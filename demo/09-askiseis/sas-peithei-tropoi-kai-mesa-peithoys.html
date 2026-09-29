@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Σας πείθει; — Τρόποι και Μέσα Πειθούς</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:     #1a1208;
+      --paper:   #f5f0e8;
+      --aged:    #e8e0cc;
+      --accent:  #8b1a1a;
+      --accent2: #2c4a6e;
+      --gold:    #c9a227;
+      --muted:   #6b5e4e;
+      --success: #2d6a4f;
+      --error:   #8b1a1a;
+      --shadow:  rgba(26,18,8,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--ink);
+      background-color: #2a2118;
+      background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(139,26,26,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(44,74,110,0.15) 0%, transparent 50%);
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--paper);
+      border-top: 6px solid var(--accent);
+      padding: 2.2rem 3rem 1.8rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .header-meta {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      font-family: 'Source Serif 4', serif;
+    }
+    .header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+    .header-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* DIVIDER */
+    .divider-ornament {
+      background: var(--aged);
+      text-align: center;
+      padding: 0.55rem;
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-left: 2px solid var(--ink);
+      border-right: 2px solid var(--ink);
+    }
+
+    /* SECTIONS */
+    .section {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-top: none;
+      padding: 2.2rem 3rem;
+      text-align: left;
+    }
+    .section + .section {
+      border-top: 1px solid var(--aged);
+    }
+
+    /* THEORY TYPOGRAPHY */
+    .section h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.45rem;
+      border-bottom: 1.5px solid var(--aged);
+    }
+    .section h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 1.6rem 0 0.6rem;
+    }
+    .section h4 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--accent2);
+      margin: 1.2rem 0 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .section p {
+      margin-bottom: 0.85rem;
+    }
+
+    /* LINK BOX */
+    .link-box {
+      background: #ede8db;
+      border: 1px solid #d0c8b0;
+      border-left: 4px solid var(--accent2);
+      border-radius: 3px;
+      padding: 1rem 1.3rem;
+      margin: 1.4rem 0;
+    }
+    .link-box p {
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .link-box a {
+      color: var(--accent2);
+      font-weight: 600;
+      text-decoration: underline;
+      word-break: break-all;
+      font-size: 0.93rem;
+    }
+    .link-box a:hover { color: var(--accent); }
+
+    /* INFOBOX: schema/diagram */
+    .schema-box {
+      background: #ede8db;
+      border: 1px solid #d0c8b0;
+      border-radius: 3px;
+      padding: 1.1rem 1.4rem;
+      margin: 1.1rem 0;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--ink);
+      font-family: 'Source Serif 4', serif;
+      white-space: pre-wrap;
+    }
+
+    /* Two-column schema (πομπός ≠ δέκτης) */
+    .schema-two-col {
+      background: #ede8db;
+      border: 1px solid #d0c8b0;
+      border-radius: 3px;
+      padding: 1.1rem 1.4rem;
+      margin: 1.1rem 0;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--ink);
+      font-family: 'Source Serif 4', serif;
+    }
+    .schema-two-col .schema-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+    .schema-two-col .schema-col-left {
+      min-width: 0;
+      flex: 0 0 42%;
+    }
+    .schema-two-col .schema-neq {
+      flex: 0 0 auto;
+      padding: 0 0.6rem;
+      font-weight: 700;
+    }
+    .schema-two-col .schema-col-right {
+      flex: 1;
+    }
+    .schema-two-col .schema-arrows {
+      display: flex;
+      margin-bottom: 0.4rem;
+    }
+    .schema-two-col .arrow-left {
+      flex: 0 0 42%;
+      padding-left: 0.5rem;
+    }
+    .schema-two-col .arrow-spacer {
+      flex: 0 0 auto;
+      padding: 0 0.6rem;
+      visibility: hidden;
+    }
+    .schema-two-col .arrow-right {
+      flex: 1;
+    }
+    .schema-two-col .schema-rows {
+      display: flex;
+    }
+    .schema-two-col .col-left-rows {
+      flex: 0 0 42%;
+      padding-right: 0.5rem;
+    }
+    .schema-two-col .col-right-rows {
+      flex: 1;
+    }
+
+    /* SYLLOGISM EXAMPLE BOX */
+    .syllogism {
+      background: #ede8db;
+      border-left: 3px solid var(--gold);
+      padding: 0.8rem 1.2rem;
+      margin: 0.9rem 0;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+    .syllogism p { margin-bottom: 0.25rem; }
+    .syllogism .label {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    /* LITERARY QUOTE */
+    .literary-quote {
+      background: #ede8db;
+      border-left: 4px solid var(--accent);
+      font-style: italic;
+      padding: 1rem 1.4rem 1rem 2.5rem;
+      margin: 1rem 0;
+      position: relative;
+      font-size: 0.97rem;
+      line-height: 1.65;
+    }
+    .literary-quote::before {
+      content: '\201C';
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4rem;
+      opacity: 0.18;
+      position: absolute;
+      left: 0.4rem;
+      top: -0.5rem;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .literary-quote .source {
+      display: block;
+      font-style: normal;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      text-align: right;
+    }
+
+    /* COMPARISON TABLE */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+    }
+    .comparison-table th {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.55rem 0.9rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      text-align: left;
+    }
+    .comparison-table td {
+      padding: 0.5rem 0.9rem;
+      border-bottom: 1px solid var(--aged);
+      vertical-align: top;
+    }
+    .comparison-table tr:nth-child(even) td { background: #ede8db; }
+
+    /* TAG list for ways of persuasion */
+    .tropoi-list {
+      counter-reset: tropos;
+      list-style: none;
+      margin: 1rem 0;
+      padding: 0;
+    }
+    .tropoi-list li {
+      counter-increment: tropos;
+      position: relative;
+      padding-left: 2.4rem;
+      margin-bottom: 0.7rem;
+      text-align: left;
+      word-spacing: normal;
+      hyphens: none;
+    }
+    .tropoi-list li::before {
+      content: counter(tropos);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      width: 1.7rem;
+      height: 1.7rem;
+      background: var(--accent2);
+      color: white;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── ACTIVITY ── */
+    .activity-header {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+    .activity-badge {
+      background: var(--accent);
+      color: white;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .activity-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .ekfonisi {
+      background: #ede8db;
+      border: 1px solid #d0c8b0;
+      border-radius: 3px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.4rem;
+      font-size: 0.97rem;
+      line-height: 1.65;
+    }
+
+    /* TRUE/FALSE QUESTIONS */
+    .tf-question {
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.6rem;
+      border-bottom: 1px solid var(--aged);
+    }
+    .tf-question:last-of-type { border-bottom: none; margin-bottom: 0.5rem; }
+
+    .tf-question-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .tf-statement {
+      margin-bottom: 1rem;
+      font-size: 0.97rem;
+      line-height: 1.7;
+    }
+    .tf-statement .excerpt {
+      background: #ede8db;
+      border-left: 3px solid var(--gold);
+      padding: 0.65rem 1rem;
+      margin: 0.6rem 0;
+      font-style: italic;
+      font-size: 0.93rem;
+      line-height: 1.65;
+    }
+    .tf-statement .excerpt .src {
+      font-style: normal;
+      font-size: 0.76rem;
+      color: var(--muted);
+      display: block;
+      text-align: right;
+      margin-top: 0.35rem;
+    }
+    .tf-claim {
+      font-weight: 600;
+      font-style: italic;
+      color: var(--accent2);
+      margin-top: 0.55rem;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.7rem;
+    }
+    .btn-tf {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.52rem 1.3rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+    .btn-tf:hover:not(:disabled) { transform: translateY(-1px); }
+    .btn-tf:disabled { opacity: 0.65; cursor: not-allowed; }
+
+    .btn-swsto {
+      background: var(--ink);
+      color: white;
+      border: 2px solid var(--ink);
+    }
+    .btn-lathos {
+      background: transparent;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+    }
+
+    /* FEEDBACK */
+    .feedback-box {
+      display: none;
+      margin-top: 0.6rem;
+      padding: 0.75rem 1rem;
+      border-radius: 3px;
+      font-size: 0.93rem;
+      line-height: 1.6;
+      border-left: 4px solid transparent;
+    }
+    .feedback-box.correct {
+      background: #e8f5e9;
+      border-left-color: var(--success);
+      color: #1b4332;
+    }
+    .feedback-box.incorrect {
+      background: #fdf0f0;
+      border-left-color: var(--error);
+      color: #5c1010;
+    }
+    .feedback-box .verdict {
+      font-weight: 700;
+      font-family: 'Playfair Display', Georgia, serif;
+      margin-bottom: 0.3rem;
+    }
+
+    /* RESET BUTTON */
+    .btn-reset {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.45rem 1.1rem;
+      background: transparent;
+      color: var(--muted);
+      border: 1.5px solid var(--muted);
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .btn-reset:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* SCORE */
+    .score-wrap {
+      display: none;
+      margin-top: 1.5rem;
+      background: var(--aged);
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      padding: 1rem 1.4rem;
+      text-align: center;
+    }
+    .score-wrap .score-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .score-wrap .score-label {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+    .score-wrap .score-msg {
+      margin-top: 0.6rem;
+      font-size: 0.93rem;
+      font-style: italic;
+      color: var(--ink);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      body { padding: 0.75rem 0.4rem 3rem; }
+      .header, .section { padding: 1.3rem 1.1rem; }
+      .header h1 { font-size: 1.45rem; }
+      .section h2 { font-size: 1.15rem; }
+      .comparison-table { font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">Νέα Ελληνική Γλώσσα · Ψηφιακό Εκπαιδευτικό Υλικό</div>
+    <h1>Σας πείθει;</h1>
+    <div class="header-sub">Τρόποι και μέσα πειθούς — Οργάνωση επιχειρήματος</div>
+  </div>
+
+  <div class="divider-ornament">✦ &nbsp; &nbsp; ✦ &nbsp; &nbsp; ✦</div>
+
+  <!-- ΕΚΦΩΝΗΣΗ + ΣΥΝΔΕΣΜΟΣ -->
+  <div class="section">
+    <div class="ekfonisi">
+      <strong>Εκφώνηση:</strong> Να επισκεφθείς τον σύνδεσμο που ακολουθεί και οδηγεί σε αρχείο με θεωρία για τους τρόπους και τα μέσα πειθούς, όπως δίνεται στο Πανελλήνιο Σχολικό Δίκτυο, και να διαβάσεις το σχετικό αρχείο. Αφού μελετήσεις τη θεωρία για τους τρόπους και τα μέσα πειθούς, να ελέγξεις τον βαθμό κατανόησης της θεωρίας στη δραστηριότητα που ακολουθεί.
+    </div>
+    <div class="link-box">
+      <p>Αρχείο θεωρίας — Πανελλήνιο Σχολικό Δίκτυο:</p>
+      <a href="https://archeia.moec.gov.cy/sm/316/30_11_2006_pitho.pdf" target="_blank" rel="noopener">https://archeia.moec.gov.cy/sm/316/30_11_2006_pitho.pdf</a>
+    </div>
+  </div>
+
+  <!-- ΘΕΩΡΙΑ: ΕΠΙΧΕΙΡΗΜΑ -->
+  <div class="section">
+    <h2>Επιχείρημα</h2>
+    <p>Σε κάθε επικοινωνιακή πράξη ⎼κατά την οποία ένας πομπός μεταδίδει ένα μήνυμα σε έναν δέκτη⎼, δηλαδή σε κάθε διαδικασία ανταλλαγής μηνυμάτων (κυρίως μέσω της γλώσσας), επισημαίνονται τα εξής:</p>
+    <p>Ο πομπός έχει κάθε φορά έναν σκοπό: τη μετάδοση πληροφοριών, την ερμηνεία ενός φαινομένου ή γεγονότος, την ανάλυση μιας έννοιας, την υποστήριξη μιας άποψης και την πειθώ (προκειμένου κάποιος να αποδεχτεί τις απόψεις του ή να τις εφαρμόσει).</p>
+    <p>Ο πομπός έχει συγκεκριμένη οπτική γωνία, η οποία αποτυπώνεται στο μήνυμα και το διαμορφώνει. Αυτή η οπτική γωνία είτε δηλώνεται έμμεσα (π.χ. ως λανθάνον σχόλιο) είτε άμεσα (με μια ρητή και απερίφραστη διατύπωση).</p>
+
+    <div class="schema-box">Επικοινωνία → μπορεί να περιλαμβάνει:
+  • μετάδοση πληροφοριών
+  • ερμηνεία φαινομένου / γεγονότος
+  • ανάλυση έννοιας
+  • υποστήριξη άποψης
+  • πειθώ του δέκτη
+
+οπτική γωνία πομπού  ≠  οπτική γωνία δέκτη
+       ↓                                    ↓
+  διαφαίνεται               διακρίνει την οπτική γωνία του πομπού
+  υπολανθάνει               διακρίνει τον σκοπό του πομπού
+  εκφράζεται ρητά</div>
+
+    <div class="schema-two-col">
+      <div class="schema-header">
+        <div class="schema-col-left"><strong>πομπός πειθούς</strong></div>
+        <div class="schema-neq">≠</div>
+        <div class="schema-col-right"><strong>δέκτης πειθούς</strong></div>
+      </div>
+      <div class="schema-arrows">
+        <div class="arrow-left">↓</div>
+        <div class="arrow-spacer">≠</div>
+        <div class="arrow-right">↓</div>
+      </div>
+      <div class="schema-rows">
+        <div class="col-left-rows">
+          <div>προσπαθεί να φέρει τον δέκτη</div>
+          <div>σε θέση να υιοθετήσει τις</div>
+          <div>απόψεις του και να ενεργήσει</div>
+          <div>σύμφωνα με αυτές</div>
+        </div>
+        <div class="col-right-rows">
+          <div>ελέγχει τη συλλογιστική πορεία του πομπού</div>
+          <div>ελέγχει το κύρος των επιχειρημάτων</div>
+          <div>ελέγχει την αξιοπιστία των τεκμηρίων</div>
+          <div>εντοπίζει τρόπους και μέσα πειθούς</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Για να ελεγχθεί, δηλαδή να αντιμετωπιστεί κριτικά από τον δέκτη, το μήνυμα, προαπαιτείται ο εντοπισμός τόσο του σκοπού όσο και της οπτικής γωνίας του πομπού.</p>
+    <p>Όταν ο πομπός αποσκοπεί στην πειθώ ελέγχονται: α) η συλλογιστική του πορεία, β) το κύρος (εγκυρότητα) των επιχειρημάτων του, γ) η αξιοπιστία των τεκμηρίων του, δ) οι τρόποι πειθούς, ε) τα μέσα πειθούς τα οποία χρησιμοποιεί.</p>
+    <p>Προκειμένου να πείσουμε, χρησιμοποιούνται οι εξής τρόποι (και τα αντίστοιχα κάθε φορά μέσα):</p>
+    <ol class="tropoi-list">
+      <li>Η χρήση της λογικής (<strong>επίκληση στη λογική</strong>), οπότε τα μέσα που χρησιμοποιούνται είναι ένας συνδυασμός επιχειρημάτων (νοητικών κατασκευών) και τεκμηρίων (υλικών αποδείξεων).</li>
+      <li>Ο συναισθηματικά φορτισμένος λόγος (<strong>επίκληση στο συναίσθημα</strong>), οπότε τα μέσα που χρησιμοποιούνται είναι διάφορες τεχνικές συναισθηματικού επηρεασμού.</li>
+      <li>Η παράθεση της θέσης μιας αυθεντίας (<strong>επίκληση στην αυθεντία</strong>).</li>
+      <li>Η ανάδειξη του ήθους του ομιλητή (<strong>επίκληση στο ήθος του πομπού</strong>), προκειμένου να φανεί αξιόπιστος ο ομιλητής-πομπός.</li>
+      <li>Ο στιγματισμός του ήθους του αντιπάλου (<strong>επίθεση στο ήθος του αντιπάλου</strong>).</li>
+    </ol>
+  </div>
+
+  <!-- ΤΡΟΠΟΙ ΠΕΙΘΟΥΣ -->
+  <div class="section">
+    <h2>Τρόποι Πειθούς</h2>
+
+    <h3>Α. Επίκληση στη λογική</h3>
+    <p>Ο πρώτος τρόπος πειθούς είναι η επίκληση στη λογική. Στο σημείο αυτό εξετάζονται τα σχετικά με: α) τα επιχειρήματα και τα τεκμήρια, β) τα είδη των συλλογισμών, γ) την εγκυρότητα, αλήθεια, ορθότητα ενός επιχειρήματος, δ) την αξιολόγηση του επιχειρήματος.</p>
+
+    <h4>1. Επιχειρήματα και τεκμήρια</h4>
+    <p>Όταν ο πομπός επιχειρεί να πείσει μέσω της επίκλησης στη λογική, χρησιμοποιεί ως μέσα επιχειρήματα και τεκμήρια.</p>
+    <p><strong>Επιχείρημα</strong> είναι κάθε σειρά λογικών προτάσεων που παρατίθενται κλιμακωτά για τη στήριξη ή την ανατροπή μιας θέσης (απόφανση) και καταλήγουν σε ένα αιτιολογημένο συμπέρασμα.</p>
+    <p><strong>Συλλογισμός</strong> είναι η διαδικασία με την οποία καταστρώνεται ένα επιχείρημα. Αποτελείται από μία ή περισσότερες ⎼τυπικά από δύο⎼ προτάσεις (προκείμενες), οι οποίες είναι η βάση για να αποδεχτούμε μια άλλη πρόταση, δηλαδή το συμπέρασμα, που ακολουθεί λογικά τις προκείμενες.</p>
+    <p>Οι δύο προτάσεις (προκείμενες) που τυπικά χρησιμεύουν ως βάση του συλλογισμού ονομάζονται: <strong>μείζων</strong> (συνήθως η πρώτη και πάντως αυτή που περιέχει το κατηγόρημα του συμπεράσματος) και <strong>ελάσσων</strong> (συνήθως η δεύτερη και πάντως αυτή που περιέχει το υποκείμενο του συμπεράσματος).</p>
+    <div class="syllogism">
+      <p class="label">Παράδειγμα</p>
+      <p><strong>Μείζων προκείμενη:</strong> Οι άνθρωποι είναι θνητοί.</p>
+      <p><strong>Ελάσσων προκείμενη:</strong> Ο Σωκράτης είναι άνθρωπος.</p>
+      <p><strong>Συμπέρασμα:</strong> Άρα, ο Σωκράτης είναι θνητός.</p>
+    </div>
+    <p><strong>Τεκμήριο</strong> είναι κάθε στοιχείο που αποτελεί μια συγκεκριμένη πληροφορία, όπως είναι τα παραδείγματα, οι αλήθειες, τα γεγονότα, οι αυθεντίες, τα στατιστικά στοιχεία, τα πορίσματα ερευνών κτλ., και χρησιμοποιείται για την ισχυροποίηση μιας θέσης, ενός επιχειρήματος.</p>
+    <p>Π.χ. <em>Ο σεισμός του Μπαμ στο Ιράν, που έγινε ακριβώς έναν χρόνο πριν, προκάλεσε ολοκληρωτική καταστροφή.</em> (γεγονός)</p>
+
+    <h4>2. Είδη συλλογισμών</h4>
+    <p>Τους συλλογισμούς τους χωρίζουμε <strong>κατά τη μορφή</strong> σε: α) κατηγορικούς, β) υποθετικούς, γ) διαζευκτικούς· και <strong>κατά το είδος της συλλογιστικής πορείας</strong> σε: α) παραγωγικούς, β) επαγωγικούς, γ) αναλογικούς.</p>
+    <p><strong>Κατηγορικός συλλογισμός</strong> είναι αυτός στον οποίο το συμπέρασμα συνάγεται χωρίς όρους ή επιφυλάξεις από προτάσεις στις οποίες δηλώνεται η κατηγορία του υποκειμένου. Υπάρχει δηλαδή το συνδετικό ρήμα «είμαι» και το κατηγορούμενο του υποκειμένου, π.χ.: <em>Ο άνθρωπος είναι θνητός.</em></p>
+    <p><strong>Υποθετικός συλλογισμός</strong> είναι αυτός στον οποίο όλες οι προτάσεις ή η μείζων προκείμενη είναι υποθετικές. Σε κάθε υπόθεση διακρίνουμε δύο μέρη: α) τον λόγο και β) την ακολουθία. Π.χ.: <em>Αν ο Γιάννης έχει άριστους βαθμούς, (τότε) είναι καλός μαθητής.</em></p>
+    <p><strong>Διαζευκτικός συλλογισμός</strong> είναι αυτός στον οποίο μία προκείμενη έχει διαζευκτική διατύπωση.</p>
+    <div class="syllogism">
+      <p><em>Ο μάρτυρας είτε ψεύδεται είτε λέει την αλήθεια.</em></p>
+      <p><em>Ο μάρτυρας δεν λέει την αλήθεια.</em></p>
+      <p><em>Άρα, ο μάρτυρας ψεύδεται.</em></p>
+    </div>
+    <p>Όσον αφορά το είδος της συλλογιστικής πορείας:</p>
+    <p><strong>α) Παραγωγικός συλλογισμός</strong>: ξεκινά από μια γενική κι αφηρημένη θέση (π.χ. μια γενική αρχή, έναν κανόνα, έναν ορισμό), η οποία ισχύει αποδεδειγμένα ή γίνεται εύλογα αποδεκτή ως πιθανή, και καταλήγει σε ένα ειδικό και συγκεκριμένο συμπέρασμα. Σ' αυτή την περίπτωση το συμπέρασμα απορρέει από τις προκείμενες, οι οποίες μας υποχρεώνουν να το δεχτούμε, και είναι βέβαιο.</p>
+    <p><strong>β) Επαγωγικός συλλογισμός</strong>: ξεκινά από μια ειδική και συγκεκριμένη θέση και καταλήγει σε ένα γενικό και αφηρημένο συμπέρασμα, το οποίο γίνεται αποδεκτό ως πιθανό, εφόσον δεχτούμε ότι αυτό που ισχύει για κάποιες μεμονωμένες περιπτώσεις ισχύει και για όλες τις ανάλογες περιπτώσεις του ίδιου συνόλου. Σε αυτή την περίπτωση το συμπέρασμα εκτείνεται πέρα από τις προκείμενες, οι οποίες απλώς το στηρίζουν, οπότε το συμπέρασμα είναι απλώς πιθανό.</p>
+    <p><strong>γ) Αναλογικός συλλογισμός</strong>: ξεκινά από μια ειδική και συγκεκριμένη θέση και καταλήγει σε ένα ειδικό και συγκεκριμένο συμπέρασμα, το οποίο συνάγεται εφόσον δεχτούμε ότι κάποιες περιπτώσεις είναι ανάλογες επειδή παρουσιάζουν ομοιότητα ως προς επιμέρους χαρακτηριστικά τους.</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Παραγωγή / παραγωγικός συλλογισμός</th>
+          <th>Επαγωγή / επαγωγικός συλλογισμός</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Πορεία από το γενικό και αφηρημένο (π.χ. αρχή, ορισμός, κανόνας κ.λπ.) προς το ειδικό/διευκρινιστικό και συγκεκριμένο.</td>
+          <td>Πορεία από το ειδικό και συγκεκριμένο προς το γενικό και αφηρημένο, δηλαδή από τις επιμέρους περιπτώσεις στον κανόνα, τον νόμο που τις διέπει.</td>
+        </tr>
+        <tr>
+          <td>Το συμπέρασμα προκύπτει από τις προκείμενες· αυτές μας «υποχρεώνουν» να το δεχθούμε.</td>
+          <td>Το συμπέρασμα επεκτείνεται πέρα από τις προκείμενες που απλώς το στηρίζουν, γι' αυτό και είναι συνήθως πιθανολογικό.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>3. Εγκυρότητα, αλήθεια, ορθότητα ενός επιχειρήματος</h4>
+    <p>Κάθε επιχείρημα που υπόκειται σε λογικό έλεγχο αξιολογείται: α) ως προς τη μορφή του· β) ως προς το περιεχόμενό του.</p>
+    <p><strong>Ως προς τη μορφή</strong>, ελέγχεται αν υπάρχει σχέση λογικής αναγκαιότητας ανάμεσα στις προκείμενες και στο συμπέρασμα· ένα επιχείρημα θεωρείται <strong>έγκυρο</strong> ή <strong>άκυρο</strong> ανάλογα.</p>
+    <p><strong>Ως προς το περιεχόμενο</strong>, ελέγχεται αν οι προκείμενες και το συμπέρασμα συμφωνούν με την αντικειμενική πραγματικότητα· ένα επιχείρημα θεωρείται <strong>αληθές</strong> ή <strong>ψευδές</strong> ανάλογα.</p>
+    <p>Με βάση τα δεδομένα αυτά, ένα επιχείρημα μπορεί να είναι: α) αληθές + έγκυρο, β) αληθές + άκυρο, γ) ψευδές + έγκυρο, δ) ψευδές + άκυρο. Μόνο στην πρώτη περίπτωση το επιχείρημα είναι <strong>ορθό</strong>.</p>
+    <p><strong>Απόδειξη</strong> ονομάζουμε τον συλλογισμό που διέπει ένα λογικώς ορθό επιχείρημα που είναι συγχρόνως και έγκυρο και αληθές.</p>
+
+    <h4>4. Αξιολόγηση ενός επιχειρήματος</h4>
+    <p>Ένα επιχείρημα έχει αποδεικτική ισχύ όταν ο συλλογισμός που το διέπει είναι απόδειξη, δηλαδή όταν: α) είναι αληθές (ως προς το περιεχόμενό του) και β) είναι έγκυρο (ως προς τη μορφή του)· ή αλλιώς, όταν οι προκείμενές του είναι αληθείς και το συμπέρασμά του απορρέει από αυτές με λογική αναγκαιότητα.</p>
+
+    <div class="schema-box">ΕΓΚΥΡΟΤΗΤΑ + ΑΛΗΘΕΙΑ (στις προκείμενες) = ΛΟΓΙΚΑ ΟΡΘΟΣ ΣΥΛΛΟΓΙΣΜΟΣ
+                 ↓
+  αν δίνει ορθό συμπέρασμα → ΑΠΟΔΕΙΞΗ</div>
+
+    <p><strong>Παραλογισμός</strong> είναι ένας συλλογισμός που: α) είναι άκυρος ή β) αν και εξωτερικά μοιάζει να είναι έγκυρος, το εξαγόμενο συμπέρασμα συγκρούεται με την πραγματικότητα. Αν ο παραλογισμός δεν οφείλεται σε λογικό σφάλμα, αλλά σε σκόπιμη προσπάθεια εξαπάτησης του δέκτη από τον πομπό, τότε τον ονομάζουμε <strong>σόφισμα</strong>.</p>
+
+    <h3>Β. Επίκληση στο συναίσθημα (του δέκτη)</h3>
+    <p>Ο δεύτερος τρόπος πειθούς είναι η επίκληση στο συναίσθημα. Συνήθη εκφραστικά μέσα με τα οποία οι ρήτορες (ομιλητές) διεγείρουν κάθε φορά τα κατάλληλα αισθήματα στο ακροατήριο τους είναι η <strong>περιγραφή</strong> και η <strong>αφήγηση</strong>. Άλλα μέσα επίκλησης στο συναίσθημα είναι: το χιούμορ, η ειρωνεία, η ποιητική γλώσσα, τα ρητορικά ερωτήματα.</p>
+    <div class="literary-quote">
+      Ποιος θα καθορίσει πού αρχίζουν και πού τελειώνουν τα όρια της ανθρώπινης παρέμβασης στο έργο της Φύσης;
+    </div>
+
+    <h3>Γ. Επίκληση στο «ήθος» (του πομπού)</h3>
+    <p>Ο τρίτος τρόπος πειθούς είναι η επίκληση στο «ήθος» του πομπού/ομιλητή. Το ήθος του ρήτορα αποτελεί, κατά τον Αριστοτέλη, τη μεγαλύτερη απόδειξη για την εγκυρότητα και την αλήθεια των λεγομένων του, καθώς, όπως επισημαίνει, πιστεύουμε ευκολότερα και περισσότερο τους έντιμους ανθρώπους. Βέβαια, το ήθος του ρήτορα θα πρέπει να αναδεικνύεται μέσα από την αγόρευσή του και όχι να επιβεβαιώνεται από τη θετική εικόνα που έχει τυχόν σχηματίσει γι' αυτόν το ακροατήριο πριν από την αγόρευσή του.</p>
+
+    <h3>Δ. Επίκληση στην αυθεντία</h3>
+    <p>Ο τέταρτος τρόπος πειθούς είναι η επίκληση στην αυθεντία. Η αξιοπιστία μιας επιχειρηματολογίας ενισχύεται όταν ο ομιλητής παραθέτει απόψεις ειδικών ή γενικά αποδεκτών προσώπων που συμφωνούν με όσα υποστηρίζει. Στην αυθεντία ανήκουν και τα εξής: αποφθέγματα, ρητά, γνωμικά, παροιμίες, αποσπάσματα από λόγους ή γραπτά κείμενα.</p>
+
+    <h3>Ε. Επίθεση στο «ήθος» του αντιπάλου</h3>
+    <p>Ο πέμπτος τρόπος πειθούς είναι η επίθεση στο «ήθος» του αντιπάλου. Ο ομιλητής επιτίθεται προσωπικά εναντίον του αντιπάλου του, κατακρίνοντάς τον για τον χαρακτήρα του ή για την προσωπική του ζωή και όχι για τα επιχειρήματά του.</p>
+    <div class="literary-quote">
+      «Η κυβέρνηση και ο ίδιος ο πρωθυπουργός είναι πλέον αναξιόπιστοι. Άλλα υποστήριζαν ως αντιπολίτευση και άλλα πράττουν ως κυβέρνηση».
+    </div>
+  </div>
+
+  <!-- ΔΡΑΣΤΗΡΙΟΤΗΤΑ -->
+  <div class="section">
+    <div class="activity-header">
+      <span class="activity-badge">Δραστηριότητα</span>
+      <span class="activity-title">Σωστό ή Λάθος;</span>
+    </div>
+    <div class="ekfonisi">
+      <strong>Εκφώνηση:</strong> Να χαρακτηρίσεις ως σωστές ή λανθασμένες τις διατυπώσεις που ακολουθούν.
+    </div>
+
+    <!-- Ερώτηση 1 -->
+    <div class="tf-question" id="q1">
+      <div class="tf-question-num">Ερώτηση 1</div>
+      <div class="tf-statement">
+        <div class="excerpt">
+          Το ξεκίνημα του 21ου αιώνα μάς φέρνει αντιμέτωπους με ποικίλα προβλήματα, την έκταση και τις συνέπειες των οποίων είναι δύσκολο να προβλέψει κανείς. Το δεύτερο ήμισυ του 20ού αιώνα επεφύλαξε πολλές εκπλήξεις στον χώρο της ανάπτυξης των νέων τεχνολογιών και στην πρόοδο της επιστήμης. Η παγκοσμιοποίηση της οικονομίας και της γνώσης έχει επιφέρει θεαματικές αλλαγές στην κοινωνική δομή και οργάνωση πολλών κρατών. Η «κοινωνία της πληροφορίας» κατέστησε αναγκαίο τον επαναπροσδιορισμό των μεθόδων και των τεχνικών της εργασίας και έθεσε σε νέα βάση το θέμα κατάκτησης της γνώσης. Σήμερα δεν έχει τόσο αξία η γνώση αυτή καθεαυτή, αφού εξελίσσεται με ταχύτατους ρυθμούς και παλιώνει προτού καν γίνει κτήμα των πολλών.
+        </div>
+        <p class="tf-claim">Ο συλλογισμός είναι επαγωγικός.</p>
+      </div>
+      <div class="btn-row">
+        <button class="btn-tf btn-swsto" onclick="checkTF(1, true)">Σωστό</button>
+        <button class="btn-tf btn-lathos" onclick="checkTF(1, false)">Λάθος</button>
+      </div>
+      <div class="feedback-box" id="fb1-correct">
+        <div class="verdict">✓ Σωστό</div>
+      </div>
+      <div class="feedback-box" id="fb1-incorrect">
+        <div class="verdict">✗ Λάθος</div>
+        Στην παράγραφο υπάρχει παραγωγική συλλογιστική πορεία, διότι στη θεματική περίοδο μιλάει γενικά για ποικίλα προβλήματα και εκπλήξεις του 21ου αιώνα και έπειτα εξειδικεύει σε κάποια από αυτά (νέες τεχνολογίες, επιστήμες κ.λπ.).
+      </div>
+    </div>
+
+    <!-- Ερώτηση 2 -->
+    <div class="tf-question" id="q2">
+      <div class="tf-question-num">Ερώτηση 2</div>
+      <div class="tf-statement">
+        <div class="excerpt">
+          Εγώ, λοιπόν, πρώτα, αν και δε μου απέμεινε μεγάλη περιουσία εξαιτίας των συμφορών του πατέρα μου και της πόλης, πάντρεψα τις δύο αδερφές μου, αφού έδωσα στην καθεμιά τους προίκα. Με τον αδερφό μου έτσι μοίρασα την πατρική περιουσία, ώστε εκείνος να ομολογεί ότι έχει περισσότερα από εμένα. Και σε σχέση με όλους τους άλλους έχω ζήσει έτσι, ώστε να μην έχω δώσει καμιά αφορμή παραπόνου εναντίον μου ποτέ ως τώρα, ούτε σε έναν από τους συμπολίτες.
+          <span class="src">Απόσπασμα από τον «Υπέρ Μαντιθέου» λόγο του Λυσία</span>
+        </div>
+        <p class="tf-claim">Στο απόσπασμα γίνεται επίκληση στο ήθος του πομπού.</p>
+      </div>
+      <div class="btn-row">
+        <button class="btn-tf btn-swsto" onclick="checkTF(2, true)">Σωστό</button>
+        <button class="btn-tf btn-lathos" onclick="checkTF(2, false)">Λάθος</button>
+      </div>
+      <div class="feedback-box" id="fb2-correct">
+        <div class="verdict">✓ Σωστό</div>
+        Ο ομιλητής μιλά σε α΄ ενικό και αναδεικνύει τη θετική στάση και συμπεριφορά απέναντι στα αδέλφια του.
+      </div>
+      <div class="feedback-box" id="fb2-incorrect">
+        <div class="verdict">✗ Λάθος</div>
+      </div>
+    </div>
+
+    <!-- Ερώτηση 3 -->
+    <div class="tf-question" id="q3">
+      <div class="tf-question-num">Ερώτηση 3</div>
+      <div class="tf-statement">
+        <div class="excerpt">
+          Οι νέοι δείχνουν μια ακατανόητη εμμονή με τα κινητά τους. Φαίνεται άλλωστε δια γυμνού οφθαλμού: μια μανιασμένη κίνηση του αντίχειρα, που πατάει τα πλήκτρα με επιδεξιότητα και γρηγοράδα, διαγράφοντας μυστηριώδεις περιστροφές περί τον άξονά του, συντάσσοντας εικονικά ραβασάκια. Τους πετυχαίνεις παντού, σε στάσεις τρόλεϊ και μετρό, στο δρόμο, σε καφετέριες ή ακόμα και στους χώρους διδασκαλίας, νεαροί κύριοι και δεσποινίδες να κοιτάνε με αγωνία το κινητό, όπως η μάγισσα την κρυστάλλινη σφαίρα, απορροφημένοι σε μια μουγκή επικοινωνία.
+          <span class="src">Αφροδίτη Πολίτη, <em>Η κουλτούρα του Αντίχειρα</em></span>
+        </div>
+        <p class="tf-claim">Στο απόσπασμα κυριαρχεί η επίκληση στο συναίσθημα με περιγραφή.</p>
+      </div>
+      <div class="btn-row">
+        <button class="btn-tf btn-swsto" onclick="checkTF(3, true)">Σωστό</button>
+        <button class="btn-tf btn-lathos" onclick="checkTF(3, false)">Λάθος</button>
+      </div>
+      <div class="feedback-box" id="fb3-correct">
+        <div class="verdict">✓ Σωστό</div>
+        Η περιγραφή είναι ένα μέσο για να κάνει κάποιος επίκληση στο συναίσθημα. Περιγράφονται με λεπτομέρειες οι κινήσεις των χεριών των εφήβων πάνω στο πληκτρολόγιο.
+      </div>
+      <div class="feedback-box" id="fb3-incorrect">
+        <div class="verdict">✗ Λάθος</div>
+      </div>
+    </div>
+
+    <!-- Ερώτηση 4 -->
+    <div class="tf-question" id="q4">
+      <div class="tf-question-num">Ερώτηση 4</div>
+      <div class="tf-statement">
+        <div class="excerpt">
+          Τα ελβετικά ρολόγια είναι πολύ ακριβά. Το ρολόι που μου δώρισαν οι συνάδελφοί μου είναι ελβετικό. Συνεπώς, το ρολόι που μου δώρισαν οι συνάδελφοί μου είναι πολύ ακριβό.
+        </div>
+        <p class="tf-claim">Ο συλλογισμός είναι έγκυρος αληθής και άρα ορθός.</p>
+      </div>
+      <div class="btn-row">
+        <button class="btn-tf btn-swsto" onclick="checkTF(4, true)">Σωστό</button>
+        <button class="btn-tf btn-lathos" onclick="checkTF(4, false)">Λάθος</button>
+      </div>
+      <div class="feedback-box" id="fb4-correct">
+        <div class="verdict">✓ Σωστό</div>
+      </div>
+      <div class="feedback-box" id="fb4-incorrect">
+        <div class="verdict">✗ Λάθος</div>
+        Ο συλλογισμός αυτός είναι έγκυρος, επειδή αυτό που αναφέρεται στο συμπέρασμα ως ειδικό — το ρολόι που μου δώρισαν — έχει υποστηριχθεί στις προκείμενες. Επιπλέον, το ειδικό για το οποίο γίνεται λόγος στο συμπέρασμα — το ρολόι που μου δώρισαν — υπάγεται στο γενικό για το οποίο γίνεται λόγος στις προκείμενες.
+        Βεβαίως, ο συλλογισμός αυτός δεν είναι αληθής, αφού δεν ισχύει εκ των προτέρων ότι όλα τα ελβετικά ρολόγια είναι ακριβά. Επομένως, ο συλλογισμός είναι έγκυρος, όχι όμως κι ορθός.
+      </div>
+    </div>
+
+    <!-- SCORE + RESET -->
+    <div class="score-wrap" id="scoreWrap">
+      <div class="score-num" id="scoreNum"></div>
+      <div class="score-label">στις 4 ερωτήσεις</div>
+      <div class="score-msg" id="scoreMsg"></div>
+    </div>
+
+    <button class="btn-reset" id="resetBtn" onclick="resetAll()" style="display:none;">↺ Νέα προσπάθεια</button>
+  </div>
+
+</div>
+
+<script>
+  // correct answers: 1→false, 2→true, 3→true, 4→false
+  const answers = { 1: false, 2: true, 3: true, 4: false };
+  const answered = {};
+
+  function checkTF(qNum, userAnswer) {
+    if (answered[qNum]) return;
+    answered[qNum] = true;
+
+    const correct = answers[qNum];
+    const isRight = (userAnswer === correct);
+
+    // disable both buttons
+    const q = document.getElementById('q' + qNum);
+    q.querySelectorAll('.btn-tf').forEach(btn => {
+      btn.disabled = true;
+    });
+
+    // show feedback
+    const fbCorrect = document.getElementById('fb' + qNum + '-correct');
+    const fbIncorrect = document.getElementById('fb' + qNum + '-incorrect');
+
+    if (isRight) {
+      fbCorrect.style.display = 'block';
+      fbCorrect.classList.add('correct');
+    } else {
+      fbIncorrect.style.display = 'block';
+      fbIncorrect.classList.add('incorrect');
+    }
+
+    // check if all answered
+    if (Object.keys(answered).length === 4) {
+      showScore();
+    }
+  }
+
+  function showScore() {
+    let score = 0;
+    for (let q in answers) {
+      if (answered[q] === answers[q]) score++;
+    }
+
+    const wrap = document.getElementById('scoreWrap');
+    const num = document.getElementById('scoreNum');
+    const msg = document.getElementById('scoreMsg');
+
+    num.textContent = score + ' / 4';
+    wrap.style.display = 'block';
+
+    let message = '';
+    if (score === 4) message = 'Άριστα! Κατανοείς πλήρως τους τρόπους πειθούς.';
+    else if (score === 3) message = 'Πολύ καλά! Μελέτησε ξανά τις ερωτήσεις που σε δυσκόλεψαν.';
+    else if (score === 2) message = 'Καλά! Επανέλαβε τη θεωρία και ξαναπροσπάθησε.';
+    else message = 'Χρειάζεται περισσότερη εξάσκηση. Μελέτησε ξανά τη θεωρία.';
+    msg.textContent = message;
+
+    document.getElementById('resetBtn').style.display = 'inline-block';
+  }
+
+  function resetAll() {
+    // clear answered state
+    for (let k in answered) delete answered[k];
+
+    // hide feedback boxes, re-enable buttons
+    for (let i = 1; i <= 4; i++) {
+      const q = document.getElementById('q' + i);
+      q.querySelectorAll('.btn-tf').forEach(btn => {
+        btn.disabled = false;
+      });
+      document.getElementById('fb' + i + '-correct').style.display = 'none';
+      document.getElementById('fb' + i + '-correct').classList.remove('correct');
+      document.getElementById('fb' + i + '-incorrect').style.display = 'none';
+      document.getElementById('fb' + i + '-incorrect').classList.remove('incorrect');
+    }
+
+    document.getElementById('scoreWrap').style.display = 'none';
+    document.getElementById('resetBtn').style.display = 'none';
+  }
+</script>
+</body>
+</html>

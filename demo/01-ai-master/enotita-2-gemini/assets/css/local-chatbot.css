@@ -1,0 +1,152 @@
+/* ============================================================
+   Τοπικός βοηθός μαθήματος — εμφάνιση
+   Χρησιμοποιεί τις υπάρχουσες μεταβλητές του design system,
+   ώστε να ακολουθεί αυτόματα ανοιχτό και σκούρο θέμα.
+   Δεν καλύπτει το υδατογράφημα ΕΚΕΚ (κάθεται πάνω από αυτό).
+   ============================================================ */
+
+.lc-launcher {
+  position: fixed; right: 16px; bottom: 76px; z-index: 65;
+  display: inline-flex; align-items: center; gap: 8px;
+  font: inherit; font-size: .88rem; font-weight: 600;
+  padding: 10px 16px; cursor: pointer;
+  color: #fff; background: var(--primary);
+  border: 1px solid var(--primary-dark); border-radius: 999px;
+  box-shadow: var(--shadow);
+}
+.lc-launcher:hover { background: var(--primary-dark); }
+.lc-launcher:focus-visible { outline: 3px solid var(--primary-soft); outline-offset: 2px; }
+.lc-launcher .lc-launcher-icon { font-size: 1.05rem; line-height: 1; }
+.lc-launcher[aria-expanded="true"] { display: none; }
+
+.lc-panel {
+  position: fixed; right: 16px; bottom: 76px; z-index: 70;
+  width: min(400px, calc(100vw - 32px));
+  max-height: min(74vh, 640px);
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.lc-panel[hidden] { display: none; }
+
+.lc-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-soft);
+}
+.lc-head h2 { margin: 0; font-size: .95rem; color: var(--ink); font-family: var(--font-display); }
+.lc-head p { margin: 2px 0 0; font-size: .72rem; color: var(--muted); line-height: 1.35; }
+.lc-head .lc-head-text { flex: 1 1 auto; min-width: 0; }
+.lc-close {
+  flex: 0 0 auto; font: inherit; font-size: 1.1rem; line-height: 1;
+  width: 32px; height: 32px; cursor: pointer;
+  color: var(--ink-2); background: transparent;
+  border: 1px solid var(--border); border-radius: 8px;
+}
+.lc-close:hover { background: var(--surface); }
+
+.lc-log {
+  flex: 1 1 auto; overflow-y: auto; padding: 14px;
+  display: flex; flex-direction: column; gap: 12px;
+  font-size: .85rem; line-height: 1.6; color: var(--text);
+  overscroll-behavior: contain;
+}
+.lc-msg { max-width: 92%; }
+.lc-msg p { margin: 0 0 8px; }
+.lc-msg p:last-child { margin-bottom: 0; }
+.lc-msg.lc-user {
+  align-self: flex-end; text-align: left;
+  background: var(--primary-tint); color: var(--ink-2);
+  border: 1px solid var(--border-soft); border-radius: 12px 12px 4px 12px;
+  padding: 9px 12px;
+}
+.lc-msg.lc-bot {
+  align-self: flex-start;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft); border-radius: 12px 12px 12px 4px;
+  padding: 10px 12px;
+}
+.lc-msg .lc-term { color: var(--ink); font-weight: 600; }
+.lc-msg mark { background: var(--primary-tint); color: var(--ink); padding: 0 2px; border-radius: 3px; }
+
+.lc-hits { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.lc-hit {
+  border: 1px solid var(--border-soft); border-radius: 10px;
+  background: var(--surface); padding: 9px 11px;
+}
+.lc-hit-group { display: block; font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .03em; margin-bottom: 3px; }
+.lc-hit-title { display: block; font-weight: 600; color: var(--ink); font-size: .84rem; margin-bottom: 4px; }
+.lc-hit-snippet { display: block; font-size: .8rem; color: var(--text); margin-bottom: 7px; }
+.lc-goto {
+  font: inherit; font-size: .76rem; font-weight: 600; cursor: pointer;
+  padding: 5px 10px; color: var(--primary);
+  background: transparent; border: 1px solid var(--primary); border-radius: 7px;
+}
+.lc-goto:hover { color: #fff; background: var(--primary); }
+
+.lc-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 14px 10px; }
+.lc-chip {
+  font: inherit; font-size: .76rem; cursor: pointer;
+  padding: 6px 10px; color: var(--ink-2);
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: 999px;
+}
+.lc-chip:hover { background: var(--primary-tint); border-color: var(--primary-soft); }
+
+.lc-form { display: flex; gap: 8px; padding: 10px 14px 12px; border-top: 1px solid var(--border-soft); }
+.lc-form input {
+  flex: 1 1 auto; min-width: 0; font: inherit; font-size: .85rem;
+  padding: 9px 11px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 9px;
+}
+.lc-form input:focus { outline: 2px solid var(--primary-soft); outline-offset: 1px; }
+.lc-form button {
+  flex: 0 0 auto; font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer;
+  padding: 9px 14px; color: #fff;
+  background: var(--primary); border: 1px solid var(--primary-dark); border-radius: 9px;
+}
+.lc-form button:hover { background: var(--primary-dark); }
+
+.lc-foot { padding: 0 14px 11px; margin: 0; font-size: .68rem; color: var(--muted); line-height: 1.45; }
+
+/* Η κάρτα παρουσίασης του βοηθού μέσα στη διαφάνεια */
+.lc-callout { display: flex; gap: 14px; align-items: flex-start; }
+.lc-callout .lc-callout-icon { font-size: 1.6rem; line-height: 1; flex: 0 0 auto; }
+.lc-open-inline {
+  font: inherit; font-size: .84rem; font-weight: 600; cursor: pointer;
+  margin-top: 6px; padding: 9px 14px; color: #fff;
+  background: var(--primary); border: 1px solid var(--primary-dark); border-radius: 9px;
+}
+.lc-open-inline:hover { background: var(--primary-dark); }
+
+
+/* --- Απάντηση, πηγή και ένδειξη πληκτρολόγησης --- */
+.lc-msg .lc-lead { color: var(--muted); font-size: .78rem; margin: 10px 0 6px; }
+.lc-msg .lc-lead:first-child { margin-top: 0; }
+.lc-source {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+  margin-top: 10px; padding: 8px 10px;
+  background: var(--surface); border: 1px solid var(--border-soft); border-radius: 10px;
+}
+.lc-source-meta { min-width: 0; flex: 1 1 150px; }
+.lc-source .lc-hit-group { margin-bottom: 2px; }
+.lc-source .lc-hit-title { margin-bottom: 0; }
+
+.lc-typing { display: flex; gap: 5px; align-items: center; padding: 12px 14px; }
+.lc-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); opacity: .35; animation: lc-blink 1.1s infinite; }
+.lc-dot:nth-child(2) { animation-delay: .18s; }
+.lc-dot:nth-child(3) { animation-delay: .36s; }
+@keyframes lc-blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .lc-dot { animation: none; opacity: .5; } }
+
+.lc-form button:disabled { opacity: .5; cursor: default; }
+.lc-chips:empty { display: none; }
+
+@media (max-width: 640px) {
+  .lc-launcher { right: 12px; bottom: 12px; padding: 9px 13px; font-size: .82rem; }
+  .lc-panel { right: 8px; left: 8px; bottom: 8px; width: auto; max-height: 82vh; }
+}
+
+@media print {
+  .lc-launcher, .lc-panel, .lc-open-inline { display: none !important; }
+}

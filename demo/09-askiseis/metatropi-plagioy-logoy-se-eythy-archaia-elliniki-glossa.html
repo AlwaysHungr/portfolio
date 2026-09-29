@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Μετατροπή Πλάγιου Λόγου σε Ευθύ — Αρχαία Ελληνική Γλώσσα</title>
+<style>
+  :root{
+    --ink:#182233;--ink-soft:#41506a;--paper:#f3f2ec;--surface:#ffffff;--line:#dcd8cb;
+    --plagios:#a86a2c;--plagios-bg:#f6ecdd;--euthys:#1f6f63;--euthys-bg:#e2efec;
+    --accent:#2f4a7c;--gold:#b89250;--err:#b23a3a;
+    --shadow:0 1px 2px rgba(24,34,51,.06),0 10px 26px rgba(24,34,51,.08);
+    --serif:"Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.55;
+    -webkit-font-smoothing:antialiased;display:flex;flex-direction:column;height:100dvh;overflow:hidden;
+  }
+  .grc{font-family:var(--serif)}
+  b{font-weight:700}
+
+  /* top bar */
+  .topbar{flex:none;display:flex;align-items:center;gap:12px;padding:10px clamp(14px,4vw,40px);
+    background:var(--ink);color:#f3f2ec;border-bottom:1px solid rgba(255,255,255,.08)}
+  .topbar .title{font-family:var(--serif);font-weight:700;font-size:clamp(.9rem,2.4vw,1.05rem);letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .kw{margin-left:auto;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:800;white-space:nowrap}
+  .track{flex:none;height:4px;background:#e8e6dc}
+  .track > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--plagios),var(--euthys));transition:width .35s ease}
+
+  /* deck */
+  .deck{position:relative;flex:1;min-height:0}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:safe center;
+    padding:clamp(16px,3.2vh,34px) clamp(16px,5vw,64px);
+    opacity:0;visibility:hidden;transform:translateX(26px);transition:opacity .4s ease,transform .4s ease;overflow-y:auto}
+  .slide.active{opacity:1;visibility:visible;transform:none;z-index:2}
+  .slide.back{transform:translateX(-26px)}
+  .inner{width:100%;max-width:960px;margin:0 auto}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .eyebrow .num{font-family:var(--serif);font-size:.95rem;color:var(--ink);border:1.5px solid var(--gold);border-radius:50%;width:28px;height:28px;display:inline-grid;place-items:center;font-weight:700}
+  h1{font-family:var(--serif);font-weight:700;line-height:1.08;margin:0}
+  h2{font-family:var(--serif);font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;margin:.2rem 0 .8rem;letter-spacing:-.01em}
+  h3{font-size:1.05rem;margin:0 0 .3rem}
+  p{margin:.45rem 0}
+  .lead{font-size:clamp(.98rem,2.4vw,1.06rem);color:var(--ink-soft);max-width:62ch}
+
+  /* cover */
+  .cover{background:var(--ink);color:#f3f2ec}
+  .cover:before{content:"";position:absolute;inset:0;background:
+    radial-gradient(620px 320px at 88% -12%,rgba(184,146,80,.18),transparent 60%),
+    radial-gradient(520px 340px at 3% 118%,rgba(31,111,99,.20),transparent 60%);pointer-events:none}
+  .cover .inner{position:relative;text-align:center}
+  .cover .kicker{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:800}
+  .cover h1{font-size:clamp(1.9rem,6vw,3.3rem);color:#fff;margin:14px 0}
+  .transform{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin:26px auto 0;max-width:760px}
+  .tcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px;text-align:left}
+  .tcard .tag{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;display:inline-block;padding:3px 9px;border-radius:12px;margin-bottom:8px}
+  .tcard.plag .tag{background:var(--plagios-bg);color:#7a4c18}
+  .tcard.euth .tag{background:var(--euthys-bg);color:#155249}
+  .tcard .grc{font-size:clamp(1.05rem,2.8vw,1.28rem);color:#fff;line-height:1.4}
+  .arrow{font-size:1.8rem;color:var(--gold);text-align:center;font-family:var(--serif)}
+  .startbtn{margin-top:30px;background:var(--gold);color:#2a2010;border:none;padding:13px 28px;border-radius:26px;font-family:var(--sans);font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 6px 18px rgba(184,146,80,.35);transition:transform .15s}
+  .startbtn:hover{transform:translateY(-2px)}
+  @media(max-width:640px){.transform{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}}
+
+  /* definition cards */
+  .defs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+  .def{background:var(--surface);border-radius:14px;padding:20px;box-shadow:var(--shadow);border-top:4px solid}
+  .def.plag{border-color:var(--plagios)}.def.euth{border-color:var(--euthys)}
+  .def .label{font-weight:800;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase}
+  .def.plag .label{color:var(--plagios)}.def.euth .label{color:var(--euthys)}
+  .def p{font-size:.95rem}
+  .def .ex{margin-top:11px;font-family:var(--serif);font-size:1.1rem;background:var(--paper);border-radius:10px;padding:11px 13px}
+  @media(max-width:640px){.defs{grid-template-columns:1fr}.def p{font-size:.9rem}}
+
+  /* links */
+  .linkgroup{margin-top:12px}
+  .linkgroup h3{color:var(--accent);font-size:.95rem;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .linkgroup h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+  .linklist{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  @media(max-width:640px){.linklist{grid-template-columns:1fr}}
+  .linkcard{display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:11px 13px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+  .linkcard:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .linkcard .lico{flex:none;width:32px;height:32px;border-radius:8px;background:var(--paper);display:grid;place-items:center}
+  .linkcard .lt{font-weight:600;font-size:.88rem;line-height:1.25}
+  .linkcard .lu{font-size:.72rem;color:var(--ink-soft)}
+
+  /* mapping table */
+  .maptable{width:100%;border-collapse:separate;border-spacing:0;margin-top:8px;background:var(--surface);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+  .maptable th,.maptable td{padding:12px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:.95rem}
+  .maptable thead th{background:var(--ink);color:#f3f2ec;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+  .maptable tbody tr:last-child td{border-bottom:none}
+  .maptable td:first-child{color:var(--plagios);font-weight:600}
+  .maptable td:last-child{color:var(--euthys);font-weight:600}
+
+  /* step */
+  .stephead{display:flex;gap:13px;align-items:center;margin-bottom:12px}
+  .stepn{flex:none;width:38px;height:38px;border-radius:10px;background:var(--ink);color:#fff;font-family:var(--serif);font-weight:700;font-size:1.15rem;display:grid;place-items:center}
+  .bullet{margin:.3rem 0;padding-left:18px;position:relative;font-size:.95rem}
+  .bullet:before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+  .greekword{font-family:var(--serif);background:var(--plagios-bg);color:#7a4c18;padding:1px 7px;border-radius:6px;font-weight:600}
+  .tip{margin-top:12px;background:var(--paper);padding:11px 14px;border-radius:9px;color:var(--ink-soft);font-size:.86rem}
+
+  .desc{background:var(--paper);border-radius:10px;padding:12px 15px;color:var(--ink-soft);font-size:.92rem;margin-bottom:10px}
+
+  /* carousel */
+  .carousel{margin-top:6px}
+  .cslide{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);min-height:150px}
+  .pill{display:inline-block;font-size:.72rem;font-weight:800;padding:3px 11px;border-radius:12px;margin-bottom:8px;letter-spacing:.04em}
+  .pill.first{background:#ecdcc6;color:#7a4c18}.pill.second{background:#dce9e6;color:#155249}.pill.third{background:#dfe3ee;color:#2f4a7c}
+  .cdesc{margin:.1rem 0 .5rem;color:var(--ink-soft);font-size:.9rem}
+  .pl{font-family:var(--serif);font-size:clamp(1.02rem,2.6vw,1.16rem);color:var(--ink)}
+  .pl b{color:var(--plagios)}
+  .reveal-btn{margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border:none;padding:8px 15px;border-radius:20px;font-family:var(--sans);font-size:.84rem;font-weight:600;cursor:pointer;transition:background .2s}
+  .reveal-btn:hover{background:#0f1826}
+  .el-wrap{max-height:0;opacity:0;overflow:hidden;transition:max-height .45s ease,opacity .35s ease,margin .35s ease;margin-top:0}
+  .el-wrap.open{max-height:240px;opacity:1;margin-top:12px}
+  .el{font-family:var(--serif);font-size:clamp(1.02rem,2.6vw,1.16rem);background:var(--euthys-bg);border-radius:9px;padding:11px 13px;color:#12433b}
+  .el b{color:var(--euthys)}
+  .el .mini{display:block;font-family:var(--sans);font-size:.72rem;color:var(--euthys);font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+  .cnote{margin-top:8px;font-size:.83rem;color:var(--ink-soft)}
+  .cnav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px}
+  .cbtn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.3rem;cursor:pointer;display:grid;place-items:center;line-height:1;transition:all .15s}
+  .cbtn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+  .cbtn:disabled{opacity:.35;cursor:default}
+  .ccount{font-size:.85rem;font-weight:700;color:var(--ink-soft);min-width:56px;text-align:center}
+
+  /* swaps */
+  .swap{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:7px 15px;margin:6px 8px 6px 0;box-shadow:var(--shadow);font-family:var(--serif);font-size:1.05rem}
+  .swap .from{color:var(--plagios);font-weight:700}.swap .to{color:var(--euthys);font-weight:700}.swap .a{color:var(--gold)}
+
+  /* matching */
+  .match{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;margin-top:10px}
+  .mcol h4{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 7px}
+  .mitem{display:block;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:.88rem;cursor:pointer;font-family:var(--sans);transition:all .15s;color:var(--ink)}
+  .mcol.left .mitem{color:var(--plagios);font-weight:600}.mcol.right .mitem{color:var(--euthys);font-weight:600}
+  .mitem.sel{border-color:var(--accent);box-shadow:0 0 0 3px rgba(47,74,124,.15)}
+  .mitem.done{background:var(--euthys-bg);border-color:var(--euthys);color:#12433b;cursor:default;opacity:.85}
+  .mitem.wrong{border-color:var(--err);animation:shake .3s}
+  @keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .match-status{margin-top:12px;font-weight:600;font-size:.92rem;min-height:1.3em}
+
+  /* MCQ */
+  .q .qt{font-weight:600;margin-bottom:10px;font-size:1rem}
+  .opt{display:block;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:11px 14px;margin:8px 0;cursor:pointer;font-size:.93rem;font-family:var(--sans);color:var(--ink);transition:all .15s;box-shadow:var(--shadow)}
+  .opt:hover:not(:disabled){border-color:var(--accent)}
+  .opt.correct{background:var(--euthys-bg);border-color:var(--euthys);color:#12433b;font-weight:600}
+  .opt.incorrect{background:#f6e3e3;border-color:var(--err);color:#7c2626}
+  .opt:disabled{cursor:default}
+  .qfx{margin-top:8px;font-size:.85rem;font-weight:600;min-height:1.2em}
+
+  /* checklist */
+  .progbar{height:9px;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:8px 0 4px}
+  .progfill{height:100%;width:0;background:linear-gradient(90deg,var(--plagios),var(--euthys));transition:width .4s ease}
+  .progtxt{font-size:.82rem;color:var(--ink-soft);font-weight:700;margin-bottom:8px}
+  .checkgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  @media(max-width:640px){.checkgrid{grid-template-columns:1fr}}
+  .chk{display:flex;gap:11px;align-items:flex-start;padding:9px 11px;border-radius:9px;cursor:pointer;background:var(--surface);border:1px solid var(--line);transition:background .15s}
+  .chk:hover{background:var(--paper)}
+  .chk input{display:none}
+  .box{flex:none;width:22px;height:22px;border:2px solid var(--line);border-radius:6px;display:grid;place-items:center;transition:all .2s;margin-top:1px}
+  .box svg{opacity:0;transform:scale(.4);transition:all .2s}
+  .chk input:checked ~ .box{background:var(--euthys);border-color:var(--euthys)}
+  .chk input:checked ~ .box svg{opacity:1;transform:scale(1)}
+  .ctxt{font-size:.85rem;line-height:1.35;transition:color .2s}
+  .chk input:checked ~ .ctxt{color:var(--ink-soft)}
+  .done-banner{display:none;margin-top:10px;padding:12px 15px;background:var(--euthys-bg);border-radius:11px;color:#12433b;font-weight:700;font-size:.92rem}
+  .done-banner.show{display:block}
+  .keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .kw{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:6px 13px;font-size:.83rem;color:var(--ink-soft);font-weight:600;box-shadow:var(--shadow)}
+
+  /* bottom nav */
+  .navbar{flex:none;display:flex;align-items:center;gap:14px;padding:10px clamp(14px,4vw,40px);background:var(--surface);border-top:1px solid var(--line)}
+  .navbtn{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 16px;border-radius:22px;font-family:var(--sans);font-weight:600;font-size:.88rem;cursor:pointer;transition:all .15s}
+  .navbtn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+  .navbtn:disabled{opacity:.35;cursor:default}
+  .navbtn.next{margin-left:auto;background:var(--ink);color:#fff;border-color:var(--ink)}
+  .navbtn.next:hover:not(:disabled){background:#0f1826;color:#fff}
+  .counter{font-size:.85rem;font-weight:700;color:var(--ink-soft);letter-spacing:.02em}
+
+  /* compact on small screens so every slide fits without scrolling */
+  @media(max-width:640px){
+    .slide{padding-top:14px;padding-bottom:14px}
+    h2{margin:.15rem 0 .55rem}
+    .lead{font-size:.92rem}
+    .def{padding:14px}.def .ex{margin-top:8px;padding:9px 11px;font-size:1.02rem}
+    .linkgroup{margin-top:8px}.linkgroup h3{margin-bottom:5px}
+    .linkcard{padding:9px 11px}.linkcard .lico{width:28px;height:28px}
+    .maptable th,.maptable td{padding:9px 13px;font-size:.9rem}
+    .desc{padding:10px 13px;font-size:.88rem;margin-bottom:8px}
+    .checkgrid{grid-template-columns:1fr 1fr;gap:5px}
+    .chk{padding:6px 8px;gap:8px}.box{width:19px;height:19px}
+    .ctxt{font-size:.74rem;line-height:1.25}
+    .keywords{margin-top:8px;gap:5px}.kw{padding:4px 10px;font-size:.75rem}
+    .progbar{margin:5px 0 3px}.progtxt{margin-bottom:5px;font-size:.78rem}
+    .cslide{padding:13px 15px;min-height:120px}
+    .eyebrow{margin-bottom:4px}.eyebrow .num{width:24px;height:24px;font-size:.85rem}
+    .linkcard .lt{font-size:.84rem}.linkcard .lu{font-size:.68rem}
+  }
+  @media(max-height:700px){
+    .slide{padding-top:10px;padding-bottom:10px}
+    h2{font-size:clamp(1.2rem,3.4vw,1.5rem);margin:.1rem 0 .4rem}
+    .lead{font-size:.88rem}
+    .cslide{min-height:104px;padding:11px 14px}
+    .desc{margin-bottom:6px;padding:9px 12px}
+    .linkgroup{margin-top:6px}.linkcard{padding:8px 10px}
+    .def{padding:12px}
+    .checkgrid{gap:4px}.chk{padding:5px 8px}.ctxt{font-size:.72rem}
+    .reveal-btn{margin-top:9px}.cnav{margin-top:9px}
+  }
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  a:focus-visible,button:focus-visible,.chk:focus-within{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="title">Μετατροπή Πλάγιου Λόγου σε Ευθύ</span>
+  <span class="kw">Αρχαία Ελληνική · Σύνταξη</span>
+</div>
+<div class="track"><i id="track"></i></div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · COVER -->
+  <section class="slide cover active">
+    <div class="inner">
+      <span class="kicker">Αρχαία Ελληνική Γλώσσα · Σύνταξη</span>
+      <h1>Μετατροπή Πλάγιου Λόγου σε Ευθύ</h1>
+      <div class="transform">
+        <div class="tcard plag"><span class="tag">Πλάγιος λόγος</span><div class="grc">Ἤκουσεν Κῦρον ἐν Κιλικίᾳ ὄντα.</div></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="tcard euth"><span class="tag">Ευθύς λόγος</span><div class="grc">Κῦρος ἐν Κιλικίᾳ ἐστί.</div></div>
+      </div>
+      <button class="startbtn" data-go="next">Ξεκίνα →</button>
+    </div>
+  </section>
+
+  <!-- 2 · ΟΡΙΣΜΟΙ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">01</span> Θεμέλια</span>
+      <h2>Πλάγιος και ευθύς λόγος</h2>
+      <div class="defs">
+        <div class="def plag">
+          <div class="label">Πλάγιος λόγος</div>
+          <p>Τα αρχικά λόγια κάποιου μάς μεταφέρονται σε επανάληψη, <b>εξαρτημένα από κάποιο ρήμα</b>, χωρίς να παρατίθενται αυτούσια.</p>
+          <div class="ex grc">Ἤκουσεν Κῦρον ἐν Κιλικίᾳ ὄντα.</div>
+        </div>
+        <div class="def euth">
+          <div class="label">Ευθύς λόγος</div>
+          <p>Η <b>απευθείας παράθεση</b> των λόγων κάποιου, όπως ακριβώς ειπώθηκαν.</p>
+          <div class="ex grc">Κῦρος ἐν Κιλικίᾳ ἐστί.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · ΣΥΝΔΕΣΜΟΙ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">02</span> Πηγές</span>
+      <h2>Αξιοποιώ τους εξωτερικούς συνδέσμους</h2>
+      <div class="linkgroup">
+        <h3><span class="dot"></span> Πύλη για την Ελληνική Γλώσσα</h3>
+        <div class="linklist">
+          <a class="linkcard" href="https://www.greek-language.gr/greekLang/ancient_greek/tools/composition/page_089.html" target="_blank" rel="noopener"><span class="lico">📖</span><span><span class="lt">Πλάγιος λόγος κρίσεως</span><span class="lu">greek-language.gr</span></span></a>
+          <a class="linkcard" href="https://www.greek-language.gr/greekLang/ancient_greek/tools/composition/page_092.html" target="_blank" rel="noopener"><span class="lico">📖</span><span><span class="lt">Οι δευτερεύουσες προτάσεις στον πλάγιο λόγο</span><span class="lu">greek-language.gr</span></span></a>
+          <a class="linkcard" href="https://www.greek-language.gr/greekLang/ancient_greek/tools/composition/page_093.html" target="_blank" rel="noopener"><span class="lico">📖</span><span><span class="lt">Οι αντωνυμίες στον πλάγιο λόγο</span><span class="lu">greek-language.gr</span></span></a>
+        </div>
+      </div>
+      <div class="linkgroup">
+        <h3><span class="dot"></span> Συντακτικό της Αρχαίας Ελληνικής, Π. Μπίλλα</h3>
+        <div class="linklist">
+          <a class="linkcard" href="http://ebooks.edu.gr/ebooks/v/html/8547/2326/Syntaktiko-Archaias-Ellinikis-Glossas_A-B-G-Gymnasiou_html-apli/index_02_04.html" target="_blank" rel="noopener"><span class="lico">📘</span><span><span class="lt">Ο ευθύς και ο πλάγιος λόγος</span><span class="lu">ebooks.edu.gr</span></span></a>
+        </div>
+      </div>
+      <div class="linkgroup">
+        <h3><span class="dot"></span> Ψηφιακό σχολικό βοήθημα</h3>
+        <div class="linklist">
+          <a class="linkcard" href="https://www.study4exams.gr/anc_greek/course/view.php?id=121" target="_blank" rel="noopener"><span class="lico">🎓</span><span><span class="lt">Ευθύς και πλάγιος λόγος — Περιπτώσεις πλαγίου λόγου</span><span class="lu">study4exams.gr</span></span></a>
+          <a class="linkcard" href="https://www.study4exams.gr/anc_greek/course/view.php?id=122" target="_blank" rel="noopener"><span class="lico">🎓</span><span><span class="lt">Ευθύς και πλάγιος λόγος — Μετατροπή πλάγιου λόγου σε ευθύ</span><span class="lu">study4exams.gr</span></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · ΠΙΝΑΚΑΣ ΑΝΤΙΣΤΟΙΧΙΩΝ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">03</span> Χάρτης μετατροπών</span>
+      <h2>Ας οργανώσουμε όσα μελετήσαμε</h2>
+      <p class="lead">Για να μετατρέψουμε τον πλάγιο λόγο σε ευθύ, ακολουθούμε την <b>αντίστροφη διαδικασία</b> από τη μετατροπή ευθέος σε πλάγιο.</p>
+      <table class="maptable">
+        <thead><tr><th>Στον πλάγιο λόγο</th><th>Στον ευθύ λόγο</th></tr></thead>
+        <tbody>
+          <tr><td>Ειδικές προτάσεις</td><td>Κύριες προτάσεις κρίσεως</td></tr>
+          <tr><td>Ειδικά απαρέμφατα</td><td>Κύριες προτάσεις κρίσεως</td></tr>
+          <tr><td>Κατηγορηματικές μετοχές</td><td>Κύριες προτάσεις κρίσεως</td></tr>
+          <tr><td>Τελικά απαρέμφατα</td><td>Κύριες προτάσεις επιθυμίας</td></tr>
+          <tr><td>Πλάγιες ερωτηματικές προτάσεις</td><td>Ευθείες ερωτήσεις</td></tr>
+          <tr><td>Δευτερεύουσες προτάσεις</td><td>Δευτερεύουσες προτάσεις</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5 · ΒΗΜΑ 1 -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">04</span> Βήματα μετατροπής</span>
+      <div class="stephead"><div class="stepn">1</div><h2 style="margin:0">Αφαιρούμε</h2></div>
+      <div class="bullet">Το <b>ρήμα εξάρτησης</b> και τους προσδιορισμούς του — ή το τοποθετούμε πριν την άνω και κάτω τελεία, αποκομμένο από τον ευθύ λόγο.</div>
+      <div class="bullet">Τους <b>συνδέσμους εισαγωγής</b> ειδικών και πλάγιων ερωτηματικών ολικής άγνοιας: <span class="greekword">ὅτι</span> <span class="greekword">ὡς</span> <span class="greekword">εἰ</span>.</div>
+      <div class="carousel" data-set="step1"></div>
+    </div>
+  </section>
+
+  <!-- 6 · ΒΗΜΑ 2 -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">04</span> Βήματα μετατροπής</span>
+      <div class="stephead"><div class="stepn">2</div><h2 style="margin:0">Μετατρέπουμε πρόσωπα &amp; αντωνυμίες</h2></div>
+      <p class="desc">Συγκρίνουμε το υποκείμενο του <b>ρήματος εξάρτησης</b> με το υποκείμενο του ρηματικού τύπου του πλαγίου λόγου (απαρεμφάτου/μετοχής) και επιλέγουμε το κατάλληλο πρόσωπο.</p>
+      <div class="carousel" data-set="person"></div>
+      <div class="tip">💡 <b>Σημείωση:</b> «Υποδύσου» το πρόσωπο που μιλά — μεταφέρσου στον τόπο, τον χρόνο και τις συνθήκες του ευθέος λόγου.</div>
+    </div>
+  </section>
+
+  <!-- 7 · ΚΥΡΙΕΣ ΚΡΙΣΕΩΣ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">05</span> Περιπτώσεις</span>
+      <h2>Ειδικά απαρέμφατα · ειδικές προτάσεις · κατηγορηματικές μετοχές</h2>
+      <p class="desc">Γίνονται <b>κύριες προτάσεις κρίσεως</b>, με <b>οριστική</b>, <b>δυνητική οριστική</b> ή <b>δυνητική ευκτική</b> ίδιου χρόνου. Οι δυνητικές εγκλίσεις διατηρούνται· η <b>ευκτική πλαγίου λόγου</b> γίνεται <b>οριστική</b>.</p>
+      <div class="carousel" data-set="krisis"></div>
+    </div>
+  </section>
+
+  <!-- 8 · ΚΥΡΙΕΣ ΕΠΙΘΥΜΙΑΣ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">06</span> Περιπτώσεις</span>
+      <h2>Τελικά απαρέμφατα</h2>
+      <p class="desc">Γίνονται <b>κύριες προτάσεις επιθυμίας</b>: <b>προστακτική</b> (κελευστικό/απαγορευτικό ρήμα, υποκ. β΄/γ΄), <b>βουλητική υποτακτική</b> (κελευστικό ρήμα, υποκ. α΄) ή <b>ευχετική ευκτική</b> (ευχετικό ρήμα).</p>
+      <div class="carousel" data-set="epithymias"></div>
+    </div>
+  </section>
+
+  <!-- 9 · ΕΥΘΕΙΕΣ ΕΡΩΤΗΣΕΙΣ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">07</span> Περιπτώσεις</span>
+      <h2>Πλάγιες → ευθείες ερωτήσεις</h2>
+      <p class="desc">Μπαίνει <b>ερωτηματικό</b> στο τέλος. Η αναφορική αντωνυμία/επίρρημα γίνεται <b>ερωτηματική</b>. Η ευκτική πλαγίου λόγου γίνεται οριστική ή υποτακτική.</p>
+      <div class="carousel" data-set="erotiseis"></div>
+    </div>
+  </section>
+
+  <!-- 10 · ΕΠΙΡΡΗΜΑΤΑ & ΑΝΤΩΝΥΜΙΕΣ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">08</span> Λεπτομέρειες</span>
+      <h2>Επιρρήματα &amp; αντωνυμίες</h2>
+      <p class="lead">Τοπικά/χρονικά επιρρήματα και αντωνυμίες (προσωπικές, επαναληπτικές, αυτοπαθείς, κτητικές) αλλάζουν ανάλογα με το νόημα.</p>
+      <div style="margin:8px 0">
+        <span class="swap"><span class="from grc">ἐκεῖ</span><span class="a">→</span><span class="to grc">ἐνθάδε</span></span>
+        <span class="swap"><span class="from grc">τότε</span><span class="a">→</span><span class="to grc">νῦν</span></span>
+      </div>
+      <div class="carousel" data-set="adverbs"></div>
+    </div>
+  </section>
+
+  <!-- 11 · ΔΕΥΤΕΡΕΥΟΥΣΕΣ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">09</span> Περιπτώσεις</span>
+      <h2>Δευτερεύουσες προτάσεις</h2>
+      <p class="desc">Οι δευτερεύουσες (εκτός ειδικών &amp; πλάγιων ερωτηματικών) <b>παραμένουν δευτερεύουσες</b>. Η ευκτική πλαγίου λόγου γίνεται οριστική/υποτακτική· το <span class="greekword">εἰ</span> γίνεται <span class="greekword">ἐάν</span> σε προσδοκώμενο και αόριστη επανάληψη.</p>
+      <div class="carousel" data-set="deft"></div>
+    </div>
+  </section>
+
+  <!-- 12 · ΑΣΚΗΣΗ ΑΝΤΙΣΤΟΙΧΙΣΗΣ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">10</span> Εξάσκηση</span>
+      <h2>Αντιστοίχισε μορφή → αποτέλεσμα</h2>
+      <p style="color:var(--ink-soft);font-size:.9rem;margin-top:0">Πάτησε ένα στοιχείο αριστερά και μετά το ταίρι του δεξιά.</p>
+      <div class="match" id="matchGame"></div>
+      <div class="match-status" id="matchStatus"></div>
+    </div>
+  </section>
+
+  <!-- 13 · ΕΡΩΤΗΣΕΙΣ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">11</span> Εξάσκηση</span>
+      <h2>Ερωτήσεις κρίσεως</h2>
+      <div id="quizHost"></div>
+    </div>
+  </section>
+
+  <!-- 14 · ΛΙΣΤΑ ΕΛΕΓΧΟΥ -->
+  <section class="slide">
+    <div class="inner">
+      <span class="eyebrow"><span class="num">12</span> Αυτοέλεγχος</span>
+      <h2>Λίστα ελέγχου</h2>
+      <div class="progbar"><div class="progfill" id="progFill"></div></div>
+      <div class="progtxt" id="progTxt">0 από 10 ολοκληρωμένα</div>
+      <div class="checkgrid" id="checkItems"></div>
+      <div class="done-banner" id="doneBanner">🏛️ Εξαιρετικά! Ολοκλήρωσες όλα τα σημεία κατανόησης της ενότητας.</div>
+      <div class="keywords">
+        <span class="kw">ευθύς λόγος</span><span class="kw">πλάγιος λόγος</span><span class="kw">μετατροπές</span>
+        <span class="kw">αντωνυμίες</span><span class="kw">επιρρήματα</span><span class="kw">ρηματικά πρόσωπα</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="navbar">
+  <button class="navbtn prev" id="btnPrev">‹ Προηγούμενο</button>
+  <span class="counter" id="counter">1 / 14</span>
+  <button class="navbtn next" id="btnNext">Επόμενο ›</button>
+</div>
+
+<script>
+"use strict";
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+/* ---------- Carousel data (docx order) ---------- */
+const SETS={
+  step1:{examples:[
+    {pl:"Ἔλεγόν τινες ὡς γιγνώσκουσι τὸ δίκαιον.",el:"Ἔλεγόν τινες: Γιγνώσκομεν τὸ δίκαιον.",note:"Αφαιρέθηκε ο σύνδεσμος «ὡς»· το ρήμα εξάρτησης πριν την άνω-κάτω τελεία."}
+  ]},
+  person:{examples:[
+    {tag:"α΄ πρόσωπο",cls:"first",desc:"Ίδια υποκείμενα → α΄ ενικού/πληθυντικού.",pl:"Οἱ στρατιῶται ἔλεγον οὐκ ἐπιτρέψειν ταῦτα γενέσθαι.",el:"Οἱ στρατιῶται ἔλεγον: Οὐκ ἐπιτρέψομεν ταῦτα γενέσθαι."},
+    {tag:"β΄ πρόσωπο",cls:"second",desc:"Διαφορετικά αλλά συνδιαλεγόμενα → β΄ ενικού/πληθυντικού.",pl:"Παρακελεύοντο Κύρῳ μὴ μάχεσθαι.",el:"Παρακελεύοντο: Κῦρε, μὴ μάχου."},
+    {tag:"γ΄ πρόσωπο",cls:"third",desc:"Διαφορετικά, με αφηγητή το υποκ. εξάρτησης → γ΄ ενικού/πληθυντικού.",pl:"Σωκράτης ἔφη τοὺς θεοὺς πάντα ὁρᾶν.",el:"Σωκράτης ἔφη: Οἱ θεοὶ πάντα ὁρῶσι."}
+  ]},
+  krisis:{examples:[
+    {pl:"Στρατιώτης ἔλεγεν ὅτι Ἀριαῖος πεφευγώς εἴη.",el:"Στρατιώτης ἔλεγεν: Ἀριαῖος πέφευγε.",note:"Ευκτική πλαγίου λόγου → οριστική."},
+    {pl:"Ἔλεγον ὅτι οὐ δίκαια πάσχοιεν ὑπὸ τῶν Ἀθηναίων.",el:"Ἔλεγον: Οὐ δίκαια πάσχομεν ὑπὸ τῶν Ἀθηναίων.",note:"Υποκείμενο στην ονομαστική, α΄ πρόσωπο."},
+    {pl:"Οἱ Πέρσαι οἴονται τοὺς ἀχαρίστους περὶ τοὺς θεοὺς ἀμελῶς ἂν ἔχειν.",el:"Οἱ Πέρσαι οἴονται: Οἱ ἀχάριστοι περὶ τοὺς θεοὺς ἀμελῶς ἂν ἔχοιεν.",note:"Δυνητικό ειδικό απαρέμφατο → δυνητική ευκτική."},
+    {pl:"Οὗτος νομίζει σοφός εἶναι.",el:"Οὗτος νομίζει: Σοφός εἰμί.",note:"Ειδικό απαρέμφατο → κύρια κρίσεως (οριστική)."},
+    {pl:"Σωκράτης ἔφη τοὺς θεοὺς πάντα ὁρᾶν.",el:"Σωκράτης ἔφη: Οἱ θεοὶ πάντα ὁρῶσι.",note:"Ειδικό απαρέμφατο → οριστική, γ΄ πρόσωπο."},
+    {pl:"Δημοσθένης ἑώρα τὸ παρατείχισμα τῶν Συρακοσίων ῥᾳδίως ἂν ληφθέν.",el:"Δημοσθένης ἑώρα: Τὸ παρατείχισμα τῶν Συρακοσίων ῥᾳδίως ἂν ληφθείη.",note:"Δυνητική κατηγορηματική μετοχή → δυνητική ευκτική."},
+    {pl:"Λακεδαιμόνιοι ἑώρων Ἀθηναίους μαχομένους ἐν τῷ πεδίῳ.",el:"Λακεδαιμόνιοι ἑώρων: Ἀθηναῖοι ἐμάχοντο ἐν τῷ πεδίῳ.",note:"Κατηγορηματική μετοχή → οριστική."},
+    {pl:"Αἱ νῆες ἠγγέλλοντο πορθοῦσαι τὴν περιοικίδα αὐτῶν.",el:"Αἱ νῆες πορθοῦσι τὴν περιοικίδα αὐτῶν.",note:"Κατηγορηματική μετοχή → οριστική."}
+  ]},
+  epithymias:{examples:[
+    {pl:"Σωκράτης ἠνάγκασεν ἡμᾶς ὁμολογεῖν.",el:"Σωκράτης ἠνάγκασεν ἡμᾶς: Ὁμολογεῖτε.",note:"Προστακτική (κελευστικό ρήμα, υποκ. β΄)."},
+    {pl:"Ἐκέλευσεν αὐτοῖς ἰέναι ἐπὶ τοὺς πολεμίους.",el:"Ἐκέλευσεν αὐτοῖς: Ἴωμεν ἐπὶ τοὺς πολεμίους.",note:"Βουλητική υποτακτική (υποκ. α΄)."},
+    {pl:"Οὗτοι ηὔχοντο αὐτὸν φίλον σφίσι γενέσθαι.",el:"Οὗτοι ηὔχοντο: Εἴθε σὺ φίλος ἡμῖν γένοιο.",note:"Ευχετική ευκτική (ευχετικό ρήμα)."},
+    {pl:"Ζεὺς ἐκέλευε Ἑρμῆν ἀπελθεῖν πρὸς Τίμωνα.",el:"Ζεὺς ἐκέλευε: Ὦ Ἑρμῆ, ἄπελθε πρὸς Τίμωνα.",note:"Προστακτική με κλητική προσφώνηση."}
+  ]},
+  erotiseis:{examples:[
+    {pl:"Ἀνὴρ ἠρώτα Ἀθηναίους εἰ οὐκ αἰσχύνοιντο.",el:"Ῥήτωρ ἠρώτα Ἀθηναίους: Οὐκ αἰσχύνεσθε;",note:"Ολικής άγνοιας → ερωτηματικό στο τέλος."},
+    {pl:"Ῥήτωρ ἐρωτᾷ Περικλέα πόθεν ἔσχε.",el:"Ῥήτωρ ἐρωτᾷ Περικλέα: Πόθεν ἔσχες;",note:"Μερικής άγνοιας → ευθεία ερώτηση."},
+    {pl:"Ἀνὴρ ἀπορεῖ ὅ,τι λέγῃ.",el:"Ἀνὴρ ἀπορεῖ: Τί λέγω;",note:"Αναφορική → ερωτηματική αντωνυμία (ὅ,τι → τί)."}
+  ]},
+  adverbs:{examples:[
+    {pl:"Ἔλεγον Θηβαίους τότε δεῖσθαι αὐτῶν.",el:"Ἔλεγον: Θηβαῖοι νῦν δέονται ὑμῶν.",note:"τότε → νῦν · αὐτῶν → ὑμῶν."}
+  ]},
+  deft:{examples:[
+    {pl:"Λέγει ὅτι, ἵνα δ' ἔτι καὶ ἄμεινον μάθωσι, τούτου ἕνεκα πλείω λέξει.",el:"Λέγει: Ἵνα δ' ἔτι καὶ ἄμεινον μάθητε, τούτου ἕνεκα πλείω λέξω.",note:"Η τελική πρόταση παραμένει δευτερεύουσα."},
+    {pl:"Ἀπεκρίνατό μοι ὅτι οὐδὲν αὐτῷ μέλοι ὧν λέγοιμι.",el:"Ἀπεκρίνατό μοι: Οὐδέν μοι μέλει ὧν λέγεις.",note:"Ευκτική πλαγίου λόγου → οριστική."},
+    {pl:"Ἔλεγον ὅτι ἅπας ὁ λόγος, εἰ ἀπείη τὰ πράγματα, μάταιόν τι φαίνοιτο.",el:"Ἔλεγον: Ἅπας ὁ λόγος ἂν ἀπῇ τὰ πράγματα, μάταιόν τι φαίνεται.",note:"Υποθετικό εἰ → ἂν (ἐάν) + υποτακτική."}
+  ]}
+};
+
+function buildCarousel(host){
+  const ex=SETS[host.dataset.set].examples;let idx=0;
+  host.innerHTML=`<div class="cslide"></div>
+    <div class="cnav" ${ex.length<2?'style="display:none"':''}>
+      <button class="cbtn prev" aria-label="Προηγούμενο">‹</button>
+      <span class="ccount"></span>
+      <button class="cbtn next" aria-label="Επόμενο">›</button></div>`;
+  const cs=host.querySelector('.cslide'),cc=host.querySelector('.ccount');
+  function render(){
+    const c=ex[idx];
+    cs.innerHTML=`${c.tag?`<span class="pill ${c.cls}">${esc(c.tag)}</span>`:''}
+      ${c.desc?`<p class="cdesc">${esc(c.desc)}</p>`:''}
+      <div class="pl grc"><b>Π.Λ.</b> ${esc(c.pl)}</div>
+      <button class="reveal-btn"><span class="ico">▸</span><span class="rtxt"> Δες τη μετατροπή</span></button>
+      <div class="el-wrap"><div class="el grc"><span class="mini">Ευθύς λόγος</span><b>Ε.Λ.</b> ${esc(c.el)}</div>${c.note?`<div class="cnote">💡 ${esc(c.note)}</div>`:''}</div>`;
+    cc.textContent=`${idx+1} / ${ex.length}`;
+    const p=host.querySelector('.prev'),n=host.querySelector('.next');
+    if(p)p.disabled=idx===0; if(n)n.disabled=idx===ex.length-1;
+  }
+  const pv=host.querySelector('.prev'),nx=host.querySelector('.next');
+  if(pv)pv.onclick=()=>{if(idx>0){idx--;render();}};
+  if(nx)nx.onclick=()=>{if(idx<ex.length-1){idx++;render();}};
+  cs.addEventListener('click',e=>{
+    const b=e.target.closest('.reveal-btn');if(!b)return;
+    const w=cs.querySelector('.el-wrap'),open=w.classList.toggle('open');
+    b.querySelector('.ico').textContent=open?'▾':'▸';
+    b.querySelector('.rtxt').textContent=open?' Απόκρυψη':' Δες τη μετατροπή';
+  });
+  render();
+}
+document.querySelectorAll('.carousel').forEach(buildCarousel);
+
+/* ---------- Matching ---------- */
+const PAIRS=[
+  {l:"Ειδικά απαρέμφατα",r:"Κύριες προτάσεις κρίσεως"},
+  {l:"Κατηγορηματικές μετοχές",r:"Κύριες προτάσεις κρίσεως"},
+  {l:"Τελικά απαρέμφατα",r:"Κύριες προτάσεις επιθυμίας"},
+  {l:"Πλάγιες ερωτηματικές",r:"Ευθείες ερωτήσεις"},
+  {l:"Δευτερεύουσες προτάσεις",r:"Δευτερεύουσες προτάσεις"}
+];
+const CORRECT={0:0,1:1,2:2,3:3,4:4},EQUIV={0:[0,1],1:[0,1]};
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
+const mg=document.getElementById('matchGame'),mStatus=document.getElementById('matchStatus');
+const rightOrder=shuffle(PAIRS.map((_,i)=>i));let selLeft=null,matched=0;
+mg.innerHTML=`<div class="mcol left"><h4>Στον πλάγιο λόγο</h4>${
+  PAIRS.map((p,i)=>`<button class="mitem" data-side="l" data-i="${i}">${esc(p.l)}</button>`).join('')}</div>
+  <div class="mcol right"><h4>Στον ευθύ λόγο</h4>${
+  rightOrder.map(i=>`<button class="mitem" data-side="r" data-i="${i}">${esc(PAIRS[i].r)}</button>`).join('')}</div>`;
+mg.addEventListener('click',e=>{
+  const it=e.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
+  if(it.dataset.side==='l'){
+    mg.querySelectorAll('.mitem[data-side="l"]').forEach(x=>x.classList.remove('sel'));
+    selLeft=it;it.classList.add('sel');
+  }else{
+    if(!selLeft){mStatus.textContent='Διάλεξε πρώτα ένα στοιχείο αριστερά.';mStatus.style.color='var(--ink-soft)';return;}
+    const li=+selLeft.dataset.i,ri=+it.dataset.i;
+    const ok=(CORRECT[li]===ri)||(EQUIV[li]&&EQUIV[li].includes(ri));
+    if(ok){selLeft.classList.add('done');selLeft.classList.remove('sel');it.classList.add('done');selLeft=null;matched++;
+      mStatus.style.color='var(--euthys)';
+      mStatus.textContent=matched===5?'✓ Τέλεια! Αντιστοίχισες σωστά όλες τις μορφές.':`Σωστά! (${matched}/5)`;
+    }else{it.classList.add('wrong');mStatus.style.color='var(--err)';mStatus.textContent='Δοκίμασε ξανά — δεν ταιριάζουν.';
+      setTimeout(()=>it.classList.remove('wrong'),350);}
+  }
+});
+
+/* ---------- MCQ (one at a time) ---------- */
+const QUIZ=[
+  {q:"Η ευκτική πλαγίου λόγου σε ειδική πρόταση, κατά τη μετατροπή σε ευθύ, γίνεται:",o:["δυνητική ευκτική","οριστική","βουλητική υποτακτική"],c:1,fx:"Η ευκτική πλαγίου λόγου μετατρέπεται σε οριστική."},
+  {q:"Οι δυνητικές εγκλίσεις (δυν. οριστική / δυν. ευκτική) από τον πλάγιο στον ευθύ λόγο:",o:["μετατρέπονται σε οριστική","διατηρούνται","γίνονται προστακτική"],c:1,fx:"Οι δυνητικές εγκλίσεις διατηρούνται."},
+  {q:"Τα τελικά απαρέμφατα μετατρέπονται σε κύριες προτάσεις:",o:["κρίσεως","επιθυμίας","ερωτηματικές"],c:1,fx:"Τελικά απαρέμφατα → κύριες προτάσεις επιθυμίας."},
+  {q:"Το υποθετικό «εἰ» γίνεται «ἐάν» όταν ο υποθετικός λόγος δηλώνει:",o:["το πραγματικό","το προσδοκώμενο ή αόριστη επανάληψη (παρόν–μέλλον)","το αντίθετο του πραγματικού"],c:1,fx:"Γίνεται ἐάν σε προσδοκώμενο και σε αόριστη επανάληψη στο παρόν–μέλλον."}
+];
+const qh=document.getElementById('quizHost');let qi=0,score=0;
+function renderQ(){
+  if(qi>=QUIZ.length){qh.innerHTML=`<div class="desc" style="text-align:center;font-size:1.05rem"><b>Ολοκλήρωσες!</b> Σκορ: ${score} / ${QUIZ.length}</div>
+    <div style="text-align:center;margin-top:12px"><button class="navbtn" id="qrestart">↻ Ξανά</button></div>`;
+    document.getElementById('qrestart').onclick=()=>{qi=0;score=0;renderQ();};return;}
+  const item=QUIZ[qi];
+  qh.innerHTML=`<div class="q"><div class="qt">${qi+1}. ${esc(item.q)} <span style="color:var(--ink-soft);font-weight:400">(${qi+1}/${QUIZ.length})</span></div>
+    ${item.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}
+    <div class="qfx"></div></div>`;
+  const fx=qh.querySelector('.qfx');
+  qh.querySelectorAll('.opt').forEach(b=>{
+    b.onclick=()=>{
+      if(qh.dataset.answered)return;qh.dataset.answered='1';
+      const opts=qh.querySelectorAll('.opt');opts.forEach(o=>o.disabled=true);
+      const chosen=+b.dataset.i;
+      if(chosen===item.c){b.classList.add('correct');score++;}
+      else{b.classList.add('incorrect');opts[item.c].classList.add('correct');}
+      fx.textContent=(chosen===item.c?'✓ Σωστά. ':'✗ ')+item.fx;
+      fx.style.color=chosen===item.c?'var(--euthys)':'var(--err)';
+      const nb=document.createElement('button');nb.className='navbtn next';nb.style.marginTop='10px';
+      nb.textContent=qi<QUIZ.length-1?'Επόμενη ερώτηση ›':'Δες αποτέλεσμα ›';
+      nb.onclick=()=>{qi++;delete qh.dataset.answered;renderQ();};
+      qh.querySelector('.q').appendChild(nb);
+    };
+  });
+}
+renderQ();
+
+/* ---------- Checklist ---------- */
+const CHECK=[
+  "Διακρίνω όλες τις μορφές του πλαγίου λόγου.",
+  "Οι μετατροπές ευθύ→πλάγιου ισχύουν αντιστρόφως στη μετατροπή πλάγιου→ευθύ.",
+  "Αναφέρω όλα τα είδη μετατροπών από πλάγιο σε ευθύ, ανάλογα με τη μορφή.",
+  "Εφαρμόζω τις μετατροπές στις εγκλίσεις από τον πλάγιο στον ευθύ λόγο.",
+  "Οι δυνητικές εγκλίσεις (δυν. οριστική/ευκτική) διατηρούνται στον ευθύ λόγο.",
+  "Διακρίνω την ευκτική πλαγίου λόγου και τη μεταφέρω στην κατάλληλη έγκλιση.",
+  "Το υποκ. εξάρτησης & του ρημ. τύπου καθορίζουν το υποκείμενο στον ευθύ λόγο.",
+  "Αναγνωρίζω το κατάλληλο ρηματικό πρόσωπο στην πρόταση του ευθέος λόγου.",
+  "Μετατρέπω τις αντωνυμίες ανάλογα με το νόημα της πρότασης.",
+  "Υπάρχουν αλλαγές σε επιρρήματα από τον πλάγιο στον ευθύ λόγο."
+];
+const KEY="oer010688_deck_checklist";let saved={};
+try{saved=JSON.parse(localStorage.getItem(KEY)||"{}");}catch(e){saved={};}
+const ci=document.getElementById('checkItems');
+const chk=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+CHECK.forEach((t,i)=>{
+  const lab=document.createElement('label');lab.className='chk';lab.tabIndex=0;
+  lab.innerHTML=`<input type="checkbox" data-i="${i}" ${saved[i]?'checked':''}><span class="box">${chk}</span><span class="ctxt">${esc(t)}</span>`;
+  lab.addEventListener('keydown',ev=>{if(ev.key===' '||ev.key==='Enter'){ev.preventDefault();lab.querySelector('input').click();}});
+  ci.appendChild(lab);
+});
+const pFill=document.getElementById('progFill'),pTxt=document.getElementById('progTxt'),banner=document.getElementById('doneBanner');
+function updProg(){let n=0;ci.querySelectorAll('input').forEach(b=>b.checked&&n++);
+  pFill.style.width=Math.round(n/CHECK.length*100)+'%';
+  pTxt.textContent=`${n} από ${CHECK.length} ολοκληρωμένα`;banner.classList.toggle('show',n===CHECK.length);}
+ci.addEventListener('change',e=>{if(e.target.matches('input')){saved[e.target.dataset.i]=e.target.checked;
+  try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(err){}updProg();}});
+updProg();
+
+/* ---------- Deck navigation ---------- */
+const slides=[...document.querySelectorAll('.slide')];
+const total=slides.length;let cur=0;
+const btnPrev=document.getElementById('btnPrev'),btnNext=document.getElementById('btnNext');
+const counter=document.getElementById('counter'),track=document.getElementById('track');
+function show(n){
+  n=Math.max(0,Math.min(total-1,n));
+  const back=n<cur;
+  slides.forEach((s,i)=>{s.classList.toggle('active',i===n);s.classList.toggle('back',back&&i!==n);});
+  cur=n;
+  counter.textContent=`${n+1} / ${total}`;
+  track.style.width=((n)/(total-1)*100)+'%';
+  btnPrev.disabled=n===0;
+  btnNext.textContent=n===total-1?'Τέλος':'Επόμενο ›';
+  slides[n].scrollTop=0;
+  slides[n].focus?.();
+}
+btnPrev.onclick=()=>show(cur-1);
+btnNext.onclick=()=>{if(cur<total-1)show(cur+1);};
+document.querySelectorAll('[data-go="next"]').forEach(b=>b.onclick=()=>show(cur+1));
+document.addEventListener('keydown',e=>{
+  if(e.target.matches('input,button,a,label,textarea'))return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'){show(cur+1);}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(cur-1);}
+});
+/* swipe */
+let tx=0,ty=0;
+document.getElementById('deck').addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+document.getElementById('deck').addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4){show(cur+(dx<0?1:-1));}
+},{passive:true});
+show(0);
+</script>
+</body>
+</html>

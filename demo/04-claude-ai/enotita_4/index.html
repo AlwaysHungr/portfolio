@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 4: Προχωρημένες Δυνατότητες — Skills, Connectors &amp; Cowork | Claude AI</title>
+<meta name="description" content="Διαδραστικό μάθημα σε μορφή διαφανειών: Connectors με Gmail, Calendar και Drive, πρακτικά workflows, Skills, Claude Desktop &amp; Cowork, Claude in Chrome και Claude for Excel.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/v2.css">
+</head>
+<body data-course="en4">
+
+<div class="app">
+
+  <!-- ===================== ΠΛΕΥΡΙΚΟ ΜΕΝΟΥ ===================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Περιεχόμενα μαθήματος">
+    <div class="sidebar-header">
+      <div class="brand">
+        <img class="brand-mark" src="assets/images/logo.webp" alt="" aria-hidden="true" width="38" height="38">
+        <span class="brand-text"><strong>Claude AI</strong> Ενότητα 4 · Skills, Connectors &amp; Cowork</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <p class="nav-group-label">Περιεχόμενα</p>
+      <ul id="navList" style="list-style:none; margin:0; padding:0;"></ul>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="overall"><span>Πρόοδος</span><span id="overallLabel">0 / 0</span></div>
+      <button type="button" class="btn btn-secondary btn-sm" id="resetProgress" style="width:100%;">Επαναφορά προόδου</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- ===================== ΚΥΡΙΑ ΠΕΡΙΟΧΗ ===================== -->
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="icon-btn" id="sidebarToggle" aria-label="Άνοιγμα/κλείσιμο μενού">☰</button>
+      <span class="topbar-title" id="topbarTitle">Ενότητα 4</span>
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Σκούρο θέμα" aria-pressed="false">🌙</button>
+      <div class="topbar-progress" aria-hidden="true">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressLabel">0%</span>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ============ ΔΙΑΦΑΝΕΙΑ 0 — ΑΡΧΙΚΗ ΟΘΟΝΗ ============ -->
+      <section class="chapter no-autonav" data-title="Αρχική οθόνη ενότητας" data-group="Εισαγωγή">
+        <div class="hero">
+          <span class="hero-badge">Ενότητα 4</span>
+          <h1>Προχωρημένες Δυνατότητες — Skills, Connectors &amp; Cowork</h1>
+          <p class="lead">Στα προηγούμενα κεφάλαια, εξετάσαμε πώς να επικοινωνούμε αποτελεσματικά με το Claude και πώς να προσαρμόζουμε τη συμπεριφορά του χρησιμοποιώντας τα Projects, την εξατομικευμένη Μνήμη και τα Custom Styles. Ωστόσο, η πραγματική αξία της Τεχνητής Νοημοσύνης και ο πυρήνας του σύγχρονου ψηφιακού μετασχηματισμού, αποκαλύπτεται όταν το εργαλείο παύει να λειτουργεί απομονωμένα σε ένα στατικό παράθυρο συνομιλίας. Σε αυτό το κεφάλαιο, το Claude μεταβαίνει από τον ρόλο του απλού βοηθού παραγωγής περιεχομένου σε έναν ενεργό, κεντρικό κόμβο παραγωγικότητας, ικανό να αλληλεπιδρά δυναμικά με το ευρύτερο ψηφιακό σας οικοσύστημα.</p>
+          <p>Μέσα από την εξερεύνηση των Skills, των Connectors και των λειτουργιών συνεργασίας (Cowork), θα περάσετε στην πρακτική εφαρμογή των έξυπνων αυτοματισμών. Θα μάθετε πώς να γεφυρώνετε το Claude με τα ψηφιακά εργαλεία και τις πλατφόρμες που ήδη χρησιμοποιείτε καθημερινά, ενοποιώντας τα δεδομένα σας σε ενιαίες ροές εργασίας. Ολοκληρώνοντας αυτή την ενότητα, θα είστε σε θέση να αυτοματοποιείτε χρονοβόρες, επαναλαμβανόμενες εργασίες με απόλυτη ακρίβεια και, τελικά, να έχετε στήσει το δικό σας, πλήρως προσωποποιημένο και αυτόνομο σύστημα παραγωγικότητας.</p>
+          <div class="objectives">
+            <h3>Μαθησιακοί στόχοι</h3>
+            <ul>
+              <li>Να συνδέετε το Claude με εξωτερικές υπηρεσίες (Gmail, Calendar, Drive κ.ά.) μέσω Connectors.</li>
+              <li>Να σχεδιάζετε πρακτικά workflows αυτοματοποίησης καθημερινών εργασιών.</li>
+              <li>Να κατανοείτε και να εφαρμόζετε τη λογική των Skills — από τα έτοιμα έως τη δημιουργία δικών σας.</li>
+              <li>Να αξιοποιείτε το Claude Desktop και το Cowork ως εργαλείο αυτόνομης εκτέλεσης εργασιών.</li>
+              <li>Να χρησιμοποιείτε τα Claude in Chrome και Claude in Excel στην καθημερινή ροή εργασίας.</li>
+            </ul>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1;">
+            <button type="button" class="btn btn-primary" data-nav="1">Έναρξη μαθήματος →</button>
+            <button type="button" class="btn btn-secondary" id="resumeBtn" hidden>Συνέχεια από το τελευταίο σημείο</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 4.1 CONNECTORS ============ -->
+      <section class="chapter" data-title="Connectors — εισαγωγή" data-group="4.1 Connectors — σύνδεση με Gmail, Calendar, Drive κ.ά.">
+        <span class="chapter-kicker">Υποενότητα 4.1</span>
+        <h1>Connectors — σύνδεση με Gmail, Calendar, Drive κ.ά.</h1>
+        <p>Μέχρι τώρα, για να αναλύσει το Claude ένα κείμενο ή να συντάξει μια απάντηση βασισμένη στα δεδομένα σας, έπρεπε είτε να του κάνετε αντιγραφή-επικόλληση (copy-paste) την πληροφορία, είτε να μεταφορτώσετε χειροκίνητα το αντίστοιχο αρχείο. Οι <strong>Διασυνδέσεις (Connectors)</strong> έρχονται να καταργήσουν αυτή τη χρονοβόρα διαδικασία, λειτουργώντας ως ψηφιακές γέφυρες μεταξύ του Claude και του οικοσυστήματος των εφαρμογών σας.</p>
+        <p>Μέσω των Connectors, το μοντέλο αποκτά τη δυνατότητα να «βλέπει» απευθείας, με ασφάλεια και κατόπιν δικής σας εντολής, πληροφορίες από εργαλεία που χρησιμοποιείτε καθημερινά.</p>
+        <h2>1. Τι είναι οι Connectors (Διασυνδέσεις)</h2>
+        <p>Στην ουσία, οι Connectors λειτουργούν ως «ψηφιακές γέφυρες» μεταξύ του Claude και του ευρύτερου ψηφιακού σας οικοσυστήματος. Επιτρέπουν στο μοντέλο να επικοινωνεί και να «διαβάζει» απευθείας πληροφορίες από τα εργαλεία που χρησιμοποιείτε καθημερινά, όπως το <strong>Google Workspace</strong> (Drive, Docs, Gmail, Calendar), το <strong>Canva</strong> και το <strong>Make</strong>.</p>
+        <p>Με αυτόν τον τρόπο, αντί να ψάχνετε εσείς ένα έγγραφο στον φάκελό σας για να το ανεβάσετε χειροκίνητα, μπορείτε απλώς να ζητήσετε από το Claude: <em>«Διάβασε τις σημειώσεις από το χθεσινό meeting στο Google Docs και φτιάξε μου μια σύνοψη των επόμενων βημάτων»</em>.</p>
+      </section>
+
+      <section class="chapter" data-title="Πού θα τους βρείτε &amp; ασφάλεια" data-group="4.1 Connectors — σύνδεση με Gmail, Calendar, Drive κ.ά.">
+        <span class="chapter-kicker">Υποενότητα 4.1</span>
+        <h2>2. Πού θα τους βρείτε — 3. Ενεργοποίηση με Ασφάλεια</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="conn-where" role="tab" aria-selected="true">Πού θα τους βρείτε</button>
+            <button type="button" class="tab-btn" data-tab="conn-safety" role="tab" aria-selected="false">Ενεργοποίηση με ασφάλεια</button>
+          </div>
+          <div class="tab-panel active" data-tab="conn-where">
+            <p>Η πρόσβαση στο μενού των διασυνδέσεων είναι πολύ απλή και βρίσκεται ενσωματωμένη στον κεντρικό πίνακα ελέγχου του λογαριασμού σας:</p>
+            <ol class="steps">
+              <li><strong class="step-title">Επιλογή Customize</strong> Μεταβείτε στο αριστερό μέρος της οθόνης σας και κάντε κλικ στην επιλογή <strong>Customize</strong>.</li>
+              <li><strong class="step-title">Επιλογή Connectors</strong> Αριστερά και πάλι στο μενού, επιλέξτε την 2η επιλογή «<strong>Connectors</strong>».</li>
+            </ol>
+            <figure class="shot">
+              <img src="assets/images/image001.png" alt="Το αριστερό μενού του Claude με την επιλογή Customize" loading="lazy">
+              <figcaption>«Επιλογή Customize»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image002.png" alt="Το μενού Customize με την επιλογή Connectors" loading="lazy">
+              <figcaption>«Επιλογή Connectors»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="conn-safety">
+            <figure class="shot">
+              <img src="assets/images/image003.png" alt="Το περιβάλλον διαχείρισης των Connectors" loading="lazy">
+              <figcaption>«Περιβάλλον Connectors»</figcaption>
+            </figure>
+            <p>Η διασύνδεση του Claude με εξωτερικές υπηρεσίες είναι μια εξαιρετικά απλή διαδικασία, η οποία ακολουθεί τα αυστηρότερα διεθνή πρότυπα ασφαλείας (μέσω πρωτοκόλλων <strong>OAuth</strong>). Το σύστημα δεν σας ζητά ποτέ τους κωδικούς σας, αλλά χρησιμοποιεί την επίσημη οδό εξουσιοδότησης της εκάστοτε πλατφόρμας. Το Claude αποκτά πρόσβαση μόνο στα δεδομένα που εσείς επιτρέπετε.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Βήματα ενεργοποίησης" data-group="4.1 Connectors — σύνδεση με Gmail, Calendar, Drive κ.ά.">
+        <span class="chapter-kicker">Υποενότητα 4.1</span>
+        <h2>Βήματα Ενεργοποίησης</h2>
+        <ol class="steps">
+          <li><strong class="step-title">Το εικονίδιο «+»</strong> Μεταβείτε στο ειδικό μενού των Connectors και πατήστε το εικονίδιο «<kbd>+</kbd>».</li>
+          <li><strong class="step-title">Επιλογή πλατφόρμας</strong> Επιλέξτε την πλατφόρμα που επιθυμείτε να συνδέσετε (π.χ. Google Drive ή Slack).</li>
+          <li><strong class="step-title">Connect (Σύνδεση)</strong> Κάντε κλικ στο <strong>Connect</strong> (Σύνδεση). Θα ανακατευθυνθείτε στο ασφαλές περιβάλλον της αντίστοιχης υπηρεσίας (π.χ. στη σελίδα σύνδεσης της Google).</li>
+          <li><strong class="step-title">Allow (Αποδοχή)</strong> Διαβάστε προσεκτικά την οθόνη συγκατάθεσης που σας εξηγεί ακριβώς σε ποια δεδομένα θα έχει πρόσβαση το Claude, και πατήστε <strong>Allow</strong> (Αποδοχή).</li>
+        </ol>
+        <figure class="shot">
+          <img src="assets/images/image004.png" alt="Το κουμπί + για προσθήκη Connector και η οθόνη Browse Connectors" loading="lazy">
+          <figcaption>«Προσθήκη Connector — Browse Connectors»</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/images/image005.png" alt="Παράδειγμα προσθήκης connector με το κουμπί Connect" loading="lazy">
+          <figcaption>«Παράδειγμα προσθήκης connector»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: σειρά βημάτων" data-group="4.1 Connectors — σύνδεση με Gmail, Calendar, Drive κ.ά.">
+        <span class="chapter-kicker">Δραστηριότητα</span>
+        <h2>Βάλτε τα βήματα στη σωστή σειρά</h2>
+        <div class="activity js-seq" id="act_1_1"
+             data-ok="Σωστή σειρά! Έτσι ενεργοποιείται με ασφάλεια ένας connector."
+             data-ko="Η σειρά δεν είναι σωστή. Θυμηθείτε: πρώτα το «+» στο μενού, μετά η επιλογή πλατφόρμας, το Connect και τέλος το Allow στην οθόνη συγκατάθεσης.">
+          <p class="act-q">Τοποθετήστε τα βήματα ενεργοποίησης ενός connector στη σωστή σειρά (κάντε κλικ στα βήματα με τη σειρά που εκτελούνται):</p>
+          <div class="seq-pool">
+            <button type="button" class="seq-item" data-step="3">Κλικ στο Connect και ανακατεύθυνση στο ασφαλές περιβάλλον της υπηρεσίας</button>
+            <button type="button" class="seq-item" data-step="1">Μενού Connectors → εικονίδιο «+»</button>
+            <button type="button" class="seq-item" data-step="4">Ανάγνωση οθόνης συγκατάθεσης και κλικ στο Allow</button>
+            <button type="button" class="seq-item" data-step="2">Επιλογή πλατφόρμας (π.χ. Google Drive ή Slack)</button>
+          </div>
+          <div class="seq-slots">
+            <div class="seq-slot"><span class="slot-num">1.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">2.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">3.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">4.</span><span class="slot-text"></span></div>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Διαχείριση δικαιωμάτων &amp; αποσύνδεση" data-group="4.1 Connectors — σύνδεση με Gmail, Calendar, Drive κ.ά.">
+        <span class="chapter-kicker">Υποενότητα 4.1</span>
+        <h2>4. Διαχείριση Δικαιωμάτων Πρόσβασης &amp; Ιδιωτικότητα</h2>
+        <p>Η διασύνδεση του Claude με το ψηφιακό σας οικοσύστημα δεν σημαίνει ότι παραχωρείτε ανεξέλεγκτη πρόσβαση στα δεδομένα σας. Ο έλεγχος παραμένει πάντα στα χέρια σας, μέσα από ένα εξαιρετικά παραμετροποιήσιμο σύστημα αδειοδοτήσεων (<strong>Tool permissions</strong>), το οποίο διασφαλίζει ότι το μοντέλο θα ενεργεί αυστηρά εντός των ορίων που εσείς θα του θέσετε.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="perm-disc" role="tab" aria-selected="true">Άμεση Αποσύνδεση</button>
+            <button type="button" class="tab-btn" data-tab="perm-read" role="tab" aria-selected="false">Εργαλεία Ανάγνωσης</button>
+            <button type="button" class="tab-btn" data-tab="perm-write" role="tab" aria-selected="false">Εργαλεία Εγγραφής / Διαγραφής</button>
+          </div>
+          <div class="tab-panel active" data-tab="perm-disc">
+            <h3>1. Άμεση Αποσύνδεση (Connect / Disconnect)</h3>
+            <p>Η σχέση του Claude με τις εξωτερικές σας εφαρμογές είναι απολύτως αναστρέψιμη. Εάν ολοκληρώσετε ένα project ή απλώς επιθυμείτε να διακόψετε την πρόσβαση του μοντέλου σε μια συγκεκριμένη υπηρεσία, η διαδικασία είναι ακαριαία. Αρκεί να μεταβείτε στη λίστα των διασυνδέσεων και να επιλέξετε <strong>Disconnect</strong>. Η «γέφυρα» επικοινωνίας καταστρέφεται άμεσα και το Claude χάνει κάθε δυνατότητα αλληλεπίδρασης με το εν λόγω περιβάλλον, μέχρι να το συνδέσετε ξανά.</p>
+            <figure class="shot">
+              <img src="assets/images/image006.png" alt="Η επιλογή Disconnect για άμεση αποσύνδεση ενός connector" loading="lazy">
+              <figcaption>«Η επιλογή άμεσης αποσύνδεσης (Disconnect)»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="perm-read">
+            <h3>2. Έλεγχος Δικαιωμάτων (Tool Permissions)</h3>
+            <p>Ακόμη και όταν μια εφαρμογή είναι συνδεδεμένη, το Claude χωρίζει τις ενέργειες που μπορεί να εκτελέσει σε συγκεκριμένα «εργαλεία» (tools). Σας δίνεται η δυνατότητα να ορίσετε ποια από αυτά τα εργαλεία θα εκτελούνται αυτόματα και ποια θα απαιτούν τη δική σας ρητή έγκριση (κλικ) πριν τεθούν σε λειτουργία. Αυτός ο διαχωρισμός γίνεται σε δύο βασικές κατηγορίες:</p>
+            <h3>α) Εργαλεία Ανάγνωσης (Read-only tools)</h3>
+            <p>Πρόκειται για ενέργειες παθητικής φύσης, όπου το Claude απλώς αναζητά, διαβάζει ή ανακτά δεδομένα (π.χ. ανάγνωση ενός εγγράφου, αναζήτηση μιας πληροφορίας στο αρχείο σας). Δεδομένου ότι αυτές οι ενέργειες δεν αλλοιώνουν τα δεδομένα σας, συνήθως ρυθμίζονται στο <strong>«Always allow»</strong> (Να επιτρέπεται πάντα). Έτσι, το μοντέλο μπορεί να αντλεί το απαραίτητο context για να σας απαντήσει, χωρίς να διακόπτει συνεχώς τη ροή της εργασίας σας ζητώντας άδειες.</p>
+            <figure class="shot">
+              <img src="assets/images/image007.png" alt="Ρύθμιση των δικαιωμάτων ανάγνωσης σε Always allow" loading="lazy">
+              <figcaption>«Ρύθμιση των δικαιωμάτων ανάγνωσης»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="perm-write">
+            <h3>β) Εργαλεία Εγγραφής / Διαγραφής (Write/delete tools)</h3>
+            <p>Εδώ υπάγονται όλες οι παρεμβατικές ενέργειες που τροποποιούν το περιβάλλον σας, όπως η δημιουργία προσχεδίων, η επεξεργασία αρχείων, η προσθήκη ετικετών ή, φυσικά, η διαγραφή δεδομένων. Για αυτές τις κρίσιμες λειτουργίες, η βέλτιστη πρακτική είναι να διατηρείτε τη ρύθμιση στο <strong>«Needs approval»</strong> (Απαιτείται έγκριση). Με αυτόν τον τρόπο, το Claude λειτουργεί ως βοηθός που προετοιμάζει τη δουλειά, αλλά το τελικό βήμα (η εκτέλεση) απαιτεί πάντα τη δική σας επιβεβαίωση, αποτρέποντας τυχόν ακούσιες ή λανθασμένες παρεμβάσεις στα αρχεία σας.</p>
+            <figure class="shot">
+              <img src="assets/images/image008.png" alt="Τα παρεμβατικά εργαλεία εγγραφής και διαγραφής με ρύθμιση Needs approval" loading="lazy">
+              <figcaption>«Τα παρεμβατικά εργαλεία εγγραφής και διαγραφής»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 4.2 ΠΡΑΚΤΙΚΑ WORKFLOWS ============ -->
+      <section class="chapter" data-title="Workflows — εισαγωγή" data-group="4.2 Πρακτικά workflows με Connectors">
+        <span class="chapter-kicker">Υποενότητα 4.2</span>
+        <h1>Πρακτικά workflows με Connectors</h1>
+        <p>Τα πρακτικά workflows (ροές εργασίας) μέσω των Connectors αποτελούν την υψηλότερη βαθμίδα αξιοποίησης του Claude. Ουσιαστικά, πρόκειται για αλληλουχίες ενεργειών που εκτελούνται μέσα από ένα και μόνο παράθυρο συνομιλίας, αξιοποιώντας τις απευθείας συνδέσεις του μοντέλου με τις εξωτερικές σας εφαρμογές (όπως το Gmail, το Google Calendar και το Google Drive).</p>
+        <p>Η βασική αρχή είναι η εξοικονόμηση χρόνου και η συγκέντρωση της πληροφορίας. Αντί να εκτελείτε κάθε βήμα χειροκίνητα και να εναλλάσσεστε διαρκώς μεταξύ διαφορετικών καρτελών, ανοίγοντας το email, ελέγχοντας το ημερολόγιο, δημιουργώντας ένα ραντεβού ή αναζητώντας αρχεία — μεταβιβάζετε αυτή την πολυπλοκότητα στο Claude μέσω φυσικής γλώσσας. Το σύστημα αναλαμβάνει να εκτελέσει τις εργασίες στο παρασκήνιο.</p>
+        <h2>Η Δύναμη της Σύνθεσης</h2>
+        <p>Αυτό που διαφοροποιεί τα workflows από τις μεμονωμένες ενέργειες είναι η έννοια της <strong>σύνθεσης</strong>. Σε μια σωστά σχεδιασμένη ροή, το αποτέλεσμα του πρώτου βήματος τροφοδοτεί οργανικά το επόμενο. Έτσι, το Claude μετατρέπεται από ένα εργαλείο παραγωγής κειμένου σε έναν ενεργό ψηφιακό βοηθό που διαχειρίζεται ολοκληρωμένες διαδικασίες.</p>
+        <p>Το κλειδί εδώ είναι η <strong>πρακτικότητα</strong>. Δεν αναφερόμαστε σε θεωρητικές δυνατότητες, αλλά σε καθημερινά, ρεαλιστικά σενάρια εργασίας τα οποία μπορείτε να εφαρμόσετε άμεσα:</p>
+      </section>
+
+      <section class="chapter" data-title="Workflows 1–2: Briefing &amp; Προγραμματισμός" data-group="4.2 Πρακτικά workflows με Connectors">
+        <span class="chapter-kicker">Υποενότητα 4.2</span>
+        <h2>Τα Workflows 1 &amp; 2</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="wf-1" role="tab" aria-selected="true">1. Morning Briefing</button>
+            <button type="button" class="tab-btn" data-tab="wf-2" role="tab" aria-selected="false">2. Ημερήσιος Προγραμματισμός</button>
+          </div>
+          <div class="tab-panel active" data-tab="wf-1">
+            <h3>1. Το Workflow της «Πρωινής Προετοιμασίας» (Morning Briefing)</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Η εντολή</span>
+              <p class="pb-text">«Λειτούργησε ως ο προσωπικός μου βοηθός και αναζήτησε στο Gmail μου τα πρόσφατα αδιάβαστα μηνύματα.»</p>
+            </div>
+            <p><strong>Η εκτέλεση:</strong> Το Claude ενεργοποιεί τον απαραίτητο connector και συνδέεται στο παρασκήνιο με τον λογαριασμό σας στο Gmail, πραγματοποιώντας στοχευμένη σάρωση των εισερχομένων. Μέσα σε ελάχιστα δευτερόλεπτα, επεξεργάζεται τον όγκο των αδιάβαστων μηνυμάτων και σας παρουσιάζει μια καθαρή, δομημένη σύνοψη σε μορφή πίνακα, επιτρέποντάς σας να ενημερωθείτε άμεσα για τις εκκρεμότητές σας χωρίς να ανοίξετε την εφαρμογή του ηλεκτρονικού ταχυδρομείου.</p>
+            <figure class="shot">
+              <img src="assets/images/image009.png" alt="Πρακτική εφαρμογή του connector Gmail με prompt σε φυσική γλώσσα" loading="lazy">
+              <figcaption>«Πρακτική εφαρμογή ενός Connector — Gmail. Το Claude αναγνωρίζει το απλό prompt σε φυσική γλώσσα και εκτελεί άμεσα, στο παρασκήνιο, την εντολή αναζήτησης αδιάβαστων μηνυμάτων στο συνδεδεμένο περιβάλλον του Gmail»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image010.png" alt="Δείγμα του τελικού αποτελέσματος της διασύνδεσης με το Gmail" loading="lazy">
+              <figcaption>«Δείγμα του τελικού αποτελέσματος της διασύνδεσης με το Gmail»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="wf-2">
+            <h3>2. Το Workflow του «Στρατηγικού Ημερήσιου Προγραμματισμού»</h3>
+            <p>Αυτή η ροή εργασίας αποδεικνύει πώς το Claude δεν λειτουργεί απλώς ως μηχανή αναζήτησης, αλλά ως ένας στρατηγικός συνεργάτης που οργανώνει τον χρόνο σας. Η διαδικασία εκτελείται σε δύο αλληλένδετα βήματα:</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Η εντολή</span>
+              <p class="pb-text">«Έλεγξε το Google Calendar μου για όλες τις προγραμματισμένες συναντήσεις και υποχρεώσεις που έχω σήμερα.»</p>
+            </div>
+            <p><strong>Η εκτέλεση:</strong> Το Claude ενεργοποιεί τον connector του Google Calendar και ανασύρει με ακρίβεια τα προγραμματισμένα γεγονότα (π.χ. συναντήσεις με ομάδες). Παράλληλα, αναλύει τον διαθέσιμο χρόνο, εντοπίζοντας αυτόματα τα κενά ή τα διαλείμματα μεταξύ των υποχρεώσεων, προσφέροντας μια πρώτη ξεκάθαρη εικόνα της ημέρας.</p>
+            <figure class="shot">
+              <img src="assets/images/image011.png" alt="Έλεγχος του ημερήσιου προγράμματος μέσω Google Calendar" loading="lazy">
+              <figcaption>«Το Claude ως προσωπικός βοηθός: Έλεγχος ημερήσιου προγράμματος μέσω Google Calendar»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image012.png" alt="Δομημένη αναφορά ημέρας με χρονοδιάγραμμα και προτεραιότητες" loading="lazy">
+              <figcaption>«Δομημένη αναφορά ημέρας: Χρονοδιάγραμμα &amp; Άμεσες Προτεραιότητες με AI»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Workflows 3–4: Αλληλογραφία &amp; Σύνοψη" data-group="4.2 Πρακτικά workflows με Connectors">
+        <span class="chapter-kicker">Υποενότητα 4.2</span>
+        <h2>Τα Workflows 3 &amp; 4</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="wf-3" role="tab" aria-selected="true">3. Διαχείριση Αλληλογραφίας</button>
+            <button type="button" class="tab-btn" data-tab="wf-4" role="tab" aria-selected="false">4. Αναζήτηση και Σύνοψη</button>
+          </div>
+          <div class="tab-panel active" data-tab="wf-3">
+            <h3>3. Το Workflow της «Έξυπνης Διαχείρισης Αλληλογραφίας»</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Η εντολή</span>
+              <p class="pb-text">«Διάβασε το τελευταίο email από τον [Όνομα Πελάτη/Συνεργάτη], ετοίμασε ένα προσχέδιο (draft) απάντησης που να επιβεβαιώνει τη συνάντηση και φτιάξε το αντίστοιχο event στο ημερολόγιό μου.»</p>
+            </div>
+            <p><strong>Η εκτέλεση:</strong> Το μοντέλο εντοπίζει το μήνυμα, συντάσσει και αποθηκεύει την απάντηση στα πρόχειρα του Gmail (ώστε να την ελέγξετε πριν σταλεί) και δημιουργεί την εγγραφή στο Calendar. Μια αλυσίδα τριών διαφορετικών συστημάτων ολοκληρώνεται με ένα μόνο prompt.</p>
+            <figure class="shot">
+              <img src="assets/images/image013.png" alt="Το Claude προετοιμάζει το προσχέδιο απάντησης και ζητά έγκριση" loading="lazy">
+              <figcaption>«Το workflow της Έξυπνης Διαχείρισης Αλληλογραφίας. Το Claude προετοιμάζει το προσχέδιο απάντησης (draft) και ζητά την τελική έγκριση του χρήστη για την αποθήκευσή του στο Gmail.»</figcaption>
+            </figure>
+            <div class="accordion">
+              <div class="acc-item">
+                <button type="button" class="acc-header" aria-expanded="false"><span>Έξυπνη Διαχείριση Αλληλογραφίας — τα αποτελέσματα</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+                <div class="acc-body">
+                  <figure class="shot">
+                    <img src="assets/images/image014.png" alt="Επιβεβαίωση ολοκλήρωσης της αυτοματοποιημένης ροής από το Claude" loading="lazy">
+                    <figcaption>«Επιτυχής ολοκλήρωση της αυτοματοποιημένης ροής. Το Claude επιβεβαιώνει δομημένα την ανάγνωση του email, τη δημιουργία του προσχεδίου απάντησης στο Gmail και την προσθήκη του νέου ραντεβού στο Google Calendar.»</figcaption>
+                  </figure>
+                  <figure class="shot">
+                    <img src="assets/images/image015.png" alt="Το προσχέδιο αποθηκευμένο στον φάκελο Πρόχειρα του Gmail" loading="lazy">
+                    <figcaption>«Επαλήθευση της ενέργειας στο περιβάλλον του Gmail. Το προσχέδιο (draft) που δημιούργησε το Claude αποθηκεύτηκε επιτυχώς στον φάκελο «Πρόχειρα», έτοιμο για τον τελικό σας έλεγχο πριν την αποστολή.»</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="wf-4">
+            <h3>4. Το Workflow της «Αναζήτησης και Σύνοψης»</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Η εντολή</span>
+              <p class="pb-text">«Ψάξε στο Google Drive για το έγγραφο με τίτλο "Οι Περιβαλλοντικές Επιπτώσεις της Γρήγορης Μόδας" και κάνε μου μια σύνοψη του εγγράφου.»</p>
+            </div>
+            <p><strong>Η εκτέλεση:</strong> Το εργαλείο παρακάμπτει εντελώς τη διαδικασία της χειροκίνητης αναζήτησης και μεταφόρτωσης αρχείων. Εντοπίζει το σωστό έγγραφο στο Drive, το αναλύει και σας επιστρέφει απευθείας τα ζητούμενα έτοιμα προς χρήση.</p>
+            <figure class="shot">
+              <img src="assets/images/image016.png" alt="Έλεγχος δικαιωμάτων πρόσβασης κατά την αναζήτηση στο Google Drive" loading="lazy">
+              <figcaption>«Έλεγχος δικαιωμάτων πρόσβασης κατά την αναζήτηση εγγράφου στο Google Drive.»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image017.png" alt="Το Claude ζητά άδεια για τη λήψη του αρχείου" loading="lazy">
+              <figcaption>«Διαδοχικά βήματα εκτέλεσης. Το Claude ζητά άδεια για τη λήψη του αρχείου, ώστε να μπορέσει να συνθέσει την τελική σύνοψη.»</figcaption>
+            </figure>
+            <div class="accordion">
+              <div class="acc-item">
+                <button type="button" class="acc-header" aria-expanded="false"><span>Αναζήτηση και Σύνοψη — τα αποτελέσματα</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+                <div class="acc-body">
+                  <figure class="shot">
+                    <img src="assets/images/image018.png" alt="Επιτυχής εντοπισμός του αρχείου στο Google Drive" loading="lazy">
+                    <figcaption>«Επιτυχής εντοπισμός του αρχείου στο Google Drive και προετοιμασία του συστήματος για την ανάλυση και εξαγωγή της σύνοψης.»</figcaption>
+                  </figure>
+                  <figure class="shot">
+                    <img src="assets/images/image019.png" alt="Η πλήρης δομημένη σύνοψη του εγγράφου από το Google Drive" loading="lazy">
+                    <figcaption>«Τελικό παραδοτέο του workflow. Το Claude παρουσιάζει την πλήρη, δομημένη σύνοψη του εγγράφου που μόλις ανέκτησε από το Google Drive.»</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: αντιστοίχιση workflows" data-group="4.2 Πρακτικά workflows με Connectors">
+        <span class="chapter-kicker">Δραστηριότητα</span>
+        <h2>Αντιστοιχίστε τα workflows</h2>
+        <div class="activity js-match" id="act_2_1" data-ok="Εξαιρετικά! Αντιστοιχίσατε σωστά όλα τα workflows με τη λειτουργία τους.">
+          <p class="act-q">Αντιστοιχίστε κάθε workflow με τη λειτουργία που επιτελεί (επιλέξτε ένα στοιχείο από κάθε στήλη):</p>
+          <div class="match-cols">
+            <div class="match-col" aria-label="Workflows">
+              <button type="button" class="match-btn" data-pair="a">Πρωινή Προετοιμασία (Morning Briefing)</button>
+              <button type="button" class="match-btn" data-pair="b">Στρατηγικός Ημερήσιος Προγραμματισμός</button>
+              <button type="button" class="match-btn" data-pair="c">Έξυπνη Διαχείριση Αλληλογραφίας</button>
+              <button type="button" class="match-btn" data-pair="d">Αναζήτηση και Σύνοψη</button>
+            </div>
+            <div class="match-col" aria-label="Λειτουργίες">
+              <button type="button" class="match-btn" data-pair="c">Draft απάντησης στα Πρόχειρα + event στο Calendar με ένα prompt</button>
+              <button type="button" class="match-btn" data-pair="a">Δομημένη σύνοψη των αδιάβαστων μηνυμάτων του Gmail σε πίνακα</button>
+              <button type="button" class="match-btn" data-pair="d">Εντοπισμός εγγράφου στο Google Drive και άμεση περίληψή του</button>
+              <button type="button" class="match-btn" data-pair="b">Έλεγχος Google Calendar και εντοπισμός κενών μεταξύ υποχρεώσεων</button>
+            </div>
+          </div>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Συνοψίζοντας τα workflows" data-group="4.2 Πρακτικά workflows με Connectors">
+        <span class="chapter-kicker">Υποενότητα 4.2</span>
+        <h2>Συνοψίζοντας</h2>
+        <p>Συνοψίζοντας, η πρακτική εφαρμογή των Connectors και η δημιουργία δομημένων workflows αλλάζουν ριζικά τον τρόπο με τον οποίο αλληλεπιδρούμε με την Τεχνητή Νοημοσύνη. Όπως είδαμε μέσα από τα ρεαλιστικά παραδείγματα, από την έξυπνη επισκόπηση της αλληλογραφίας και τον στρατηγικό προγραμματισμό του ημερολογίου, μέχρι τη στοχευμένη αναζήτηση και σύνοψη εγγράφων, το Claude ξεφεύγει από τα στενά όρια ενός παθητικού εργαλείου παραγωγής κειμένου.</p>
+        <p>Η ενσωμάτωση αυτών των διασυνδέσεων μετατρέπει το μοντέλο σε έναν κεντρικό, διαδραστικό κόμβο παραγωγικότητας που προσφέρει τρία καθοριστικά πλεονεκτήματα:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🧭</div>
+            <h4>1. Εξάλειψη του Context Switching</h4>
+            <p>Δεν χρειάζεται πλέον να διακόπτετε τη ροή της σκέψης σας για να ανοίξετε πολλαπλές καρτέλες και διαφορετικές εφαρμογές (Gmail, Calendar, Drive). Όλη η εργασία συγκεντρώνεται και ολοκληρώνεται μέσα σε ένα ενιαίο, «ήσυχο» περιβάλλον διεπαφής.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">⚙️</div>
+            <h4>2. Αυτοματοποίηση Ρουτίνας</h4>
+            <p>Χρονοβόρες και επαναλαμβανόμενες μικρο-εργασίες (όπως η εύρεση ενός αρχείου, η ανάγνωση των αδιάβαστων emails ή η δημιουργία ενός προσχεδίου) εκτελούνται πλέον στο παρασκήνιο σε ελάχιστα δευτερόλεπτα, απελευθερώνοντας πολύτιμο χρόνο για πιο δημιουργικές και στρατηγικές αποφάσεις.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🛡️</div>
+            <h4>3. Ασφάλεια και Έλεγχος</h4>
+            <p>Η ταχύτητα αυτή δεν έρχεται εις βάρος της ασφάλειας. Όπως αποδείχθηκε στα workflows, ο χρήστης παραμένει πάντα στο επίκεντρο της διαδικασίας, διατηρώντας το δικαίωμα της τελικής έγκρισης (έλεγχος προσχεδίων, αδειοδοτήσεις) πριν από κάθε παρεμβατική ενέργεια στα δεδομένα του.</p>
+          </div>
+        </div>
+        <div class="callout callout-note">
+          <span class="co-icon" aria-hidden="true">🧠</span>
+          <div><p>Αφομοιώνοντας τη λογική των Connectors, δεν μαθαίνετε απλώς να χρησιμοποιείτε μια πλατφόρμα ΑΙ. Στην ουσία, σχεδιάζετε και εφαρμόζετε το δικό σας, απολύτως προσωποποιημένο και εξαιρετικά αποδοτικό σύστημα ψηφιακής εργασίας.</p></div>
+        </div>
+      </section>
+
+      <!-- ============ 4.3 SKILLS ============ -->
+      <section class="chapter" data-title="Βίντεο: Claude Skills" data-group="4.3 Skills — τι είναι και πώς «διδάσκεις» διαδικασίες">
+        <span class="chapter-kicker">Υποενότητα 4.3 · Βίντεο</span>
+        <h1>Skills — τι είναι και πώς «διδάσκεις» διαδικασίες</h1>
+        <div class="video-block">
+          <span class="video-kicker">▶ Βίντεο μαθήματος</span>
+          <h3>Claude Skills</h3>
+          <p>Το βίντεο παρουσιάζει στην πράξη τον μηχανισμό των Skills: πώς το Claude «μαθαίνει» πάγιες διαδικασίες, πώς λειτουργούν οι προεγκατεστημένες δεξιότητες και πώς ξεκινάτε με τις δικές σας.</p>
+          <p><strong>Τι να προσέξετε:</strong> τον ρόλο του αρχείου SKILL.md, τη διαφορά ανάμεσα σε Pre-built και Custom Skills, και τα σημεία του μενού Customize &gt; Skills όπου γίνεται η διαχείριση.</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/1204519421?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="Claude Skills — παρουσίαση της λειτουργίας"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Ερώτηση κατανόησης: το βίντεο" data-group="4.3 Skills — τι είναι και πώς «διδάσκεις» διαδικασίες">
+        <span class="chapter-kicker">Ερώτηση κατανόησης</span>
+        <h2>Μετά το βίντεο: τι είναι το SKILL.md;</h2>
+        <div class="activity quiz-mini js-mcq" id="act_3_1" data-correct="1"
+             data-ok="Σωστά! Το SKILL.md είναι ένα απλό αρχείο κειμένου (Markdown) που περιγράφει σε φυσική γλώσσα σκοπό, συνθήκες ενεργοποίησης, βήματα και επιθυμητό αποτέλεσμα — χωρίς κώδικα."
+             data-ko="Όχι. Το SKILL.md δεν είναι κώδικας ούτε εκτελέσιμο αρχείο — είναι ένα απλό κείμενο σε Markdown με σαφείς οδηγίες σε φυσική γλώσσα.">
+          <p class="act-q">Τι ακριβώς είναι το αρχείο SKILL.md στον πυρήνα ενός Skill;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Ένα εκτελέσιμο πρόγραμμα που απαιτεί γνώσεις προγραμματισμού.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Ένα απλό κείμενο Markdown που περιγράφει σε φυσική γλώσσα τον σκοπό, τις συνθήκες ενεργοποίησης, τα βήματα και το επιθυμητό αποτέλεσμα.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Ένα αρχείο ρυθμίσεων που καθορίζει μόνο τη γραμματοσειρά των παραδοτέων.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Τι είναι τα Skills" data-group="4.3 Skills — τι είναι και πώς «διδάσκεις» διαδικασίες">
+        <span class="chapter-kicker">Υποενότητα 4.3</span>
+        <h2>1. Τι είναι τα Skills</h2>
+        <p>Τα <strong>Skills (Δεξιότητες)</strong> αποτελούν έναν προηγμένο μηχανισμό του Claude, ο οποίος σας επιτρέπει να του «διδάξετε» μια συγκεκριμένη διαδικασία ή έναν πάγιο τρόπο εργασίας, καταργώντας την ανάγκη να επαναλαμβάνετε τις ίδιες οδηγίες σε κάθε νέα συνομιλία. Σκεφτείτε ένα Skill ως ένα αυστηρό <strong>«εγχειρίδιο λειτουργιών» (SOP — Standard Operating Procedure)</strong> που παραδίδετε στο μοντέλο για την εκτέλεση μιας συγκεκριμένης εργασίας.</p>
+        <h2>Το αρχείο SKILL.md</h2>
+        <p>Στον πυρήνα του, ένα Skill στηρίζεται σε ένα αρχείο με την ονομασία <code>SKILL.md</code>. Πρόκειται ουσιαστικά για ένα απλό κείμενο (σε μορφή Markdown), στο οποίο περιγράφετε με φυσική γλώσσα:</p>
+        <div class="flip-grid">
+          <div class="flip-card" tabindex="0" role="button" aria-label="Σκοπός — κλικ για λεπτομέρειες">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">🎯 Σκοπός<span class="flip-hint">Κλικ για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back">Τον <strong>σκοπό</strong> του Skill (τι ακριβώς κάνει).</div>
+            </div>
+          </div>
+          <div class="flip-card" tabindex="0" role="button" aria-label="Συνθήκες ενεργοποίησης — κλικ για λεπτομέρειες">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">⚡ Συνθήκες ενεργοποίησης<span class="flip-hint">Κλικ για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back">Τις <strong>συνθήκες ενεργοποίησής</strong> του (πότε πρέπει να το χρησιμοποιεί το Claude).</div>
+            </div>
+          </div>
+          <div class="flip-card" tabindex="0" role="button" aria-label="Διαδοχικά βήματα — κλικ για λεπτομέρειες">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">🪜 Διαδοχικά βήματα<span class="flip-hint">Κλικ για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back">Τα <strong>διαδοχικά βήματα</strong> εκτέλεσης.</div>
+            </div>
+          </div>
+          <div class="flip-card" tabindex="0" role="button" aria-label="Επιθυμητό αποτέλεσμα — κλικ για λεπτομέρειες">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">🏁 Επιθυμητό αποτέλεσμα<span class="flip-hint">Κλικ για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back">Το ακριβές <strong>επιθυμητό αποτέλεσμα</strong>.</div>
+            </div>
+          </div>
+        </div>
+        <p>Δεν απαιτείται καμία απολύτως γνώση προγραμματισμού, αρκεί μια σαφής, λογικά δομημένη περιγραφή.</p>
+      </section>
+
+      <section class="chapter" data-title="Παράδειγμα: εβδομαδιαία αναφορά" data-group="4.3 Skills — τι είναι και πώς «διδάσκεις» διαδικασίες">
+        <span class="chapter-kicker">Υποενότητα 4.3</span>
+        <h2>Ένα παράδειγμα από την πράξη</h2>
+        <p>Για παράδειγμα, εάν δημιουργείτε μια εβδομαδιαία αναφορά σε Word με συγκεκριμένη δομή (Τίτλος, Εισαγωγή, Πίνακας Ευρημάτων, Συμπεράσματα), αντί να περιγράφετε αυτή τη δομή από την αρχή, δημιουργείτε ένα Skill.</p>
+        <p>Οι οδηγίες σας θα ορίζουν: <em>«Όταν ο χρήστης ζητήσει την εβδομαδιαία αναφορά, δημιούργησε ένα αρχείο Word ακολουθώντας ακριβώς αυτές τις επικεφαλίδες και αυτή τη μορφοποίηση»</em>. Έκτοτε, μια απλή εντολή όπως <em>«Φτιάξε την αναφορά της εβδομάδας»</em> είναι αρκετή για να παραγάγει το τέλειο αποτέλεσμα.</p>
+      </section>
+
+      <section class="chapter" data-title="Οι δύο κατηγορίες Skills" data-group="4.3 Skills — τι είναι και πώς «διδάσκεις» διαδικασίες">
+        <span class="chapter-kicker">Υποενότητα 4.3</span>
+        <h2>Οι δύο βασικές κατηγορίες Skills</h2>
+        <p>Στην πλατφόρμα του Claude συναντάμε δύο βασικές κατηγορίες Skills:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📦</div>
+            <h4>Pre-built Skills (Προεγκατεστημένες Δεξιότητες)</h4>
+            <p>Πρόκειται για έτοιμες, ενσωματωμένες δυνατότητες που παρέχει απευθείας η Anthropic (όπως η δημιουργία και η επεξεργασία αρχείων PDF, Excel, Word και PowerPoint). Το Claude τις αναγνωρίζει και τις ενεργοποιεί αυτόματα στο παρασκήνιο, προσαρμοζόμενο στις απαιτήσεις της εκάστοτε εργασίας, χωρίς να χρειάζεται καμία απολύτως ενέργεια από τον χρήστη.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🛠️</div>
+            <h4>Custom / User Skills (Προσαρμοσμένες Δεξιότητες)</h4>
+            <p>Είναι τα Skills που σχεδιάζετε εσείς, αποκλειστικά για να καλύψετε τις δικές σας, εξειδικευμένες επαγγελματικές ανάγκες. Η μεταφόρτωσή τους στην πλατφόρμα γίνεται μέσω συμπιεσμένων αρχείων (<code>.zip</code>) και η πλήρης διαχείρισή τους πραγματοποιείται μέσα από το κεντρικό μενού <strong>Customize &gt; Skills</strong>. Από εκεί μπορείτε να τα επεξεργαστείτε, να τα ενεργοποιήσετε ή να προσθέσετε νέα. Η δημιουργία και χρήση τους απαιτεί να είναι ενεργοποιημένη η λειτουργία <strong>Code Execution</strong> (Εκτέλεση Κώδικα) και είναι διαθέσιμη αποκλειστικά στα πλάνα <strong>Pro, Max, Team και Enterprise</strong>.</p>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image020.png" alt="Το κεντρικό περιβάλλον διαχείρισης των Skills μέσα από το μενού Customize" loading="lazy">
+          <figcaption>«Το κεντρικό περιβάλλον διαχείρισης των Skills μέσα από το μενού Customize»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Skills vs. Projects" data-group="4.3 Skills — τι είναι και πώς «διδάσκεις» διαδικασίες">
+        <span class="chapter-kicker">Υποενότητα 4.3</span>
+        <h2>2. Η θεμελιώδης διαφορά: Skills vs. Projects</h2>
+        <p>Ένα από τα συχνότερα σημεία σύγχυσης κατά τη χρήση του Claude είναι η διάκριση μεταξύ των Projects και των Skills. Ενώ και τα δύο εργαλεία βελτιώνουν την παραγωγικότητα, εξυπηρετούν εντελώς διαφορετικούς σκοπούς:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🗂️</div>
+            <h4>Τα Projects δημιουργούν το «Πλαίσιο» (Το Ποιος &amp; το Τι)</h4>
+            <p>Ένα Project είναι ένας θεματικός χώρος εργασίας. Ορίζει τον ρόλο του μοντέλου, τους γενικούς κανόνες συμπεριφοράς και περιέχει τη βάση γνώσεων (αρχεία αναφοράς).</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📋</div>
+            <h4>Τα Skills ορίζουν τη «Διαδικασία» (Το Πώς)</h4>
+            <p>Ένα Skill δεν παρέχει γενική γνώση ούτε πλαίσιο. Είναι αυστηρά εκτελεστικό. Ορίζει βήματα, κανόνες μορφοποίησης και συγκεκριμένα παραδοτέα (output).</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Συγκριτικός πίνακας Projects/Skills" data-group="4.3 Skills — τι είναι και πώς «διδάσκεις» διαδικασίες">
+        <span class="chapter-kicker">Υποενότητα 4.3</span>
+        <h2>Συγκριτικός πίνακας</h2>
+        <p>Για την καλύτερη κατανόηση, παραθέτουμε τον ακόλουθο συγκριτικό πίνακα:</p>
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr><th>Χαρακτηριστικό</th><th>Projects</th><th>Skills</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Λειτουργία</td><td>Είναι θεματικοί χώροι εργασίας.</td><td>Είναι αυτοματοποιημένες διαδικασίες.</td></tr>
+              <tr><td>Περιεχόμενο</td><td>Ρόλος, πλαίσιο (context), βάση γνώσης (αρχεία αναφοράς)</td><td>Βήματα εκτέλεσης, κανόνες, format εξόδου.</td></tr>
+              <tr><td>Εφαρμογή</td><td>Μόνο εντός του συγκεκριμένου Project.</td><td>Σε οποιαδήποτε συνομιλία του λογαριασμού.</td></tr>
+              <tr><td>Παράδειγμα</td><td>«Είσαι Σύμβουλος Περιβαλλοντικής Αδειοδότησης. Διάβασε αυτή τη νομοθεσία.»</td><td>«Όταν ζητήσω ΜΠΕ, ακολούθησε αυτά τα 7 συγκεκριμένα βήματα δομής.»</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-note">
+          <span class="co-icon" aria-hidden="true">🤝</span>
+          <div><p>Τα δύο αυτά εργαλεία λειτουργούν ιδανικά σε συνέργεια. Μπορείτε να έχετε ένα Project που ορίζει τον γενικό ρόλο, και μέσα σε αυτό να αξιοποιείτε Skills που καθοδηγούν την εκτέλεση επιμέρους εργασιών.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: Projects ή Skills;" data-group="4.3 Skills — τι είναι και πώς «διδάσκεις» διαδικασίες">
+        <span class="chapter-kicker">Δραστηριότητα</span>
+        <h2>Projects ή Skills;</h2>
+        <div class="activity js-fill" id="act_3_2"
+             data-ok="Σωστά! Ξεχωρίσατε πλήρως το «Πλαίσιο» (Projects) από τη «Διαδικασία» (Skills)."
+             data-ko="Κάποιες επιλογές δεν είναι σωστές. Θυμηθείτε: Projects = θεματικός χώρος/πλαίσιο/βάση γνώσης, Skills = εκτελεστική διαδικασία που ισχύει σε κάθε συνομιλία.">
+          <p class="act-q">Επιλέξτε σε ποιο εργαλείο αντιστοιχεί κάθε περιγραφή:</p>
+          <p class="fill-blank">«Θεματικός χώρος εργασίας με ρόλο, γενικούς κανόνες και βάση γνώσεων» →
+            <select data-answer="projects" aria-label="Εργαλείο πρώτης περιγραφής">
+              <option value="">— επιλέξτε —</option>
+              <option value="projects">Projects</option>
+              <option value="skills">Skills</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Αυστηρά εκτελεστικό: βήματα, κανόνες μορφοποίησης, συγκεκριμένα παραδοτέα» →
+            <select data-answer="skills" aria-label="Εργαλείο δεύτερης περιγραφής">
+              <option value="">— επιλέξτε —</option>
+              <option value="projects">Projects</option>
+              <option value="skills">Skills</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Εφαρμόζεται μόνο εντός του συγκεκριμένου θεματικού χώρου» →
+            <select data-answer="projects" aria-label="Εργαλείο τρίτης περιγραφής">
+              <option value="">— επιλέξτε —</option>
+              <option value="projects">Projects</option>
+              <option value="skills">Skills</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Εφαρμόζεται σε οποιαδήποτε συνομιλία του λογαριασμού» →
+            <select data-answer="skills" aria-label="Εργαλείο τέταρτης περιγραφής">
+              <option value="">— επιλέξτε —</option>
+              <option value="projects">Projects</option>
+              <option value="skills">Skills</option>
+            </select>
+          </p>
+          <button type="button" class="btn btn-primary btn-sm fill-check" style="margin-top:10px;">Έλεγχος απαντήσεων</button>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πότε απαιτείται Skill" data-group="4.3 Skills — τι είναι και πώς «διδάσκεις» διαδικασίες">
+        <span class="chapter-kicker">Υποενότητα 4.3</span>
+        <h2>3. Πότε μια εργασία απαιτεί τη δημιουργία Skill</h2>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🥇</span>
+          <div><p><strong>Ο χρυσός κανόνας της παραγωγικότητας είναι ο εξής:</strong> Σε περίπτωση που παρατηρήσετε πως επαναλαμβάνετε την εισαγωγή των ίδιων οδηγιών στο Claude περισσότερες από δύο φορές, τότε η διαδικασία αυτή πρέπει να μετατραπεί σε Skill.</p></div>
+        </div>
+        <p>Πιο συγκεκριμένα, μια εργασία είναι η ιδανική υποψήφια για τη δημιουργία Skill όταν πληροί ένα ή περισσότερα από τα παρακάτω κριτήρια:</p>
+        <h3>Τα κριτήρια</h3>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>Επαναλαμβανόμενη Δομή</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Η εργασία απαιτεί πάντα τα ίδια ακριβώς βήματα ή το αποτέλεσμα πρέπει να έχει μια σταθερή αρχιτεκτονική (π.χ. φόρμες αξιολόγησης, πρότυπα απαντητικών email, τυποποιημένες αναφορές).</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>Αυστηροί Κανόνες Μορφοποίησης</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Όταν το παραδοτέο πρέπει να τηρεί συγκεκριμένες τεχνικές προδιαγραφές (συγκεκριμένες γραμματοσειρές, πίνακες με προκαθορισμένες στήλες, εξαγωγή σε συγκεκριμένο τύπο αρχείου).</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>Πολύπλοκα Προαπαιτούμενα (Prompts)</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Εάν για να κάνετε σωστά τη δουλειά σας χρειάζεται να γράψετε ένα prompt 10 έως 15 γραμμών με αναλυτικές παραμέτρους, αυτή η «γνώση» πρέπει να αποθηκευτεί μόνιμα σε ένα Skill για να μην τη χάσετε.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>Σταθερή Ροή Εργασίας (Workflow)</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Όταν η εργασία ακολουθεί μια απαράβατη λογική σειρά (π.χ. «Πρώτα διάβασε το επισυναπτόμενο αρχείο, έπειτα κάνε τη συγκεκριμένη μαθηματική πράξη και, τέλος, εξήγαγε το αποτέλεσμα σε πίνακα»).</p></div>
+          </div>
+        </div>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">🚫</span>
+          <div><p>Αντίθετα, η δημιουργία ενός Skill περιττεύει όταν η εργασία είναι ad-hoc/μοναδική (π.χ. <em>«Ανάλυσέ μου τις βασικές αρχές του Blockchain»</em>) ή όταν το ζητούμενο αλλάζει ριζικά σε κάθε περίσταση, χωρίς να διαγράφεται κάποιο κοινό, επαναλαμβανόμενο μοτίβο.</p></div>
+        </div>
+      </section>
+
+      <!-- ============ 4.4 ΕΤΟΙΜΑ SKILLS & ΔΗΜΙΟΥΡΓΙΑ ΔΙΚΩΝ ΣΟΥ ============ -->
+      <section class="chapter" data-title="Pre-built Skills — αξιοποίηση" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h1>Παραδείγματα έτοιμων Skills και πώς να φτιάξεις δικά σου</h1>
+        <h2>Α. Αξιοποίηση έτοιμων (Pre-built) Skills</h2>
+        <p>Η λειτουργία των προεγκατεστημένων δεξιοτήτων (Pre-built Skills) χαρακτηρίζεται από πλήρη αυτοματοποίηση, καθώς δεν απαιτείται καμία εξειδικευμένη ενέργεια ή ειδική εντολή (call) από την πλευρά του χρήστη για την ενεργοποίησή τους. Το Claude διαθέτει την ικανότητα να αναλύει το περιεχόμενο του αιτήματός σας σε φυσική γλώσσα και να αναγνωρίζει αυτόνομα ποιο συγκεκριμένο Skill είναι απαραίτητο για την ορθή εκτέλεση της εργασίας.</p>
+        <p>Εσείς αρκεί απλώς να περιγράψετε το επιθυμητό παραδοτέο, όπως για παράδειγμα, τη δημιουργία ενός αρχείου Word ή την εξαγωγή δεδομένων σε έναν πίνακα Excel και το μοντέλο θα επιστρατεύσει αυτόματα το κατάλληλο εργαλείο στο παρασκήνιο, διασφαλίζοντας την ακρίβεια και την τυποποίηση του τελικού αποτελέσματος.</p>
+      </section>
+
+      <section class="chapter" data-title="Παραδείγματα Pre-built Skills" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>Τέσσερα παραδείγματα Pre-built Skills</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="pre-word" role="tab" aria-selected="true">1. Word (docx)</button>
+            <button type="button" class="tab-btn" data-tab="pre-excel" role="tab" aria-selected="false">2. Excel (xlsx)</button>
+            <button type="button" class="tab-btn" data-tab="pre-pptx" role="tab" aria-selected="false">3. PowerPoint (pptx)</button>
+            <button type="button" class="tab-btn" data-tab="pre-pdf" role="tab" aria-selected="false">4. PDF</button>
+          </div>
+          <div class="tab-panel active" data-tab="pre-word">
+            <h3>Παράδειγμα 1 — Word (docx)</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Prompt</span>
+              <p class="pb-text">«Δημιούργησε ένα επαγγελματικό υπόμνημα (memo) σε Word, με θέμα την πρόταση αναβάθμισης του δικτύου Wi-Fi στον 3ο όροφο. Αποδέκτης: Τμήμα IT. Να περιλαμβάνει τρέχουσα κατάσταση, πρόταση λύσης, εκτιμώμενο κόστος και χρονοδιάγραμμα.»</p>
+            </div>
+            <figure class="shot">
+              <img src="assets/images/image021.png" alt="Αυτόματη ενεργοποίηση του docx Skill για δημιουργία υπομνήματος σε Word" loading="lazy">
+              <figcaption>«Αυτόματη ενεργοποίηση Pre-built Skill»</figcaption>
+            </figure>
+            <p>Στο παράδειγμα βλέπετε, ότι το Claude αναγνωρίζει αυτό που του ζητάει ο χρήστης, το οποίο είναι ένα έγγραφο Word. Επομένως, φορτώνει αυτόματα το <strong>docx Skill</strong>, παράγοντας ένα επαγγελματικό υπόμνημα χωρίς καμία επιπλέον ρύθμιση.</p>
+          </div>
+          <div class="tab-panel" data-tab="pre-excel">
+            <h3>Παράδειγμα 2 — Excel (xlsx)</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Prompt</span>
+              <p class="pb-text">«Φτιάξε ένα αρχείο Excel με μηνιαία παρακολούθηση εξόδων τμήματος. Στήλες: Ημερομηνία, Κατηγορία δαπάνης, Περιγραφή, Ποσό, Υπόλοιπο budget. Πρόσθεσε τύπο αυτόματου αθροίσματος και μορφοποίηση κεφαλίδων.»</p>
+            </div>
+            <figure class="shot">
+              <img src="assets/images/image022.png" alt="Ενεργοποίηση του Excel Skill από το Claude" loading="lazy">
+              <figcaption>«Ενεργοποίηση Excel Skill»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image023.png" alt="Αυτόματη ενεργοποίηση Pre-built Skill για δημιουργία αρχείου Excel" loading="lazy">
+              <figcaption>«Αυτόματη ενεργοποίηση Pre-built Skill»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="pre-pptx">
+            <h3>Παράδειγμα 3 — PowerPoint (pptx)</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Prompt</span>
+              <p class="pb-text">«Δημιούργησε μια παρουσίαση 5 διαφανειών για ενημέρωση της διοίκησης σχετικά με την πρόοδο του έργου ψηφιακού μετασχηματισμού. Δομή: Τίτλος, τρέχουσα κατάσταση, ορόσημα που ολοκληρώθηκαν, εκκρεμότητες, επόμενα βήματα.»</p>
+            </div>
+            <figure class="shot">
+              <img src="assets/images/image024.png" alt="Ενεργοποίηση του PPTX Skill από το Claude" loading="lazy">
+              <figcaption>«Ενεργοποίηση PPTX Skill»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image025.png" alt="Αυτόματη ενεργοποίηση Pre-built Skill για δημιουργία παρουσίασης" loading="lazy">
+              <figcaption>«Αυτόματη ενεργοποίηση Pre-built Skill»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="pre-pdf">
+            <h3>Παράδειγμα 4 — PDF</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Prompt</span>
+              <p class="pb-text">«Διάβασε το συνημμένο PDF και εξήγαγε σε πίνακα: τίτλο εγγράφου, ημερομηνία, βασικά ευρήματα και συμπεράσματα.»</p>
+            </div>
+            <figure class="shot">
+              <img src="assets/images/image026.png" alt="Το Claude διαβάζει και αναλύει το συνημμένο PDF" loading="lazy">
+              <figcaption>«Το Claude διαβάζει και αναλύει το PDF»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δικό σας Skill — Τρόπος 1ος" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>Β. Δημιουργία δικού σας Skill</h2>
+        <p>Για την δημιουργία του δικού σας Skill υπάρχουν <strong>3 τρόποι</strong>.</p>
+        <h3>Τρόπος 1ος</h3>
+        <p>Για να δημιουργήσετε ένα δικό σας Skill χρειάζονται τρία βήματα:</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="way1-s1" role="tab" aria-selected="true">Βήμα 1</button>
+            <button type="button" class="tab-btn" data-tab="way1-s2" role="tab" aria-selected="false">Βήμα 2</button>
+            <button type="button" class="tab-btn" data-tab="way1-s3" role="tab" aria-selected="false">Βήμα 3</button>
+          </div>
+          <div class="tab-panel active" data-tab="way1-s1">
+            <p><strong>Βήμα 1: Αναγνωρίστε την επαναλαμβανόμενη εργασία.</strong> Σκεφτείτε: ποια εργασία κάνετε κάθε εβδομάδα (ή κάθε μήνα) με τον ίδιο τρόπο;</p>
+            <p>Παράδειγμα: Εβδομαδιαία γράφετε αναφορά προόδου έργου για τον προϊστάμενό σας, πάντα με την ίδια δομή.</p>
+          </div>
+          <div class="tab-panel" data-tab="way1-s2">
+            <h3>Βήμα 2: Περιγράψτε τη διαδικασία σε φυσική γλώσσα</h3>
+            <p>Γράψτε ένα αρχείο <code>SKILL.md</code> που περιγράφει τι κάνει το Skill, πότε πρέπει να ενεργοποιείται, και ποια βήματα ακολουθεί. Δεν χρειάζεται κώδικας, μόνο σαφείς οδηγίες.</p>
+            <p>Ανοίγετε το Notepad (Σημειωματάριο στον υπολογιστή σας).</p>
+            <figure class="shot">
+              <img src="assets/images/image027.png" alt="Συγγραφή των οδηγιών του Skill στο Σημειωματάριο" loading="lazy">
+              <figcaption>«Γράφετε τις οδηγίες που θα περιέχει το Skill»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image028.png" alt="Αποθήκευση του αρχείου οδηγιών SKILL.md" loading="lazy">
+              <figcaption>«Αποθήκευση οδηγιών»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="way1-s3">
+            <h3>Βήμα 3: Ανεβάστε το Skill</h3>
+            <p>Αποθηκεύστε τον φάκελο ως <code>.zip</code> και ανεβάστε τον μέσω <strong>Customize &gt; Skills &gt; κουμπί "+"</strong>.</p>
+            <figure class="shot">
+              <img src="assets/images/image029.png" alt="Η διαδικασία upload του Skill μέσω του κουμπιού συν" loading="lazy">
+              <figcaption>«Η διαδικασία upload μέσω του κουμπιού "+"»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image030.png" alt="Το skill weekly-progress-report στη λίστα των Skills" loading="lazy">
+              <figcaption>«Το skill "weekly-progress-report"»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Παράδειγμα αρχείου SKILL.md" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>Παράδειγμα αρχείου SKILL.md για εβδομαδιαία αναφορά</h2>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">📄 SKILL.md</span>
+          <p class="pb-text">---<br>
+          name: weekly-progress-report<br>
+          description: Δημιουργεί εβδομαδιαία αναφορά προόδου έργου σε Word. Χρησιμοποίησε αυτό το skill όταν ο χρήστης ζητήσει εβδομαδιαία αναφορά, weekly report ή αναφορά προόδου.<br>
+          ---<br><br>
+          # Εβδομαδιαία Αναφορά Προόδου Έργου<br><br>
+          ## Οδηγίες<br>
+          Όταν ο χρήστης ζητήσει εβδομαδιαία αναφορά, δημιούργησε αρχείο Word με την εξής δομή:<br>
+          1. Τίτλος: «Εβδομαδιαία Αναφορά Προόδου — [Όνομα Έργου]»<br>
+          2. Περίοδος αναφοράς (ημερομηνίες εβδομάδας)<br>
+          3. Σύνοψη (3-4 προτάσεις)<br>
+          4. Πίνακας εργασιών: Εργασία | Κατάσταση | Υπεύθυνος | Σχόλια<br>
+          5. Κίνδυνοι / Εκκρεμότητες<br>
+          6. Στόχοι επόμενης εβδομάδας<br><br>
+          ## Κανόνες μορφοποίησης<br>
+          - Γραμματοσειρά: Calibri 11pt<br>
+          - Επικεφαλίδες: Bold, μέγεθος 14pt<br>
+          - Πίνακας με περιγράμματα και χρωματιστή κεφαλίδα<br>
+          - Γλώσσα: Ελληνικά, επίσημο ύφος</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Μετά τη μεταφόρτωση" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>Το νέο σας Skill στο περιβάλλον του Claude</h2>
+        <p>Μόλις ολοκληρωθεί η διαδικασία της μεταφόρτωσης, το νέο σας προσαρμοσμένο Skill (όπως, για παράδειγμα, το «weekly-progress-report») ενσωματώνεται άμεσα στο περιβάλλον του Claude. Πλοηγούμενοι στο κεντρικό μενού <strong>Customize &gt; Skills</strong>, μπορείτε πλέον να εντοπίσετε το συγκεκριμένο εργαλείο στη λίστα των διαθέσιμων επιλογών.</p>
+        <p>Στη συγκεκριμένη διεπαφή αποτυπώνονται με σαφήνεια όλα τα κρίσιμα στοιχεία ελέγχου και διαχείρισης: η ακριβής ονομασία της δεξιότητας, η ειδική ένδειξη <strong>«Added by: You»</strong> η οποία επιβεβαιώνει την αποκλειστική σας ιδιοκτησία, ο κεντρικός διακόπτης ενεργοποίησης (toggle) για την εναλλαγή της κατάστασης λειτουργίας του, καθώς και το πλήρες περιεχόμενο των δομημένων οδηγιών που έχετε ενσωματώσει μέσω του αρχείου <strong>SKILL.md</strong>.</p>
+        <h2>Το Skill σε δράση</h2>
+        <figure class="shot">
+          <img src="assets/images/image031.png" alt="Ενεργοποίηση του weekly progress report Skill με τον διακόπτη toggle" loading="lazy">
+          <figcaption>«Ενεργοποίηση weekly progress report Skill»</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/images/image032.png" alt="Το Claude αναγνωρίζει αυτόματα το skill και παράγει αναφορά σε Word" loading="lazy">
+          <figcaption>«Το Claude αναγνωρίζει αυτόματα το skill "weekly-progress-report" και παράγει αναφορά σε Word ακολουθώντας ακριβώς τη δομή που ορίστηκε στο SKILL.md»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: βήματα δημιουργίας" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Δραστηριότητα</span>
+        <h2>Βάλτε τα βήματα στη σωστή σειρά</h2>
+        <div class="activity js-seq" id="act_5_1"
+             data-ok="Σωστή σειρά! Αυτή είναι η ροή της χειροκίνητης δημιουργίας ενός Custom Skill."
+             data-ko="Η σειρά δεν είναι σωστή. Θυμηθείτε: πρώτα αναγνωρίζετε την επαναλαμβανόμενη εργασία, μετά γράφετε το SKILL.md, το αποθηκεύετε ως .zip και το ανεβάζετε από το Customize > Skills.">
+          <p class="act-q">Βάλτε στη σωστή σειρά τα βήματα της χειροκίνητης δημιουργίας Skill (Τρόπος 1ος):</p>
+          <div class="seq-pool">
+            <button type="button" class="seq-item" data-step="2">Συγγραφή του SKILL.md σε φυσική γλώσσα (π.χ. στο Notepad)</button>
+            <button type="button" class="seq-item" data-step="4">Upload μέσω Customize &gt; Skills &gt; «+»</button>
+            <button type="button" class="seq-item" data-step="1">Αναγνώριση της επαναλαμβανόμενης εργασίας</button>
+            <button type="button" class="seq-item" data-step="3">Αποθήκευση του φακέλου ως .zip</button>
+          </div>
+          <div class="seq-slots">
+            <div class="seq-slot"><span class="slot-num">1.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">2.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">3.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">4.</span><span class="slot-text"></span></div>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Toggle &amp; διαχείριση Skill" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>Γ. Ενεργοποίηση / Απενεργοποίηση Skill</h2>
+        <p>Δίπλα σε κάθε Skill υπάρχει ένας διακόπτης (toggle). Αν τον απενεργοποιήσετε, το Skill παραμένει αποθηκευμένο αλλά το Claude δεν θα το χρησιμοποιεί μέχρι να το ενεργοποιήσετε ξανά.</p>
+        <p>Αυτό είναι χρήσιμο όταν θέλετε προσωρινά να απενεργοποιήσετε ένα Skill χωρίς να το διαγράψετε.</p>
+        <h2>Δ. Διαχείριση Skill — Επεξεργασία, Λήψη και Διαγραφή</h2>
+        <p>Για κάθε Skill που έχετε δημιουργήσει, πηγαίνετε στο <strong>Customize &gt; Skills</strong>, επιλέξτε το Skill και πατήστε το εικονίδιο με τις τρεις τελείες (⋮) πάνω δεξιά. Το μενού προσφέρει τρεις επιλογές:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">✏️</div>
+            <h4>Edit</h4>
+            <p>Επεξεργασία του Skill. Μπορείτε να τροποποιήσετε τις οδηγίες, τη δομή ή τους κανόνες μορφοποίησης χωρίς να χρειαστεί να το διαγράψετε και να το ξαναδημιουργήσετε.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">⬇️</div>
+            <h4>Download</h4>
+            <p>Λήψη του Skill ως αρχείο <code>.zip</code> στον υπολογιστή σας. Χρήσιμο για να κρατάτε αντίγραφα ασφαλείας ή να μοιραστείτε ένα Skill με συναδέλφους.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🗑️</div>
+            <h4>Delete</h4>
+            <p>Οριστική διαγραφή του Skill. Η ενέργεια αυτή δεν αναιρείται, αν υπάρχει πιθανότητα να το χρειαστείτε ξανά, κάντε πρώτα Download και μετά Delete.</p>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image033.png" alt="Το μενού διαχείρισης ενός Skill με τις επιλογές Edit, Download και Delete" loading="lazy">
+          <figcaption>«Διαχείριση ενός Skill»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Τρόπος 2ος — Create with Claude" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>2ος Τρόπος δημιουργίας Skill — «Create with Claude»</h2>
+        <p>Εκτός από τη χειροκίνητη δημιουργία, η πλατφόρμα προσφέρει έναν πιο εύκολο τρόπο. Μπορείτε να ζητήσετε από τον ίδιο τον Claude να φτιάξει το Skill για εσάς. Πηγαίνετε στο <strong>Customize &gt; Skills</strong>, πατήστε το κουμπί «<kbd>+</kbd>» και επιλέξτε <strong>«Create with Claude»</strong>.</p>
+        <figure class="shot">
+          <img src="assets/images/image034.png" alt="Η επιλογή Create with Claude για δημιουργία Skill" loading="lazy">
+          <figcaption>«Δημιουργία Skill με την βοήθεια του Claude»</figcaption>
+        </figure>
+        <h3>Περιγράφετε τι θέλετε να κάνει το Skill</h3>
+        <p>Στη συνέχεια, περιγράφετε σε φυσική γλώσσα τι θέλετε να κάνει το Skill. Για παράδειγμα:</p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Παράδειγμα περιγραφής</span>
+          <p class="pb-text">«Θέλω ένα Skill που να δημιουργεί εβδομαδιαία αναφορά προόδου έργου σε Word. Να περιλαμβάνει τίτλο, περίοδο αναφοράς, σύνοψη, πίνακα εργασιών με στήλες Εργασία/Κατάσταση/Υπεύθυνος/Σχόλια, κινδύνους και στόχους επόμενης εβδομάδας. Γλώσσα ελληνικά, επίσημο ύφος.»</p>
+        </div>
+        <p>Το Claude θα δημιουργήσει αυτόματα το αρχείο SKILL.md με τη σωστή δομή, τους κανόνες και τα triggers, και θα το αποθηκεύσει απευθείας στα Skills σας, χωρίς να χρειαστεί να γράψετε κώδικα ή να ανεβάσετε αρχείο.</p>
+        <figure class="shot">
+          <img src="assets/images/image035.png" alt="Οδηγία προς το Claude για τη δημιουργία του Skill" loading="lazy">
+          <figcaption>«Οδηγία για την δημιουργία Skill με την βοήθεια του Claude»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Η δημιουργία σε εξέλιξη" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>Η δημιουργία σε εξέλιξη — και το τελικό αποτέλεσμα</h2>
+        <figure class="shot">
+          <img src="assets/images/image036.png" alt="Δείγμα της προόδου δημιουργίας του skill από το Claude" loading="lazy">
+          <figcaption>«Δείγμα κατά την πρόοδο της δημιουργίας του skill»</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/images/image037.png" alt="Το ολοκληρωμένο Skill έτοιμο προς χρήση" loading="lazy">
+          <figcaption>«Έτοιμο Skill»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Τρόπος 3ος — Φόρμα οδηγιών" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>3ος Τρόπος δημιουργίας Skill — «Write skill instructions»</h2>
+        <p>Πηγαίνοντας πάλι στο μενού Skills και επιλέγοντας το εικονίδιο «<kbd>+</kbd>» επιλέγετε το <strong>«Write skill instructions»</strong>, μπορείτε να δημιουργήσετε ένα skill συμπληρώνοντας τα πεδία της φόρμας.</p>
+        <figure class="shot">
+          <img src="assets/images/image038.png" alt="Η φόρμα χειροκίνητης δημιουργίας Skill με τα τρία πεδία" loading="lazy">
+          <figcaption>«Η φόρμα χειροκίνητης δημιουργίας Skill»</figcaption>
+        </figure>
+        <p>Αυτή είναι η φόρμα χειροκίνητης δημιουργίας Skill. Τα τρία πεδία:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🏷️</div>
+            <h4>Skill name</h4>
+            <p>Το όνομα του Skill σας. Χρησιμοποιήστε πεζά λατινικά με παύλες, χωρίς κενά και ελληνικούς χαρακτήρες. Π.χ.: <code>weekly-progress-report</code></p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📝</div>
+            <h4>Description</h4>
+            <p>Περιγράφει τι κάνει το Skill και πότε πρέπει ο Claude να το ενεργοποιήσει. Αυτό είναι κρίσιμο γιατί ο Claude διαβάζει αυτό το πεδίο για να αποφασίσει αν θα χρησιμοποιήσει το Skill. Π.χ. <em>«Δημιουργεί εβδομαδιαία αναφορά προόδου έργου σε Word. Χρησιμοποίησε αυτό το skill όταν ο χρήστης ζητήσει εβδομαδιαία αναφορά, weekly report ή αναφορά προόδου.»</em></p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📋</div>
+            <h4>Instructions</h4>
+            <p>Οι αναλυτικές οδηγίες που θα ακολουθεί το Claude. Εδώ γράφετε τη δομή, τα βήματα, τους κανόνες μορφοποίησης. Π.χ. <em>«Δημιούργησε αρχείο Word με την εξής δομή: 1. Τίτλος: Εβδομαδιαία Αναφορά Προόδου — [Όνομα Έργου] 2. Περίοδος αναφοράς 3. Σύνοψη (3-4 προτάσεις) 4. Πίνακας εργασιών: Εργασία | Κατάσταση | Υπεύθυνος | Σχόλια 5. Κίνδυνοι / Εκκρεμότητες 6. Στόχοι επόμενης εβδομάδας. Γραμματοσειρά Calibri 11pt, επικεφαλίδες bold 14pt, γλώσσα ελληνικά, επίσημο ύφος.»</em></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Create — το Skill στη λίστα" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>Πατήστε Create — και είναι έτοιμο</h2>
+        <p>Μόλις πατήσετε <strong>Create</strong>, το Skill αποθηκεύεται αυτόματα στη λίστα σας και είναι έτοιμο προς χρήση.</p>
+        <figure class="shot">
+          <img src="assets/images/image039.png" alt="Συμπλήρωση της φόρμας για τη δημιουργία Skill" loading="lazy">
+          <figcaption>«Συμπλήρωση φόρμας για δημιουργία Skill»</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/images/image040.png" alt="Το νέο Skill προστέθηκε στη λίστα των Skills" loading="lazy">
+          <figcaption>«Skill προστέθηκε στην λίστα»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Συμπερασματικά για τα Skills" data-group="4.4 Έτοιμα Skills &amp; δημιουργία δικών σου">
+        <span class="chapter-kicker">Υποενότητα 4.4</span>
+        <h2>Συμπερασματικά</h2>
+        <p>Συμπερασματικά, η κατανόηση και η ενσωμάτωση των Skills στην καθημερινή σας ροή εργασίας σηματοδοτεί τη μετάβαση από την απλή «συνομιλία» με την Τεχνητή Νοημοσύνη στον συνειδητό σχεδιασμό ψηφιακών συστημάτων. Είτε αξιοποιείτε την αόρατη αποτελεσματικότητα των Pre-built Skills, είτε αναπτύσσετε τα δικά σας, εξειδικευμένα Custom Skills, το όφελος είναι διττό. Πρώτον, εξασφαλίζετε απόλυτη συνέπεια στα παραδοτέα σας και δεύτερον εκμηδενίζετε τον χρόνο που σπαταλούσατε σε επαναλαμβανόμενες οδηγίες. Ουσιαστικά, καταργείτε την ανάγκη να εξηγείτε διαρκώς το «πώς» πρέπει να γίνει μια εργασία. Αναλαμβάνοντας τον ρόλο του δημιουργού διαδικασιών, εκπαιδεύετε το Claude να σκέφτεται και να παράγει έργο ευθυγραμμισμένο απόλυτα με τα δικά σας, αυστηρά επαγγελματικά πρότυπα, μετατρέποντάς το στο απόλυτο εργαλείο κλιμάκωσης (scaling) της παραγωγικότητάς σας.</p>
+      </section>
+
+      <!-- ============ 4.5 CLAUDE DESKTOP — COWORK ============ -->
+      <section class="chapter" data-title="Βίντεο: Claude Desktop και Cowork" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5 · Βίντεο</span>
+        <h1>Claude Desktop – Cowork — ο αυτόνομος ψηφιακός βοηθός</h1>
+        <div class="video-block">
+          <span class="video-kicker">▶ Βίντεο μαθήματος</span>
+          <h3>Claude Desktop και Cowork</h3>
+          <p>Το βίντεο σας ξεναγεί στην εφαρμογή Claude Desktop και στη λειτουργία Cowork: από την εγκατάσταση και τα τρία περιβάλλοντα εργασίας, μέχρι την ανάθεση αυτόνομων εργασιών σε τοπικούς φακέλους.</p>
+          <p><strong>Τι να προσέξετε:</strong> τη διαφορά της desktop εφαρμογής από τη web έκδοση, τον ρόλο του Φακέλου Εργασίας (Working Folder) και τα δύο επίπεδα αυτονομίας (Ask before acting / Act without asking).</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/1204519419?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="Claude Desktop και Cowork — παρουσίαση της λειτουργίας"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Ερώτηση κατανόησης: το βίντεο" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Ερώτηση κατανόησης</span>
+        <h2>Μετά το βίντεο: η ειδοποιός διαφορά</h2>
+        <div class="activity quiz-mini js-mcq" id="act_6_1" data-correct="2"
+             data-ok="Σωστά! Η ειδοποιός διαφορά είναι η άμεση διασύνδεση με τον τοπικό υπολογιστή: ανάγνωση φακέλων, διαχείριση αρχείων και αυτόνομη εκτέλεση εργασιών μέσω του Cowork."
+             data-ko="Όχι. Η ειδοποιός διαφορά της desktop εφαρμογής είναι ότι διασυνδέεται άμεσα με τον τοπικό υπολογιστή και μπορεί να εκτελέσει το Cowork — κάτι που ο browser, ως απομονωμένο περιβάλλον, δεν επιτρέπει.">
+          <p class="act-q">Ποια είναι η ειδοποιός διαφορά του Claude Desktop σε σχέση με τη διαδικτυακή έκδοση (claude.ai);</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Προσφέρει ισχυρότερα μοντέλα τεχνητής νοημοσύνης.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Δεν απαιτεί λογαριασμό Claude για τη χρήση του.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Διασυνδέεται άμεσα με τον τοπικό υπολογιστή και εκτελεί το Cowork σε τοπικούς φακέλους και αρχεία.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Τι είναι το Claude Desktop" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Claude Desktop</h2>
+        <p>Το Claude Desktop αποτελεί την αυτόνομη εφαρμογή συστήματος (διαθέσιμη για το λειτουργικό περιβάλλον των Windows), η οποία παρέχει ενοποιημένη πρόσβαση σε όλες τις προηγμένες λειτουργίες του μοντέλου, συγκεκριμένα στα εργαλεία <strong>Chat, Cowork και Code</strong>, καταργώντας πλήρως την ανάγκη χρήσης κάποιου περιηγητή ιστού (web browser).</p>
+        <figure class="shot">
+          <img src="assets/images/image041.jpg" alt="Η εφαρμογή Claude Desktop" loading="lazy">
+        </figure>
+        <h2>Η ειδοποιός διαφορά από τη web έκδοση</h2>
+        <p>Η ειδοποιός διαφορά της desktop εφαρμογής σε σχέση με τη διαδικτυακή έκδοση (claude.ai) έγκειται στην ικανότητά της να διασυνδέεται άμεσα με τον τοπικό σας υπολογιστή. Σε αντίθεση με τον browser, ο οποίος από τη φύση του λειτουργεί σε ένα αυστηρά απομονωμένο περιβάλλον ασφαλείας, η εφαρμογή Desktop μπορεί να εκτελέσει το εργαλείο Cowork, αποκτώντας τις εξής διευρυμένες δυνατότητες:</p>
+        <ul class="checklist">
+          <li><strong>Απευθείας ανάγνωση και σάρωση</strong> τοπικών φακέλων και καταλόγων του συστήματός σας.</li>
+          <li><strong>Ενεργή αλληλεπίδραση</strong> και προηγμένη διαχείριση των αποθηκευμένων σας αρχείων.</li>
+          <li><strong>Αυτόνομη εκτέλεση σύνθετων εργασιών</strong> στο παρασκήνιο, μετατρέποντας το Claude σε έναν πραγματικό ψηφιακό συνεργάτη που επιχειρεί απευθείας στο δικό σας περιβάλλον εργασίας.</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Εγκατάσταση Claude Desktop" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Διαδικασία Εγκατάστασης</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="dsk-s1" role="tab" aria-selected="true">Βήμα 1ο: Λήψη</button>
+            <button type="button" class="tab-btn" data-tab="dsk-s2" role="tab" aria-selected="false">Βήμα 2ο: Εγκατάσταση</button>
+            <button type="button" class="tab-btn" data-tab="dsk-s3" role="tab" aria-selected="false">Βήμα 3ο: Εκκίνηση</button>
+          </div>
+          <div class="tab-panel active" data-tab="dsk-s1">
+            <h3>Βήμα 1ο: Λήψη Λογισμικού (Download)</h3>
+            <p>Η διαδικασία λήψης της εφαρμογής ξεκινά άμεσα, μέσα από το ήδη γνώριμο περιβάλλον του λογαριασμού σας στο Claude, ακολουθώντας την εξής διαδρομή:</p>
+            <p>Στο κάτω μέρος της αριστερής πλευρικής μπάρας ελέγχου (sidebar), εντοπίστε και κάντε κλικ στο ειδικό εικονίδιο λήψης (<strong>Get apps and extensions</strong>), το οποίο βρίσκεται δίπλα στα στοιχεία του προφίλ σας.</p>
+            <figure class="shot">
+              <img src="assets/images/image042.png" alt="Το εικονίδιο λήψης εφαρμογών Get apps and extensions στο sidebar" loading="lazy">
+              <figcaption>«Το εικονίδιο λήψης εφαρμογών — Get apps and extensions»</figcaption>
+            </figure>
+            <h3>Η σελίδα Downloads</h3>
+            <p>Η ενέργεια αυτή θα σας ανακατευθύνει αυτόματα στην επίσημη σελίδα λήψεων της πλατφόρμας (<a href="https://claude.ai/downloads" target="_blank" rel="noopener">https://claude.ai/downloads</a>).</p>
+            <p>Στη νέα οθόνη, πλοηγηθείτε στην ενότητα με την ένδειξη <strong>Desktop</strong>. Εκεί, κάντε κλικ στο αντίστοιχο κουμπί λήψης για το λειτουργικό σας σύστημα (π.χ. «Download for Windows») προκειμένου να αποθηκεύσετε το αρχείο εγκατάστασης (installer) τοπικά στον υπολογιστή σας.</p>
+            <figure class="shot">
+              <img src="assets/images/image043.png" alt="Η σελίδα Downloads για τη λήψη της Desktop έκδοσης" loading="lazy">
+              <figcaption>«Το περιβάλλον της σελίδας Downloads, από όπου πραγματοποιείται η ασφαλής λήψη του εκτελέσιμου αρχείου για την Desktop έκδοση»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="dsk-s2">
+            <h3>Βήμα 2ο: Εγκατάσταση</h3>
+            <p>Μόλις κατεβάσετε το αρχείο, πατήστε για εκτέλεση. Η διαδικασία είναι σχεδιασμένη ώστε να ολοκληρώνεται αυτόματα, χωρίς να απαιτούνται πολύπλοκες παραμετροποιήσεις ή ειδικές ρυθμίσεις από την πλευρά του χρήστη.</p>
+            <figure class="shot">
+              <img src="assets/images/image044.png" alt="Το αρχείο εγκατάστασης του Claude Desktop" loading="lazy">
+              <figcaption>«Αρχείο εγκατάστασης»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image045.png" alt="Η διαδικασία εγκατάστασης του Claude Desktop" loading="lazy">
+              <figcaption>«Εγκατάσταση του Desktop»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="dsk-s3">
+            <h3>Βήμα 3ο: Εκκίνηση και Ταυτοποίηση</h3>
+            <p>Ανοίξτε την εφαρμογή μέσα από το Μενού Έναρξης (στα Windows). Στην οθόνη υποδοχής, πραγματοποιήστε είσοδο (log in) με τα διαπιστευτήρια του λογαριασμού σας. Εάν δεν διαθέτετε ήδη λογαριασμό, θα χρειαστεί πρώτα να δημιουργήσετε έναν μέσω της διαδικτυακής πλατφόρμας (claude.ai).</p>
+            <figure class="shot">
+              <img src="assets/images/image046.png" alt="Το περιβάλλον της εφαρμογής Claude for Desktop" loading="lazy">
+              <figcaption>«Περιβάλλον της εφαρμογής Claude for Desktop»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Τα 3 εικονίδια πλοήγησης" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Τα τρία εικονίδια πλοήγησης</h2>
+        <p>Ανοίγοντας την εφαρμογή Claude Desktop, στο πάνω αριστερό μέρος της οθόνης θα παρατηρήσετε τρία κεντρικά εικονίδια πλοήγησης (tabs). Το καθένα ενεργοποιεί ένα εντελώς διαφορετικό περιβάλλον εργασίας, προσαρμοσμένο στις εκάστοτε ανάγκες σας:</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="dsk-chat" role="tab" aria-selected="true">1. Chat</button>
+            <button type="button" class="tab-btn" data-tab="dsk-cowork" role="tab" aria-selected="false">2. Cowork</button>
+            <button type="button" class="tab-btn" data-tab="dsk-code" role="tab" aria-selected="false">3. Code</button>
+          </div>
+          <div class="tab-panel active" data-tab="dsk-chat">
+            <p><strong>1. Chat (Η κλασική λειτουργία Συνομιλίας):</strong> Το πρώτο εικονίδιο αντιστοιχεί στο βασικό περιβάλλον αλληλεπίδρασης, παρόμοιο με αυτό της διαδικτυακής έκδοσης. Εδώ εκτελούνται οι παραδοσιακές λειτουργίες παραγωγής περιεχομένου, ερωταπαντήσεων (Q&amp;A) και ανάλυσης δεδομένων. Σε αυτό το tab, το Claude λειτουργεί ως ένας κλασικός ψηφιακός συνομιλητής, χωρίς να παρεμβαίνει στα τοπικά αρχεία του συστήματός σας.</p>
+          </div>
+          <div class="tab-panel" data-tab="dsk-cowork">
+            <p><strong>2. Cowork (Ο Αυτόνομος Ψηφιακός Βοηθός):</strong> Το κεντρικό εικονίδιο αποτελεί την «καρδιά» της desktop εφαρμογής. Ενεργοποιώντας το Cowork, το Claude μετατρέπεται από απλός συνομιλητής σε ενεργό συνεργάτη. Θα μιλήσουμε γι΄αυτό στη συνέχεια αναλυτικότερα.</p>
+          </div>
+          <div class="tab-panel" data-tab="dsk-code">
+            <p><strong>3. Code (Το Περιβάλλον Προγραμματισμού):</strong> Το τρίτο εικονίδιο ανοίγει έναν εξειδικευμένο χώρο εργασίας σχεδιασμένο αποκλειστικά για την ανάπτυξη λογισμικού. Βελτιστοποιεί την παραγωγή, τον έλεγχο (debugging) και την ανάλυση κώδικα, παρέχοντας μια διεπαφή απαλλαγμένη από περιττούς περισπασμούς, ιδανική για τεχνικές εργασίες και προγραμματιστικά projects.</p>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image047.png" alt="Τα τρία εικονίδια πλοήγησης του Claude Desktop: Chat, Cowork και Code" loading="lazy">
+          <figcaption>«Οι 3 πυλώνες του Claude Desktop — Chat/Cowork/Code»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Ο μηχανισμός του Cowork" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Ο Μηχανισμός Λειτουργίας του Cowork</h2>
+        <p>Το Cowork αποτελεί την πιο προηγμένη λειτουργία της εφαρμογής Claude Desktop, καθώς μεταβάλλει ριζικά τον ρόλο του μοντέλου από έναν παθητικό συνομιλητή σε έναν πλήρως αυτόνομο ψηφιακό βοηθό. Ουσιαστικά, του εκχωρεί τη δυνατότητα να «εργαστεί» απευθείας μέσα στο δικό σας υπολογιστικό περιβάλλον και να διεκπεραιώσει σύνθετες διεργασίες για λογαριασμό σας.</p>
+        <p>Στην πράξη, η λειτουργία του βασίζεται σε μια εξαιρετικά αποδοτική διαδικασία ανάθεσης. Αρκεί να του υποδείξετε έναν τοπικό φάκελο και να περιγράψετε το επιθυμητό παραδοτέο.</p>
+        <h3>Από εκείνο το σημείο, το σύστημα αναλαμβάνει δράση εντελώς αυτόνομα</h3>
+        <ul class="checklist">
+          <li>Ανοίγει και διαβάζει τα απαραίτητα αρχεία του φακέλου.</li>
+          <li>Επεξεργάζεται τον όγκο των δεδομένων.</li>
+          <li>Αναπτύσσει και εκτελεί κώδικα στο παρασκήνιο (εφόσον η εργασία το απαιτεί).</li>
+          <li>Συνθέτει το τελικό αποτέλεσμα και το αποθηκεύει απευθείας στο τοπικό σας σύστημα.</li>
+        </ul>
+        <p>Κατά τη διάρκεια αυτής της διαδικασίας, έχετε την πλήρη ελευθερία είτε να παρακολουθείτε την πρόοδο των βημάτων σε πραγματικό χρόνο, είτε να αφήσετε το πρόγραμμα να εργάζεται στο παρασκήνιο και να επιστρέψετε απλώς για να παραλάβετε το ολοκληρωμένο έργο.</p>
+      </section>
+
+      <section class="chapter" data-title="Σε ποιους απευθύνεται" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Σε ποιους απευθύνεται</h2>
+        <p>Αν και τεχνολογικά μοιράζεται την ίδια ισχυρή αρχιτεκτονική με το Claude Code (τον χώρο εργασίας για προγραμματιστές), το Cowork είναι σχεδιασμένο με γνώμονα την απόλυτη ευχρηστία. Παρακάμπτει την ανάγκη για χρήση γραμμής εντολών (terminal) και δεν προϋποθέτει απολύτως καμία τεχνική γνώση συγγραφής κώδικα. Έχει δημιουργηθεί αποκλειστικά για τους <strong>knowledge workers</strong> (εργάτες της γνώσης), τους επαγγελματίες δηλαδή των οποίων η καθημερινότητα περιστρέφεται γύρω από τη διαχείριση εγγράφων, τη σύνταξη αναφορών, την ανάλυση δεδομένων, τη δημιουργία παρουσιάσεων και την ευρύτερη οργάνωση της πληροφορίας.</p>
+      </section>
+
+      <section class="chapter" data-title="Ο Φάκελος Εργασίας (Working Folder)" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Διαχείριση Αρχείων &amp; Εργασιών στο Desktop: Ο Φάκελος Εργασίας (Working Folder)</h2>
+        <p>Η έναρξη οποιασδήποτε αυτόνομης διαδικασίας στο περιβάλλον του Cowork προϋποθέτει τον σαφή καθορισμό του πεδίου δράσης του ψηφιακού βοηθού. Η αρχική αυτή παραμετροποίηση επιτυγχάνεται μέσω της επιλογής ενός τοπικού φακέλου, η οποία πραγματοποιείται από το ειδικό πεδίο επιλογής στο κάτω μέρος της οθόνης του Cowork.</p>
+        <figure class="shot">
+          <img src="assets/images/image048.png" alt="Επιλογή του φακέλου εργασίας στον οποίο θα έχει πρόσβαση το Claude" loading="lazy">
+          <figcaption>«Επιλογή φακέλου όπου θα έχει πρόσβαση το Claude»</figcaption>
+        </figure>
+        <h2>Το αυστηρό όριο πρόσβασης</h2>
+        <p>Αυτός ο Φάκελος Εργασίας (Working Folder) λειτουργεί ως το αυστηρό και απαραίτητο όριο πρόσβασης για το Claude. Το μοντέλο διαθέτει το δικαίωμα να αναγνώσει υφιστάμενα δεδομένα και να εγγράψει νέα αρχεία <strong>αποκλειστικά και μόνο εντός</strong> των ορίων του συγκεκριμένου καταλόγου. Οποιοδήποτε άλλο στοιχείο ή φάκελος του υπολογιστή σας παραμένει πλήρως απομονωμένο και απροσπέλαστο, διασφαλίζοντας την ιδιωτικότητα και την ακεραιότητα του συστήματός σας.</p>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">📁</span>
+          <div><p><strong>Βέλτιστη Πρακτική Ασφάλειας και Οργάνωσης:</strong> Για τη μέγιστη ασφάλεια και την ορθότερη διαχείριση της πληροφορίας, κρίνεται απαραίτητο να δημιουργείτε έναν ξεχωριστό, αφιερωμένο φάκελο για κάθε διακριτή εργασία ή project που αναθέτετε. Συνακόλουθα, θα πρέπει να αποφεύγεται αυστηρά η επιλογή κεντρικών ή ριζικών καταλόγων του συστήματος (όπως για παράδειγμα ολόκληρος ο σκληρός δίσκος C:\), προκειμένου να διατηρείται ο απόλυτος έλεγχος των παραγόμενων αρχείων και να διευκολύνεται η μετέπειτα αναζήτησή τους.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Επίπεδα αυτονομίας" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Επίπεδα Αυτονομίας και Έλεγχος Εκτέλεσης</h2>
+        <p>Ακριβώς δίπλα από την επιλογή του φακέλου εργασίας, το περιβάλλον του Cowork σας παρέχει τη δυνατότητα να ρυθμίσετε τον βαθμό ελευθερίας που παραχωρείτε στο Claude, μέσω ενός αναπτυσσόμενου μενού. Αυτή η ρύθμιση καθορίζει το πώς το μοντέλο θα διαχειρίζεται τις παρεμβατικές ενέργειες στον υπολογιστή σας (όπως η δημιουργία, η τροποποίηση ή η διαγραφή αρχείων). Οι διαθέσιμες επιλογές είναι δύο και εξυπηρετούν εντελώς διαφορετικά σενάρια και στάδια εξοικείωσης με το εργαλείο:</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="auto-ask" role="tab" aria-selected="true">1. Ask before acting</button>
+            <button type="button" class="tab-btn" data-tab="auto-act" role="tab" aria-selected="false">2. Act without asking</button>
+          </div>
+          <div class="tab-panel active" data-tab="auto-ask">
+            <h3>1. Ask before acting (Εκτέλεση κατόπιν έγκρισης)</h3>
+            <p><strong>Πώς λειτουργεί:</strong> Σε αυτή τη λειτουργία, το Claude θα αναλύσει το αίτημά σας και θα σχεδιάσει τα βήματα, αλλά θα κάνει παύση πριν εκτελέσει οποιαδήποτε ενέργεια στον φάκελό σας. Θα σας παρουσιάσει τι ακριβώς σκοπεύει να κάνει και θα περιμένει τη ρητή σας έγκριση για να προχωρήσει.</p>
+            <p><strong>Πότε να το χρησιμοποιείτε:</strong> Αποτελεί τη βέλτιστη πρακτική και συνιστάται ανεπιφύλακτα όταν δοκιμάζετε μια νέα ροή εργασίας, όταν διαχειρίζεστε ευαίσθητα εταιρικά δεδομένα ή όταν απλώς επιθυμείτε να διατηρείτε τον απόλυτο, βήμα-προς-βήμα έλεγχο της διαδικασίας.</p>
+          </div>
+          <div class="tab-panel" data-tab="auto-act">
+            <h3>2. Act without asking (Πλήρως αυτόνομη εκτέλεση)</h3>
+            <p><strong>Πώς λειτουργεί:</strong> Επιλέγοντας αυτή τη ρύθμιση, αφαιρείτε τα ενδιάμεσα «φρένα» ασφαλείας. Το Claude θα διαβάσει την εντολή σας και θα εκτελέσει απρόσκοπτα ολόκληρη την αλυσίδα των απαιτούμενων ενεργειών στο παρασκήνιο, παραδίδοντάς σας απευθείας το τελικό αποτέλεσμα χωρίς να διακόψει για να ζητήσει άδεια.</p>
+            <p><strong>Πότε να το χρησιμοποιείτε:</strong> Είναι η ιδανική επιλογή για τυποποιημένες, επαναλαμβανόμενες εργασίες για τις οποίες το μοντέλο έχει ήδη αποδείξει ότι παράγει ακριβή αποτελέσματα. Επιτρέπει τη μέγιστη εξοικονόμηση χρόνου, καθώς μπορείτε να αναθέσετε την εργασία και να απομακρυνθείτε από την οθόνη όσο το σύστημα εργάζεται.</p>
+            <figure class="shot">
+              <img src="assets/images/image049.png" alt="Το μενού ελέγχου αυτονομίας στο περιβάλλον του Cowork" loading="lazy">
+              <figcaption>«Μενού ελέγχου αυτονομίας στο περιβάλλον του Cowork»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: επίπεδα αυτονομίας" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Δραστηριότητα</span>
+        <h2>Ποιο επίπεδο αυτονομίας ταιριάζει;</h2>
+        <div class="activity js-fill" id="act_7_2"
+             data-ok="Σωστά! «Ask before acting» για δοκιμές, ευαίσθητα δεδομένα και βήμα-προς-βήμα έλεγχο· «Act without asking» για δοκιμασμένες, τυποποιημένες εργασίες."
+             data-ko="Κάποιες επιλογές δεν είναι σωστές. Θυμηθείτε: νέα ροή/ευαίσθητα δεδομένα/έλεγχος → Ask before acting· δοκιμασμένη, επαναλαμβανόμενη εργασία → Act without asking.">
+          <p class="act-q">Επιλέξτε το κατάλληλο επίπεδο αυτονομίας για κάθε σενάριο:</p>
+          <p class="fill-blank">Δοκιμάζετε για πρώτη φορά μια νέα ροή εργασίας με ευαίσθητα εταιρικά δεδομένα →
+            <select data-answer="ask" aria-label="Επίπεδο αυτονομίας πρώτου σεναρίου">
+              <option value="">— επιλέξτε —</option>
+              <option value="ask">Ask before acting</option>
+              <option value="act">Act without asking</option>
+            </select>
+          </p>
+          <p class="fill-blank">Τυποποιημένη, επαναλαμβανόμενη εργασία στην οποία το μοντέλο έχει ήδη αποδείξει ότι παράγει ακριβή αποτελέσματα →
+            <select data-answer="act" aria-label="Επίπεδο αυτονομίας δεύτερου σεναρίου">
+              <option value="">— επιλέξτε —</option>
+              <option value="ask">Ask before acting</option>
+              <option value="act">Act without asking</option>
+            </select>
+          </p>
+          <p class="fill-blank">Θέλετε να διατηρείτε απόλυτο, βήμα-προς-βήμα έλεγχο της διαδικασίας →
+            <select data-answer="ask" aria-label="Επίπεδο αυτονομίας τρίτου σεναρίου">
+              <option value="">— επιλέξτε —</option>
+              <option value="ask">Ask before acting</option>
+              <option value="act">Act without asking</option>
+            </select>
+          </p>
+          <button type="button" class="btn btn-primary btn-sm fill-check" style="margin-top:10px;">Έλεγχος απαντήσεων</button>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πρακτικά σενάρια Cowork (1–2)" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Πρακτικά Σενάρια Εφαρμογής του Cowork</h2>
+        <p>Για να γίνει απολύτως κατανοητή η μετασχηματιστική δύναμη του Cowork, θα εξετάσουμε ορισμένα καθημερινά σενάρια που απασχολούν κάθε επαγγελματία. Σε αυτά τα παραδείγματα, ο αυτόνομος βοηθός αναλαμβάνει εργασίες που, υπό κανονικές συνθήκες, θα απαιτούσαν ώρες χειροκίνητης προσπάθειας.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="cw-s1" role="tab" aria-selected="true">Σενάριο 1: Οργάνωση Φακέλων</button>
+            <button type="button" class="tab-btn" data-tab="cw-s2" role="tab" aria-selected="false">Σενάριο 2: Μαζική Μετονομασία</button>
+          </div>
+          <div class="tab-panel active" data-tab="cw-s1">
+            <h3>Σενάριο 1: Αυτοματοποιημένη Οργάνωση Φακέλων (File Management)</h3>
+            <p>Η διαχείριση ενός φακέλου που έχει γεμίσει με εκατοντάδες ανομοιογενή αρχεία σε βάθος χρόνου, είναι μια από τις πιο εξαντλητικές εργασίες ρουτίνας. Το Cowork μπορεί να αναλάβει τον ρόλο του διαχειριστή συστήματος.</p>
+            <p><strong>Το Πρόβλημα:</strong> Ένας φάκελος με εκατοντάδες αρχεία διαφορετικών τύπων, ονομάτων και ημερομηνιών, χωρίς καμία λογική δομή.</p>
+            <figure class="shot">
+              <img src="assets/images/image050.png" alt="Φάκελος με ανομοιογενή αρχεία διαφορετικών τύπων" loading="lazy">
+              <figcaption>«Αρχεία διαφορετικών τύπων»</figcaption>
+            </figure>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Η Εντολή (Prompt)</span>
+              <p class="pb-text">«Οργάνωσε τον φάκελο ταξινομώντας τα αρχεία ανά τύπο (π.χ. Έγγραφα, Εικόνες, Παρουσιάσεις) και, σε δεύτερο επίπεδο, ανά ημερομηνία.»</p>
+            </div>
+            <p><strong>Η Εκτέλεση στην Πράξη:</strong> Το μοντέλο δεν περιορίζεται στο να σας δώσει γραπτές συμβουλές οργάνωσης. Αναλαμβάνει δράση στο παρασκήνιο: σαρώνει ολόκληρο τον φάκελο εργασίας, αναγνωρίζει τις καταλήξεις (file extensions) και τα μεταδεδομένα (metadata) κάθε αρχείου.</p>
+            <p>Στη συνέχεια, εκτελεί τον απαραίτητο κώδικα για να δημιουργήσει αυτόματα τη νέα δομή υποφακέλων και να μετακινήσει φυσικά το κάθε αρχείο στη σωστή τοποθεσία. Μέσα σε λίγα δευτερόλεπτα, το ψηφιακό χάος μετατρέπεται σε ένα απόλυτα ταξινομημένο περιβάλλον, με μηδενική δική σας προσπάθεια.</p>
+            <div class="accordion">
+              <div class="acc-item">
+                <button type="button" class="acc-header" aria-expanded="false"><span>Σενάριο 1: Τα αποτελέσματα</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+                <div class="acc-body">
+                  <figure class="shot">
+                    <img src="assets/images/image051.png" alt="Η οδηγία στο Claude και τα τελικά αποτελέσματα της οργάνωσης" loading="lazy">
+                    <figcaption>«Οδηγία στο Claude &amp; τελικά αποτελέσματα»</figcaption>
+                  </figure>
+                  <figure class="shot">
+                    <img src="assets/images/image052.png" alt="Η ταξινόμηση των αρχείων στον φάκελο σε υποφακέλους" loading="lazy">
+                    <figcaption>«Ταξινόμηση αρχείων στον φάκελο»</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="cw-s2">
+            <h3>Σενάριο 2: Μαζική Μετονομασία Αρχείων</h3>
+            <p>Ένα σύνηθες πρόβλημα μετά τη λήψη φωτογραφιών, τη μεταφορά δεδομένων από κινητές συσκευές ή τη συγκέντρωση υλικού από συνεργάτες, είναι η άναρχη ονοματολογία των αρχείων (π.χ. <code>IMG_8472.jpg</code>, <code>scan_new_final.png</code>). Αυτή η έλλειψη δομής καθιστά σχεδόν αδύνατη τη γρήγορη αναζήτηση και την ταξινόμηση.</p>
+            <p><strong>Το Πρόβλημα:</strong> Δεκάδες ή εκατοντάδες αρχεία εικόνων με τυχαία, μη περιγραφικά ονόματα, τα οποία πρέπει να μετονομαστούν ένα προς ένα για να ενταχθούν σε ένα επαγγελματικό σύστημα αρχειοθέτησης.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Η Εντολή (Prompt)</span>
+              <p class="pb-text">«Μετονόμασε όλες τις εικόνες του φακέλου εφαρμόζοντας αυστηρά τη μορφή "ΕΕΕΕ-ΜΜ-ΗΗ_τίτλος"»</p>
+            </div>
+            <p><strong>Η Εκτέλεση στην Πράξη:</strong> Αντί να αναλώνεστε κάνοντας δεξί κλικ και «Μετονομασία» σε κάθε αρχείο ξεχωριστά, το Cowork αυτοματοποιεί πλήρως τη διαδικασία. Σαρώνει τον φάκελο, εξάγει τα κρυφά μεταδεδομένα (metadata/EXIF) κάθε εικόνας για να βρει την ακριβή ημερομηνία λήψης, και εφαρμόζει μαζικά τον νέο κανόνα ονοματολογίας. Μια εξαιρετικά μονότονη και επιρρεπής σε ανθρώπινα λάθη διαδικασία ολοκληρώνεται αλάνθαστα σε κλάσματα του δευτερολέπτου.</p>
+            <div class="accordion">
+              <div class="acc-item">
+                <button type="button" class="acc-header" aria-expanded="false"><span>Σενάριο 2: Το αποτέλεσμα</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+                <div class="acc-body">
+                  <figure class="shot">
+                    <img src="assets/images/image053.png" alt="Η μαζική μετονομασία εικόνων από το Cowork" loading="lazy">
+                    <figcaption>«Μαζική μετονομασία εικόνων»</figcaption>
+                  </figure>
+                  <figure class="shot">
+                    <img src="assets/images/image054.png" alt="Το αποτέλεσμα της μαζικής μετονομασίας εικόνων" loading="lazy">
+                    <figcaption>«Αποτέλεσμα μαζικής μετονομασίας εικόνων»</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πρακτικά σενάρια Cowork (3–4)" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Πρακτικά Σενάρια Εφαρμογής του Cowork — συνέχεια</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="cw-s3" role="tab" aria-selected="true">Σενάριο 3: Ανάλυση &amp; Οπτικοποίηση</button>
+            <button type="button" class="tab-btn" data-tab="cw-s4" role="tab" aria-selected="false">Σενάριο 4: Έξυπνη Μετονομασία</button>
+          </div>
+          <div class="tab-panel active" data-tab="cw-s3">
+            <h3>Σενάριο 3: Αυτοματοποιημένη Ανάλυση Δεδομένων και Οπτικοποίηση (Data Visualization)</h3>
+            <p>Στο σύγχρονο επιχειρηματικό περιβάλλον, η μετατροπή ακατέργαστων δεδομένων σε οπτικές αναφορές απαιτεί συχνά τη χρήση εξειδικευμένων εργαλείων (όπως το Excel ή το PowerBI) και αρκετό χρόνο για υπολογισμούς και μορφοποίηση. Το Cowork απλοποιεί αυτή τη διαδικασία δραματικά.</p>
+            <p><strong>Το Πρόβλημα:</strong> Έχετε στη διάθεσή σας ένα λογιστικό φύλλο με ανεπεξέργαστα δεδομένα (π.χ. το μητρώο προσωπικού της εταιρείας) και χρειάζεστε άμεσα ένα επαγγελματικό γράφημα για μια αναφορά ή παρουσίαση, χωρίς να αναλωθείτε σε χειροκίνητη ομαδοποίηση στηλών και γραμμών.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Η Εντολή (Prompt)</span>
+              <p class="pb-text">«Εντόπισε το αρχείο με όνομα "HR_Employee_Data". Θέλω να δημιουργήσεις ένα pie chart με τίτλο "Κατανομή προσωπικού ανά θέση εργασίας", το οποίο να παρουσιάζει το ποσοστό των εργαζομένων που ανήκουν σε κάθε τμήμα.»</p>
+            </div>
+            <p><strong>Η Εκτέλεση στην Πράξη:</strong> Το Cowork δεν σας καθοδηγεί απλώς στο πώς να το φτιάξετε μόνοι σας. Σαρώνει τον φάκελο εργασίας και εντοπίζει το σωστό αρχείο. Στη συνέχεια, διαβάζει τα δεδομένα, πραγματοποιεί τους απαραίτητους υπολογισμούς για την εξαγωγή των ποσοστών και, εκτελώντας κώδικα στο παρασκήνιο, παράγει και προβάλλει απευθείας το ζητούμενο γράφημα στην οθόνη σας. Μάλιστα, όπως φαίνεται και στη διεπαφή, καταγράφει με απόλυτη διαφάνεια τα βήματα που ακολούθησε (π.χ. "Ανάγνωση δεδομένων", "Δημιουργία pie chart").</p>
+            <figure class="shot">
+              <img src="assets/images/image055.png" alt="Η πλήρης ροή του Cowork σε ρόλο αναλυτή δεδομένων με δημιουργία pie chart" loading="lazy">
+              <figcaption>«Η πλήρης ροή του Cowork σε ρόλο αναλυτή»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="cw-s4">
+            <h3>Σενάριο 4: Σημασιολογική Ανάλυση και Έξυπνη Μετονομασία Αρχείων (Content-Aware Renaming)</h3>
+            <p>Η συσσώρευση αρχείων με ασαφή ή εργοστασιακά ονόματα (όπως <code>unknown.pdf</code>, <code>document_1.pdf</code> ή <code>scan_0821.pdf</code>) αποτελεί ένα συχνό πρόβλημα που καθιστά την εύρεση πληροφοριών αδύνατη χωρίς το χειροκίνητο άνοιγμα κάθε εγγράφου. Το Cowork μπορεί να «διαβάσει» και να κατανοήσει το περιεχόμενο, αναλαμβάνοντας την έξυπνη αρχειοθέτησή του.</p>
+            <p><strong>Το Πρόβλημα:</strong> Ύπαρξη «ανώνυμων» ή κακώς ονοματισμένων ψηφιακών εγγράφων στον φάκελο εργασίας, τα οποία απαιτούν χρόνο για να ελεγχθούν και να ταξινομηθούν χειροκίνητα.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Η Εντολή (Prompt — Βελτιωμένη Διατύπωση)</span>
+              <p class="pb-text">«Εντόπισε το αρχείο "unknown.pdf" στον φάκελο εργασίας, ανάγνωσε ολόκληρο το περιεχόμενό του και μετονόμασέ το χρησιμοποιώντας έναν σύντομο και απόλυτα περιγραφικό τίτλο, ο οποίος να αντικατοπτρίζει το κύριο θέμα του εγγράφου.»</p>
+            </div>
+            <p><strong>Η Εκτέλεση στην Πράξη:</strong> Στο σενάριο αυτό, ο αυτόνομος βοηθός αναδεικνύει την ικανότητά του στη <strong>σημασιολογική κατανόηση (semantic understanding)</strong> κειμένου. Το Cowork ανοίγει το αρχείο PDF, αναλύει τη δομή, τους τίτλους και το περιεχόμενό του (ακόμα και αν πρόκειται για πολυσέλιδη τεχνική αναφορά ή σύμβαση) και εξάγει την κεντρική ιδέα. Στη συνέχεια, αντικαθιστά το ασαφές όνομα unknown.pdf με έναν επαγγελματικό τίτλο. Με τον τρόπο αυτό, η πληροφορία γίνεται άμεσα αναγνωρίσιμη στο σύστημα αρχείων, χωρίς να χρειαστεί να αφιερώσετε πολύ χρόνο στην ανάγνωση του εγγράφου.</p>
+            <figure class="shot">
+              <img src="assets/images/image056.png" alt="Η εκτέλεση της σημασιολογικής ανάλυσης του PDF στο Cowork" loading="lazy">
+              <figcaption>«Η εκτέλεση της σημασιολογικής ανάλυσης στο Cowork»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image057.png" alt="Η επιβεβαίωση της μετονομασίας στον τοπικό φάκελο αρχείων" loading="lazy">
+              <figcaption>«Η επιβεβαίωση της ενέργειας στον τοπικό φάκελο αρχείων»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Ο κανόνας Human-in-the-Loop" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Σημαντική Επισήμανση: Ο Κανόνας του Ανθρώπινου Ελέγχου (Human-in-the-Loop)</h2>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">🧑‍⚖️</span>
+          <div>
+            <p>Παρότι το Claude Cowork αποτελεί ένα εξαιρετικά ισχυρό εργαλείο αυτοματοποίησης που εκτελεί πολύπλοκες εργασίες σε δευτερόλεπτα, <strong>ο τελικός έλεγχος των παραδοτέων (quality assurance) ανήκει πάντα αποκλειστικά σε εσάς</strong>. Όσο προηγμένη και αν είναι η Τεχνητή Νοημοσύνη, παραμένει ένα πιθανολογικό σύστημα. Ενδέχεται να παρερμηνεύσει μια διφορούμενη εντολή, να παραλείψει κάποια δεδομένα σε ένα γράφημα ή να κατηγοριοποιήσει λανθασμένα ένα έγγραφο κατά τη μετονομασία του. Επομένως, καθίσταται απαράβατος επαγγελματικός κανόνας να ελέγχετε πάντα το τελικό αποτέλεσμα στον φάκελο εργασίας σας, πριν αξιοποιήσετε τα αρχεία ή τα μοιραστείτε με τους συνεργάτες σας.</p>
+            <p><strong>Να θυμάστε:</strong> Ο ψηφιακός βοηθός αναλαμβάνει την εκτέλεση, αλλά εσείς φέρετε πάντα την ευθύνη της τελικής έγκρισης.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Ολοκληρώνοντας την περιήγηση" data-group="4.5 Claude Desktop — Cowork">
+        <span class="chapter-kicker">Υποενότητα 4.5</span>
+        <h2>Ολοκληρώνοντας την περιήγηση στο Cowork</h2>
+        <p>Ολοκληρώνοντας την περιήγηση στο περιβάλλον του Cowork, γίνεται σαφές ότι η συγκεκριμένη λειτουργία αντιπροσωπεύει μια ουσιαστική αλλαγή παραδείγματος για την επαγγελματική παραγωγικότητα. Το Claude παύει να είναι απλώς ένας ευφυής συνομιλητής σε μια απομονωμένη καρτέλα του browser και μετατρέπεται σε έναν ενεργό, εκτελεστικό συνεργάτη που επιχειρεί απευθείας στο λειτουργικό σας σύστημα.</p>
+        <p>Όπως αποδείχθηκε μέσα από τα πρακτικά σενάρια, από την οργανωτική αναδιάρθρωση φακέλων και τη σημασιολογική μετονομασία εγγράφων, μέχρι την άμεση οπτικοποίηση πολύπλοκων δεδομένων, εξαντλητικές εργασίες ρουτίνας διεκπεραιώνονται πλέον αυτόνομα, σε ελάχιστο χρόνο και χωρίς να απαιτούνται γνώσεις προγραμματισμού. Η ενσωμάτωση αυτού του επιπέδου αυτοματοποίησης στην καθημερινή ροή εργασίας απελευθερώνει πολύτιμο χρόνο για στρατηγική σκέψη. Διατηρώντας πάντα τον ρόλο του τελικού ελεγκτή (human-in-the-loop), ο σύγχρονος επαγγελματίας αναβαθμίζει τον ρόλο του από απλό εκτελεστή μικρο-εργασιών σε διαχειριστή ψηφιακών συστημάτων.</p>
+      </section>
+
+      <!-- ============ 4.6 CLAUDE IN CHROME & CLAUDE IN EXCEL ============ -->
+      <section class="chapter" data-title="Claude in Chrome — εισαγωγή" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h1>Claude in Chrome &amp; Claude in Excel</h1>
+        <h2>A. Claude in Chrome</h2>
+        <p>Η επέκταση (extension) του Claude για τον Google Chrome μετατρέπει τον περιηγητή σας σε ένα προηγμένο, διαδραστικό εργαλείο έρευνας και εκτέλεσης εργασιών. Δεν πρόκειται απλώς για ένα συμβατικό chatbot ενσωματωμένο σε ένα πλευρικό παράθυρο (sidebar). Το Claude φέρνει την Τεχνητή Νοημοσύνη απευθείας στο περιβάλλον εργασίας σας, αποκτώντας τη δυνατότητα να «βλέπει» και να αλληλεπιδρά με την ιστοσελίδα που επισκέπτεστε.</p>
+        <p>Πρακτικά, αυτό σημαίνει ότι καταργείται πλήρως η χρονοβόρα διαδικασία της συνεχούς αντιγραφής και επικόλλησης (copy-paste) πληροφοριών μεταξύ της πλατφόρμας και του browser. Αντί να μεταφέρετε εσείς τα δεδομένα στο Claude, το μοντέλο έρχεται σε εσάς και δρα εκ μέρους σας, προσφέροντας δύο βασικούς πυλώνες λειτουργίας:</p>
+      </section>
+
+      <section class="chapter" data-title="Οι δύο πυλώνες λειτουργίας" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Οι δύο πυλώνες λειτουργίας</h2>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🔎</div>
+            <h4>Σημασιολογική Ανάλυση και Έρευνα</h4>
+            <p>Διαβάζει άμεσα το περιεχόμενο της τρέχουσας σελίδας, επιτρέποντάς σας να ζητήσετε δομημένες συνόψεις, να εξαγάγετε συγκεκριμένα δεδομένα και να αναλύσετε εκτενή άρθρα.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🖱️</div>
+            <h4>Αυτόνομη Πλοήγηση και Εκτέλεση</h4>
+            <p>Διαθέτει την ικανότητα να αλληλεπιδρά ενεργά με τα στοιχεία της διεπαφής (UI). Μπορεί να πατάει κουμπιά, να συμπληρώνει φόρμες και να διεκπεραιώνει σύνθετες, πολυβηματικές εργασίες που εκτείνονται σε πολλαπλά tabs, εξασφαλίζοντας πάντα προηγουμένως τη ρητή δική σας έγκριση.</p>
+          </div>
+        </div>
+        <p>Ουσιαστικά, ο ψηφιακός βοηθός ενσωματώνεται πλήρως στην καθημερινή σας πλοήγηση, «κατανοώντας» όχι μόνο το τι διαβάζετε, αλλά και το τι προσπαθείτε να επιτύχετε στον ιστό.</p>
+      </section>
+
+      <section class="chapter" data-title="Εγκατάσταση Claude for Chrome" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Εγκατάσταση βήμα προς βήμα</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="chr-s1" role="tab" aria-selected="true">Βήμα 1: Λήψη</button>
+            <button type="button" class="tab-btn" data-tab="chr-s2" role="tab" aria-selected="false">Chrome Web Store</button>
+            <button type="button" class="tab-btn" data-tab="chr-s3" role="tab" aria-selected="false">Εξουσιοδότηση</button>
+            <button type="button" class="tab-btn" data-tab="chr-s4" role="tab" aria-selected="false">2ος τρόπος</button>
+          </div>
+          <div class="tab-panel active" data-tab="chr-s1">
+            <p><strong>Βήμα 1:</strong> Η διαδικασία λήψης της επέκτασης μπορεί να γίνει με 2 τρόπους. Πρώτον, ξεκινώντας, μέσα από το ήδη γνώριμο περιβάλλον του λογαριασμού σας στο Claude, ακολουθώντας την εξής διαδρομή:</p>
+            <p>Στο κάτω μέρος της αριστερής πλευρικής μπάρας ελέγχου (sidebar), εντοπίστε και κάντε κλικ στο ειδικό εικονίδιο λήψης (Get apps and extensions), το οποίο βρίσκεται δίπλα στα στοιχεία του προφίλ σας.</p>
+            <figure class="shot">
+              <img src="assets/images/image058.png" alt="Το εικονίδιο λήψης εφαρμογών Get apps and extensions" loading="lazy">
+              <figcaption>«Το εικονίδιο λήψης εφαρμογών — Get apps and extensions»</figcaption>
+            </figure>
+            <p>Η ενέργεια αυτή θα σας ανακατευθύνει αυτόματα στην επίσημη σελίδα λήψεων της πλατφόρμας (<a href="https://claude.ai/downloads" target="_blank" rel="noopener">https://claude.ai/downloads</a>). Στη νέα οθόνη, πλοηγηθείτε στην ενότητα με την ένδειξη Chrome. Εκεί, κάνετε κλικ στην επιλογή «<strong>Install</strong>».</p>
+            <figure class="shot">
+              <img src="assets/images/image059.png" alt="Η επέκταση Claude for Chrome στη σελίδα λήψεων του Claude.ai" loading="lazy">
+              <figcaption>«Επέκταση Claude for Chrome από το περιβάλλον του Claude.ai»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="chr-s2">
+            <h3>Προσθήκη από το Chrome Web Store</h3>
+            <p>Αμέσως μετά θα οδηγηθείτε στην επόμενη σελίδα στο chrome web store, όπου εκεί θα κάνετε κλικ στο κουμπί «Προσθήκη».</p>
+            <figure class="shot">
+              <img src="assets/images/image060.png" alt="Η προσθήκη της επέκτασης Claude από το Chrome Web Store" loading="lazy">
+              <figcaption>«Chrome Webstore — Προσθήκη επέκτασης Claude»</figcaption>
+            </figure>
+            <p>Στη συνέχεια, θα σας εμφανιστεί ένα παράθυρο, πατήστε «Προσθήκη επέκτασης».</p>
+            <figure class="shot">
+              <img src="assets/images/image061.png" alt="Το παράθυρο επιβεβαίωσης προσθήκης της επέκτασης Claude" loading="lazy">
+              <figcaption>«Επιβεβαίωση Προσθήκης επέκτασης Claude»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="chr-s3">
+            <h3>Εξουσιοδότηση (Authorize)</h3>
+            <p>Έπειτα, θα εμφανιστεί ένα παράθυρο ασφαλείας όπου καλείστε να εγκρίνετε τη σύνδεση. Κάνοντας κλικ στο κουμπί «<strong>Authorize</strong>» (Εξουσιοδότηση), επιτρέπετε στην επέκταση Claude for Chrome να διασυνδεθεί με τον προσωπικό σας λογαριασμό στην Anthropic. Με αυτή την ενέργεια, παραχωρείτε στο εργαλείο τα απαραίτητα δικαιώματα πρόσβασης, προκειμένου να μπορεί να διαβάζει τα στοιχεία του προφίλ σας και να διαχειρίζεται (δημιουργεί, συνεχίζει ή διαγράφει) τις συνομιλίες σας απευθείας μέσα από τον browser.</p>
+            <figure class="shot">
+              <img src="assets/images/image062.png" alt="Η εξουσιοδότηση της επέκτασης Claude for Chrome για σύνδεση με τον λογαριασμό" loading="lazy">
+              <figcaption>«Εξουσιοδότηση της επέκτασης Claude for Chrome για σύνδεση με προσωπικό λογαριασμό στο Claude»</figcaption>
+            </figure>
+            <p>Η επέκταση είναι πλέον εγκατεστημένη στον browser σας. Την επέκταση Claude μπορείτε να την βρείτε δεξιά δίπλα από την γραμμή αναζήτησης με το εικονίδιο πάζλ, όπου μπορεί να κάνετε κλικ στην πινέζα, ώστε να είναι ορατή η συγκεκριμένη επέκταση πάντα.</p>
+            <figure class="shot">
+              <img src="assets/images/image063.png" alt="Η επιτυχής εγκατάσταση της επέκτασης στο Chrome" loading="lazy">
+              <figcaption>«Επιτυχής εγκατάσταση της επέκτασης»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="chr-s4">
+            <h3>Ο δεύτερος τρόπος εγκατάστασης</h3>
+            <p>Ο δεύτερος τρόπος εγκατάστασης του Claude for Chrome είναι να επισκεφθείτε το Web Store από τον browser Chrome. Εκεί μπορείτε να αναζητήσετε την επέκταση Claude.</p>
+            <figure class="shot">
+              <img src="assets/images/image064.png" alt="Αναζήτηση του Claude for Chrome στο Web Store" loading="lazy">
+              <figcaption>«Αναζήτηση του Claude for Chrome στο WebStore»</figcaption>
+            </figure>
+            <p>Ο τρόπος εγκατάστασης στη συνέχεια είναι ίδιος, όπως και στην πρώτη περίπτωση.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Έτοιμο το Claude for Chrome" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Έτοιμο για την περιήγησή σας</h2>
+        <p>Πλέον, το Claude for Chrome είναι έτοιμο για να σας βοηθήσει στην περιήγησή σας στο διαδίκτυο.</p>
+        <figure class="shot">
+          <img src="assets/images/image065.png" alt="Παρουσίαση του Claude for Chrome" loading="lazy">
+          <figcaption>«Παρουσίαση του Claude for Chrome»</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/images/image066.png" alt="Το περιβάλλον εργασίας του Claude ενσωματωμένο στον περιηγητή" loading="lazy">
+          <figcaption>«Το περιβάλλον εργασίας του μοντέλου πλήρως ενσωματωμένο στον περιηγητή.»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Επίπεδα Εξουσιοδότησης" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Επίπεδα Εξουσιοδότησης</h2>
+        <p>Κατά την εκκίνηση του Claude in Chrome, στο κάτω μέρος του πεδίου εισαγωγής κειμένου (prompt), θα παρατηρήσετε ένα αναπτυσσόμενο μενού ελέγχου. Μέσω αυτού, καθορίζετε τον βαθμό αυτονομίας του ψηφιακού βοηθού κατά την περιήγησή σας (όπως ακριβώς είδαμε νωρίτερα και στο Claude Cowork). Οι διαθέσιμες επιλογές είναι οι εξής:</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="auth-ask" role="tab" aria-selected="true">Ask before acting</button>
+            <button type="button" class="tab-btn" data-tab="auth-allow" role="tab" aria-selected="false">Always allow</button>
+          </div>
+          <div class="tab-panel active" data-tab="auth-ask">
+            <p><strong>Ask before acting (Εκτέλεση κατόπιν έγκρισης):</strong> Στην ασφαλέστερη λειτουργία του, το Claude αναλύει το αίτημά σας, σχεδιάζει τα απαιτούμενα βήματα και σταματά, αναμένοντας τη ρητή σας έγκριση πριν προβεί σε οποιαδήποτε ενέργεια στη σελίδα. Αποτελεί τη συνιστώμενη πρακτική για νέους χρήστες ή κατά τη δοκιμή νέων διαδικασιών.</p>
+          </div>
+          <div class="tab-panel" data-tab="auth-allow">
+            <p><strong>Always allow actions on this site (Μόνιμη εξουσιοδότηση ανά τομέα):</strong> Η συγκεκριμένη ρύθμιση εκχωρεί στο μοντέλο το δικαίωμα να επιχειρεί αυτόνομα, χωρίς ενδιάμεσες ερωτήσεις επιβεβαίωσης, στο συγκεκριμένο domain (π.χ. στο εσωτερικό σύστημα του οργανισμού σας). Η επιλογή αυτή πρέπει να ενεργοποιείται με φειδώ και αποκλειστικά σε απολύτως έμπιστα περιβάλλοντα (trusted sites).</p>
+          </div>
+        </div>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">🛑</span>
+          <div><p><strong>Δικλείδα Ασφαλείας:</strong> Ανεξαρτήτως του επιλεγμένου τρόπου λειτουργίας, ο αλγόριθμος είναι σχεδιασμένος ώστε να αναγνωρίζει ενέργειες υψηλού ρίσκου (όπως η εκτέλεση οικονομικών συναλλαγών, η οριστική δημοσίευση περιεχομένου ή η λήψη εκτελέσιμων αρχείων). Σε αυτές τις περιπτώσεις, το σύστημα θα απαιτήσει πάντα την τελική σας επιβεβαίωση. Ωστόσο, πάντα χρειάζεται προσοχή και έλεγχος από την πλευρά του χρήστη.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Προηγμένες δυνατότητες Chrome" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Προηγμένες Δυνατότητες του Claude in Chrome</h2>
+        <p>Η ενσωμάτωση του Claude στον περιηγητή μετασχηματίζει τον τρόπο με τον οποίο αλληλεπιδράτε με τον παγκόσμιο ιστό, προσφέροντας ένα ευρύ φάσμα αυτοματοποιήσεων:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📄</div>
+            <h4>Ανάγνωση και Ανάλυση Σελίδων (Page Reading)</h4>
+            <p>Άμεση σύνοψη εκτενών άρθρων, βαθιά κατανόηση της δομής του περιεχομένου και εξαγωγή στοχευμένων δεδομένων.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🗂️</div>
+            <h4>Συνδυαστική Ανάλυση Πολλαπλών Καρτελών (Multi-tab Operations)</h4>
+            <p>Ομαδοποιώντας διαφορετικές καρτέλες (tabs) εντός του χώρου ελέγχου του Claude, το μοντέλο αποκτά «πανοραμική» όραση, επιτρέποντάς του να αναλύει και να συνθέτει δεδομένα από πολλαπλές πηγές ταυτόχρονα.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📝</div>
+            <h4>Αυτόματη Συμπλήρωση Φορμών (Form Filling)</h4>
+            <p>Αναλαμβάνει την κοπιαστική και επαναλαμβανόμενη διαδικασία καταχώρισης δεδομένων σε ψηφιακές φόρμες με απόλυτη ακρίβεια.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🧭</div>
+            <h4>Έξυπνη Πλοήγηση (Smart Navigation)</h4>
+            <p>Σε αναγνωρισμένα, ευρέως χρησιμοποιούμενα ψηφιακά περιβάλλοντα (όπως τα Gmail, Google Calendar, Slack, Google Docs και GitHub), το Claude κατανοεί εγγενώς την αρχιτεκτονική της διεπαφής. Πλοηγείται και εκτελεί ενέργειες αυτόνομα, χωρίς να απαιτεί καθοδήγηση βήμα προς βήμα.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">⏰</div>
+            <h4>Προγραμματισμένες Εργασίες (Scheduled Tasks)</h4>
+            <p>Δυνατότητα παραμετροποίησης επαναλαμβανόμενων διαδικασιών, οι οποίες εκτελούνται πλήρως αυτοματοποιημένα βάσει προκαθορισμένου χρονοδιαγράμματος.</p>
+          </div>
+        </div>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">🔒</span>
+          <div>
+            <p><strong>Συστάσεις ασφαλείας:</strong></p>
+            <ul>
+              <li>Ξεκινήστε με sites που εμπιστεύεστε</li>
+              <li>Ελέγχετε πάντα τα πλάνα πριν τα εγκρίνετε</li>
+              <li>Αποφεύγετε sites με user-generated content από άγνωστες πηγές</li>
+              <li>Μη δίνετε πρόσβαση σε sites όπου είστε συνδεδεμένοι με ευαίσθητους λογαριασμούς</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πρακτικό παράδειγμα: ΔΙΑΥΓΕΙΑ" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Πρακτικό παράδειγμα</h2>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Ψάξε στη ΔΙΑΥΓΕΙΑ αποφάσεις του Δήμου Αθηναίων από τον τελευταίο μήνα που αφορούν ανάθεση υπηρεσιών ή προμήθειες. Φτιάξε μου πίνακα με: ΑΔΑ, Θέμα, Ημερομηνία και Ποσό.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image067.png" alt="Το Claude υλοποιεί αυτόνομα την οδηγία αναζήτησης στη ΔΙΑΥΓΕΙΑ" loading="lazy">
+          <figcaption>«Το Claude υλοποιεί αυτόνομα μια οδηγία χρήστη»</figcaption>
+        </figure>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">✋</span>
+          <div><p><strong>Σημαντική Επισήμανση κατά την Εκτέλεση:</strong> Από τη στιγμή που το Claude αναλαμβάνει δράση, θα παρατηρήσετε ότι το περιβάλλον του περιηγητή μπροστά σας αρχίζει να κινείται, να κάνει κύλιση (scroll) και να επιλέγει πεδία πλήρως αυτόνομα. Είναι κρίσιμο <strong>να μην αλληλεπιδράσετε καθόλου με τη σελίδα</strong> (να μην κάνετε κλικ, ούτε να πληκτρολογήσετε κάτι) όσο ο ψηφιακός βοηθός εργάζεται, καθώς οποιαδήποτε ανθρώπινη παρέμβαση ενδέχεται να διακόψει τη ροή των ενεργειών του και να ακυρώσει τη διαδικασία.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος: αυτόνομη εκτέλεση" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Γρήγορος έλεγχος</span>
+        <h2>Όσο ο browser «κινείται» μόνος του…</h2>
+        <div class="activity quiz-mini js-mcq" id="act_8_1" data-correct="0"
+             data-ok="Σωστά! Όσο το Claude εργάζεται αυτόνομα στη σελίδα, δεν κάνετε κλικ ούτε πληκτρολογείτε — κάθε παρέμβαση μπορεί να διακόψει τη ροή και να ακυρώσει τη διαδικασία."
+             data-ko="Όχι. Κάθε ανθρώπινη παρέμβαση (κλικ ή πληκτρολόγηση) όσο το Claude εκτελεί αυτόνομα ενέργειες μπορεί να διακόψει τη ροή και να ακυρώσει τη διαδικασία.">
+          <p class="act-q">Το Claude in Chrome εκτελεί αυτόνομα μια πολυβηματική εργασία και ο browser «κινείται» μόνος του. Τι πρέπει να κάνετε;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Να μην αλληλεπιδράσω καθόλου με τη σελίδα μέχρι να ολοκληρωθεί η διαδικασία.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Να κάνω κλικ στα πεδία για να «βοηθήσω» το Claude να τελειώσει πιο γρήγορα.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Να πληκτρολογώ παράλληλα τις δικές μου αναζητήσεις στην ίδια καρτέλα.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δείγματα αποτελεσμάτων &amp; εξαγωγή" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Δείγματα αποτελεσμάτων</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="res-samples" role="tab" aria-selected="true">Δείγματα αποτελεσμάτων</button>
+            <button type="button" class="tab-btn" data-tab="res-excel" role="tab" aria-selected="false">Εξαγωγή σε Excel</button>
+          </div>
+          <div class="tab-panel active" data-tab="res-samples">
+            <figure class="shot">
+              <img src="assets/images/image068.png" alt="Πρώτο δείγμα αποτελεσμάτων της αναζήτησης στη ΔΙΑΥΓΕΙΑ" loading="lazy">
+              <figcaption>«Δείγμα αποτελεσμάτων 1»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image069.png" alt="Δεύτερο δείγμα αποτελεσμάτων της αναζήτησης στη ΔΙΑΥΓΕΙΑ" loading="lazy">
+              <figcaption>«Δείγμα αποτελεσμάτων 2»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="res-excel">
+            <h3>Εξαγωγή των αποτελεσμάτων σε Excel</h3>
+            <figure class="shot">
+              <img src="assets/images/image070.png" alt="Εξαγωγή των αποτελεσμάτων σε αρχείο Excel" loading="lazy">
+              <figcaption>«Εξαγωγή αποτελεσμάτων σε excel αρχείο»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image071.png" alt="Τα αποτελέσματα σε αρχείο Excel" loading="lazy">
+              <figcaption>«Αποτελέσματα σε excel αρχείο»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Claude in Excel — εισαγωγή" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>B. Claude in Excel</h2>
+        <p>Το <strong>Claude for Excel</strong> αποτελεί το επίσημο πρόσθετο (add-in) της Anthropic, ειδικά σχεδιασμένο για να γεφυρώσει την αναλυτική ισχύ της Τεχνητής Νοημοσύνης με το περιβάλλον του Microsoft Excel. Κατά την εγκατάστασή του, δημιουργείται ένα ενσωματωμένο πλευρικό παράθυρο ελέγχου (sidebar) απευθείας μέσα στο λογιστικό σας φύλλο. Η σημαντικότερη καινοτομία αυτού του εργαλείου είναι ότι σας επιτρέπει να αλληλεπιδράτε με τα δεδομένα σας χρησιμοποιώντας απλή, φυσική γλώσσα, εκμηδενίζοντας την ανάγκη για συγγραφή και αποσφαλμάτωση περίπλοκων μαθηματικών συναρτήσεων.</p>
+      </section>
+
+      <section class="chapter" data-title="Εγκατάσταση Claude for Excel" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Διαδικασία Εγκατάστασης (Βήμα προς Βήμα)</h2>
+        <p>Η λήψη και εγκατάσταση της επέκτασης πραγματοποιείται με απόλυτη ασφάλεια, ξεκινώντας μέσα από το γνώριμο περιβάλλον του λογαριασμού σας στο Claude:</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="xl-s1" role="tab" aria-selected="true">Install</button>
+            <button type="button" class="tab-btn" data-tab="xl-s2" role="tab" aria-selected="false">Microsoft 365</button>
+            <button type="button" class="tab-btn" data-tab="xl-s3" role="tab" aria-selected="false">Η επιλογή Claude</button>
+            <button type="button" class="tab-btn" data-tab="xl-s4" role="tab" aria-selected="false">Σύνδεση</button>
+            <button type="button" class="tab-btn" data-tab="xl-s5" role="tab" aria-selected="false">Έτοιμο για χρήση</button>
+          </div>
+          <div class="tab-panel active" data-tab="xl-s1">
+            <ol class="steps">
+              <li><strong class="step-title">Get apps and extensions</strong> Στο κάτω μέρος της αριστερής πλευρικής μπάρας πλοήγησης (sidebar), εντοπίστε και κάντε κλικ στο ειδικό εικονίδιο λήψης εφαρμογών (<strong>Get apps and extensions</strong>), το οποίο βρίσκεται ακριβώς δίπλα από τα στοιχεία του προφίλ σας.</li>
+              <li><strong class="step-title">Σελίδα λήψεων</strong> Η ενέργεια αυτή θα σας ανακατευθύνει αυτόματα στην επίσημη σελίδα λήψεων της πλατφόρμας (<a href="https://claude.ai/downloads" target="_blank" rel="noopener">https://claude.ai/downloads</a>).</li>
+              <li><strong class="step-title">Install για Excel</strong> Εκεί θα βρείτε τη λίστα με τις διαθέσιμες διασυνδέσεις. Εντοπίστε την επιλογή για το <strong>Excel</strong> και κάντε κλικ στο διπλανό κουμπί <strong>Install</strong> (Εγκατάσταση) για να προσθέσετε το εργαλείο στο λογισμικό σας.</li>
+            </ol>
+            <figure class="shot">
+              <img src="assets/images/image072.png" alt="Η εγκατάσταση του Claude για Excel μέσω Microsoft 365" loading="lazy">
+              <figcaption>«Εγκατάσταση Excel — Microsoft 365»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="xl-s2">
+            <h3>Μετάβαση στο Microsoft 365</h3>
+            <figure class="shot">
+              <img src="assets/images/image073.png" alt="Το άνοιγμα της επιλογής εφαρμογής για το Excel" loading="lazy">
+              <figcaption>«Άνοιγμα Επιλογής εφαρμογής»</figcaption>
+            </figure>
+            <p>Στη συνέχεια επιλέγεται το Microsoft 365 και θα οδηγηθείτε στο excel cloud της Microsoft.</p>
+            <figure class="shot">
+              <img src="assets/images/image074.png" alt="Το περιβάλλον του Microsoft 365" loading="lazy">
+              <figcaption>«Περιβάλλον Microsoft 365»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="xl-s3">
+            <h3>Η επιλογή Claude μέσα στο Excel</h3>
+            <p>Εδώ πλέον μπορείτε να δημιουργήσετε ένα νέο έγγραφο ή να εισάγετε δικά σας αρχεία.</p>
+            <p>Δεξιά στο παράθυρο του Excel θα δείτε το εικονίδιο με τις 3 τελείες (…). Κάνοντας κλικ στο κάτω μέρος του πτυσσόμενου παραθύρου θα δείτε την επιλογή <strong>Claude</strong>.</p>
+            <figure class="shot">
+              <img src="assets/images/image075.png" alt="Η επιλογή Claude στο μενού πρόσθετων του Excel" loading="lazy">
+              <figcaption>«Claude for Excel»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="xl-s4">
+            <h3>Σύνδεση του λογαριασμού σας</h3>
+            <p>Στη συνέχεια, θα δείτε δεξιά σας ένα νέο παράθυρο, στο οποίο θα πρέπει να πατήσετε «<strong>Continue in browser</strong>», ώστε να συνδεθεί ο λογαριασμός σας.</p>
+            <figure class="shot">
+              <img src="assets/images/image076.png" alt="Η επιβεβαίωση σύνδεσης με τον λογαριασμό μέσω Continue in browser" loading="lazy">
+              <figcaption>«Επιβεβαίωση Σύνδεσης με τον λογαριασμό σας»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image077.png" alt="Η επιλογή Connect για την εξουσιοδότηση του Claude" loading="lazy">
+              <figcaption>«Επιλογή Connect»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="xl-s5">
+            <h3>Έτοιμο για χρήση</h3>
+            <p>Μετά την επιβεβαίωση και εξουσιοδότηση που δώσατε στο Claude, είναι πλέον έτοιμο για χρήση.</p>
+            <figure class="shot">
+              <img src="assets/images/image078.png" alt="Το Claude for Excel έτοιμο για χρήση" loading="lazy">
+              <figcaption>«Έτοιμο το Claude for Excel»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image079.png" alt="Το Claude ως βοηθός μέσα στο περιβάλλον του Excel" loading="lazy">
+              <figcaption>«Το Claude βοηθός σε περιβάλλον Excel»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πρακτικά παραδείγματα Excel" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Πρακτικό παράδειγμα</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="xlp-1" role="tab" aria-selected="true">1ο Prompt</button>
+            <button type="button" class="tab-btn" data-tab="xlp-2" role="tab" aria-selected="false">2ο Prompt</button>
+          </div>
+          <div class="tab-panel active" data-tab="xlp-1">
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ 1ο Prompt</span>
+              <p class="pb-text">«Δημιούργησε ένα νέο sheet "Σύνοψη" με πίνακα που δείχνει: συνολικές πωλήσεις ανά Μάρκα, πλήθος παραγγελιών ανά Μάρκα και μέση τιμή παραγγελίας ανά Μάρκα. Χρησιμοποίησε formulas, όχι στατικές τιμές.»</p>
+            </div>
+            <figure class="shot">
+              <img src="assets/images/image080.png" alt="Η οδηγία εκτέλεσης προς το Claude μέσα στο περιβάλλον Excel" loading="lazy">
+              <figcaption>«Οδηγία εκτέλεσης στο Claude στο περιβάλλον Excel»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image081.png" alt="Το νέο tab Σύνοψη που δημιούργησε το Claude στο Excel" loading="lazy">
+              <figcaption>«Αποτέλεσμα μετά από ενέργειες του Claude — Δημιουργία New tab Σύνοψη»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="xlp-2">
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ 2ο Prompt</span>
+              <p class="pb-text">«Φτιάξε ένα γράφημα στηλών που δείχνει τις συνολικές πωλήσεις (στήλη Σύνολο) ανά Πόλη. Πρόσθεσε τίτλο "Πωλήσεις ανά Πόλη" και conditional formatting στη στήλη Σύνολο: πράσινο αν είναι πάνω από 200€, κόκκινο αν είναι κάτω από 100€.»</p>
+            </div>
+            <figure class="shot">
+              <img src="assets/images/image082.png" alt="Το Claude for Excel δημιουργεί πίνακα πωλήσεων, γράφημα στηλών και conditional formatting" loading="lazy">
+              <figcaption>«Claude for Excel δημιουργεί πίνακα πωλήσεων ανά πόλη, γράφημα στηλών και conditional formatting»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Σωστό ή Λάθος: formulas" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Γρήγορος έλεγχος</span>
+        <h2>Σωστό ή Λάθος;</h2>
+        <div class="activity quiz-mini js-mcq" id="act_9_1" data-correct="1"
+             data-ok="Σωστά! Είναι Λάθος: η καινοτομία του Claude for Excel είναι ακριβώς ότι μεταφράζει τη φυσική γλώσσα σε formulas — δεν χρειάζεται να γράφετε και να αποσφαλματώνετε συναρτήσεις μόνοι σας."
+             data-ko="Δεν είναι σωστό. Το Claude for Excel σας επιτρέπει να αλληλεπιδράτε με τα δεδομένα σε απλή φυσική γλώσσα — το μοντέλο αναλαμβάνει το τεχνικό βάρος των συναρτήσεων.">
+          <p class="act-q">Σωστό ή Λάθος: Για να χρησιμοποιήσετε το Claude for Excel, πρέπει να γνωρίζετε να γράφετε μόνοι σας περίπλοκες μαθηματικές συναρτήσεις (formulas).</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Σωστό</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Λάθος</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Σύνοψη ενσωμάτωσης: Chrome &amp; Excel" data-group="4.6 Claude in Chrome &amp; Claude in Excel">
+        <span class="chapter-kicker">Υποενότητα 4.6</span>
+        <h2>Σύνοψη: Η Δύναμη της Άμεσης Ενσωμάτωσης</h2>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="sum-chrome" role="tab" aria-selected="true">Chrome</button>
+            <button type="button" class="tab-btn" data-tab="sum-excel" role="tab" aria-selected="false">Excel</button>
+          </div>
+          <div class="tab-panel active" data-tab="sum-chrome">
+            <p>Η ενσωμάτωση του <strong>Claude στον Google Chrome</strong> επαναπροσδιορίζει ριζικά την εμπειρία της διαδικτυακής περιήγησης, μετατρέποντας τον browser από ένα απλό εργαλείο προβολής πληροφοριών σε έναν ενεργό ψηφιακό ερευνητή. Η πραγματική του δύναμη έγκειται στην ικανότητά του να "κατανοεί" σημασιολογικά το περιβάλλον στο οποίο βρίσκεστε, επιτρέποντάς του να αναλύει άμεσα εκτενή κείμενα, να διαχειρίζεται συνδυαστικά πολλαπλές καρτέλες (tabs) και να εκτελεί αυτόνομα, αλλά πάντα υπό την έγκρισή σας, διαδραστικές ενέργειες, όπως η πλοήγηση και η συμπλήρωση φορμών. Αυτή η άμεση διασύνδεση εξαλείφει πλήρως την ανάγκη συνεχούς εναλλαγής εφαρμογών (context switching), επιταχύνοντας την άντληση και την επεξεργασία δεδομένων απευθείας στην πηγή τους.</p>
+          </div>
+          <div class="tab-panel" data-tab="sum-excel">
+            <p>Αντίστοιχα, το <strong>Claude for Excel</strong> επιφέρει μια μετασχηματιστική αλλαγή στη διαχείριση και ανάλυση δεδομένων, εκδημοκρατίζοντας τις πιο προηγμένες δυνατότητες των λογιστικών φύλλων. Η προστιθέμενη αξία του εργαλείου συνοψίζεται στη άμεση μετάφραση της φυσικής γλώσσας σε πολύπλοκες υπολογιστικές συναρτήσεις (formulas) και μαζικές αυτοματοποιήσεις. Αντί ο χρήστης να αναλώνεται στον χειροκίνητο καθαρισμό δεδομένων, τον εντοπισμό συντακτικών λαθών και τον σχεδιασμό συγκεντρωτικών πινάκων, το μοντέλο αναλαμβάνει εξ ολοκλήρου το τεχνικό βάρος. Έτσι, το Excel εξελίσσεται από ένα στατικό λογισμικό καταχώρισης σε ένα δυναμικό, ευφυές περιβάλλον εργασίας, όπου η εξαγωγή κρίσιμων συμπερασμάτων και η οπτικοποίηση μεγάλου όγκου πληροφοριών πραγματοποιούνται ακαριαία.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 4.7 ΣΥΝΟΨΗ ============ -->
+      <section class="chapter" data-title="Σύνοψη — εισαγωγή" data-group="4.7 Σύνοψη — το προσωπικό σου σύστημα παραγωγικότητας">
+        <span class="chapter-kicker">Υποενότητα 4.7</span>
+        <h1>Σύνοψη — το προσωπικό σου σύστημα παραγωγικότητας</h1>
+        <p>Φτάνοντας στην ολοκλήρωση αυτού του οδηγού, είναι πλέον σαφές ότι το Claude δεν είναι απλώς ένα έξυπνο chatbot στο οποίο απευθύνετε μεμονωμένες ερωτήσεις. Εάν αξιοποιήσετε στο έπακρο τις δυνατότητες που αναλύθηκαν παραπάνω, το Claude θα μετατραπεί σε έναν <strong>ολοκληρωμένο, κεντρικό λειτουργικό σύστημα παραγωγικότητας</strong>, απολύτως προσαρμοσμένο στη δική σας επαγγελματική ταυτότητα και καθημερινότητα.</p>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🧩</span>
+          <div><p>Η πραγματική αξία του ψηφιακού μετασχηματισμού δεν κρύβεται στη χρήση ενός μεμονωμένου εργαλείου, αλλά στη <strong>συνέργεια</strong> όλων των δυνατοτήτων του.</p></div>
+        </div>
+        <p>Ας δούμε πώς συνδυάζονται τα πέντε θεμελιώδη στοιχεία που μάθαμε, για να δημιουργήσουν το απόλυτο, εξατομικευμένο workflow:</p>
+      </section>
+
+      <section class="chapter" data-title="Τα πέντε θεμελιώδη στοιχεία" data-group="4.7 Σύνοψη — το προσωπικό σου σύστημα παραγωγικότητας">
+        <span class="chapter-kicker">Υποενότητα 4.7</span>
+        <h2>Τα πέντε θεμελιώδη στοιχεία</h2>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🗂️</div>
+            <h4>1. Το Πλαίσιο (Projects)</h4>
+            <p>Είναι ο μόνιμος χώρος εργασίας σας. Εδώ βρίσκονται αποθηκευμένα τα αρχεία, οι κανονισμοί και το ιστορικό της εταιρείας σας. Δεν χρειάζεται πλέον να εξηγείτε από την αρχή το περιβάλλον στο οποίο κινείστε.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">✒️</div>
+            <h4>2. Custom Styles</h4>
+            <p>Έχετε ήδη διδάξει στο μοντέλο το πώς ακριβώς γράφετε. Όταν το Claude παράγει περιεχόμενο, χρησιμοποιεί το δικό σας επαγγελματικό, ακαδημαϊκό ή φιλικό ύφος, διασφαλίζοντας την προσωπική σας σφραγίδα σε κάθε παραδοτέο.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🔌</div>
+            <h4>3. Connectors</h4>
+            <p>Δεν αναλώνεστε στο να κατεβάζετε και να ανεβάζετε αρχεία. Μέσω των Connectors, το Claude "βλέπει" απευθείας τα σημερινά σας emails στο Gmail ή τα επικαιροποιημένα δεδομένα στο Google Drive, αντλώντας ζωντανή πληροφορία χωρίς να εγκαταλείψετε την πλατφόρμα.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📋</div>
+            <h4>4. Skills</h4>
+            <p>Για τις επαναλαμβανόμενες εργασίες, δεν γράφετε πια μακροσκελή prompts. Ενεργοποιείτε το έτοιμο Skill (π.χ. «Εβδομαδιαία Αναφορά»), το οποίο λειτουργεί ως αυστηρός οδηγός εκτέλεσης βήμα προς βήμα, μορφοποιώντας το αποτέλεσμα ακριβώς όπως το θέλετε (π.χ. σε έτοιμο αρχείο Word).</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🧠</div>
+            <h4>5. Memory</h4>
+            <p>Πάνω από όλα αυτά, η Μνήμη του συστήματος καταγράφει αθόρυβα τις μικρές καθημερινές σας προτιμήσεις (π.χ. «πάντα να τονίζεις με bold τα τελικά ποσά»), κάνοντας το σύστημα όλο και πιο διαισθητικό με την πάροδο του χρόνου.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: τα 5 στοιχεία" data-group="4.7 Σύνοψη — το προσωπικό σου σύστημα παραγωγικότητας">
+        <span class="chapter-kicker">Δραστηριότητα</span>
+        <h2>Αντιστοιχίστε τα πέντε στοιχεία</h2>
+        <div class="activity js-match" id="act_10_1" data-ok="Εξαιρετικά! Κατέχετε πλήρως τα πέντε θεμελιώδη στοιχεία του προσωπικού συστήματος παραγωγικότητας.">
+          <p class="act-q">Αντιστοιχίστε κάθε στοιχείο του συστήματος με τον ρόλο του:</p>
+          <div class="match-cols">
+            <div class="match-col" aria-label="Στοιχεία">
+              <button type="button" class="match-btn" data-pair="a">Projects</button>
+              <button type="button" class="match-btn" data-pair="b">Custom Styles</button>
+              <button type="button" class="match-btn" data-pair="c">Connectors</button>
+              <button type="button" class="match-btn" data-pair="d">Skills</button>
+              <button type="button" class="match-btn" data-pair="e">Memory</button>
+            </div>
+            <div class="match-col" aria-label="Ρόλοι">
+              <button type="button" class="match-btn" data-pair="d">Αυστηρός οδηγός εκτέλεσης για επαναλαμβανόμενες εργασίες</button>
+              <button type="button" class="match-btn" data-pair="a">Μόνιμος χώρος εργασίας με αρχεία, κανονισμούς και ιστορικό</button>
+              <button type="button" class="match-btn" data-pair="e">Καταγράφει αθόρυβα τις καθημερινές προτιμήσεις σας</button>
+              <button type="button" class="match-btn" data-pair="c">Ζωντανή πληροφορία απευθείας από Gmail και Google Drive</button>
+              <button type="button" class="match-btn" data-pair="b">Το δικό σας ύφος γραφής σε κάθε παραδοτέο</button>
+            </div>
+          </div>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Το Απόλυτο Workflow" data-group="4.7 Σύνοψη — το προσωπικό σου σύστημα παραγωγικότητας">
+        <span class="chapter-kicker">Υποενότητα 4.7</span>
+        <h2>Το Απόλυτο Workflow στην Πράξη</h2>
+        <p>Φανταστείτε την έναρξη της εργασιακής σας εβδομάδας. Αντί να ανοίξετε δέκα διαφορετικές καρτέλες (tabs):</p>
+        <ol class="steps">
+          <li><strong class="step-title">Βήμα 1</strong> Ανοίγετε απλώς το <strong>Project</strong> «Μηνιαίο Reporting».</li>
+          <li><strong class="step-title">Βήμα 2</strong> Με μία μόνο εντολή στο Claude: «Διάβασε τα τελευταία 5 emails από τον πελάτη (μέσω <strong>Connectors</strong>) και τα δεδομένα πωλήσεων που έχουμε στα Files του Project.»</li>
+          <li><strong class="step-title">Βήμα 3</strong> «Χρησιμοποιώντας το <strong>Skill</strong> «Αναφορά Προόδου», συνέταξε το τελικό αρχείο Word, διατηρώντας το αυστηρό εταιρικό <strong>Style</strong> που έχουμε ορίσει.»</li>
+        </ol>
+        <p>Μέσα σε ελάχιστα δευτερόλεπτα, η Τεχνητή Νοημοσύνη συλλέγει, αναλύει, μορφοποιεί και παραδίδει το τελικό έγγραφο. Εσείς, αξιοποιώντας την εξατομικευμένη <strong>Μνήμη</strong> του συστήματος, δεν χρειάστηκε να κάνετε καμία διορθωτική παρέμβαση.</p>
+      </section>
+
+      <section class="chapter" data-title="Ο Αρχιτέκτονας των Διαδικασιών" data-group="4.7 Σύνοψη — το προσωπικό σου σύστημα παραγωγικότητας">
+        <span class="chapter-kicker">Υποενότητα 4.7</span>
+        <h2>Ο Αρχιτέκτονας των Διαδικασιών</h2>
+        <p>Αυτή είναι η ουσία της σύγχρονης παραγωγικότητας. Ο ρόλος του σύγχρονου επαγγελματία αναβαθμίζεται. Παύετε να είστε ο διεκπεραιωτής των μικρών, επαναλαμβανόμενων διοικητικών εργασιών και μετατρέπεστε στον <strong>Αρχιτέκτονα των Διαδικασιών</strong>. Χρησιμοποιώντας το Claude ως το προσωπικό σας σύστημα παραγωγικότητας, ανακτάτε το πιο πολύτιμο αγαθό: τον χρόνο σας, για να τον αφιερώσετε εκεί που πραγματικά απαιτείται ανθρώπινη κρίση, στρατηγική σκέψη και δημιουργικότητα.</p>
+      </section>
+
+      <section class="chapter" data-title="Ανακεφαλαίωση Ενότητας 4" data-group="4.7 Σύνοψη — το προσωπικό σου σύστημα παραγωγικότητας">
+        <span class="chapter-kicker">Ανακεφαλαίωση</span>
+        <h2>Ανακεφαλαίωση Ενότητας 4</h2>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>1. Connectors — «ψηφιακές γέφυρες»</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Οι <strong>Connectors</strong> είναι «ψηφιακές γέφυρες» μεταξύ του Claude και του οικοσυστήματός σας (Google Workspace — Drive, Docs, Gmail, Calendar — Canva, Make). Ενεργοποιούνται από το <strong>Customize &gt; Connectors</strong> με το «+», μέσω ασφαλών πρωτοκόλλων <strong>OAuth</strong> — το σύστημα δεν ζητά ποτέ τους κωδικούς σας.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>2. Έλεγχος &amp; δικαιώματα</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Ο έλεγχος παραμένει στα χέρια σας: άμεση αποσύνδεση με <strong>Disconnect</strong> και <strong>Tool permissions</strong> — εργαλεία ανάγνωσης σε «Always allow», εργαλεία εγγραφής/διαγραφής σε <strong>«Needs approval»</strong>.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>3. Workflows με Connectors</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Τα <strong>workflows με Connectors</strong> εκτελούν αλληλουχίες ενεργειών με ένα prompt: Πρωινή Προετοιμασία (Gmail), Στρατηγικός Ημερήσιος Προγραμματισμός (Calendar), Έξυπνη Διαχείριση Αλληλογραφίας (email → draft → event) και Αναζήτηση &amp; Σύνοψη (Drive). Οφέλη: εξάλειψη context switching, αυτοματοποίηση ρουτίνας, ασφάλεια και έλεγχος.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>4. Skills &amp; SKILL.md</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Τα <strong>Skills</strong> είναι «εγχειρίδια λειτουργιών» (SOP) που βασίζονται στο αρχείο <strong>SKILL.md</strong>: σκοπός, συνθήκες ενεργοποίησης, βήματα, επιθυμητό αποτέλεσμα — όλα σε φυσική γλώσσα, χωρίς κώδικα. Διακρίνονται σε <strong>Pre-built</strong> (αυτόματα: PDF, Excel, Word, PowerPoint) και <strong>Custom</strong> (δικά σας, με Code Execution, στα πλάνα Pro/Max/Team/Enterprise).</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>5. Projects vs Skills</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p><strong>Projects vs Skills:</strong> τα Projects ορίζουν το «Πλαίσιο» (ρόλος, context, βάση γνώσης — μόνο εντός του Project), τα Skills τη «Διαδικασία» (βήματα, κανόνες, format — σε κάθε συνομιλία). Χρυσός κανόνας: ίδιες οδηγίες πάνω από δύο φορές → Skill.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>6. Τρεις τρόποι δημιουργίας Custom Skill</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Τρεις τρόποι δημιουργίας Custom Skill: <strong>χειροκίνητα</strong> (SKILL.md → .zip → upload), <strong>«Create with Claude»</strong> (περιγραφή σε φυσική γλώσσα) και <strong>φόρμα «Write skill instructions»</strong> (Skill name, Description, Instructions). Διαχείριση: toggle, Edit, Download, Delete (μη αναστρέψιμο — πρώτα Download).</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>7. Claude Desktop &amp; Cowork</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Το <strong>Claude Desktop</strong> (Windows) ενοποιεί τα <strong>Chat, Cowork και Code</strong> και, σε αντίθεση με τον browser, διασυνδέεται άμεσα με τον τοπικό υπολογιστή. Το <strong>Cowork</strong> εργάζεται αυτόνομα σε έναν <strong>Φάκελο Εργασίας (Working Folder)</strong> — αυστηρό όριο πρόσβασης — με δύο επίπεδα αυτονομίας: <strong>Ask before acting</strong> και <strong>Act without asking</strong>.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>8. Σενάρια Cowork &amp; Human-in-the-Loop</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Πρακτικά σενάρια Cowork: οργάνωση φακέλων, μαζική μετονομασία (metadata/EXIF), ανάλυση δεδομένων και οπτικοποίηση, σημασιολογική μετονομασία εγγράφων. Απαράβατος κανόνας: <strong>Human-in-the-Loop</strong> — ο τελικός έλεγχος ανήκει πάντα σε εσάς.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>9. Claude in Chrome &amp; Claude for Excel</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Το <strong>Claude in Chrome</strong> διαβάζει και αναλύει σελίδες, χειρίζεται πολλαπλά tabs, συμπληρώνει φόρμες, πλοηγείται έξυπνα και εκτελεί προγραμματισμένες εργασίες — με επίπεδα εξουσιοδότησης (Ask before acting / Always allow ανά site) και δικλείδα ασφαλείας για ενέργειες υψηλού ρίσκου. Όσο εργάζεται αυτόνομα, μην αλληλεπιδράτε με τη σελίδα. Το <strong>Claude for Excel</strong> (add-in μέσω Microsoft 365) μεταφράζει τη φυσική γλώσσα σε formulas, γραφήματα και conditional formatting — χωρίς συγγραφή και αποσφαλμάτωση συναρτήσεων.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false"><span>10. Το προσωπικό σύστημα παραγωγικότητας</span><span class="acc-arrow" aria-hidden="true">▶</span></button>
+            <div class="acc-body"><p>Το προσωπικό σύστημα παραγωγικότητας συντίθεται από πέντε στοιχεία σε συνέργεια: <strong>Projects</strong> (πλαίσιο), <strong>Custom Styles</strong> (ύφος), <strong>Connectors</strong> (ζωντανά δεδομένα), <strong>Skills</strong> (διαδικασίες), <strong>Memory</strong> (προτιμήσεις) — και εσάς στον ρόλο του <strong>Αρχιτέκτονα των Διαδικασιών</strong>.</p></div>
+          </div>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🎉</span>
+          <div><p><strong>Συγχαρητήρια!</strong> Ολοκληρώσατε την Ενότητα 4. Μπορείτε να επιστρέψετε σε οποιαδήποτε διαφάνεια από το μενού περιεχομένων, για επανάληψη ή για να ξαναδοκιμάσετε τις δραστηριότητες.</p></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/v2.js"></script>
+</body>
+</html>

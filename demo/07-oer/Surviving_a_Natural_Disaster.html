@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surviving a Natural Disaster</title>
+<style>
+/* ===== base ===== */
+*{box-sizing:border-box}
+:root{
+  --ink:#16273A; --muted:#5B6B7B; --paper:#FFFFFF; --bg:#F1F5F9;
+  --brand:#1F5FA8; --brand2:#0E3E7A; --accent:#F0A63A; --ok:#2E8B57; --bad:#C63B3B; --line:#D9E2EC;
+  --radius:16px; --topH:56px;
+}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);
+  font:16px/1.55 "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+.app{height:100dvh;display:flex;flex-direction:column}
+/* ===== header ===== */
+.top{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 10px 14px -10px rgba(0,0,0,.15);z-index:5}
+.top .ttl{font-weight:800;font-size:17px;letter-spacing:.2px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .lbl{font-size:13px;color:var(--muted);white-space:nowrap}
+.prog{height:4px;background:var(--line);flex:0 0 auto}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));transition:width .4s}
+/* ===== screens ===== */
+.screens{flex:1;min-height:0;position:relative}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:auto;padding:18px 22px}
+.screen.on{display:flex;animation:fadein .35s}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wrap{width:100%;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0;gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:0 6px 18px -12px rgba(0,0,0,.18)}
+.card.pad{padding:22px 26px}
+h1{font-size:clamp(24px,3.4vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.3px}
+h2{font-size:clamp(19px,2.2vw,26px);margin:0 0 8px}
+h3{font-size:17px;margin:0 0 6px}
+p{margin:0 0 10px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:none;color:var(--brand);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#E8F0FA;color:var(--brand2);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
+/* ===== buttons ===== */
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:11px 18px;font-weight:800;
+  background:var(--brand);color:#fff;box-shadow:0 8px 18px -10px rgba(31,95,168,.8);transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px);background:var(--brand2)}
+.btn.ghost{background:transparent;color:var(--brand);box-shadow:none;border:2px solid var(--brand)}
+.btn.ghost:hover{background:#E8F0FA}
+.btn.sm{padding:8px 13px;font-size:14px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.btn[hidden]{display:none}
+/* ===== bottom nav ===== */
+.nav{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:var(--paper);border-top:1px solid var(--line)}
+.dots{display:flex;gap:8px;align-items:center}
+.dots button{width:11px;height:11px;border-radius:50%;border:2px solid var(--brand);background:transparent;padding:0}
+.dots button.on{background:var(--brand);transform:scale(1.25)}
+.dots button.done{background:#9DBCE3;border-color:#9DBCE3}
+/* ===== images: alt-tooltip + zoom ===== */
+.zi{position:relative;display:inline-block;max-width:100%;cursor:zoom-in;border-radius:12px;line-height:0}
+.zi img{border-radius:12px;width:100%;height:auto}
+.zi .mag{position:absolute;right:9px;top:9px;width:30px;height:30px;border-radius:50%;background:#0E2233;color:#fff;
+  display:grid;place-items:center;font-size:15px;opacity:.85;pointer-events:none;line-height:1}
+.zi::after{content:attr(data-alt);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%);
+  background:#0E2233;color:#fff;font-size:13px;line-height:1.35;padding:8px 11px;border-radius:9px;max-width:min(320px,78vw);
+  width:max-content;white-space:normal;text-align:center;display:none;z-index:31;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.zi::before{content:"";position:absolute;left:50%;bottom:calc(100% + 3px);transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:#0E2233;display:none;z-index:31;pointer-events:none}
+.zi:hover::after,.zi:focus-visible::after,.zi.on::after,.zi:hover::before,.zi:focus-visible::before,.zi.on::before{display:block;animation:tipin .18s}
+.zi.below::after{bottom:auto;top:calc(100% + 9px)}
+.zi.below::before{bottom:auto;top:calc(100% + 3px);border-top-color:transparent;border-bottom-color:#0E2233}
+.zi.inset::after{bottom:auto;top:14px;left:14px;transform:none;max-width:70%;text-align:left}
+.zi.inset::before{display:none!important}
+.zi:hover,.zi:focus-visible,.zi.on{z-index:30}
+@keyframes tipin{from{opacity:0;transform:translate(-50%,4px)}to{opacity:1}}
+.zi.inset:hover::after{animation:none}
+figure{margin:0}
+figcaption{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:6px}
+/* lightbox */
+.lbx{position:fixed;inset:0;background:rgba(6,16,28,.92);display:none;z-index:90;padding:16px;overflow:auto}
+.lbx.on{display:grid;place-items:center}
+.lbx .box{width:100%;max-width:1200px;min-width:0;text-align:center}
+.lbx img{width:auto;height:auto;max-width:100%;max-height:82vh;margin:0 auto;border-radius:8px}
+.lbx .cap{color:#DCE6F0;font-size:14px;margin-top:10px}
+.lbx .x{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:#0E2233;color:#fff;border:2px solid #fff;
+  font-size:24px;line-height:1;display:grid;place-items:center;z-index:91;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+/* ===== activities ===== */
+.q{display:flex;flex-direction:column;gap:12px}
+.q .stem{font-weight:700;font-size:17px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:12px;text-align:left;border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:12px 14px;transition:.15s}
+.opt:hover{border-color:var(--brand);background:#F5F9FE}
+.opt .k{flex:0 0 30px;height:30px;border-radius:50%;background:#E8F0FA;color:var(--brand2);display:grid;place-items:center;font-weight:800;font-size:14px}
+.opt.sel{border-color:var(--brand);background:#EAF2FC}
+.opt.good{border-color:var(--ok);background:#EAF7EF}
+.opt.good .k{background:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:#FBEDED}
+.opt.bad .k{background:var(--bad);color:#fff}
+.opt.dim{opacity:.5}
+.opts.locked .opt{cursor:default}
+.fb{border-radius:12px;padding:12px 14px;border:2px solid;font-size:15px}
+.fb.ok{border-color:var(--ok);background:#EAF7EF;color:#1B5E3A}
+.fb.no{border-color:var(--bad);background:#FBEDED;color:#8A2626}
+.fb.rev{border-color:var(--accent);background:#FFF6E5;color:#6B4A00}
+.fb[hidden]{display:none}
+.tries{font-size:13px;color:var(--muted)}
+.steps{display:flex;gap:6px;flex-wrap:wrap}
+.steps i{width:22px;height:8px;border-radius:4px;background:var(--line)}
+.steps i.on{background:var(--brand)} .steps i.ok{background:var(--ok)} .steps i.no{background:var(--bad)}
+/* results ring */
+.ring{width:150px;height:150px}
+.ring circle{fill:none;stroke-width:12}
+.ring .bg{stroke:var(--line)} .ring .v{stroke:var(--ok);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .8s}
+.ring text{font-weight:900;font-size:26px;fill:var(--ink);text-anchor:middle;dominant-baseline:middle}
+.band{border-left:8px solid var(--accent);border-radius:12px;padding:12px 16px;background:#FFF9EE}
+.band.mute{opacity:.45;border-left-color:var(--line);background:#F7F9FB}
+/* reveal cards */
+.flip{display:grid;cursor:pointer;border:0;padding:0;background:none;text-align:left;width:100%}
+.flip .f,.flip .b{grid-area:1/1;border-radius:14px;padding:16px;transition:opacity .35s,transform .35s;display:block}
+.flip .f{background:var(--brand);color:#fff;font-weight:800}
+.flip .b{background:var(--paper);border:2px solid var(--brand);opacity:0;visibility:hidden;transform:scale(.96)}
+.flip.on .f{opacity:0;visibility:hidden;transform:scale(.96)} .flip.on .b{opacity:1;visibility:visible;transform:none}
+/* misc */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.two>*{min-width:0;min-height:0}
+.grow{flex:1;min-height:0;overflow:auto}
+.center{text-align:center}
+.src{font-size:12.5px;color:var(--muted)}
+.srclist{columns:2;column-gap:22px;font-size:13px;color:var(--muted)}
+.srclist li{break-inside:avoid;margin-bottom:6px}
+@media (max-width:760px){
+  .screen{padding:12px 12px}
+  .two{grid-template-columns:minmax(0,1fr)}
+  .srclist{columns:1}
+  .top .ttl{font-size:15px}
+  h1{font-size:24px}
+}
+
+/* ===== lesson ===== */
+.top .ttl{color:var(--brand2)}
+.cover{flex:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:26px;align-items:center}
+.cover>*{min-width:0;min-height:0}
+.cover .art{display:grid;place-items:center}
+.cover .art svg{width:min(100%,360px);height:auto}
+.subtl{color:var(--muted);font-size:15px;margin:0 0 6px}
+.stage{display:flex;flex-direction:column;gap:14px;flex:1;min-height:0}
+.stage[hidden]{display:none}
+.lead{font-size:clamp(16px,1.6vw,19px);line-height:1.6}
+.linkcard{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:linear-gradient(135deg,#0E3E7A,#1F5FA8);color:#fff;border-radius:var(--radius);padding:20px 24px}
+.linkcard .ic{flex:0 0 58px;width:58px;height:58px;border-radius:14px;background:rgba(255,255,255,.14);display:grid;place-items:center}
+.linkcard .ic svg{width:34px;height:34px}
+.linkcard .txt{flex:1 1 220px;min-width:0}
+.linkcard .txt small{display:block;opacity:.85;font-size:13px;margin-top:3px}
+.btn.link{background:#fff;color:var(--brand2);text-decoration:none;box-shadow:0 8px 18px -10px rgba(0,0,0,.6)}
+.btn.link:hover{background:#EAF2FC;color:var(--brand2)}
+.visited{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--ok)}
+.visited[hidden]{display:none}
+/* article blueprint */
+.bp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;flex:1;min-height:0}
+.bp>*{min-width:0;min-height:0}
+.sheet{background:#FBFCFE;border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:flex;flex-direction:column;gap:9px;overflow:auto}
+.part{border:2px solid var(--line);border-radius:12px;padding:0;background:var(--paper);text-align:left;width:100%;transition:.18s;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0}
+.part .tag{background:var(--brand);color:#fff;font-weight:800;font-size:12px;letter-spacing:.08em;padding:10px 12px;border-radius:9px 0 0 9px;display:grid;place-items:center;min-width:64px;writing-mode:vertical-rl;transform:rotate(180deg)}
+.part .body{padding:10px 14px;font-size:14.5px;line-height:1.45}
+.part .body i{font-style:italic;font-weight:800;color:var(--brand2)}
+.part .body i.plain{font-style:normal;font-weight:800;color:var(--brand2)}
+.part.seen{border-color:var(--ok)} .part.seen .tag{background:var(--ok)}
+.part:hover{border-color:var(--brand);transform:translateY(-1px)}
+.callout{border-left:8px solid var(--accent);background:#FFF9EE;border-radius:12px;padding:12px 16px;font-size:15px}
+.callout b{color:#6B4A00}
+.cnt{font-size:13px;color:var(--muted);font-weight:700}
+/* vocabulary */
+.vocab{display:flex;flex-wrap:wrap;gap:8px}
+.vw{border:2px solid #C9DBEF;background:#EEF4FB;color:var(--brand2);border-radius:999px;padding:6px 13px;font-size:14px;font-weight:700;transition:.15s;cursor:pointer}
+.vw:hover{border-color:var(--brand);background:#E1ECF9}
+.vw.used{background:var(--ok);border-color:var(--ok);color:#fff}
+.vw.used::after{content:" ✓"}
+/* writing */
+.write{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;flex:1;min-height:0}
+.write>*{min-width:0;min-height:0}
+.editor{display:flex;flex-direction:column;gap:10px;min-height:0}
+.editor textarea{flex:1;min-height:180px;resize:none;border:2px solid var(--line);border-radius:14px;padding:14px 16px;font:16px/1.6 Georgia,"Times New Roman",serif;color:var(--ink);background:var(--paper);outline:none;transition:border-color .15s}
+.editor textarea:focus{border-color:var(--brand)}
+.editor textarea[disabled]{background:#F7F9FB;color:var(--ink)}
+.meter{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.meter .bar{flex:1 1 140px;height:10px;border-radius:5px;background:var(--line);overflow:hidden;position:relative}
+.meter .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s,background .3s}
+.meter .bar.ok i{background:var(--ok)} .meter .bar.over i{background:var(--bad)}
+.meter .bar::after{content:"";position:absolute;left:60%;top:0;bottom:0;width:2px;background:rgba(14,34,51,.35)}
+.meter .n{font-weight:900;font-size:22px;min-width:44px;text-align:right}
+.meter .n.ok{color:var(--ok)} .meter .n.over{color:var(--bad)}
+.side{display:flex;flex-direction:column;gap:12px;overflow:auto;min-height:0}
+.side .card{padding:14px 16px}
+.chk{display:grid;gap:8px}
+.ck{display:flex;align-items:flex-start;gap:10px;border:2px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--paper);text-align:left;font-size:14px;line-height:1.4;transition:.15s;cursor:pointer}
+.ck .bx{flex:0 0 22px;width:22px;height:22px;border-radius:6px;border:2px solid var(--brand);display:grid;place-items:center;font-size:14px;color:#fff;margin-top:1px}
+.ck.on{border-color:var(--ok);background:#EAF7EF} .ck.on .bx{background:var(--ok);border-color:var(--ok)}
+.ck.on .bx::after{content:"✓"}
+.done{border:2px solid var(--ok);background:#EAF7EF;color:#1B5E3A;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.done[hidden]{display:none}
+.done .big{font-size:26px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+/* rubric */
+.rtabs{display:flex;gap:8px;flex-wrap:wrap}
+.rt{border:2px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px;transition:.15s}
+.rt:hover{border-color:var(--brand)}
+.rt.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.rt.seen:not(.on){border-color:var(--ok);color:var(--ok)}
+.rpane{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;flex:1;min-height:0;overflow:auto;align-content:start}
+.rpane[hidden]{display:none}
+.rpane>*{min-width:0}
+.lv{border-radius:14px;padding:14px 15px;border:2px solid var(--line);background:var(--paper);display:flex;flex-direction:column;gap:8px;animation:fadein .35s}
+.lv .h{display:flex;align-items:center;gap:10px;font-weight:900}
+.lv .sc{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:15px;flex:0 0 34px}
+.lv.l3{border-color:#2E8B57} .lv.l3 .sc{background:#2E8B57}
+.lv.l2{border-color:#4F8FD6} .lv.l2 .sc{background:#4F8FD6}
+.lv.l1{border-color:#DE9505} .lv.l1 .sc{background:#DE9505}
+.lv.l0{border-color:#C63B3B} .lv.l0 .sc{background:#C63B3B}
+.lv p{margin:0;font-size:14.5px;line-height:1.5}
+/* keywords */
+.kw{display:flex;flex-direction:column;gap:14px;max-height:100%}
+.kw .srcbox{flex:0 1 auto;min-height:0;overflow:auto}
+.srclist a{color:var(--brand);word-break:break-all}
+/* signature svg */
+@keyframes rain{0%{transform:translateY(-6px);opacity:0}30%{opacity:1}100%{transform:translateY(26px);opacity:0}}
+@keyframes wave{0%{transform:translateX(0)}100%{transform:translateX(-60px)}}
+@keyframes flash{0%,88%,100%{opacity:0}90%,94%{opacity:1}}
+@keyframes drift{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+@keyframes quake{0%,100%{transform:translate(0,0)}20%{transform:translate(-1.5px,0)}40%{transform:translate(1.5px,.5px)}60%{transform:translate(-1px,-.5px)}80%{transform:translate(1px,0)}}
+.sig .drop{animation:rain 1.4s linear infinite;transform-origin:center}
+.sig .w1{animation:wave 4s linear infinite}.sig .w2{animation:wave 6s linear infinite reverse}
+.sig .bolt{animation:flash 5s ease-in-out infinite}
+.sig .cloud{animation:drift 6s ease-in-out infinite}
+.sig .house{animation:quake 5s ease-in-out infinite}
+@media (max-width:860px){
+  .cover{grid-template-columns:minmax(0,1fr)}
+  .cover .art svg{width:min(100%,200px)}
+  .bp{grid-template-columns:minmax(0,1fr)}
+  .write{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto}
+  .editor textarea{min-height:200px}
+  .rpane{grid-template-columns:minmax(0,1fr)}
+  .part .tag{writing-mode:horizontal-tb;transform:none;border-radius:9px 0 0 9px;min-width:54px}
+}
+@media (max-width:860px){ #s3 .wrap,#s4 .wrap,#s5 .wrap{overflow:auto} #s3 .wrap>*,#s4 .wrap>*,#s5 .wrap>*{flex:0 0 auto} .sheet{overflow:visible} .side{overflow:visible} .rpane{overflow:visible} }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="ttl" lang="en">Surviving a Natural Disaster</div>
+    <div class="lbl" id="lbl">Εξώφυλλο</div>
+  </header>
+  <div class="prog"><i id="prog"></i></div>
+
+  <main class="screens" id="screens">
+
+
+    <!-- 1. ΕΞΩΦΥΛΛΟ -->
+    <section class="screen on" data-name="Εξώφυλλο">
+      <div class="wrap">
+        <div class="card pad cover">
+          <div>
+            <div class="eyebrow">ESSAY</div>
+            <h1 lang="en">Surviving a Natural Disaster</h1>
+            <p class="chips"><span class="chip">περιβάλλον</span><span class="chip">φυσικές καταστροφές</span><span class="chip">έκθεση</span><span class="chip">environment</span><span class="chip">natural disasters</span><span class="chip">essay</span></p>
+            <p style="margin-top:18px"><button class="btn" onclick="go(1)">Ξεκίνα →</button></p>
+          </div>
+          <div class="art"><svg class="sig" viewBox="0 0 320 300" aria-hidden="true">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1F5FA8"/><stop offset="1" stop-color="#8FB8E8"/></linearGradient>
+<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F7BD1"/><stop offset="1" stop-color="#0E3E7A"/></linearGradient>
+<clipPath id="cp"><circle cx="160" cy="150" r="140"/></clipPath></defs>
+<circle cx="160" cy="150" r="140" fill="url(#sky)"/>
+<g clip-path="url(#cp)">
+ <g class="house"><rect x="118" y="150" width="84" height="66" rx="4" fill="#F5E6C8"/><polygon points="110,152 160,112 210,152" fill="#C63B3B"/><rect x="150" y="178" width="20" height="38" fill="#7A4B2A"/><rect x="128" y="162" width="16" height="14" fill="#1F5FA8"/><rect x="176" y="162" width="16" height="14" fill="#1F5FA8"/></g>
+ <g class="w2" fill="url(#sea)" opacity=".85"><path d="M-40 232 q30 -18 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 v100 h-420z"/></g>
+ <g class="w1" fill="#0E3E7A"><path d="M-40 246 q30 -16 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 v100 h-420z"/></g>
+ <g class="cloud"><ellipse cx="96" cy="72" rx="46" ry="24" fill="#EAF2FC"/><ellipse cx="128" cy="60" rx="34" ry="26" fill="#F7FAFE"/><ellipse cx="70" cy="66" rx="28" ry="20" fill="#F7FAFE"/></g>
+ <g class="cloud" style="animation-delay:-3s"><ellipse cx="236" cy="92" rx="40" ry="20" fill="#DCE8F6"/><ellipse cx="258" cy="80" rx="28" ry="22" fill="#EEF4FB"/></g>
+ <polygon class="bolt" points="232,100 216,132 230,132 214,168 246,124 230,124 246,100" fill="#F0A63A"/>
+ <g stroke="#DCE8F6" stroke-width="3" stroke-linecap="round">
+  <line class="drop" x1="64" y1="96" x2="60" y2="108"/><line class="drop" style="animation-delay:.3s" x1="88" y1="100" x2="84" y2="112"/>
+  <line class="drop" style="animation-delay:.7s" x1="112" y1="96" x2="108" y2="108"/><line class="drop" style="animation-delay:1s" x1="136" y1="100" x2="132" y2="112"/>
+  <line class="drop" style="animation-delay:.5s" x1="76" y1="118" x2="72" y2="130"/><line class="drop" style="animation-delay:.9s" x1="124" y1="118" x2="120" y2="130"/>
+ </g>
+</g>
+<circle cx="160" cy="150" r="140" fill="none" stroke="#fff" stroke-width="6"/>
+</svg></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ARTICLE LINK -->
+    <section class="screen" data-name="Natural Disasters" id="s2">
+      <div class="wrap">
+        <div class="card pad grow stage">
+          <div class="eyebrow">1 / 3</div>
+          <p class="lead" lang="en">Read the article to find out more about natural disasters, in general. Then, click on one of the natural disasters to find out more information about it and specific advice to follow when this disaster strikes.</p>
+          <div class="linkcard">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg></div>
+            <div class="txt"><b lang="en">Natural Disasters</b><small lang="en">International Federation of Red Cross (IFRC)</small></div>
+            <a class="btn link" id="artlink" href="https://www.ifrc.org/our-work/disasters-climate-and-crises/what-disaster" target="_blank" rel="noopener" lang="en">Natural Disasters ↗</a>
+          </div>
+          <span class="visited" id="visited" hidden>✓ Άνοιξες το άρθρο</span>
+          <div style="margin-top:auto" class="actions"><button class="btn" onclick="go(2)">Μπροστά ›</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TASK -->
+    <section class="screen" data-name="Your article" id="s3">
+      <div class="wrap">
+        <div class="card pad grow stage">
+          <div class="eyebrow">2 / 3</div>
+          <p class="lead" style="font-size:16px" lang="en">After that, come back here and write an article of at least 150 words, expressing your opinion on the importance of being prepared in the case of the natural disaster that you read about. Use the text as inspiration but don’t forget to express your own opinion. <b>Your text should include:</b></p>
+          <div class="bp">
+            <div class="sheet" id="sheet" lang="en">
+              <button class="part" type="button"><span class="tag">TITLE</span><span class="body">an appropriate and catchy title (since it’s an article!)</span></button>
+              <button class="part" type="button"><span class="tag">INTRO</span><span class="body">an <i>introduction</i> of one or two sentences with general ideas on the topic,</span></button>
+              <button class="part" type="button"><span class="tag">BODY</span><span class="body">one paragraph with the importance of being prepared in the case of natural disasters (supported with convincing arguments and specific examples!),</span></button>
+              <button class="part" type="button"><span class="tag">END</span><span class="body">a <i>conclusion</i> of one or two sentences that sums up your arguments and restates your opinion on the topic.</span></button>
+              <span class="cnt" id="partcnt">Εξερεύνησες 0/4</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto">
+              <div class="callout" lang="en"><b>Remember to keep the style formal since you’re writing an article!</b> You can do that by using formal vocabulary and by avoiding short forms and informal phrases!</div>
+              <div>
+                <p lang="en" style="font-weight:700">Here is some useful vocabulary for you to use:</p>
+                <div class="vocab" id="vocab1" lang="en"><button class="vw" type="button" data-w="natural disaster">natural disaster</button><button class="vw" type="button" data-w="emergency supplies">emergency supplies</button><button class="vw" type="button" data-w="extreme weather">extreme weather</button><button class="vw" type="button" data-w="emergency shelter">emergency shelter</button><button class="vw" type="button" data-w="rescue team">rescue team</button><button class="vw" type="button" data-w="safety measures">safety measures</button><button class="vw" type="button" data-w="clean drinking water">clean drinking water</button><button class="vw" type="button" data-w="severe flooding">severe flooding</button><button class="vw" type="button" data-w="powerful earthquake">powerful earthquake</button><button class="vw" type="button" data-w="strong winds">strong winds</button><button class="vw" type="button" data-w="emergency services">emergency services</button><button class="vw" type="button" data-w="damaged buildings">damaged buildings</button><button class="vw" type="button" data-w="emergency plan">emergency plan</button><button class="vw" type="button" data-w="local authorities">local authorities</button><button class="vw" type="button" data-w="emergency warning">emergency warning</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WRITE -->
+    <section class="screen" data-name="Write" id="s4">
+      <div class="wrap">
+        <div class="card pad grow stage">
+          <div class="eyebrow">3 / 3</div>
+          <div class="write">
+            <div class="editor">
+              <textarea id="essay" lang="en" spellcheck="true" placeholder="Surviving a Natural Disaster"></textarea>
+              <div class="meter"><span class="n" id="wc">0</span><span class="cnt">λέξεις</span><div class="bar" id="bar"><i></i></div><span class="cnt">Ελάχιστο πλήθος λέξεων: 150 λέξεις, Μέγιστο πλήθος λέξεων: 250 λέξεις.</span></div>
+              <div class="actions">
+                <button class="btn" id="submit" disabled>Υποβολή</button>
+                <button class="btn ghost" id="edit" hidden>Επεξεργασία</button>
+                <button class="btn ghost sm" id="copy" hidden>Αντιγραφή κειμένου</button>
+                <span class="cnt" id="copied" hidden>✓ Αντιγράφηκε</span>
+              </div>
+              <div class="done" id="done" hidden><span class="big">✅</span><span><b>Υποβλήθηκε</b> — <span id="donewc"></span> λέξεις</span><button class="btn sm" onclick="go(4)">Ρουμπρίκα ›</button></div>
+            </div>
+            <div class="side">
+              <div class="card">
+                <h3 lang="en">Your text should include:</h3>
+                <div class="chk" lang="en">
+                  <button class="ck" type="button"><span class="bx"></span><span>an appropriate and catchy title (since it’s an article!)</span></button>
+                  <button class="ck" type="button"><span class="bx"></span><span>an <i>introduction</i> of one or two sentences with general ideas on the topic,</span></button>
+                  <button class="ck" type="button"><span class="bx"></span><span>one paragraph with the importance of being prepared in the case of natural disasters (supported with convincing arguments and specific examples!),</span></button>
+                  <button class="ck" type="button"><span class="bx"></span><span>a <i>conclusion</i> of one or two sentences that sums up your arguments and restates your opinion on the topic.</span></button>
+                </div>
+              </div>
+              <div class="card">
+                <h3 lang="en">Here is some useful vocabulary for you to use:</h3>
+                <div class="vocab" id="vocab2" lang="en"><button class="vw" type="button" data-w="natural disaster">natural disaster</button><button class="vw" type="button" data-w="emergency supplies">emergency supplies</button><button class="vw" type="button" data-w="extreme weather">extreme weather</button><button class="vw" type="button" data-w="emergency shelter">emergency shelter</button><button class="vw" type="button" data-w="rescue team">rescue team</button><button class="vw" type="button" data-w="safety measures">safety measures</button><button class="vw" type="button" data-w="clean drinking water">clean drinking water</button><button class="vw" type="button" data-w="severe flooding">severe flooding</button><button class="vw" type="button" data-w="powerful earthquake">powerful earthquake</button><button class="vw" type="button" data-w="strong winds">strong winds</button><button class="vw" type="button" data-w="emergency services">emergency services</button><button class="vw" type="button" data-w="damaged buildings">damaged buildings</button><button class="vw" type="button" data-w="emergency plan">emergency plan</button><button class="vw" type="button" data-w="local authorities">local authorities</button><button class="vw" type="button" data-w="emergency warning">emergency warning</button></div>
+                <p class="cnt" style="margin:8px 0 0" id="vcnt">Χρησιμοποίησες 0/15</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. RUBRIC -->
+    <section class="screen" data-name="Ρουμπρίκα" id="s5">
+      <div class="wrap">
+        <div class="card pad grow stage">
+          <div class="eyebrow" lang="en">CRITERION</div>
+          <div class="rtabs" id="rtabs" lang="en"><button class="rt on" type="button" data-r="0">Content &amp; Task Achievement</button><button class="rt" type="button" data-r="1">Organisation &amp; Cohesion</button><button class="rt" type="button" data-r="2">Language Use</button><button class="rt" type="button" data-r="3">Style &amp; Register</button></div>
+          <div class="rpane" data-r="0"><div class="lv l3"><div class="h"><span class="sc">3</span>Excellent (3)</div><p lang="en">Fully addresses the task with well-developed, relevant ideas and a clear purpose.</p></div><div class="lv l2"><div class="h"><span class="sc">2</span>Good (2)</div><p lang="en">Addresses the task with relevant ideas, though some points could be developed further.</p></div><div class="lv l1"><div class="h"><span class="sc">1</span>Developing (1)</div><p lang="en">Partially addresses the task; ideas are repetitive, underdeveloped, or occasionally irrelevant.</p></div><div class="lv l0"><div class="h"><span class="sc">0</span>Limited (0)</div><p lang="en">Does not adequately address the task or provides very limited relevant content.</p></div></div><div class="rpane" data-r="1" hidden><div class="lv l3"><div class="h"><span class="sc">3</span>Excellent (3)</div><p lang="en">Information is logically organised into clear paragraphs with effective sequencing and a wide range of cohesive devices used naturally.</p></div><div class="lv l2"><div class="h"><span class="sc">2</span>Good (2)</div><p lang="en">Generally well organised with appropriate paragraphing and linking devices.</p></div><div class="lv l1"><div class="h"><span class="sc">1</span>Developing (1)</div><p lang="en">Organisation is inconsistent; linking devices are limited or sometimes inaccurate.</p></div><div class="lv l0"><div class="h"><span class="sc">0</span>Limited (0)</div><p lang="en">Lacks clear organisation; ideas are disconnected and difficult to follow.</p></div></div><div class="rpane" data-r="2" hidden><div class="lv l3"><div class="h"><span class="sc">3</span>Excellent (3)</div><p lang="en">Demonstrates a wide range of sophisticated vocabulary and complex grammatical structures with a high degree of accuracy. Errors are rare and do not affect understanding.</p></div><div class="lv l2"><div class="h"><span class="sc">2</span>Good (2)</div><p lang="en">Uses a good range of vocabulary and grammatical structures with occasional errors that do not interfere with meaning.</p></div><div class="lv l1"><div class="h"><span class="sc">1</span>Developing (1)</div><p lang="en">Uses adequate but repetitive vocabulary and attempts some complex structures, though frequent errors reduce clarity.</p></div><div class="lv l0"><div class="h"><span class="sc">0</span>Limited (0)</div><p lang="en">Limited vocabulary and frequent grammatical errors significantly affect clarity and communication.</p></div></div><div class="rpane" data-r="3" hidden><div class="lv l3"><div class="h"><span class="sc">3</span>Excellent (3)</div><p lang="en">Consistently maintains an engaging, appropriate style and register for an article, effectively addressing the intended audience.</p></div><div class="lv l2"><div class="h"><span class="sc">2</span>Good (2)</div><p lang="en">Style and register are generally appropriate, with only minor inconsistencies.</p></div><div class="lv l1"><div class="h"><span class="sc">1</span>Developing (1)</div><p lang="en">Style or register is occasionally inappropriate or inconsistent for the genre.</p></div><div class="lv l0"><div class="h"><span class="sc">0</span>Limited (0)</div><p lang="en">Style and register are inappropriate for the task and audience.</p></div></div>
+          <div class="actions" style="margin-top:auto"><button class="btn ghost sm" id="rprev">‹ Προηγούμενο κριτήριο</button><button class="btn sm" id="rnext">Επόμενο κριτήριο ›</button><span class="cnt" id="rcnt">Εξερεύνησες 1/4</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. KEYWORDS & SOURCES -->
+    <section class="screen" data-name="Λέξεις-κλειδιά &amp; Πηγές">
+      <div class="wrap">
+        <div class="card pad grow kw">
+          <div>
+            <div class="eyebrow">ΛΕΞΕΙΣ-ΚΛΕΙΔΙΑ</div>
+            <p class="chips"><span class="chip">περιβάλλον</span><span class="chip">φυσικές καταστροφές</span><span class="chip">έκθεση</span><span class="chip">environment</span><span class="chip">natural disasters</span><span class="chip">essay</span></p>
+          </div>
+          <div class="srcbox">
+            <div class="eyebrow">ΠΗΓΕΣ</div>
+            <ul class="srclist" style="columns:1">
+              <li lang="en">Natural Disasters — <a href="https://www.ifrc.org/our-work/disasters-climate-and-crises/what-disaster" target="_blank" rel="noopener">https://www.ifrc.org/our-work/disasters-climate-and-crises/what-disaster</a> (International Federation of Red Cross (IFRC))</li>
+              <li>International Federation of Red Cross (χ.χ.). <i>What is a disaster?</i>. Ανακτήθηκε από <a href="https://www.ifrc.org/our-work/disasters-climate-and-crises/what-disaster" target="_blank" rel="noopener">https://www.ifrc.org/our-work/disasters-climate-and-crises/what-disaster</a></li>
+            </ul>
+          </div>
+          <div class="actions" style="margin-top:auto"><button class="btn ghost" onclick="resetLesson();go(0)">↺ Επανάληψη</button></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="btn ghost sm" id="prev" onclick="go(cur-1)">‹ Πίσω</button>
+    <div class="dots" id="dots"></div>
+    <button class="btn sm" id="next" onclick="go(cur+1)">Μπροστά ›</button>
+  </nav>
+</div>
+
+<!-- lightbox -->
+<div class="lbx" id="lbx" aria-modal="true" role="dialog">
+  <button class="x" id="lbxX" aria-label="Κλείσιμο">✕</button>
+  <div class="box"><img id="lbxImg" alt=""><div class="cap" id="lbxCap"></div></div>
+</div>
+
+<script>
+/* ===== navigation ===== */
+var screens=[].slice.call(document.querySelectorAll('.screen')),cur=0;
+var dots=document.getElementById('dots');
+screens.forEach(function(s,i){var b=document.createElement('button');b.title=s.dataset.name||('Οθόνη '+(i+1));b.setAttribute('aria-label',b.title);b.onclick=function(){go(i)};dots.appendChild(b)});
+function go(n){
+  if(n<0||n>=screens.length)return;
+  screens[cur].classList.remove('on');cur=n;screens[cur].classList.add('on');screens[cur].scrollTop=0;
+  [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===cur);d.classList.toggle('done',i<cur)});
+  document.getElementById('lbl').textContent=screens[cur].dataset.name||'';
+  document.getElementById('prog').style.width=((cur+1)/screens.length*100)+'%';
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===screens.length-1;
+  document.querySelectorAll('.zi.on').forEach(function(z){z.classList.remove('on')});
+  if(window.onScreen)onScreen(cur);
+}
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('lbx').classList.contains('on')){if(e.key==='Escape')closeLbx();return}
+  var t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
+  if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);
+});
+go(0);
+
+/* ===== images: tooltip side + lightbox ===== */
+function side(z){var r=z.getBoundingClientRect();z.classList.toggle('below',r.top<130&&!z.classList.contains('inset'))}
+var lbx=document.getElementById('lbx'),lbxImg=document.getElementById('lbxImg'),lbxCap=document.getElementById('lbxCap');
+function openLbx(z){var im=z.querySelector('img');lbxImg.src=im.src;lbxImg.alt=im.alt;lbxCap.textContent=z.dataset.alt||im.alt||'';
+  document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});lbx.classList.add('on')}
+function closeLbx(){lbx.classList.remove('on');lbxImg.src=''}
+document.getElementById('lbxX').onclick=closeLbx;
+lbx.addEventListener('click',function(e){if(e.target===lbx||e.target.classList.contains('box'))closeLbx()});
+document.addEventListener('click',function(e){var z=e.target.closest('.zi');if(!z)return;if(e.target.closest('.hs'))return;openLbx(z)});
+document.addEventListener('mouseover',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('focusin',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('zi'))openLbx(e.target)});
+/* touch: first tap shows alt, second opens */
+document.addEventListener('touchstart',function(e){var z=e.target.closest('.zi');if(!z)return;
+  if(!z.classList.contains('on')){e.preventDefault();document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});z.classList.add('on');side(z)}},{passive:false});
+
+/* ===== helpers ===== */
+function ring(el,n,total){var c=2*Math.PI*60;var v=el.querySelector('.v');var pc=total?n/total:0;v.style.strokeDasharray=(c*pc)+' '+c;v.style.opacity=pc?1:0;el.querySelector('text').textContent=n+'/'+total}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ===== lesson logic ===== */
+(function(){
+  var MIN=150,MAX=250;
+  /* article link visited */
+  document.getElementById('artlink').addEventListener('click',function(){document.getElementById('visited').hidden=false});
+  /* blueprint parts */
+  var parts=[].slice.call(document.querySelectorAll('#sheet .part'));
+  parts.forEach(function(p){p.addEventListener('click',function(){p.classList.add('seen');
+    document.getElementById('partcnt').textContent='Εξερεύνησες '+parts.filter(function(x){return x.classList.contains('seen')}).length+'/4'})});
+  /* essay */
+  var ta=document.getElementById('essay'),wc=document.getElementById('wc'),bar=document.getElementById('bar'),sub=document.getElementById('submit'),
+      edit=document.getElementById('edit'),cp=document.getElementById('copy'),copied=document.getElementById('copied'),done=document.getElementById('done');
+  var v2=[].slice.call(document.querySelectorAll('#vocab2 .vw')),v1=[].slice.call(document.querySelectorAll('#vocab1 .vw'));
+  function words(t){return (t.match(/[A-Za-zÀ-ɏͰ-Ͽ0-9][A-Za-zÀ-ɏͰ-Ͽ0-9'’\-]*/g)||[]).length}
+  function norm(s){return s.toLowerCase().replace(/\s+/g,' ')}
+  function update(){
+    var n=words(ta.value);wc.textContent=n;
+    var pc=Math.min(100,n/MAX*100);bar.firstElementChild.style.width=pc+'%';
+    var st=n>MAX?'over':(n>=MIN?'ok':'');
+    bar.className='bar '+st;wc.className='n '+st;
+    sub.disabled=!(n>=MIN&&n<=MAX);
+    var t=norm(ta.value),u=0;
+    v2.forEach(function(b,i){var on=t.indexOf(b.dataset.w)>=0;b.classList.toggle('used',on);v1[i].classList.toggle('used',on);if(on)u++});
+    document.getElementById('vcnt').textContent='Χρησιμοποίησες '+u+'/15';
+  }
+  ta.addEventListener('input',update);
+  v2.forEach(function(b){b.addEventListener('click',function(){if(ta.disabled)return;
+    var s=ta.selectionStart||ta.value.length,e=ta.selectionEnd||s,before=ta.value.slice(0,s),after=ta.value.slice(e);
+    var ins=(before&&!/\s$/.test(before)?' ':'')+b.dataset.w+(after&&!/^\s/.test(after)?' ':'');
+    ta.value=before+ins+after;ta.focus({preventScroll:true});ta.selectionStart=ta.selectionEnd=(before+ins).length;update()})});
+  v1.forEach(function(b){b.addEventListener('click',function(){b.classList.add('used')})});
+  sub.addEventListener('click',function(){
+    if(sub.disabled)return;ta.disabled=true;sub.hidden=true;edit.hidden=false;cp.hidden=false;
+    document.getElementById('donewc').textContent=words(ta.value);done.hidden=false;
+  });
+  edit.addEventListener('click',function(){ta.disabled=false;sub.hidden=false;edit.hidden=true;cp.hidden=true;copied.hidden=true;done.hidden=true;ta.focus({preventScroll:true});update()});
+  cp.addEventListener('click',function(){
+    function ok(){copied.hidden=false;setTimeout(function(){copied.hidden=true},2000)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(ok,function(){fallback()})}else fallback();
+    function fallback(){ta.disabled=false;ta.select();try{document.execCommand('copy');ok()}catch(e){}ta.disabled=true;window.getSelection&&window.getSelection().removeAllRanges()}
+  });
+  /* checklist */
+  [].forEach.call(document.querySelectorAll('.ck'),function(c){c.addEventListener('click',function(){c.classList.toggle('on')})});
+  /* rubric */
+  var tabs=[].slice.call(document.querySelectorAll('#rtabs .rt')),panes=[].slice.call(document.querySelectorAll('.rpane')),rcur=0;
+  function showR(i){rcur=i;tabs.forEach(function(t,k){t.classList.toggle('on',k===i);if(k===i)t.classList.add('seen')});
+    panes.forEach(function(p,k){p.hidden=k!==i});
+    document.getElementById('rprev').disabled=i===0;document.getElementById('rnext').disabled=i===tabs.length-1;
+    document.getElementById('rcnt').textContent='Εξερεύνησες '+tabs.filter(function(t){return t.classList.contains('seen')}).length+'/4'}
+  tabs.forEach(function(t,i){t.addEventListener('click',function(){showR(i)})});
+  document.getElementById('rprev').addEventListener('click',function(){showR(Math.max(0,rcur-1))});
+  document.getElementById('rnext').addEventListener('click',function(){showR(Math.min(tabs.length-1,rcur+1))});
+  showR(0);
+  /* reset on replay */
+  window.resetLesson=function(){ta.disabled=false;ta.value='';sub.hidden=false;edit.hidden=true;cp.hidden=true;copied.hidden=true;done.hidden=true;update();
+    parts.forEach(function(p){p.classList.remove('seen')});document.getElementById('partcnt').textContent='Εξερεύνησες 0/4';
+    [].forEach.call(document.querySelectorAll('.ck.on'),function(c){c.classList.remove('on')});v1.forEach(function(b){b.classList.remove('used')});
+    tabs.forEach(function(t){t.classList.remove('seen')});showR(0);document.getElementById('visited').hidden=true};
+  update();
+})();
+</script>
+<script>var ASSETS={};document.querySelectorAll("img[data-key]").forEach(function(i){i.src=ASSETS[i.dataset.key]});</script>
+</body>
+</html>

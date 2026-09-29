@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Υπολογίζω και αξιολογώ το δείκτη μάζας σώματος</title>
+  <style>
+    /* ============ Design tokens ============ */
+    :root {
+      color-scheme: light;
+      --bg: #eef0f6;
+      --surface: #ffffff;
+      --surface-2: #f6f7fb;
+      --text: #1f2937;
+      --muted: #5b6473;
+      --faint: #9199a8;
+      --border: #e3e6ee;
+      --brand: #4f46e5;
+      --brand-2: #7c3aed;
+      --brand-ink: #3730a3;
+      --brand-soft: #eef2ff;
+      --brand-soft-2: #e0e7ff;
+
+      --blue-bg: #dbeafe;  --blue-fg: #1e40af;  --blue-soft: #eff6ff;  --blue-solid: #60a5fa;
+      --green-bg: #dcfce7; --green-fg: #166534; --green-soft: #f0fdf4; --green-solid: #4ade80;
+      --yellow-bg: #fef9c3;--yellow-fg: #854d0e;--yellow-soft: #fefce8;--yellow-solid: #facc15;
+      --red-bg: #fee2e2;   --red-fg: #991b1b;   --red-soft: #fef2f2;   --red-solid: #f87171;
+
+      --warn-bg: #fef3c7; --warn-br: #fcd34d;
+
+      --band-op: 0.30;
+      --grid: rgba(31,41,55,0.08);
+
+      --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 20px;
+      --sh-1: 0 1px 2px rgba(16,24,40,0.05), 0 1px 3px rgba(16,24,40,0.06);
+      --sh-2: 0 4px 12px -2px rgba(16,24,40,0.08), 0 2px 6px -2px rgba(16,24,40,0.06);
+      --sh-3: 0 18px 40px -12px rgba(16,24,40,0.22);
+      --ring: 0 0 0 3px rgba(79,70,229,0.35);
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0d0f16;
+      --surface: #161a24;
+      --surface-2: #1c2130;
+      --text: #e6e9f0;
+      --muted: #a3abbb;
+      --faint: #737d90;
+      --border: #29303f;
+      --brand: #818cf8;
+      --brand-2: #a78bfa;
+      --brand-ink: #c7d2fe;
+      --brand-soft: #1d2136;
+      --brand-soft-2: #262c46;
+
+      --blue-bg: #1b3358;  --blue-fg: #93c5fd;  --blue-soft: #16243c;
+      --green-bg: #14402a; --green-fg: #86efac; --green-soft: #102d1f;
+      --yellow-bg: #453515;--yellow-fg: #fde047;--yellow-soft: #2e2510;
+      --red-bg: #4a1d1f;   --red-fg: #fca5a5;   --red-soft: #331516;
+
+      --warn-bg: #3b2f10; --warn-br: #6b5316;
+
+      --band-op: 0.24;
+      --grid: rgba(230,233,240,0.09);
+      --sh-1: 0 1px 2px rgba(0,0,0,0.4);
+      --sh-2: 0 6px 16px -4px rgba(0,0,0,0.55);
+      --sh-3: 0 20px 44px -14px rgba(0,0,0,0.7);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color .3s var(--ease), color .3s var(--ease);
+    }
+
+    ::selection { background: var(--brand-soft-2); color: var(--brand-ink); }
+
+    :focus-visible {
+      outline: none;
+      box-shadow: var(--ring);
+      border-radius: var(--r-sm);
+    }
+
+    /* ============ Layout ============ */
+    .container { display: flex; min-height: 100vh; }
+
+    /* ============ Sidebar ============ */
+    .sidebar {
+      width: 300px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 20;
+    }
+    .sidebar-header {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #fff;
+      padding: 26px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sidebar-header::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(255,255,255,0.22), transparent 65%);
+      pointer-events: none;
+    }
+    .sidebar-header h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      position: relative;
+      padding-left: 44px;
+    }
+    .brand-mark {
+      position: absolute;
+      left: 0; top: 2px;
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.28);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem;
+    }
+
+    /* progress rail under header */
+    .progress-rail {
+      height: 4px;
+      background: var(--brand-soft-2);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      transition: width .45s var(--ease);
+    }
+
+    .nav-list { list-style: none; flex: 1; padding: 10px; overflow-y: auto; }
+    .nav-item { margin-bottom: 4px; }
+    .nav-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 12px;
+      width: 100%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      font: inherit;
+      font-size: 0.95rem;
+      border-radius: var(--r-md);
+      color: var(--text);
+      transition: background-color .18s var(--ease), transform .18s var(--ease);
+    }
+    .nav-btn::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 3px; height: 0;
+      border-radius: 0 3px 3px 0;
+      background: var(--brand);
+      transition: height .25s var(--ease);
+    }
+    .nav-btn:hover { background: var(--surface-2); }
+    .nav-item.active .nav-btn { background: var(--brand-soft); }
+    .nav-item.active .nav-btn::before { height: 60%; }
+    .nav-icon {
+      width: 40px; height: 40px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+      transition: background-color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .nav-item.active .nav-icon {
+      background: var(--brand-soft-2);
+      border-color: transparent;
+      transform: scale(1.04);
+    }
+    .nav-title { font-weight: 600; color: var(--text); line-height: 1.3; }
+    .nav-item.active .nav-title { color: var(--brand); }
+    .nav-subtitle { font-size: 0.78rem; color: var(--faint); line-height: 1.3; }
+    .nav-check {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: var(--green-fg);
+      opacity: 0;
+      transform: scale(.6);
+      transition: all .25s var(--ease);
+    }
+    .nav-item.visited .nav-check { opacity: 1; transform: scale(1); }
+
+    .sidebar-footer {
+      padding: 14px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--faint);
+    }
+    .theme-toggle {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform .2s var(--ease), background-color .2s var(--ease);
+    }
+    .theme-toggle:hover { transform: rotate(-18deg) scale(1.08); background: var(--brand-soft); }
+
+    /* ============ Main ============ */
+    .main-content { flex: 1; padding: 36px 32px 56px; min-width: 0; }
+    .content-wrapper { max-width: 920px; margin: 0 auto; }
+
+    /* ============ Cards ============ */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh-1);
+      padding: 30px 32px;
+      margin-bottom: 22px;
+      transition: box-shadow .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+    }
+    .card:hover { box-shadow: var(--sh-2); }
+
+    .section.active > *, .section.active .examples-grid, .section.active .zones-grid {
+      animation: rise .5s var(--ease) backwards;
+    }
+    .section.active > *:nth-child(1) { animation-delay: .02s; }
+    .section.active > *:nth-child(2) { animation-delay: .08s; }
+    .section.active > *:nth-child(3) { animation-delay: .14s; }
+    .section.active > *:nth-child(4) { animation-delay: .20s; }
+    .section.active > *:nth-child(5) { animation-delay: .26s; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============ Typography ============ */
+    h2 {
+      font-size: 1.55rem;
+      color: var(--text);
+      margin-bottom: 14px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    h2::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -1px;
+      width: 56px; height: 3px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+    }
+    h3 { font-size: 1.2rem; color: var(--text); margin-bottom: 12px; font-weight: 650; letter-spacing: -0.01em; }
+    p { margin-bottom: 12px; color: var(--muted); }
+    p:last-child { margin-bottom: 0; }
+    strong { color: var(--text); font-weight: 650; }
+    .note { text-align: center; font-size: 0.85rem; color: var(--faint); margin-top: 14px; }
+    .bullets { margin: 14px 0 14px 22px; list-style: disc; color: var(--muted); }
+    .bullets li { margin-bottom: 6px; }
+    .bullets li::marker { color: var(--brand); }
+
+    /* ============ Info / Warning ============ */
+    .info-box {
+      background: var(--brand-soft);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--brand);
+      padding: 20px 22px;
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+      margin: 18px 0 0;
+    }
+    .info-box h4 {
+      color: var(--brand-ink);
+      font-weight: 650;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.02rem;
+    }
+    .info-box p { color: var(--muted); }
+    .info-box .bullets { margin-top: 8px; }
+
+    .warning-box {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-br);
+      padding: 18px 20px;
+      border-radius: var(--r-md);
+      margin: 22px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      box-shadow: var(--sh-1);
+    }
+    .warning-icon { font-size: 1.4rem; line-height: 1.4; }
+    .warning-box p { color: var(--text); opacity: .9; }
+
+    /* ============ Formula ============ */
+    .formula-box {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #fff;
+      padding: 34px 28px;
+      border-radius: var(--r-lg);
+      text-align: center;
+      margin: 22px 0 0;
+      box-shadow: var(--sh-3);
+      position: relative;
+      overflow: hidden;
+    }
+    .formula-box::before {
+      content: "";
+      position: absolute;
+      inset: -60% -20% auto auto;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .formula-main {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+      position: relative;
+    }
+    .formula-example {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 12px 24px;
+      border-radius: 999px;
+      display: inline-block;
+      position: relative;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ============ Example cards ============ */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+    .example-card {
+      padding: 24px;
+      border-radius: var(--r-lg);
+      color: #fff;
+      box-shadow: var(--sh-2);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .example-card:hover { transform: translateY(-3px); box-shadow: var(--sh-3); }
+    .example-card.blue { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+    .example-card.green { background: linear-gradient(135deg, #10b981, #14b8a6); }
+    .example-card h4 { font-size: 1.08rem; margin-bottom: 10px; font-weight: 650; }
+    .example-card > p { color: rgba(255,255,255,0.92); }
+    .example-calc {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 16px;
+      border-radius: var(--r-md);
+      margin-top: 14px;
+    }
+    .example-calc p { color: rgba(255,255,255,0.9); margin-bottom: 8px; font-size: 0.92rem; }
+    .example-result { font-size: 1.2rem; font-weight: 700; color: #fff !important; margin-bottom: 0 !important; }
+
+    /* ============ Steps ============ */
+    .steps-list { margin: 18px 0 0; counter-reset: step; }
+    .step-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border-radius: var(--r-md);
+      transition: background-color .2s var(--ease);
+    }
+    .step-item:hover { background: var(--surface-2); }
+    .step-number {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px -2px rgba(79,70,229,0.6);
+    }
+    .step-text { padding-top: 3px; color: var(--muted); }
+
+    /* ============ BMI bars ============ */
+    .bmi-chart { display: flex; flex-direction: column; gap: 12px; margin-top: 6px; }
+    .bmi-bar { display: flex; align-items: center; gap: 16px; }
+    .bmi-label { width: 120px; font-weight: 550; text-align: right; flex-shrink: 0; font-size: 0.92rem; }
+    .bmi-track {
+      flex: 1;
+      height: 34px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      min-width: 0;
+    }
+    .bmi-fill {
+      height: 100%;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+      color: #10233f;
+      font-weight: 700;
+      font-size: 0.85rem;
+      width: 0;
+      transition: width .9s var(--ease);
+    }
+    .bmi-fill.blue { background: linear-gradient(90deg, #93c5fd, var(--blue-solid)); --w: 46%; }
+    .bmi-fill.green { background: linear-gradient(90deg, #86efac, var(--green-solid)); --w: 62%; color: #08301c; }
+    .bmi-fill.yellow { background: linear-gradient(90deg, #fde68a, var(--yellow-solid)); --w: 75%; color: #43300a; }
+    .bmi-fill.red { background: linear-gradient(90deg, #fca5a5, var(--red-solid)); --w: 100%; color: #4a1010; }
+    .section.active .bmi-fill { width: var(--w); }
+
+    /* ============ Zones ============ */
+    .zones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; margin-bottom: 22px; }
+    .zone-card {
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh-1);
+      background: var(--surface);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .zone-card:hover { transform: translateY(-2px); box-shadow: var(--sh-2); }
+    .zone-header {
+      padding: 15px 20px;
+      font-weight: 650;
+      font-size: 1.06rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .zone-header.blue { background: var(--blue-bg); color: var(--blue-fg); }
+    .zone-header.green { background: var(--green-bg); color: var(--green-fg); }
+    .zone-header.yellow { background: var(--yellow-bg); color: var(--yellow-fg); }
+    .zone-header.red { background: var(--red-bg); color: var(--red-fg); }
+    .zone-body { padding: 20px; background: var(--surface); }
+    .zone-risk {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: var(--r-sm);
+      font-size: 0.88rem;
+      font-weight: 550;
+      line-height: 1.5;
+    }
+    .zone-risk.blue { background: var(--blue-soft); color: var(--blue-fg); }
+    .zone-risk.green { background: var(--green-soft); color: var(--green-fg); }
+    .zone-risk.yellow { background: var(--yellow-soft); color: var(--yellow-fg); }
+    .zone-risk.red { background: var(--red-soft); color: var(--red-fg); }
+
+    /* ============ Result display ============ */
+    .result-display {
+      padding: 24px;
+      border-radius: var(--r-lg);
+      margin-bottom: 22px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: background-color .35s var(--ease);
+    }
+    .result-display.blue { background: var(--blue-bg); }
+    .result-display.green { background: var(--green-bg); }
+    .result-display.yellow { background: var(--yellow-bg); }
+    .result-display.red { background: var(--red-bg); }
+    .result-display #resultInfo { color: var(--text); opacity: .8; font-size: 0.95rem; }
+    .result-category {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 6px;
+      letter-spacing: -0.02em;
+      transition: color .35s var(--ease);
+    }
+    .result-category.blue { color: var(--blue-fg); }
+    .result-category.green { color: var(--green-fg); }
+    .result-category.yellow { color: var(--yellow-fg); }
+    .result-category.red { color: var(--red-fg); }
+    .result-thresholds {
+      font-size: 0.82rem;
+      color: var(--text);
+      opacity: .65;
+      margin-top: 12px;
+      line-height: 1.7;
+    }
+
+    /* ============ Sliders ============ */
+    .sliders-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px 36px;
+      margin-top: 26px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .slider-group label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .slider-label { display: flex; align-items: center; gap: 10px; font-weight: 550; font-size: 0.95rem; }
+    .slider-icon {
+      width: 36px; height: 36px;
+      background: var(--brand-soft);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .slider-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--brand);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .slider-value.pink { color: #db2777; }
+    [data-theme="dark"] .slider-value.pink { color: #f472b6; }
+
+    input[type="range"] {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--brand);
+      border: 3px solid var(--surface);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(79,70,229,0.45);
+      transition: transform .15s var(--ease);
+    }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    input[type="range"]::-moz-range-thumb {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--brand);
+      border: 3px solid var(--surface);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(79,70,229,0.45);
+    }
+    input[type="range"].pink::-webkit-slider-thumb { background: #db2777; box-shadow: 0 2px 8px rgba(219,39,119,0.45); }
+    input[type="range"].pink::-moz-range-thumb { background: #db2777; box-shadow: 0 2px 8px rgba(219,39,119,0.45); }
+    input[type="range"]:focus-visible { box-shadow: var(--ring); }
+    .slider-range {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--faint);
+      margin-top: 10px;
+    }
+
+    /* ============ Charts ============ */
+    .chart-shell {
+      position: relative;
+      height: 330px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .chart-shell svg { display: block; width: 100%; height: 100%; }
+    .chart-shell text { font-family: inherit; }
+    .chart-point-halo { animation: pulse 2.4s ease-in-out infinite; transform-origin: center; }
+    @keyframes pulse {
+      0%, 100% { opacity: .28; r: 12; }
+      50% { opacity: .08; r: 20; }
+    }
+
+    /* ============ Bottom nav ============ */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 36px;
+      padding-top: 26px;
+      border-top: 1px solid var(--border);
+    }
+    .nav-btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: var(--r-md);
+      font: inherit;
+      font-weight: 650;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: all .2s var(--ease);
+      border: none;
+    }
+    .nav-btn-prev {
+      background: var(--surface);
+      color: var(--brand);
+      border: 1px solid var(--brand-soft-2);
+    }
+    .nav-btn-prev:hover:not(:disabled) { background: var(--brand-soft); transform: translateX(-2px); }
+    .nav-btn-next {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #fff;
+      box-shadow: 0 6px 16px -4px rgba(79,70,229,0.55);
+    }
+    .nav-btn-next:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 22px -6px rgba(79,70,229,0.6); }
+    .nav-btn-main:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none; }
+
+    /* ============ Sections ============ */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ============ Responsive ============ */
+    @media (max-width: 900px) {
+      .container { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: sticky;
+        top: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--sh-1);
+      }
+      .sidebar-header { padding: 16px 18px; }
+      .sidebar-header h1 { font-size: 1rem; padding-left: 40px; }
+      .brand-mark { width: 30px; height: 30px; top: 0; }
+      .nav-list {
+        display: flex;
+        gap: 6px;
+        padding: 8px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+      .nav-list::-webkit-scrollbar { height: 0; }
+      .nav-item { margin-bottom: 0; flex: 0 0 auto; scroll-snap-align: center; }
+      .nav-btn { flex-direction: column; gap: 6px; padding: 10px 14px; text-align: center; min-width: 92px; }
+      .nav-btn::before { display: none; }
+      .nav-item.active .nav-btn { box-shadow: inset 0 -3px 0 var(--brand); }
+      .nav-icon { width: 34px; height: 34px; font-size: 1rem; }
+      .nav-subtitle { font-size: 0.72rem; }
+      .nav-check { position: absolute; top: 6px; right: 8px; margin: 0; }
+      .sidebar-footer { padding: 8px 14px; }
+      .main-content { padding: 20px 16px 40px; }
+      .card { padding: 22px 18px; border-radius: var(--r-md); }
+      h2 { font-size: 1.3rem; }
+      .formula-main { font-size: 1.25rem; }
+      .bmi-bar { gap: 10px; }
+      .bmi-label { width: 96px; font-size: 0.85rem; }
+      .zones-grid { grid-template-columns: 1fr; }
+      .chart-shell { height: 280px; }
+      .nav-btn-main { padding: 12px 18px; font-size: 0.9rem; }
+      .result-category { font-size: 1.6rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ============ Print ============ */
+    @media print {
+      .sidebar, .nav-buttons, .progress-rail { display: none !important; }
+      .section { display: block !important; page-break-after: always; }
+      .card { box-shadow: none; border: 1px solid #ddd; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar" aria-label="Ενότητες">
+      <div class="sidebar-header">
+        <h1><span class="brand-mark" aria-hidden="true">⚖️</span>Υπολογίζω και αξιολογώ το δείκτη μάζας σώματος</h1>
+      </div>
+      <div class="progress-rail" role="presentation"><div class="progress-fill" id="progressFill"></div></div>
+      <ul class="nav-list">
+        <li class="nav-item active" data-section="0">
+          <button class="nav-btn" type="button" aria-current="step">
+            <span class="nav-icon" aria-hidden="true">📖</span>
+            <span>
+              <span class="nav-title">Ενότητα 1</span>
+              <span class="nav-subtitle" style="display:block">Εισαγωγή</span>
+            </span>
+            <span class="nav-check" aria-hidden="true">✓</span>
+          </button>
+        </li>
+        <li class="nav-item" data-section="1">
+          <button class="nav-btn" type="button">
+            <span class="nav-icon" aria-hidden="true">🧮</span>
+            <span>
+              <span class="nav-title">Ενότητα 2</span>
+              <span class="nav-subtitle" style="display:block">Υπολογισμός</span>
+            </span>
+            <span class="nav-check" aria-hidden="true">✓</span>
+          </button>
+        </li>
+        <li class="nav-item" data-section="2">
+          <button class="nav-btn" type="button">
+            <span class="nav-icon" aria-hidden="true">📈</span>
+            <span>
+              <span class="nav-title">Ενότητα 3</span>
+              <span class="nav-subtitle" style="display:block">Καμπύλες</span>
+            </span>
+            <span class="nav-check" aria-hidden="true">✓</span>
+          </button>
+        </li>
+        <li class="nav-item" data-section="3">
+          <button class="nav-btn" type="button">
+            <span class="nav-icon" aria-hidden="true">⚠️</span>
+            <span>
+              <span class="nav-title">Ενότητα 4</span>
+              <span class="nav-subtitle" style="display:block">Κίνδυνοι</span>
+            </span>
+            <span class="nav-check" aria-hidden="true">✓</span>
+          </button>
+        </li>
+        <li class="nav-item" data-section="4">
+          <button class="nav-btn" type="button">
+            <span class="nav-icon" aria-hidden="true">🎛️</span>
+            <span>
+              <span class="nav-title">Ενότητα 5</span>
+              <span class="nav-subtitle" style="display:block">Διαδραστικό</span>
+            </span>
+            <span class="nav-check" aria-hidden="true">✓</span>
+          </button>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <span>© 2024 Εκπαίδευση ΔΜΣ</span>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Εναλλαγή θέματος" title="Εναλλαγή θέματος">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+      <div class="content-wrapper">
+
+        <!-- Section 1: Introduction -->
+        <div class="section active" id="section-0">
+          <div class="card">
+            <h2>Ενότητα 1. Εισαγωγή στον Υπολογισμό του Δείκτη Μάζας Σώματος (ΔΜΣ)</h2>
+            <p>Αυτή η ενότητα έχει ως στόχο να εισαγάγει τον χρήστη στην έννοια του Δείκτη Μάζας Σώματος και στον μαθηματικό τύπο υπολογισμού του, συνοδευόμενη από ένα παραδειγματικό σενάριο.</p>
+
+            <div class="info-box">
+              <h4>ℹ️ Τι είναι ο ΔΜΣ;</h4>
+              <p>Ο Δείκτης Μάζας Σώματος (ΔΜΣ) αποτελεί ένα ευρέως χρησιμοποιούμενο μέτρο για την αξιολόγηση του σωματικού βάρους σε σχέση με το ύψος ενός ατόμου. Παρότι για τους ενήλικες ο ΔΜΣ έχει σταθερά όρια αξιολόγησης, στην περίπτωση των παιδιών και των εφήβων (ηλικίας 2 έως 20 ετών) η αξιολόγηση διαφέρει και εξαρτάται από το φύλο και την ηλικία. Αυτό συμβαίνει επειδή το σωματικό λίπος μεταβάλλεται δραστικά κατά την ανάπτυξη.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Ο Μαθηματικός Τύπος</h3>
+            <p>Ο ΔΜΣ υπολογίζεται διαιρώντας το βάρος του ατόμου (σε κιλά) με το τετράγωνο του ύψους του (σε μέτρα).</p>
+
+            <div class="formula-box">
+              <div class="formula-main">ΔΜΣ = Βάρος (kg) / Ύψος² (m²)</div>
+              <div class="formula-example">
+                Παράδειγμα: 65 kg / (1.70 m)² = 65 / 2.89 ≈ <strong>22.5</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Κατηγορίες ΔΜΣ για Ενήλικες</h3>
+            <div class="bmi-chart">
+              <div class="bmi-bar">
+                <div class="bmi-label">Ελλιποβαρές</div>
+                <div class="bmi-track"><div class="bmi-fill blue">&lt; 18.5</div></div>
+              </div>
+              <div class="bmi-bar">
+                <div class="bmi-label">Φυσιολογικό</div>
+                <div class="bmi-track"><div class="bmi-fill green">18.5 - 24.9</div></div>
+              </div>
+              <div class="bmi-bar">
+                <div class="bmi-label">Υπέρβαρος</div>
+                <div class="bmi-track"><div class="bmi-fill yellow">25 - 29.9</div></div>
+              </div>
+              <div class="bmi-bar">
+                <div class="bmi-label">Παχύσαρκος</div>
+                <div class="bmi-track"><div class="bmi-fill red">&gt; 30</div></div>
+              </div>
+            </div>
+            <p class="note">
+              Σημείωση: Τα όρια αυτά ισχύουν για ενήλικες. Για παιδιά και εφήβους χρησιμοποιούνται καμπύλες ανά ηλικία.
+            </p>
+          </div>
+
+          <div class="nav-buttons">
+            <button class="nav-btn-main nav-btn-prev" type="button" disabled>← Προηγούμενο</button>
+            <button class="nav-btn-main nav-btn-next" type="button" onclick="goToSection(1)">Επόμενο →</button>
+          </div>
+        </div>
+
+        <!-- Section 2: Calculation -->
+        <div class="section" id="section-1">
+          <div class="card">
+            <h2>Ενότητα 2 – Πώς υπολογίζω τον ΔΜΣ μου; (βήμα-βήμα)</h2>
+            <p>Για να υπολογίσουμε τον ΔΜΣ χρειαζόμαστε δύο μετρήσεις:</p>
+            <ul class="bullets">
+              <li>βάρος σε κιλά (kg)</li>
+              <li>ύψος σε μέτρα (m)</li>
+            </ul>
+
+            <p><strong>Ακολουθούμε τρία βήματα:</strong></p>
+            <div class="steps-list">
+              <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-text">Μετράμε το ύψος μας και το μετατρέπουμε σε μέτρα με δύο δεκαδικά ψηφία (π.χ. 1,62 m).</div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-text">Μετράμε το βάρος μας σε κιλά.</div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-text">Υπολογίζουμε το τετράγωνο του ύψους (ύψος × ύψος) και διαιρούμε το βάρος με αυτόν τον αριθμό.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="examples-grid">
+            <div class="example-card blue">
+              <h4>📘 Παράδειγμα 1</h4>
+              <p>Μαθητής Α: ύψος 1,50 m, βάρος 42 kg.</p>
+              <div class="example-calc">
+                <p>Τετράγωνο ύψους: 1,50 × 1,50 = 2,25</p>
+                <p class="example-result">ΔΜΣ: 42 ÷ 2,25 = 18,7</p>
+              </div>
+            </div>
+            <div class="example-card green">
+              <h4>📗 Παράδειγμα 2</h4>
+              <p>Μαθήτρια Β: ύψος 1,60 m, βάρος 64 kg.</p>
+              <div class="example-calc">
+                <p>Τετράγωνο ύψους: 1,60 × 1,60 = 2,56</p>
+                <p class="example-result">ΔΜΣ: 64 ÷ 2,56 = 25,0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <div class="warning-icon" aria-hidden="true">⚠️</div>
+            <p>Οι δύο αυτοί αριθμοί (18,7 και 25,0) δεν ερμηνεύονται με τα όρια των ενηλίκων, επειδή πρόκειται για μαθητές. Τους συγκρίνουμε με τις καμπύλες ΔΜΣ ανά ηλικία και φύλο, για να δούμε σε ποια ζώνη βρίσκονται.</p>
+          </div>
+
+          <div class="nav-buttons">
+            <button class="nav-btn-main nav-btn-prev" type="button" onclick="goToSection(0)">← Προηγούμενο</button>
+            <button class="nav-btn-main nav-btn-next" type="button" onclick="goToSection(2)">Επόμενο →</button>
+          </div>
+        </div>
+
+        <!-- Section 3: Growth Curves -->
+        <div class="section" id="section-2">
+          <div class="card">
+            <h2>Ενότητα 3 – ΔΜΣ, ηλικία και φύλο – Πίνακες και καμπύλες</h2>
+            <p>Στα παιδιά και στους εφήβους ο ΔΜΣ εξαρτάται από την ηλικία και το φύλο. Ένα αγόρι και ένα κορίτσι με τον ίδιο ΔΜΣ μπορεί να ανήκουν σε διαφορετική κατηγορία, επειδή αναπτύσσονται με διαφορετικό ρυθμό.</p>
+            <p>Γι' αυτό χρησιμοποιούμε ειδικούς πίνακες και καμπύλες «ΔΜΣ-για-την-ηλικία» για αγόρια και κορίτσια, οι οποίοι βασίζονται σε μεγάλους πληθυσμούς παιδιών.</p>
+
+            <div class="info-box">
+              <h4>📊 Εκατοστιαίες θέσεις</h4>
+              <p>Σε αυτούς τους πίνακες κάθε καμπύλη αντιστοιχεί σε ένα ποσοστό (π.χ. 5η, 50ή, 85η, 95η εκατοστιαία θέση):</p>
+              <ul class="bullets">
+                <li><strong>Πάνω από 95η:</strong> Παχύσαρκος</li>
+                <li><strong>85η - 95η:</strong> Υπέρβαρος</li>
+                <li><strong>5η - 85η:</strong> Φυσιολογικό βάρος</li>
+                <li><strong>Κάτω από 5η:</strong> Ελλιποβαρής</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Καμπύλες ΔΜΣ-για-την-ηλικία (Ενδεικτικό Διάγραμμα)</h3>
+            <div class="chart-shell" id="staticChart"><svg role="img" aria-label="Καμπύλες ΔΜΣ-για-την-ηλικία"></svg></div>
+            <p class="note">
+              Σημείωση: Το διάγραμμα είναι ενδεικτικό. Για ακριβείς μετρήσεις συμβουλευτείτε επίσημες καμπύλες ανάπτυξης.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Πώς διαβάζουμε τις καμπύλες</h3>
+            <div class="steps-list">
+              <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-text">Εντοπίζουμε στον οριζόντιο άξονα την ηλικία (σε έτη).</div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-text">Στον κάθετο άξονα, εντοπίζουμε την τιμή του ΔΜΣ.</div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-text">Βρίσκουμε το σημείο όπου τέμνονται η ηλικία και ο ΔΜΣ.</div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-text">Βλέπουμε ανάμεσα σε ποιες καμπύλες ή σε ποια χρωματισμένη ζώνη βρίσκεται το σημείο.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-buttons">
+            <button class="nav-btn-main nav-btn-prev" type="button" onclick="goToSection(1)">← Προηγούμενο</button>
+            <button class="nav-btn-main nav-btn-next" type="button" onclick="goToSection(3)">Επόμενο →</button>
+          </div>
+        </div>
+
+        <!-- Section 4: Health Risks -->
+        <div class="section" id="section-3">
+          <div class="card">
+            <h2>Ενότητα 4 – Ζώνες ΔΜΣ και κίνδυνοι για την υγεία</h2>
+            <p>Οι ζώνες ΔΜΣ μας βοηθούν να καταλάβουμε σε ποιο εύρος βάρους βρισκόμαστε σε σχέση με το ύψος, την ηλικία και το φύλο.</p>
+          </div>
+
+          <div class="zones-grid">
+            <div class="zone-card">
+              <div class="zone-header blue">💙 Ελλιποβαρής</div>
+              <div class="zone-body">
+                <p>Ο ΔΜΣ είναι πολύ χαμηλός σε σχέση με την ηλικία. Αυτό μπορεί να σημαίνει ότι το παιδί δεν παίρνει αρκετή ενέργεια και θρεπτικά συστατικά από τη διατροφή του. Υπάρχει κίνδυνος για αδυναμία, κόπωση, δυσκολία συγκέντρωσης στο σχολείο, προβλήματα στην ανάπτυξη και στο ανοσοποιητικό.</p>
+                <div class="zone-risk blue">⚠️ Πιθανός κίνδυνος για ανεπαρκή ανάπτυξη, αδυναμία, συχνές λοιμώξεις</div>
+              </div>
+            </div>
+
+            <div class="zone-card">
+              <div class="zone-header green">💚 Φυσιολογικό βάρος</div>
+              <div class="zone-body">
+                <p>Ο ΔΜΣ βρίσκεται στη «πράσινη» ζώνη. Το βάρος είναι συμβατό με το ύψος και την ηλικία και συνήθως συνδέεται με μικρότερο κίνδυνο εμφάνισης χρόνιων νοσημάτων, όταν συνοδεύεται από ισορροπημένη διατροφή και σωματική δραστηριότητα.</p>
+                <div class="zone-risk green">✓ Συνδέεται με μικρότερο κίνδυνο εμφάνισης χρόνιων νοσημάτων</div>
+              </div>
+            </div>
+
+            <div class="zone-card">
+              <div class="zone-header yellow">💛 Υπέρβαρος</div>
+              <div class="zone-body">
+                <p>Ο ΔΜΣ βρίσκεται σε αυξημένη ζώνη. Αν το παιδί παραμείνει για μεγάλο διάστημα σε αυτή τη ζώνη, αυξάνεται ο κίνδυνος να εξελιχθεί σε παχυσαρκία και να εμφανίσει προβλήματα όπως αυξημένη αρτηριακή πίεση, διαταραγμένα λιπίδια αίματος, αυξημένο κίνδυνο για σακχαρώδη διαβήτη τύπου 2.</p>
+                <div class="zone-risk yellow">⚠️ Αυξημένος κίνδυνος για μελλοντική παχυσαρκία και μεταβολικές διαταραχές</div>
+              </div>
+            </div>
+
+            <div class="zone-card">
+              <div class="zone-header red">❤️ Παχύσαρκος</div>
+              <div class="zone-body">
+                <p>Ο ΔΜΣ είναι πολύ υψηλός (πάνω από την 95η εκατοστιαία θέση για παιδιά/εφήβους). Η παχυσαρκία συνδέεται με σημαντικά αυξημένο κίνδυνο για σακχαρώδη διαβήτη τύπου 2, καρδιαγγειακά νοσήματα, ορθοπεδικά προβλήματα, διαταραχές ύπνου και ψυχολογικές δυσκολίες.</p>
+                <div class="zone-risk red">⚠️ Σημαντικά αυξημένος κίνδυνος για διαβήτη, καρδιαγγειακά και άλλα προβλήματα</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-buttons">
+            <button class="nav-btn-main nav-btn-prev" type="button" onclick="goToSection(2)">← Προηγούμενο</button>
+            <button class="nav-btn-main nav-btn-next" type="button" onclick="goToSection(4)">Επόμενο →</button>
+          </div>
+        </div>
+
+        <!-- Section 5: Interactive -->
+        <div class="section" id="section-4">
+          <div class="card">
+            <h2>Ενότητα 5 – Διαδραστικός υπολογιστής ΔΜΣ</h2>
+            <p>Χρησιμοποιήστε τους παρακάτω ρυθμιστές για να εξερευνήσετε πώς μεταβάλλεται η κατηγορία ΔΜΣ ανάλογα με την ηλικία.</p>
+            <ul class="bullets">
+              <li>Σύρετε τον ρυθμιστή ηλικίας για να δείτε πώς αλλάζουν τα όρια.</li>
+              <li>Σύρετε τον ρυθμιστή ΔΜΣ για να δείτε σε ποια ζώνη ανήκει κάποιος.</li>
+              <li>Παρατηρήστε πώς το ίδιο ΔΜΣ μπορεί να ανήκει σε διαφορετική κατηγορία σε διαφορετικές ηλικίες.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="result-display green" id="resultDisplay" aria-live="polite">
+              <div id="resultInfo">Για ηλικία <strong id="resultAge">10</strong> ετών με ΔΜΣ <strong id="resultBMI">20</strong></div>
+              <div class="result-category green" id="resultCategory">Φυσιολογικό βάρος</div>
+              <div class="result-thresholds" id="resultThresholds">
+                Όρια για αυτή την ηλικία: Ελλιποβαρής &lt;15.8 | Φυσιολογικό 15.8-22.0 | Υπέρβαρος 22.0-25.7 | Παχυσαρκία &gt;25.7
+              </div>
+            </div>
+
+            <div class="chart-shell" id="interactiveChart"><svg role="img" aria-label="Διαδραστικό διάγραμμα ΔΜΣ ανά ηλικία"></svg></div>
+
+            <div class="sliders-grid">
+              <div class="slider-group">
+                <label for="ageSlider">
+                  <span class="slider-label">
+                    <span class="slider-icon" aria-hidden="true">📅</span>
+                    Ηλικία
+                  </span>
+                  <span class="slider-value" id="ageValue">10 ετών</span>
+                </label>
+                <input type="range" id="ageSlider" min="2" max="20" value="10" step="1">
+                <div class="slider-range">
+                  <span>2 έτη</span>
+                  <span>20 έτη</span>
+                </div>
+              </div>
+
+              <div class="slider-group">
+                <label for="bmiSlider">
+                  <span class="slider-label">
+                    <span class="slider-icon" aria-hidden="true">⚖️</span>
+                    Δείκτης Μάζας Σώματος
+                  </span>
+                  <span class="slider-value pink" id="bmiValue">20</span>
+                </label>
+                <input type="range" class="pink" id="bmiSlider" min="10" max="35" value="20" step="0.5">
+                <div class="slider-range">
+                  <span>10</span>
+                  <span>35</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-buttons">
+            <button class="nav-btn-main nav-btn-prev" type="button" onclick="goToSection(3)">← Προηγούμενο</button>
+            <button class="nav-btn-main nav-btn-next" type="button" disabled>Επόμενο →</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ---------- Theme ---------- */
+    var themeToggle = document.getElementById('themeToggle');
+    var stored = null;
+    try { stored = localStorage.getItem('bmi-theme'); } catch (e) {}
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(stored || (prefersDark ? 'dark' : 'light'));
+
+    function setTheme(mode) {
+      document.documentElement.setAttribute('data-theme', mode);
+      themeToggle.textContent = mode === 'dark' ? '☀️' : '🌙';
+      try { localStorage.setItem('bmi-theme', mode); } catch (e) {}
+      renderAll();
+    }
+    themeToggle.addEventListener('click', function () {
+      setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    /* ---------- Navigation ---------- */
+    var TOTAL = 5;
+    var current = 0;
+    var navItems = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+
+    window.goToSection = function (index) {
+      if (index < 0 || index >= TOTAL || index === current) return;
+
+      document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
+      navItems.forEach(function (n) {
+        n.classList.remove('active');
+        n.querySelector('.nav-btn').removeAttribute('aria-current');
+      });
+
+      document.getElementById('section-' + index).classList.add('active');
+      var item = navItems[index];
+      item.classList.add('active');
+      item.classList.add('visited');
+      item.querySelector('.nav-btn').setAttribute('aria-current', 'step');
+      if (item.scrollIntoView) item.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+
+      current = index;
+      document.getElementById('progressFill').style.width = ((index + 1) / TOTAL * 100) + '%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (index === 2 || index === 4) renderAll();
+    };
+
+    navItems.forEach(function (item) {
+      item.querySelector('.nav-btn').addEventListener('click', function () {
+        window.goToSection(parseInt(item.dataset.section, 10));
+      });
+    });
+    navItems[0].classList.add('visited');
+
+    document.addEventListener('keydown', function (e) {
+      var tag = (e.target.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+      if (e.key === 'ArrowRight') window.goToSection(current + 1);
+      if (e.key === 'ArrowLeft') window.goToSection(current - 1);
+    });
+
+    /* ---------- BMI model ---------- */
+    var AGE_MIN = 2, AGE_MAX = 20, BMI_MIN = 10, BMI_MAX = 35;
+    var r1 = function (n) { return Math.round(n * 10) / 10; };
+
+    function getThresholds(age) {
+      return {
+        p5: r1(14 + age * 0.1),
+        p85: r1(17 + age * 0.35),
+        p95: r1(18.5 + age * 0.45)
+      };
+    }
+    function getCategory(bmi, age) {
+      var t = getThresholds(age);
+      if (bmi < t.p5) return { name: 'Ελλιποβαρής', color: 'blue' };
+      if (bmi < t.p85) return { name: 'Φυσιολογικό βάρος', color: 'green' };
+      if (bmi < t.p95) return { name: 'Υπέρβαρος', color: 'yellow' };
+      return { name: 'Παχύσαρκος', color: 'red' };
+    }
+
+    /* ---------- Chart engine ---------- */
+    var PAD = { top: 16, right: 16, bottom: 34, left: 46 };
+    var X_TICKS = [2, 5, 8, 11, 14, 17, 20];
+    var Y_TICKS = [10, 15, 20, 25, 30, 35];
+
+    function cssVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+    function esc(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function buildChart(host, opts) {
+      var svg = host.querySelector('svg');
+      var W = host.clientWidth, H = host.clientHeight;
+      if (!W || !H) return;
+
+      var plotW = W - PAD.left - PAD.right;
+      var plotH = H - PAD.top - PAD.bottom;
+      var isNarrow = W < 520;
+
+      var X = function (a) { return PAD.left + (a - AGE_MIN) / (AGE_MAX - AGE_MIN) * plotW; };
+      var Y = function (b) { return PAD.top + (1 - (b - BMI_MIN) / (BMI_MAX - BMI_MIN)) * plotH; };
+
+      var ages = [];
+      for (var a = AGE_MIN; a <= AGE_MAX + 0.001; a += 0.5) ages.push(Math.min(a, AGE_MAX));
+
+      function bandPath(lower, upper) {
+        var d = 'M' + X(ages[0]) + ',' + Y(lower(ages[0]));
+        ages.forEach(function (ag) { d += ' L' + X(ag) + ',' + Y(lower(ag)); });
+        for (var i = ages.length - 1; i >= 0; i--) d += ' L' + X(ages[i]) + ',' + Y(upper(ages[i]));
+        return d + ' Z';
+      }
+      function linePath(fn) {
+        return ages.map(function (ag, i) { return (i ? 'L' : 'M') + X(ag) + ',' + Y(fn(ag)); }).join(' ');
+      }
+
+      var p5 = function (ag) { return getThresholds(ag).p5; };
+      var p85 = function (ag) { return getThresholds(ag).p85; };
+      var p95 = function (ag) { return getThresholds(ag).p95; };
+      var floor = function () { return BMI_MIN; };
+      var ceil = function () { return BMI_MAX; };
+
+      var bands = [
+        { d: bandPath(p95, ceil), fill: cssVar('--red-solid') },
+        { d: bandPath(p85, p95), fill: cssVar('--yellow-solid') },
+        { d: bandPath(p5, p85), fill: cssVar('--green-solid') },
+        { d: bandPath(floor, p5), fill: cssVar('--blue-solid') }
+      ];
+
+      var op = cssVar('--band-op') || '0.3';
+      var grid = cssVar('--grid');
+      var muted = cssVar('--muted');
+      var faint = cssVar('--faint');
+      var s = '';
+
+      s += '<defs><clipPath id="plotClip-' + host.id + '"><rect x="' + PAD.left + '" y="' + PAD.top +
+           '" width="' + plotW + '" height="' + plotH + '"/></clipPath></defs>';
+
+      s += '<g clip-path="url(#plotClip-' + host.id + ')">';
+      bands.forEach(function (b) {
+        s += '<path d="' + b.d + '" fill="' + b.fill + '" fill-opacity="' + op + '"/>';
+      });
+
+      // grid
+      Y_TICKS.forEach(function (t) {
+        s += '<line x1="' + PAD.left + '" x2="' + (PAD.left + plotW) + '" y1="' + Y(t) + '" y2="' + Y(t) +
+             '" stroke="' + grid + '" stroke-width="1"/>';
+      });
+      X_TICKS.forEach(function (t) {
+        s += '<line y1="' + PAD.top + '" y2="' + (PAD.top + plotH) + '" x1="' + X(t) + '" x2="' + X(t) +
+             '" stroke="' + grid + '" stroke-width="1"/>';
+      });
+
+      // percentile curves
+      [[p5, cssVar('--blue-fg')], [p85, cssVar('--yellow-fg')], [p95, cssVar('--red-fg')]].forEach(function (c) {
+        s += '<path d="' + linePath(c[0]) + '" fill="none" stroke="' + c[1] +
+             '" stroke-width="2" stroke-opacity="0.75" stroke-dasharray="5 4" stroke-linecap="round"/>';
+      });
+
+      // band labels
+      if (opts.bandLabels) {
+        var labelAge = isNarrow ? 12 : 19.4;
+        var anchor = isNarrow ? 'middle' : 'end';
+        var lx = X(labelAge);
+        var rows = [
+          { txt: opts.bandLabels[0], mid: (p95(labelAge) + BMI_MAX) / 2, col: cssVar('--red-fg') },
+          { txt: opts.bandLabels[1], mid: (p85(labelAge) + p95(labelAge)) / 2, col: cssVar('--yellow-fg') },
+          { txt: opts.bandLabels[2], mid: (p5(labelAge) + p85(labelAge)) / 2, col: cssVar('--green-fg') },
+          { txt: opts.bandLabels[3], mid: (BMI_MIN + p5(labelAge)) / 2, col: cssVar('--blue-fg') }
+        ];
+        rows.forEach(function (r) {
+          s += '<text x="' + lx + '" y="' + (Y(r.mid) + 4) + '" text-anchor="' + anchor +
+               '" font-size="11.5" font-weight="600" fill="' + r.col + '">' + esc(r.txt) + '</text>';
+        });
+      }
+      s += '</g>';
+
+      // axes frame
+      s += '<rect x="' + PAD.left + '" y="' + PAD.top + '" width="' + plotW + '" height="' + plotH +
+           '" fill="none" stroke="' + grid + '" stroke-width="1" rx="6"/>';
+
+      // ticks
+      Y_TICKS.forEach(function (t) {
+        s += '<text x="' + (PAD.left - 8) + '" y="' + (Y(t) + 4) + '" text-anchor="end" font-size="10.5" fill="' + faint + '">' + t + '</text>';
+      });
+      X_TICKS.forEach(function (t) {
+        s += '<text x="' + X(t) + '" y="' + (PAD.top + plotH + 16) + '" text-anchor="middle" font-size="10.5" fill="' + faint + '">' + t + '</text>';
+      });
+
+      // axis titles
+      s += '<text transform="translate(13,' + (PAD.top + plotH / 2) + ') rotate(-90)" text-anchor="middle" font-size="11" fill="' + muted + '">ΔΜΣ (kg/m²)</text>';
+      s += '<text x="' + (PAD.left + plotW / 2) + '" y="' + (H - 4) + '" text-anchor="middle" font-size="11" fill="' + muted + '">Ηλικία (έτη)</text>';
+
+      // interactive marker
+      if (opts.point) {
+        var px = X(opts.point.age), py = Y(opts.point.bmi);
+        var pc = cssVar('--brand');
+        s += '<g clip-path="url(#plotClip-' + host.id + ')">';
+        s += '<line x1="' + px + '" x2="' + px + '" y1="' + PAD.top + '" y2="' + (PAD.top + plotH) +
+             '" stroke="' + pc + '" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="4 4"/>';
+        s += '<line y1="' + py + '" y2="' + py + '" x1="' + PAD.left + '" x2="' + (PAD.left + plotW) +
+             '" stroke="' + pc + '" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="4 4"/>';
+        s += '<circle class="chart-point-halo" cx="' + px + '" cy="' + py + '" r="12" fill="' + pc + '" opacity="0.28"/>';
+        s += '<circle cx="' + px + '" cy="' + py + '" r="7" fill="' + pc + '" stroke="' + cssVar('--surface') + '" stroke-width="3"/>';
+        s += '</g>';
+      }
+
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svg.innerHTML = s;
+    }
+
+    /* ---------- Interactive controls ---------- */
+    var ageSlider = document.getElementById('ageSlider');
+    var bmiSlider = document.getElementById('bmiSlider');
+
+    function paintTrack(el, accent) {
+      var min = parseFloat(el.min), max = parseFloat(el.max);
+      var pct = (parseFloat(el.value) - min) / (max - min) * 100;
+      el.style.background = 'linear-gradient(90deg, ' + accent + ' 0%, ' + accent + ' ' + pct + '%, ' +
+                            cssVar('--surface-2') + ' ' + pct + '%, ' + cssVar('--surface-2') + ' 100%)';
+    }
+
+    function updateDisplay() {
+      var age = parseInt(ageSlider.value, 10);
+      var bmi = parseFloat(bmiSlider.value);
+      var t = getThresholds(age);
+      var cat = getCategory(bmi, age);
+
+      document.getElementById('ageValue').textContent = age + ' ετών';
+      document.getElementById('bmiValue').textContent = bmi;
+      document.getElementById('resultAge').textContent = age;
+      document.getElementById('resultBMI').textContent = bmi;
+      document.getElementById('resultCategory').textContent = cat.name;
+      document.getElementById('resultThresholds').textContent =
+        'Όρια για αυτή την ηλικία: Ελλιποβαρής <' + t.p5 + ' | Φυσιολογικό ' + t.p5 + '-' + t.p85 +
+        ' | Υπέρβαρος ' + t.p85 + '-' + t.p95 + ' | Παχυσαρκία >' + t.p95;
+
+      document.getElementById('resultDisplay').className = 'result-display ' + cat.color;
+      document.getElementById('resultCategory').className = 'result-category ' + cat.color;
+
+      paintTrack(ageSlider, cssVar('--brand'));
+      paintTrack(bmiSlider, document.documentElement.getAttribute('data-theme') === 'dark' ? '#f472b6' : '#db2777');
+
+      buildChart(document.getElementById('interactiveChart'), {
+        bandLabels: ['Παχυσαρκία', 'Υπέρβαρος', 'Φυσιολογικό', 'Ελλιποβαρές'],
+        point: { age: age, bmi: bmi }
+      });
+    }
+
+    function renderAll() {
+      if (!ageSlider || !bmiSlider) return;
+      buildChart(document.getElementById('staticChart'), {
+        bandLabels: ['Παχυσαρκία (>95η)', 'Υπέρβαρος (85η-95η)', 'Φυσιολογικό (5η-85η)', 'Ελλιποβαρές (<5η)']
+      });
+      updateDisplay();
+    }
+
+    ageSlider.addEventListener('input', updateDisplay);
+    bmiSlider.addEventListener('input', updateDisplay);
+
+    var raf;
+    window.addEventListener('resize', function () {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(renderAll);
+    });
+
+    renderAll();
+  })();
+  </script>
+</body>
+</html>

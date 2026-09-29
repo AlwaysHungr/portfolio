@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 2: Καθημερινά Εργαλεία — Artifacts, Αρχεία &amp; Ανάλυση | Claude AI</title>
+<meta name="description" content="Διαδραστικό μάθημα σε μορφή διαφανειών: Artifacts, εργασία με αρχεία (PDF, Word, Excel, εικόνες), Web Search &amp; Research Mode, δημιουργία εγγράφων Office, Code Execution και πρακτικές εφαρμογές καθημερινότητας.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/v2.css">
+</head>
+<body data-course="en2">
+
+<div class="app">
+
+  <!-- ===================== ΠΛΕΥΡΙΚΟ ΜΕΝΟΥ ===================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Περιεχόμενα μαθήματος">
+    <div class="sidebar-header">
+      <div class="brand">
+        <img class="brand-mark" src="assets/images/logo.webp" alt="" aria-hidden="true" width="38" height="38">
+        <span class="brand-text"><strong>Claude AI</strong> Ενότητα 2 · Καθημερινά Εργαλεία</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <p class="nav-group-label">Περιεχόμενα</p>
+      <ul id="navList" style="list-style:none; margin:0; padding:0;"></ul>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="overall"><span>Πρόοδος</span><span id="overallLabel">0 / 0</span></div>
+      <button type="button" class="btn btn-secondary btn-sm" id="resetProgress" style="width:100%;">Επαναφορά προόδου</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- ===================== ΚΥΡΙΑ ΠΕΡΙΟΧΗ ===================== -->
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="icon-btn" id="sidebarToggle" aria-label="Άνοιγμα/κλείσιμο μενού">☰</button>
+      <span class="topbar-title" id="topbarTitle">Ενότητα 2</span>
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Σκούρο θέμα" aria-pressed="false">🌙</button>
+      <div class="topbar-progress" aria-hidden="true">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressLabel">0%</span>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ============ ΔΙΑΦΑΝΕΙΑ 0 — ΑΡΧΙΚΗ ΟΘΟΝΗ ============ -->
+      <section class="chapter no-autonav" data-title="Αρχική οθόνη ενότητας">
+        <div class="hero">
+          <span class="hero-badge">Ενότητα 2</span>
+          <h1>Καθημερινά Εργαλεία — Artifacts, Αρχεία &amp; Ανάλυση</h1>
+          <p class="lead">Σε αυτή την ενότητα, θα εξοικειωθείτε με τα εργαλεία εκείνα που καθιστούν το Claude κάτι πολύ περισσότερο από έναν απλό ψηφιακό βοηθό. Στο τέλος της ενότητας, θα είστε σε θέση να παράγετε αληθινά παραδοτέα, όπως έγγραφα, αναλύσεις και συνόψεις. Με αυτόν τον τρόπο, θα μπορείτε να αντικαταστήσετε πολλά μικρά εργαλεία της καθημερινότητάς σας με ένα μόνο μέσο. Έτσι, θα αναβαθμίσετε ουσιαστικά την αποδοτικότητα της ροής εργασίας σας.</p>
+          <div class="objectives">
+            <h3>Μαθησιακοί στόχοι</h3>
+            <ul>
+              <li>Να κατανοήσετε τι είναι τα Artifacts, πότε εμφανίζονται και πώς τα διαχειρίζεστε και τα επεξεργάζεστε.</li>
+              <li>Να αναλύετε αρχεία PDF, Word, Excel/CSV και εικόνες, και να συγκρίνετε πολλαπλά αρχεία μεταξύ τους.</li>
+              <li>Να επιλέγετε σωστά ανάμεσα σε Web Search και Research Mode και να αξιολογείτε κριτικά πηγές και αποτελέσματα.</li>
+              <li>Να δημιουργείτε έτοιμα αρχεία Office (Word, Excel, PowerPoint, PDF) απευθείας από το Claude.</li>
+              <li>Να αξιοποιείτε το Code Execution &amp; File Creation για καθαρισμό δεδομένων, υπολογισμούς και γραφήματα — χωρίς γνώσεις προγραμματισμού.</li>
+              <li>Να εφαρμόζετε το Claude σε 5 ρεαλιστικά σενάρια καθημερινότητας: email, συνόψεις, μεταφράσεις, brainstorming και παρουσιάσεις.</li>
+            </ul>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1;">
+            <button type="button" class="btn btn-primary" data-nav="1">Έναρξη μαθήματος →</button>
+            <button type="button" class="btn btn-secondary" id="resumeBtn" hidden>Συνέχεια από το τελευταίο σημείο</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ΥΠΟΕΝΟΤΗΤΑ 2.1 — ARTIFACTS
+           ============================================================ -->
+
+      <section class="chapter" data-title="Τι είναι τα Artifacts &amp; τι δημιουργείτε" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1</span>
+        <h1>Artifacts — τι είναι και πότε εμφανίζονται</h1>
+        <p>Τα Artifacts στο Claude δεν είναι απλώς ένα ακόμη εργαλείο. Είναι η δυνατότητα που έχετε να δημιουργείτε και να προβάλλετε <strong>αυτόνομο περιεχόμενο</strong> απευθείας μέσα στη συνομιλία σας, σε ένα ειδικό «παράθυρο» που ανοίγει δίπλα στο chat. Φανταστείτε το σαν έναν προσωπικό χώρο εργασίας, όπου το περιεχόμενο αποκτά τη δική του ανεξάρτητη υπόσταση.</p>
+        <h2>Τι μπορείτε να δημιουργήσετε</h2>
+        <p>Οι δυνατότητες είναι ουσιαστικά απεριόριστες, ανάλογα με τις ανάγκες σας. Μπορείτε να διαχειριστείτε:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">💻</div>
+            <h3>Κώδικα και Εφαρμογές</h3>
+            <p>Από διαδραστικές εφαρμογές HTML, CSS και JavaScript, μέχρι πολύπλοκα React components, υπολογιστικά εργαλεία, ακόμα και ολοκληρωμένα dashboards.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📄</div>
+            <h3>Έγγραφα</h3>
+            <p>Μεγάλα κείμενα, ολοκληρωμένα άρθρα ή επαγγελματικές αναφορές που χρειάζονται καθαρή δομή και μορφοποίηση Markdown.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🎨</div>
+            <h3>Οπτικά στοιχεία</h3>
+            <p>Σχεδιαστικά γραφικά SVG ή διαγράμματα ροής, που αποσαφηνίζουν σύνθετες έννοιες με μια ματιά.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πότε δημιουργείται &amp; γιατί να τα χρησιμοποιείτε" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1</span>
+        <h1>Πότε επιλέγει το Claude να δημιουργήσει ένα Artifact</h1>
+        <p>Το Claude διαθέτει έναν δικό του μηχανισμό «κρίσης» για το πότε μια πληροφορία πρέπει να απομονωθεί. Θα δείτε ένα Artifact να εμφανίζεται όταν το περιεχόμενο πληροί ορισμένες προϋποθέσεις:</p>
+        <div class="flip-grid">
+          <div class="flip-card" tabindex="0" role="button" aria-label="Αυτόνομο περιεχόμενο — πατήστε για λεπτομέρειες">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">🧩 Αυτόνομο<span class="flip-hint">Πατήστε για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back">Είναι <strong>αυτόνομο</strong> και δεν χρειάζεται το υπόλοιπο της συνομιλίας για να βγάλει νόημα.</div>
+            </div>
+          </div>
+          <div class="flip-card" tabindex="0" role="button" aria-label="Σημαντικός όγκος — πατήστε για λεπτομέρειες">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">📦 Σημαντικός όγκος<span class="flip-hint">Πατήστε για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back">Έχει <strong>σημαντικό όγκο</strong>, υπερβαίνοντας για παράδειγμα τις 20 γραμμές κώδικα ή τους 1.500 χαρακτήρες.</div>
+            </div>
+          </div>
+          <div class="flip-card" tabindex="0" role="button" aria-label="Πιθανό παραδοτέο — πατήστε για λεπτομέρειες">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">💾 Πιθανό παραδοτέο<span class="flip-hint">Πατήστε για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back">Αποτελεί ένα <strong>αρχείο</strong> που πιθανότατα θα θέλατε να αποθηκεύσετε ή να αξιοποιήσετε σε κάποιο άλλο project σας.</div>
+            </div>
+          </div>
+        </div>
+        <h2>Γιατί να τα χρησιμοποιείτε</h2>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">⚡</div>
+            <p>Τα πλεονεκτήματα στην καθημερινή σας εργασία είναι άμεσα και απτά. Αρχικά, η δυνατότητα <strong>επεξεργασίας σε πραγματικό χρόνο</strong> σάς επιτρέπει να βλέπετε τις αλλαγές σας να συμβαίνουν μπροστά στα μάτια σας. Επιπλέον, τα διαδραστικά artifacts εκτελούνται απευθείας μέσα στον browser σας, εξοικονομώντας σας πολύτιμο χρόνο.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📥</div>
+            <p>Το σημαντικότερο, βέβαια, είναι ότι τα αρχεία αυτά <strong>παραμένουν ξεχωριστά από τη ροή της συνομιλίας</strong>. Μπορείτε να τα κατεβάσετε ανά πάσα στιγμή, έχοντας πάντα στα χέρια σας ένα καθαρό και έτοιμο προς χρήση παραδοτέο, χωρίς να ψάχνετε σε χιλιάδες μηνύματα για να βρείτε εκείνη τη μία γραμμή κώδικα που χρειαζόσασταν.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Βίντεο: Δημιουργία εφαρμογών με Artifacts" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1 · Βίντεο</span>
+        <h1>Βίντεο: Δημιουργία εφαρμογών με Claude Artifacts</h1>
+        <div class="video-block">
+          <span class="video-kicker">▶ Βίντεο μαθήματος</span>
+          <h3>Δημιουργία εφαρμογών με Claude Artifacts</h3>
+          <p>Δείτε στην πράξη πώς το Claude δημιουργεί ένα αυτόνομο Artifact μέσα στη συνομιλία και πώς μια απλή οδηγία μετατρέπεται σε λειτουργική εφαρμογή.</p>
+          <p><strong>Τι να προσέξετε:</strong> πότε «αποφασίζει» το Claude να ανοίξει το ξεχωριστό παράθυρο του Artifact και πώς το περιεχόμενο παραμένει ανεξάρτητο από τη ροή της συνομιλίας.</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/1204519665?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="Δημιουργία εφαρμογών με Claude Artifacts"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος: πότε εμφανίζεται Artifact" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1 · Γρήγορος έλεγχος</span>
+        <h1>Γρήγορος έλεγχος</h1>
+        <div class="activity quiz-mini js-mcq" id="act_1_1" data-correct="2"
+             data-ok="Σωστά! Ένα Artifact δημιουργείται όταν το περιεχόμενο είναι αυτόνομο, έχει σημαντικό όγκο (π.χ. πάνω από 20 γραμμές κώδικα ή 1.500 χαρακτήρες) και αποτελεί αρχείο που θα θέλατε να αποθηκεύσετε."
+             data-ko="Δεν είναι σωστό. Το Artifact εμφανίζεται όταν το περιεχόμενο είναι αυτόνομο, ογκώδες (π.χ. >20 γραμμές κώδικα ή 1.500 χαρακτήρες) και πιθανό παραδοτέο προς αποθήκευση.">
+          <p class="act-q">Ποια από τις παρακάτω προϋποθέσεις οδηγεί το Claude να δημιουργήσει ένα Artifact;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Κάθε φορά που ο χρήστης γράφει ερώτηση άνω των 10 λέξεων.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Μόνο όταν ο χρήστης έχει συνδρομή επί πληρωμή.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Όταν το περιεχόμενο είναι αυτόνομο, έχει σημαντικό όγκο και αποτελεί αρχείο που πιθανόν θα αποθηκεύατε.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Παραδείγματα Artifacts" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1</span>
+        <h1>Παραδείγματα Artifacts</h1>
+        <figure class="shot">
+          <img src="assets/images/image001.png" alt="Παράδειγμα Artifact με δημιουργία αρχείου docx μέσα στη συνομιλία του Claude" loading="lazy">
+          <figcaption>«Παράδειγμα 1 artifact: Δημιουργία docx αρχείου»</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/images/image002.png" alt="Διαδραστικό Artifact αριθμομηχανής στο ειδικό παράθυρο δίπλα στο chat" loading="lazy">
+          <figcaption>«Παράδειγμα 2 artifact: Διαδραστικό Artifact αριθμομηχανής»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Βίντεο: Αριθμομηχανή με Artifacts" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1 · Βίντεο</span>
+        <h1>Βίντεο: Δημιουργία αριθμομηχανής με Claude Artifacts</h1>
+        <div class="video-block">
+          <span class="video-kicker">▶ Βίντεο μαθήματος</span>
+          <h3>Δημιουργία αριθμομηχανής με Claude Artifacts</h3>
+          <p>Ένα πλήρες παράδειγμα διαδραστικού Artifact: από το prompt μέχρι τη λειτουργική αριθμομηχανή που εκτελείται απευθείας στον browser σας.</p>
+          <p><strong>Τι να προσέξετε:</strong> πώς το διαδραστικό Artifact «τρέχει» μέσα στο παράθυρο προεπισκόπησης και πώς μπορείτε να ζητήσετε αλλαγές με απλή, καθημερινή γλώσσα.</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/1204519836?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="Δημιουργία αριθμομηχανής με Claude Artifacts"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Αναστοχασμός: το δικό σας Artifact" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1 · Αναστοχασμός</span>
+        <h1>Αναστοχασμός</h1>
+        <div class="activity reflect" id="act_1_2">
+          <p class="act-q">💭 Σκεφτείτε: ποιο μικρό εργαλείο της δικής σας καθημερινότητας (π.χ. έναν υπολογισμό που κάνετε συχνά, μια φόρμα, έναν πίνακα) θα μπορούσατε να ζητήσετε από το Claude ως διαδραστικό Artifact; Πώς θα διατυπώνατε το πρώτο σας prompt;</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Διαχείριση &amp; επεξεργασία Artifact" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1</span>
+        <h1>Διαχείριση και Επεξεργασία ενός Artifact</h1>
+        <p>Η πραγματική δύναμη των Artifacts κρύβεται στην ευελιξία τους. Δεν πρόκειται για στατικά αρχεία, αλλά για <strong>δυναμικά περιβάλλοντα εργασίας</strong>. Όταν εμφανιστεί ένα Artifact στην οθόνη σας, δεν είστε υποχρεωμένοι να το αποδεχτείτε ως έχει. Μπορείτε να παρέμβετε, να διορθώσετε και να διαμορφώσετε το περιεχόμενό του με δύο διαφορετικούς τρόπους, ανάλογα με το τι σας εξυπηρετεί καλύτερα εκείνη τη στιγμή.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Τρόποι επεξεργασίας ενός Artifact">
+            <button type="button" class="tab-btn active" data-tab="edit-claude" role="tab" aria-selected="true">1. Μέσω του Claude</button>
+            <button type="button" class="tab-btn" data-tab="edit-docx" role="tab" aria-selected="false">2. Χειροκίνητα: αρχεία κειμένου</button>
+            <button type="button" class="tab-btn" data-tab="edit-code" role="tab" aria-selected="false">Project με κώδικα</button>
+            <button type="button" class="tab-btn" data-tab="edit-improve" role="tab" aria-selected="false">Explain &amp; Improve</button>
+          </div>
+          <div class="tab-panel active" data-tab="edit-claude" role="tabpanel">
+            <h3>1. Επεξεργασία μέσω του Claude</h3>
+            <p>Αυτός είναι ο πιο φυσικός και αποδοτικός τρόπος εργασίας. Αντί να ψάχνετε γραμμές κώδικα ή να ξαναγράφετε παραγράφους, αφήνετε το μοντέλο να κάνει τη βαριά δουλειά για εσάς. Απλώς ζητάτε τις αλλαγές που επιθυμείτε απευθείας μέσα στο chat, χρησιμοποιώντας απλή, καθημερινή γλώσσα.</p>
+            <p>Οι οδηγίες σας μπορεί να είναι όσο συγκεκριμένες ή όσο γενικές θέλετε. Για παράδειγμα, μπορείτε να του ζητήσετε:</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Παραδείγματα οδηγιών επεξεργασίας</span>
+              <p class="pb-text">«Κάνε το άρθρο πιο σύντομο και περιεκτικό, αφαιρώντας τις επαναλήψεις.»</p>
+              <p class="pb-text">«Άλλαξε το χρώμα του κεντρικού κουμπιού σε μπλε και μεγάλωσε τη γραμματοσειρά.»</p>
+              <p class="pb-text">«Πρόσθεσε μια νέα παράγραφο στο τέλος που να αναλύει τα πλεονεκτήματα της μεθόδου.»</p>
+            </div>
+            <p>Το Claude θα επεξεργαστεί το αίτημά σας και θα ενημερώσει το Artifact σε δευτερόλεπτα. Το πιο σημαντικό; <strong>Το ιστορικό των αλλαγών διατηρείται</strong>, επιτρέποντάς σας να παρακολουθείτε την εξέλιξη του αρχείου σας.</p>
+            <figure class="shot">
+              <img src="assets/images/image003.png" alt="Επεξεργασία Artifact μέσω γραπτής οδηγίας στο chat" loading="lazy">
+              <figcaption>«Επεξεργασία Artifact μέσω prompt»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="edit-docx" role="tabpanel">
+            <h3>2. Χειροκίνητη Επεξεργασία</h3>
+            <p>Ωστόσο, υπάρχουν περιπτώσεις που μια μικρή, άμεση διόρθωση είναι πιο γρήγορη χειροκίνητα, από το να τη ζητήσετε εκ νέου μέσω κειμένου από το μοντέλο. Ο τρόπος που θα ενεργήσετε εδώ εξαρτάται αποκλειστικά από το <strong>είδος του αρχείου</strong> που περιέχει το Artifact.</p>
+            <p>Στην περίπτωση που το Claude έχει δημιουργήσει ένα αρχείο κειμένου (π.χ. .docx) μέσω εκτέλεσης κώδικα (code execution), αυτό δεν είναι διαθέσιμο για άμεση επεξεργασία κειμένου μέσα στο παράθυρο του Artifact. Οι επιλογές είναι είτε να κατεβάσετε το αρχείο τοπικά στον υπολογιστή σας και να το επεξεργαστείτε, είτε να επιλέξετε το κουμπί <strong>Google Drive</strong>, όπου τότε το αρχείο θα ανοίξει μέσω του Google Drive για να το επεξεργαστείτε.</p>
+            <figure class="shot">
+              <img src="assets/images/image004.png" alt="Επιλογές λήψης αρχείου τοπικά στον υπολογιστή ή ανοίγματος στο Google Drive" loading="lazy">
+              <figcaption>«Κατέβασμα αρχείου τοπικά στον υπολογιστή ή στο Google Drive»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="edit-code" role="tabpanel">
+            <h3>Project με κώδικα: προβολή UI και πηγαίου κώδικα</h3>
+            <p>Στην περίπτωση όμως που έχετε δημιουργήσει κάποιο project με κώδικα, τότε μπορείτε μέσα από το Artifact να δείτε και να επεξεργαστείτε εν μέρει τον κώδικα.</p>
+            <figure class="shot">
+              <img src="assets/images/image005.png" alt="Προβολή της διεπαφής χρήστη ενός Artifact με ενεργοποιημένο το εικονίδιο προεπισκόπησης" loading="lazy">
+              <figcaption>«Προβολή της διεπαφής χρήστη (UI) ενός Artifact με ενεργοποιημένο το εικονίδιο προεπισκόπησης»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image006.png" alt="Μετάβαση στην προβολή του πηγαίου κώδικα του Artifact μέσω του αντίστοιχου εικονιδίου" loading="lazy">
+              <figcaption>«Μετάβαση στην προβολή του πηγαίου κώδικα του Artifact μέσω του αντίστοιχου εικονιδίου»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="edit-improve" role="tabpanel">
+            <h3>Επιλογές επεξεργασίας κώδικα</h3>
+            <p>Για την επεξεργασία του κώδικα οι επιλογές ωστόσο είναι συγκεκριμένες:</p>
+            <ol class="steps">
+              <li><strong class="step-title">explain</strong> Το Claude αναλύει τον κώδικα που επιλέξατε.</li>
+              <li><strong class="step-title">improve</strong> Δίνετε την οδηγία στο μοντέλο να αναδιαμορφώσει ή να διορθώσει το επιλεγμένο σημείο.</li>
+            </ol>
+            <p>Βεβαίως, μπορείτε πάντα να κατεβάσετε το αρχείο ή να αντιγράψετε τον κώδικα που δίνει το Claude, τοπικά στον υπολογιστή σας.</p>
+            <figure class="shot">
+              <img src="assets/images/image007.png" alt="Επιλογές στοχευμένης επεξεργασίας κώδικα Improve και Explain και μενού αντιγραφής ή λήψης του αρχείου" loading="lazy">
+              <figcaption>«Επιλογές στοχευμένης επεξεργασίας κώδικα (Improve/Explain) και μενού καθολικής αντιγραφής ή λήψης του αρχείου»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δημοσίευση (Publish)" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1</span>
+        <h1>Δημοσίευση ενός Artifact (Publish)</h1>
+        <p>Όταν το Artifact φτάσει στην τελική του μορφή και είστε απόλυτα ικανοποιημένοι με το αποτέλεσμα, το Claude σάς δίνει τη δυνατότητα να το μοιραστείτε με εξωτερικούς συνεργάτες ή πελάτες μέσω της επιλογής <strong>Publish</strong> (Δημοσίευση), η οποία βρίσκεται στο πάνω δεξί μέρος του παραθύρου.</p>
+        <figure class="shot">
+          <img src="assets/images/image008.png" alt="Παράθυρο προετοιμασίας και επιβεβαίωσης δημοσίευσης ενός Artifact" loading="lazy">
+          <figcaption>«Παράθυρο προετοιμασίας και επιβεβαίωσης δημοσίευσης»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Βίντεο: Artifacts Panel" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1 · Βίντεο</span>
+        <h1>Βίντεο: Χρήση του Claude Artifacts Panel</h1>
+        <div class="video-block">
+          <span class="video-kicker">▶ Βίντεο μαθήματος</span>
+          <h3>Χρήση του Claude Artifacts Panel</h3>
+          <p>Το βίντεο σας ξεναγεί στο παράθυρο (panel) των Artifacts: εναλλαγή προεπισκόπησης/κώδικα, στοχευμένη επεξεργασία και επιλογές αντιγραφής, λήψης και δημοσίευσης.</p>
+          <p><strong>Τι να προσέξετε:</strong> τα εικονίδια εναλλαγής UI/κώδικα, τις επιλογές explain και improve, καθώς και το κουμπί Publish για κοινοποίηση του τελικού αποτελέσματος.</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/1204519925?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="Χρήση του Claude Artifacts Panel"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος: Publish" data-group="2.1 Artifacts — τι είναι και πότε εμφανίζονται">
+        <span class="chapter-kicker">Υποενότητα 2.1 · Γρήγορος έλεγχος</span>
+        <h1>Γρήγορος έλεγχος</h1>
+        <div class="activity quiz-mini js-mcq" id="q_publish" data-correct="0"
+             data-ok="Σωστά! Όταν το Artifact φτάσει στην τελική του μορφή, η επιλογή Publish (Δημοσίευση) στο πάνω δεξί μέρος του παραθύρου επιτρέπει την κοινοποίησή του σε εξωτερικούς συνεργάτες ή πελάτες."
+             data-ko="Όχι. Η επιλογή Publish βρίσκεται στο πάνω δεξί μέρος του παραθύρου του Artifact και χρησιμεύει για να μοιραστείτε το τελικό αποτέλεσμα με εξωτερικούς συνεργάτες ή πελάτες.">
+          <p class="act-q">Πού βρίσκεται και τι κάνει η επιλογή «Publish» ενός Artifact;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Στο πάνω δεξί μέρος του παραθύρου — επιτρέπει να μοιραστείτε το Artifact με εξωτερικούς συνεργάτες ή πελάτες.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Στο κάτω μέρος του chat — αποθηκεύει τη συνομιλία σε PDF.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Στις ρυθμίσεις — ενεργοποιεί το code execution.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Δ</span> Στην πλευρική μπάρα — μετονομάζει τη συνομιλία.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ΥΠΟΕΝΟΤΗΤΑ 2.2 — ΔΟΥΛΕΥΟΝΤΑΣ ΜΕ ΑΡΧΕΙΑ
+           ============================================================ -->
+
+      <section class="chapter" data-title="Δουλεύοντας με αρχεία: PDF" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · PDF</span>
+        <h1>Δουλεύοντας με αρχεία</h1>
+        <p>Το Claude δεν περιορίζεται μόνο στην επεξεργασία του κειμένου που πληκτρολογείτε. Διαθέτει μια πανίσχυρη λειτουργία αναγνώρισης και ανάλυσης εξωτερικών εγγράφων, μετατρέποντας τη συνομιλία σας σε έναν <strong>ζωντανό σταθμό επεξεργασίας δεδομένων</strong>.</p>
+        <h2>Η επεξεργασία αρχείων PDF</h2>
+        <p>Τα έγγραφα PDF αποτελούν το παγκόσμιο πρότυπο για αναφορές, μελέτες, ακαδημαϊκά άρθρα και δημόσια έγγραφα. Συχνά όμως, ο όγκος τους είναι αποθαρρυντικός. Το Claude μπορεί να διαβάσει, να κατανοήσει και να αναλύσει αρχεία PDF σε δευτερόλεπτα, προσφέροντάς σας μια σειρά από πολύτιμες δυνατότητες.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Δυνατότητες επεξεργασίας PDF">
+            <button type="button" class="tab-btn active" data-tab="pdf-sum" role="tab" aria-selected="true">Δυναμική Σύνοψη</button>
+            <button type="button" class="tab-btn" data-tab="pdf-qa" role="tab" aria-selected="false">Στοχευμένη Αναζήτηση</button>
+            <button type="button" class="tab-btn" data-tab="pdf-extra" role="tab" aria-selected="false">Μετάφραση &amp; Δομημένα δεδομένα</button>
+          </div>
+          <div class="tab-panel active" data-tab="pdf-sum" role="tabpanel">
+            <p><strong>Δυναμική Σύνοψη (Summarization):</strong> Αντί απλά να διαβάζει εκατοντάδες σελίδες, μπορείτε να του ζητήσετε να εξαγάγει τα βασικά συμπεράσματα, τις κεντρικές ιδέες ή τις αποφάσεις μιας πολυσέλιδης αναφοράς. Η σύνοψη μπορεί να γίνει σε μορφή παραγράφων ή δομημένων bullet points για μεγαλύτερη ευκολία.</p>
+            <figure class="shot">
+              <img src="assets/images/image009.png" alt="Ανάλυση αρχείου PDF για το AI Act και παραγωγή δομημένης σύνοψης από το Claude" loading="lazy">
+              <figcaption>«Ανάλυση αρχείου PDF (AI Act) και παραγωγή δομημένης σύνοψης»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="pdf-qa" role="tabpanel">
+            <p><strong>Στοχευμένη Αναζήτηση Πληροφοριών:</strong> Μπορείτε να κάνετε ερωτήσεις απευθείας πάνω στο έγγραφο. Για παράδειγμα: «Με βάση το PDF που ανέβασα, ποιες είναι οι υποχρεώσεις του αναδόχου που αναφέρονται στη σελίδα 14;». Το μοντέλο θα εντοπίσει την πληροφορία και θα σας απαντήσει με ακρίβεια.</p>
+            <figure class="shot">
+              <img src="assets/images/image010.png" alt="Στοχευμένη αναζήτηση πληροφοριών με ερωταπαντήσεις πάνω στο έγγραφο PDF" loading="lazy">
+              <figcaption>«Στοχευμένη αναζήτηση πληροφοριών (Q&amp;A) επί του εγγράφου με συγκεκριμένο ερώτημα»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="pdf-extra" role="tabpanel">
+            <ul class="checklist">
+              <li><strong>Μετάφραση και ορολογία:</strong> Εάν έχετε ένα ξενόγλωσσο τεχνικό κείμενο ή μια επιστημονική μελέτη, μπορείτε να ζητήσετε τη μετάφρασή του στα Ελληνικά, διατηρώντας μάλιστα την επίσημη και εξειδικευμένη ορολογία του κλάδου σας.</li>
+              <li><strong>Εξαγωγή δομημένων δεδομένων:</strong> Το Claude μπορεί να εντοπίσει διάσπαρτα στοιχεία, ημερομηνίες ή ονόματα μέσα στο κείμενο του PDF και να τα οργανώσει σε έναν καθαρό, δομημένο πίνακα, έτοιμο προς χρήση.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">💡</span>
+          <div><p><strong>Συμβουλή:</strong> Όταν εργάζεστε με PDF, η σαφήνεια του prompt καθορίζει την ποιότητα του αποτελέσματος. Αντί για ένα γενικό «Κάνε μου μια σύνοψη», προτιμήστε οδηγίες όπως: «Κάνε μια σύνοψη των 5 κυριότερων κινδύνων που περιγράφονται στο έγγραφο, εστιάζοντας στις οικονομικές επιπτώσεις».</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος: prompt για PDF" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · Γρήγορος έλεγχος</span>
+        <h1>Γρήγορος έλεγχος</h1>
+        <div class="activity quiz-mini js-mcq" id="q_pdf_prompt" data-correct="2"
+             data-ok="Σωστά! Η σαφήνεια του prompt καθορίζει την ποιότητα του αποτελέσματος: αντί για γενικό αίτημα, δίνετε συγκεκριμένο πλήθος σημείων και εστίαση."
+             data-ko="Όχι. Η ενότητα συνιστά συγκεκριμένες οδηγίες με πλήθος σημείων και εστίαση — όχι γενικά αιτήματα.">
+          <p class="act-q">Θέλετε την καλύτερη δυνατή σύνοψη ενός PDF. Ποιο prompt συνιστά η ενότητα;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> «Κάνε μου μια σύνοψη»</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> «Διάβασε το PDF»</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> «Κάνε μια σύνοψη των 5 κυριότερων κινδύνων που περιγράφονται στο έγγραφο, εστιάζοντας στις οικονομικές επιπτώσεις»</button>
+            <button type="button" class="option-btn"><span class="opt-key">Δ</span> «Πες μου τα πάντα για το έγγραφο με κάθε λεπτομέρεια»</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Η επεξεργασία αρχείων Word" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · Word</span>
+        <h1>Η επεξεργασία αρχείων Word</h1>
+        <p>Αν τα αρχεία PDF αποτελούν τον ιδανικό τύπο για ανάγνωση και άντληση πληροφοριών, τα αρχεία Word είναι ο απόλυτος σύμμαχος στην <strong>παραγωγή και την τροποποίηση περιεχομένου</strong>. Το Claude μπορεί να επεξεργαστεί αρχεία .docx, επιτρέποντάς σας να παρακάμψετε τη χρονοβόρα διαδικασία της χειροκίνητης αναδιατύπωσης.</p>
+        <p>Ανεβάζοντας ένα αρχείο Word στη συνομιλία, μπορείτε να εκτελέσετε άμεσα τις εξής εργασίες:</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Εργασίες σε αρχεία Word">
+            <button type="button" class="tab-btn active" data-tab="word-style" role="tab" aria-selected="true">Αλλαγή ύφους &amp; μορφοποίησης</button>
+            <button type="button" class="tab-btn" data-tab="word-proof" role="tab" aria-selected="false">Διόρθωση &amp; Επιμέλεια</button>
+            <button type="button" class="tab-btn" data-tab="word-structure" role="tab" aria-selected="false">Αναδιάρθρωση</button>
+            <button type="button" class="tab-btn" data-tab="word-enrich" role="tab" aria-selected="false">Εμπλουτισμός</button>
+          </div>
+          <div class="tab-panel active" data-tab="word-style" role="tabpanel">
+            <p><strong>Αλλαγή ύφους και μορφοποίησης:</strong> Μπορείτε να εισαγάγετε ένα προσχέδιο κειμένου και να ζητήσετε από το μοντέλο να το μετατρέψει. Για παράδειγμα ένα απλό κείμενο μπορεί να μεταμορφωθεί σε μια επίσημη εταιρική αναφορά, σε ένα ακαδημαϊκό δοκίμιο ή σε ένα τεχνικό εγχειρίδιο.</p>
+            <h3>Παράδειγμα: πριν και μετά το prompt</h3>
+            <figure class="shot">
+              <img src="assets/images/image011.png" alt="Αρχικό κείμενο Word πριν από την οδηγία αναδιαμόρφωσης" loading="lazy">
+              <figcaption>«Αρχικό κείμενο πριν το prompt»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image012.png" alt="Αριστερά η οδηγία του χρήστη και δεξιά το αναδιαμορφωμένο αποτέλεσμα" loading="lazy">
+              <figcaption>«Αριστερά prompt — δεξιά το αποτέλεσμα»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="word-proof" role="tabpanel">
+            <p><strong>Διόρθωση και Επιμέλεια Κειμένου (Proof reading):</strong> Το Claude εντοπίζει γραμματικά, συντακτικά ή ορθογραφικά λάθη. Παράλληλα, μπορεί να βελτιώσει τη ροή του λόγου, κάνοντας το κείμενο πιο συμπαγές και επαγγελματικό, χωρίς να αλλοιώσει το αρχικό νόημα.</p>
+          </div>
+          <div class="tab-panel" data-tab="word-structure" role="tabpanel">
+            <p><strong>Αναδιάρθρωση Εγγράφου:</strong> Εάν ένα έγγραφο στερείται δομής, μπορείτε να δώσετε οδηγία στο μοντέλο να προσθέσει κατάλληλες επικεφαλίδες (headings), να χωρίσει το κείμενο σε λογικές παραγράφους ή να μετατρέψει χαοτικές σημειώσεις σε οργανωμένα bullet points.</p>
+          </div>
+          <div class="tab-panel" data-tab="word-enrich" role="tabpanel">
+            <p><strong>Εμπλουτισμός Περιεχομένου:</strong> Έχοντας ως βάση το έγγραφό σας, μπορείτε να ζητήσετε από το Claude να επεκτείνει συγκεκριμένες ενότητες, να προσθέσει επιχειρήματα ή να δημιουργήσει μια εισαγωγή και έναν επίλογο που ταιριάζουν με το υπόλοιπο περιεχόμενο.</p>
+          </div>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🎯</span>
+          <div><p><strong>Συμβουλή:</strong> Όταν θέλετε να αναδιαμορφώσετε ένα αρχείο Word, είναι χρήσιμο να καθορίζετε εκ των προτέρων το κοινό στο οποίο απευθύνεται το κείμενο. Ένα prompt της μορφής: «Αναδιατύπωσε το επισυναπτόμενο έγγραφο ώστε το ύφος του να είναι αυστηρά επαγγελματικό και κατάλληλο για παρουσίαση σε διοικητικό συμβούλιο», θα δώσει ένα πολύ πιο στοχευμένο αποτέλεσμα.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Η ανάλυση αρχείων Excel και δεδομένων" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · Excel</span>
+        <h1>Η ανάλυση αρχείων Excel και δεδομένων (.xlsx / .csv)</h1>
+        <p>Αν η επεξεργασία κειμένων Word προσφέρει δημιουργική ελευθερία, η διαχείριση αρχείων Excel με το Claude προσφέρει <strong>καθαρή υπολογιστική ισχύ</strong>. Το μοντέλο μπορεί να επεξεργαστεί υπολογιστικά φύλλα και αρχεία δεδομένων, επιτρέποντάς σας να παρακάμψετε τις περίπλοκες συναρτήσεις.</p>
+        <p>Ανεβάζοντας ένα αρχείο Excel στη συνομιλία, μπορείτε να εκτελέσετε άμεσα τις εξής προηγμένες εργασίες:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📊</div>
+            <h3>Στατιστική ανάλυση και συμπεράσματα</h3>
+            <p>Το Claude μπορεί να διαβάσει χιλιάδες γραμμές δεδομένων και να εντοπίσει τάσεις, κορυφαία προϊόντα σε πωλήσεις ή περιφέρειες με τη μεγαλύτερη κερδοφορία.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🧮</div>
+            <h3>Υπολογισμός Δεικτών και KPIs</h3>
+            <p>Μπορείτε να ζητήσετε μαθηματικούς υπολογισμούς (όπως αθροίσματα, μέσους όρους ή ποσοστά κέρδους) χωρίς να γράψετε ούτε έναν τύπο στο Excel.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📑</div>
+            <h3>Δημιουργία συγκεντρωτικών αναφορών (Reporting)</h3>
+            <p>Το μοντέλο μπορεί να ομαδοποιήσει χαοτικά δεδομένα και να σας παραδώσει μια καθαρή, δομημένη σύνοψη των αποτελεσμάτων.</p>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image013.png" alt="Ανάλυση υπολογιστικού φύλλου Excel και εξαγωγή αποτελεσμάτων σε δομημένο πίνακα" loading="lazy">
+          <figcaption>«Ανάλυση υπολογιστικού φύλλου Excel και εξαγωγή αποτελεσμάτων σε δομημένο πίνακα»</figcaption>
+        </figure>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">📈</span>
+          <div><p><strong>Συμβουλή:</strong> Όταν εργάζεστε με μεγάλα αρχεία δεδομένων, ζητάτε από το Claude να σας παρουσιάζει τα αποτελέσματα σε φθίνουσα σειρά (από το μεγαλύτερο στο μικρότερο) ή σε μορφή καθαρών πινάκων Markdown, ώστε η πληροφορία να είναι άμεσα αξιοποιήσιμη.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Βίντεο: Excel με το Claude" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · Βίντεο</span>
+        <h1>Βίντεο: Εργασία με Excel μέσω Claude Artifacts</h1>
+        <div class="video-block">
+          <span class="video-kicker">▶ Βίντεο μαθήματος</span>
+          <h3>Εργασία με Excel μέσω Claude Artifacts</h3>
+          <p>Δείτε πώς το Claude αναλαμβάνει ένα υπολογιστικό φύλλο Excel: ανάλυση δεδομένων, υπολογισμοί και παρουσίαση αποτελεσμάτων σε δομημένη μορφή.</p>
+          <p><strong>Τι να προσέξετε:</strong> πώς διατυπώνεται το prompt για την ανάλυση, πώς παρουσιάζονται τα αποτελέσματα σε πίνακες και πώς αποφεύγετε τις περίπλοκες συναρτήσεις του Excel.</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/1204519883?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="Εργασία με Excel μέσω Claude Artifacts"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος: ανάλυση Excel" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · Γρήγορος έλεγχος</span>
+        <h1>Γρήγορος έλεγχος</h1>
+        <div class="activity quiz-mini js-mcq" id="act_2_1" data-correct="1"
+             data-ok="Σωστά! Με ένα αρχείο Excel το Claude εντοπίζει τάσεις, υπολογίζει δείκτες/KPIs και παράγει συγκεντρωτικές αναφορές — χωρίς να γράψετε ούτε έναν τύπο."
+             data-ko="Όχι. Δεν χρειάζεται να γράψετε συναρτήσεις: ανεβάζετε το αρχείο και ζητάτε στατιστική ανάλυση, υπολογισμό δεικτών ή συγκεντρωτική αναφορά με απλή γλώσσα.">
+          <p class="act-q">Ανεβάζετε ένα Excel με χιλιάδες γραμμές πωλήσεων. Ποια είναι η σωστή προσέγγιση για να βρείτε τα κορυφαία προϊόντα;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Πρέπει πρώτα να γράψω εγώ τις κατάλληλες συναρτήσεις μέσα στο Excel.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Ζητώ με απλή γλώσσα στατιστική ανάλυση — το Claude εντοπίζει τάσεις και κορυφαία προϊόντα και παραδίδει δομημένη σύνοψη.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Το Claude δεν μπορεί να διαβάσει αρχεία .xlsx, μόνο .csv.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Η επεξεργασία και ανάλυση εικόνων" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · Εικόνες</span>
+        <h1>Η επεξεργασία και ανάλυση εικόνων</h1>
+        <p>Το Claude μπορεί να επεξεργαστεί αρχεία εικόνας (όπως .png, .jpg, .jpeg), επιτρέποντάς σας να εξάγετε πληροφορίες από οπτικό υλικό. Η λειτουργία αυτή είναι ιδιαίτερα χρήσιμη όταν θέλετε να μετατρέψετε στατικά δεδομένα σε επεξεργάσιμο κείμενο.</p>
+        <p>Ανεβάζοντας μια εικόνα στη συνομιλία, μπορείτε να εκτελέσετε άμεσα τις εξής εργασίες:</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Εργασίες σε εικόνες">
+            <button type="button" class="tab-btn active" data-tab="img-ocr" role="tab" aria-selected="true">Ψηφιοποίηση κειμένου (OCR)</button>
+            <button type="button" class="tab-btn" data-tab="img-diagrams" role="tab" aria-selected="false">Ανάγνωση διαγραμμάτων</button>
+            <button type="button" class="tab-btn" data-tab="img-uiux" role="tab" aria-selected="false">Αξιολόγηση UI/UX</button>
+            <button type="button" class="tab-btn" data-tab="img-mockup" role="tab" aria-selected="false">Κώδικας από προσχέδιο</button>
+          </div>
+          <div class="tab-panel active" data-tab="img-ocr" role="tabpanel">
+            <p><strong>Ψηφιοποίηση κειμένου (OCR):</strong> Εάν ανεβάσετε τη φωτογραφία ενός εγγράφου ή ένα screenshot, το Claude αναγνωρίζει και εξάγει τους χαρακτήρες. Έτσι, αποκτάτε το κείμενο σε ψηφιακή μορφή χωρίς να χρειάζεται να το πληκτρολογήσετε από την αρχή.</p>
+            <h3>Παράδειγμα OCR: από την απόδειξη στον πίνακα</h3>
+            <figure class="shot">
+              <img src="assets/images/image014.jpg" alt="Ψηφιοποίηση και εξαγωγή δεδομένων από έντυπη απόδειξη με τεχνολογία οπτικής αναγνώρισης χαρακτήρων" loading="lazy">
+              <figcaption>«Ψηφιοποίηση και εξαγωγή δεδομένων από έντυπη απόδειξη με τη χρήση της τεχνολογίας οπτικής αναγνώρισης χαρακτήρων (OCR)»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image015.png" alt="Αποτέλεσμα οπτικής αναγνώρισης χαρακτήρων με αυτόματη οργάνωση των δεδομένων της απόδειξης σε δομημένο πίνακα" loading="lazy">
+              <figcaption>«Αποτέλεσμα οπτικής αναγνώρισης χαρακτήρων (OCR) με αυτόματη εξαγωγή και οργάνωση των δεδομένων της απόδειξης σε δομημένο πίνακα»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="img-diagrams" role="tabpanel">
+            <p><strong>Ανάγνωση διαγραμμάτων:</strong> Μπορείτε να εισαγάγετε διαγράμματα ροής, οργανογράμματα ή τεχνικά σχέδια. Το μοντέλο αναλύει τη δομή τους και σας περιγράφει γραπτώς τα βήματα ή τις σχέσεις μεταξύ των στοιχείων.</p>
+          </div>
+          <div class="tab-panel" data-tab="img-uiux" role="tabpanel">
+            <p><strong>Αξιολόγηση διεπαφών (UI/UX):</strong> Ανεβάζοντας το screenshot μιας ιστοσελίδας ή μιας εφαρμογής, μπορείτε να ζητήσετε παρατηρήσεις για τη χρηστικότητα. Το Claude εντοπίζει τη διάταξη των στοιχείων και προτείνει συγκεκριμένες σχεδιαστικές βελτιώσεις.</p>
+          </div>
+          <div class="tab-panel" data-tab="img-mockup" role="tabpanel">
+            <p><strong>Παραγωγή κώδικα από προσχέδιο:</strong> Μπορείτε να σχεδιάσετε σε χαρτί το mockup μιας απλής ιστοσελίδας και να το φωτογραφήσετε. Ζητώντας από το Claude να το αναπαράγει, εκείνο θα δημιουργήσει τον αντίστοιχο κώδικα HTML/CSS σε ένα Artifact.</p>
+          </div>
+        </div>
+        <div class="callout callout-note">
+          <span class="co-icon" aria-hidden="true">📸</span>
+          <div><p><strong>Επαγγελματική Συμβουλή:</strong> Για να έχει η αναγνώριση την καλύτερη δυνατή ακρίβεια, φροντίστε οι εικόνες ή τα screenshots να έχουν καλό φωτισμό, καθαρή εστίαση και ευανάγνωστους χαρακτήρες.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Βίντεο: quiz εικόνας" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · Βίντεο</span>
+        <h1>Βίντεο: Δημιουργία διαδραστικού quiz εικόνας</h1>
+        <div class="video-block">
+          <span class="video-kicker">▶ Βίντεο μαθήματος</span>
+          <h3>Δημιουργία διαδραστικού quiz εικόνας με Claude Artifacts</h3>
+          <p>Ένα πρακτικό παράδειγμα που συνδυάζει την ανάλυση εικόνας με τη δύναμη των Artifacts: το Claude «διαβάζει» οπτικό υλικό και το μετατρέπει σε διαδραστικό quiz.</p>
+          <p><strong>Τι να προσέξετε:</strong> πώς το Claude αντλεί πληροφορία από την εικόνα και πώς το αποτέλεσμα παραδίδεται ως διαδραστικό Artifact, έτοιμο για χρήση.</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/1204519420?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="Δημιουργία διαδραστικού quiz εικόνας με Claude Artifacts"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Αναστοχασμός: ψηφιοποίηση υλικού" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · Αναστοχασμός</span>
+        <h1>Αναστοχασμός</h1>
+        <div class="activity reflect" id="act_2_2">
+          <p class="act-q">💭 Σκεφτείτε: ποιο έντυπο ή οπτικό υλικό της δουλειάς σας (αποδείξεις, χειρόγραφες σημειώσεις, διαγράμματα, screenshots) θα σας γλίτωνε τον περισσότερο χρόνο αν το ψηφιοποιούσατε ή το αναλύατε με το Claude; Τι θα του ζητούσατε να κάνει με τα δεδομένα που θα εξαγάγει;</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Σύγκριση πολλαπλών αρχείων" data-group="2.2 Δουλεύοντας με αρχεία">
+        <span class="chapter-kicker">Υποενότητα 2.2 · Πολλαπλά αρχεία</span>
+        <h1>Σύγκριση μεταξύ πολλαπλών αρχείων</h1>
+        <p>Η ανάγκη για παράλληλη μελέτη εγγράφων παρουσιάζεται συχνά στην καθημερινή εργασία, είτε πρόκειται για διαφορετικές εκδόσεις του ίδιου αρχείου είτε για αναφορές διαφορετικών περιόδων. Το Claude σάς επιτρέπει να ανεβάσετε <strong>περισσότερα από ένα αρχεία ταυτόχρονα</strong> στη συνομιλία (π.χ. δύο PDF, ένα Excel και ένα Word), διευκολύνοντας τη μεταξύ τους διασταύρωση.</p>
+        <p>Αυτή η δυνατότητα είναι ιδιαίτερα χρήσιμη για τις ακόλουθες εργασίες:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🔍</div>
+            <h3>Εντοπισμός αλλαγών (Version Control)</h3>
+            <p>Ανεβάζοντας δύο διαφορετικές εκδόσεις ενός συμβολαίου, μιας τεχνικής πρότασης ή ενός κανονισμού, μπορείτε να ζητήσετε από το μοντέλο να εντοπίσει τις προσθήκες, τις διαγραφές ή τις τροποποιήσεις που έγιναν στο νεότερο έγγραφο.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📊</div>
+            <h3>Σύγκριση οικονομικών ή στατιστικών δεδομένων</h3>
+            <p>Μπορείτε να εισαγάγετε δύο υπολογιστικά φύλλα Excel (π.χ. πωλήσεις του Έτους Α και του Έτους Β) και να ζητήσετε μια αναφορά μεταβολών. Το Claude θα υπολογίσει τις διαφορές και θα αναδείξει τις αυξήσεις ή τις μειώσεις ανά κατηγορία.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🔗</div>
+            <h3>Διασταύρωση πηγών (Cross-referencing)</h3>
+            <p>Όταν μελετάτε ένα θέμα από διαφορετικές πλευρές, μπορείτε να ανεβάσετε δύο ή τρία ακαδημαϊκά άρθρα ή εταιρικές εκθέσεις. Το μοντέλο μπορεί να συνθέσει τα κοινά τους σημεία, αλλά και να επισημάνει τις περιπτώσεις όπου οι απόψεις ή τα δεδομένα των συγγραφέων έρχονται σε αντίθεση.</p>
+          </div>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🧮</span>
+          <div><p><strong>Συμβουλή:</strong> Για να είναι η σύγκριση απόλυτα ξεκάθαρη, ζητάτε πάντα από το Claude να οργανώνει τα ευρήματα σε <strong>συγκριτικούς πίνακες</strong>. Ορισμένα πεδία που βοηθούν στη δομή είναι: «Σημείο Σύγκρισης», «Αρχείο 1», «Αρχείο 2» και «Παρατηρήσεις/Μεταβολή».</p></div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ΥΠΟΕΝΟΤΗΤΑ 2.3 — WEB SEARCH & RESEARCH MODE
+           ============================================================ -->
+
+      <section class="chapter" data-title="Web Search &amp; Research Mode" data-group="2.3 Web Search &amp; Research Mode">
+        <span class="chapter-kicker">Υποενότητα 2.3</span>
+        <h1>Web Search &amp; Research Mode</h1>
+        <p>Η τεχνητή νοημοσύνη δεν περιορίζεται μόνο στις γνώσεις με τις οποίες εκπαιδεύτηκε. Το Claude έχει τη δυνατότητα να συνδέεται με το διαδίκτυο για να αναζητά επίκαιρες πληροφορίες, γεγονότα της επικαιρότητας ή εξειδικευμένες πηγές. Για να διαχειριστείτε αποτελεσματικά αυτή τη ροή πληροφοριών, το μοντέλο σάς παρέχει δύο διακριτά εργαλεία: την <strong>Απλή Web Αναζήτηση (Web Search)</strong> και την <strong>Ενδελεχή Έρευνα (Research Mode)</strong>.</p>
+        <p>Η σωστή επιλογή ανάμεσα σε αυτές τις δύο επιλογές, εξαρτάται από το είδος και το βάθος της πληροφορίας που χρειάζεστε κάθε φορά.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Web Search ή Research Mode">
+            <button type="button" class="tab-btn active" data-tab="mode-ws" role="tab" aria-selected="true">1. Web Search</button>
+            <button type="button" class="tab-btn" data-tab="mode-rm" role="tab" aria-selected="false">2. Research Mode</button>
+          </div>
+          <div class="tab-panel active" data-tab="mode-ws" role="tabpanel">
+            <h3>1. Απλή Web αναζήτηση (Web Search)</h3>
+            <p>Η απλή αναζήτηση λειτουργεί ως ένας γρήγορος ψηφιακός βοηθός επικαιρότητας. Ενεργοποιείται αυτόματα ή κατ' επιλογή όταν το ερώτημά σας απαιτεί πρόσβαση σε τρέχοντα ή μεταβαλλόμενα δεδομένα.</p>
+            <p><strong>Πότε την χρειάζεστε:</strong> Όταν αναζητάτε συγκεκριμένα, άμεσα γεγονότα, στατιστικά στοιχεία, πρόσφατες ειδήσεις ή απλές πληροφορίες που δεν απαιτούν βαθύτερη ανάλυση.</p>
+            <figure class="shot">
+              <img src="assets/images/image016.png" alt="Ενεργοποίηση της λειτουργίας Web Search στο Claude" loading="lazy">
+              <figcaption>«Ενεργοποίηση της λειτουργίας Web Search»</figcaption>
+            </figure>
+            <p><strong>Τρόπος λειτουργίας:</strong> Το Claude εκτελεί μια γρήγορη σάρωση των κορυφαίων αποτελεσμάτων στις μηχανές αναζήτησης, εντοπίζει την απάντηση, σας την παρουσιάζει συνοπτικά και παραθέτει τους σχετικούς συνδέσμους (links) ως πηγές.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Παράδειγμα χρήσης</span>
+              <p class="pb-text">«Ποιες είναι οι τελευταίες αλλαγές που ανακοινώθηκαν αυτή την εβδομάδα για τη φορολογία των ελεύθερων επαγγελματιών;»</p>
+            </div>
+            <figure class="shot">
+              <img src="assets/images/image017.png" alt="Απάντηση του Claude με χρήση Web Search και ενσωμάτωση ενεργών παραπομπών στις πηγές" loading="lazy">
+              <figcaption>«Απάντηση του Claude με χρήση της λειτουργίας Web Search και ενσωμάτωση ενεργών παραπομπών (citations) στις πηγές άντλησης των πληροφοριών»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="mode-rm" role="tabpanel">
+            <h3>2. Ενδελεχής έρευνα (Research Mode)</h3>
+            <p>Το Research Mode μετατρέπει το μοντέλο σε έναν <strong>αυτόνομο ερευνητή</strong>. Δεν κάνει απλώς μια επιφανειακή αναζήτηση, αλλά εκτελεί πολλαπλούς κύκλους αναζητήσεων, διασταυρώνει πηγές και συνθέτει δομημένες αναφορές.</p>
+            <p><strong>Πότε την χρειάζεστε:</strong> Όταν το θέμα σας είναι σύνθετο, απαιτεί επιστημονική τεκμηρίωση, σύγκριση διαφορετικών απόψεων, ανάλυση αγοράς ή βιβλιογραφική επισκόπηση.</p>
+            <figure class="shot">
+              <img src="assets/images/image018.png" alt="Διεξαγωγή πολυεπίπεδης αναζήτησης στη λειτουργία Research Mode με αυτόματη διασταύρωση πηγών" loading="lazy">
+              <figcaption>«Διεξαγωγή πολυεπίπεδης αναζήτησης στη λειτουργία Research Mode με αυτόματη διασταύρωση πηγών και σύνθεση ερευνητικής αναφοράς»</figcaption>
+            </figure>
+            <p><strong>Τρόπος λειτουργίας:</strong> Το Claude διαβάζει τα πρώτα αποτελέσματα, εντοπίζει νέες λέξεις-κλειδιά, πραγματοποιεί νέες (υπο)αναζητήσεις για να καλύψει τα κενά, απορρίπτει αναξιόπιστες πηγές και τελικά συνθέτει μια εκτενή, πολυεπίπεδη αναφορά με ενσωματωμένες παραπομπές.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Παράδειγμα χρήσης</span>
+              <p class="pb-text">«Πραγματοποιήστε μια ολοκληρωμένη έρευνα για την εξέλιξη των ψηφιακών βοηθών (chatbots) στην τοπική αυτοδιοίκηση στην Ευρώπη τα τελευταία τρία χρόνια. Αναλύστε τις βέλτιστες πρακτικές και τις προκλήσεις υλοποίησης.»</p>
+            </div>
+            <div class="accordion">
+              <div class="acc-item">
+                <button type="button" class="acc-header" aria-expanded="false">Πηγές και αποτελέσματα έρευνας (στιγμιότυπα) <span class="acc-arrow" aria-hidden="true">▸</span></button>
+                <div class="acc-body">
+                  <figure class="shot">
+                    <img src="assets/images/image019.png" alt="Παρουσίαση πηγών κατά τη διαδικασία αναζήτησης του Research Mode" loading="lazy">
+                    <figcaption>«Παρουσίαση πηγών κατά την διαδικασία αναζήτησης»</figcaption>
+                  </figure>
+                  <figure class="shot">
+                    <img src="assets/images/image020.png" alt="Αποτελέσματα ολοκληρωμένης έρευνας του Research Mode" loading="lazy">
+                    <figcaption>«Αποτελέσματα έρευνας»</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: Web Search ή Research Mode;" data-group="2.3 Web Search &amp; Research Mode">
+        <span class="chapter-kicker">Υποενότητα 2.3 · Δραστηριότητα</span>
+        <h1>Δραστηριότητα: ποιο εργαλείο;</h1>
+        <div class="activity js-fill" id="act_3_1"
+             data-ok="Σωστά! Γρήγορα, άμεσα δεδομένα → Web Search· σύνθετη τεκμηρίωση και βιβλιογραφική επισκόπηση → Research Mode."
+             data-ko="Κάποιες επιλογές δεν είναι σωστές. Θυμηθείτε: Web Search = γρήγορα γεγονότα/ειδήσεις· Research Mode = σύνθετα θέματα, πολλαπλοί κύκλοι αναζητήσεων και δομημένη αναφορά.">
+          <p class="act-q">Ποιο εργαλείο θα επιλέγατε σε κάθε σενάριο;</p>
+          <p class="fill-blank">«Ποια είναι η σημερινή ισοτιμία ευρώ/δολαρίου και τα πρόσφατα στατιστικά ανεργίας;» →
+            <select data-answer="web" aria-label="Εργαλείο πρώτου σεναρίου">
+              <option value="">— επιλέξτε —</option>
+              <option value="web">Web Search</option>
+              <option value="research">Research Mode</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Βιβλιογραφική επισκόπηση για την εξέλιξη των chatbots στην τοπική αυτοδιοίκηση, με σύγκριση απόψεων και βέλτιστες πρακτικές» →
+            <select data-answer="research" aria-label="Εργαλείο δεύτερου σεναρίου">
+              <option value="">— επιλέξτε —</option>
+              <option value="web">Web Search</option>
+              <option value="research">Research Mode</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Ποιες αλλαγές ανακοινώθηκαν αυτή την εβδομάδα για τη φορολογία των ελεύθερων επαγγελματιών;» →
+            <select data-answer="web" aria-label="Εργαλείο τρίτου σεναρίου">
+              <option value="">— επιλέξτε —</option>
+              <option value="web">Web Search</option>
+              <option value="research">Research Mode</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Ολοκληρωμένη ανάλυση αγοράς με διασταύρωση πηγών και δομημένη αναφορά με παραπομπές» →
+            <select data-answer="research" aria-label="Εργαλείο τέταρτου σεναρίου">
+              <option value="">— επιλέξτε —</option>
+              <option value="web">Web Search</option>
+              <option value="research">Research Mode</option>
+            </select>
+          </p>
+          <button type="button" class="btn btn-primary btn-sm fill-check" style="margin-top:10px;">Έλεγχος απαντήσεων</button>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Κριτική αξιολόγηση πηγών" data-group="2.3 Web Search &amp; Research Mode">
+        <span class="chapter-kicker">Υποενότητα 2.3 · Κριτική αξιολόγηση</span>
+        <h1>Κριτική αξιολόγηση πηγών και αποτελεσμάτων</h1>
+        <p>Η δυνατότητα του Claude να αντλεί δεδομένα από το διαδίκτυο αυξάνει κατακόρυφα την παραγωγικότητα, αλλά παράλληλα απαιτεί από τον χρήστη την άσκηση <strong>κριτικής αξιολόγησης</strong>. Η τεχνητή νοημοσύνη επεξεργάζεται τις πληροφορίες που βρίσκει διαθέσιμες, πράγμα που σημαίνει ότι η ποιότητα της απάντησης εξαρτάται άμεσα από την ποιότητα των πηγών της.</p>
+        <figure class="shot">
+          <img src="assets/images/image021.png" alt="Παράθεση πηγών από το Claude με επίσημους θεσμικούς ιστοτόπους και δευτερογενή ψηφιακά μέσα" loading="lazy">
+          <figcaption>«Παράθεση πηγών από το Claude με ταυτόχρονη εμφάνιση επίσημων θεσμικών ιστοτόπων και δευτερογενών ψηφιακών μέσων»</figcaption>
+        </figure>
+        <p>Για να διασφαλίσετε την εγκυρότητα της έρευνάς σας, είναι απαράδεκτο να υιοθετείτε τυφλά κάθε αποτέλεσμα. Αντίθετα, προτείνεται να ακολουθείτε τα παρακάτω βήματα ελέγχου:</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">1. Έλεγχος της αξιοπιστίας του Domain <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p><strong>Έλεγχος της αξιοπιστίας του Domain:</strong> Πατώντας πάνω στις αριθμημένες παραπομπές ή ανοίγοντας το παράθυρο των πηγών (Sources), εξετάστε τους ιστοτόπους που επισκέφθηκε το μοντέλο. Προέρχονται οι πληροφορίες από επίσημους κυβερνητικούς φορείς (π.χ. .gov, europa.eu), θεσμοθετημένα ειδησεογραφικά δίκτυα, ακαδημαϊκά ιδρύματα ή από ανώνυμα blogs και φόρουμ;</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">2. Διασταύρωση ημερομηνιών <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p><strong>Διασταύρωση ημερομηνιών:</strong> Σε κλάδους που μεταβάλλονται ραγδαία, όπως η τεχνολογία, η νομοθεσία ή η οικονομία, η πληροφορία χάνει γρήγορα την αξία της. Ελέγξτε αν οι πηγές που χρησιμοποιήθηκαν είναι πρόσφατες και επίκαιρες ή αν βασίζονται σε δεδομένα παλαιότερων ετών.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">3. Εντοπισμός πιθανών αποκλίσεων (Hallucinations) <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p><strong>Εντοπισμός πιθανών αποκλίσεων (Hallucinations):</strong> Παρόλο που η σύνδεση στο διαδίκτυο μειώνει σημαντικά τις πιθανότητες «παραισθήσεων» (hallucinations) του μοντέλου, υπάρχει πάντα η πιθανότητα παρερμηνείας ενός σύνθετου κειμένου. Αν ένα στατιστικό στοιχείο ή μια νομική διάταξη σας φαίνεται υπερβολική ή ασυνήθιστη, χρησιμοποιήστε τον σύνδεσμο για να διαβάσετε το πρωτότυπο κείμενο στο σημείο της αναφοράς.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">4. Αναγνώριση Μεροληψίας (Bias) <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p><strong>Αναγνώριση Μεροληψίας (Bias):</strong> Το Claude παρουσιάζει τη σύνθεση των απόψεων που εντοπίζει. Εάν το θέμα της αναζήτησής σας είναι αμφιλεγόμενο, ελέγξτε αν η απάντηση περιλαμβάνει σφαιρική προσέγγιση ή αν έχει βασιστεί μονόπλευρα σε πηγές που υποστηρίζουν μόνο μία συγκεκριμένη κατεύθυνση.</p>
+            </div>
+          </div>
+        </div>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">⚠️</span>
+          <div><p>Η αναζήτηση και η έρευνα μέσω του Claude <strong>δεν αντικαθιστούν τον ανθρώπινο έλεγχο</strong>. Λειτουργούν ως το εργαλείο που θα κάνει το 90% της προεργασίας (συλλογή, μετάφραση, σύνοψη), αφήνοντας σε εσάς το κρίσιμο 10% της τελικής επαλήθευσης και έγκρισης.</p></div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ΥΠΟΕΝΟΤΗΤΑ 2.4 — ΔΗΜΙΟΥΡΓΙΑ ΕΓΓΡΑΦΩΝ OFFICE
+           ============================================================ -->
+
+      <section class="chapter" data-title="Δημιουργία εγγράφων Office" data-group="2.4 Δημιουργία εγγράφων Office">
+        <span class="chapter-kicker">Υποενότητα 2.4</span>
+        <h1>Δημιουργία εγγράφων Office</h1>
+        <p>Η εξέλιξη του Claude επιτρέπει πλέον την <strong>απευθείας παραγωγή αρχείων</strong> που μπορείτε να κατεβάσετε και να χρησιμοποιήσετε άμεσα στην εργασία σας. Μέσω αυτής της λειτουργίας, το Claude έχει την δυνατότητα να δημιουργήσει έγγραφα με την πλήρη μορφοποίηση που απαιτείται από τα επαγγελματικά πρότυπα. Αυτή η δυνατότητα καλύπτει τους τέσσερις βασικούς πυλώνες του γραφείου: <strong>1. Microsoft Word, 2. Microsoft Excel, 3. Microsoft Power Point</strong> και <strong>4. αρχεία PDF</strong>.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Τύποι εγγράφων Office">
+            <button type="button" class="tab-btn active" data-tab="off-word" role="tab" aria-selected="true">1. Word</button>
+            <button type="button" class="tab-btn" data-tab="off-excel" role="tab" aria-selected="false">2. Excel</button>
+            <button type="button" class="tab-btn" data-tab="off-ppt" role="tab" aria-selected="false">3. PowerPoint</button>
+            <button type="button" class="tab-btn" data-tab="off-pdf" role="tab" aria-selected="false">4. PDF</button>
+          </div>
+          <div class="tab-panel active" data-tab="off-word" role="tabpanel">
+            <p><strong>Microsoft Word (.docx):</strong> Το Claude μπορεί να συντάξει αναφορές, συμβόλαια ή επιστολές, εφαρμόζοντας επικεφαλίδες (headings), έντονη γραφή και σωστή δομή παραγράφων. Το αποτέλεσμα δεν είναι απλό κείμενο, αλλά ένα έγγραφο έτοιμο για εκτύπωση ή περαιτέρω επεξεργασία.</p>
+            <figure class="shot">
+              <img src="assets/images/image022.png" alt="Δημιουργία και παράδοση έτοιμου αρχείου Word από το Claude, διαθέσιμου για άμεση λήψη" loading="lazy">
+              <figcaption>«Δημιουργία και παράδοση έτοιμου αρχείου Word (.docx) από το Claude, διαθέσιμου για άμεση λήψη από τον χρήστη»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="off-excel" role="tabpanel">
+            <p><strong>Microsoft Excel (.xlsx):</strong> Πρόκειται για την παραγωγή λειτουργικών υπολογιστικών φύλλων. Τα αρχεία που δημιουργεί το Claude περιλαμβάνουν πραγματικούς μαθηματικούς τύπους, πολλαπλά φύλλα εργασίας και μορφοποίηση υπό όρους, επιτρέποντάς σας να μεταβείτε από μια απλή συνομιλία σε ένα έτοιμο εργαλείο ανάλυσης.</p>
+            <figure class="shot">
+              <img src="assets/images/image023.png" alt="Δημιουργία και παράδοση έτοιμου αρχείου Excel από το Claude, διαθέσιμου για άμεση λήψη" loading="lazy">
+              <figcaption>«Δημιουργία και παράδοση έτοιμου αρχείου Excel (.xlsx) από το Claude, διαθέσιμου για άμεση λήψη από τον χρήστη»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="off-ppt" role="tabpanel">
+            <p><strong>Microsoft PowerPoint (.pptx):</strong> Μπορείτε να ζητήσετε τη δημιουργία μιας πλήρους παρουσίασης. Το Claude οργανώνει το περιεχόμενο σε διαφάνειες, προσθέτει τίτλους, bullet points και, αν του ζητηθεί, σημειώσεις για τον ομιλητή στο κάτω μέρος κάθε διαφάνειας.</p>
+            <figure class="shot">
+              <img src="assets/images/image024.png" alt="Δημιουργία και παράδοση έτοιμου αρχείου PowerPoint από το Claude, διαθέσιμου για άμεση λήψη" loading="lazy">
+              <figcaption>«Δημιουργία και παράδοση έτοιμου αρχείου Power Point (.pptx) από το Claude, διαθέσιμου για άμεση λήψη από τον χρήστη»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="off-pdf" role="tabpanel">
+            <p><strong>Αρχεία PDF:</strong> Ιδανικό για την παραγωγή τελικών αναφορών ή εγγράφων που προορίζονται για κοινοποίηση. Το PDF διασφαλίζει ότι η μορφοποίηση που δημιούργησε το Claude θα παραμείνει αναλλοίωτη σε οποιαδήποτε συσκευή.</p>
+            <figure class="shot">
+              <img src="assets/images/image025.png" alt="Δημιουργία και παράδοση έτοιμου αρχείου PDF από το Claude, διαθέσιμου για άμεση λήψη" loading="lazy">
+              <figcaption>«Δημιουργία και παράδοση έτοιμου αρχείου PDF (.pdf) από το Claude, διαθέσιμου για άμεση λήψη από τον χρήστη»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πώς λειτουργεί η διαδικασία" data-group="2.4 Δημιουργία εγγράφων Office">
+        <span class="chapter-kicker">Υποενότητα 2.4</span>
+        <h1>Πώς λειτουργεί η διαδικασία;</h1>
+        <p>Για να δημιουργήσετε ένα αρχείο, η διαδικασία είναι απλή και άμεση:</p>
+        <ol class="steps">
+          <li><strong class="step-title">Ενεργοποίηση</strong> Βεβαιωθείτε ότι στις ρυθμίσεις (Settings &gt; Capabilities) είναι ενεργοποιημένη η επιλογή <strong>«Code execution and file creation»</strong>.</li>
+          <li><strong class="step-title">Το Prompt</strong> Ζητήστε από το Claude αυτό που χρειάζεστε με σαφήνεια. Για παράδειγμα: «Με βάση την ανάλυση που κάναμε, δημιούργησε ένα αρχείο Excel με τα δεδομένα των πωλήσεων και ένα αρχείο PowerPoint 5 διαφανειών για την παρουσίασή τους».</li>
+          <li><strong class="step-title">Λήψη</strong> Μόλις το Claude ολοκληρώσει τη δημιουργία, θα εμφανιστεί στη συνομιλία ένα εικονίδιο αρχείου με το όνομα του εγγράφου. Πατώντας πάνω του, το αρχείο κατεβαίνει απευθείας στον υπολογιστή σας.</li>
+        </ol>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">📏</span>
+          <div><p><strong>Συμβουλή:</strong> Το όριο μεγέθους για τα αρχεία που δημιουργεί το Claude είναι τα <strong>30MB</strong>. Αυτό είναι υπεραρκετό για τα περισσότερα έγγραφα κειμένου και παρουσιάσεις, αλλά αν έχετε εξαιρετικά μεγάλα σετ δεδομένων στο Excel, ίσως χρειαστεί να ζητήσετε την οργάνωσή τους σε περισσότερα από ένα αρχεία.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: σειρά βημάτων" data-group="2.4 Δημιουργία εγγράφων Office">
+        <span class="chapter-kicker">Υποενότητα 2.4 · Δραστηριότητα</span>
+        <h1>Δραστηριότητα: βάλτε τα βήματα στη σειρά</h1>
+        <div class="activity js-seq" id="act_4_1"
+             data-ok="Σωστή σειρά! Ενεργοποίηση της δυνατότητας, σαφές prompt, εμφάνιση του εικονιδίου αρχείου και λήψη με ένα κλικ."
+             data-ko="Η σειρά δεν είναι σωστή. Θυμηθείτε: πρώτα η ενεργοποίηση στα Settings, μετά το σαφές prompt, έπειτα εμφανίζεται το εικονίδιο και τέλος γίνεται η λήψη.">
+          <p class="act-q">Τοποθετήστε στη σωστή σειρά τα βήματα δημιουργίας ενός αρχείου Office από το Claude (κάντε κλικ στα βήματα με τη σειρά που εκτελούνται):</p>
+          <div class="seq-pool">
+            <button type="button" class="seq-item" data-step="3">Εμφανίζεται στη συνομιλία εικονίδιο αρχείου με το όνομα του εγγράφου</button>
+            <button type="button" class="seq-item" data-step="1">Ενεργοποίηση «Code execution and file creation» στα Settings &gt; Capabilities</button>
+            <button type="button" class="seq-item" data-step="4">Κλικ στο εικονίδιο — το αρχείο κατεβαίνει στον υπολογιστή</button>
+            <button type="button" class="seq-item" data-step="2">Σαφές prompt με το ζητούμενο αρχείο (π.χ. Excel + PowerPoint 5 διαφανειών)</button>
+          </div>
+          <div class="seq-slots">
+            <div class="seq-slot"><span class="slot-num">1.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">2.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">3.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">4.</span><span class="slot-text"></span></div>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ΥΠΟΕΝΟΤΗΤΑ 2.5 — CODE EXECUTION & FILE CREATION
+           ============================================================ -->
+
+      <section class="chapter" data-title="Code Execution &amp; File Creation" data-group="2.5 Code Execution &amp; File Creation για μη-προγραμματιστές">
+        <span class="chapter-kicker">Υποενότητα 2.5</span>
+        <h1>Code Execution &amp; File Creation για μη-προγραμματιστές</h1>
+        <p>Μέχρι πρόσφατα, η προχωρημένη ανάλυση δεδομένων, ο καθαρισμός αρχείων και η δημιουργία σύνθετων γραφημάτων απαιτούσαν εξειδικευμένες γνώσεις προγραμματισμού (π.χ. σε γλώσσα Python) ή προχωρημένη χρήση εργαλείων Business Intelligence. Το Claude ανατρέπει αυτό το δεδομένο μέσω του ενσωματωμένου περιβάλλοντος εκτέλεσης κώδικα (<strong>Code Execution Sandbox</strong>).</p>
+        <p>Η λειτουργία αυτή επιτρέπει στο μοντέλο να γράφει αυτόματα κώδικα, να τον εκτελεί σε πραγματικό χρόνο και να σας παρουσιάζει απευθείας το τελικό αποτέλεσμα (πίνακες, υπολογισμούς ή διαγράμματα). Ως χρήστης, δεν χρειάζεται να δείτε, να γράψετε ή να κατανοήσετε ούτε μία γραμμή κώδικα. Η επικοινωνία σας με το μοντέλο γίνεται αποκλειστικά με απλές οδηγίες στα ελληνικά.</p>
+        <p>Ανεβάζοντας ένα αρχείο δεδομένων (όπως .xlsx ή .csv), μπορείτε να ζητήσετε τη διεξαγωγή εργασιών που παραδοσιακά απαιτούσαν ώρες χειροκίνητης εργασίας.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Δυνατότητες Code Execution">
+            <button type="button" class="tab-btn active" data-tab="ce-clean" role="tab" aria-selected="true">Καθαρισμός δεδομένων</button>
+            <button type="button" class="tab-btn" data-tab="ce-stats" role="tab" aria-selected="false">Υπολογισμοί &amp; στατιστικά</button>
+            <button type="button" class="tab-btn" data-tab="ce-charts" role="tab" aria-selected="false">Γραφήματα</button>
+          </div>
+          <div class="tab-panel active" data-tab="ce-clean" role="tabpanel">
+            <h3>Καθαρισμός δεδομένων (Data Cleaning)</h3>
+            <p>Το Claude μπορεί να εντοπίσει και να διορθώσει αυτόματα διπλότυπες εγγραφές, να συμπληρώσει ή να αφαιρέσει κενά πεδία, και να τυποποιήσει τη μορφή των δεδομένων (π.χ. μετατροπή όλων των ημερομηνιών στην ίδια μορφή).</p>
+            <figure class="shot">
+              <img src="assets/images/image026.png" alt="Οδηγία προς το Claude για καθαρισμό δεδομένων αρχείου Excel" loading="lazy">
+              <figcaption>«Οδηγία (prompt) για καθαρισμό δεδομένων αρχείου excel»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image027.png" alt="Αποτελέσματα καθαρισμού δεδομένων αρχείου Excel από το Claude" loading="lazy">
+              <figcaption>«Αποτελέσματα καθαρισμού δεδομένων αρχείου excel από το Claude»</figcaption>
+            </figure>
+            <div class="accordion">
+              <div class="acc-item">
+                <button type="button" class="acc-header" aria-expanded="false">Τα δεδομένα πριν και μετά τον καθαρισμό <span class="acc-arrow" aria-hidden="true">▸</span></button>
+                <div class="acc-body">
+                  <figure class="shot">
+                    <img src="assets/images/image028.png" alt="Τα δεδομένα του αρχείου πριν από την επεξεργασία" loading="lazy">
+                    <figcaption>«Δεδομένα πριν την επεξεργασία»</figcaption>
+                  </figure>
+                  <figure class="shot">
+                    <img src="assets/images/image029.png" alt="Τα καθαρισμένα δεδομένα μετά την επεξεργασία με το Claude" loading="lazy">
+                    <figcaption>«Καθαρισμένα δεδομένα μετά την επεξεργασία με τον Claude»</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="ce-stats" role="tabpanel">
+            <h3>Σύνθετοι υπολογισμοί και στατιστικά</h3>
+            <p>Αντί να ψάχνετε πολύπλοκες συναρτήσεις, μπορείτε να ζητήσετε από το μοντέλο να υπολογίσει μέσους όρους, ποσοστιαίες μεταβολές, τάσεις ή να ομαδοποιήσει τα δεδομένα ανά κατηγορία.</p>
+            <figure class="shot">
+              <img src="assets/images/image030.png" alt="Διεξαγωγή σύνθετων στατιστικών υπολογισμών και εξαγωγή επιχειρηματικών συμπερασμάτων" loading="lazy">
+              <figcaption>«Διεξαγωγή σύνθετων στατιστικών υπολογισμών και την εξαγωγή επιχειρηματικών συμπερασμάτων»</figcaption>
+            </figure>
+            <div class="accordion">
+              <div class="acc-item">
+                <button type="button" class="acc-header" aria-expanded="false">Συνέχεια του παραδείγματος στατιστικής ανάλυσης <span class="acc-arrow" aria-hidden="true">▸</span></button>
+                <div class="acc-body">
+                  <figure class="shot">
+                    <img src="assets/images/image031.png" alt="Συνέχεια των σύνθετων στατιστικών υπολογισμών με επιχειρηματικά συμπεράσματα" loading="lazy">
+                    <figcaption>«Διεξαγωγή σύνθετων στατιστικών υπολογισμών και την εξαγωγή επιχειρηματικών συμπερασμάτων»</figcaption>
+                  </figure>
+                  <figure class="shot">
+                    <img src="assets/images/image032.png" alt="Ολοκλήρωση των σύνθετων στατιστικών υπολογισμών με επιχειρηματικά συμπεράσματα" loading="lazy">
+                    <figcaption>«Διεξαγωγή σύνθετων στατιστικών υπολογισμών και την εξαγωγή επιχειρηματικών συμπερασμάτων»</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="ce-charts" role="tabpanel">
+            <h3>Αυτόματη παραγωγή γραφημάτων</h3>
+            <p>Το μοντέλο μπορεί να μετατρέψει τις στήλες ενός πίνακα σε οπτική πληροφορία, δημιουργώντας ραβδογράμματα, κυκλικά διαγράμματα (πίτες) ή διαγράμματα γραμμής, τα οποία ενσωματώνονται απευθείας στη συνομιλία σας.</p>
+            <figure class="shot">
+              <img src="assets/images/image033.png" alt="Αυτόματη δημιουργία ραβδογράμματος από το Claude για τη σύγκριση εσόδων ανά κατηγορία αθλητικών παπουτσιών" loading="lazy">
+              <figcaption>«Αυτόματη δημιουργία ραβδογράμματος (Bar Chart) από το Claude για τη σύγκριση των συνολικών εσόδων ανά κατηγορία αθλητικών παπουτσιών»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image034.png" alt="Αυτόματη δημιουργία κυκλικού διαγράμματος για τη γεωγραφική κατανομή των εσόδων ανά περιοχή" loading="lazy">
+              <figcaption>«Αυτόματη δημιουργία κυκλικού διαγράμματος (Pie Chart) για την οπτικοποίηση της γεωγραφικής κατανομής των εσόδων ανά περιοχή»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γιατί μετράει η ένδειξη εκτέλεσης κώδικα" data-group="2.5 Code Execution &amp; File Creation για μη-προγραμματιστές">
+        <span class="chapter-kicker">Υποενότητα 2.5 · Ran Python code</span>
+        <h1>Γιατί είναι σημαντικό να γνωρίζετε πότε εκτελείται κώδικας;</h1>
+        <p>Όταν ζητάτε από το Claude να επεξεργαστεί ένα αρχείο δεδομένων (π.χ. ένα Excel ή ένα CSV), θα παρατηρήσετε κατά τη διάρκεια της επεξεργασίας μια ένδειξη όπως <strong>«Ran Python code»</strong> ή <strong>«Analyzing»</strong>.</p>
+        <p>Για έναν μη προγραμματιστή, η ένδειξη αυτή μπορεί αρχικά να φαίνεται ως μια δευτερεύουσα τεχνική λεπτομέρεια. Στην πραγματικότητα, όμως, αποτελεί μια από τις πιο κρίσιμες πληροφορίες που πρέπει να παρακολουθείτε, για δύο πολύ συγκεκριμένους, λειτουργικούς λόγους:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🎯</div>
+            <h3>1. Εγγύηση μαθηματικής ακρίβειας (Υπολογισμός έναντι πρόβλεψης)</h3>
+            <p>Τα Μεγάλα Γλωσσικά Μοντέλα (LLMs) στην απλή τους λειτουργία λειτουργούν με βάση τη <strong>στατιστική πρόβλεψη λέξεων</strong>. Αυτό σημαίνει ότι αν τους ζητήσετε να κάνουν σύνθετες μαθηματικές πράξεις ή να αθροίσουν εκατοντάδες γραμμές ενός Excel σε απλό κείμενο, υπάρχει σοβαρός κίνδυνος να κάνουν λάθος στην αριθμητική («παραίσθηση»).</p>
+            <p>Όταν όμως εμφανίζεται η ένδειξη «Ran Python code», το Claude μετατρέπεται από κειμενογράφο σε ηλεκτρονικό υπολογιστή. Γράφει ένα πραγματικό πρόγραμμα, το εκτελεί πάνω στο αρχείο σας και σας επιστρέφει το αποτέλεσμα. Η ένδειξη αυτή είναι η οπτική σας επιβεβαίωση ότι το μοντέλο <strong>υπολόγισε</strong> με απόλυτη μαθηματική ακρίβεια τα δεδομένα σας και δεν τα <strong>μάντεψε</strong>.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">⏱️</div>
+            <h3>2. Έλεγχος της ροής εργασίας (Time Tracking)</h3>
+            <p>Η επεξεργασία μεγάλων όγκων δεδομένων και η παραγωγή γραφημάτων απαιτούν χρόνο για να «τρέξουν» στο υπόβαθρο. Η εμφάνιση της ένδειξης λειτουργεί ως <strong>δείκτης προόδου (progress bar)</strong>.</p>
+            <p>Σας ενημερώνει ότι το Claude εργάζεται ενεργά πάνω στο αρχείο σας και συνθέτει την απάντηση, αποτρέποντάς σας από το να θεωρήσετε ότι η εφαρμογή έχει κολλήσει ή ότι πρέπει να ανανεώσετε τη σελίδα χάνοντας τη συνομιλία σας.</p>
+          </div>
+        </div>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">🛡️</span>
+          <div><p><strong>Κανόνας εμπιστοσύνης:</strong> Πριν χρησιμοποιήσετε οποιοδήποτε στατιστικό στοιχείο, άθροισμα ή οικονομικό υπολογισμό που σας έδωσε το Claude για ένα αρχείο, βεβαιωθείτε ότι η απάντησή του συνοδεύεται από την ένδειξη εκτέλεσης κώδικα. Είναι η δικλείδα ασφαλείας σας για επαγγελματικά και έγκυρα αποτελέσματα. Πάντα ο τελικός έλεγχος πρέπει να γίνεται από εσάς τους χρήστες.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος: Ran Python code" data-group="2.5 Code Execution &amp; File Creation για μη-προγραμματιστές">
+        <span class="chapter-kicker">Υποενότητα 2.5 · Γρήγορος έλεγχος</span>
+        <h1>Γρήγορος έλεγχος</h1>
+        <div class="activity quiz-mini js-mcq" id="act_5_1" data-correct="1"
+             data-ok="Ακριβώς! Η ένδειξη «Ran Python code» επιβεβαιώνει ότι το Claude εκτέλεσε πραγματικό πρόγραμμα πάνω στο αρχείο σας — υπολόγισε με μαθηματική ακρίβεια, δεν «μάντεψε»."
+             data-ko="Όχι. Η ένδειξη «Ran Python code» σημαίνει ότι το Claude έγραψε και εκτέλεσε πραγματικό κώδικα πάνω στα δεδομένα σας — εγγύηση μαθηματικής ακρίβειας και δείκτης προόδου.">
+          <p class="act-q">Τι σημαίνει η ένδειξη «Ran Python code» όταν το Claude επεξεργάζεται το Excel σας;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Ότι το Claude θέλει να μάθετε προγραμματισμό Python για να συνεχίσετε.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Ότι το μοντέλο εκτέλεσε πραγματικό πρόγραμμα πάνω στο αρχείο σας — τα αποτελέσματα είναι υπολογισμένα με μαθηματική ακρίβεια, όχι «μαντεψιά».</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Ότι η εφαρμογή «κόλλησε» και πρέπει να ανανεώσετε τη σελίδα.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ΥΠΟΕΝΟΤΗΤΑ 2.6 — ΠΡΑΚΤΙΚΕΣ ΕΦΑΡΜΟΓΕΣ ΚΑΘΗΜΕΡΙΝΟΤΗΤΑΣ
+           ============================================================ -->
+
+      <section class="chapter" data-title="Πρακτικές εφαρμογές — εισαγωγή" data-group="2.6 Πρακτικές εφαρμογές καθημερινότητας">
+        <span class="chapter-kicker">Υποενότητα 2.6</span>
+        <h1>Πρακτικές εφαρμογές καθημερινότητας</h1>
+        <p>Η πραγματική αξία ενός εργαλείου Τεχνητής Νοημοσύνης δεν κρίνεται από τις θεωρητικές του δυνατότητες, αλλά από τον τρόπο με τον οποίο ενσωματώνεται στην καθημερινή ροή εργασίας και βελτιώνει την παραγωγικότητα. Σε αυτή την υποενότητα, θα εξετάσουμε <strong>πέντε ρεαλιστικά σενάρια</strong> της καθημερινότητας, στα οποία το Claude μπορεί να αναλάβει τον ρόλο του άμεσου ψηφιακού σας συνεργάτη.</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">✉️</div>
+            <h3>1. Email</h3>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📋</div>
+            <h3>2. Συνόψεις εγγράφων</h3>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🌍</div>
+            <h3>3. Μεταφράσεις με ύφος</h3>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">💡</div>
+            <h3>4. Brainstorming</h3>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📊</div>
+            <h3>5. Παρουσιάσεις</h3>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="1. Σύνταξη &amp; διόρθωση email" data-group="2.6 Πρακτικές εφαρμογές καθημερινότητας">
+        <span class="chapter-kicker">Υποενότητα 2.6 · Σενάριο 1</span>
+        <h1>1. Επαγγελματική σύνταξη και διόρθωση email</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Παραδείγματα σεναρίου email">
+            <button type="button" class="tab-btn active" data-tab="sc1-main" role="tab" aria-selected="true">Βασικό παράδειγμα</button>
+            <button type="button" class="tab-btn" data-tab="sc1-alt" role="tab" aria-selected="false">Εναλλακτικό: απάντηση σε παράπονο</button>
+          </div>
+          <div class="tab-panel active" data-tab="sc1-main" role="tabpanel">
+            <p>Η επικοινωνία μέσω ηλεκτρονικού ταχυδρομείου απαιτεί συχνά χρόνο για να επιτευχθεί η σωστή ισορροπία μεταξύ ευγένειας, σαφήνειας και επαγγελματισμού, ειδικά όταν πρόκειται για ευαίσθητα ή επίσημα θέματα.</p>
+            <p>Μπορείτε να δώσετε στο Claude ένα πρόχειρο κείμενο με σκόρπιες σκέψεις και να του ζητήσετε να το μετατρέψει σε ένα δομημένο, επίσημο email.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Θέλω να λειτουργήσεις ως Επαγγελματίας Κειμενογράφος. Μετάτρεψε τις παρακάτω σημειώσεις σε ένα επίσημο και ευγενικό email προς τη Διοίκηση, με το οποίο θα ζητάμε παράταση της προθεσμίας υποβολής του project κατά 3 ημέρες, επικαλούμενοι τεχνικές καθυστερήσεις στην αναβάθμιση του συστήματος. [Εισαγωγή σημειώσεων]»</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="sc1-alt" role="tabpanel">
+            <h3>Εναλλακτικό παράδειγμα: απάντηση σε παράπονο</h3>
+            <p>Μια άλλη συχνή πρόκληση είναι η απάντηση σε ένα γραπτό παράπονο ή σε μια δυσαρέσκεια συνεργάτη. Σε τέτοιες περιπτώσεις, η συναισθηματική φόρτιση μπορεί να δυσκολέψει τη σύνταξη μιας αντικειμενικής απάντησης. Το Claude μπορεί να λειτουργήσει ως <strong>φίλτρο διπλωματίας</strong>.</p>
+            <p>Δίνετε στο μοντέλο το παράπονο που λάβατε και του ζητάτε να συνθέσει μια απάντηση που αναγνωρίζει το πρόβλημα, προτείνει λύση και διασφαλίζει τη διατήρηση της καλής συνεργασίας.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Θέλω να λειτουργήσεις ως Έμπειρος Υπεύθυνος Δημοσίων Σχέσεων (PR Manager). Ένας σημαντικός πελάτης μάς έστειλε παράπονο γιατί καθυστέρησε η παράδοση της εβδομαδιαίας αναφοράς αποτελεσμάτων. Μετάτρεψε τις παρακάτω σκόρπιες σκέψεις μου σε μια επίσημη, καθησυχαστική και άκρως επαγγελματική απάντηση. Πρέπει να ζητάμε συγγνώμη για την αναστάτωση, να εξηγούμε σύντομα ότι οφειλόταν σε έκτακτο τεχνικό έλεγχο των διακομιστών και να τον ενημερώνουμε ότι η αναφορά έχει ήδη αποσταλεί. Σημειώσεις: [Εισάγετε τις σημειώσεις ή το αρχικό email του πελάτη]»</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος: prompt για παράπονο" data-group="2.6 Πρακτικές εφαρμογές καθημερινότητας">
+        <span class="chapter-kicker">Υποενότητα 2.6 · Γρήγορος έλεγχος</span>
+        <h1>Γρήγορος έλεγχος</h1>
+        <div class="activity quiz-mini js-mcq" id="q_email" data-correct="2"
+             data-ok="Σωστά! Το Claude λειτουργεί ως «φίλτρο διπλωματίας»: με σαφή ρόλο (PR Manager), πλαίσιο (το παράπονο) και συγκεκριμένα ζητούμενα (συγγνώμη, εξήγηση, ενημέρωση), η απάντηση αναγνωρίζει το πρόβλημα και διατηρεί τη συνεργασία."
+             data-ko="Όχι. Η πρακτική της ενότητας είναι σαφής ρόλος, πλαίσιο και συγκεκριμένα ζητούμενα — όχι γενικά ή αμυντικά αιτήματα.">
+          <p class="act-q">Λαμβάνετε γραπτό παράπονο από σημαντικό πελάτη για καθυστερημένη αναφορά. Ποιο prompt ακολουθεί την πρακτική της ενότητας;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> «Γράψε μια απάντηση στο παράπονο»</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> «Πες στον πελάτη ότι δεν φταίμε εμείς»</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> «Λειτούργησε ως έμπειρος PR Manager: μετάτρεψε τις σημειώσεις μου σε επίσημη, καθησυχαστική απάντηση που ζητά συγγνώμη, εξηγεί σύντομα τον έκτακτο τεχνικό έλεγχο και ενημερώνει ότι η αναφορά έχει ήδη αποσταλεί»</button>
+            <button type="button" class="option-btn"><span class="opt-key">Δ</span> «Σύνταξε ένα οποιοδήποτε ευγενικό email»</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="2. Σύνοψη εκτενών εγγράφων" data-group="2.6 Πρακτικές εφαρμογές καθημερινότητας">
+        <span class="chapter-kicker">Υποενότητα 2.6 · Σενάριο 2</span>
+        <h1>2. Σύνοψη εκτενών εγγράφων και αναφορών</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Παραδείγματα σεναρίου σύνοψης">
+            <button type="button" class="tab-btn active" data-tab="sc2-main" role="tab" aria-selected="true">Βασικό παράδειγμα</button>
+            <button type="button" class="tab-btn" data-tab="sc2-alt" role="tab" aria-selected="false">Εναλλακτικό: πρακτικά σύσκεψης</button>
+          </div>
+          <div class="tab-panel active" data-tab="sc2-main" role="tabpanel">
+            <p>Η διαχείριση μεγάλου όγκου πληροφοριών (όπως πολυσέλιδες δημόσιες διακηρύξεις, νομικά κείμενα ή εταιρικές αναφορές) αποτελεί συχνά χρονοβόρα διαδικασία.</p>
+            <p>Ανεβάζοντας το έγγραφο (σε μορφή PDF ή Word), το Claude μπορεί να εξάγει τα κρίσιμα σημεία, τις προθεσμίες ή τα οικονομικά μεγέθη μέσα σε δευτερόλεπτα.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Έχω ανεβάσει αυτή την αναφορά 40 σελίδων. Λειτούργησε ως Executive Assistant και δημιούργησε μια συνοπτική αναφορά (Executive Summary) σε bullet points, η οποία θα περιλαμβάνει: α) τον κύριο σκοπό του εγγράφου, β) τις 5 πιο σημαντικές διαπιστώσεις και γ) τυχόν κρίσιμες ημερομηνίες ή προθεσμίες που αναφέρονται.»</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="sc2-alt" role="tabpanel">
+            <h3>Εναλλακτικό παράδειγμα: πρακτικά σύσκεψης</h3>
+            <p>Ένα ακόμη συχνό σενάριο είναι η ανάγκη επεξεργασίας πολυσέλιδων πρακτικών μιας μεγάλης σύσκεψης (Minutes of Meeting) ή αναλυτικών οδηγιών ενός έργου, όπου πρέπει να απομονωθούν άμεσα οι ευθύνες που αναλογούν σε κάθε εμπλεκόμενο.</p>
+            <p>Ανεβάζετε το έγγραφο και ζητάτε από το Claude να λειτουργήσει ως Project Manager, παρακάμπτοντας τις γενικές συζητήσεις και καταγράφοντας αποκλειστικά τις συγκεκριμένες εργασίες που ανατέθηκαν.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Σου έχω επισυνάψει το αρχείο Word με τα αναλυτικά πρακτικά της μηνιαίας σύσκεψης του τμήματος. Λειτούργησε ως έμπειρος Project Manager και εξήγαγε από το κείμενο ένα ξεκάθαρο πλάνο ενεργειών (Action Plan). Θέλω να δημιουργήσεις έναν πίνακα με τις εξής 3 στήλες: 1) Συγκεκριμένη Εργασία / Παραδοτέο, 2) Όνομα Υπευθύνου (ποιος ανέλαβε τι) και 3) Προθεσμία Υλοποίησης. Αγνόησε τις γενικές τοποθετήσεις και εστίασε αυστηρά στις δεσμεύσεις που αναλήφθηκαν.»</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="3. Μετάφραση με προσαρμογή ύφους" data-group="2.6 Πρακτικές εφαρμογές καθημερινότητας">
+        <span class="chapter-kicker">Υποενότητα 2.6 · Σενάριο 3</span>
+        <h1>3. Μετάφραση κειμένων με προσαρμογή ύφους</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Παραδείγματα σεναρίου μετάφρασης">
+            <button type="button" class="tab-btn active" data-tab="sc3-main" role="tab" aria-selected="true">Βασικό παράδειγμα</button>
+            <button type="button" class="tab-btn" data-tab="sc3-alt" role="tab" aria-selected="false">Εναλλακτικό: τεχνικά κείμενα</button>
+          </div>
+          <div class="tab-panel active" data-tab="sc3-main" role="tabpanel">
+            <p>Η απλή, αυτοματοποιημένη μετάφραση λέξη προς λέξη συχνά αλλοιώνει το νόημα ή το απαιτούμενο ύφος ενός επαγγελματικού κειμένου.</p>
+            <p>Το Claude υπερέχει γιατί δεν μεταφράζει απλώς τη γλώσσα, αλλά μεταφέρει το <strong>πολιτισμικό και εταιρικό υπόβαθρο</strong>, προσαρμόζοντας το ύφος (π.χ. από ανεπίσημο σε αυστηρά ακαδημαϊκό ή νομικό).</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Μετάφρασε το ακόλουθο ελληνικό κείμενο στα αγγλικά. Το κείμενο απευθύνεται σε επενδυτές εξωτερικού, επομένως η μετάφραση πρέπει να διατηρεί ένα εξαιρετικά επαγγελματικό, πειστικό και σύγχρονο επιχειρηματικό ύφος (corporate tone), αποφεύγοντας τις κατά λέξη μεταφράσεις ιδιωματισμών.»</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="sc3-alt" role="tabpanel">
+            <h3>Εναλλακτικό παράδειγμα: τεχνικά κείμενα στα ελληνικά</h3>
+            <p>Μια εξίσου σημαντική πρόκληση είναι η μετάφραση ξενόγλωσσων τεχνικών κειμένων, οδηγιών ή όρων χρήσης στα ελληνικά, με τρόπο που να μην ακούγεται «ρομποτικός» ή δυσνόητος για τον τελικό αποδέκτη.</p>
+            <p>Δίνετε στο Claude ένα αγγλικό κείμενο με πυκνή ορολογία (π.χ. από τον κλάδο της πληροφορικής ή του management) και του ζητάτε να το μεταφράσει στα ελληνικά, απλοποιώντας το ύφος ώστε να είναι άμεσα κατανοητό από μη εξειδικευμένους χρήστες.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Θέλω να λειτουργήσεις ως Εξειδικευμένος Μεταφραστής και Τεχνικός Κειμενογράφος (Technical Copywriter). Μετάφρασε το ακόλουθο αγγλικό κείμενο, το οποίο περιγράφει τις τεχνικές προδιαγραφές ασφαλείας μιας εφαρμογής, στα ελληνικά. <strong>Προσοχή στο ύφος:</strong> Η μετάφραση δεν πρέπει να είναι κατά λέξη. Το τελικό κείμενο απευθύνεται στους απλούς χρήστες της εφαρμογής, επομένως το ύφος πρέπει να είναι φιλικό, επεξηγηματικό και απόλυτα κατανοητό (user-friendly tone), χωρίς όμως να χάνει την επαγγελματική του εγκυρότητα. Απόδωσε τους τεχνικούς όρους με δόκιμες ελληνικές εκφράσεις.»</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="4. Brainstorming" data-group="2.6 Πρακτικές εφαρμογές καθημερινότητας">
+        <span class="chapter-kicker">Υποενότητα 2.6 · Σενάριο 4</span>
+        <h1>4. Παραγωγή ιδεών και καταιγισμός ιδεών (Brainstorming)</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Παραδείγματα σεναρίου brainstorming">
+            <button type="button" class="tab-btn active" data-tab="sc4-main" role="tab" aria-selected="true">Βασικό παράδειγμα</button>
+            <button type="button" class="tab-btn" data-tab="sc4-alt" role="tab" aria-selected="false">Εναλλακτικό: λειτουργικά προβλήματα</button>
+          </div>
+          <div class="tab-panel active" data-tab="sc4-main" role="tabpanel">
+            <p>Όταν καλείστε να σχεδιάσετε ένα νέο σεμινάριο, μια καμπάνια ή μια λύση σε ένα εσωτερικό πρόβλημα, η εύρεση της αρχικής ιδέας είναι συχνά το δυσκολότερο βήμα.</p>
+            <p>Το Claude λειτουργεί ως ένας συνεργάτης που δεν κουράζεται ποτέ, προσφέροντας εναλλακτικές οπτικές γωνίες και δομώντας τη σκέψη σας.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Θέλω να σχεδιάσω ένα νέο εκπαιδευτικό πρόγραμμα 10 ωρών για ενήλικες με θέμα "Ψηφιακές Δεξιότητες στο Γραφείο". Λειτούργησε ως Σύμβουλος Εκπαίδευσης και πρότεινέ μου 3 διαφορετικές εναλλακτικές δομές (curriculum blueprints) με βάση τις σύγχρονες ανάγκες της αγοράς εργασίας.»</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="sc4-alt" role="tabpanel">
+            <h3>Εναλλακτικό παράδειγμα: λειτουργικά προβλήματα</h3>
+            <p>Εκτός από τον σχεδιασμό προγραμμάτων, η μέθοδος του καταιγισμού ιδεών είναι απαραίτητη όταν ένας οργανισμός αντιμετωπίζει λειτουργικά προβλήματα ή εσωτερικές προκλήσεις και αναζητά άμεσες, πρακτικές λύσεις που δεν είναι προφανείς εξ αρχής.</p>
+            <p>Παρουσιάζετε το πρόβλημα στο Claude και του ζητάτε να εφαρμόσει μια συγκεκριμένη τεχνική brainstorming (όπως η μέθοδος Six Thinking Hats ή η ανάλυση αιτιών), ώστε να σας δώσει προτάσεις που καλύπτουν διαφορετικές οπτικές γωνίες.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Στον οργανισμό μας αντιμετωπίζουμε σημαντική καθυστέρηση στην έγκριση εσωτερικών αιτημάτων και προμηθειών λόγω σύνθετης γραφειοκρατίας, γεγονός που προκαλεί εκνευρισμό στο προσωπικό. Λειτούργησε ως Σύμβουλος Επιχειρησιακής Οργάνωσης (Operations Consultant) και κάνε ένα δημιουργικό brainstorming. Πρότεινέ μου 5 καινοτόμες και άμεσα υλοποιήσιμες ιδέες για την απλοποίηση αυτής της διαδικασίας, χρησιμοποιώντας ψηφιακά εργαλεία αυτοματισμού. Για κάθε ιδέα κατέγραψε: α) τον τίτλο της, β) πώς λειτουργεί στην πράξη και γ) το αναμενόμενο όφελος για την αποδοτικότητα της ομάδας.»</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="5. Δομή παρουσιάσεων" data-group="2.6 Πρακτικές εφαρμογές καθημερινότητας">
+        <span class="chapter-kicker">Υποενότητα 2.6 · Σενάριο 5</span>
+        <h1>5. Προετοιμασία και δομή παρουσιάσεων</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Παραδείγματα σεναρίου παρουσιάσεων">
+            <button type="button" class="tab-btn active" data-tab="sc5-main" role="tab" aria-selected="true">Βασικό παράδειγμα</button>
+            <button type="button" class="tab-btn" data-tab="sc5-alt" role="tab" aria-selected="false">Εναλλακτικό: Business Pitch</button>
+          </div>
+          <div class="tab-panel active" data-tab="sc5-main" role="tabpanel">
+            <p>Η δημιουργία μιας παρουσίασης απαιτεί διαφορετική αρχιτεκτονική από τη συγγραφή ενός κειμένου, καθώς η πληροφορία πρέπει να είναι σύντομη και οπτικά οργανωμένη.</p>
+            <p>Πριν ανοίξετε το PowerPoint, το Claude μπορεί να δημιουργήσει το πλήρες προσχέδιο (storyboard), ορίζοντας τι θα περιλαμβάνει κάθε διαφάνεια, τον τίτλο της και τις σημειώσεις που πρέπει να πείτε εσείς προφορικά.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Με βάση την ανάλυση που κάναμε για την ψηφιακή ωριμότητα των οργανισμών, δημιούργησε τη δομή για μια παρουσίαση 6 διαφανειών. Για κάθε διαφάνεια, όρισε: 1) Τον Τίτλο, 2) Τα Core Bullet Points (έως 3) και 3) Τις Σημειώσεις Ομιλητή (Speaker Notes) που θα χρησιμοποιήσω κατά την παρουσίαση.»</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="sc5-alt" role="tabpanel">
+            <h3>Εναλλακτικό παράδειγμα: Business Pitch</h3>
+            <p>Ένα ακόμη κρίσιμο σενάριο είναι η προετοιμασία μιας παρουσίασης για την έγκριση ενός νέου έργου ή τον απολογισμό μιας επιχειρηματικής πρωτοβουλίας (Business Pitch). Σε αυτές τις περιπτώσεις, η δομή πρέπει να ακολουθεί μια λογική αλληλουχία: πρόβλημα, λύση, κόστος και προσδοκώμενο όφελος.</p>
+            <p>Ζητάτε από το Claude να λειτουργήσει ως Business Developer και να οργανώσει τις πληροφορίες ενός νέου έργου σε ένα «σφιχτό» storyboard παρουσίασης, εστιάζοντας στην πειστικότητα των επιχειρημάτων.</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Για παράδειγμα</span>
+              <p class="pb-text">«Θέλουμε να παρουσιάσουμε στη Γενική Διεύθυνση μια πρόταση για την προμήθεια ενός νέου λογισμικού Διαχείρισης Πελατών (CRM) με σκοπό την έγκριση του budget. Λειτούργησε ως έμπειρος Business Developer και δημιούργησε τη δομή (storyboard) για μια σύντομη και δυναμική παρουσίαση 5 διαφανειών. Για κάθε διαφάνεια όρισε: 1) Τον ακριβή Τίτλο. 2) Τα κύρια οπτικά στοιχεία ή Bullet Points (έως 3, με έμφαση σε αριθμούς και οφέλη). 3) Τις Σημειώσεις Ομιλητή (Speaker Notes) με τα επιχειρήματα που πρέπει να αναφέρω προφορικά για να πείσω τους συμμετέχοντες. Η ροή πρέπει να ακολουθεί τη δομή: Διαφάνεια 1: Εισαγωγή, Διαφάνεια 2: Το Πρόβλημα (υφιστάμενη κατάσταση), Διαφάνεια 3: Η Λύση (το CRM), Διαφάνεια 4: Οικονομικό Όφελος &amp; ROI, Διαφάνεια 5: Επόμενα Βήματα (Next Steps).»</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: σενάρια &amp; ρόλοι" data-group="2.6 Πρακτικές εφαρμογές καθημερινότητας">
+        <span class="chapter-kicker">Υποενότητα 2.6 · Δραστηριότητα</span>
+        <h1>Δραστηριότητα: αντιστοίχιση</h1>
+        <div class="activity js-match" id="act_6_1" data-ok="Εξαιρετικά! Αντιστοιχίσατε σωστά κάθε σενάριο με τον ρόλο που αναθέτουμε στο Claude.">
+          <p class="act-q">Αντιστοιχίστε κάθε σενάριο καθημερινότητας με τον ρόλο που αναθέτουμε στο Claude σύμφωνα με τα παραδείγματα της υποενότητας:</p>
+          <div class="match-cols">
+            <div class="match-col" aria-label="Σενάρια">
+              <button type="button" class="match-btn" data-pair="a">Απάντηση σε παράπονο σημαντικού πελάτη</button>
+              <button type="button" class="match-btn" data-pair="b">Action Plan από πρακτικά σύσκεψης</button>
+              <button type="button" class="match-btn" data-pair="c">Brainstorming για γραφειοκρατικές καθυστερήσεις</button>
+              <button type="button" class="match-btn" data-pair="d">Storyboard παρουσίασης για έγκριση budget CRM</button>
+            </div>
+            <div class="match-col" aria-label="Ρόλοι">
+              <button type="button" class="match-btn" data-pair="c">Σύμβουλος Επιχειρησιακής Οργάνωσης (Operations Consultant)</button>
+              <button type="button" class="match-btn" data-pair="a">Έμπειρος Υπεύθυνος Δημοσίων Σχέσεων (PR Manager)</button>
+              <button type="button" class="match-btn" data-pair="d">Business Developer</button>
+              <button type="button" class="match-btn" data-pair="b">Project Manager</button>
+            </div>
+          </div>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           ΑΝΑΚΕΦΑΛΑΙΩΣΗ
+           ============================================================ -->
+
+      <section class="chapter" data-title="Ανακεφαλαίωση (1/2)" data-group="Ανακεφαλαίωση">
+        <span class="chapter-kicker">Ανακεφαλαίωση · 1/2</span>
+        <h1>Ανακεφαλαίωση Ενότητας 2 (μέρος 1)</h1>
+        <ol class="recap-list">
+          <li>Τα <strong>Artifacts</strong> είναι αυτόνομο περιεχόμενο σε ξεχωριστό παράθυρο δίπλα στο chat (κώδικας/εφαρμογές, έγγραφα, οπτικά στοιχεία SVG/διαγράμματα). Εμφανίζονται όταν το περιεχόμενο είναι αυτόνομο, ογκώδες (π.χ. &gt;20 γραμμές κώδικα ή 1.500 χαρακτήρες) και πιθανό παραδοτέο προς αποθήκευση.</li>
+          <li>Επεξεργασία Artifact με δύο τρόπους: <strong>μέσω του Claude</strong> (οδηγίες σε απλή γλώσσα, με διατήρηση ιστορικού αλλαγών) ή <strong>χειροκίνητα</strong> (docx: λήψη τοπικά ή Google Drive· κώδικας: προβολή UI/κώδικα, επιλογές <strong>explain/improve</strong>, αντιγραφή/λήψη) — και κοινοποίηση με <strong>Publish</strong>.</li>
+          <li>Εργασία με αρχεία: <strong>PDF</strong> (σύνοψη, στοχευμένο Q&amp;A, μετάφραση με ορολογία, εξαγωγή δομημένων δεδομένων), <strong>Word</strong> (ύφος/μορφοποίηση, proofreading, αναδιάρθρωση, εμπλουτισμός), <strong>Excel/CSV</strong> (στατιστική ανάλυση, KPIs, reporting), <strong>εικόνες</strong> (OCR, ανάγνωση διαγραμμάτων, αξιολόγηση UI/UX, κώδικας από mockup) και <strong>σύγκριση πολλαπλών αρχείων</strong> (version control, σύγκριση δεδομένων, cross-referencing — με συγκριτικούς πίνακες).</li>
+          <li><strong>Web Search</strong> για γρήγορα, άμεσα γεγονότα και ειδήσεις με παραπομπές· <strong>Research Mode</strong> για σύνθετα θέματα, με πολλαπλούς κύκλους (υπο)αναζητήσεων, διασταύρωση πηγών και εκτενή αναφορά με παραπομπές.</li>
+        </ol>
+      </section>
+
+      <section class="chapter" data-title="Ανακεφαλαίωση (2/2)" data-group="Ανακεφαλαίωση">
+        <span class="chapter-kicker">Ανακεφαλαίωση · 2/2</span>
+        <h1>Ανακεφαλαίωση Ενότητας 2 (μέρος 2)</h1>
+        <ol class="recap-list" start="5">
+          <li>Κριτική αξιολόγηση αποτελεσμάτων: έλεγχος αξιοπιστίας domain, διασταύρωση ημερομηνιών, εντοπισμός αποκλίσεων (hallucinations), αναγνώριση μεροληψίας (bias). Το Claude κάνει το 90% της προεργασίας — το κρίσιμο 10% της επαλήθευσης είναι δικό σας.</li>
+          <li>Δημιουργία εγγράφων Office: <strong>Word, Excel (με πραγματικούς τύπους), PowerPoint (με speaker notes), PDF</strong>. Διαδικασία: ενεργοποίηση «Code execution and file creation» → σαφές prompt → λήψη από το εικονίδιο αρχείου. Όριο μεγέθους: <strong>30MB</strong>.</li>
+          <li><strong>Code Execution Sandbox</strong> για μη προγραμματιστές: καθαρισμός δεδομένων, σύνθετοι υπολογισμοί/στατιστικά, αυτόματα γραφήματα. Η ένδειξη <strong>«Ran Python code»</strong> = εγγύηση μαθηματικής ακρίβειας (υπολογισμός, όχι πρόβλεψη) και δείκτης προόδου.</li>
+          <li>Πέντε πρακτικές εφαρμογές: επαγγελματικά <strong>email</strong>, <strong>συνόψεις</strong> εκτενών εγγράφων, <strong>μεταφράσεις</strong> με προσαρμογή ύφους, <strong>brainstorming</strong> και <strong>δομή παρουσιάσεων</strong> — πάντα με σαφή ρόλο, πλαίσιο και ζητούμενη μορφή.</li>
+        </ol>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🎉</span>
+          <div><p><strong>Συγχαρητήρια!</strong> Ολοκληρώσατε την Ενότητα 2. Μπορείτε να επιστρέψετε σε οποιαδήποτε διαφάνεια από το μενού περιεχομένων για επανάληψη.</p></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/v2.js"></script>
+</body>
+</html>

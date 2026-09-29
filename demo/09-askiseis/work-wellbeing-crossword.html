@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Work & Wellbeing Crossword</title>
+<style>
+  :root{
+    --bg:#0f172a;
+    --panel:#ffffff;
+    --accent:#2563eb;
+    --accent-light:#dbeafe;
+    --correct:#16a34a;
+    --wrong:#dc2626;
+    --ink:#0f172a;
+    --muted:#64748b;
+    --cell-border:#334155;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, Arial, sans-serif;
+    background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);
+    color:var(--ink);
+    min-height:100vh;
+    padding:24px;
+  }
+  h1{
+    color:#fff;
+    text-align:center;
+    font-size:26px;
+    margin:0 0 4px;
+    letter-spacing:0.5px;
+  }
+  .subtitle{
+    text-align:center;
+    color:#94a3b8;
+    margin-bottom:20px;
+    font-size:14px;
+  }
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    align-items:flex-start;
+    justify-content:center;
+  }
+  .board-panel{
+    background:var(--panel);
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  }
+  #grid{
+    display:grid;
+    gap:2px;
+    background:var(--cell-border);
+    border:3px solid var(--cell-border);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .cell{
+    position:relative;
+    background:#fff;
+    width:34px;
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .cell.block{
+    background:transparent;
+  }
+  .cell input{
+    width:100%;
+    height:100%;
+    border:none;
+    text-align:center;
+    font-size:16px;
+    font-weight:700;
+    text-transform:uppercase;
+    background:transparent;
+    color:var(--ink);
+    outline:none;
+    padding:0;
+    caret-color:var(--accent);
+  }
+  .cell .num{
+    position:absolute;
+    top:1px;
+    left:2px;
+    font-size:8px;
+    font-weight:600;
+    color:var(--muted);
+    pointer-events:none;
+  }
+  .cell.active input{
+    background:var(--accent-light);
+  }
+  .cell.highlight input{
+    background:#eff6ff;
+  }
+  .cell.correct input{
+    background:#dcfce7;
+    color:var(--correct);
+  }
+  .cell.wrong input{
+    background:#fee2e2;
+    color:var(--wrong);
+  }
+  .clues-panel{
+    background:var(--panel);
+    border-radius:16px;
+    padding:20px 24px;
+    width:340px;
+    max-height:640px;
+    overflow-y:auto;
+    box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  }
+  .clue-group h3{
+    margin:0 0 10px;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--accent);
+    border-bottom:2px solid var(--accent-light);
+    padding-bottom:6px;
+  }
+  .clue-group{margin-bottom:20px;}
+  .clue-item{
+    font-size:13.5px;
+    line-height:1.4;
+    padding:6px 8px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:2px;
+    color:#334155;
+  }
+  .clue-item:hover{
+    background:#f1f5f9;
+  }
+  .clue-item.active{
+    background:var(--accent-light);
+    color:var(--accent);
+    font-weight:600;
+  }
+  .clue-item .n{
+    font-weight:700;
+    margin-right:4px;
+  }
+  .clue-item.done{
+    text-decoration:line-through;
+    color:#94a3b8;
+  }
+  .toolbar{
+    max-width:1200px;
+    margin:0 auto 18px;
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  button{
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:transform .1s, background .2s;
+  }
+  button:hover{background:#1d4ed8;}
+  button:active{transform:scale(0.97);}
+  button.secondary{background:#475569;}
+  button.secondary:hover{background:#334155;}
+  #status{
+    text-align:center;
+    color:#fff;
+    font-weight:600;
+    min-height:24px;
+    margin-bottom:6px;
+    font-size:15px;
+  }
+  #timer{
+    text-align:center;
+    color:#94a3b8;
+    font-size:13px;
+    margin-bottom:14px;
+  }
+  .win-banner{
+    display:none;
+    text-align:center;
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+    color:#fff;
+    padding:14px;
+    border-radius:12px;
+    max-width:1200px;
+    margin:0 auto 18px;
+    font-size:16px;
+    font-weight:700;
+    box-shadow:0 10px 30px rgba(22,163,74,0.4);
+  }
+  @media (max-width: 700px){
+    .cell{width:24px;height:24px;}
+    .cell input{font-size:12px;}
+    .clues-panel{width:100%;max-height:none;}
+  }
+</style>
+</head>
+<body>
+
+<h1>Work &amp; Wellbeing Crossword</h1>
+<div class="subtitle">Click a cell and start typing • Use arrow keys to move • Tab to jump to next clue</div>
+
+<div id="status"></div>
+<div id="timer">⏱ 00:00</div>
+<div class="win-banner" id="winBanner">🎉 Congratulations — you solved the whole puzzle!</div>
+
+<div class="toolbar">
+  <button id="checkBtn">Check answers</button>
+  <button id="revealBtn" class="secondary">Reveal letter</button>
+  <button id="clearBtn" class="secondary">Clear all</button>
+</div>
+
+<div class="wrap">
+  <div class="board-panel">
+    <div id="grid"></div>
+  </div>
+  <div class="clues-panel">
+    <div class="clue-group">
+      <h3>Across</h3>
+      <div id="acrossList"></div>
+    </div>
+    <div class="clue-group">
+      <h3>Down</h3>
+      <div id="downList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = {"nrows": 14, "ncols": 17, "cells": [[null, null, null, null, null, null, null, {"letter": "S", "number": 1}, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, {"letter": "H", "number": 2}, {"letter": "E", "number": null}, {"letter": "A", "number": null}, {"letter": "L", "number": null}, {"letter": "T", "number": null}, {"letter": "H", "number": null}, null, null, null, null, null, null], [null, null, null, null, null, null, null, {"letter": "L", "number": null}, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, {"letter": "A", "number": null}, null, {"letter": "V", "number": 3}, null, null, null, null, null, null, null], [null, null, null, null, null, null, {"letter": "B", "number": 4}, {"letter": "R", "number": null}, {"letter": "E", "number": null}, {"letter": "A", "number": null}, {"letter": "K", "number": null}, null, null, {"letter": "P", "number": 5}, null, null, null], [null, null, {"letter": "E", "number": 6}, null, null, null, null, {"letter": "Y", "number": null}, null, {"letter": "C", "number": null}, null, {"letter": "S", "number": 7}, {"letter": "T", "number": null}, {"letter": "R", "number": null}, {"letter": "E", "number": null}, {"letter": "S", "number": 8}, {"letter": "S", "number": null}], [{"letter": "O", "number": 9}, null, {"letter": "X", "number": null}, null, null, null, null, null, null, {"letter": "A", "number": null}, null, {"letter": "A", "number": null}, null, {"letter": "O", "number": null}, null, {"letter": "L", "number": null}, null], [{"letter": "V", "number": null}, null, {"letter": "E", "number": null}, null, null, null, {"letter": "B", "number": 10}, null, null, {"letter": "T", "number": null}, null, {"letter": "F", "number": null}, null, {"letter": "D", "number": 11}, {"letter": "I", "number": null}, {"letter": "E", "number": null}, {"letter": "T", "number": null}], [{"letter": "E", "number": null}, null, {"letter": "R", "number": null}, null, {"letter": "D", "number": 12}, {"letter": "E", "number": null}, {"letter": "A", "number": null}, {"letter": "D", "number": null}, {"letter": "L", "number": null}, {"letter": "I", "number": null}, {"letter": "N", "number": null}, {"letter": "E", "number": null}, null, {"letter": "U", "number": null}, null, {"letter": "E", "number": null}, null], [{"letter": "R", "number": null}, null, {"letter": "C", "number": null}, null, null, null, {"letter": "L", "number": null}, null, null, {"letter": "O", "number": null}, null, {"letter": "T", "number": null}, null, {"letter": "C", "number": null}, null, {"letter": "P", "number": null}, null], [{"letter": "T", "number": null}, null, {"letter": "I", "number": null}, null, null, null, {"letter": "A", "number": null}, null, null, {"letter": "N", "number": null}, null, {"letter": "Y", "number": null}, null, {"letter": "T", "number": null}, null, null, null], [{"letter": "I", "number": 13}, {"letter": "N", "number": null}, {"letter": "S", "number": null}, {"letter": "U", "number": null}, {"letter": "R", "number": null}, {"letter": "A", "number": null}, {"letter": "N", "number": null}, {"letter": "C", "number": null}, {"letter": "E", "number": null}, null, null, null, null, {"letter": "I", "number": null}, null, null, null], [{"letter": "M", "number": null}, null, {"letter": "E", "number": null}, null, null, null, {"letter": "C", "number": null}, null, null, null, null, null, null, {"letter": "V", "number": null}, null, null, null], [{"letter": "E", "number": null}, null, null, null, null, null, {"letter": "E", "number": null}, null, {"letter": "O", "number": 14}, {"letter": "F", "number": null}, {"letter": "F", "number": null}, {"letter": "I", "number": null}, {"letter": "C", "number": null}, {"letter": "E", "number": null}, null, null, null]], "across": [{"number": 2, "clue": "The state of being physically and mentally well.", "answer": "HEALTH", "row": 1, "col": 5, "length": 6}, {"number": 4, "clue": "A short period of rest when you stop working to relax.", "answer": "BREAK", "row": 4, "col": 6, "length": 5}, {"number": 7, "clue": "A feeling of pressure or worry often caused by difficult situations at work.", "answer": "STRESS", "row": 5, "col": 11, "length": 6}, {"number": 11, "clue": "The food you eat every day that affects your health.", "answer": "DIET", "row": 7, "col": 13, "length": 4}, {"number": 12, "clue": "The date when a piece of work must be finished.", "answer": "DEADLINE", "row": 8, "col": 4, "length": 8}, {"number": 13, "clue": "Protection that helps pay for medical costs or accidents.", "answer": "INSURANCE", "row": 11, "col": 0, "length": 9}, {"number": 14, "clue": "A place where people work, usually at desks or computers.", "answer": "OFFICE", "row": 13, "col": 8, "length": 6}], "down": [{"number": 1, "clue": "The money you earn for your job.", "answer": "SALARY", "row": 0, "col": 7, "length": 6}, {"number": 3, "clue": "Time spent away from work, usually for rest or travel.", "answer": "VACATION", "row": 3, "col": 9, "length": 8}, {"number": 5, "clue": "Able to work efficiently and complete tasks successfully.", "answer": "PRODUCTIVE", "row": 4, "col": 13, "length": 10}, {"number": 6, "clue": "Physical activity that keeps you fit.", "answer": "EXERCISE", "row": 5, "col": 2, "length": 8}, {"number": 7, "clue": "Measures taken to prevent accidents and keep people safe at work.", "answer": "SAFETY", "row": 5, "col": 11, "length": 6}, {"number": 8, "clue": "The rest you need every night to feel healthy and well.", "answer": "SLEEP", "row": 5, "col": 15, "length": 5}, {"number": 9, "clue": "Working longer than your normal working hours.", "answer": "OVERTIME", "row": 6, "col": 0, "length": 8}, {"number": 10, "clue": "A good relationship between work and personal life is called work-life ____.", "answer": "BALANCE", "row": 7, "col": 6, "length": 7}]};
+
+const grid = document.getElementById('grid');
+grid.style.gridTemplateColumns = `repeat(${DATA.ncols}, 34px)`;
+grid.style.gridTemplateRows = `repeat(${DATA.nrows}, 34px)`;
+
+let currentDir = 'across';
+let currentWord = null; // clue object currently focused
+let cellRefs = {}; // "r-c" -> input element
+
+// build cell elements
+for(let r=0;r<DATA.nrows;r++){
+  for(let c=0;c<DATA.ncols;c++){
+    const cellData = DATA.cells[r][c];
+    const div = document.createElement('div');
+    if(!cellData){
+      div.className = 'cell block';
+      grid.appendChild(div);
+      continue;
+    }
+    div.className = 'cell';
+    div.dataset.r = r;
+    div.dataset.c = c;
+    if(cellData.number){
+      const num = document.createElement('div');
+      num.className = 'num';
+      num.textContent = cellData.number;
+      div.appendChild(num);
+    }
+    const input = document.createElement('input');
+    input.maxLength = 1;
+    input.dataset.r = r;
+    input.dataset.c = c;
+    input.dataset.answer = cellData.letter;
+    div.appendChild(input);
+    grid.appendChild(div);
+    cellRefs[`${r}-${c}`] = input;
+
+    input.addEventListener('focus', ()=> onFocusCell(r,c));
+    input.addEventListener('input', (e)=> onInput(e, r, c));
+    input.addEventListener('keydown', (e)=> onKeyDown(e, r, c));
+    input.addEventListener('click', ()=>{
+      // clicking same cell toggles direction if both exist
+      if(currentWord && currentWord.row===r && currentWord.col===c){
+        toggleDirection(r,c);
+      }
+    });
+  }
+}
+
+function wordsAt(r,c){
+  const res = {across:null, down:null};
+  for(const w of DATA.across){
+    if(r===w.row && c>=w.col && c<w.col+w.length) res.across = w;
+  }
+  for(const w of DATA.down){
+    if(c===w.col && r>=w.row && r<w.row+w.length) res.down = w;
+  }
+  return res;
+}
+
+function toggleDirection(r,c){
+  const words = wordsAt(r,c);
+  if(currentDir==='across' && words.down){
+    currentDir='down'; currentWord=words.down;
+  } else if(currentDir==='down' && words.across){
+    currentDir='across'; currentWord=words.across;
+  }
+  renderHighlight();
+  renderClueActive();
+}
+
+function onFocusCell(r,c){
+  const words = wordsAt(r,c);
+  if(currentDir==='across' && words.across){ currentWord = words.across; }
+  else if(currentDir==='down' && words.down){ currentWord = words.down; }
+  else if(words.across){ currentDir='across'; currentWord = words.across; }
+  else if(words.down){ currentDir='down'; currentWord = words.down; }
+  renderHighlight();
+  renderClueActive();
+}
+
+function renderHighlight(){
+  document.querySelectorAll('.cell').forEach(el=>el.classList.remove('active','highlight'));
+  if(!currentWord) return;
+  for(let i=0;i<currentWord.length;i++){
+    const r = currentWord.row + (currentWord === wordsAt(currentWord.row,currentWord.col).down ? i : 0);
+    // simpler: recompute properly below
+  }
+  const w = currentWord;
+  const isAcross = DATA.across.includes(w);
+  for(let i=0;i<w.length;i++){
+    const rr = isAcross ? w.row : w.row+i;
+    const cc = isAcross ? w.col+i : w.col;
+    const el = cellRefs[`${rr}-${cc}`]?.parentElement;
+    if(el) el.classList.add('highlight');
+  }
+}
+
+function renderClueActive(){
+  document.querySelectorAll('.clue-item').forEach(el=>el.classList.remove('active'));
+  if(!currentWord) return;
+  const isAcross = DATA.across.includes(currentWord);
+  const id = (isAcross?'a-':'d-')+currentWord.number;
+  const el = document.getElementById(id);
+  if(el){ el.classList.add('active'); el.scrollIntoView({block:'nearest'}); }
+}
+
+function moveFocus(r,c,dir,step){
+  let rr=r, cc=c;
+  while(true){
+    rr += dir==='down' ? step : 0;
+    cc += dir==='across' ? step : 0;
+    if(rr<0||cc<0||rr>=DATA.nrows||cc>=DATA.ncols) return;
+    const key = `${rr}-${cc}`;
+    if(cellRefs[key]){ cellRefs[key].focus(); return; }
+    else return;
+  }
+}
+
+function onInput(e,r,c){
+  const val = e.target.value.toUpperCase().replace(/[^A-Z]/g,'');
+  e.target.value = val;
+  e.target.parentElement.classList.remove('correct','wrong');
+  if(val){
+    moveFocus(r,c,currentDir,1);
+  }
+  updateStatus();
+}
+
+function onKeyDown(e,r,c){
+  const key = e.key;
+  if(key==='ArrowRight'){ e.preventDefault(); moveFocus(r,c,'across',1); }
+  else if(key==='ArrowLeft'){ e.preventDefault(); moveFocus(r,c,'across',-1); }
+  else if(key==='ArrowDown'){ e.preventDefault(); moveFocus(r,c,'down',1); }
+  else if(key==='ArrowUp'){ e.preventDefault(); moveFocus(r,c,'down',-1); }
+  else if(key==='Backspace'){
+    if(!e.target.value){
+      e.preventDefault();
+      moveFocus(r,c,currentDir,-1);
+    }
+  }
+  else if(key==='Tab'){
+    e.preventDefault();
+    jumpToNextClue();
+  }
+}
+
+function jumpToNextClue(){
+  const all = [...DATA.across.map(w=>({...w,dir:'across'})), ...DATA.down.map(w=>({...w,dir:'down'}))];
+  all.sort((a,b)=> a.number-b.number || (a.dir>b.dir?1:-1));
+  let idx = all.findIndex(w=> currentWord && w.number===currentWord.number && ((w.dir==='across')===DATA.across.includes(currentWord)));
+  idx = (idx+1) % all.length;
+  const next = all[idx];
+  currentDir = next.dir;
+  currentWord = next.dir==='across' ? DATA.across.find(w=>w.number===next.number) : DATA.down.find(w=>w.number===next.number);
+  cellRefs[`${currentWord.row}-${currentWord.col}`].focus();
+}
+
+// build clue lists
+const acrossList = document.getElementById('acrossList');
+const downList = document.getElementById('downList');
+
+DATA.across.forEach(w=>{
+  const div = document.createElement('div');
+  div.className='clue-item';
+  div.id = 'a-'+w.number;
+  div.innerHTML = `<span class="n">${w.number}.</span>${w.clue}`;
+  div.addEventListener('click', ()=>{
+    currentDir='across'; currentWord=w;
+    cellRefs[`${w.row}-${w.col}`].focus();
+  });
+  acrossList.appendChild(div);
+});
+
+DATA.down.forEach(w=>{
+  const div = document.createElement('div');
+  div.className='clue-item';
+  div.id = 'd-'+w.number;
+  div.innerHTML = `<span class="n">${w.number}.</span>${w.clue}`;
+  div.addEventListener('click', ()=>{
+    currentDir='down'; currentWord=w;
+    cellRefs[`${w.row}-${w.col}`].focus();
+  });
+  downList.appendChild(div);
+});
+
+// status / check / reveal / clear
+const statusEl = document.getElementById('status');
+const winBanner = document.getElementById('winBanner');
+
+function allWords(){
+  return [...DATA.across.map(w=>({...w,dir:'across'})), ...DATA.down.map(w=>({...w,dir:'down'}))];
+}
+
+function updateStatus(){
+  let filled=0, total=0;
+  Object.values(cellRefs).forEach(inp=>{ total++; if(inp.value) filled++; });
+  statusEl.textContent = `${filled} / ${total} letters filled`;
+}
+
+document.getElementById('checkBtn').addEventListener('click', ()=>{
+  let correctCount=0, filledCount=0, total=0;
+  Object.entries(cellRefs).forEach(([key,inp])=>{
+    total++;
+    const cellEl = inp.parentElement;
+    cellEl.classList.remove('correct','wrong');
+    if(inp.value){
+      filledCount++;
+      if(inp.value === inp.dataset.answer){
+        cellEl.classList.add('correct');
+        correctCount++;
+      } else {
+        cellEl.classList.add('wrong');
+      }
+    }
+  });
+  if(correctCount===total){
+    winBanner.style.display='block';
+    clearInterval(timerInterval);
+  } else {
+    statusEl.textContent = `${correctCount} / ${total} letters correct so far — keep going!`;
+  }
+});
+
+document.getElementById('revealBtn').addEventListener('click', ()=>{
+  if(!currentWord){ alert('Click a clue or cell first.'); return; }
+  const isAcross = DATA.across.includes(currentWord);
+  const r = currentWord.row, c = currentWord.col;
+  // reveal the currently focused single cell if possible, else first blank in word
+  const active = document.activeElement;
+  if(active && active.dataset && cellRefs[`${active.dataset.r}-${active.dataset.c}`]===active){
+    active.value = active.dataset.answer;
+    active.parentElement.classList.remove('wrong');
+    active.parentElement.classList.add('correct');
+    updateStatus();
+    return;
+  }
+  for(let i=0;i<currentWord.length;i++){
+    const rr = isAcross ? r : r+i;
+    const cc = isAcross ? c+i : c;
+    const inp = cellRefs[`${rr}-${cc}`];
+    if(!inp.value){
+      inp.value = inp.dataset.answer;
+      inp.parentElement.classList.add('correct');
+      break;
+    }
+  }
+  updateStatus();
+});
+
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  if(!confirm('Clear all your answers?')) return;
+  Object.values(cellRefs).forEach(inp=>{
+    inp.value='';
+    inp.parentElement.classList.remove('correct','wrong');
+  });
+  winBanner.style.display='none';
+  updateStatus();
+  startTimer();
+});
+
+// timer
+let seconds=0, timerInterval;
+function startTimer(){
+  clearInterval(timerInterval);
+  seconds=0;
+  timerInterval = setInterval(()=>{
+    seconds++;
+    const m = String(Math.floor(seconds/60)).padStart(2,'0');
+    const s = String(seconds%60).padStart(2,'0');
+    document.getElementById('timer').textContent = `⏱ ${m}:${s}`;
+  },1000);
+}
+startTimer();
+
+// initial focus on first cell
+const firstKey = Object.keys(cellRefs)[0];
+cellRefs[firstKey].focus();
+updateStatus();
+</script>
+</body>
+</html>

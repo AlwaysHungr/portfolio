@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mon programme de la journée</title>
+<style>
+/* ===== base ===== */
+*{box-sizing:border-box}
+:root{
+  --ink:#16273A; --muted:#5B6B7B; --paper:#FFFFFF; --bg:#F2F7F2;
+  --brand:#2E7D4F; --brand2:#1C5636; --accent:#F0A63A; --ok:#2E8B57; --bad:#C63B3B; --line:#D8E4DA;
+  --radius:16px; --topH:56px;
+  --c1:#4CA36A; --c2:#E07A4B; --c3:#F0B429; --c4:#5B86C4;
+}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);
+  font:16px/1.55 "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+.app{height:100dvh;display:flex;flex-direction:column}
+/* ===== header ===== */
+.top{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 10px 14px -10px rgba(0,0,0,.15);z-index:5}
+.top .ttl{font-weight:800;font-size:17px;letter-spacing:.2px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .lbl{font-size:13px;color:var(--muted);white-space:nowrap}
+.prog{height:4px;background:var(--line);flex:0 0 auto}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));transition:width .4s}
+/* ===== screens ===== */
+.screens{flex:1;min-height:0;position:relative}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:auto;padding:18px 22px}
+.screen.on{display:flex;animation:fadein .35s}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wrap{width:100%;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0;gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:0 6px 18px -12px rgba(0,0,0,.18)}
+.card.pad{padding:22px 26px}
+h1{font-size:clamp(24px,3.4vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.3px}
+h2{font-size:clamp(19px,2.2vw,26px);margin:0 0 8px}
+h3{font-size:17px;margin:0 0 6px}
+p{margin:0 0 10px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--brand);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#E4F1E8;color:var(--brand2);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
+/* ===== buttons ===== */
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:11px 18px;font-weight:800;
+  background:var(--brand);color:#fff;box-shadow:0 8px 18px -10px rgba(46,125,79,.9);transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px);background:var(--brand2)}
+.btn.ghost{background:transparent;color:var(--brand);box-shadow:none;border:2px solid var(--brand)}
+.btn.ghost:hover{background:#E4F1E8}
+.btn.sm{padding:8px 13px;font-size:14px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.btn[hidden]{display:none}
+/* ===== bottom nav ===== */
+.nav{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:var(--paper);border-top:1px solid var(--line)}
+.dots{display:flex;gap:8px;align-items:center}
+.dots button{width:11px;height:11px;border-radius:50%;border:2px solid var(--brand);background:transparent;padding:0}
+.dots button.on{background:var(--brand);transform:scale(1.25)}
+.dots button.done{background:#A8CDB6;border-color:#A8CDB6}
+/* ===== images: alt-tooltip + zoom ===== */
+.zi{position:relative;display:inline-block;max-width:100%;cursor:zoom-in;border-radius:12px;line-height:0}
+.zi img{border-radius:12px;width:100%;height:auto}
+.zi .mag{position:absolute;right:9px;top:9px;width:30px;height:30px;border-radius:50%;background:#0E2233;color:#fff;
+  display:grid;place-items:center;font-size:15px;opacity:.85;pointer-events:none;line-height:1}
+.zi::after{content:attr(data-alt);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%);
+  background:#0E2233;color:#fff;font-size:13px;line-height:1.35;padding:8px 11px;border-radius:9px;max-width:min(320px,78vw);
+  width:max-content;white-space:normal;text-align:center;display:none;z-index:31;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.zi::before{content:"";position:absolute;left:50%;bottom:calc(100% + 3px);transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:#0E2233;display:none;z-index:31;pointer-events:none}
+.zi:hover::after,.zi:focus-visible::after,.zi.on::after,.zi:hover::before,.zi:focus-visible::before,.zi.on::before{display:block;animation:tipin .18s}
+.zi.below::after{bottom:auto;top:calc(100% + 9px)}
+.zi.below::before{bottom:auto;top:calc(100% + 3px);border-top-color:transparent;border-bottom-color:#0E2233}
+.zi.inset::after{bottom:auto;top:14px;left:14px;transform:none;max-width:70%;text-align:left}
+.zi.inset::before{display:none!important}
+.zi:hover,.zi:focus-visible,.zi.on{z-index:30}
+@keyframes tipin{from{opacity:0;transform:translate(-50%,4px)}to{opacity:1}}
+.zi.inset:hover::after{animation:none}
+figure{margin:0}
+figcaption{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:6px}
+/* lightbox */
+.lbx{position:fixed;inset:0;background:rgba(6,16,28,.92);display:none;z-index:90;padding:16px;overflow:auto}
+.lbx.on{display:grid;place-items:center}
+.lbx .box{width:100%;max-width:1200px;min-width:0;text-align:center}
+.lbx img{width:auto;height:auto;max-width:100%;max-height:82vh;margin:0 auto;border-radius:8px}
+.lbx .cap{color:#DCE6F0;font-size:14px;margin-top:10px}
+.lbx .x{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:#0E2233;color:#fff;border:2px solid #fff;
+  font-size:24px;line-height:1;display:grid;place-items:center;z-index:91;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+/* ===== activities ===== */
+.fb{border-radius:12px;padding:12px 14px;border:2px solid;font-size:15px}
+.fb.ok{border-color:var(--ok);background:#EAF7EF;color:#1B5E3A}
+.fb[hidden]{display:none}
+/* reveal cards */
+.flip{display:grid;cursor:pointer;border:0;padding:0;background:none;text-align:left;width:100%}
+.flip .f,.flip .b{grid-area:1/1;border-radius:14px;padding:16px;transition:opacity .35s,transform .35s;display:block}
+.flip .f{background:var(--brand);color:#fff;font-weight:800}
+.flip .b{background:var(--paper);border:2px solid var(--brand);opacity:0;visibility:hidden;transform:scale(.96)}
+.flip.on .f{opacity:0;visibility:hidden;transform:scale(.96)} .flip.on .b{opacity:1;visibility:visible;transform:none}
+.flip[hidden]{display:none}
+/* misc */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.two>*{min-width:0;min-height:0}
+.grow{flex:1;min-height:0;overflow:auto}
+.center{text-align:center}
+.src{font-size:12.5px;color:var(--muted)}
+
+/* ================= μάθημα ================= */
+/* --- εξώφυλλο --- */
+.cvgrid{flex:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:26px;align-items:center}
+.cvgrid>*{min-width:0;min-height:0}
+.plate{width:100%;max-width:330px;margin:0 auto;display:block}
+.plate .wdg{transform-origin:60px 60px;animation:wdgin .7s both}
+.plate .wdg:nth-of-type(2){animation-delay:.12s}
+.plate .wdg:nth-of-type(3){animation-delay:.24s}
+@keyframes wdgin{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
+/* --- εικονίδια γευμάτων --- */
+.mi{width:26px;height:26px;flex:0 0 26px;color:var(--brand);stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* --- κάρτες παραδειγμάτων --- */
+.exhd{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:var(--brand2);margin:0 0 12px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+.exhd .num{flex:0 0 30px;height:30px;border-radius:9px;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:15px}
+.excard{display:flex;flex-direction:column}
+.mrow{display:flex;gap:11px;align-items:center;padding:8px 0;min-height:0;border-bottom:1px dashed var(--line)}
+.two.fill .mrow{flex:1 1 auto}
+.mrow:last-child{border-bottom:0}
+.mrow .mtx{min-width:0}
+.mrow b{display:block;font-size:13px;letter-spacing:.02em;color:var(--brand2)}
+.mrow span{font-size:14.5px}
+.excard{border-top:5px solid var(--c1)}
+.excard.b{border-top-color:var(--c4)}
+/* --- λεξιλόγιο --- */
+.vgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-rows:minmax(62px,104px);align-content:safe center;gap:12px;flex:1;min-height:0}
+.vgrid>*{min-width:0}
+.vc .f,.vc .b{padding:12px 13px;min-height:62px;display:flex;align-items:center;justify-content:safe center;text-align:center;font-size:15px;line-height:1.3}
+.vc .f{background:linear-gradient(135deg,var(--brand),#3E9A63)}
+.vc .b{font-weight:800;color:var(--brand2)}
+.vc.on .b{animation:pop .3s}
+@keyframes pop{from{transform:scale(.9)}to{transform:none}}
+.counter{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:800;color:var(--brand2);background:#E4F1E8;border-radius:999px;padding:6px 14px}
+.counter[hidden]{display:none}
+.counter i{display:block;width:60px;height:7px;border-radius:4px;background:#C3DECD;overflow:hidden}
+.counter i b{display:block;height:100%;width:0;background:var(--brand);transition:width .35s}
+/* --- επιλογή προσώπου --- */
+.perlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px}
+.perlist>*{min-width:0}
+.per{border:2px solid var(--line);background:var(--paper);border-radius:13px;padding:18px 16px;text-align:left;font-size:15px;
+  display:flex;align-items:center;gap:11px;transition:.15s;color:var(--ink)}
+.per:hover{border-color:var(--brand);background:#F2F9F4}
+.per.sel{border-color:var(--brand);background:#E4F1E8;box-shadow:0 6px 16px -10px rgba(46,125,79,.9)}
+.per .tick{flex:0 0 24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:13px;color:#fff}
+.per.sel .tick{background:var(--brand);border-color:var(--brand)}
+.per i{font-style:italic}
+/* --- έκθεση --- */
+.mchips{display:flex;flex-wrap:wrap;gap:8px}
+.mchip{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:700;
+  background:#EEF3EF;color:var(--muted);border:2px solid var(--line);transition:.2s}
+.mchip.hit{background:#E4F1E8;color:var(--brand2);border-color:var(--brand)}
+.mchip .dot{width:9px;height:9px;border-radius:50%;background:#C6D2C9}
+.mchip.hit .dot{background:var(--brand)}
+.essay{width:100%;flex:1;min-height:130px;resize:none;border:2px solid var(--line);border-radius:13px;padding:13px 15px;
+  font:15.5px/1.6 "Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:#FCFEFC}
+.essay:focus{outline:none;border-color:var(--brand);background:#fff}
+.ebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between}
+.wcount{font-size:13.5px;font-weight:800;color:var(--brand2)}
+.mytext{white-space:pre-wrap;font-size:15.5px;line-height:1.65;border-left:5px solid var(--brand);background:#F5FAF6;border-radius:0 12px 12px 0;padding:12px 16px}
+.mybox{display:flex;flex-direction:column;gap:12px;flex:1;min-height:0}
+.mybox[hidden]{display:none}
+.wbox{display:flex;flex-direction:column;gap:12px;flex:1;min-height:0}
+.wbox[hidden]{display:none}
+.pertag{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;background:#FFF4E0;border:2px solid var(--accent);
+  color:#6B4A00;border-radius:999px;padding:5px 13px;font-weight:700}
+.pertag[hidden]{display:none}
+.pertag em{font-style:italic}
+/* --- τελική οθόνη --- */
+.kwbig{display:flex;flex-wrap:wrap;gap:11px;justify-content:safe center}
+.kwbig span{background:#fff;border:2px solid var(--brand);color:var(--brand2);border-radius:999px;padding:9px 19px;font-size:16px;font-weight:800;
+  animation:kwin .5s both}
+.kwbig span:nth-child(2){animation-delay:.08s}.kwbig span:nth-child(3){animation-delay:.16s}
+.kwbig span:nth-child(4){animation-delay:.24s}.kwbig span:nth-child(5){animation-delay:.32s}
+@keyframes kwin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fr{font-style:italic}
+.fill{flex:1;min-height:0}
+.pushdown{margin-top:auto}
+@media (max-width:760px){
+  .screen{padding:12px 12px}
+  .two{grid-template-columns:minmax(0,1fr)}
+  .cvgrid{grid-template-columns:minmax(0,1fr);align-content:start;align-items:start}
+  .plate{max-width:210px}
+  .top .ttl{font-size:15px}
+  h1{font-size:24px}
+  .vgrid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(56px,auto);flex:0 0 auto;align-content:start}
+  /* σε κινητό κυλάει ΟΛΗ η οθόνη, όχι κουτάκι μέσα στην κάρτα */
+  .screen .grow{overflow:visible;flex:0 0 auto}
+  .cvgrid{flex:0 0 auto}
+  .pushdown{margin-top:18px}
+  .essay{min-height:150px}
+  .vc .f,.vc .b{min-height:56px;font-size:14px;padding:9px 8px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-pd" viewBox="0 0 24 24"><path d="M3 17h18"/><path d="M12 4v2"/><path d="M5.6 7.6 7 9"/><path d="M18.4 7.6 17 9"/><path d="M6.5 17a5.5 5.5 0 0 1 11 0"/></symbol>
+  <symbol id="i-dj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.2"/><circle cx="12" cy="12" r="3.4"/><path d="M3 4v3.2a1.7 1.7 0 0 0 1.7 1.7"/><path d="M21 4v16"/></symbol>
+  <symbol id="i-go" viewBox="0 0 24 24"><path d="M12 8.4c1.4-1.6 4.4-2 6 .2 1.7 2.4.5 8-2.4 10.2-1.3 1-2.6.3-3.6.3s-2.3.7-3.6-.3C5.5 16.6 4.3 11 6 8.6c1.6-2.2 4.6-1.8 6-.2Z"/><path d="M12 8.4V5.6"/><path d="M12 5.6c1.8 0 3-1 3.2-2.4-1.8-.3-3 .8-3.2 2.4Z"/></symbol>
+  <symbol id="i-di" viewBox="0 0 24 24"><path d="M19.5 14.6A7.6 7.6 0 0 1 9.4 4.5a7.6 7.6 0 1 0 10.1 10.1Z"/><path d="M17 4.2h2.6"/><path d="M18.3 2.9v2.6"/></symbol>
+</defs></svg>
+
+<div class="app">
+  <header class="top">
+    <div class="ttl" lang="fr">Mon programme de la journée</div>
+    <div class="lbl" id="lbl">Εξώφυλλο</div>
+  </header>
+  <div class="prog"><i id="prog"></i></div>
+
+  <main class="screens" id="screens">
+
+    <!-- ============ 1. ΕΞΩΦΥΛΛΟ ============ -->
+    <section class="screen on" data-name="Εξώφυλλο">
+      <div class="wrap">
+        <div class="card pad cvgrid">
+          <div>
+            <div class="eyebrow">ΜΑΘΗΜΑ</div>
+            <h1 lang="fr">Mon programme de la journée</h1>
+            <p class="chips" style="margin-bottom:16px">
+              <span class="chip" lang="fr">Alimentation</span>
+              <span class="chip" lang="fr">Nutrition</span>
+              <span class="chip" lang="fr">Santé</span>
+              <span class="chip" lang="fr">Programme alimentaire</span>
+              <span class="chip" lang="fr">Repas</span>
+            </p>
+            <p style="margin-top:14px"><button class="btn" onclick="go(1)">Ξεκίνα →</button></p>
+          </div>
+          <div>
+            <svg class="plate" viewBox="0 0 120 120" role="img" aria-label="Πιάτο">
+              <circle cx="60" cy="60" r="46" fill="#fff" stroke="#D8E4DA" stroke-width="2.4"/>
+              <circle cx="60" cy="60" r="38" fill="none" stroke="#EAF2EC" stroke-width="1.6"/>
+              <path class="wdg" d="M60 60 L60 26 A34 34 0 0 1 60 94 Z" fill="var(--c1)"/>
+              <path class="wdg" d="M60 60 L60 94 A34 34 0 0 1 30.56 43 Z" fill="var(--c2)"/>
+              <path class="wdg" d="M60 60 L30.56 43 A34 34 0 0 1 60 26 Z" fill="var(--c3)"/>
+              <g stroke="#B9C9BE" stroke-width="2.6" stroke-linecap="round" fill="none">
+                <path d="M9 30v22a4 4 0 0 0 4 4h0v34"/><path d="M9 30v14"/><path d="M17 30v14"/>
+                <path d="M111 30c-4 0-6 8-6 15s2 11 6 11v34"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. ΠΑΡΑΔΕΙΓΜΑΤΑ ============ -->
+    <section class="screen" data-name="Παραδείγματα">
+      <div class="wrap">
+        <div class="card pad grow" style="display:flex;flex-direction:column">
+          <div class="eyebrow">1 / 3</div>
+          <h2>Παραδείγματα ημερήσιων προγραμμάτων</h2>
+          <p>Στην ιστοσελίδα θα δεις απλά παραδείγματα ημερήσιων προγραμμάτων διατροφής στα γαλλικά. Κάθε πρόγραμμα δείχνει τι τρώει κάποιος για πρωινό, μεσημεριανό, βραδινό και σνακ.</p>
+          <div class="two fill" style="margin-top:16px">
+            <div class="card excard">
+              <p class="exhd"><span class="num">1</span><span lang="fr">Exemple 1 – Pour un sportif</span></p>
+              <div class="mrow"><svg class="mi"><use href="#i-pd"/></svg><span class="mtx" lang="fr"><b>Petit déjeuner</b><span>yaourt, fruits, céréales.</span></span></div>
+              <div class="mrow"><svg class="mi"><use href="#i-dj"/></svg><span class="mtx" lang="fr"><b>Déjeuner</b><span>poulet avec riz et salade.</span></span></div>
+              <div class="mrow"><svg class="mi"><use href="#i-go"/></svg><span class="mtx" lang="fr"><b>Goûter</b><span>banane, barre de céréales.</span></span></div>
+              <div class="mrow"><svg class="mi"><use href="#i-di"/></svg><span class="mtx" lang="fr"><b>Dîner</b><span>poisson, légumes, pain complet.</span></span></div>
+            </div>
+            <div class="card excard b">
+              <p class="exhd"><span class="num" style="background:var(--c4)">2</span><span lang="fr">Exemple 2 – Pour quelqu’un qui veut perdre du poids</span></p>
+              <div class="mrow"><svg class="mi"><use href="#i-pd"/></svg><span class="mtx" lang="fr"><b>Petit déjeuner</b><span>thé, une pomme, yaourt nature</span></span></div>
+              <div class="mrow"><svg class="mi"><use href="#i-dj"/></svg><span class="mtx" lang="fr"><b>Déjeuner</b><span>salade verte, poulet grillé</span></span></div>
+              <div class="mrow"><svg class="mi"><use href="#i-go"/></svg><span class="mtx" lang="fr"><b>Goûter</b><span>carottes, un fruit</span></span></div>
+              <div class="mrow"><svg class="mi"><use href="#i-di"/></svg><span class="mtx" lang="fr"><b>Dîner</b><span>soupe de légumes, un peu de fromage blanc</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. ΛΕΞΙΛΟΓΙΟ ============ -->
+    <section class="screen" data-name="Χρήσιμο λεξιλόγιο">
+      <div class="wrap">
+        <div class="card pad grow" style="display:flex;flex-direction:column">
+          <div class="eyebrow">2 / 3</div>
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px">
+            <h2 style="margin:0">Χρήσιμο λεξιλόγιο</h2>
+            <span class="counter">Εξερεύνησες <span id="vnum">0/10</span><i><b id="vbar"></b></i></span>
+          </div>
+          <div class="vgrid" id="vgrid"></div>
+          <p style="margin-top:14px;flex:0 0 auto">Μπορείς να χρησιμοποιήσεις αυτό το λεξιλόγιο για να περιγράψεις υγιεινά γεύματα.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. ΦΤΙΑΞΕ ΤΟ ΔΙΚΟ ΣΟΥ ============ -->
+    <section class="screen" data-name="Φτιάξε το πρόγραμμά σου">
+      <div class="wrap">
+        <div class="card pad grow" style="display:flex;flex-direction:column">
+          <div class="eyebrow">3 / 3</div>
+          <h2>Φτιάξε το δικό σου πρόγραμμα διατροφής</h2>
+          <p>Διάλεξε ένα «πρόσωπο», π.χ. <i class="fr" lang="fr">un sportif</i>, <i class="fr" lang="fr">une fille qui veut être en forme</i>, <i class="fr" lang="fr">un garçon qui veut perdre du poids</i>. Σκέψου τι θα ήταν καλό να τρώει μέσα στη μέρα. Γράψε 4–6 προτάσεις στα γαλλικά, οργανωμένες σε <span class="fr" lang="fr">petit déjeuner</span>, <span class="fr" lang="fr">déjeuner</span>, <span class="fr" lang="fr">goûter</span>, <span class="fr" lang="fr">dîner</span>. Μπορείς να βασιστείς στα παραδείγματα, αλλά να δημιουργήσεις το δικό σου πρόγραμμα.</p>
+          <p class="src" style="margin:16px 0 8px;font-weight:800;color:var(--brand2)">Διάλεξε:</p>
+          <div class="perlist" id="perlist">
+            <button class="per" data-p="un sportif"><span class="tick">✓</span><i lang="fr">un sportif</i></button>
+            <button class="per" data-p="une fille qui veut être en forme"><span class="tick">✓</span><i lang="fr">une fille qui veut être en forme</i></button>
+            <button class="per" data-p="un garçon qui veut perdre du poids"><span class="tick">✓</span><i lang="fr">un garçon qui veut perdre du poids</i></button>
+          </div>
+          <p class="pushdown" style="margin-top:18px;margin-bottom:0"><button class="btn" onclick="go(4)">Στη δραστηριότητα →</button></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. ΔΡΑΣΤΗΡΙΟΤΗΤΑ (ΕΚΘΕΣΗ) ============ -->
+    <section class="screen" data-name="Δραστηριότητα">
+      <div class="wrap">
+        <div class="card pad grow" style="display:flex;flex-direction:column;gap:12px">
+          <div>
+            <div class="eyebrow">ΔΡΑΣΤΗΡΙΟΤΗΤΑ</div>
+            <h2 lang="fr" style="margin-bottom:10px">Mon programme de la journée</h2>
+            <p>Γράψε ένα ημερήσιο πρόγραμμα διατροφής στα γαλλικά για ένα άτομο της επιλογής σου (π.χ. έναν αθλητή, ένα άτομο που θέλει να χάσει βάρος ή κάποιον που θέλει να τρέφεται πιο υγιεινά).</p>
+            <p class="pertag" id="pertag" hidden>Η επιλογή σου: <em lang="fr" id="perval"></em></p>
+            <p style="margin-bottom:8px">Συμπερίλαβε <i>τουλάχιστον</i> 4 γεύματα:</p>
+            <div class="mchips" id="mchips">
+              <span class="mchip" data-w="petit dejeuner"><span class="dot"></span><span lang="fr">Petit déjeuner</span></span>
+              <span class="mchip" data-w="dejeuner"><span class="dot"></span><span lang="fr">Déjeuner</span></span>
+              <span class="mchip" data-w="gouter"><span class="dot"></span><span lang="fr">Goûter</span></span>
+              <span class="mchip" data-w="diner"><span class="dot"></span><span lang="fr">Dîner</span></span>
+            </div>
+            <p style="margin:10px 0 0">Γράψε 4–6 προτάσεις συνολικά, χρησιμοποιώντας το λεξιλόγιο και τα παραδείγματα που είδες πιο πάνω.</p>
+          </div>
+
+          <div class="wbox" id="wbox">
+            <textarea class="essay" id="essay" lang="fr" aria-label="Το κείμενό σου" spellcheck="false"></textarea>
+            <div class="ebar">
+              <span class="wcount"><span id="wc">0</span> λέξεις</span>
+              <button class="btn" id="send" disabled>Υποβολή</button>
+            </div>
+          </div>
+
+          <div class="mybox" id="mybox" hidden>
+            <div class="fb ok">✓ Το κείμενό σου</div>
+            <div class="mytext" id="mytext" lang="fr"></div>
+            <div class="ebar">
+              <span class="wcount"><span id="wc2">0</span> λέξεις</span>
+              <button class="btn ghost" id="again">Ξαναγράψε</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. ΛΕΞΕΙΣ-ΚΛΕΙΔΙΑ ============ -->
+    <section class="screen" data-name="Λέξεις-κλειδιά">
+      <div class="wrap">
+        <div class="card pad grow" style="display:flex;flex-direction:column;justify-content:safe center;align-items:center;gap:20px;text-align:center">
+          <svg class="plate" style="max-width:150px" viewBox="0 0 120 120" role="img" aria-label="Πιάτο">
+            <circle cx="60" cy="60" r="46" fill="#fff" stroke="#D8E4DA" stroke-width="2.4"/>
+            <path class="wdg" d="M60 60 L60 26 A34 34 0 0 1 60 94 Z" fill="var(--c1)"/>
+            <path class="wdg" d="M60 60 L60 94 A34 34 0 0 1 30.56 43 Z" fill="var(--c2)"/>
+            <path class="wdg" d="M60 60 L30.56 43 A34 34 0 0 1 60 26 Z" fill="var(--c3)"/>
+          </svg>
+          <h2 style="margin:0">Λέξεις-κλειδιά</h2>
+          <div class="kwbig">
+            <span lang="fr">Alimentation</span>
+            <span lang="fr">Nutrition</span>
+            <span lang="fr">Santé</span>
+            <span lang="fr">Programme alimentaire</span>
+            <span lang="fr">Repas</span>
+          </div>
+          <button class="btn ghost" onclick="go(0)">↺ Επανάληψη</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="btn ghost sm" id="prev" onclick="go(cur-1)">‹ Πίσω</button>
+    <div class="dots" id="dots"></div>
+    <button class="btn sm" id="next" onclick="go(cur+1)">Μπροστά ›</button>
+  </nav>
+</div>
+
+<!-- lightbox -->
+<div class="lbx" id="lbx" aria-modal="true" role="dialog">
+  <button class="x" id="lbxX" aria-label="Κλείσιμο">✕</button>
+  <div class="box"><img id="lbxImg" alt=""><div class="cap" id="lbxCap"></div></div>
+</div>
+
+<script>
+/* ===== navigation ===== */
+var screens=[].slice.call(document.querySelectorAll('.screen')),cur=0;
+var dots=document.getElementById('dots');
+screens.forEach(function(s,i){var b=document.createElement('button');b.title=s.dataset.name||('Οθόνη '+(i+1));b.setAttribute('aria-label',b.title);b.onclick=function(){go(i)};dots.appendChild(b)});
+function go(n){
+  if(n<0||n>=screens.length)return;
+  screens[cur].classList.remove('on');cur=n;screens[cur].classList.add('on');screens[cur].scrollTop=0;
+  [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===cur);d.classList.toggle('done',i<cur)});
+  document.getElementById('lbl').textContent=screens[cur].dataset.name||'';
+  document.getElementById('prog').style.width=((cur+1)/screens.length*100)+'%';
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===screens.length-1;
+  document.querySelectorAll('.zi.on').forEach(function(z){z.classList.remove('on')});
+  if(window.onScreen)onScreen(cur);
+}
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('lbx').classList.contains('on')){if(e.key==='Escape')closeLbx();return}
+  var t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
+  if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);
+});
+go(0);
+
+/* ===== images: tooltip side + lightbox ===== */
+function side(z){var r=z.getBoundingClientRect();z.classList.toggle('below',r.top<130&&!z.classList.contains('inset'))}
+var lbx=document.getElementById('lbx'),lbxImg=document.getElementById('lbxImg'),lbxCap=document.getElementById('lbxCap');
+function openLbx(z){var im=z.querySelector('img');lbxImg.src=im.src;lbxImg.alt=im.alt;lbxCap.textContent=z.dataset.alt||im.alt||'';
+  document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});lbx.classList.add('on')}
+function closeLbx(){lbx.classList.remove('on');lbxImg.src=''}
+document.getElementById('lbxX').onclick=closeLbx;
+lbx.addEventListener('click',function(e){if(e.target===lbx||e.target.classList.contains('box'))closeLbx()});
+document.addEventListener('click',function(e){var z=e.target.closest('.zi');if(!z)return;if(e.target.closest('.hs'))return;openLbx(z)});
+document.addEventListener('mouseover',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('focusin',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('zi'))openLbx(e.target)});
+/* touch: first tap shows alt, second opens */
+document.addEventListener('touchstart',function(e){var z=e.target.closest('.zi');if(!z)return;
+  if(!z.classList.contains('on')){e.preventDefault();document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});z.classList.add('on');side(z)}},{passive:false});
+
+/* ===== helpers ===== */
+function ring(el,n,total){var c=2*Math.PI*60;var v=el.querySelector('.v');var pc=total?n/total:0;v.style.strokeDasharray=(c*pc)+' '+c;v.style.opacity=pc?1:0;el.querySelector('text').textContent=n+'/'+total}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ================= λεξιλόγιο ================= */
+(function(){
+  var VOC=[["Petit déjeuner","πρωινό"],["Déjeuner","μεσημεριανό"],["Dîner","βραδινό"],["Goûter","σνακ"],
+           ["légumes","λαχανικά"],["fruits","φρούτα"],["riz","ρύζι"],["poisson","ψάρι"],
+           ["salade","σαλάτα"],["yaourt","γιαούρτι"]];
+  var g=document.getElementById('vgrid'),num=document.getElementById('vnum'),bar=document.getElementById('vbar'),seen=0;
+  VOC.forEach(function(v){
+    var b=document.createElement('button');
+    b.className='flip vc';b.type='button';
+    b.innerHTML='<span class="f" lang="fr"></span><span class="b"></span>';
+    b.querySelector('.f').textContent=v[0];
+    b.querySelector('.b').textContent=v[1];
+    b.setAttribute('aria-label',v[0]);
+    b.onclick=function(){
+      b.classList.toggle('on');
+      if(b.classList.contains('on')&&!b.dataset.seen){b.dataset.seen='1';seen++;upd()}
+    };
+    g.appendChild(b);
+  });
+  function upd(){num.textContent=seen+'/'+VOC.length;bar.style.width=(seen/VOC.length*100)+'%'}
+  upd();
+})();
+
+/* ================= επιλογή προσώπου + έκθεση ================= */
+(function(){
+  var per=null;
+  var tag=document.getElementById('pertag'),val=document.getElementById('perval');
+  [].forEach.call(document.querySelectorAll('#perlist .per'),function(b){
+    b.onclick=function(){
+      var was=b.classList.contains('sel');
+      [].forEach.call(document.querySelectorAll('#perlist .per'),function(x){x.classList.remove('sel')});
+      if(was){per=null}else{b.classList.add('sel');per=b.dataset.p}
+      if(per){val.textContent=per;tag.hidden=false}else{tag.hidden=true}
+    };
+  });
+
+  var ta=document.getElementById('essay'),wc=document.getElementById('wc'),wc2=document.getElementById('wc2'),
+      send=document.getElementById('send'),again=document.getElementById('again'),
+      wbox=document.getElementById('wbox'),mybox=document.getElementById('mybox'),mytext=document.getElementById('mytext'),
+      chips=[].slice.call(document.querySelectorAll('#mchips .mchip'));
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ')}
+  function words(s){var m=s.trim().match(/[^\s]+/g);return m?m.length:0}
+  function upd(){
+    var n=words(ta.value);wc.textContent=n;send.disabled=n===0;
+    var t=norm(ta.value);
+    var rest=t.split('petit dejeuner').join(' ');
+    chips.forEach(function(c){
+      var w=c.dataset.w;
+      var hit=(w==='dejeuner')?rest.indexOf('dejeuner')>-1:t.indexOf(w)>-1;
+      c.classList.toggle('hit',hit);
+    });
+  }
+  ta.addEventListener('input',upd);
+  send.onclick=function(){
+    mytext.textContent=ta.value;wc2.textContent=words(ta.value);
+    wbox.hidden=true;mybox.hidden=false;
+  };
+  again.onclick=function(){
+    mybox.hidden=true;wbox.hidden=false;ta.focus({preventScroll:true});
+  };
+  upd();
+})();
+</script>
+<script>var ASSETS={};document.querySelectorAll("img[data-key]").forEach(function(i){i.src=ASSETS[i.dataset.key]});</script>
+</body>
+</html>

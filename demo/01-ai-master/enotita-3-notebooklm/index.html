@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 3: NotebookLM – Google | Διαδραστικό Μάθημα</title>
+<meta name="description" content="Διαδραστικό μάθημα σε μορφή διαφανειών: γνωριμία με το NotebookLM της Google — πρόσβαση, δημιουργία σημειωματάριων, διαχείριση πηγών, ερωτήσεις με παραπομπές και η ενότητα Studio (ηχητική επισκόπηση, βίντεο, Mind Map, κουίζ, εκπαιδευτικές κάρτες, αναφορές).">
+<link rel="stylesheet" href="assets/css/style.css?v=1">
+<link rel="stylesheet" href="assets/css/v2.css?v=1">
+<!-- AI-UPDATE-2026:START --><link rel="stylesheet" href="assets/css/updates-2026.css?v=enriched"><link rel="stylesheet" href="assets/css/enrichment.css?v=1"><!-- AI-UPDATE-2026:END --><link rel="stylesheet" href="assets/css/local-chatbot.css?v=sc1"><link rel="stylesheet" href="assets/css/space-theme.css?v=sp1"><script>try{if(!localStorage.getItem("claudeCourse_theme"))localStorage.setItem("claudeCourse_theme","dark");}catch(e){}</script><link rel="stylesheet" href="assets/css/astra.css?v=2"><link rel="stylesheet" href="assets/css/reactbits.css?v=2"><link rel="stylesheet" href="assets/css/shadcn-base.css?v=sc1"><link rel="stylesheet" href="assets/css/shadcn-chat.css?v=sc1"></head>
+<body class="sidebar-collapsed" data-astra-course="notebooklm" data-course="aimaster_en3">
+
+<div class="app">
+
+  <!-- ===================== ΠΛΕΥΡΙΚΟ ΜΕΝΟΥ ===================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Περιεχόμενα μαθήματος">
+    <div class="sidebar-header">
+      <div class="brand">
+        <img class="brand-mark" src="assets/images/notebooklm-logo.png" alt="" aria-hidden="true" width="38" height="38">
+        <span class="brand-text"><strong>AI MASTER</strong> Ενότητα 3 · NotebookLM – Google</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <p class="nav-group-label">Περιεχόμενα</p>
+      <ul id="navList" style="list-style:none; margin:0; padding:0;"></ul>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="overall"><span>Πρόοδος</span><span id="overallLabel">0 / 0</span></div>
+      <button type="button" class="btn btn-secondary btn-sm" id="resetProgress" style="width:100%;">Επαναφορά προόδου</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- ===================== ΚΥΡΙΑ ΠΕΡΙΟΧΗ ===================== -->
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="icon-btn" id="sidebarToggle" aria-label="Άνοιγμα/κλείσιμο μενού">☰</button>
+      <span class="topbar-title" id="topbarTitle">Ενότητα 3</span>
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Σκούρο θέμα" aria-pressed="false">🌙</button>
+      <div class="topbar-progress" aria-hidden="true">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressLabel">0%</span>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ============ ΔΙΑΦΑΝΕΙΑ 0 — ΑΡΧΙΚΗ ΟΘΟΝΗ ============ -->
+      <section class="chapter no-autonav" data-title="Αρχική οθόνη ενότητας" data-group="Εισαγωγή">
+        <div class="hero">
+          <span class="hero-badge">Ενότητα 3</span>
+          <h1>NotebookLM – Google: Ο έξυπνος ψηφιακός σας βοηθός μελέτης</h1>
+          <p class="lead">Ένα διαδραστικό μάθημα γνωριμίας με το NotebookLM, το εργαλείο τεχνητής νοημοσύνης της Google που «διαβάζει» τα δικά σας έγγραφα και σας βοηθά να τα κατανοείτε, να τα οργανώνετε και να τα μετατρέπετε σε γνώση — από τη σύνδεση και το πρώτο σημειωματάριο μέχρι την ενότητα Studio.</p>
+          <img class="hero-logo" src="assets/images/notebooklm-logo.png" alt="" aria-hidden="true">
+          <div class="objectives">
+            <h3>Μαθησιακοί στόχοι</h3>
+            <ul>
+              <li>Να κατανοήσετε τι είναι το NotebookLM και πώς λειτουργεί ως «έξυπνος αναγνώστης» των δικών σας πηγών.</li>
+              <li>Να συνδεθείτε στο εργαλείο με τον λογαριασμό Google σας και να περιηγηθείτε στο περιβάλλον του.</li>
+              <li>Να δημιουργήσετε το πρώτο σας σημειωματάριο (Notebook) και να προσθέσετε και να διαχειριστείτε τις πηγές σας.</li>
+              <li>Να κάνετε ερωτήσεις στις πηγές σας και να αξιοποιείτε τις παραπομπές των απαντήσεων.</li>
+              <li>Να αποθηκεύετε σημειώσεις και να αξιοποιείτε τις αυτόματες προτεινόμενες ερωτήσεις.</li>
+              <li>Να εξερευνήσετε την ενότητα Studio: Ηχητική Επισκόπηση, Επισκόπηση Βίντεο, Mind Map, Κουίζ, Εκπαιδευτικές Κάρτες και Αναφορές.</li>
+              <li>Να διαχειρίζεστε τις δημιουργίες σας (μετονομασία, διαγραφή) και να οργανώνετε τα σημειωματάριά σας.</li>
+            </ul>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1;">
+            <button type="button" class="btn btn-primary" data-nav="1">Έναρξη μαθήματος →</button>
+            <button type="button" class="btn btn-secondary" id="resumeBtn" hidden>Συνέχεια από το τελευταίο σημείο</button>
+          </div>
+        </div>
+      <!-- AI-UPDATE-2026:START --><div class="update-catalog"><details><summary>Εμπλουτισμένο υλικό · 6 αναλυτικές υποενότητες</summary><p>Κάθε υποενότητα περιλαμβάνει εισαγωγή, αναλυτική εξήγηση με παραγράφους, μελέτη περίπτωσης και διαδραστική εφαρμογή. Μπορείτε να προχωράτε σε βήματα ή να επιλέξετε «Συνεχής ανάγνωση».</p><ul><li><a data-update-link href="#notebook-name">NotebookLM και Gemini Notebook: η νεότερη ονομασία</a></li><li><a data-update-link href="#notebook-source-register">Βιβλιοθήκη πηγών με ημερομηνίες και εκδόσεις</a></li><li><a data-update-link href="#notebook-evidence">Παραπομπή, συμπέρασμα και άγνωστο στοιχείο</a></li><li><a data-update-link href="#notebook-new-studio">Από τη σύνοψη σε επεξεργάσιμα παραδοτέα</a></li><li><a data-update-link href="#notebook-study-cycle">Κουίζ και κάρτες με στόχο την κατανόηση</a></li><li><a data-update-link href="#notebook-research-lab">Εργαστήριο: τρεις πηγές, ένα ελέγξιμο ενημερωτικό</a></li></ul><p>Οι διαθέσιμες λειτουργίες μπορεί να διαφέρουν ανά λογαριασμό, πρόγραμμα και πλατφόρμα.</p></details></div><!-- AI-UPDATE-2026:END --></section>
+
+      <!-- ============ ΚΕΦΑΛΑΙΟ 1 ============ -->
+      <section class="chapter" data-title="Εισαγωγή στο NotebookLM" data-group="1. Γνωριμία με το NotebookLM"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#notebook-name">NotebookLM και Gemini Notebook: η νεότερη ονομασία</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 1.1</span>
+        <h1>Εισαγωγή στο NotebookLM</h1>
+        <p>Το NotebookLM είναι ένα νέο εργαλείο τεχνητής νοημοσύνης της Google, σχεδιασμένο για να βοηθά τον χρήστη να κατανοεί και να οργανώνει τις δικές του πληροφορίες. Με απλά λόγια, είναι ένας ψηφιακός βοηθός AI που έχει εκπαιδευτεί να δουλεύει πάνω στα δικά σας έγγραφα και σημειώσεις.</p>
+        <p>Αυτό το εργαλείο AI λύνει ένα συχνό πρόβλημα που αντιμετωπίζουν πολλοί χρήστες: μαζεύουν πολλές σημειώσεις, άρθρα ή έγγραφα και στη συνέχεια δυσκολεύονται να τα διαβάσουν, να τα συνοψίσουν ή να τα συνδυάσουν. Χάρη στο NotebookLM, ο χρήστης μπορεί να μελετά πιο γρήγορα, να συγκεντρώνει βασικές ιδέες από πολλά κείμενα και να δημιουργεί περιλήψεις ή οδηγούς μελέτης, χωρίς να χάνει χρόνο σε αναζήτηση ή οργάνωση.</p>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="notebook-name" data-update-title="NotebookLM και Gemini Notebook: η νεότερη ονομασία" aria-labelledby="notebook-name-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 1.1</p><h2 id="notebook-name-title" tabindex="-1">NotebookLM και Gemini Notebook: η νεότερη ονομασία</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να αναγνωρίζετε το εργαλείο στις σημερινές πηγές.</p><div class="learn-workbook" data-workbook="notebook-name"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="notebook-name-tab-0" aria-controls="notebook-name-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="notebook-name-tab-1" aria-controls="notebook-name-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="notebook-name-tab-2" aria-controls="notebook-name-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="notebook-name-tab-3" aria-controls="notebook-name-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="notebook-name-panel-0" role="tabpanel" aria-labelledby="notebook-name-tab-0" tabindex="0"><p>Στις 16 Ιουλίου 2026 η Google ανακοίνωσε τη μετονομασία του NotebookLM σε Gemini Notebook. Η ανακοίνωση το περιγράφει ως αυτοτελές ερευνητικό προϊόν, με μεγαλύτερη σύνδεση με το οικοσύστημα Gemini. Το όνομα της παρούσας ενότητας και οι αρχικές οθόνες διατηρούνται, ώστε να παραμένει αναγνωρίσιμο το εκπαιδευτικό υλικό.</p><p>Η ίδια ανακοίνωση αναφέρει συγχρονισμό notebooks ανάμεσα στην εφαρμογή Gemini και στην αυτοτελή εμπειρία Gemini Notebook. Στην πράξη ελέγχουμε λογαριασμό, διαθέσιμες συνδέσεις και δικαιώματα πριν θεωρήσουμε ότι βλέπουμε το ίδιο σύνολο πηγών.</p><div class="update-note"><strong>Κρατήστε αυτό:</strong> Μια αλλαγή ονομασίας δεν αλλάζει τον βασικό μαθησιακό κανόνα: γνωρίζουμε ποιες πηγές χρησιμοποιούμε και ελέγχουμε τις παραπομπές. Οι οδηγίες που ακολουθούν εφαρμόζονται στο υλικό της ενότητας ανεξάρτητα από τη γλώσσα των μενού.</div><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Βλέπετε παλιό οδηγό με τον όρο NotebookLM και νεότερο με τον όρο Gemini Notebook. Τι ελέγχετε πριν ακολουθήσετε τα βήματα;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Την ημερομηνία, τον επίσημο εκδότη, τον λογαριασμό και τη λειτουργία που περιγράφεται. Δεν υποθέτουμε ότι κάθε παλιό screenshot αντιστοιχεί στη σημερινή διάταξη.</p></details></div></div><div class="learn-panel" id="notebook-name-panel-1" role="tabpanel" aria-labelledby="notebook-name-tab-1" tabindex="0"><h3>Τι αλλάζει όταν η εργασία οργανώνεται γύρω από συγκεκριμένες πηγές</h3><p>Η εργασία σε ένα notebook ξεκινά από ένα σώμα υλικού που επιλέγει ο χρήστης. Οι πηγές μπορεί να αφορούν ένα μάθημα, μια μελέτη ή ένα επαγγελματικό έργο. Αυτό διαφοροποιεί τη διαδικασία από μια γενική ερώτηση χωρίς συνοδευτικά δεδομένα: το ζητούμενο είναι να εντοπιστούν, να οργανωθούν και να συντεθούν πληροφορίες με αναγνωρίσιμη προέλευση. Η επιλογή πηγών αποτελεί επομένως μέρος της ίδιας της ερευνητικής εργασίας.</p><p>Η προσθήκη ενός αρχείου δεν σημαίνει ότι το βασικό μοντέλο επανεκπαιδεύεται πάνω σε αυτό. Το περιεχόμενο αξιοποιείται ως πλαίσιο για την αναζήτηση σχετικών αποσπασμάτων και την παραγωγή απαντήσεων. Η διάκριση έχει πρακτική σημασία: αν μια πληροφορία δεν περιλαμβάνεται στις πηγές ή δεν αναγνωρίστηκε σωστά κατά την εισαγωγή, δεν πρέπει να περιμένουμε ότι η απάντηση θα τη γνωρίζει με βεβαιότητα.</p><p>Η οργάνωση γύρω από πηγές διευκολύνει την ιχνηλασιμότητα, δηλαδή τη δυνατότητα να επιστρέφουμε από έναν ισχυρισμό στο υλικό που τον στηρίζει. Δεν εξαλείφει όμως την ανάγκη κριτικής ανάγνωσης. Οι πηγές μπορεί να περιέχουν λάθη, να έχουν διαφορετική έκδοση ή να αφορούν διαφορετικό πλαίσιο. Ο χρήστης ελέγχει τόσο την ποιότητα του υλικού όσο και την πιστότητα της σύνθεσης που παράγεται από αυτό.</p></div><div class="learn-panel" id="notebook-name-panel-2" role="tabpanel" aria-labelledby="notebook-name-tab-2" tabindex="0"><h3>Παράδειγμα: ένα notebook για συγκεκριμένο εκπαιδευτικό ερώτημα</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Ένας εκπαιδευτής συγκεντρώνει πρόγραμμα σπουδών, οδηγό αξιολόγησης και σημειώσεις εργαστηρίου. Αν το ερώτημα είναι «πώς θα αξιολογηθεί η τελική εργασία;», η κύρια πηγή είναι ο εγκεκριμένος οδηγός αξιολόγησης. Οι προσωπικές σημειώσεις μπορεί να βοηθούν στην εξήγηση, αλλά δεν πρέπει να παρουσιάζονται σαν επίσημοι κανόνες.</p><p>Ο εκπαιδευτής ονομάζει καθαρά τις πηγές και ζητά να δηλώνεται πότε μια πρόταση αποτελεί ερμηνεία. Με αυτή την οργάνωση το notebook λειτουργεί ως χώρος τεκμηριωμένης μελέτης και όχι ως απλή αποθήκη αρχείων.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Απάντησε για τα κριτήρια αξιολόγησης χρησιμοποιώντας τον εγκεκριμένο οδηγό. Δώσε σχετικό απόσπασμα για κάθε κριτήριο. Αν χρησιμοποιήσεις σημειώσεις για επεξήγηση, δήλωσε ότι δεν αποτελούν επίσημο κανονισμό.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="notebook-name-panel-3" role="tabpanel" aria-labelledby="notebook-name-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Τι αποδεικνύει η προσθήκη ενός PDF στο notebook;</p><form class="enrich-choice" data-correct="1" data-answers="[&quot;Η προσθήκη πηγής δεν τεκμηριώνει επανεκπαίδευση του βασικού μοντέλου.&quot;,&quot;Σωστά. Η πηγή παρέχει πλαίσιο, αλλά η αξιοποίησή της χρειάζεται έλεγχο.&quot;,&quot;Η ποιότητα και η εγκυρότητα της πηγής πρέπει να αξιολογηθούν χωριστά.&quot;]"><fieldset><legend class="enrich-sr">Τι αποδεικνύει η προσθήκη ενός PDF στο notebook;</legend><label><input type="radio" name="notebook-name-choice" value="0" required><span>Ότι το βασικό μοντέλο επανεκπαιδεύτηκε οριστικά.</span></label><label><input type="radio" name="notebook-name-choice" value="1" required><span>Ότι το PDF μπορεί να χρησιμοποιηθεί ως πηγή της συγκεκριμένης εργασίας.</span></label><label><input type="radio" name="notebook-name-choice" value="2" required><span>Ότι κάθε πληροφορία του PDF είναι αληθής.</span></label></fieldset><button type="submit" class="enrich-button">Έλεγχος απάντησης</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></form><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Διάλεξε ένα ερώτημα που θα διερευνούσες με notebook και κατέγραψε ποια πηγή θα είχε τον κύριο ρόλο στην απάντηση.</p><label for="notebook-name-reflection">Η δική σου σύντομη απάντηση</label><textarea id="notebook-name-reflection" data-note="notebook-name" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://blog.google/intl/de-de/produkte/suchen-entdecken/notebooklm-wird-gemini-notebook/" target="_blank" rel="noopener noreferrer">Google · NotebookLM → Gemini Notebook, 16/07/2026 (γερμανικά)</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <section class="chapter" data-title="Για ποιους είναι χρήσιμο" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.1</span>
+        <h1>Για ποιους είναι χρήσιμο</h1>
+        <p>Είναι ιδιαίτερα χρήσιμο για μαθητές, φοιτητές, ερευνητές ή οποιονδήποτε χρειάζεται να κατανοεί μεγάλο όγκο πληροφορίας από διαφορετικές πηγές.</p>
+        <div class="card-grid">
+          <div class="card"><span class="card-icon" aria-hidden="true">🎓</span><h3>Μαθητές &amp; φοιτητές</h3><p>Γρηγορότερη μελέτη, βασικές ιδέες από πολλά κείμενα, περιλήψεις και οδηγοί μελέτης.</p></div>
+          <div class="card"><span class="card-icon" aria-hidden="true">🔬</span><h3>Ερευνητές</h3><p>Συγκέντρωση και σύνδεση πληροφοριών από πολλές διαφορετικές πηγές.</p></div>
+          <div class="card"><span class="card-icon" aria-hidden="true">💼</span><h3>Κάθε χρήστης</h3><p>Οποιοσδήποτε χρειάζεται να κατανοεί μεγάλο όγκο πληροφορίας χωρίς να χάνει χρόνο σε αναζήτηση ή οργάνωση.</p></div>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🔑</span>
+          <div><p><strong>Βασικό συμπέρασμα:</strong> Το NotebookLM λειτουργεί σαν ένας «έξυπνος αναγνώστης» που δουλεύει μαζί σας και σας βοηθά να μετατρέπετε τα δεδομένα σας σε γνώση.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Τι είναι και πώς λειτουργεί" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.2</span>
+        <h1>Τι είναι και πώς λειτουργεί το NotebookLM</h1>
+        <p>Το NotebookLM είναι ένα ψηφιακό σημειωματάριο με τεχνητή νοημοσύνη της Google, που μαθαίνει από τα δικά σας έγγραφα και σας βοηθά να τα αξιοποιείτε πιο αποτελεσματικά. Από προεπιλογή, διαβάζει μόνο ό,τι του δώσετε εσείς (π.χ. αρχεία PDF, σημειώσεις, Google Docs ή άρθρα). Ωστόσο, αν του ζητήσετε μέσω prompt, μπορεί να πραγματοποιήσει αναζήτηση στο διαδίκτυο και να σας προτείνει σχετικές πηγές.</p>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">⚙️</span>
+          <div><p><strong>Πώς λειτουργεί:</strong> Η βασική του λειτουργία στηρίζεται στο ότι «διαβάζει» μόνο τα έγγραφα που του δίνετε, όπως για παράδειγμα PDF αρχεία και Google Docs, και στη συνέχεια δημιουργεί προσωπικό σημειωματάριο. Μέσα σε αυτό, μπορεί να απαντά σε ερωτήσεις, να δημιουργεί περιλήψεις, να συγκρίνει πηγές ή να συνθέτει οδηγούς μελέτης βασισμένους αποκλειστικά σε αυτό το υλικό.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πρόσβαση — Βήμα 1" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Πρόσβαση και Σύνδεση — Βήμα 1</h1>
+        <p>Για να ξεκινήσετε να χρησιμοποιείτε το NotebookLM, χρειάζεται μόνο ένας λογαριασμός Google. Το εργαλείο λειτουργεί απευθείας μέσα από τον φυλλομετρητή (browser), χωρίς να απαιτείται εγκατάσταση.</p>
+        <p><strong>Βήμα 1: Μετάβαση στη σελίδα του NotebookLM.</strong> Ανοίξτε έναν browser (π.χ. Chrome, Mozilla) και πληκτρολογήστε τη διεύθυνση: <a href="https://notebooklm.google/" target="_blank" rel="noopener">https://notebooklm.google/</a></p>
+        <figure class="shot">
+          <img src="assets/images/image1.png" alt="Η αρχική σελίδα του NotebookLM" loading="lazy">
+          <figcaption>«Αρχική σελίδα του NotebookLM»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Πρόσβαση — Βήμα 2" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Πρόσβαση και Σύνδεση — Βήμα 2</h1>
+        <p>Έπειτα, πατώντας το κουμπί «Δοκιμάστε το NotebookLM», θα μεταβείτε μέσα στο περιβάλλον του εργαλείου.</p>
+        <p>Στην περίπτωση που ο browser σας δεν είναι συνδεδεμένος με το gmail σας, τότε θα σας ζητήσει να συνδεθείτε με τα στοιχεία σας.</p>
+        <figure class="shot">
+          <img src="assets/images/image2.png" alt="Οθόνη σύνδεσης με λογαριασμό Google" loading="lazy">
+          <figcaption>«Σύνδεση με τα στοιχεία του χρήστη»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Η κεντρική σελίδα" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Η κεντρική σελίδα του NotebookLM</h1>
+        <p>Διαφορετικά, θα μεταβείτε απευθείας στην κεντρική σελίδα του NotebookLM, όπως φαίνεται στην παρακάτω εικόνα.</p>
+        <figure class="shot">
+          <img src="assets/images/image3.png" alt="Η κεντρική σελίδα του NotebookLM με σημειωματάρια" loading="lazy">
+          <figcaption>«Κεντρική σελίδα του NotebookLM με σημειωματάρια»</figcaption>
+        </figure>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">📌</span>
+          <div><p><strong>Συνοψίζοντας:</strong> Η πρόσβαση στο NotebookLM είναι γρήγορη και γίνεται αποκλειστικά μέσω του Google λογαριασμού σας, όπως και στο Gemini. Μετά την πρώτη είσοδο, το NotebookLM δημιουργεί αυτόματα έναν χώρο εργασίας, στον οποίο μπορείτε να αποθηκεύσετε όλα τα σημειωματάριά σας.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δημιουργία πρώτου Notebook" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>Δημιουργία πρώτου Notebook — Βήμα 1</h1>
+        <p>Αφού συνδεθείτε στο NotebookLM, μπορείτε να ξεκινήσετε αμέσως δημιουργώντας το πρώτο σας σημειωματάριο (Notebook). Κάθε σημειωματάριο λειτουργεί σαν προσωπικός χώρος μελέτης, όπου προσθέτετε τα δικά σας έγγραφα και πηγές.</p>
+        <p><strong>Βήμα 1: Δημιουργία Notebook.</strong> Στην κεντρική οθόνη, δημιουργήστε ένα νέο σημειωματάριο. Υπάρχουν 2 τρόποι, όπως φαίνεται στην παρακάτω εικόνα.</p>
+        <figure class="shot">
+          <img src="assets/images/image4.png" alt="Οι δύο τρόποι δημιουργίας σημειωματάριου" loading="lazy">
+          <figcaption>«Δημιουργία σημειωματάριου»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Ονομασία &amp; προσθήκη αρχείων" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>Βήμα 2: Ονομασία του Notebook &amp; Προσθήκη αρχείων</h1>
+        <p>Πατώντας «Δημιουργία νέου σημειωματάριου», ανοίγει ένα νέο παράθυρο, όπως φαίνεται παρακάτω.</p>
+        <figure class="shot">
+          <img src="assets/images/image5.png" alt="Παράθυρο μεταφόρτωσης πηγών" loading="lazy">
+        </figure>
+        <p>Αρχικά, στο κέντρο εμφανίζεται η επιλογή «Μεταφόρτωση πηγών». Πατώντας επάνω, μπορείτε να επιλέξετε τα αρχεία που έχετε αποθηκευμένα στον υπολογιστή σας, για να τα ανεβάσετε στο σημειωματάριο.</p>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">⚠️</span>
+          <div><p><strong>Προσοχή:</strong> Σε αυτό το σημείο χρειάζεται να θυμάστε ότι δεν μπορείτε να ανεβάσετε οποιονδήποτε τύπο αρχείου θέλετε. Οι υποστηριζόμενοι τύποι αρχείων, όπως ήδη αναγράφεται, είναι: <strong>PDF, txt, Markdown, Ήχος (π.χ. mp3)</strong>.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Επιλογή αρχείου" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>Προσθήκη και Διαχείριση αρχείων</h1>
+        <p>Αφού λοιπόν ανοίξετε το παράθυρο και πατήσετε «Μεταφόρτωση πηγών», τώρα επιλέξτε τα αρχεία από τον υπολογιστή σας.</p>
+        <figure class="shot">
+          <img src="assets/images/image6.png" alt="Επιλογή αρχείου από τον υπολογιστή" loading="lazy">
+          <figcaption>«Επιλογή αρχείου»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Ανάλυση &amp; λίστα πηγών" data-group="1. Γνωριμία με το NotebookLM"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#notebook-source-register">Βιβλιοθήκη πηγών με ημερομηνίες και εκδόσεις</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>Ανάλυση του αρχείου και λίστα πηγών</h1>
+        <p>Μόλις επιλέξετε το αρχείο, το NotebookLM χρειάζεται λίγα δευτερόλεπτα για να το αναλύσει. Μόλις είναι έτοιμο, θα δείτε το όνομα του αρχείου να εμφανίζεται στη λίστα με τις πηγές στην αριστερή στήλη.</p>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image7.png" alt="Μεταφόρτωση αρχείου σε εξέλιξη" loading="lazy"><figcaption>«Upload file»</figcaption></figure>
+          <figure class="shot"><img src="assets/images/image8.png" alt="Το περιβάλλον του NotebookLM με την πηγή στην αριστερή στήλη" loading="lazy"><figcaption>«Το περιβάλλον του NotebookLM»</figcaption></figure>
+        </div>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="notebook-source-register" data-update-title="Βιβλιοθήκη πηγών με ημερομηνίες και εκδόσεις" aria-labelledby="notebook-source-register-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 1.5</p><h2 id="notebook-source-register-title" tabindex="-1">Βιβλιοθήκη πηγών με ημερομηνίες και εκδόσεις</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να προετοιμάζετε υλικό που μπορεί να ελεγχθεί.</p><div class="learn-workbook" data-workbook="notebook-source-register"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="notebook-source-register-tab-0" aria-controls="notebook-source-register-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="notebook-source-register-tab-1" aria-controls="notebook-source-register-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="notebook-source-register-tab-2" aria-controls="notebook-source-register-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="notebook-source-register-tab-3" aria-controls="notebook-source-register-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="notebook-source-register-panel-0" role="tabpanel" aria-labelledby="notebook-source-register-tab-0" tabindex="0"><p>Η τεκμηρίωση σε πηγές μειώνει ορισμένους κινδύνους ανακριβειών, αλλά δεν εγγυάται σωστή απάντηση. Αν το notebook περιέχει παλιά, ελλιπή ή αντιφατικά έγγραφα, αυτά επηρεάζουν τη σύνθεση. Η ποιότητα ξεκινά πριν από την πρώτη ερώτηση.</p><div class="update-table" role="region" aria-label="Συγκριτικός πίνακας" tabindex="0"><table><thead><tr><th scope="col">Πεδίο μητρώου</th><th scope="col">Παράδειγμα</th></tr></thead><tbody><tr><th scope="row">Τίτλος και εκδότης</th><td>Οδηγός λειτουργίας · εκπαιδευτικός φορέας</td></tr><tr><th scope="row">Έκδοση και ημερομηνία</th><td>v2 · 08/09/2026</td></tr><tr><th scope="row">Σκοπός</th><td>Περιγραφή διαδικασίας, όχι απόδειξη αποτελεσματικότητας</td></tr><tr><th scope="row">Κατάσταση</th><td>Ενεργό / ιστορικό / προς επιβεβαίωση</td></tr></tbody></table></div><p>Κρατάμε διαφορετικές εκδόσεις μόνο όταν θέλουμε να τις συγκρίνουμε, με σαφείς ετικέτες. Αν αναζητούμε τη σημερινή διαδικασία, επιλέγουμε την ισχύουσα πηγή. Για δυσανάγνωστο PDF ελέγχουμε ότι η εξαγωγή κειμένου αναγνωρίζει πίνακες, τόνους και αρίθμηση σελίδων.</p><figure class="shot update-figure"><img src="assets/images/update-study.png" alt="Εκπαιδευόμενη συγκρίνει πηγές στον υπολογιστή με βιβλίο και προσωπικές σημειώσεις." loading="lazy"><figcaption>Συνθετική εκπαιδευτική εικόνα, δημιουργημένη με AI. Δεν αποτελεί φωτογραφία πραγματικού συμβάντος ή στιγμιότυπο εφαρμογής.</figcaption></figure><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Έχετε οδηγούς του 2024 και του 2026 με διαφορετικές προθεσμίες. Ποιο είναι το πρώτο ερώτημα;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Ποιος οδηγός ισχύει για την περίπτωσή μας; Ζητάμε σύγκριση εκδόσεων με παραπομπές και ελέγχουμε αν ο νεότερος αντικαθιστά τον προηγούμενο.</p></details></div></div><div class="learn-panel" id="notebook-source-register-panel-1" role="tabpanel" aria-labelledby="notebook-source-register-tab-1" tabindex="0"><h3>Η ποιότητα της βιβλιοθήκης καθορίζει τα όρια της σύνθεσης</h3><p>Ένα μητρώο πηγών είναι σύντομος οργανωμένος κατάλογος που εξηγεί τι είναι κάθε τεκμήριο και γιατί χρησιμοποιείται. Χρήσιμα πεδία είναι τίτλος, δημιουργός, έκδοση, τύπος πηγής και σχέση με το ερευνητικό ερώτημα. Η ημερομηνία δημοσίευσης έχει νόημα όταν συνδέεται με το περιεχόμενο: μια παλιά θεωρητική εργασία μπορεί να παραμένει θεμελιώδης, ενώ μια παλιά οδηγία προϊόντος μπορεί να μην περιγράφει τη σημερινή λειτουργία.</p><p>Η νεότερη έκδοση δεν ταυτίζεται πάντα με την εγκεκριμένη έκδοση. Σε επαγγελματικό περιβάλλον μπορεί να υπάρχουν προσχέδια, τελικά αρχεία και προσωπικές διορθώσεις με παρόμοιο τίτλο. Αν τα εισαγάγουμε χωρίς διάκριση, η απάντηση μπορεί να συνδυάσει στοιχεία με διαφορετική ισχύ. Η σαφής ονομασία και η επιλογή κατάλληλων πηγών ανά ερώτημα περιορίζουν αυτή τη σύγχυση.</p><p>Πριν ζητήσουμε σύνθεση ελέγχουμε αν η εισαγωγή διατήρησε κρίσιμα στοιχεία. Πίνακες, υποσημειώσεις, σαρωμένο κείμενο και σύνθετη μορφοποίηση μπορεί να χρειάζονται ιδιαίτερη επιθεώρηση. Ένας απλός έλεγχος είναι να ζητήσουμε μεταγραφή ενός γνωστού αποσπάσματος και να τη συγκρίνουμε με το πρωτότυπο. Αν η ανάγνωση της πηγής είναι λανθασμένη, η διόρθωση πρέπει να γίνει πριν από την ερμηνεία.</p></div><div class="learn-panel" id="notebook-source-register-panel-2" role="tabpanel" aria-labelledby="notebook-source-register-tab-2" tabindex="0"><h3>Παράδειγμα: τρία αρχεία με παρόμοιο όνομα</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Στον φάκελο υπάρχουν «Πρόγραμμα_σχέδιο», «Πρόγραμμα_εγκεκριμένο» και «Πρόγραμμα_προσωπικές_σημειώσεις». Η ερώτηση αφορά τις επίσημες ώρες διδασκαλίας. Η πηγή που καθορίζει την απάντηση είναι το εγκεκριμένο πρόγραμμα, ενώ το σχέδιο χρησιμοποιείται μόνο αν ζητείται σύγκριση αλλαγών.</p><p>Στο μητρώο καταγράφεται ο ρόλος κάθε αρχείου. Η απάντηση πρέπει να αναφέρει την επιλεγμένη έκδοση, ώστε ένας δεύτερος αναγνώστης να μπορεί να αναπαραγάγει τον έλεγχο. Αυτό είναι ιδιαίτερα χρήσιμο όταν το υλικό επαναχρησιμοποιείται από διαφορετικούς εκπαιδευτές.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Κατέγραψε τίτλο, έκδοση, ρόλο και πιθανό περιορισμό κάθε πηγής. Για τις επίσημες ώρες χρησιμοποίησε μόνο το εγκεκριμένο πρόγραμμα. Αν υπάρχει διαφορά με άλλη πηγή, παρουσίασέ την χωριστά.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="notebook-source-register-panel-3" role="tabpanel" aria-labelledby="notebook-source-register-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Σύνδεσε τον τύπο πηγής με τον κατάλληλο τρόπο χρήσης.</p><form class="enrich-match" data-explanation="Η ταξινόμηση των πηγών αποτρέπει τη μετατροπή πρότασης ή προσωπικής άποψης σε επίσημη πληροφορία."><div class="enrich-match-row"><label for="notebook-source-register-match-0">Εγκεκριμένος οδηγός</label><select id="notebook-source-register-match-0" aria-label="Αντιστοίχιση: Εγκεκριμένος οδηγός" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="0">Βάση για επίσημους κανόνες</option><option value="2">Βοηθητική ερμηνεία με σαφή επισήμανση</option><option value="1">Υλικό για σύγκριση προτεινόμενων αλλαγών</option><option value="3">Προηγείται έλεγχος ορθής ανάγνωσης</option></select></div><div class="enrich-match-row"><label for="notebook-source-register-match-1">Προσχέδιο</label><select id="notebook-source-register-match-1" aria-label="Αντιστοίχιση: Προσχέδιο" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="0">Βάση για επίσημους κανόνες</option><option value="2">Βοηθητική ερμηνεία με σαφή επισήμανση</option><option value="1">Υλικό για σύγκριση προτεινόμενων αλλαγών</option><option value="3">Προηγείται έλεγχος ορθής ανάγνωσης</option></select></div><div class="enrich-match-row"><label for="notebook-source-register-match-2">Προσωπικές σημειώσεις</label><select id="notebook-source-register-match-2" aria-label="Αντιστοίχιση: Προσωπικές σημειώσεις" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="0">Βάση για επίσημους κανόνες</option><option value="2">Βοηθητική ερμηνεία με σαφή επισήμανση</option><option value="1">Υλικό για σύγκριση προτεινόμενων αλλαγών</option><option value="3">Προηγείται έλεγχος ορθής ανάγνωσης</option></select></div><div class="enrich-match-row"><label for="notebook-source-register-match-3">Σαρωμένος πίνακας</label><select id="notebook-source-register-match-3" aria-label="Αντιστοίχιση: Σαρωμένος πίνακας" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="0">Βάση για επίσημους κανόνες</option><option value="2">Βοηθητική ερμηνεία με σαφή επισήμανση</option><option value="1">Υλικό για σύγκριση προτεινόμενων αλλαγών</option><option value="3">Προηγείται έλεγχος ορθής ανάγνωσης</option></select></div><button type="submit" class="enrich-button">Έλεγχος αντιστοίχισης</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></form><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Ονόμασε τρεις πηγές που χρησιμοποιείς συχνά και γράψε τον διαφορετικό ρόλο που θα είχαν στο μητρώο σου.</p><label for="notebook-source-register-reflection">Η δική σου σύντομη απάντηση</label><textarea id="notebook-source-register-reflection" data-note="notebook-source-register" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://blog.google/innovation-and-ai/technology/ai/notebooklm-google-ai/" target="_blank" rel="noopener noreferrer">Google · Η τεκμηρίωση με πηγές και τα όριά της</a></li><li><a href="https://blog.google/intl/de-de/produkte/suchen-entdecken/notebooklm-wird-gemini-notebook/" target="_blank" rel="noopener noreferrer">Google · NotebookLM → Gemini Notebook, 16/07/2026 (γερμανικά)</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <section class="chapter" data-title="Προεπισκόπηση πηγής" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>Προεπισκόπηση της πηγής</h1>
+        <p>Τώρα, αφού έχετε ανεβάσει το αρχείο που θέλετε, πατήστε επάνω στο όνομά του. Ανοίγει η προεπισκόπηση της πηγής.</p>
+        <figure class="shot">
+          <img src="assets/images/image9.png" alt="Προεπισκόπηση της πηγής" loading="lazy">
+        </figure>
+        <p>Πλέον, μπορείτε να κάνετε ερωτήσεις στο μοντέλο και να σας απαντά με βάση τις πληροφορίες του συγκεκριμένου αρχείου.</p>
+      </section>
+
+      <section class="chapter" data-title="Επιλογή ορισμένων αρχείων" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>Επιλογή ορισμένων αρχείων προς μελέτη</h1>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">⚠️</span>
+          <div><p><strong>Προσοχή!</strong> Αν έχετε ανεβάσει πολλά αρχεία αλλά θέλετε το NotebookLM να χρησιμοποιεί μόνο ορισμένα από αυτά, μπορείτε να απο-επιλέξετε όποια δεν χρειάζεστε εκείνη τη στιγμή. Έτσι, το εργαλείο θα απαντά μόνο με βάση τα αρχεία που έχετε αφήσει επιλεγμένα.</p></div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image10.png" alt="Επιλογή ορισμένων αρχείων προς μελέτη" loading="lazy">
+          <figcaption>«Επιλογή ορισμένων αρχείων προς μελέτη»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Ερωτήσεις στις πηγές" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Ερωτήσεις σχετικά με τις πηγές</h1>
+        <p>Αφού επιλέξετε ποια αρχεία θέλετε να μελετήσετε, μπορείτε να ξεκινήσετε τη συνομιλία με το NotebookLM. Το εργαλείο αναλύει το περιεχόμενο των πηγών και απαντά μόνο με βάση όσα περιλαμβάνονται στα επιλεγμένα αρχεία ή και σε όλα τα αρχεία που έχετε ανεβάσει.</p>
+        <p><strong>Βήμα 1: Το πεδίο των ερωτήσεων.</strong> Στο κάτω μέρος της οθόνης εμφανίζεται ένα πλαίσιο κειμένου με την ένδειξη «Ξεκινήστε να πληκτρολογείτε…». Εδώ μπορείτε να γράψετε απλές ερωτήσεις, όπως:</p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Παραδείγματα</span>
+          <p class="pb-text">«Ποια είναι τα βασικά σημεία του αρχείου;»<br>«Δώσε μου μια σύντομη περίληψη.»<br>«Τι αναφέρει το κείμενο για τα οφέλη της τεχνητής νοημοσύνης;»</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Το πεδίο ερωτήσεων" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Το πεδίο ερωτήσεων</h1>
+        <figure class="shot">
+          <img src="assets/images/image11.png" alt="Το πεδίο ερωτήσεων στο κάτω μέρος της οθόνης" loading="lazy">
+          <figcaption>«Το πεδίο ερωτήσεων στο κάτω μέρος της οθόνης»</figcaption>
+        </figure>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">💡</span>
+          <div><p><strong>Tip!</strong> Δίπλα στο πλαίσιο όπου γράφετε την ερώτησή σας, εμφανίζεται ένδειξη με τον αριθμό των πηγών που θα χρησιμοποιήσει το NotebookLM για να απαντήσει (π.χ. «2 πηγές»). Έτσι ξέρετε πάντα πόσες πηγές λαμβάνονται υπόψη στην απάντηση.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Λήψη απάντησης" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Βήμα 2: Λήψη απάντησης</h1>
+        <p>Μόλις πατήσετε Enter, το NotebookLM εμφανίζει μια αναλυτική απάντηση στο πάνω μέρος της οθόνης, στη μεσαία στήλη.</p>
+        <figure class="shot">
+          <img src="assets/images/image12.png" alt="Αναλυτική απάντηση του NotebookLM στη μεσαία στήλη" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Παραπομπές" data-group="1. Γνωριμία με το NotebookLM"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#notebook-evidence">Παραπομπή, συμπέρασμα και άγνωστο στοιχείο</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Οι παραπομπές των απαντήσεων</h1>
+        <p>Στο τέλος κάθε απάντησης μπορείτε να δείτε τις παραπομπές, οι οποίες δείχνουν από ποιο αρχείο και από ποιο σημείο του αρχείου προήλθε αυτή η πληροφορία.</p>
+        <figure class="shot">
+          <img src="assets/images/image13.png" alt="Παραπομπές από τα αρχεία" loading="lazy">
+          <figcaption>«Παραπομπές από τα αρχεία»</figcaption>
+        </figure>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="notebook-evidence" data-update-title="Παραπομπή, συμπέρασμα και άγνωστο στοιχείο" aria-labelledby="notebook-evidence-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 1.6</p><h2 id="notebook-evidence-title" tabindex="-1">Παραπομπή, συμπέρασμα και άγνωστο στοιχείο</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να ξεχωρίζετε τι λέει η πηγή από την ερμηνεία του AI.</p><div class="learn-workbook" data-workbook="notebook-evidence"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="notebook-evidence-tab-0" aria-controls="notebook-evidence-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="notebook-evidence-tab-1" aria-controls="notebook-evidence-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="notebook-evidence-tab-2" aria-controls="notebook-evidence-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="notebook-evidence-tab-3" aria-controls="notebook-evidence-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="notebook-evidence-panel-0" role="tabpanel" aria-labelledby="notebook-evidence-tab-0" tabindex="0"><p>Μια παραπομπή πρέπει να οδηγεί στο απόσπασμα που στηρίζει τη συγκεκριμένη πρόταση. Δεν αρκεί να αφορά γενικά το ίδιο θέμα. Διαβάζουμε το συμφραζόμενο και ελέγχουμε μήπως το AI παρέλειψε προϋπόθεση, εξαίρεση ή αρνητική διατύπωση.</p><figure class="shot update-figure"><img src="assets/images/update-evidence.svg" alt="Πηγή με ημερομηνία, συγκεκριμένο απόσπασμα, ισχυρισμός που στηρίζεται σε αυτό και ανθρώπινος έλεγχος." loading="lazy"><figcaption>Πρωτότυπο εκπαιδευτικό διάγραμμα · 2026. Η εξήγηση αποδίδεται και στο κείμενο.</figcaption></figure><div class="update-prompt"><h3>Δοκιμάστε αυτό το prompt</h3><blockquote>Χρησιμοποίησε μόνο τις επιλεγμένες πηγές. Για κάθε απάντηση δώσε: τι αναφέρεται ρητά, ποια παραπομπή το στηρίζει και τι παραμένει άγνωστο. Αν προτείνεις συμπέρασμα, χαρακτήρισέ το ως ερμηνεία. Μην επινοείς αριθμούς ή ονόματα.</blockquote></div><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Η πηγή λέει «δοκιμάστηκε σε 20 άτομα». Η απάντηση γράφει «αποδεδειγμένα αποτελεσματικό για όλους». Στηρίζεται ο ισχυρισμός;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Όχι. Η γενίκευση υπερβαίνει το διαθέσιμο τεκμήριο. Χρειάζεται περιγραφή της δοκιμής, του δείγματος και των περιορισμών. Η παραπομπή δεν κάνει τη γενίκευση έγκυρη.</p></details></div></div><div class="learn-panel" id="notebook-evidence-panel-1" role="tabpanel" aria-labelledby="notebook-evidence-tab-1" tabindex="0"><h3>Πώς μεταφέρεται ένας ισχυρισμός χωρίς να αλλάζει το νόημά του</h3><p>Η τεκμηριωμένη γραφή διαχωρίζει το απόσπασμα της πηγής, την παράφρασή του και το συμπέρασμα του αναγνώστη. Η παράφραση αλλάζει τις λέξεις, αλλά πρέπει να διατηρεί το νόημα, τον πληθυσμό αναφοράς και το επίπεδο βεβαιότητας. Αν η πηγή γράφει «ενδέχεται», η σύνοψη δεν πρέπει να γράφει «αποδεικνύει». Μικρές γλωσσικές μετατοπίσεις μπορούν να δημιουργήσουν πολύ μεγαλύτερο ισχυρισμό από αυτόν που τεκμηριώνεται.</p><p>Ελέγχουμε την παραπομπή με τρεις ερωτήσεις: αφορά το ίδιο πράγμα, στηρίζει ολόκληρη την πρόταση και περιλαμβάνει κάποια επιφύλαξη που παραλείφθηκε; Η παρουσία ενός αριθμού παραπομπής δίπλα σε μια πρόταση δεν αρκεί. Μπορεί η πηγή να στηρίζει μόνο την πρώτη από δύο επιμέρους διατυπώσεις. Για αυτό οι σύνθετοι ισχυρισμοί είναι συχνά καλύτερο να διασπώνται σε μικρότερα ελέγξιμα μέρη.</p><p>Το άγνωστο στοιχείο πρέπει να παραμένει άγνωστο μέχρι να βρεθεί κατάλληλο τεκμήριο. Η συμπλήρωση κενού με μια εύλογη υπόθεση μπορεί να κάνει το κείμενο πιο ομαλό, αλλά μειώνει τη διαφάνειά του. Αν χρειάζεται πρόταση για δράση, τη διατυπώνουμε ως δική μας εισήγηση και εξηγούμε σε ποια δεδομένα στηρίζεται. Η τεκμηρίωση δεν απαγορεύει την ερμηνεία· απαιτεί να είναι αναγνωρίσιμη ως ερμηνεία.</p></div><div class="learn-panel" id="notebook-evidence-panel-2" role="tabpanel" aria-labelledby="notebook-evidence-tab-2" tabindex="0"><h3>Παράδειγμα: αυτοπεποίθηση και πραγματική επίδοση</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Η πηγή αναφέρει ότι 40 συμμετέχοντες δήλωσαν μεγαλύτερη αυτοπεποίθηση μετά την επιμόρφωση. Η σύνοψη γράφει ότι «η επιμόρφωση αύξησε τις δεξιότητες όλων των εργαζομένων». Η διατύπωση αλλάζει τη μέτρηση, γενικεύει τον πληθυσμό και προσθέτει αιτιώδη βεβαιότητα.</p><p>Μια πιστή εκδοχή είναι: «Οι συμμετέχοντες ανέφεραν μεγαλύτερη αυτοπεποίθηση. Από το συγκεκριμένο απόσπασμα δεν προκύπτει αντικειμενική μέτρηση δεξιοτήτων». Οι αριθμοί και το σενάριο είναι υποθετικά και χρησιμοποιούνται για να φανεί ο τρόπος ελέγχου.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Διάκρινε ρητά τι αναφέρει η πηγή και τι προτείνουμε εμείς. Διατήρησε τον πληθυσμό και τις επιφυλάξεις. Για κάθε νέο συμπέρασμα δήλωσε αν είναι τεκμηριωμένο ή αποτελεί υπόθεση.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="notebook-evidence-panel-3" role="tabpanel" aria-labelledby="notebook-evidence-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Ποια φράση είναι πιστή στο υποθετικό εύρημα;</p><form class="enrich-choice" data-correct="0" data-answers="[&quot;Σωστά. Διατηρείται ο τύπος μέτρησης και ο πληθυσμός αναφοράς.&quot;,&quot;Αλλάζει τόσο το αποτέλεσμα όσο και το εύρος του πληθυσμού.&quot;,&quot;Δεν υπάρχει σχετική μέτρηση παραγωγικότητας στο απόσπασμα.&quot;]"><fieldset><legend class="enrich-sr">Ποια φράση είναι πιστή στο υποθετικό εύρημα;</legend><label><input type="radio" name="notebook-evidence-choice" value="0" required><span>«Οι συμμετέχοντες ανέφεραν μεγαλύτερη αυτοπεποίθηση».</span></label><label><input type="radio" name="notebook-evidence-choice" value="1" required><span>«Όλοι οι εργαζόμενοι απέκτησαν περισσότερες δεξιότητες».</span></label><label><input type="radio" name="notebook-evidence-choice" value="2" required><span>«Αποδείχθηκε αύξηση της παραγωγικότητας».</span></label></fieldset><button type="submit" class="enrich-button">Έλεγχος απάντησης</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></form><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Γράψε μια πρόταση που διαχωρίζει ένα εύρημα από μια πρόταση εφαρμογής του, χρησιμοποιώντας τις φράσεις «η πηγή αναφέρει» και «προτείνουμε».</p><label for="notebook-evidence-reflection">Η δική σου σύντομη απάντηση</label><textarea id="notebook-evidence-reflection" data-note="notebook-evidence" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://blog.google/innovation-and-ai/technology/ai/notebooklm-google-ai/" target="_blank" rel="noopener noreferrer">Google · Η τεκμηρίωση με πηγές και τα όριά της</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <section class="chapter" data-title="Αποθήκευση σημειώσεων" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.7</span>
+        <h1>Αποθήκευση σημειώσεων</h1>
+        <p>Κατά τη διάρκεια της συνομιλίας σας με το NotebookLM, μπορείτε εύκολα να αποθηκεύσετε σημαντικά σημεία ή απαντήσεις που σας έδωσε. Στο τέλος κάθε απάντησης παρουσιάζεται μια επιλογή «Αποθήκευση σημείωσης». Πατώντας το, αυτές οι πληροφορίες θα αποθηκευτούν στη δεξιά (3η) στήλη.</p>
+        <figure class="shot">
+          <img src="assets/images/image14.png" alt="Η επιλογή Αποθήκευση σημείωσης" loading="lazy">
+          <figcaption>«Αποθήκευση σημείωσης»</figcaption>
+        </figure>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">💡</span>
+          <div><p><strong>Συμβουλή:</strong> Μπορείτε να οργανώνετε τις σημειώσεις σας ανά θέμα ή ερώτηση, έτσι ώστε να δημιουργήσετε στο τέλος έναν ολοκληρωμένο οδηγό μελέτης.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Αυτόματες ερωτήσεις" data-group="1. Γνωριμία με το NotebookLM">
+        <span class="chapter-kicker">Υποενότητα 1.7</span>
+        <h1>Αυτόματες ερωτήσεις</h1>
+        <p>Κάτω από το πεδίο της ερώτησης (prompt), το NotebookLM προτείνει ερωτήσεις σχετικές με το θέμα που μόλις συζητήθηκε. Αυτές δημιουργούνται αυτόματα από το μοντέλο και λειτουργούν σαν ιδέες για περαιτέρω διερεύνηση.</p>
+        <figure class="shot">
+          <img src="assets/images/image15.png" alt="Αυτόματες προτεινόμενες ερωτήσεις" loading="lazy">
+          <figcaption>«Αυτόματες ερωτήσεις»</figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ ΚΕΦΑΛΑΙΟ 2 ============ -->
+      <section class="chapter" data-title="Εξερεύνηση της ενότητας Studio" data-group="2. Η ενότητα Studio"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#notebook-new-studio">Από τη σύνοψη σε επεξεργάσιμα παραδοτέα</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 2.1</span>
+        <h1>Εξερεύνηση της ενότητας Studio</h1>
+        <p>Η ενότητα Studio του NotebookLM σας επιτρέπει να μετατρέπετε το υλικό σας σε διαφορετικά είδη περιεχομένου, όπως «Ηχητική Επισκόπηση», «Επισκόπηση Βίντεο», «Mind Map», «Αναφορές», «Εκπαιδευτικές κάρτες», «Κουίζ». Με αυτόν τον τρόπο, ο χρήστης μπορεί να αξιοποιεί το ίδιο γνωστικό υλικό σε ποικίλες μορφές, είτε για μελέτη, είτε για παρουσίαση, είτε για εκπαιδευτικούς σκοπούς.</p>
+        <div class="pill-row">
+          <span class="pill">🎧 Ηχητική Επισκόπηση</span>
+          <span class="pill">🎬 Επισκόπηση Βίντεο</span>
+          <span class="pill">🗺 Mind Map</span>
+          <span class="pill">📄 Αναφορές</span>
+          <span class="pill">🃏 Εκπαιδευτικές κάρτες</span>
+          <span class="pill">❓ Κουίζ</span>
+        </div>
+        <p>Το σημαντικό είναι ότι ο χρήστης δεν χρειάζεται να κάνει καμία επιπλέον ενέργεια ή να δώσει εντολές. Αρκεί απλώς να πατήσει επάνω στη λειτουργία που τον ενδιαφέρει, και το NotebookLM ξεκινά αυτόματα να δημιουργεί το αντίστοιχο περιεχόμενο (π.χ. περίληψη, βίντεο, κάρτες ή κουίζ) βασισμένο στις πηγές του.</p>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">⏳</span>
+          <div><p><strong>Σημείωση:</strong> Η δημιουργία των εργαλείων του Studio διαρκεί κάποια λεπτά.</p></div>
+        </div>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="notebook-new-studio" data-update-title="Από τη σύνοψη σε επεξεργάσιμα παραδοτέα" aria-labelledby="notebook-new-studio-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 2.1</p><h2 id="notebook-new-studio-title" tabindex="-1">Από τη σύνοψη σε επεξεργάσιμα παραδοτέα</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να επιλέγετε κατάλληλη μορφή εξόδου για τον σκοπό σας.</p><div class="learn-workbook" data-workbook="notebook-new-studio"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="notebook-new-studio-tab-0" aria-controls="notebook-new-studio-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="notebook-new-studio-tab-1" aria-controls="notebook-new-studio-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="notebook-new-studio-tab-2" aria-controls="notebook-new-studio-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="notebook-new-studio-tab-3" aria-controls="notebook-new-studio-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="notebook-new-studio-panel-0" role="tabpanel" aria-labelledby="notebook-new-studio-tab-0" tabindex="0"><p>Η αναβάθμιση που περιγράφει η Google το 2026 προσθέτει εκτέλεση κώδικα σε ασφαλή υπολογιστή cloud και περισσότερα παραδοτέα από τις πηγές: έγγραφα, υπολογιστικά φύλλα, παρουσιάσεις, γραφήματα και δομημένα δεδομένα. Η διάθεση ξεκίνησε σε συγκεκριμένα προγράμματα και επεκτείνεται· ελέγχουμε ποιες λειτουργίες υπάρχουν στον λογαριασμό μας.</p><div class="update-table" role="region" aria-label="Συγκριτικός πίνακας" tabindex="0"><table><thead><tr><th scope="col">Στόχος</th><th scope="col">Κατάλληλο παραδοτέο</th><th scope="col">Έλεγχος</th></tr></thead><tbody><tr><th scope="row">Να ενημερωθεί η ομάδα</th><td>Σύντομο έγγραφο</td><td>Κάθε συμπέρασμα να έχει πηγή</td></tr><tr><th scope="row">Να επανελεγχθούν αριθμοί</th><td>Υπολογιστικό φύλλο</td><td>Μονάδες, τύποι, συνολικά μεγέθη</td></tr><tr><th scope="row">Να παρουσιαστεί μια ιδέα</th><td>Διαφάνειες</td><td>Ένα βασικό μήνυμα ανά διαφάνεια</td></tr><tr><th scope="row">Να ανταλλαχθούν δεδομένα</th><td>CSV ή JSON</td><td>Σωστά πεδία και κενές τιμές</td></tr></tbody></table></div><p>Εκπαιδευτική πρακτική: ζητάμε πρώτα μικρό δείγμα και επιβεβαιώνουμε τη δομή. Έπειτα δημιουργούμε το πλήρες αρχείο. Ανοίγουμε την εξαγωγή στην εφαρμογή προορισμού, επειδή η καλή εμφάνιση στην προεπισκόπηση δεν εγγυάται ίδια μορφοποίηση παντού.</p><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Γιατί να ζητήσουμε φύλλο εργασίας μαζί με PDF αναφοράς;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Το PDF διευκολύνει την ανάγνωση, ενώ το υπολογιστικό φύλλο επιτρέπει έλεγχο και επανάχρηση των δεδομένων. Τα δύο εξυπηρετούν διαφορετικούς σκοπούς.</p></details></div></div><div class="learn-panel" id="notebook-new-studio-panel-1" role="tabpanel" aria-labelledby="notebook-new-studio-tab-1" tabindex="0"><h3>Το ίδιο περιεχόμενο χρειάζεται διαφορετικό σχεδιασμό σε κάθε μορφή</h3><p>Η μετατροπή πηγών σε σύνοψη, παρουσίαση, πίνακα ή οπτικό υλικό δεν είναι απλή αλλαγή αρχείου. Κάθε μορφή εξυπηρετεί διαφορετική χρήση. Μια αναφορά χρειάζεται συνεκτική ανάπτυξη και τεκμηρίωση, μια παρουσίαση επιλέγει τα βασικά για ζωντανή εξήγηση και ένας πίνακας οργανώνει συγκρίσιμα πεδία. Αν μεταφέρουμε το ίδιο μεγάλο κείμενο παντού, το αποτέλεσμα μπορεί να είναι τεχνικά σωστό αλλά πρακτικά δύσχρηστο.</p><p>Η επιλογή μορφής πρέπει να ακολουθεί τον στόχο του αναγνώστη. Για γρήγορη ενημέρωση μπορεί να αρκεί σύντομο σημείωμα με εύρημα, περιορισμό και επόμενο βήμα. Για μελέτη χρειάζεται περισσότερη εξήγηση και δυνατότητα επιστροφής στις πηγές. Οι νεότερες δυνατότητες παραγωγής αρχείων διευρύνουν τις επιλογές, αλλά η διαθεσιμότητα εξαρτάται από το συγκεκριμένο περιβάλλον και το πρόγραμμα πρόσβασης.</p><p>Μετά την παραγωγή ελέγχουμε τη μεταφορά της πληροφορίας. Διατηρήθηκαν οι κρίσιμοι αριθμοί; Συνδέονται οι παραπομπές με τα σωστά σημεία; Μήπως μια σύντομη διαφάνεια αφαίρεσε την επιφύλαξη που υπήρχε στην αναφορά; Ο έλεγχος αφορά και τη λειτουργία του αρχείου: άνοιγμα, αναγνωσιμότητα, μορφοποίηση και δυνατότητα επεξεργασίας. Η παραγωγή ενός αρχείου δεν αποτελεί από μόνη της παραλαβή ολοκληρωμένου έργου.</p></div><div class="learn-panel" id="notebook-new-studio-panel-2" role="tabpanel" aria-labelledby="notebook-new-studio-tab-2" tabindex="0"><h3>Παράδειγμα: από αναφορά σε εκπαιδευτική παρουσίαση</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Η πηγή περιλαμβάνει ένα εύρημα με δύο περιορισμούς. Για τη μονοσέλιδη αναφορά οι περιορισμοί εξηγούνται σε παράγραφο. Για την παρουσίαση εμφανίζονται συνοπτικά κοντά στο εύρημα και αναπτύσσονται από τον εκπαιδευτή. Δεν αφαιρούνται απλώς για να χωρέσει περισσότερο κείμενο.</p><p>Πριν παραδοθεί το υλικό, η ομάδα συγκρίνει έναν βασικό ισχυρισμό σε όλες τις μορφές. Αν το νόημα έχει μετατοπιστεί, διορθώνει τη μεταφορά και όχι μόνο την εμφάνιση. Αυτός ο έλεγχος βοηθά να παραμείνει ενιαία η εκπαιδευτική γραμμή.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Μετέτρεψε τις πηγές σε σύντομη αναφορά και σχέδιο παρουσίασης. Διατήρησε το κύριο εύρημα και τους περιορισμούς και στις δύο μορφές. Εξήγησε πώς προσαρμόστηκε η έκταση χωρίς αλλαγή νοήματος.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="notebook-new-studio-panel-3" role="tabpanel" aria-labelledby="notebook-new-studio-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Διάλεξε τον βασικό σχεδιαστικό στόχο κάθε παραδοτέου.</p><form class="enrich-match" data-explanation="Η μορφή υπηρετεί τον τρόπο χρήσης. Η πιστότητα στις πηγές παραμένει κοινή απαίτηση."><div class="enrich-match-row"><label for="notebook-new-studio-match-0">Αναφορά</label><select id="notebook-new-studio-match-0" aria-label="Αντιστοίχιση: Αναφορά" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="2">Συγκρίσιμα πεδία και μονάδες</option><option value="1">Σαφές μήνυμα για προφορική εξήγηση</option><option value="0">Συνεκτική ανάπτυξη με τεκμηρίωση</option><option value="3">Εξήγηση, προσπάθεια και ανατροφοδότηση</option></select></div><div class="enrich-match-row"><label for="notebook-new-studio-match-1">Παρουσίαση</label><select id="notebook-new-studio-match-1" aria-label="Αντιστοίχιση: Παρουσίαση" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="2">Συγκρίσιμα πεδία και μονάδες</option><option value="1">Σαφές μήνυμα για προφορική εξήγηση</option><option value="0">Συνεκτική ανάπτυξη με τεκμηρίωση</option><option value="3">Εξήγηση, προσπάθεια και ανατροφοδότηση</option></select></div><div class="enrich-match-row"><label for="notebook-new-studio-match-2">Πίνακας</label><select id="notebook-new-studio-match-2" aria-label="Αντιστοίχιση: Πίνακας" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="2">Συγκρίσιμα πεδία και μονάδες</option><option value="1">Σαφές μήνυμα για προφορική εξήγηση</option><option value="0">Συνεκτική ανάπτυξη με τεκμηρίωση</option><option value="3">Εξήγηση, προσπάθεια και ανατροφοδότηση</option></select></div><div class="enrich-match-row"><label for="notebook-new-studio-match-3">Φύλλο μελέτης</label><select id="notebook-new-studio-match-3" aria-label="Αντιστοίχιση: Φύλλο μελέτης" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="2">Συγκρίσιμα πεδία και μονάδες</option><option value="1">Σαφές μήνυμα για προφορική εξήγηση</option><option value="0">Συνεκτική ανάπτυξη με τεκμηρίωση</option><option value="3">Εξήγηση, προσπάθεια και ανατροφοδότηση</option></select></div><button type="submit" class="enrich-button">Έλεγχος αντιστοίχισης</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></form><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Περιέγραψε πώς θα άλλαζες την παρουσίαση της ίδιας πληροφορίας για έναν αναγνώστη αναφοράς και για ένα ακροατήριο.</p><label for="notebook-new-studio-reflection">Η δική σου σύντομη απάντηση</label><textarea id="notebook-new-studio-reflection" data-note="notebook-new-studio" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://blog.google/innovation-and-ai/products/notebooklm/better-research-notebooklm/" target="_blank" rel="noopener noreferrer">Google · Νέες δυνατότητες έρευνας στο NotebookLM</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <section class="chapter" data-title="Το περιβάλλον του Studio" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.1</span>
+        <h1>Το περιβάλλον του Studio</h1>
+        <figure class="shot">
+          <img src="assets/images/image16.png" alt="Η ενότητα Studio του NotebookLM" loading="lazy">
+          <figcaption>«Studio»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Ηχητική Επισκόπηση" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.2</span>
+        <h1>Ηχητική Επισκόπηση</h1>
+        <p>Η λειτουργία Ηχητική Επισκόπηση μετατρέπει το περιεχόμενο των πηγών σας σε αφήγηση.</p>
+        <p>Έτσι, μπορείτε να ακούσετε μια σύνοψη του θέματος αντί να τη διαβάσετε — ιδανικό για επανάληψη ή γρήγορη ενημέρωση.</p>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🎧</span>
+          <div><p>Ιδανική λύση όταν θέλετε να «μελετήσετε» εν κινήσει, ακούγοντας το υλικό σας σαν αφήγηση.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Επισκόπηση Βίντεο" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.3</span>
+        <h1>Επισκόπηση Βίντεο</h1>
+        <p>Η επιλογή Επισκόπηση Βίντεο δημιουργεί μια σύντομη παρουσίαση του περιεχομένου σας σε μορφή βίντεο, με υποστηρικτικό κείμενο ή αφήγηση.</p>
+        <p>Είναι χρήσιμη για παρουσιάσεις ή εκπαιδευτικό υλικό σε τάξεις και σεμινάρια.</p>
+        <figure class="shot">
+          <img src="assets/images/image17.png" alt="Στιγμιότυπο από το βίντεο που δημιούργησε το NotebookLM" loading="lazy">
+          <figcaption>«Εικόνα από το video που δημιούργησε το NotebookLM»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Mind Map" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.4</span>
+        <h1>Mind Map (Χάρτης Σκέψης)</h1>
+        <p>Το Mind Map (Χάρτης Σκέψης) παρουσιάζει τις βασικές έννοιες του υλικού σας οπτικά, σε μορφή διαγράμματος. Σας βοηθά να κατανοήσετε γρήγορα τη δομή και τη σχέση ανάμεσα στις ιδέες.</p>
+        <figure class="shot">
+          <img src="assets/images/image18.png" alt="Mind Map βασισμένο στις πηγές" loading="lazy">
+          <figcaption>«Mind Map βασισμένο στις πηγές»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Κουίζ" data-group="2. Η ενότητα Studio"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#notebook-study-cycle">Κουίζ και κάρτες με στόχο την κατανόηση</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 2.5</span>
+        <h1>Κουίζ</h1>
+        <p>Η επιλογή Κουίζ μετατρέπει το περιεχόμενο των πηγών σας σε μικρά τεστ γνώσης. Το NotebookLM δημιουργεί ερωτήσεις πολλαπλής επιλογής ή ανοιχτού τύπου, ώστε να ελέγχετε τι έχετε κατανοήσει.</p>
+        <figure class="shot">
+          <img src="assets/images/image19.png" alt="Κουίζ που δημιούργησε το NotebookLM" loading="lazy">
+        </figure>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="notebook-study-cycle" data-update-title="Κουίζ και κάρτες με στόχο την κατανόηση" aria-labelledby="notebook-study-cycle-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 2.5</p><h2 id="notebook-study-cycle-title" tabindex="-1">Κουίζ και κάρτες με στόχο την κατανόηση</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να μετατρέπετε τις δημιουργίες του Studio σε σχέδιο μελέτης.</p><div class="learn-workbook" data-workbook="notebook-study-cycle"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="notebook-study-cycle-tab-0" aria-controls="notebook-study-cycle-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="notebook-study-cycle-tab-1" aria-controls="notebook-study-cycle-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="notebook-study-cycle-tab-2" aria-controls="notebook-study-cycle-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="notebook-study-cycle-tab-3" aria-controls="notebook-study-cycle-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="notebook-study-cycle-panel-0" role="tabpanel" aria-labelledby="notebook-study-cycle-tab-0" tabindex="0"><p>Στην αρχική ενότητα γνωρίσαμε κουίζ και εκπαιδευτικές κάρτες. Εδώ τα εντάσσουμε σε μικρή διδακτική διαδικασία: πρώτα ανάκληση χωρίς βοήθεια, μετά ανατροφοδότηση με πηγή και τέλος εφαρμογή σε νέο παράδειγμα. Η διαδικασία αποτελεί πρόταση του μαθήματος, όχι μέτρηση αποτελεσματικότητας του προϊόντος.</p><ol><li>Επιλέξτε μικρό, συνεκτικό σύνολο πηγών.</li><li>Ζητήστε ερωτήσεις που απαιτούν επιλογή ή εξήγηση, όχι μόνο αναγνώριση ορισμών.</li><li>Ελέγξτε ότι η σωστή απάντηση τεκμηριώνεται και οι λανθασμένες επιλογές δεν είναι αμφίσημες.</li><li>Καταγράψτε τι δυσκόλεψε τους εκπαιδευομένους και επιστρέψτε στο σχετικό απόσπασμα.</li></ol><div class="update-prompt"><h3>Δοκιμάστε αυτό το prompt</h3><blockquote>Με βάση το επιλεγμένο υλικό, σχεδίασε πέντε ερωτήσεις εφαρμογής. Για καθεμία δώσε στόχο, σωστή απάντηση, εξήγηση και πηγή. Μην εξετάσεις στοιχεία που δεν διδάσκονται. Πρόσθεσε μία ερώτηση στην οποία η σωστή στάση είναι να ζητήσουμε περισσότερες πληροφορίες.</blockquote></div><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Μια ερώτηση έχει δύο σωστές απαντήσεις αλλά επιτρέπει μόνο μία επιλογή. Τι κάνουμε;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Την αναδιατυπώνουμε ή τη μετατρέπουμε σε πολλαπλής επιλογής με σαφείς οδηγίες. Το αυτόματα παραγόμενο κουίζ χρειάζεται έλεγχο πριν χρησιμοποιηθεί για αξιολόγηση.</p></details></div></div><div class="learn-panel" id="notebook-study-cycle-panel-1" role="tabpanel" aria-labelledby="notebook-study-cycle-tab-1" tabindex="0"><h3>Ανάκληση, ανατροφοδότηση και εφαρμογή σε νέο παράδειγμα</h3><p>Οι κάρτες και τα quizzes αποκτούν εκπαιδευτική αξία όταν απαιτούν πραγματική προσπάθεια ανάκλησης. Αν η απάντηση είναι ήδη ορατή ή προκύπτει από επιφανειακό στοιχείο της διατύπωσης, η δραστηριότητα μπορεί να ελέγχει αναγνώριση αντί κατανόησης. Ζητάμε από τον εκπαιδευόμενο να απαντήσει πριν δει τη λύση και να εξηγήσει σύντομα την επιλογή του. Η δυσκολία προσαρμόζεται στο επίπεδο και στις ανάγκες του.</p><p>Μια καλή ερώτηση έχει σαφή στόχο και αποφεύγει αμφισημίες. Στην πολλαπλή επιλογή οι λανθασμένες απαντήσεις πρέπει να αντιστοιχούν σε εύλογες παρανοήσεις. Αν μία επιλογή είναι εμφανώς άσχετη, η επιτυχία μπορεί να οφείλεται στον αποκλεισμό της και όχι στη γνώση. Ο εκπαιδευτής εξετάζει αν υπάρχει μία καλύτερη απάντηση και αν η αιτιολόγηση στηρίζεται πράγματι στο διδαγμένο υλικό.</p><p>Ο κύκλος μελέτης συνεχίζεται μετά τη διόρθωση. Ο εκπαιδευόμενος εντοπίζει τι τον μπέρδεψε, επιστρέφει στην πηγή και δοκιμάζει νέο παράδειγμα. Η επανάληψη σε μεταγενέστερο χρόνο μπορεί να χρησιμοποιηθεί για να ελεγχθεί η διατήρηση της γνώσης. Δεν μετατρέπουμε μια μικρή άσκηση αυτοελέγχου σε απόδειξη γενικής επάρκειας: διαφορετικοί στόχοι χρειάζονται διαφορετικές εργασίες και επαρκή τεκμήρια επίδοσης.</p></div><div class="learn-panel" id="notebook-study-cycle-panel-2" role="tabpanel" aria-labelledby="notebook-study-cycle-tab-2" tabindex="0"><h3>Παράδειγμα: από την κάρτα ορισμού στην εφαρμογή</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Μια κάρτα ρωτά «τι είναι παρονομαστής;». Η σωστή απάντηση δείχνει γνώση του όρου, αλλά όχι απαραίτητα σωστή χρήση. Η επόμενη ερώτηση δίνει δύο ομάδες διαφορετικού μεγέθους και ζητά να υπολογιστεί ποια έχει μεγαλύτερη αναλογία ολοκληρώσεων.</p><p>Αν ο εκπαιδευόμενος επιλέξει μόνο το μεγαλύτερο πλήθος, η ανατροφοδότηση επιστρέφει στη σχέση αριθμητή και παρονομαστή. Έπειτα δίνεται νέο ζεύγος αριθμών για να ελεγχθεί αν η έννοια εφαρμόζεται πέρα από το αρχικό παράδειγμα.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Δημιούργησε μία ερώτηση ορισμού, μία σύγκρισης και μία εφαρμογής από τις πηγές. Κράτησε τις λύσεις χωριστά. Για κάθε λανθασμένη επιλογή εξήγησε την πιθανή παρανόηση.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="notebook-study-cycle-panel-3" role="tabpanel" aria-labelledby="notebook-study-cycle-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Οργάνωσε έναν κύκλο ενεργής μελέτης.</p><div class="enrich-order" data-explanation="Η ανατροφοδότηση συνδέει την αρχική προσπάθεια με νέα εφαρμογή, ώστε η μελέτη να μην περιορίζεται στην απομνημόνευση μιας απάντησης."><p class="enrich-help">Μετακίνησε τα βήματα με τα κουμπιά ↑ και ↓. Το πρώτο βήμα πρέπει να βρίσκεται επάνω.</p><ol><li data-order="0"><span>Μελετώ την έννοια και την πηγή</span><div><button type="button" data-move="-1" aria-label="Πάνω: Μελετώ την έννοια και την πηγή">↑</button><button type="button" data-move="1" aria-label="Κάτω: Μελετώ την έννοια και την πηγή">↓</button></div></li><li data-order="3"><span>Εφαρμόζω τον κανόνα σε νέο παράδειγμα</span><div><button type="button" data-move="-1" aria-label="Πάνω: Εφαρμόζω τον κανόνα σε νέο παράδειγμα">↑</button><button type="button" data-move="1" aria-label="Κάτω: Εφαρμόζω τον κανόνα σε νέο παράδειγμα">↓</button></div></li><li data-order="2"><span>Ελέγχω την αιτιολόγηση και διορθώνω</span><div><button type="button" data-move="-1" aria-label="Πάνω: Ελέγχω την αιτιολόγηση και διορθώνω">↑</button><button type="button" data-move="1" aria-label="Κάτω: Ελέγχω την αιτιολόγηση και διορθώνω">↓</button></div></li><li data-order="1"><span>Απαντώ χωρίς να βλέπω τη λύση</span><div><button type="button" data-move="-1" aria-label="Πάνω: Απαντώ χωρίς να βλέπω τη λύση">↑</button><button type="button" data-move="1" aria-label="Κάτω: Απαντώ χωρίς να βλέπω τη λύση">↓</button></div></li></ol><button type="button" class="enrich-button enrich-check-order">Έλεγχος σειράς</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></div><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Μετέτρεψε μια ερώτηση απλής απομνημόνευσης του αντικειμένου σου σε ερώτηση εφαρμογής με σύντομο σενάριο.</p><label for="notebook-study-cycle-reflection">Η δική σου σύντομη απάντηση</label><textarea id="notebook-study-cycle-reflection" data-note="notebook-study-cycle" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://blog.google/products-and-platforms/products/education/iste-2026-educator-updates/" target="_blank" rel="noopener noreferrer">Google · Εκπαίδευση και ISTE 2026, 25/06/2026</a></li><li><a href="https://blog.google/innovation-and-ai/technology/ai/notebooklm-google-ai/" target="_blank" rel="noopener noreferrer">Google · Η τεκμηρίωση με πηγές και τα όριά της</a></li><li><a href="https://www.nature.com/articles/s41539-026-00400-2" target="_blank" rel="noopener noreferrer">Wilschut, Sense &amp; van Rijn (2026) · Έρευνα για την πρακτική ανάκλησης</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <section class="chapter" data-title="Επεξήγηση στο κουίζ" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.5</span>
+        <h1>Το κουμπί «Επεξήγηση»</h1>
+        <p>Όπως φαίνεται στην εικόνα, στο τέλος της ερώτησης υπάρχει ένα κουμπί «Επεξήγηση». Πατώντας το, στο κεντρικό (μεσαίο) παράθυρο το NotebookLM θα σας εξηγήσει περισσότερα σχετικά με τη σωστή ή τη λάθος απάντηση που δώσατε.</p>
+        <figure class="shot">
+          <img src="assets/images/image20.png" alt="Επεξήγηση στην ερώτηση του κουίζ" loading="lazy">
+          <figcaption>«Επεξήγηση στην ερώτηση του κουίζ»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Εκπαιδευτικές Κάρτες" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.6</span>
+        <h1>Εκπαιδευτικές Κάρτες (Flashcards)</h1>
+        <p>Οι Εκπαιδευτικές Κάρτες (Flashcards) δημιουργούνται αυτόματα από τις σημειώσεις και τα βασικά σημεία των πηγών. Κάθε κάρτα περιέχει μια ερώτηση και μια απάντηση, βοηθώντας σας να επαναλάβετε το υλικό σας με διαδραστικό τρόπο. Για να δείτε την απάντηση, θα πρέπει να πατήσετε επάνω στην κάρτα και τότε εμφανίζεται το πίσω μέρος με την απάντηση.</p>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image21.png" alt="Η ερώτηση της εκπαιδευτικής κάρτας" loading="lazy"><figcaption>«Ερώτηση κάρτας»</figcaption></figure>
+          <figure class="shot"><img src="assets/images/image22.png" alt="Η απάντηση της εκπαιδευτικής κάρτας" loading="lazy"><figcaption>«Απάντηση της κάρτας»</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Αναφορές" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.7</span>
+        <h1>Αναφορές</h1>
+        <p>Η λειτουργία Αναφορές επιτρέπει στο NotebookLM να δημιουργεί αυτόματα διαφορετικά είδη κειμένων βασισμένα στις πηγές που έχετε προσθέσει.</p>
+        <p>Μπορείτε να επιλέξετε ανάμεσα σε διάφορες μορφές, ανάλογα με τον σκοπό σας — για παράδειγμα, Οδηγό Μελέτης, Ενημερωτικό Δελτίο, Ανάρτηση Ιστολογίου ή Λευκή Βίβλο.</p>
+        <figure class="shot">
+          <img src="assets/images/image23.png" alt="Οι διαθέσιμες μορφές αναφορών" loading="lazy">
+          <figcaption>«Αναφορές»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Τι προσφέρει κάθε μορφή" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.7</span>
+        <h1>Τι προσφέρει κάθε μορφή</h1>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">✏️ Δημιουργήστε το δικό σας<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Πλήρως προσαρμόσιμη αναφορά, όπου ορίζετε εσείς τη δομή και το ύφος.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🗂️ Αρχείο Πηγών<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Σύντομη παρουσίαση όλων των εγγράφων που έχετε χρησιμοποιήσει, με αποσπάσματα και παραπομπές.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">📚 Οδηγός Μελέτης<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Αυτόματη περίληψη με ερωτήσεις και προτεινόμενες θεματικές για επανάληψη.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">📝 Ανάρτηση Ιστολογίου<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Κείμενο σε πιο αφηγηματικό ύφος, ιδανικό για άρθρα ή παρουσιάσεις.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">📖 Λευκή Βίβλος<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Εκτενής, αναλυτική αναφορά για προχωρημένους χρήστες ή ερευνητικές εργασίες.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">📰 Ενημερωτικό Δελτίο<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Συνοπτική παρουσίαση νέων ή τάσεων από τις πηγές σας.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">💡 Επεξηγηματικό Κείμενο<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Κείμενο που αναλύει έννοιες με απλό και κατανοητό τρόπο.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🎭 Αφήγηση Περιπτώσεων<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Παρουσίαση ενός θέματος μέσα από πραγματικά ή υποθετικά παραδείγματα.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Παραδείγματα αναφορών" data-group="2. Η ενότητα Studio"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#notebook-research-lab">Εργαστήριο: τρεις πηγές, ένα ελέγξιμο ενημερωτικό</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 2.7</span>
+        <h1>Παραδείγματα αναφορών</h1>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image24.png" alt="Παράδειγμα ανάρτησης ιστολογίου" loading="lazy"><figcaption>«Ανάρτηση Ιστολογίου»</figcaption></figure>
+          <figure class="shot"><img src="assets/images/image25.png" alt="Παράδειγμα αφήγησης περιπτώσεων" loading="lazy"><figcaption>«Αφήγηση Περιπτώσεων»</figcaption></figure>
+        </div>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="notebook-research-lab" data-update-title="Εργαστήριο: τρεις πηγές, ένα ελέγξιμο ενημερωτικό" aria-labelledby="notebook-research-lab-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 2.7</p><h2 id="notebook-research-lab-title" tabindex="-1">Εργαστήριο: τρεις πηγές, ένα ελέγξιμο ενημερωτικό</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να ολοκληρώνετε μια μικρή εργασία με ίχνος τεκμηρίωσης.</p><div class="learn-workbook" data-workbook="notebook-research-lab"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="notebook-research-lab-tab-0" aria-controls="notebook-research-lab-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="notebook-research-lab-tab-1" aria-controls="notebook-research-lab-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="notebook-research-lab-tab-2" aria-controls="notebook-research-lab-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="notebook-research-lab-tab-3" aria-controls="notebook-research-lab-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="notebook-research-lab-panel-0" role="tabpanel" aria-labelledby="notebook-research-lab-tab-0" tabindex="0"><p>Σενάριο: ετοιμάζετε ενημερωτικό για συναδέλφους σχετικά με τη χρήση AI σε ένα εκπαιδευτικό πρόγραμμα. Χρησιμοποιείτε μία επίσημη ανακοίνωση δυνατότητας, έναν εσωτερικό οδηγό με συνθετικά στοιχεία και ένα σύντομο ερωτηματολόγιο εξάσκησης. Δεν ανεβάζετε προσωπικά δεδομένα εκπαιδευομένων.</p><ol><li>Δώστε σε κάθε πηγή τίτλο, ημερομηνία και ρόλο.</li><li>Ζητήστε πίνακα «τι γνωρίζουμε / τι δεν γνωρίζουμε».</li><li>Επιλέξτε μία πρόταση βελτίωσης που στηρίζεται στις πηγές.</li><li>Δημιουργήστε ενημερωτικό μίας σελίδας και τρεις ερωτήσεις συζήτησης.</li><li>Ανοίξτε τις παραπομπές και ελέγξτε αν η πρόταση παραμένει σωστή χωρίς υποθέσεις που δεν δηλώθηκαν.</li></ol><div class="update-prompt"><h3>Δοκιμάστε αυτό το prompt</h3><blockquote>Ετοίμασε ενημερωτικό 300 λέξεων. Χώρισε τα επιβεβαιωμένα στοιχεία, τα κενά και τις δικές μας προτάσεις. Μην παρουσιάσεις την ανακοίνωση ενός κατασκευαστή ως ανεξάρτητη απόδειξη μαθησιακού οφέλους. Πρόσθεσε πηγές και ημερομηνία ελέγχου.</blockquote></div><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Πότε θεωρείται ολοκληρωμένη η εργασία;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Όταν το αρχείο ανοίγει, οι κρίσιμοι ισχυρισμοί έχουν ελεγχθεί, τα άγνωστα στοιχεία είναι ορατά και ένας συνάδελφος μπορεί να επαναλάβει τον έλεγχο. Η καλαίσθητη μορφή είναι ένα μόνο μέρος της ποιότητας.</p></details></div></div><div class="learn-panel" id="notebook-research-lab-panel-1" role="tabpanel" aria-labelledby="notebook-research-lab-tab-1" tabindex="0"><h3>Η σύνθεση χρειάζεται διαδρομή που μπορεί να ελέγξει τρίτος αναγνώστης</h3><p>Ένα ελέγξιμο ενημερωτικό πρέπει να παρουσιάζει το ερώτημα, τα κύρια ευρήματα, τους περιορισμούς και τη βάση των προτεινόμενων ενεργειών. Δεν χρειάζεται να περιλαμβάνει κάθε λεπτομέρεια των πηγών, αλλά πρέπει να επιτρέπει στον αναγνώστη να εντοπίσει από πού προήλθαν οι κρίσιμοι ισχυρισμοί. Η συντομία επιτυγχάνεται με επιλογή ουσιωδών σημείων και όχι με αφαίρεση απαραίτητων επιφυλάξεων.</p><p>Σε εργασία με πολλές πηγές ξεκινάμε από πίνακα σύγκρισης. Καταγράφουμε το ερώτημα κάθε πηγής, το πλαίσιο, το εύρημα και τυχόν διαφωνία με τις υπόλοιπες. Αν χρησιμοποιούν διαφορετικούς ορισμούς, δεν συνδυάζουμε απευθείας τα αποτελέσματα. Η σύγκριση προηγείται της σύνθεσης, γιατί διαφορετικά μπορεί να κατασκευαστεί μία ομαλή αφήγηση που κρύβει ουσιαστικές ασυμβατότητες.</p><p>Η ομαδική εργασία γίνεται πιο αποτελεσματική όταν οι ρόλοι ελέγχου είναι σαφείς. Ένα άτομο μπορεί να ελέγχει την αντιστοίχιση πηγών, άλλο τους αριθμούς και άλλο τη σαφήνεια του παραδοτέου. Οι ρόλοι δεν καταργούν την κοινή ευθύνη για το τελικό κείμενο. Πριν από την παράδοση, η ομάδα εξετάζει αν τα συμπεράσματα απαντούν στο αρχικό ερώτημα και αν οι προτάσεις δηλώνονται ως προτάσεις.</p></div><div class="learn-panel" id="notebook-research-lab-panel-2" role="tabpanel" aria-labelledby="notebook-research-lab-tab-2" tabindex="0"><h3>Παράδειγμα: τρεις πηγές για ένα πρόγραμμα επιμόρφωσης</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Η πρώτη πηγή περιγράφει το πρόγραμμα, η δεύτερη περιέχει ανώνυμα αποτελέσματα και η τρίτη είναι ερευνητική μελέτη για σχετική μέθοδο. Η περιγραφή δεν αποδεικνύει αποτελεσματικότητα, ενώ τα αποτελέσματα του συγκεκριμένου προγράμματος δεν τεκμηριώνουν αυτόματα γενική εφαρμογή της μεθόδου.</p><p>Το ενημερωτικό παρουσιάζει τι έγινε, τι μετρήθηκε και τι μπορεί εύλογα να προταθεί ως επόμενο βήμα. Αν δεν υπάρχουν δεδομένα μακροχρόνιας επίδοσης, το σημειώνει και προτείνει κατάλληλη επόμενη μέτρηση αντί να δηλώνει ότι το ζήτημα έχει λυθεί.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Σύνταξε ενημερωτικό με ερώτημα, ευρήματα, περιορισμούς και επόμενα βήματα. Σύνδεσε τους ισχυρισμούς με τις πηγές και διαχώρισε τις προτάσεις της ομάδας από τα ερευνητικά συμπεράσματα.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="notebook-research-lab-panel-3" role="tabpanel" aria-labelledby="notebook-research-lab-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Ποια διατύπωση σέβεται τα όρια του υποθετικού υλικού;</p><form class="enrich-choice" data-correct="1" data-answers="[&quot;Η περιγραφή εξηγεί τον σχεδιασμό, όχι την επίδοση ή την αποτελεσματικότητα.&quot;,&quot;Σωστά. Συνδέει το συμπέρασμα με το πεδίο των δεδομένων.&quot;,&quot;Οι τίτλοι δεν αποκαλύπτουν αν οι πηγές χρησιμοποιούν συγκρίσιμους ορισμούς και μετρήσεις.&quot;]"><fieldset><legend class="enrich-sr">Ποια διατύπωση σέβεται τα όρια του υποθετικού υλικού;</legend><label><input type="radio" name="notebook-research-lab-choice" value="0" required><span>«Η περιγραφή του προγράμματος αποδεικνύει την επιτυχία του».</span></label><label><input type="radio" name="notebook-research-lab-choice" value="1" required><span>«Τα διαθέσιμα αποτελέσματα αφορούν το συγκεκριμένο πρόγραμμα· χρειάζονται επιπλέον δεδομένα για γενίκευση».</span></label><label><input type="radio" name="notebook-research-lab-choice" value="2" required><span>«Η συμφωνία τριών τίτλων αρκεί για κοινό συμπέρασμα».</span></label></fieldset><button type="submit" class="enrich-button">Έλεγχος απάντησης</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></form><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Γράψε μια πρόταση συμπεράσματος και μια πρόταση επόμενου βήματος για το δικό σου μικρό ερευνητικό έργο.</p><label for="notebook-research-lab-reflection">Η δική σου σύντομη απάντηση</label><textarea id="notebook-research-lab-reflection" data-note="notebook-research-lab" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://blog.google/innovation-and-ai/products/notebooklm/better-research-notebooklm/" target="_blank" rel="noopener noreferrer">Google · Νέες δυνατότητες έρευνας στο NotebookLM</a></li><li><a href="https://blog.google/products-and-platforms/products/education/iste-2026-educator-updates/" target="_blank" rel="noopener noreferrer">Google · Εκπαίδευση και ISTE 2026, 25/06/2026</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <section class="chapter" data-title="Διαχείριση Δημιουργιών" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.8</span>
+        <h1>Διαχείριση Δημιουργιών στο Studio</h1>
+        <p>Αφού το NotebookLM ολοκληρώσει τη δημιουργία των αναφορών, ηχητικών επισκοπήσεων ή άλλων τύπων περιεχομένου, αυτές εμφανίζονται συγκεντρωμένες στη λίστα του Studio.</p>
+        <figure class="shot">
+          <img src="assets/images/image26.png" alt="Η λίστα με όλες τις δημιουργίες στο Studio" loading="lazy">
+          <figcaption>«Όλα όσα έχεις δημιουργήσει»</figcaption>
+        </figure>
+        <p>Κάθε δημιουργία συνοδεύεται από πληροφορίες όπως:</p>
+        <ul>
+          <li><strong>Τίτλος</strong> (π.χ. «Τεχνητή Νοημοσύνη στην Τάξη»)</li>
+          <li><strong>Είδος περιεχομένου</strong> (Αφήγηση, Αναφορά, Βίντεο κ.λπ.)</li>
+          <li><strong>Αριθμός πηγών</strong> που χρησιμοποιήθηκαν</li>
+          <li><strong>Χρόνος δημιουργίας</strong> (π.χ. «1 λεπτό πριν»)</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Διαχείριση κάθε δημιουργίας" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.9</span>
+        <h1>Διαχείριση κάθε δημιουργίας</h1>
+        <p>Κάνοντας κλικ στις τρεις τελείες (⋮) δεξιά από κάθε έργο, εμφανίζονται δύο βασικές επιλογές:</p>
+        <ul>
+          <li><strong>Μετονομασία:</strong> για να αλλάξετε τον τίτλο της δημιουργίας και να την οργανώσετε πιο εύκολα.</li>
+          <li><strong>Διαγραφή:</strong> για να αφαιρέσετε οριστικά μια δημιουργία που δεν χρειάζεστε.</li>
+        </ul>
+        <figure class="shot">
+          <img src="assets/images/image27.png" alt="Οι επιλογές Διαγραφή και Μετονομασία" loading="lazy">
+          <figcaption>«Διαγραφή &amp; Μετονομασία»</figcaption>
+        </figure>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">💡</span>
+          <div><p><strong>Συμβουλή:</strong> Η μετονομασία είναι χρήσιμη όταν έχετε φτιάξει πολλές εκδόσεις της ίδιας αναφοράς ή οδηγού, ώστε να θυμάστε ποια είναι η τελική.</p></div>
+        </div>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">📌</span>
+          <div><p><strong>Συνοψίζοντας:</strong> Η περιοχή Studio δεν είναι απλώς χώρος δημιουργίας, αλλά και χώρος οργάνωσης. Εδώ μπορείτε να διαχειρίζεστε εύκολα όλες τις μορφές περιεχομένου που έχει παράγει το NotebookLM, να τις μετονομάζετε, να τις ταξινομείτε ή να τις διαγράφετε.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Μετάβαση στην Αρχική Σελίδα" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.10</span>
+        <h1>Μετάβαση στην «Αρχική Σελίδα»</h1>
+        <p>Για να μεταβείτε στην αρχική σελίδα, δηλαδή έξω από το σημειωματάριο στο οποίο έχετε δημιουργήσει το θέμα (για παράδειγμα, τεχνητή νοημοσύνη), μπορείτε να πατήσετε το εικονίδιο του NotebookLM, όπως φαίνεται στην εικόνα.</p>
+        <figure class="shot">
+          <img src="assets/images/image28.png" alt="Το εικονίδιο του NotebookLM για μετάβαση στην αρχική" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Το γενικό περιβάλλον" data-group="2. Η ενότητα Studio">
+        <span class="chapter-kicker">Υποενότητα 2.10</span>
+        <h1>Το γενικό περιβάλλον του NotebookLM</h1>
+        <p>Τότε θα μεταβείτε στο γενικό περιβάλλον του NotebookLM, όπου εκεί μπορείτε και πάλι να δημιουργήσετε ένα νέο σημειωματάριο, με ένα νέο θέμα προς μελέτη.</p>
+        <figure class="shot">
+          <img src="assets/images/image29.png" alt="Το γενικό περιβάλλον του NotebookLM με τα σημειωματάρια" loading="lazy">
+        </figure>
+        <p>Όπως φαίνεται στην εικόνα, αριστερά υπάρχει η επιλογή «Δημιουργία νέου σημειωματαρίου» και δεξιά «Εισαγωγή στην Τεχνητή Νοημοσύνη», όπου είναι το θέμα που δημιουργήσατε.</p>
+      </section>
+
+      <!-- ============ ΑΝΑΚΕΦΑΛΑΙΩΣΗ ============ -->
+      <section class="chapter" data-title="Ανακεφαλαίωση" data-group="Ανακεφαλαίωση &amp; Πηγές">
+        <span class="chapter-kicker">Ανακεφαλαίωση</span>
+        <h1>Ανακεφαλαίωση Ενότητας 3</h1>
+        <p>Ας συνοψίσουμε τα βασικά σημεία της ενότητας:</p>
+        <ol class="recap-list">
+          <li>Το <strong>NotebookLM</strong> είναι εργαλείο τεχνητής νοημοσύνης της Google — ένας «έξυπνος αναγνώστης» που δουλεύει πάνω στα δικά σας έγγραφα και σας βοηθά να μετατρέπετε τα δεδομένα σας σε γνώση.</li>
+          <li>Από προεπιλογή <strong>«διαβάζει» μόνο ό,τι του δώσετε</strong> (PDF, σημειώσεις, Google Docs, άρθρα) και δημιουργεί προσωπικό σημειωματάριο όπου απαντά σε ερωτήσεις, φτιάχνει περιλήψεις, συγκρίνει πηγές και συνθέτει οδηγούς μελέτης.</li>
+          <li>Η <strong>πρόσβαση</strong> γίνεται από το notebooklm.google αποκλειστικά με λογαριασμό Google, χωρίς εγκατάσταση, απευθείας από τον browser.</li>
+          <li>Κάθε <strong>Notebook</strong> είναι προσωπικός χώρος μελέτης· υποστηριζόμενοι τύποι πηγών: PDF, txt, Markdown, Ήχος (π.χ. mp3). Μπορείτε να απο-επιλέγετε πηγές ώστε το εργαλείο να απαντά μόνο από τις επιλεγμένες.</li>
+          <li>Οι <strong>απαντήσεις συνοδεύονται από παραπομπές</strong> που δείχνουν από ποιο αρχείο και σημείο προήλθε η πληροφορία, ενώ με την «Αποθήκευση σημείωσης» χτίζετε σταδιακά τον δικό σας οδηγό μελέτης.</li>
+          <li>Η ενότητα <strong>Studio</strong> μετατρέπει αυτόματα το υλικό σας σε: Ηχητική Επισκόπηση, Επισκόπηση Βίντεο, Mind Map, Κουίζ, Εκπαιδευτικές Κάρτες και Αναφορές (Οδηγός Μελέτης, Λευκή Βίβλος, Ανάρτηση Ιστολογίου κ.ά.) — χωρίς καμία επιπλέον εντολή.</li>
+          <li>Στο Studio γίνεται και η <strong>διαχείριση των δημιουργιών</strong>: μετονομασία και διαγραφή από το μενού με τις τρεις τελείες (⋮).</li>
+        </ol>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🚀</span>
+          <div><p><strong>Συγχαρητήρια!</strong> Ολοκληρώσατε την Ενότητα 3. Μπορείτε να επιστρέψετε σε οποιαδήποτε διαφάνεια από το πλευρικό μενού για επανάληψη — η πρόοδός σας αποθηκεύεται αυτόματα.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πηγές &amp; σύνδεσμοι" data-group="Ανακεφαλαίωση &amp; Πηγές">
+        <span class="chapter-kicker">Πηγές</span>
+        <h1>Πηγές &amp; σύνδεσμοι</h1>
+        <p>Οι σύνδεσμοι που αναφέρονται στο εκπαιδευτικό υλικό της ενότητας:</p>
+        <ul class="checklist">
+          <li><strong>Επίσημη ιστοσελίδα του NotebookLM:</strong> <a href="https://notebooklm.google/" target="_blank" rel="noopener">https://notebooklm.google/</a></li>
+        </ul>
+        <div class="brandcard" style="background:#0F0F0F; border-color:#0F0F0F;"><img src="assets/images/notebooklm-wordmark-white.png" alt="Λογότυπο NotebookLM" style="max-height:56px;"></div>
+      <!-- AI-UPDATE-2026:START --><div class="update-bibliography"><h2>Πηγές των συμπληρωματικών υποενοτήτων</h2><p>Επίσημη τεκμηρίωση και επιλεγμένες επιστημονικές αναφορές. Τα επαγγελματικά παραδείγματα είναι υποθετικά και τα δεδομένα των ασκήσεων συνθετικά.</p><ul><li><a href="https://blog.google/intl/de-de/produkte/suchen-entdecken/notebooklm-wird-gemini-notebook/" target="_blank" rel="noopener noreferrer">Google · NotebookLM → Gemini Notebook, 16/07/2026 (γερμανικά)</a></li><li><a href="https://blog.google/innovation-and-ai/technology/ai/notebooklm-google-ai/" target="_blank" rel="noopener noreferrer">Google · Η τεκμηρίωση με πηγές και τα όριά της</a></li><li><a href="https://blog.google/innovation-and-ai/products/notebooklm/better-research-notebooklm/" target="_blank" rel="noopener noreferrer">Google · Νέες δυνατότητες έρευνας στο NotebookLM</a></li><li><a href="https://blog.google/products-and-platforms/products/education/iste-2026-educator-updates/" target="_blank" rel="noopener noreferrer">Google · Εκπαίδευση και ISTE 2026, 25/06/2026</a></li><li><a href="https://www.nature.com/articles/s41539-026-00400-2" target="_blank" rel="noopener noreferrer">Wilschut, Sense &amp; van Rijn (2026) · Έρευνα για την πρακτική ανάκλησης</a></li></ul></div><!-- AI-UPDATE-2026:END --></section>
+            <section class="chapter" id="ntheory-intro" data-title="Τι θα μάθετε για την εργασία με πηγές" data-group="Θεωρητικό υπόβαθρο: εργασία με πηγές">
+        <span class="chapter-kicker">Θεωρία · 1</span>
+        <h1>Τι θα μάθετε για την εργασία με πηγές</h1>
+        <p>Το NotebookLM διαφέρει από έναν γενικό βοηθό συνομιλίας σε ένα ουσιώδες σημείο: απαντά <strong>μόνο με βάση τις πηγές που του δίνετε</strong>. Είδατε πώς αξιοποιείται αυτό στην πράξη. Η παρούσα θεματική εξηγεί γιατί ο περιορισμός αυτός είναι πλεονέκτημα και πώς λειτουργεί τεχνικά.</p>
+        <div class="objectives">
+          <h3>Μαθησιακοί στόχοι της θεματικής</h3>
+          <ul>
+            <li>Να εξηγείτε τη διαφορά ανάμεσα σε απάντηση από τη γνώση του μοντέλου και σε απάντηση από πηγή.</li>
+            <li>Να περιγράφετε πώς εντοπίζεται το σχετικό απόσπασμα μέσα σε ένα μεγάλο έγγραφο.</li>
+            <li>Να διακρίνετε την παραπομπή από το συμπέρασμα και από το κενό πληροφορίας.</li>
+            <li>Να επιλέγετε και να προετοιμάζετε πηγές ώστε να δίνουν αξιόπιστα αποτελέσματα.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="chapter" id="ntheory-grounding" data-title="Γιατί το «κλείδωμα στις πηγές» αλλάζει το αποτέλεσμα" data-group="Θεωρητικό υπόβαθρο: εργασία με πηγές">
+        <span class="chapter-kicker">Θεωρία · 2</span>
+        <h1>Γιατί το «κλείδωμα στις πηγές» αλλάζει το αποτέλεσμα</h1>
+        <p>Ένα γλωσσικό μοντέλο παράγει τη γλωσσικά πιθανότερη συνέχεια. Όταν του λείπει πληροφορία, δεν έχει τρόπο να πει «δεν το ξέρω»: συμπληρώνει με κάτι εύλογο. Αυτή είναι η ρίζα των παραισθήσεων.</p>
+        <p>Το κλείδωμα στις πηγές αλλάζει το ερώτημα που τίθεται στο μοντέλο. Από «τι ξέρεις γι' αυτό;» γίνεται «τι λέει <em>αυτό εδώ</em> το κείμενο γι' αυτό;». Η δεύτερη διατύπωση είναι ελέγξιμη, επειδή η σωστή απάντηση βρίσκεται μπροστά και στα δύο μέρη.</p>
+        <div class="update-table"><table>
+          <thead><tr><th scope="col">Γενικός βοηθός</th><th scope="col">Βοηθός κλειδωμένος στις πηγές</th></tr></thead>
+          <tbody>
+            <tr><td>Απαντά για οτιδήποτε, με ποικίλη αξιοπιστία.</td><td>Απαντά μόνο για όσα καλύπτουν οι πηγές σας.</td></tr>
+            <tr><td>Δύσκολος έλεγχος: δεν ξέρετε από πού προήλθε ο ισχυρισμός.</td><td>Άμεσος έλεγχος: κάθε ισχυρισμός δείχνει το σημείο προέλευσης.</td></tr>
+            <tr><td>Η ημερομηνία γνώσης περιορίζει την επικαιρότητα.</td><td>Η επικαιρότητα εξαρτάται από τα δικά σας αρχεία.</td></tr>
+            <tr><td>Το «δεν ξέρω» είναι σπάνιο.</td><td>Το «δεν αναφέρεται στις πηγές» είναι αποδεκτή και χρήσιμη απάντηση.</td></tr>
+          </tbody>
+        </table></div>
+        <p class="slide-theory">Το τίμημα είναι πραγματικό: ο βοηθός δεν θα σας πει κάτι που λείπει από το υλικό σας, ακόμη κι αν είναι κοινή γνώση. Η επιλογή των πηγών γίνεται έτσι η σημαντικότερη απόφαση της εργασίας.</p>
+      </section>
+      <section class="chapter" id="ntheory-retrieval" data-title="Τεμαχισμός και ανάκτηση αποσπασμάτων" data-group="Θεωρητικό υπόβαθρο: εργασία με πηγές">
+        <span class="chapter-kicker">Θεωρία · 3</span>
+        <h1>Τεμαχισμός και ανάκτηση αποσπασμάτων</h1>
+        <p>Πώς βρίσκεται το σωστό σημείο μέσα σε εκατοντάδες σελίδες; Με μια διαδικασία τεσσάρων βημάτων, κοινή σε όλα τα εργαλεία που στηρίζονται σε πηγές.</p>
+        <div class="update-table"><table>
+          <thead><tr><th scope="col">Βήμα</th><th scope="col">Τι συμβαίνει</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">1. Τεμαχισμός</th><td>Κάθε πηγή κόβεται σε αποσπάσματα λίγων παραγράφων.</td></tr>
+            <tr><th scope="row">2. Ευρετηρίαση</th><td>Κάθε απόσπασμα μετατρέπεται σε διάνυσμα που αποτυπώνει το νόημά του.</td></tr>
+            <tr><th scope="row">3. Ανάκτηση</th><td>Η ερώτησή σας γίνεται επίσης διάνυσμα και επιλέγονται τα πλησιέστερα αποσπάσματα.</td></tr>
+            <tr><th scope="row">4. Σύνθεση</th><td>Τα επιλεγμένα αποσπάσματα δίνονται στο μοντέλο, το οποίο συντάσσει την απάντηση με παραπομπές.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">⚠️</span>
+          <div><p><strong>Πού αστοχεί:</strong> αν η κρίσιμη πληροφορία είναι μοιρασμένη σε δύο απομακρυσμένα σημεία, ή αν βρίσκεται σε εικόνα χωρίς κείμενο, ή αν το έγγραφο είναι σαρωμένο χωρίς αναγνώριση χαρακτήρων, η ανάκτηση μπορεί να μη φέρει το σωστό απόσπασμα. Η απάντηση τότε είναι ελλιπής, αν και διατυπωμένη με βεβαιότητα.</p></div>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">✅</span>
+          <div><p><strong>Πρακτική συνέπεια:</strong> προτιμήστε αρχεία με πραγματικό κείμενο αντί για σαρώσεις, με σαφείς επικεφαλίδες και λογική δομή. Ένα καλά οργανωμένο έγγραφο δίνει καλύτερα αποτελέσματα από ένα μεγαλύτερο αλλά άναρχο.</p></div>
+        </div>
+      </section>
+      <section class="chapter" id="ntheory-claims" data-title="Παραπομπή, συμπέρασμα και κενό πληροφορίας" data-group="Θεωρητικό υπόβαθρο: εργασία με πηγές">
+        <span class="chapter-kicker">Θεωρία · 4</span>
+        <h1>Παραπομπή, συμπέρασμα και κενό πληροφορίας</h1>
+        <p>Σε μια απάντηση που στηρίζεται σε πηγές συνυπάρχουν τρία διαφορετικά είδη πρότασης. Η διάκρισή τους είναι η ουσία της κριτικής ανάγνωσης.</p>
+        <div class="update-table"><table>
+          <thead><tr><th scope="col">Είδος</th><th scope="col">Παράδειγμα διατύπωσης</th><th scope="col">Πώς ελέγχεται</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Παραπομπή</th><td>«Η μελέτη αναφέρει ποσοστό 43%.»</td><td>Ανοίγετε την πηγή και εντοπίζετε τον αριθμό.</td></tr>
+            <tr><th scope="row">Συμπέρασμα</th><td>«Άρα η τάση είναι ανοδική.»</td><td>Ελέγχετε αν προκύπτει λογικά από τα δεδομένα των πηγών.</td></tr>
+            <tr><th scope="row">Κενό</th><td>«Δεν αναφέρεται στις πηγές.»</td><td>Το αποδέχεστε ως χρήσιμη πληροφορία και αναζητάτε πρόσθετη πηγή.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Η απάντηση γράφει: «Το πρόγραμμα ήταν επιτυχημένο, καθώς οι συμμετοχές αυξήθηκαν κατά 12%.» Πόσα είδη πρότασης περιέχει;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Δύο. Το «αυξήθηκαν κατά 12%» είναι παραπομπή και ελέγχεται στην πηγή. Το «ήταν επιτυχημένο» είναι συμπέρασμα και προϋποθέτει κριτήριο επιτυχίας που πρέπει να ορίζεται κάπου. Αν το κριτήριο δεν υπάρχει στις πηγές, το συμπέρασμα είναι δική σας ευθύνη και όχι εύρημα.</p></details></div>
+      </section>
+      <section class="chapter" id="ntheory-check" data-title="Ελέγξτε την κατανόησή σας στη θεωρία" data-group="Θεωρητικό υπόβαθρο: εργασία με πηγές">
+        <span class="chapter-kicker">Αυτοαξιολόγηση</span>
+        <h1>Ελέγξτε την κατανόησή σας στη θεωρία</h1>
+        <p>Απαντήστε νοερά και μετά ανοίξτε κάθε απάντηση. Οι ερωτήσεις είναι διαμορφωτικές και δεν επηρεάζουν τη βαθμολογία της τελικής αξιολόγησης.</p>
+        <div class="update-exercise"><h3>Ερώτηση 1</h3><p>Γιατί ένας βοηθός κλειδωμένος στις πηγές παρουσιάζει λιγότερες παραισθήσεις;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Επειδή το ζητούμενο αλλάζει: δεν καλείται να ανακαλέσει γνώση, αλλά να αποδώσει περιεχόμενο που βρίσκεται μπροστά του. Παράλληλα, του δίνεται αποδεκτή εναλλακτική διατύπωση, το «δεν αναφέρεται», που δεν υπάρχει σε έναν γενικό βοηθό.</p></details></div>
+        <div class="update-exercise"><h3>Ερώτηση 2</h3><p>Ανεβάσατε σαρωμένο PDF και ο βοηθός δεν βρίσκει τίποτα. Ποια είναι η πιθανότερη αιτία;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Το αρχείο περιέχει εικόνες σελίδων και όχι κείμενο, οπότε δεν μπόρεσε να γίνει τεμαχισμός και ευρετηρίαση. Χρειάζεται αναγνώριση χαρακτήρων ή αντικατάσταση με έκδοση που περιέχει πραγματικό κείμενο.</p></details></div>
+        <div class="update-exercise"><h3>Ερώτηση 3</h3><p>Δύο πηγές σας δίνουν διαφορετικό αριθμό για το ίδιο μέγεθος. Τι κάνετε;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Δεν επιλέγετε αυθαίρετα. Ελέγχετε ημερομηνία, μεθοδολογία και ακριβή ορισμό του μεγέθους σε κάθε πηγή. Συνήθως οι αριθμοί δεν είναι αντικρουόμενοι αλλά μετρούν ελαφρώς διαφορετικά πράγματα. Στο τελικό κείμενο αναφέρετε και τα δύο, με τη διευκρίνιση.</p></details></div>
+      </section>
+      <section class="chapter" id="ntheory-sources" data-title="Θεωρία: πηγές και περαιτέρω μελέτη" data-group="Θεωρητικό υπόβαθρο: εργασία με πηγές">
+        <span class="chapter-kicker">Πηγές</span>
+        <h1>Θεωρία: πηγές και περαιτέρω μελέτη</h1>
+        <div class="update-sources"><ul>
+          <li><a href="https://notebooklm.google/" target="_blank" rel="noopener noreferrer">NotebookLM · επίσημη σελίδα</a></li>
+          <li><a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener noreferrer">Lewis κ.ά. · η εργασία που εισήγαγε την παραγωγή με ανάκτηση (RAG)</a></li>
+          <li><a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">Vaswani κ.ά., «Attention Is All You Need» · η αρχιτεκτονική transformer</a></li>
+        </ul></div>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">📌</span>
+          <div><p>Τα παραδείγματα και οι πίνακες είναι <strong>διδακτικές κατασκευές</strong> του μαθήματος και δεν αποτελούν μετρήσεις συγκεκριμένου προϊόντος.</p></div>
+        </div>
+      </section>
+<section class="chapter" id="local-assistant" data-title="Ο βοηθός του μαθήματος" data-group="Εργαλεία μαθήματος"><span class="chapter-kicker">Εργαλείο μαθήματος</span><h1>Ο βοηθός του μαθήματος</h1><p>Κάτω δεξιά σε κάθε οθόνη θα βρείτε το κουμπί <strong>«Βοηθός μαθήματος»</strong>. Είναι ένας μικρός συνομιλητής που γνωρίζει το περιεχόμενο αυτής της ενότητας και σας βοηθά να βρείτε γρήγορα ό,τι ψάχνετε, χωρίς να ξεφυλλίζετε διαφάνειες.</p><div class="callout callout-note lc-callout">
+          <span class="co-icon lc-callout-icon" aria-hidden="true">💬</span>
+          <div><p><strong>Δοκιμάστε τον τώρα.</strong> Ρωτήστε τον με δικά σας λόγια, όπως θα ρωτούσατε έναν συνάδελφο. Θα σας απαντήσει και θα σας πάει με ένα κλικ στο σημείο όπου βρίσκεται η απάντηση.</p><button type="button" class="lc-open-inline" data-open-assistant>Άνοιγμα του βοηθού</button></div>
+        </div><h2>Τι μπορείτε να τον ρωτήσετε</h2><ul class="checklist">
+          <li><strong>Ορισμούς:</strong> «τι είναι η παραπομπή σε πηγή;»</li>
+          <li><strong>Διαδικασίες:</strong> «πώς ανεβάζω πηγές βήμα βήμα;»</li>
+          <li><strong>Παραδείγματα:</strong> «δείξε μου ένα παράδειγμα σύνοψης»</li>
+          <li><strong>Προσανατολισμό:</strong> «περιεχόμενα» ή «πού βρίσκομαι;»</li>
+          <li><strong>Συνέχεια:</strong> «πες μου περισσότερα», για να συνεχίσει από εκεί που σταμάτησε</li>
+        </ul><div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">🔒</span>
+          <div><p>Ο βοηθός δουλεύει μέσα στον δικό σας υπολογιστή, πάνω στο υλικό του μαθήματος. Δεν στέλνει πουθενά τις ερωτήσεις σας, δεν τις αποθηκεύει και λειτουργεί ακόμη κι όταν δεν έχετε σύνδεση στο διαδίκτυο.</p></div>
+        </div><p class="slide-theory">Υπάρχει και μια διδακτική πλευρά. Ο βοηθός <strong>εντοπίζει</strong> κείμενο που υπάρχει ήδη, αντί να <strong>παράγει</strong> καινούργιο. Γι’ αυτό δεν μπορεί να σας πει κάτι που δεν γράφεται πουθενά στο μάθημα, αλλά ούτε και να επινοήσει. Η ίδια διάκριση, ανάμεσα στην ανάκτηση και στην παραγωγή, βρίσκεται πίσω από κάθε σύστημα τεχνητής νοημοσύνης που στηρίζεται σε πηγές.</p></section>
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/app.js?v=1"></script>
+<script src="assets/js/v2.js?v=1"></script>
+<!-- AI-UPDATE-2026:START --><script src="assets/js/updates-2026.js?v=enriched"></script><script src="assets/js/enrichment.js?v=1"></script><!-- AI-UPDATE-2026:END --><script src="scorm-driver.js"></script>
+<script src="assets/js/local-chatbot.js?v=sc1"></script><script src="assets/js/space-theme.js?v=sp1"></script><script src="assets/js/astra-knot.js?v=2"></script><script src="assets/js/astra.js?v=2"></script><script src="assets/js/reactbits.js?v=2"></script></body>
+</html>

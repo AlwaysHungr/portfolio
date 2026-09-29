@@ -1,0 +1,945 @@
+﻿<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ενότητα 1. Αριθμοί που Προβλέπουν, Αλγόριθμοι που Αποφασίζουν: ΤΝ στη Χρηματοοικονομική Διοίκηση</title>
+  <style>
+    :root {
+      --bg: #fff7ed;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #7c6f64;
+      --orange-100: #ffedd5;
+      --orange-200: #fed7aa;
+      --orange-300: #fdba74;
+      --orange-500: #f97316;
+      --orange-600: #ea580c;
+      --orange-700: #c2410c;
+      --danger: #dc2626;
+      --border: #f4c9a5;
+      --shadow: 0 12px 28px rgba(194, 65, 12, 0.12);
+      --shadow-soft: 0 8px 20px rgba(194, 65, 12, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+      background:
+        radial-gradient(circle at 10% 10%, #ffedd5 0%, transparent 38%),
+        radial-gradient(circle at 90% 12%, #fed7aa 0%, transparent 42%),
+        linear-gradient(180deg, #fff7ed 0%, #fffaf5 45%, #fff 100%);
+    }
+
+    .floating-timer {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 999;
+      min-width: 185px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--orange-200);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      padding: 10px 12px;
+      display: grid;
+      gap: 3px;
+    }
+
+    .floating-timer .label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    #timer {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--orange-700);
+      letter-spacing: 0.02em;
+    }
+
+    #timerStatus {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--danger);
+    }
+
+    #timerStatus.ready {
+      color: #15803d;
+    }
+
+    .wrap {
+      max-width: 1020px;
+      margin: 28px auto;
+      padding: 60px 16px 40px;
+    }
+
+    .header {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fff 0%, #fff7ed 100%);
+      border: 1px solid var(--orange-200);
+      border-radius: 18px;
+      padding: 20px 18px 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .header::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      top: -130px;
+      right: -70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--orange-200) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 1.38rem;
+      color: #7c2d12;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
+      background: #fff;
+      border: 1px solid var(--orange-200);
+      color: #9a3412;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .progress-wrap {
+      margin: 8px 0 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 11px;
+      background: #ffedd5;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid #fed7aa;
+    }
+
+    #progressFill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #fb923c 0%, #f97316 100%);
+      transition: width 0.25s ease;
+    }
+
+    .progress-caption {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #9a3412;
+    }
+
+    #timeLockMessage,
+    #timeReadyMessage {
+      margin: 8px 0 0;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    #timeLockMessage {
+      color: var(--danger);
+    }
+
+    #timeReadyMessage {
+      color: #15803d;
+      display: none;
+    }
+
+    .question {
+      background: var(--card);
+      border: 1px solid var(--orange-200);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 12px 0;
+      box-shadow: 0 6px 18px rgba(234, 88, 12, 0.07);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .question:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(234, 88, 12, 0.11);
+      border-color: var(--orange-300);
+    }
+
+    .question legend {
+      display: inline-block;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffedd5, #fff7ed);
+      border: 1px solid #fed7aa;
+      border-radius: 999px;
+      padding: 6px 12px;
+      color: #7c2d12;
+      font-size: 0.93rem;
+      letter-spacing: 0.01em;
+    }
+
+    .question-textbox {
+      background: linear-gradient(180deg, #fff 0%, #fff7ed 100%);
+      border: 1px solid #fdba74;
+      border-radius: 12px;
+      padding: 12px 13px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #7c2d12;
+      margin-bottom: 10px;
+      box-shadow: inset 0 0 0 1px #ffedd5;
+    }
+
+    .question-options {
+      display: grid;
+      gap: 8px;
+    }
+
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 10px 11px;
+      border: 1px solid #fde2cc;
+      border-radius: 11px;
+      cursor: pointer;
+      background: #fff;
+      transition: all 0.18s ease;
+    }
+
+    .option:hover {
+      border-color: var(--orange-300);
+      background: #fffaf5;
+    }
+
+    .option.selected {
+      border-color: var(--orange-500);
+      background: #fff2e9;
+      box-shadow: inset 0 0 0 1px #fdba74;
+    }
+
+    .option input[type="radio"] {
+      margin-top: 2px;
+      accent-color: var(--orange-600);
+      transform: scale(1.05);
+    }
+
+    .option-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ffedd5;
+      color: #9a3412;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: 1px solid #fdba74;
+      line-height: 1;
+      margin-top: 1px;
+    }
+
+    .option-text {
+      flex: 1;
+      font-size: 0.96rem;
+      color: #374151;
+    }
+
+    .actions {
+      position: sticky;
+      bottom: 8px;
+      z-index: 20;
+      background: rgba(255, 247, 237, 0.92);
+      border: 1px solid var(--orange-200);
+      border-radius: 14px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(8px);
+      padding: 10px;
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
+      color: #fff;
+      padding: 11px 16px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(234, 88, 12, 0.25);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    button:hover:enabled {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    #submitBtn.locked {
+      background: linear-gradient(135deg, #b6b0aa, #9f9a95);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    #submitBtn.locked:hover {
+      transform: none;
+      filter: none;
+    }
+
+    #guardMessage {
+      color: var(--danger);
+      font-weight: 700;
+      min-height: 1.4em;
+      font-size: 0.95rem;
+    }
+
+    #result {
+      margin-top: 12px;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 12px;
+      padding: 14px;
+      display: none;
+      font-size: 1rem;
+    }
+
+    #toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translate(-50%, 24px);
+      background: #7f1d1d;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      box-shadow: 0 10px 22px rgba(127, 29, 29, 0.3);
+      font-weight: 700;
+      z-index: 1100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        padding-top: 78px;
+      }
+
+      .floating-timer {
+        top: 10px;
+        right: 10px;
+        min-width: 162px;
+        padding: 9px 10px;
+      }
+
+      #timer {
+        font-size: 1.28rem;
+      }
+
+      .header h1 {
+        font-size: 1.18rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <aside class="floating-timer" aria-live="polite">
+    <span class="label">Χρόνος που απομένει</span>
+    <span id="timer">15:00</span>
+    <span id="timerStatus">Η υποβολή είναι κλειδωμένη</span>
+  </aside>
+
+  <div class="wrap">
+    <section class="header">
+      <h1>Quiz: Ενότητα 1. Αριθμοί που Προβλέπουν, Αλγόριθμοι που Αποφασίζουν: ΤΝ στη Χρηματοοικονομική Διοίκηση</h1>
+      <div class="meta">
+        <span class="pill">Σύνολο ερωτήσεων: 20</span>
+        <span class="pill">Χρόνος: 15 λεπτά</span>
+        <span class="pill" id="answeredCount">Απαντημένες: 0/20</span>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div id="progressFill"></div>
+        </div>
+        <div class="progress-caption">Πρόοδος συμπλήρωσης</div>
+      </div>
+      <p id="timeLockMessage">Το quiz θα υποβληθεί αυτόματα μόλις περάσουν 15 λεπτά.</p>
+      <p id="timeReadyMessage">Ο χρόνος ολοκληρώθηκε. Γίνεται αυτόματη υποβολή.</p>
+    </section>
+
+    <form id="quizForm"></form>
+
+    <div class="actions">
+      <button id="submitBtn" class="locked" type="submit" form="quizForm" title="Θα υποβληθεί αυτόματα σε 15 λεπτά">Υποβολή Quiz</button>
+      <span id="guardMessage" aria-live="polite"></span>
+    </div>
+
+    <section id="result"></section>
+  </div>
+  <div id="toast" role="status" aria-live="assertive"></div>
+
+  <script>
+    const quizData = [
+      {
+        question: "Ποιος είναι ο ρόλος της χρηματοοικονομικής διαχείρισης στη βιωσιμότητα και τη στρατηγική κατεύθυνση μιας επιχείρησης στο σύγχρονο επιχειρησιακό περιβάλλον;",
+        options: {
+          A: "Περιορίζεται μόνο στην τήρηση λογιστικών βιβλίων χωρίς στρατηγική συμβολή.",
+          B: "Διασφαλίζει βιωσιμότητα μέσω σχεδιασμού, κατανομής πόρων και υποστήριξης στρατηγικών αποφάσεων.",
+          C: "Αφορά αποκλειστικά τη φορολογική συμμόρφωση και όχι τη διοίκηση.",
+          D: "Εστιάζει μόνο στη μείωση προσωπικού για αύξηση κερδών."
+        },
+        correct: "B"
+      },
+      {
+        question: "Πώς επηρεάζει η ποιότητα και η διαθεσιμότητα των δεδομένων την αποτελεσματικότητα της Τεχνητής Νοημοσύνης στη χρηματοοικονομική ανάλυση και τη λήψη αποφάσεων;",
+        options: {
+          A: "Δεν επηρεάζει, γιατί η ΤΝ λειτουργεί ανεξάρτητα από τα δεδομένα.",
+          B: "Καθορίζει την αξιοπιστία των αποτελεσμάτων, καθώς κακά ή ελλιπή δεδομένα οδηγούν σε λανθασμένες αναλύσεις.",
+          C: "Επηρεάζει μόνο την ταχύτητα και όχι την ακρίβεια.",
+          D: "Έχει σημασία μόνο σε μικρές επιχειρήσεις."
+        },
+        correct: "B"
+      },
+      {
+        question: "Με ποιους τρόπους η Τεχνητή Νοημοσύνη μπορεί να υποστηρίξει τον χρηματοοικονομικό προγραμματισμό και την πρόβλεψη, χωρίς να υποκαθιστά την ανθρώπινη κρίση;",
+        options: {
+          A: "Με το να παίρνει αυτόνομα όλες τις αποφάσεις προϋπολογισμού.",
+          B: "Με το να αναλύει τάσεις/σενάρια και να προτείνει προβλέψεις, αφήνοντας την τελική κρίση στη διοίκηση.",
+          C: "Με το να αγνοεί εξωτερικούς παράγοντες για να απλοποιεί το μοντέλο.",
+          D: "Με το να αντικαθιστά τις συναντήσεις προγραμματισμού με αυτόματα μηνύματα."
+        },
+        correct: "B"
+      },
+      {
+        question: "Ποια είναι η συμβολή της Τεχνητής Νοημοσύνης στη διαχείριση κόστους και αποδοτικότητας και ποιοι παράγοντες πρέπει να λαμβάνονται υπόψη κατά την αξιοποίησή της;",
+        options: {
+          A: "Καταργεί την ανάγκη κοστολόγησης γιατί μειώνει αυτόματα όλα τα κόστη.",
+          B: "Εντοπίζει μοτίβα σπατάλης και ευκαιρίες βελτίωσης, με προσοχή σε ποιότητα δεδομένων και μεροληψίες.",
+          C: "Χρησιμοποιείται μόνο για αύξηση τιμών και όχι για κόστη.",
+          D: "Λειτουργεί σωστά χωρίς καμία διαδικασία ελέγχου."
+        },
+        correct: "B"
+      },
+      {
+        question: "Γιατί η διαχείριση ταμειακών ροών και ρευστότητας θεωρείται κρίσιμη λειτουργία και πώς μπορεί να ενισχυθεί μέσω τεχνολογικής υποστήριξης;",
+        options: {
+          A: "Δεν είναι κρίσιμη, γιατί οι πωλήσεις εξασφαλίζουν πάντα μετρητά.",
+          B: "Είναι κρίσιμη για την επιβίωση και ενισχύεται με παρακολούθηση, προβλέψεις και έγκαιρες ειδοποιήσεις ρευστότητας.",
+          C: "Αφορά μόνο την επενδυτική πολιτική και όχι τη λειτουργία.",
+          D: "Βελτιώνεται μόνο με αύξηση δανεισμού."
+        },
+        correct: "B"
+      },
+      {
+        question: "Ποιοι είναι οι βασικοί άξονες αξιολόγησης επενδύσεων και πώς μπορεί η Τεχνητή Νοημοσύνη να υποστηρίξει τις κεφαλαιακές αποφάσεις;",
+        options: {
+          A: "Μόνο η αρχική δαπάνη, χωρίς εξέταση ρίσκου ή απόδοσης.",
+          B: "Απόδοση, κίνδυνος, χρόνος και στρατηγική συνάφεια, με την ΤΝ να υποστηρίζει σενάρια και ανάλυση ευαισθησίας.",
+          C: "Μόνο η δημοφιλία του έργου στην αγορά.",
+          D: "Μόνο η άποψη ενός στελέχους χωρίς δεδομένα."
+        },
+        correct: "B"
+      },
+      {
+        question: "Πώς συμβάλλει η Τεχνητή Νοημοσύνη στη διαχείριση χρηματοοικονομικού κινδύνου και ποια είναι τα όρια της αποτελεσματικότητάς της σε συνθήκες υψηλής αβεβαιότητας;",
+        options: {
+          A: "Προβλέπει πάντα τέλεια όλες τις κρίσεις, άρα δεν υπάρχουν όρια.",
+          B: "Εντοπίζει μοτίβα κινδύνου και πιθανότητες, αλλά περιορίζεται όταν αλλάζουν ριζικά οι συνθήκες ή λείπουν δεδομένα.",
+          C: "Χρησιμοποιείται μόνο για λογιστικές καταχωρήσεις.",
+          D: "Καταργεί την ανάγκη για πολιτικές κινδύνου."
+        },
+        correct: "B"
+      },
+      {
+        question: "Με ποιους τρόπους ο έλεγχος οικονομικών διαδικασιών ενισχύεται μέσω της Τεχνητής Νοημοσύνης και ποιος παραμένει ο ρόλος της ανθρώπινης εποπτείας;",
+        options: {
+          A: "Η ΤΝ καταργεί πλήρως κάθε έλεγχο από ανθρώπους.",
+          B: "Ενισχύεται με ανίχνευση ανωμαλιών και αυτοματοποιημένους ελέγχους, ενώ η ανθρώπινη εποπτεία παραμένει για αξιολόγηση και λογοδοσία.",
+          C: "Ο έλεγχος γίνεται πιο αργός, γιατί προστίθενται χειροκίνητα βήματα.",
+          D: "Ο έλεγχος περιορίζεται μόνο σε ετήσιους ισολογισμούς."
+        },
+        correct: "B"
+      },
+      {
+        question: "Ποιοι είναι οι σημαντικότεροι περιορισμοί και κίνδυνοι της χρήσης Τεχνητής Νοημοσύνης στη χρηματοοικονομική διαχείριση και πώς μπορούν να αντιμετωπιστούν;",
+        options: {
+          A: "Δεν υπάρχουν κίνδυνοι, γιατί τα οικονομικά είναι πάντα προβλέψιμα.",
+          B: "Μεροληψία, λάθη δεδομένων, black box και κυβερνοκίνδυνοι, με αντιμετώπιση μέσω ελέγχων, διακυβέρνησης και ανθρώπινης επίβλεψης.",
+          C: "Ο μόνος κίνδυνος είναι ότι μειώνει την ταχύτητα εργασίας.",
+          D: "Αντιμετωπίζονται μόνο με πλήρη απόκρυψη των μοντέλων από τους χρήστες."
+        },
+        correct: "B"
+      },
+      {
+        question: "Γιατί η σταδιακή ενσωμάτωση της Τεχνητής Νοημοσύνης στη χρηματοοικονομική διαχείριση θεωρείται προτιμότερη από την απότομη και εκτεταμένη υιοθέτησή της;",
+        options: {
+          A: "Για να αποφευχθεί η εκπαίδευση προσωπικού.",
+          B: "Για να δοκιμαστούν λύσεις, να μειωθούν κίνδυνοι και να ενσωματωθεί αλλαγή σε διαδικασίες και κουλτούρα.",
+          C: "Γιατί η ΤΝ δεν μπορεί ποτέ να εφαρμοστεί σε οικονομικά.",
+          D: "Για να μειωθεί η ακρίβεια των αναλύσεων."
+        },
+        correct: "B"
+      },
+      {
+        question: "Πώς μετασχηματίζεται η παραδοσιακή αντίληψη της χρηματοοικονομικής διαχείρισης από έναν μηχανισμό εκ των υστέρων καταγραφής σε μια προληπτική, στρατηγική λειτουργία στο σύγχρονο επιχειρησιακό περιβάλλον;",
+        options: {
+          A: "Παραμένει αποκλειστικά καταγραφική και αποφεύγει τον σχεδιασμό.",
+          B: "Μετατοπίζεται σε πρόβλεψη, έλεγχο και στήριξη στρατηγικών επιλογών μέσω ανάλυσης και σεναρίων.",
+          C: "Καταργεί τους προϋπολογισμούς και λειτουργεί χωρίς στόχους.",
+          D: "Εστιάζει μόνο σε φορολογικές δηλώσεις."
+        },
+        correct: "B"
+      },
+      {
+        question: "Ποια είναι η ουσιαστική διάκριση μεταξύ δεδομένων, πληροφορίας και γνώσης στη χρηματοοικονομική λήψη αποφάσεων και με ποιον τρόπο η Τεχνητή Νοημοσύνη διευκολύνει τη μετάβαση από το ένα στάδιο στο άλλο;",
+        options: {
+          A: "Είναι ταυτόσημες έννοιες και η ΤΝ δεν αλλάζει κάτι.",
+          B: "Δεδομένα=ακατέργαστα στοιχεία, πληροφορία=επεξεργασμένα/δομημένα, γνώση=ερμηνεία για δράση, και η ΤΝ βοηθά με επεξεργασία, συσχετίσεις και προβλέψεις.",
+          C: "Γνώση είναι μόνο η προσωπική άποψη χωρίς στοιχεία.",
+          D: "Η μετάβαση γίνεται μόνο με χειροκίνητους υπολογισμούς."
+        },
+        correct: "B"
+      },
+      {
+        question: "Πώς η Τεχνητή Νοημοσύνη επιτρέπει τη μετάβαση από τους ετήσιους κύκλους χρηματοοικονομικού σχεδιασμού σε μοντέλα «συνεχούς προγραμματισμού» και ποια είναι τα οφέλη αυτής της ευελιξίας για την επιχείρηση;",
+        options: {
+          A: "Με το να απαγορεύει αναθεωρήσεις προϋπολογισμού μέσα στη χρονιά.",
+          B: "Με συνεχή ενημέρωση προβλέψεων από νέα δεδομένα, προσφέροντας ταχύτερη προσαρμογή και καλύτερη κατανομή πόρων.",
+          C: "Με το να μειώνει τη συχνότητα αναφορών σε μία φορά ανά διετία.",
+          D: "Με το να αγνοεί μεταβολές αγοράς για σταθερότητα."
+        },
+        correct: "B"
+      },
+      {
+        question: "Με ποιους τρόπους η υποστηρικτική ανάλυση της ΤΝ μπορεί να αποκαλύψει «αόρατα» ή έμμεσα κόστη (π.χ. από καθυστερήσεις ή ασυντόνιστες ενέργειες) που δεν αποτυπώνονται στις παραδοσιακές λογιστικές αναλύσεις;",
+        options: {
+          A: "Με το να εξετάζει μόνο τα τιμολόγια προμηθευτών.",
+          B: "Με ανάλυση διαδικασιών και συσχετίσεων (χρόνος, αποδοτικότητα, επαναλήψεις) που αποκαλύπτουν κρυφές απώλειες.",
+          C: "Με το να αγνοεί λειτουργικά δεδομένα για να μην υπάρχει σύγχυση.",
+          D: "Με το να μετατρέπει όλα τα κόστη σε σταθερά χωρίς ανάλυση."
+        },
+        correct: "B"
+      },
+      {
+        question: "Πώς η διαχείριση του κεφαλαίου κίνησης (αποθέματα, απαιτήσεις και υποχρεώσεις) επηρεάζει τη ρευστότητα και πώς η τεχνολογική υποστήριξη βοηθά στην εξεύρεση της ισορροπίας μεταξύ λειτουργικής ευελιξίας και οικονομικής πειθαρχίας;",
+        options: {
+          A: "Δεν επηρεάζει τη ρευστότητα, γιατί αφορά μόνο λογιστικές εγγραφές.",
+          B: "Επηρεάζει άμεσα τα διαθέσιμα μετρητά, και η τεχνολογία βοηθά με παρακολούθηση κύκλων, βελτιστοποίηση αποθεμάτων και εισπράξεων.",
+          C: "Βελτιώνεται μόνο με αύξηση αποθεμάτων ανεξαρτήτως κόστους.",
+          D: "Η ισορροπία επιτυγχάνεται με κατάργηση πίστωσης σε όλους τους πελάτες."
+        },
+        correct: "B"
+      },
+      {
+        question: "Γιατί ένα επενδυτικό έργο με θετικά οικονομικά αποτελέσματα μπορεί να απορριφθεί από τη διοίκηση και ποιος είναι ο ρόλος της «στρατηγικής συνάφειας» στην αξιολόγηση επενδύσεων και την υποστήριξη κεφαλαιακών αποφάσεων;",
+        options: {
+          A: "Επειδή η διοίκηση απορρίπτει πάντα τα κερδοφόρα έργα.",
+          B: "Επειδή μπορεί να μην ευθυγραμμίζεται με τη στρατηγική ή να αυξάνει μη αποδεκτούς κινδύνους, άρα η στρατηγική συνάφεια είναι κριτήριο πέρα από τους αριθμούς.",
+          C: "Επειδή τα θετικά αποτελέσματα σημαίνουν πάντα υπερβολικό ρίσκο.",
+          D: "Επειδή οι επενδύσεις αξιολογούνται μόνο με βάση την προσωπική προτίμηση του CFO."
+        },
+        correct: "B"
+      },
+      {
+        question: "Πώς η Τεχνητή Νοημοσύνη συμβάλλει στη χαρτογράφηση των αλληλεπιδράσεων μεταξύ διαφορετικών κατηγοριών κινδύνου (π.χ. πώς ένας κίνδυνος αγοράς μπορεί να προκαλέσει κρίση ρευστότητας) και πώς αυτό ενισχύει τη συνολική επίγνωση της διοίκησης;",
+        options: {
+          A: "Με το να εξετάζει κάθε κίνδυνο απομονωμένα χωρίς συσχετίσεις.",
+          B: "Με μοντέλα που αναλύουν συσχετίσεις και αλυσιδωτές επιδράσεις, προσφέροντας πιο ολοκληρωμένη εικόνα κινδύνου.",
+          C: "Με το να αντικαθιστά πλήρως τα stress tests.",
+          D: "Με το να αγνοεί κινδύνους που δεν έχουν εμφανιστεί στο παρελθόν."
+        },
+        correct: "B"
+      },
+      {
+        question: "Με ποιον τρόπο η χρήση της ΤΝ μετατρέπει τον οικονομικό έλεγχο από μια αποσπασματική και αντιδραστική διαδικασία σε έναν προληπτικό μηχανισμό που ανιχνεύει ανωμαλίες σε πραγματικό χρόνο;",
+        options: {
+          A: "Με το να περιορίζει τον έλεγχο σε ετήσιους δειγματοληπτικούς ελέγχους.",
+          B: "Με συνεχή παρακολούθηση συναλλαγών και ανίχνευση αποκλίσεων/ανωμαλιών καθώς συμβαίνουν.",
+          C: "Με το να καταργεί κάθε ειδοποίηση για να μην υπάρχει θόρυβος.",
+          D: "Με το να βασίζεται μόνο σε χειροκίνητη συμφωνία βιβλίων."
+        },
+        correct: "B"
+      },
+      {
+        question: "Τι περιλαμβάνει ο κίνδυνος της «έλλειψης ερμηνευσιμότητας» (Black Box) στα συστήματα ΤΝ και ποιες είναι οι επιπτώσεις του στη δυνατότητα τεκμηρίωσης και λογοδοσίας της χρηματοοικονομικής διοίκησης;",
+        options: {
+          A: "Σημαίνει ότι τα μοντέλα είναι πάντα ακριβή και δεν χρειάζονται εξήγηση.",
+          B: "Σημαίνει δυσκολία κατανόησης του γιατί μιας απόφασης, περιορίζοντας τεκμηρίωση, έλεγχο και λογοδοσία.",
+          C: "Αφορά μόνο την ταχύτητα επεξεργασίας και όχι τη λογοδοσία.",
+          D: "Είναι θετικό, γιατί μειώνει τις ερωτήσεις από ελεγκτές."
+        },
+        correct: "B"
+      },
+      {
+        question: "Πώς η οργανωσιακή κουλτούρα επηρεάζει την αποδοχή της Τεχνητής Νοημοσύνης και ποιοι παράγοντες (όπως η εκπαίδευση και η επικοινωνία) μπορούν να μειώσουν τον φόβο υποκατάστασης των ανθρώπινων ρόλων κατά τη διαδικασία ενσωμάτωσης;",
+        options: {
+          A: "Η κουλτούρα δεν επηρεάζει ποτέ την υιοθέτηση τεχνολογίας.",
+          B: "Μια κουλτούρα εμπιστοσύνης και μάθησης ενισχύει την αποδοχή, ενώ εκπαίδευση και σαφής επικοινωνία μειώνουν τον φόβο υποκατάστασης.",
+          C: "Ο φόβος μειώνεται μόνο με απολύσεις ώστε να συνηθίσουν οι εργαζόμενοι.",
+          D: "Η αποδοχή επιτυγχάνεται καλύτερα με απόκρυψη των σχεδίων υιοθέτησης ΤΝ."
+        },
+        correct: "B"
+      }
+    ];
+
+    const QUIZ_DURATION_SECONDS = 15 * 60;
+    const startTime = Date.now();
+    let toastTimeoutId = null;
+    let quizCompleted = false;
+    let timerIntervalId = null;
+
+    const form = document.getElementById("quizForm");
+    const timerEl = document.getElementById("timer");
+    const timerStatus = document.getElementById("timerStatus");
+    const submitBtn = document.getElementById("submitBtn");
+    const guardMessage = document.getElementById("guardMessage");
+    const resultBox = document.getElementById("result");
+    const timeLockMessage = document.getElementById("timeLockMessage");
+    const timeReadyMessage = document.getElementById("timeReadyMessage");
+    const answeredCountEl = document.getElementById("answeredCount");
+    const progressFill = document.getElementById("progressFill");
+    const toastEl = document.getElementById("toast");
+    const SCORM_PASSING_PERCENT = 60;
+
+    function resolveScormApi() {
+      const parentWindow = window.parent;
+      if (!parentWindow || parentWindow === window) {
+        return null;
+      }
+
+      if (
+        typeof parentWindow.SetScore === "function" &&
+        typeof parentWindow.SetReachedEnd === "function" &&
+        typeof parentWindow.CommitData === "function"
+      ) {
+        return parentWindow;
+      }
+
+      return null;
+    }
+
+    const scormApi = resolveScormApi();
+    const LESSON_STATUS = {
+      PASSED: (window.parent && window.parent.LESSON_STATUS_PASSED) || 1,
+      COMPLETED: (window.parent && window.parent.LESSON_STATUS_COMPLETED) || 2,
+      FAILED: (window.parent && window.parent.LESSON_STATUS_FAILED) || 3,
+      INCOMPLETE: (window.parent && window.parent.LESSON_STATUS_INCOMPLETE) || 4
+    };
+
+    function scormCall(methodName, ...args) {
+      if (!scormApi || typeof scormApi[methodName] !== "function") {
+        return null;
+      }
+
+      try {
+        return scormApi[methodName](...args);
+      } catch (_error) {
+        return null;
+      }
+    }
+
+    function initScormTracking() {
+      if (!scormApi) {
+        return;
+      }
+
+      scormCall("SetBookmark", "index.html");
+      scormCall("SetProgressMeasure", 0);
+      scormCall("SetObjectiveStatus", "", LESSON_STATUS.INCOMPLETE);
+      scormCall("CommitData");
+    }
+
+    function reportScormResult(scorePercent, isPassed, answeredCount) {
+      if (!scormApi) {
+        return;
+      }
+
+      const roundedScore = Math.round(scorePercent * 100) / 100;
+      scormCall("SetScore", roundedScore, 100, 0);
+      scormCall("SetProgressMeasure", 1);
+      scormCall("SetReachedEnd");
+
+      if (isPassed) {
+        scormCall("SetPassed");
+        scormCall("SetObjectiveStatus", "", LESSON_STATUS.PASSED);
+      } else {
+        scormCall("SetFailed");
+        scormCall("SetObjectiveStatus", "", LESSON_STATUS.FAILED);
+      }
+
+      const suspendPayload = JSON.stringify({
+        completed: true,
+        answeredCount,
+        scorePercent: roundedScore,
+        passed: isPassed,
+        completedAt: new Date().toISOString()
+      });
+
+      scormCall("SetBookmark", "completed");
+      scormCall("SetDataChunk", suspendPayload);
+      scormCall("CommitData");
+    }
+
+    function renderQuestions() {
+      quizData.forEach((item, index) => {
+        const fieldset = document.createElement("fieldset");
+        fieldset.className = "question";
+        fieldset.setAttribute("id", `q${index + 1}`);
+
+        const legend = document.createElement("legend");
+        legend.textContent = `Ερώτηση ${index + 1}`;
+        fieldset.appendChild(legend);
+
+        const questionBox = document.createElement("div");
+        questionBox.className = "question-textbox";
+        questionBox.textContent = item.question;
+        fieldset.appendChild(questionBox);
+
+        const optionsWrap = document.createElement("div");
+        optionsWrap.className = "question-options";
+
+        ["A", "B", "C", "D"].forEach((letter) => {
+          const label = document.createElement("label");
+          label.className = "option";
+
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = `question-${index}`;
+          input.value = letter;
+
+          const optionLetter = document.createElement("span");
+          optionLetter.className = "option-label";
+          optionLetter.textContent = letter;
+
+          const optionText = document.createElement("span");
+          optionText.className = "option-text";
+          optionText.textContent = item.options[letter];
+
+          label.appendChild(input);
+          label.appendChild(optionLetter);
+          label.appendChild(optionText);
+          optionsWrap.appendChild(label);
+        });
+
+        fieldset.appendChild(optionsWrap);
+        form.appendChild(fieldset);
+      });
+    }
+
+    function formatTime(totalSeconds) {
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    function getElapsedSeconds() {
+      return Math.floor((Date.now() - startTime) / 1000);
+    }
+
+    function updateSelectedState() {
+      const labels = form.querySelectorAll(".option");
+      labels.forEach((label) => {
+        label.classList.remove("selected");
+      });
+
+      const checkedInputs = form.querySelectorAll(".option input:checked");
+      checkedInputs.forEach((input) => {
+        if (input.parentElement) {
+          input.parentElement.classList.add("selected");
+        }
+      });
+    }
+
+    function updateProgress() {
+      const answeredCount = form.querySelectorAll("input[type='radio']:checked").length;
+      const percent = (answeredCount / quizData.length) * 100;
+      answeredCountEl.textContent = `Απαντημένες: ${answeredCount}/${quizData.length}`;
+      progressFill.style.width = `${percent}%`;
+    }
+
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add("show");
+      if (toastTimeoutId) {
+        clearTimeout(toastTimeoutId);
+      }
+      toastTimeoutId = setTimeout(() => {
+        toastEl.classList.remove("show");
+      }, 2600);
+    }
+
+    function updateSubmitState(remaining) {
+      const expired = remaining === 0;
+      if (expired) {
+        submitBtn.classList.remove("locked");
+        submitBtn.title = "Γίνεται αυτόματη υποβολή";
+        timerStatus.textContent = "Γίνεται αυτόματη υποβολή";
+        timerStatus.classList.add("ready");
+        timeLockMessage.style.display = "none";
+        timeReadyMessage.style.display = "block";
+        guardMessage.textContent = "";
+      } else {
+        submitBtn.classList.add("locked");
+        submitBtn.title = `Αυτόματη υποβολή σε ${formatTime(remaining)}`;
+        timerStatus.textContent = "Η υποβολή είναι προγραμματισμένη";
+        timerStatus.classList.remove("ready");
+        timeLockMessage.style.display = "block";
+        timeReadyMessage.style.display = "none";
+      }
+    }
+
+    function triggerAutoSubmit() {
+      if (quizCompleted) {
+        return;
+      }
+
+      guardMessage.textContent = "Ο χρόνος ολοκληρώθηκε. Γίνεται αυτόματη υποβολή.";
+      showToast("Ο χρόνος ολοκληρώθηκε. Γίνεται αυτόματη υποβολή.");
+      submitBtn.click();
+    }
+
+    function updateTimer() {
+      if (quizCompleted) {
+        return;
+      }
+
+      const elapsed = getElapsedSeconds();
+      const remaining = Math.max(QUIZ_DURATION_SECONDS - elapsed, 0);
+
+      timerEl.textContent = formatTime(remaining);
+      updateSubmitState(remaining);
+
+      if (remaining === 0) {
+        triggerAutoSubmit();
+      }
+    }
+
+    function lockQuizInputs() {
+      const inputs = form.querySelectorAll("input");
+      inputs.forEach((input) => {
+        input.disabled = true;
+      });
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (quizCompleted) {
+        return;
+      }
+
+      const elapsed = getElapsedSeconds();
+      if (elapsed < QUIZ_DURATION_SECONDS) {
+        const left = QUIZ_DURATION_SECONDS - elapsed;
+        const blockMessage = `Δεν μπορείς να υποβάλεις ακόμα. Απομένουν ${formatTime(left)}.`;
+        guardMessage.textContent = blockMessage;
+        showToast(blockMessage);
+        return;
+      }
+
+      quizCompleted = true;
+      if (timerIntervalId) {
+        clearInterval(timerIntervalId);
+      }
+      timerEl.textContent = "00:00";
+
+      let correctCount = 0;
+      let answeredCount = 0;
+
+      quizData.forEach((item, index) => {
+        const chosen = form.querySelector(`input[name="question-${index}"]:checked`);
+        if (chosen) {
+          answeredCount += 1;
+          if (chosen.value === item.correct) {
+            correctCount += 1;
+          }
+        }
+      });
+
+      const numericPercentage = (correctCount / quizData.length) * 100;
+      const percentage = numericPercentage.toFixed(1);
+      const passed = numericPercentage >= SCORM_PASSING_PERCENT;
+      resultBox.style.display = "block";
+      resultBox.innerHTML = `
+        <strong>Αποτέλεσμα:</strong> ${correctCount}/${quizData.length} σωστές απαντήσεις (${percentage}%).<br>
+        <strong>Απαντημένες:</strong> ${answeredCount}/${quizData.length}.<br>
+        <strong>Κατάσταση:</strong> ${passed ? "Επιτυχία" : "Αποτυχία"} (όριο επιτυχίας ${SCORM_PASSING_PERCENT}%).
+      `;
+
+      lockQuizInputs();
+      submitBtn.disabled = true;
+      submitBtn.classList.remove("locked");
+      timerStatus.textContent = "Το quiz ολοκληρώθηκε";
+      timerStatus.classList.add("ready");
+      guardMessage.textContent = "Το quiz υποβλήθηκε επιτυχώς.";
+      reportScormResult(numericPercentage, passed, answeredCount);
+    });
+
+    form.addEventListener("change", (event) => {
+      if (event.target && event.target.matches("input[type='radio']")) {
+        updateSelectedState();
+        updateProgress();
+      }
+    });
+
+    renderQuestions();
+    initScormTracking();
+    updateSelectedState();
+    updateProgress();
+    updateTimer();
+    timerIntervalId = setInterval(updateTimer, 1000);
+
+    window.addEventListener("beforeunload", () => {
+      scormCall("CommitData");
+    });
+  </script>
+</body>
+</html>
+

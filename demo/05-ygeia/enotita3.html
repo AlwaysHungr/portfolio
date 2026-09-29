@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 3: Απεικονιστικές Μέθοδοι — Τεχνητή Νοημοσύνη στην Υγεία</title>
+<meta name="description" content="Διαδραστική HTML5 παρουσίαση ηλεκτρονικής μάθησης για το μάθημα «Τεχνητή Νοημοσύνη στην Υγεία».">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230e7490'/%3E%3Cpath d='M16 24s-7-4.4-7-9.2C9 11.5 11 10 13.2 10c1.5 0 2.3.7 2.8 1.4.5-.7 1.3-1.4 2.8-1.4 2.2 0 4.2 1.5 4.2 4.8C23 19.6 16 24 16 24z' fill='%23fff'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<a class="skip-link" href="#stage">Μετάβαση στο περιεχόμενο</a>
+
+<header class="topbar" role="banner">
+  <button id="menuToggle" class="icon-btn" aria-label="Εμφάνιση/απόκρυψη μενού" aria-expanded="true" aria-controls="sidebar">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <div class="brand">
+    <span class="brand-logo" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <defs>
+          <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#0d9488"/>
+          </linearGradient>
+        </defs>
+        <circle cx="20" cy="20" r="19" fill="url(#lg1)"/>
+        <path d="M20 29s-8.5-5.3-8.5-11c0-3.4 2.4-5.4 5-5.4 1.8 0 3 .9 3.5 1.8.5-.9 1.7-1.8 3.5-1.8 2.6 0 5 2 5 5.4C28.5 23.7 20 29 20 29z" fill="#fff"/>
+        <g stroke="#0e7490" stroke-width="1.4" fill="none">
+          <path d="M14 19h3l1.5-3 2 6 1.5-3h4"/>
+        </g>
+        <g fill="#c4b5fd">
+          <circle cx="7" cy="10" r="1.6"/><circle cx="33" cy="10" r="1.6"/><circle cx="7" cy="30" r="1.6"/><circle cx="33" cy="30" r="1.6"/>
+        </g>
+      </svg>
+    </span>
+    <div class="brand-text">
+      <span class="brand-title">Τεχνητή Νοημοσύνη στην Υγεία</span>
+      <span class="brand-sub" id="brandModule">Διαδραστικό μάθημα</span>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="fontDec" class="icon-btn font-btn" aria-label="Μείωση μεγέθους γραμματοσειράς" title="Μικρότερα γράμματα"><span aria-hidden="true">A&minus;</span></button>
+    <button id="fontInc" class="icon-btn font-btn" aria-label="Αύξηση μεγέθους γραμματοσειράς" title="Μεγαλύτερα γράμματα"><span class="fb-big" aria-hidden="true">A+</span></button>
+    <button id="homeBtn" class="icon-btn" aria-label="Αρχική σελίδα" title="Αρχική σελίδα">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5M6 10.5V20h12v-9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </button>
+    <button id="fsBtn" class="icon-btn" aria-label="Πλήρης οθόνη" title="Πλήρης οθόνη">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav id="sidebar" class="sidebar" aria-label="Πλοήγηση ενότητας">
+    <div id="sidebarInner" class="sidebar-inner"><!-- δημιουργείται δυναμικά --></div>
+  </nav>
+  <div id="scrim" class="scrim" hidden></div>
+
+  <main id="stage" class="stage" role="main" tabindex="-1">
+    <div id="slideArea" class="slide-area" aria-live="polite"><!-- περιεχόμενο --></div>
+
+    <footer id="controls" class="controls" aria-label="Έλεγχος πλοήγησης διαφανειών" style="display:none">
+      <button id="prevBtn" class="nav-btn" aria-label="Προηγούμενη διαφάνεια">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <span class="nav-btn-label">Προηγούμενο</span>
+      </button>
+      <div class="progress-wrap">
+        <span id="slideCounter" class="slide-counter" aria-live="polite">–</span>
+        <div class="progress-track" role="progressbar" id="progressBar" aria-label="Πρόοδος ενότητας" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <button id="nextBtn" class="nav-btn nav-btn-primary" aria-label="Επόμενη διαφάνεια">
+        <span class="nav-btn-label">Επόμενο</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </button>
+    </footer>
+  </main>
+</div>
+
+<script src="data/modules.js"></script>
+<script src="data/content-e3-1.js"></script>
+<script src="data/content-e3-2.js"></script>
+<script>window.SINGLE_MODULE = 'e3';</script>
+<script src="js/app.js"></script>
+</body>
+</html>

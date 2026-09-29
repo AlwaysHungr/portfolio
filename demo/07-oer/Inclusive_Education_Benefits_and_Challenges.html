@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inclusive Education: Benefits and Challenges</title>
+<style>
+/* ===== base ===== */
+*{box-sizing:border-box}
+:root{
+  --ink:#16273A; --muted:#5B6B7B; --paper:#FFFFFF; --bg:#F1F5F9;
+  --brand:#1F5FA8; --brand2:#0E3E7A; --accent:#F0A63A; --ok:#2E8B57; --bad:#C63B3B; --line:#D9E2EC;
+  --radius:16px; --topH:56px;
+}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);
+  font:16px/1.55 "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+.app{height:100dvh;display:flex;flex-direction:column}
+/* ===== header ===== */
+.top{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 10px 14px -10px rgba(0,0,0,.15);z-index:5}
+.top .ttl{font-weight:800;font-size:17px;letter-spacing:.2px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .lbl{font-size:13px;color:var(--muted);white-space:nowrap}
+.prog{height:4px;background:var(--line);flex:0 0 auto}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));transition:width .4s}
+/* ===== screens ===== */
+.screens{flex:1;min-height:0;position:relative}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:auto;padding:18px 22px}
+.screen.on{display:flex;animation:fadein .35s}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wrap{width:100%;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0;gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:0 6px 18px -12px rgba(0,0,0,.18)}
+.card.pad{padding:22px 26px}
+h1{font-size:clamp(24px,3.4vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.3px}
+h2{font-size:clamp(19px,2.2vw,26px);margin:0 0 8px}
+h3{font-size:17px;margin:0 0 6px}
+p{margin:0 0 10px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:none;color:var(--brand);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#E8F0FA;color:var(--brand2);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
+/* ===== buttons ===== */
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:11px 18px;font-weight:800;
+  background:var(--brand);color:#fff;box-shadow:0 8px 18px -10px rgba(31,95,168,.8);transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px);background:var(--brand2)}
+.btn.ghost{background:transparent;color:var(--brand);box-shadow:none;border:2px solid var(--brand)}
+.btn.ghost:hover{background:#E8F0FA}
+.btn.sm{padding:8px 13px;font-size:14px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.btn[hidden]{display:none}
+/* ===== bottom nav ===== */
+.nav{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:var(--paper);border-top:1px solid var(--line)}
+.dots{display:flex;gap:8px;align-items:center}
+.dots button{width:11px;height:11px;border-radius:50%;border:2px solid var(--brand);background:transparent;padding:0}
+.dots button.on{background:var(--brand);transform:scale(1.25)}
+.dots button.done{background:#9DBCE3;border-color:#9DBCE3}
+/* ===== images: alt-tooltip + zoom ===== */
+.zi{position:relative;display:inline-block;max-width:100%;cursor:zoom-in;border-radius:12px;line-height:0}
+.zi img{border-radius:12px;width:100%;height:auto}
+.zi .mag{position:absolute;right:9px;top:9px;width:30px;height:30px;border-radius:50%;background:#0E2233;color:#fff;
+  display:grid;place-items:center;font-size:15px;opacity:.85;pointer-events:none;line-height:1}
+.zi::after{content:attr(data-alt);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%);
+  background:#0E2233;color:#fff;font-size:13px;line-height:1.35;padding:8px 11px;border-radius:9px;max-width:min(320px,78vw);
+  width:max-content;white-space:normal;text-align:center;display:none;z-index:31;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.zi::before{content:"";position:absolute;left:50%;bottom:calc(100% + 3px);transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:#0E2233;display:none;z-index:31;pointer-events:none}
+.zi:hover::after,.zi:focus-visible::after,.zi.on::after,.zi:hover::before,.zi:focus-visible::before,.zi.on::before{display:block;animation:tipin .18s}
+.zi.below::after{bottom:auto;top:calc(100% + 9px)}
+.zi.below::before{bottom:auto;top:calc(100% + 3px);border-top-color:transparent;border-bottom-color:#0E2233}
+.zi.inset::after{bottom:auto;top:14px;left:14px;transform:none;max-width:70%;text-align:left}
+.zi.inset::before{display:none!important}
+.zi:hover,.zi:focus-visible,.zi.on{z-index:30}
+@keyframes tipin{from{opacity:0;transform:translate(-50%,4px)}to{opacity:1}}
+.zi.inset:hover::after{animation:none}
+figure{margin:0}
+figcaption{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:6px}
+/* lightbox */
+.lbx{position:fixed;inset:0;background:rgba(6,16,28,.92);display:none;z-index:90;padding:16px;overflow:auto}
+.lbx.on{display:grid;place-items:center}
+.lbx .box{width:100%;max-width:1200px;min-width:0;text-align:center}
+.lbx img{width:auto;height:auto;max-width:100%;max-height:82vh;margin:0 auto;border-radius:8px}
+.lbx .cap{color:#DCE6F0;font-size:14px;margin-top:10px}
+.lbx .x{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:#0E2233;color:#fff;border:2px solid #fff;
+  font-size:24px;line-height:1;display:grid;place-items:center;z-index:91;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+/* ===== activities ===== */
+.q{display:flex;flex-direction:column;gap:12px}
+.q .stem{font-weight:700;font-size:17px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:12px;text-align:left;border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:12px 14px;transition:.15s}
+.opt:hover{border-color:var(--brand);background:#F5F9FE}
+.opt .k{flex:0 0 30px;height:30px;border-radius:50%;background:#E8F0FA;color:var(--brand2);display:grid;place-items:center;font-weight:800;font-size:14px}
+.opt.sel{border-color:var(--brand);background:#EAF2FC}
+.opt.good{border-color:var(--ok);background:#EAF7EF}
+.opt.good .k{background:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:#FBEDED}
+.opt.bad .k{background:var(--bad);color:#fff}
+.opt.dim{opacity:.5}
+.opts.locked .opt{cursor:default}
+.fb{border-radius:12px;padding:12px 14px;border:2px solid;font-size:15px}
+.fb.ok{border-color:var(--ok);background:#EAF7EF;color:#1B5E3A}
+.fb.no{border-color:var(--bad);background:#FBEDED;color:#8A2626}
+.fb.rev{border-color:var(--accent);background:#FFF6E5;color:#6B4A00}
+.fb[hidden]{display:none}
+.tries{font-size:13px;color:var(--muted)}
+.steps{display:flex;gap:6px;flex-wrap:wrap}
+.steps i{width:22px;height:8px;border-radius:4px;background:var(--line)}
+.steps i.on{background:var(--brand)} .steps i.ok{background:var(--ok)} .steps i.no{background:var(--bad)}
+/* results ring */
+.ring{width:150px;height:150px}
+.ring circle{fill:none;stroke-width:12}
+.ring .bg{stroke:var(--line)} .ring .v{stroke:var(--ok);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .8s}
+.ring text{font-weight:900;font-size:26px;fill:var(--ink);text-anchor:middle;dominant-baseline:middle}
+.band{border-left:8px solid var(--accent);border-radius:12px;padding:12px 16px;background:#FFF9EE}
+.band.mute{opacity:.45;border-left-color:var(--line);background:#F7F9FB}
+/* reveal cards */
+.flip{display:grid;cursor:pointer;border:0;padding:0;background:none;text-align:left;width:100%}
+.flip .f,.flip .b{grid-area:1/1;border-radius:14px;padding:16px;transition:opacity .35s,transform .35s;display:block}
+.flip .f{background:var(--brand);color:#fff;font-weight:800}
+.flip .b{background:var(--paper);border:2px solid var(--brand);opacity:0;visibility:hidden;transform:scale(.96)}
+.flip.on .f{opacity:0;visibility:hidden;transform:scale(.96)} .flip.on .b{opacity:1;visibility:visible;transform:none}
+/* misc */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.two>*{min-width:0;min-height:0}
+.grow{flex:1;min-height:0;overflow:auto}
+.center{text-align:center}
+.src{font-size:12.5px;color:var(--muted)}
+.srclist{columns:2;column-gap:22px;font-size:13px;color:var(--muted)}
+.srclist li{break-inside:avoid;margin-bottom:6px}
+@media (max-width:760px){
+  .screen{padding:12px 12px}
+  .two{grid-template-columns:minmax(0,1fr)}
+  .srclist{columns:1}
+  .top .ttl{font-size:15px}
+  h1{font-size:24px}
+}
+
+/* ===== lesson-specific ===== */
+:root{--teal:#0F8B8D;--teal2:#0A6466;--plum:#7B4B94;--sun:#F0A63A;--rose:#D9536F;--mint:#EAF7F3}
+.top .ttl{color:var(--brand2)}
+/* cover */
+.cvgrid{flex:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:26px;align-items:center;min-height:0}
+.cvgrid>*{min-width:0;min-height:0}
+.cvart{display:flex;justify-content:center;align-items:center;min-height:0}
+.cvart svg{width:100%;max-width:420px;height:auto;max-height:52vh}
+.subt{color:var(--muted);font-size:15px;margin:0 0 14px}
+.fig{animation:rise .8s both}
+.fig:nth-child(2){animation-delay:.08s}.fig:nth-child(3){animation-delay:.16s}.fig:nth-child(4){animation-delay:.24s}
+.fig:nth-child(5){animation-delay:.32s}.fig:nth-child(6){animation-delay:.4s}.fig:nth-child(7){animation-delay:.48s}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* section colour code */
+.sec{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.1em;padding:4px 10px;border-radius:999px;margin-bottom:8px}
+.sec.a{background:#E6F4F4;color:var(--teal2)}.sec.b{background:#F1E9F6;color:var(--plum)}.sec.c{background:#FFF3E0;color:#8A5A00}.sec.d{background:#E8F0FA;color:var(--brand2)}
+.sec.e{background:#FBE9EE;color:#8F2A44}
+/* article link */
+.linkcard{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#0F8B8D,#1F5FA8);color:#fff;border-radius:var(--radius);padding:22px 26px}
+.linkcard .lt{flex:1 1 260px;min-width:0}
+.linkcard h2{color:#fff;margin:0 0 4px}
+.linkcard small{opacity:.85;word-break:break-all}
+.lnk{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--brand2);text-decoration:none;font-weight:800;border-radius:12px;padding:12px 18px;box-shadow:0 8px 18px -10px rgba(0,0,0,.5);transition:transform .15s}
+.lnk:hover{transform:translateY(-2px)}
+.lnk .arrow{font-size:18px}
+.readok{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#C8F0E9;margin-top:8px}
+.readok[hidden]{display:none}
+.task{font-size:17px;line-height:1.6}
+.task b{color:var(--brand2)}
+/* article skeleton (read–reveal) */
+.skel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.skel>*{min-width:0}
+.paper{background:#FCFBF7;border:1px solid #E8E2D2;border-radius:14px;padding:18px 20px;box-shadow:0 10px 24px -18px rgba(0,0,0,.35);position:relative}
+.paper::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;border-radius:14px 0 0 14px;background:var(--plum)}
+.blk{display:block;width:100%;text-align:left;border:2px dashed #CFC5DD;background:#fff;border-radius:12px;padding:10px 14px;margin-bottom:10px;transition:.2s;cursor:pointer}
+.blk:last-child{margin-bottom:0}
+.blk .ln{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--plum);font-size:14px}
+.blk .ln .no{width:24px;height:24px;border-radius:50%;background:#F1E9F6;display:grid;place-items:center;font-size:12px;flex:0 0 24px}
+.blk .bars{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.blk .bars i{display:block;height:7px;border-radius:4px;background:#ECE6F2}
+.blk .bars i:nth-child(2){width:86%}.blk .bars i:nth-child(3){width:62%}
+.blk.t .bars i{height:12px;width:72%;background:#E3D8EC}
+.blk .txt{display:none;margin-top:8px;font-size:15.5px;line-height:1.5;color:var(--ink)}
+.blk.open{border-style:solid;border-color:var(--plum);background:#FBF8FD}
+.blk.open .bars{display:none}.blk.open .txt{display:block;animation:fadein .3s}
+.blk.open .ln .no{background:var(--plum);color:#fff}
+.lead{font-size:17px;font-weight:700;margin-bottom:10px}
+.cnt{font-size:13px;color:var(--muted);margin-top:6px}
+.callout{border-left:8px solid var(--sun);background:#FFF9EE;border-radius:12px;padding:12px 16px;font-size:15.5px}
+.callout[hidden]{display:none}
+/* vocabulary */
+.vocab{display:flex;flex-wrap:wrap;gap:10px}
+.vc{border:2px solid #CFE3F5;background:#fff;color:var(--brand2);border-radius:999px;padding:9px 15px;font-weight:700;font-size:15px;transition:.15s;display:inline-flex;align-items:center;gap:7px}
+.vc:hover{border-color:var(--brand);transform:translateY(-1px)}
+.vc.pick{background:var(--brand);color:#fff;border-color:var(--brand)}
+.vc .st{font-size:13px;opacity:0}
+.vc.pick .st{opacity:1}
+/* writing */
+.wgrid{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+.wgrid>*{min-width:0;min-height:0}
+.editor{display:flex;flex-direction:column;min-height:0}
+.editor textarea{flex:1;min-height:220px;width:100%;resize:none;border:2px solid var(--line);border-radius:12px;padding:14px;font:16px/1.6 Georgia,"Times New Roman",serif;color:var(--ink);background:#FFFDF8;outline:none}
+.editor textarea:focus{border-color:var(--brand)}
+.editor textarea[readonly]{background:#F5F7FA}
+.meter{margin-top:10px}
+.meter .bar{height:10px;border-radius:5px;background:var(--line);position:relative;overflow:hidden}
+.meter .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--bad);transition:width .3s,background .3s}
+.meter .bar i.mid{background:var(--ok)}.meter .bar i.over{background:var(--sun)}
+.meter .bar em{position:absolute;top:0;bottom:0;width:2px;background:#fff;left:66.6%}
+.meter .row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:4px}
+.meter .row b{color:var(--ink);font-size:15px}
+.side{display:flex;flex-direction:column;gap:12px;overflow:auto;min-height:0}
+.side .card{flex:0 0 auto}
+.tracker{display:flex;flex-wrap:wrap;gap:7px}
+.tk{font-size:13px;border-radius:999px;padding:5px 11px;border:1.5px solid var(--line);color:var(--muted);background:#fff;transition:.2s;display:inline-flex;align-items:center;gap:5px}
+.tk.hit{border-color:var(--ok);background:#EAF7EF;color:#1B5E3A;font-weight:700}
+.tk .ck{display:none}.tk.hit .ck{display:inline}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.status{font-size:14px;font-weight:700}
+.status.no{color:var(--bad)}.status.ok{color:var(--ok)}.status.over{color:#8A5A00}
+.done{border:2px solid var(--ok);background:#EAF7EF;border-radius:12px;padding:12px 14px;color:#1B5E3A;font-size:15px}
+.done[hidden]{display:none}
+.copyok{font-size:13px;color:var(--ok);font-weight:700}
+.copyok[hidden]{display:none}
+/* rubric */
+.rgrid{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:16px}
+.rgrid>*{min-width:0;min-height:0}
+.rlist{display:flex;flex-direction:column;gap:12px;overflow:auto;min-height:0;padding-right:4px}
+.crit{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;flex:0 0 auto}
+.crit h3{display:flex;align-items:center;gap:10px;color:var(--brand2)}
+.crit h3 .pts{margin-left:auto;font-size:13px;color:var(--muted);font-weight:700}
+.lv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.lv>*{min-width:0}
+.lvb{text-align:left;border:2px solid var(--line);background:#fff;border-radius:11px;padding:10px 12px;font-size:13.5px;line-height:1.4;transition:.15s;display:flex;flex-direction:column;gap:6px}
+.lvb:hover{border-color:var(--brand)}
+.lvb .hd{font-weight:800;font-size:13px;color:var(--brand2);display:flex;align-items:center;gap:6px}
+.lvb .hd i{width:22px;height:22px;border-radius:50%;background:#E8F0FA;display:grid;place-items:center;font-style:normal;font-size:12px;flex:0 0 22px}
+.lvb.on{border-color:var(--ok);background:#EAF7EF}
+.lvb.on .hd i{background:var(--ok);color:#fff}
+.lvb.on .hd{color:#1B5E3A}
+.rside{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;align-self:start;position:sticky;top:0}
+.rside .ring{width:150px;height:150px}
+.rside .lab{font-size:13px;color:var(--muted)}
+/* keywords */
+.kwgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.kwgrid>*{min-width:0}
+.srcbox a{color:var(--brand);word-break:break-all}
+.chip.gr{background:#E6F4F4;color:var(--teal2)}
+@media (max-width:860px){
+  .cvgrid,.skel,.wgrid,.rgrid,.kwgrid{grid-template-columns:minmax(0,1fr)}
+  .cvart svg{max-height:26vh}
+  .lv{grid-template-columns:minmax(0,1fr)}
+  .rside{position:static;align-self:auto}
+  .rgrid{display:flex;flex-direction:column;overflow:auto}
+  .rlist{overflow:visible;flex:0 0 auto}
+  .wgrid{display:flex;flex-direction:column;overflow:auto}
+  .editor{flex:0 0 auto}
+  .editor textarea{min-height:260px}
+  .side{overflow:visible;flex:0 0 auto}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="ttl" lang="en">Inclusive Education: Benefits and Challenges</div>
+    <div class="lbl" id="lbl">Εξώφυλλο</div>
+  </header>
+  <div class="prog"><i id="prog"></i></div>
+
+  <main class="screens" id="screens">
+
+
+    <!-- 1. ΕΞΩΦΥΛΛΟ -->
+    <section class="screen on" data-name="Εξώφυλλο">
+      <div class="wrap">
+        <div class="card pad cvgrid" style="flex:1">
+          <div>
+            <div class="eyebrow">ΔΡΑΣΤΗΡΙΟΤΗΤΑ ΑΝΟΙΧΤΟΥ ΤΥΠΟΥ</div>
+            <h1 lang="en">Inclusive Education: Benefits and Challenges</h1>
+            <p class="chips"><span class="chip">κοινωνία</span><span class="chip">εκπαίδευση</span><span class="chip">έκθεση</span><span class="chip gr" lang="en">social issues</span><span class="chip gr" lang="en">education</span><span class="chip gr" lang="en">essay</span></p>
+            <p style="margin-top:20px"><button class="btn" onclick="go(1)">Ξεκίνα →</button></p>
+          </div>
+          <div class="cvart"><svg viewBox="0 0 420 340" role="img" aria-label="Inclusive Education: Benefits and Challenges" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gbk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1F5FA8"/><stop offset="1" stop-color="#0F8B8D"/></linearGradient>
+    <linearGradient id="gpg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EAF2FC"/></linearGradient>
+  </defs>
+  <circle cx="210" cy="170" r="150" fill="#E8F0FA"/>
+  <circle cx="210" cy="170" r="118" fill="none" stroke="#CFE3F5" stroke-width="2" stroke-dasharray="6 8"/>
+  <!-- open book -->
+  <g transform="translate(210 186)">
+    <path d="M-78 -34 Q-40 -46 0 -30 Q40 -46 78 -34 L78 42 Q40 30 0 46 Q-40 30 -78 42 Z" fill="url(#gbk)"/>
+    <path d="M-68 -26 Q-34 -36 0 -22 L0 34 Q-34 20 -68 30 Z" fill="url(#gpg)"/>
+    <path d="M68 -26 Q34 -36 0 -22 L0 34 Q34 20 68 30 Z" fill="url(#gpg)"/>
+    <g stroke="#9DBCE3" stroke-width="3" stroke-linecap="round">
+      <line x1="-54" y1="-10" x2="-14" y2="-16"/><line x1="-54" y1="2" x2="-14" y2="-4"/><line x1="-54" y1="14" x2="-24" y2="9"/>
+      <line x1="14" y1="-16" x2="54" y2="-10"/><line x1="14" y1="-4" x2="54" y2="2"/><line x1="24" y1="9" x2="54" y2="14"/>
+    </g>
+  </g>
+  <!-- figures around -->
+  <g class="fig"><circle cx="210" cy="48" r="16" fill="#F0A63A"/><path d="M186 100 Q210 66 234 100 Z" fill="#F0A63A"/></g>
+  <g class="fig"><circle cx="318" cy="90" r="15" fill="#D9536F"/><path d="M296 138 Q318 108 340 138 Z" fill="#D9536F"/></g>
+  <g class="fig"><circle cx="102" cy="90" r="15" fill="#7B4B94"/><path d="M80 138 Q102 108 124 138 Z" fill="#7B4B94"/></g>
+  <g class="fig"><circle cx="336" cy="220" r="14" fill="#0F8B8D"/><path d="M316 262 Q336 236 356 262 Z" fill="#0F8B8D"/><circle cx="342" cy="270" r="13" fill="none" stroke="#0F8B8D" stroke-width="4"/><circle cx="322" cy="272" r="6" fill="none" stroke="#0F8B8D" stroke-width="3"/></g>
+  <g class="fig"><circle cx="84" cy="220" r="14" fill="#2E8B57"/><path d="M64 262 Q84 236 104 262 Z" fill="#2E8B57"/></g>
+  <g class="fig"><circle cx="160" cy="292" r="13" fill="#1F5FA8"/><path d="M142 326 Q160 306 178 326 Z" fill="#1F5FA8"/></g>
+  <g class="fig"><circle cx="262" cy="292" r="13" fill="#C63B3B"/><path d="M244 326 Q262 306 280 326 Z" fill="#C63B3B"/></g>
+</svg></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ΤΟ ΑΡΘΡΟ -->
+    <section class="screen" data-name="Inclusive Education">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="sec a">ΒΗΜΑ 1 · ΑΝΑΓΝΩΣΗ</div>
+          <div class="linkcard">
+            <div class="lt">
+              <h2 lang="en">Inclusive Education</h2>
+              <small lang="en">unicef.org/education/inclusive-education</small>
+              <div class="readok" id="readok" hidden>✓ Άνοιξες το άρθρο</div>
+            </div>
+            <a class="lnk" id="artlink" href="https://www.unicef.org/education/inclusive-education" target="_blank" rel="noopener"><span lang="en">Inclusive Education</span><span class="arrow">↗</span></a>
+          </div>
+          <p class="task" lang="en" style="margin-top:18px"><b>Read the article to find out more about the benefits and the challenges of inclusive education.</b> Then, come back here and write an article of at least 200 words, expressing your opinion on the topic at hand. Use the text as inspiration but don’t forget to express your own opinion.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ΔΟΜΗ -->
+    <section class="screen" data-name="Δομή του άρθρου">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="sec b">ΒΗΜΑ 2 · ΔΟΜΗ</div>
+          <div class="skel">
+            <div>
+              <p class="lead" lang="en">Your text should include:</p>
+              <p class="cnt" id="blkcnt">Άνοιξες 0/4</p>
+              <div class="callout" id="formal" lang="en" hidden>Remember to keep the style formal since you’re writing an article! You can do that by using formal vocabulary and by avoiding short forms and informal phrases!</div>
+            </div>
+            <div class="paper" id="paper">
+              <button class="blk t" type="button"><span class="ln"><span class="no">1</span>title</span><span class="bars"><i></i></span><span class="txt" lang="en">an appropriate and catchy title (since it’s an article!)</span></button>
+              <button class="blk" type="button"><span class="ln"><span class="no">2</span>introduction</span><span class="bars"><i></i><i></i></span><span class="txt" lang="en">an <i>introduction</i> of one or two sentences with general ideas on the topic,</span></button>
+              <button class="blk" type="button"><span class="ln"><span class="no">3</span>advantages · disadvantages</span><span class="bars"><i></i><i></i><i></i></span><span class="txt" lang="en">two paragraphs with the <i>advantages</i> and <i>disadvantages</i> of inclusive education (supported with convincing examples!),</span></button>
+              <button class="blk" type="button"><span class="ln"><span class="no">4</span>conclusion</span><span class="bars"><i></i><i></i></span><span class="txt" lang="en">a <i>conclusion</i> of one or two sentences that sums up your arguments and restates your opinion on the topic.</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ΛΕΞΙΛΟΓΙΟ -->
+    <section class="screen" data-name="Λεξιλόγιο">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="sec c">ΒΗΜΑ 3 · ΛΕΞΙΛΟΓΙΟ</div>
+          <p class="lead" lang="en">Here is some useful vocabulary for you to use:</p>
+          <div class="vocab" id="vocab" lang="en"><button class="vc" type="button" data-v="inclusive learning environment"><span class="st">★</span>inclusive learning environment</button><button class="vc" type="button" data-v="equal access to education"><span class="st">★</span>equal access to education</button><button class="vc" type="button" data-v="diverse learning needs"><span class="st">★</span>diverse learning needs</button><button class="vc" type="button" data-v="social cohesion"><span class="st">★</span>social cohesion</button><button class="vc" type="button" data-v="equity and inclusion"><span class="st">★</span>equity and inclusion</button><button class="vc" type="button" data-v="differentiated instruction"><span class="st">★</span>differentiated instruction</button><button class="vc" type="button" data-v="empathy and respect"><span class="st">★</span>empathy and respect</button><button class="vc" type="button" data-v="remove barriers"><span class="st">★</span>remove barriers</button><button class="vc" type="button" data-v="enhance academic achievement"><span class="st">★</span>enhance academic achievement</button><button class="vc" type="button" data-v="additional demands on teachers"><span class="st">★</span>additional demands on teachers</button><button class="vc" type="button" data-v="substantial funding"><span class="st">★</span>substantial funding</button><button class="vc" type="button" data-v="individual and collective needs"><span class="st">★</span>individual and collective needs</button><button class="vc" type="button" data-v="long-term societal benefits"><span class="st">★</span>long-term societal benefits</button></div>
+          <p class="cnt" id="vcnt">Επέλεξες 0/13</p>
+          <p style="margin-top:14px"><button class="btn" onclick="go(4)">Συγγραφή →</button></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ΣΥΓΓΡΑΦΗ -->
+    <section class="screen" data-name="Συγγραφή">
+      <div class="wrap">
+        <div class="wgrid">
+          <div class="card pad editor">
+            <div class="sec d">ΒΗΜΑ 4 · ΣΥΓΓΡΑΦΗ</div>
+            <label for="essay" class="lead" lang="en">Inclusive Education: Benefits and Challenges</label>
+            <textarea id="essay" spellcheck="true" lang="en" aria-label="Κείμενο"></textarea>
+            <div class="meter">
+              <div class="bar"><i id="mbar"></i><em></em></div>
+              <div class="row"><span><b id="wc">0</b> λέξεις</span><span>200–300 λέξεις</span></div>
+            </div>
+          </div>
+          <div class="side">
+            <div class="card">
+              <h3>Λεξιλόγιο που χρησιμοποίησες <span id="tkn" style="color:var(--muted);font-weight:700;font-size:14px">0/13</span></h3>
+              <div class="tracker" id="tracker" lang="en"><span class="tk" data-v="inclusive learning environment"><span class="ck">✓</span>inclusive learning environment</span><span class="tk" data-v="equal access to education"><span class="ck">✓</span>equal access to education</span><span class="tk" data-v="diverse learning needs"><span class="ck">✓</span>diverse learning needs</span><span class="tk" data-v="social cohesion"><span class="ck">✓</span>social cohesion</span><span class="tk" data-v="equity and inclusion"><span class="ck">✓</span>equity and inclusion</span><span class="tk" data-v="differentiated instruction"><span class="ck">✓</span>differentiated instruction</span><span class="tk" data-v="empathy and respect"><span class="ck">✓</span>empathy and respect</span><span class="tk" data-v="remove barriers"><span class="ck">✓</span>remove barriers</span><span class="tk" data-v="enhance academic achievement"><span class="ck">✓</span>enhance academic achievement</span><span class="tk" data-v="additional demands on teachers"><span class="ck">✓</span>additional demands on teachers</span><span class="tk" data-v="substantial funding"><span class="ck">✓</span>substantial funding</span><span class="tk" data-v="individual and collective needs"><span class="ck">✓</span>individual and collective needs</span><span class="tk" data-v="long-term societal benefits"><span class="ck">✓</span>long-term societal benefits</span></div>
+            </div>
+            <div class="card">
+              <div class="actions">
+                <button class="btn" id="submit" disabled>Υποβολή</button>
+                <button class="btn ghost sm" id="copy" type="button">Αντιγραφή</button>
+                <span class="copyok" id="copyok" hidden>✓ Αντιγράφηκε</span>
+              </div>
+              <p class="status no" id="status" style="margin:10px 0 0">Χρειάζονται ακόμη 200 λέξεις</p>
+              <div class="done" id="done" hidden style="margin-top:12px">
+                <b>✓ Το κείμενό σου υποβλήθηκε.</b><br>Δραστηριότητα ανοιχτού τύπου, οι μαθητές/τριες λαμβάνουν ανατροφοδότηση από τον/την εκπαιδευτικό.
+                <div class="actions" style="margin-top:10px"><button class="btn sm" onclick="go(5)">Ρουμπρίκα αξιολόγησης →</button><button class="btn ghost sm" id="edit" type="button">Επεξεργασία</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ΡΟΥΜΠΡΙΚΑ -->
+    <section class="screen" data-name="Ρουμπρίκα αξιολόγησης">
+      <div class="wrap">
+        <div class="rgrid">
+          <div class="rlist" id="rlist">
+            <div class="card" style="flex:0 0 auto">
+              <div class="sec e">ΡΟΥΜΠΡΙΚΑ · ΑΥΤΟΑΞΙΟΛΟΓΗΣΗ</div>
+              <p style="margin:0" lang="en"><b>Criterion</b> · Excellent (3) · Good (2) · Developing (1) · Limited (0)</p>
+            </div>
+            <div class="crit"><h3><span lang="en">Content & Task Achievement</span><span class="pts" data-pts="0">—</span></h3><div class="lv"><button class="lvb" type="button" data-c="0" data-p="3"><span class="hd"><i>3</i>Excellent (3)</span><span lang="en">Fully addresses the task with well-developed, relevant ideas and a clear purpose.</span></button><button class="lvb" type="button" data-c="0" data-p="2"><span class="hd"><i>2</i>Good (2)</span><span lang="en">Addresses the task with relevant ideas, though some points could be developed further.</span></button><button class="lvb" type="button" data-c="0" data-p="1"><span class="hd"><i>1</i>Developing (1)</span><span lang="en">Partially addresses the task; ideas are repetitive, underdeveloped, or occasionally irrelevant.</span></button><button class="lvb" type="button" data-c="0" data-p="0"><span class="hd"><i>0</i>Limited (0)</span><span lang="en">Does not adequately address the task or provides very limited relevant content.</span></button></div></div><div class="crit"><h3><span lang="en">Organisation & Cohesion</span><span class="pts" data-pts="1">—</span></h3><div class="lv"><button class="lvb" type="button" data-c="1" data-p="3"><span class="hd"><i>3</i>Excellent (3)</span><span lang="en">Information is logically organised into clear paragraphs with effective sequencing and a wide range of cohesive devices used naturally.</span></button><button class="lvb" type="button" data-c="1" data-p="2"><span class="hd"><i>2</i>Good (2)</span><span lang="en">Generally well organised with appropriate paragraphing and linking devices.</span></button><button class="lvb" type="button" data-c="1" data-p="1"><span class="hd"><i>1</i>Developing (1)</span><span lang="en">Organisation is inconsistent; linking devices are limited or sometimes inaccurate.</span></button><button class="lvb" type="button" data-c="1" data-p="0"><span class="hd"><i>0</i>Limited (0)</span><span lang="en">Lacks clear organisation; ideas are disconnected and difficult to follow.</span></button></div></div><div class="crit"><h3><span lang="en">Language Use</span><span class="pts" data-pts="2">—</span></h3><div class="lv"><button class="lvb" type="button" data-c="2" data-p="3"><span class="hd"><i>3</i>Excellent (3)</span><span lang="en">Demonstrates a wide range of sophisticated vocabulary and complex grammatical structures with a high degree of accuracy. Errors are rare and do not affect understanding.</span></button><button class="lvb" type="button" data-c="2" data-p="2"><span class="hd"><i>2</i>Good (2)</span><span lang="en">Uses a good range of vocabulary and grammatical structures with occasional errors that do not interfere with meaning.</span></button><button class="lvb" type="button" data-c="2" data-p="1"><span class="hd"><i>1</i>Developing (1)</span><span lang="en">Uses adequate but repetitive vocabulary and attempts some complex structures, though frequent errors reduce clarity.</span></button><button class="lvb" type="button" data-c="2" data-p="0"><span class="hd"><i>0</i>Limited (0)</span><span lang="en">Limited vocabulary and frequent grammatical errors significantly affect clarity and communication.</span></button></div></div><div class="crit"><h3><span lang="en">Style & Register</span><span class="pts" data-pts="3">—</span></h3><div class="lv"><button class="lvb" type="button" data-c="3" data-p="3"><span class="hd"><i>3</i>Excellent (3)</span><span lang="en">Consistently maintains an engaging, appropriate style and register for an article, effectively addressing the intended audience.</span></button><button class="lvb" type="button" data-c="3" data-p="2"><span class="hd"><i>2</i>Good (2)</span><span lang="en">Style and register are generally appropriate, with only minor inconsistencies.</span></button><button class="lvb" type="button" data-c="3" data-p="1"><span class="hd"><i>1</i>Developing (1)</span><span lang="en">Style or register is occasionally inappropriate or inconsistent for the genre</span></button><button class="lvb" type="button" data-c="3" data-p="0"><span class="hd"><i>0</i>Limited (0)</span><span lang="en">Style and register are inappropriate for the task and audience.</span></button></div></div>
+          </div>
+          <div class="card rside">
+            <svg class="ring" id="rring" viewBox="0 0 150 150"><circle class="bg" cx="75" cy="75" r="60"/><circle class="v" cx="75" cy="75" r="60" style="stroke-dasharray:0 377;opacity:0"/><text x="75" y="75">0/12</text></svg>
+            <div class="lab">Αυτοαξιολόγηση</div>
+            <button class="btn ghost sm" id="rreset" type="button">Επανάληψη</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ΛΕΞΕΙΣ-ΚΛΕΙΔΙΑ & ΠΗΓΕΣ -->
+    <section class="screen" data-name="Λέξεις-κλειδιά & Πηγές">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="kwgrid">
+            <div>
+              <h2>Λέξεις-κλειδιά</h2>
+              <p class="chips"><span class="chip">κοινωνία</span><span class="chip">εκπαίδευση</span><span class="chip">έκθεση</span><span class="chip gr" lang="en">social issues</span><span class="chip gr" lang="en">education</span><span class="chip gr" lang="en">essay</span></p>
+            </div>
+            <div class="srcbox">
+              <h2>Πηγές</h2>
+              <ul style="padding-left:18px;margin:0;font-size:14px">
+                <li><span lang="en">Inclusive Education</span> — Unicef: <a href="https://www.unicef.org/education/inclusive-education" target="_blank" rel="noopener">https://www.unicef.org/education/inclusive-education</a></li>
+              </ul>
+            </div>
+          </div>
+          <p style="margin-top:22px"><button class="btn ghost" onclick="go(0)">↺ Από την αρχή</button></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="btn ghost sm" id="prev" onclick="go(cur-1)">‹ Πίσω</button>
+    <div class="dots" id="dots"></div>
+    <button class="btn sm" id="next" onclick="go(cur+1)">Μπροστά ›</button>
+  </nav>
+</div>
+
+<!-- lightbox -->
+<div class="lbx" id="lbx" aria-modal="true" role="dialog">
+  <button class="x" id="lbxX" aria-label="Κλείσιμο">✕</button>
+  <div class="box"><img id="lbxImg" alt=""><div class="cap" id="lbxCap"></div></div>
+</div>
+
+<script>
+/* ===== navigation ===== */
+var screens=[].slice.call(document.querySelectorAll('.screen')),cur=0;
+var dots=document.getElementById('dots');
+screens.forEach(function(s,i){var b=document.createElement('button');b.title=s.dataset.name||('Οθόνη '+(i+1));b.setAttribute('aria-label',b.title);b.onclick=function(){go(i)};dots.appendChild(b)});
+function go(n){
+  if(n<0||n>=screens.length)return;
+  screens[cur].classList.remove('on');cur=n;screens[cur].classList.add('on');screens[cur].scrollTop=0;
+  [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===cur);d.classList.toggle('done',i<cur)});
+  document.getElementById('lbl').textContent=screens[cur].dataset.name||'';
+  document.getElementById('prog').style.width=((cur+1)/screens.length*100)+'%';
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===screens.length-1;
+  document.querySelectorAll('.zi.on').forEach(function(z){z.classList.remove('on')});
+  if(window.onScreen)onScreen(cur);
+}
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('lbx').classList.contains('on')){if(e.key==='Escape')closeLbx();return}
+  var t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
+  if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);
+});
+go(0);
+
+/* ===== images: tooltip side + lightbox ===== */
+function side(z){var r=z.getBoundingClientRect();z.classList.toggle('below',r.top<130&&!z.classList.contains('inset'))}
+var lbx=document.getElementById('lbx'),lbxImg=document.getElementById('lbxImg'),lbxCap=document.getElementById('lbxCap');
+function openLbx(z){var im=z.querySelector('img');lbxImg.src=im.src;lbxImg.alt=im.alt;lbxCap.textContent=z.dataset.alt||im.alt||'';
+  document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});lbx.classList.add('on')}
+function closeLbx(){lbx.classList.remove('on');lbxImg.src=''}
+document.getElementById('lbxX').onclick=closeLbx;
+lbx.addEventListener('click',function(e){if(e.target===lbx||e.target.classList.contains('box'))closeLbx()});
+document.addEventListener('click',function(e){var z=e.target.closest('.zi');if(!z)return;if(e.target.closest('.hs'))return;openLbx(z)});
+document.addEventListener('mouseover',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('focusin',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('zi'))openLbx(e.target)});
+/* touch: first tap shows alt, second opens */
+document.addEventListener('touchstart',function(e){var z=e.target.closest('.zi');if(!z)return;
+  if(!z.classList.contains('on')){e.preventDefault();document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});z.classList.add('on');side(z)}},{passive:false});
+
+/* ===== helpers ===== */
+function ring(el,n,total){var c=2*Math.PI*60;var v=el.querySelector('.v');var pc=total?n/total:0;v.style.strokeDasharray=(c*pc)+' '+c;v.style.opacity=pc?1:0;el.querySelector('text').textContent=n+'/'+total}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ===== lesson logic ===== */
+(function(){
+  /* article link */
+  var al=document.getElementById('artlink');
+  al.addEventListener('click',function(){document.getElementById('readok').hidden=false});
+
+  /* article skeleton */
+  var blks=[].slice.call(document.querySelectorAll('#paper .blk'));
+  function upBlk(){var n=blks.filter(function(b){return b.classList.contains('open')}).length;
+    document.getElementById('blkcnt').textContent='Άνοιξες '+n+'/'+blks.length;
+    document.getElementById('formal').hidden=n<blks.length}
+  blks.forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');upBlk()})});
+
+  /* vocabulary picks */
+  var vcs=[].slice.call(document.querySelectorAll('#vocab .vc'));
+  vcs.forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('pick');
+    document.getElementById('vcnt').textContent='Επέλεξες '+vcs.filter(function(x){return x.classList.contains('pick')}).length+'/'+vcs.length})});
+
+  /* writing */
+  var MIN=200,MAX=300;
+  var ta=document.getElementById('essay'),wc=document.getElementById('wc'),bar=document.getElementById('mbar'),
+      st=document.getElementById('status'),sub=document.getElementById('submit'),done=document.getElementById('done'),
+      tks=[].slice.call(document.querySelectorAll('#tracker .tk')),tkn=document.getElementById('tkn');
+  function words(s){return s.split(/\s+/).filter(function(w){return /[\p{L}\p{N}]/u.test(w)}).length}
+  function norm(s){return s.toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g,' ')}
+  var submitted=false;
+  function update(){
+    var n=words(ta.value);wc.textContent=n;
+    var pc=Math.min(n,MAX)/MAX*100;bar.style.width=pc+'%';
+    bar.className=n>MAX?'over':(n>=MIN?'mid':'');
+    if(n<MIN){st.className='status no';st.textContent='Χρειάζονται ακόμη '+(MIN-n)+' λέξεις'}
+    else if(n>MAX){st.className='status over';st.textContent='Ξεπέρασες το μέγιστο κατά '+(n-MAX)+' λέξεις'}
+    else{st.className='status ok';st.textContent='Εντός ορίων (200–300 λέξεις)'}
+    sub.disabled=submitted||n<MIN||n>MAX;
+    var t=norm(ta.value),h=0;
+    tks.forEach(function(k){var hit=t.indexOf(norm(k.dataset.v))>-1;k.classList.toggle('hit',hit);if(hit)h++});
+    tkn.textContent=h+'/'+tks.length;
+    try{localStorage.setItem('ie_draft',ta.value)}catch(e){}
+  }
+  ta.addEventListener('input',update);
+  try{var d=localStorage.getItem('ie_draft');if(d)ta.value=d}catch(e){}
+  sub.addEventListener('click',function(){submitted=true;ta.readOnly=true;done.hidden=false;sub.hidden=true;st.hidden=true;window.essaySubmitted=true});
+  document.getElementById('edit').addEventListener('click',function(){submitted=false;ta.readOnly=false;done.hidden=true;sub.hidden=false;st.hidden=false;window.essaySubmitted=false;update();ta.focus({preventScroll:true})});
+  document.getElementById('copy').addEventListener('click',function(){
+    var ok=document.getElementById('copyok');
+    function show(){ok.hidden=false;setTimeout(function(){ok.hidden=true},1800)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(show,function(){ta.select();try{document.execCommand('copy')}catch(e){}show()})}
+    else{ta.select();try{document.execCommand('copy')}catch(e){}show()}
+  });
+  update();
+
+  /* rubric self-assessment */
+  var lvbs=[].slice.call(document.querySelectorAll('.lvb')),rring=document.getElementById('rring');
+  var pick={};
+  function upR(){var tot=0,n=0;Object.keys(pick).forEach(function(c){tot+=pick[c];n++});
+    ring(rring,tot,12);
+    document.querySelectorAll('.pts').forEach(function(p){var c=p.dataset.pts;p.textContent=(c in pick)?pick[c]+'/3':'—'});
+    window.rubricScore=tot;window.rubricPicked=n}
+  lvbs.forEach(function(b){b.addEventListener('click',function(){
+    var c=b.dataset.c;lvbs.forEach(function(x){if(x.dataset.c===c)x.classList.remove('on')});b.classList.add('on');pick[c]=+b.dataset.p;upR()})});
+  document.getElementById('rreset').addEventListener('click',function(){pick={};lvbs.forEach(function(x){x.classList.remove('on')});upR()});
+  upR();
+})();
+</script>
+<script>var ASSETS={};document.querySelectorAll("img[data-key]").forEach(function(i){i.src=ASSETS[i.dataset.key]});</script>
+</body>
+</html>

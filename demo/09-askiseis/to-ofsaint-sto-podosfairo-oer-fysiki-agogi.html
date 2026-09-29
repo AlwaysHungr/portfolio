@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Το Οφσάιντ στο Ποδόσφαιρο | OER Φυσική Αγωγή</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a6b3a;
+    --green-light: #2d9657;
+    --green-dark: #0f4526;
+    --pitch: #2d7a42;
+    --pitch-dark: #1e5c30;
+    --white: #f8fdf9;
+    --yellow: #f5c518;
+    --red: #e63946;
+    --blue: #1d3557;
+    --blue-light: #457b9d;
+    --gray: #8d99ae;
+    --gray-light: #edf2f4;
+    --correct: #2d9657;
+    --wrong: #e63946;
+    --stripe: rgba(255,255,255,0.04);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #0a1f12;
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    position: relative;
+    background: linear-gradient(160deg, #0a1f12 0%, #0f3d1e 50%, #1a6b3a 100%);
+    padding: 60px 20px 80px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(90deg, var(--stripe) 0, var(--stripe) 1px, transparent 1px, transparent 80px),
+      repeating-linear-gradient(0deg, var(--stripe) 0, var(--stripe) 1px, transparent 1px, transparent 80px);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--yellow);
+    color: #1a1a1a;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 10vw, 100px);
+    letter-spacing: 4px;
+    line-height: 0.9;
+    color: #fff;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--yellow); }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .hero-tag {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    backdrop-filter: blur(4px);
+  }
+  .pitch-lines {
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 300px; height: 60px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+  }
+
+  /* ========== NAV ========== */
+  .nav-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,31,18,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    flex: 0 0 auto;
+    padding: 16px 22px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.25s;
+    white-space: nowrap;
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    user-select: none;
+  }
+  .nav-tab:hover { color: rgba(255,255,255,0.8); }
+  .nav-tab.active {
+    color: var(--yellow);
+    border-bottom-color: var(--yellow);
+  }
+
+  /* ========== SECTIONS ========== */
+  .section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ========== SECTION HEADERS ========== */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .sec-icon {
+    width: 50px; height: 50px;
+    background: var(--green);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .sec-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  .sec-header p { font-size: 14px; color: var(--gray); }
+
+  /* ========== CARDS ========== */
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .card h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--yellow);
+  }
+  .card p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.82); }
+  .card ul { padding-left: 20px; }
+  .card li { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.82); }
+
+  .highlight-box {
+    background: rgba(245,197,24,0.08);
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 12px 12px 0;
+    padding: 18px 20px;
+    margin: 18px 0;
+  }
+  .highlight-box p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.9); }
+  .highlight-box strong { color: var(--yellow); }
+
+  .warning-box {
+    background: rgba(230,57,70,0.1);
+    border-left: 4px solid var(--red);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ========== PITCH DIAGRAM ========== */
+  .pitch-diagram {
+    background: var(--pitch);
+    border-radius: 16px;
+    padding: 30px 20px;
+    margin: 24px 0;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+  .pitch-diagram::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px,
+      transparent 1px, transparent 60px
+    );
+  }
+  .pitch-svg-wrap { position: relative; z-index: 1; }
+
+  /* ========== CASES GRID ========== */
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .case-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 22px;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+  .case-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--green-light);
+  }
+  .case-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    background: var(--green);
+    border-radius: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .case-card h4 {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+  .case-card p { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.65); }
+  .case-badge {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(45,150,87,0.2);
+    border: 1px solid var(--green-light);
+    color: #6dde96;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  /* ========== TIMELINE / VIDEO STRUCTURE ========== */
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--green-light), var(--green-dark));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -25px; top: 22px;
+    width: 12px; height: 12px;
+    background: var(--green-light);
+    border: 2px solid #0a1f12;
+    border-radius: 50%;
+  }
+  .tl-time {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--yellow);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .tl-title { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+  .tl-desc { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+  .tl-badge {
+    display: inline-block;
+    background: rgba(69,123,157,0.25);
+    border: 1px solid var(--blue-light);
+    color: #a8d4f0;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-top: 8px;
+  }
+
+  /* ========== QUIZ ========== */
+  .quiz-progress {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .qp-dot {
+    width: 32px; height: 6px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.12);
+    transition: background 0.3s;
+  }
+  .qp-dot.done { background: var(--green-light); }
+  .qp-dot.current { background: var(--yellow); }
+
+  .quiz-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 32px;
+    margin-bottom: 20px;
+  }
+  .quiz-qnum {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--yellow);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .quiz-question {
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 12px; }
+  .quiz-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    width: 100%;
+  }
+  .quiz-opt:hover:not(:disabled) {
+    border-color: var(--blue-light);
+    background: rgba(69,123,157,0.15);
+  }
+  .quiz-opt.correct {
+    border-color: var(--correct);
+    background: rgba(45,150,87,0.15);
+    color: #fff;
+  }
+  .quiz-opt.wrong {
+    border-color: var(--wrong);
+    background: rgba(230,57,70,0.12);
+    color: #fff;
+  }
+  .quiz-opt:disabled { cursor: default; }
+  .opt-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+  .quiz-opt.correct .opt-letter { background: var(--correct); }
+  .quiz-opt.wrong .opt-letter { background: var(--wrong); }
+
+  .quiz-feedback {
+    display: none;
+    padding: 18px 20px;
+    border-radius: 12px;
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+    animation: fadeIn 0.3s ease;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb {
+    background: rgba(45,150,87,0.15);
+    border: 1px solid var(--correct);
+    color: #a0f0bc;
+  }
+  .quiz-feedback.wrong-fb {
+    background: rgba(230,57,70,0.12);
+    border: 1px solid var(--wrong);
+    color: #f4b8be;
+  }
+  .fb-icon { font-size: 20px; margin-right: 8px; }
+
+  .quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 12px;
+  }
+  .btn {
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.12); color: #fff; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+  .btn-yellow {
+    background: var(--yellow);
+    color: #1a1a1a;
+    font-weight: 900;
+  }
+  .btn-yellow:hover { background: #ffd140; transform: translateY(-1px); }
+
+  /* ========== SCORE ========== */
+  .score-card {
+    text-align: center;
+    padding: 48px 30px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+  }
+  .score-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 90px;
+    line-height: 1;
+    color: var(--yellow);
+    margin: 10px 0;
+  }
+  .score-label { font-size: 14px; color: var(--gray); margin-bottom: 20px; }
+  .score-msg { font-size: 22px; font-weight: 800; margin-bottom: 24px; }
+
+  /* ========== TABLE ========== */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .summary-table th {
+    background: rgba(255,255,255,0.06);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: var(--yellow);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .summary-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+  .summary-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .badge-no {
+    display: inline-block;
+    background: rgba(45,150,87,0.2);
+    border: 1px solid #2d9657;
+    color: #6dde96;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ========== GRAPHICS SECTION ========== */
+  .graphic-prompt {
+    background: rgba(69,123,157,0.08);
+    border: 1px dashed rgba(69,123,157,0.5);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .graphic-prompt h4 {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--blue-light);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .graphic-prompt p { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.75); font-style: italic; }
+  .graphic-label {
+    display: inline-block;
+    background: rgba(69,123,157,0.2);
+    color: #a8d4f0;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+
+  /* ========== BIBLIOGRAPHY ========== */
+  .bib-item {
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid var(--green-light);
+    border-radius: 0 10px 10px 0;
+    margin-bottom: 14px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.75);
+  }
+  .bib-item a { color: var(--blue-light); }
+
+  /* ========== OBJECTIVES ========== */
+  .obj-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .obj-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .obj-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .obj-item p { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.85); }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 600px) {
+    .quiz-card { padding: 22px 16px; }
+    .hero h1 { font-size: 54px; }
+    .summary-table { font-size: 12px; }
+    .summary-table td, .summary-table th { padding: 10px 10px; }
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  footer strong { color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">⚽ Φυσική Αγωγή · Γυμνάσιο</div>
+  <h1>Το <span>Οφσάιντ</span><br>στο Ποδόσφαιρο</h1>
+  <p class="hero-sub">Μάθε τον κανονισμό που μπερδεύει τους πάντες — με παραδείγματα, διαγράμματα και διαδραστικές ερωτήσεις.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">📋 Κανονισμός IFAB</span>
+    <span class="hero-tag">🎯 7 Περιπτώσεις</span>
+    <span class="hero-tag">❓ 10 Ερωτήσεις</span>
+  </div>
+  <div class="pitch-lines"></div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('theory')">📖 Θεωρία</button>
+  <button class="nav-tab" onclick="showSection('cases')">⚖️ Περιπτώσεις</button>
+  <button class="nav-tab" onclick="showSection('video-structure')">🎬 Βίντεο</button>
+  <button class="nav-tab" onclick="showSection('quiz')">❓ Quiz</button>
+  <button class="nav-tab" onclick="showSection('summary')">📊 Ανακεφαλαίωση</button>
+</nav>
+
+<!-- ===================== SECTION: THEORY ===================== -->
+<section class="section active" id="theory">
+  <div class="sec-header">
+    <div class="sec-icon">📖</div>
+    <div>
+      <h2>Θεωρία & Κανονισμός</h2>
+      <p>Κανόνας 11 — IFAB Laws of the Game</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Τι είναι το Οφσάιντ;</h3>
+    <p>Φαντάσου ότι παρακολουθείς έναν αγώνα ποδοσφαίρου και ξαφνικά ο διαιτητής σφυρίζει. Οι παίκτες της μίας ομάδας διαμαρτύρονται, οι άλλοι πανηγυρίζουν. Τι συνέβη; Πολύ πιθανόν να σφυρίστηκε <strong style="color:var(--yellow)">οφσάιντ</strong>.</p>
+    <br>
+    <p>Ο κανονισμός του οφσάιντ είναι από τους πιο γνωστούς — αλλά και από τους πιο παρεξηγημένους — κανονισμούς στο ποδόσφαιρο. Ας τον δούμε μαζί, βήμα-βήμα.</p>
+  </div>
+
+  <div class="card">
+    <h3>Ορισμός (Κανόνας 11 — IFAB)</h3>
+    <p>Σύμφωνα με τους επίσημους κανονισμούς της <strong style="color:var(--yellow)">IFAB (International Football Association Board)</strong>, ένας παίκτης βρίσκεται σε <strong>θέση οφσάιντ</strong> όταν:</p>
+
+    <div class="highlight-box" style="margin-top:16px;">
+      <p>Οποιοδήποτε μέρος του <strong>κεφαλιού, του σώματος ή των ποδιών</strong> του βρίσκεται <strong>πιο κοντά στη γραμμή τέρματος του αντιπάλου</strong> από ό,τι <strong>η μπάλα</strong> και <strong>ο δεύτερος τελευταίος αμυντικός</strong> (συνήθως ο τελευταίος παίκτης πεδίου — ο τερματοφύλακας υπολογίζεται ως ένας από τους αμυντικούς).</p>
+    </div>
+
+    <div class="warning-box">
+      ⚠️ <strong>Προσοχή:</strong> Τα <strong>χέρια και τα μπράτσα ΔΕΝ λαμβάνονται υπόψη</strong> για τον καθορισμό της θέσης οφσάιντ.
+    </div>
+  </div>
+
+  <!-- SVG Diagram -->
+  <div class="pitch-diagram">
+    <div class="pitch-svg-wrap">
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+        <!-- Pitch markings -->
+        <rect x="0" y="0" width="700" height="320" fill="#2d7a42" rx="10"/>
+        <!-- Grass stripes -->
+        <rect x="0" y="0" width="700" height="53" fill="rgba(0,0,0,0.05)"/>
+        <rect x="0" y="107" width="700" height="53" fill="rgba(0,0,0,0.05)"/>
+        <rect x="0" y="214" width="700" height="53" fill="rgba(0,0,0,0.05)"/>
+
+        <!-- Goal line right -->
+        <line x1="640" y1="20" x2="640" y2="300" stroke="white" stroke-width="2.5" opacity="0.8"/>
+        <!-- Goal -->
+        <rect x="640" y="120" width="30" height="80" fill="none" stroke="white" stroke-width="2.5" opacity="0.9"/>
+        <!-- Net lines -->
+        <line x1="650" y1="120" x2="650" y2="200" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <line x1="660" y1="120" x2="660" y2="200" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <line x1="670" y1="120" x2="670" y2="200" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <line x1="640" y1="135" x2="670" y2="135" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <line x1="640" y1="150" x2="670" y2="150" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <line x1="640" y1="165" x2="670" y2="165" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <line x1="640" y1="180" x2="670" y2="180" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <line x1="640" y1="195" x2="670" y2="195" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+
+        <!-- Penalty area -->
+        <rect x="534" y="90" width="106" height="140" fill="none" stroke="white" stroke-width="1.5" opacity="0.6"/>
+
+        <!-- OFFSIDE LINE (red dashed) -->
+        <line x1="30" y1="190" x2="700" y2="190" stroke="#e63946" stroke-width="2.5" stroke-dasharray="12,6" opacity="0.9"/>
+        <text x="35" y="183" fill="#e63946" font-size="11" font-family="Nunito,sans-serif" font-weight="800">ΓΡΑΜΜΗ ΟΦΣΑΙΝΤ</text>
+
+        <!-- Goalkeeper -->
+        <circle cx="618" cy="160" r="16" fill="#1d3557" stroke="white" stroke-width="2"/>
+        <text x="618" y="165" fill="white" font-size="11" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800">GK</text>
+
+        <!-- Last defender -->
+        <circle cx="500" cy="190" r="16" fill="#1d3557" stroke="white" stroke-width="2"/>
+        <text x="500" y="195" fill="white" font-size="10" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800">ΑΜ</text>
+        <!-- Defender label -->
+        <text x="500" y="220" fill="rgba(255,255,255,0.8)" font-size="10" text-anchor="middle" font-family="Nunito,sans-serif">2ος τελ. αμυντικός</text>
+
+        <!-- 2nd defender -->
+        <circle cx="540" cy="240" r="14" fill="#1d3557" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+        <text x="540" y="245" fill="white" font-size="10" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800">ΑΜ</text>
+
+        <!-- Attacker in offside (red) -->
+        <circle cx="560" cy="155" r="16" fill="#e63946" stroke="white" stroke-width="2.5"/>
+        <text x="560" y="160" fill="white" font-size="10" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800">ΕΠ</text>
+        <text x="560" y="140" fill="#ffb3b8" font-size="10" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800">ΟΦΣΑΙΝΤ ⚠️</text>
+
+        <!-- Passer with ball -->
+        <circle cx="300" cy="220" r="16" fill="#2d9657" stroke="white" stroke-width="2"/>
+        <text x="300" y="225" fill="white" font-size="10" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800">ΣΥΜ</text>
+        <!-- Ball -->
+        <circle cx="340" cy="210" r="8" fill="white" stroke="#333" stroke-width="1"/>
+        <!-- Pass arrow -->
+        <line x1="316" y1="215" x2="540" y2="162" stroke="white" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7"/>
+        <polygon points="537,152 548,162 536,170" fill="white" opacity="0.7"/>
+        <text x="420" y="175" fill="rgba(255,255,255,0.7)" font-size="10" text-anchor="middle" font-family="Nunito,sans-serif">πάσα</text>
+
+        <!-- Legend -->
+        <rect x="30" y="255" width="220" height="50" fill="rgba(0,0,0,0.3)" rx="8"/>
+        <circle cx="50" cy="268" r="7" fill="#e63946" stroke="white" stroke-width="1.5"/>
+        <text x="65" y="272" fill="white" font-size="10" font-family="Nunito,sans-serif">Επιθετικός σε οφσάιντ</text>
+        <circle cx="50" cy="290" r="7" fill="#2d9657" stroke="white" stroke-width="1.5"/>
+        <text x="65" y="294" fill="white" font-size="10" font-family="Nunito,sans-serif">Συμπαίκτης με μπάλα</text>
+        <circle cx="155" cy="268" r="7" fill="#1d3557" stroke="white" stroke-width="1.5"/>
+        <text x="170" y="272" fill="white" font-size="10" font-family="Nunito,sans-serif">Αμυντικός</text>
+      </svg>
+      <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.5);margin-top:8px;">
+        Διάγραμμα: Τυπική θέση οφσάιντ — ο επιθετικός (κόκκινος) βρίσκεται πιο κοντά στη γραμμή τέρματος από τον δεύτερο τελευταίο αμυντικό.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Πότε καταλογίζεται Οφσάιντ;</h3>
+    <p>Το να βρίσκεσαι σε θέση οφσάιντ <strong>δεν είναι από μόνο του παράβαση</strong>. Το οφσάιντ καταλογίζεται μόνο όταν ο παίκτης <strong>εμπλέκεται ενεργά</strong> στο παιχνίδι:</p>
+    <ul style="margin-top:14px;">
+      <li>🏃 <strong>Παίζει ή αγγίζει</strong> τη μπάλα που έχει παίξει ή αγγίξει συμπαίκτης του</li>
+      <li>👁️ <strong>Παρεμποδίζει</strong> αντίπαλο παίκτη (π.χ. εμποδίζει την ορατότητα του τερματοφύλακα)</li>
+      <li>🎯 <strong>Αποκτά πλεονέκτημα</strong> από τη θέση οφσάιντ (π.χ. η μπάλα αναπηδά σε αυτόν από δοκάρι ή αντίπαλο)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>⏱️ Κρίσιμη Στιγμή Αξιολόγησης</h3>
+    <div class="highlight-box">
+      <p>Η θέση του παίκτη κρίνεται <strong>τη στιγμή που ο συμπαίκτης του παίζει ή αγγίζει τη μπάλα</strong> — ΟΧΙ τη στιγμή που ο παίκτης λαμβάνει τη μπάλα. Αυτή η λεπτομέρεια είναι κρίσιμη και συχνά αξιολογείται από το VAR!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION: CASES ===================== -->
+<section class="section" id="cases">
+  <div class="sec-header">
+    <div class="sec-icon">⚖️</div>
+    <div>
+      <h2>Οι 7 Εξαιρέσεις</h2>
+      <p>Περιπτώσεις που ΔΕΝ ισχύει ο κανονισμός</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:24px;">
+    <p>Υπάρχουν <strong style="color:var(--yellow)">7 συγκεκριμένες περιπτώσεις</strong> στις οποίες, ακόμα και αν ένας παίκτης βρίσκεται σε θέση οφσάιντ, ο κανονισμός <strong>δεν εφαρμόζεται</strong>. Ας τις δούμε μία-μία αναλυτικά.</p>
+  </div>
+
+  <div class="cases-grid">
+
+    <div class="case-card">
+      <div class="case-num">1</div>
+      <h4>Σκόπιμη Αμυντική Επαφή</h4>
+      <p>Ο αμυντικός <strong>σκόπιμα</strong> παίζει τη μπάλα (deliberate play). Η τελευταία επαφή ήταν από αντίπαλο — το «ρολόι» οφσάιντ μηδενίζεται.</p>
+      <div class="case-badge">❌ ΟΧΙ ΟΦΣΑΙΝΤ</div>
+      <p style="margin-top:10px;font-size:12px;color:rgba(255,255,255,0.5);">⚠️ Διαφορετικό αν ο αμυντικός απλώς εκτρέπει (deflection) ακούσια.</p>
+    </div>
+
+    <div class="case-card">
+      <div class="case-num">2</div>
+      <h4>Απευθείας από Κορνέρ</h4>
+      <p>Ο παίκτης λαμβάνει τη μπάλα <strong>απευθείας</strong> από εκτέλεση γωνιαίας (κορνέρ). Δεν μπορεί να κριθεί οφσάιντ σε καμία περίπτωση.</p>
+      <div class="case-badge">❌ ΟΧΙ ΟΦΣΑΙΝΤ</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-num">3</div>
+      <h4>Απευθείας από Throw-in</h4>
+      <p>Ο παίκτης λαμβάνει τη μπάλα <strong>απευθείας</strong> από ρίψη εντός συμπαίκτη. Η ρίψη εντός εξαιρείται πάντα από τον κανονισμό.</p>
+      <div class="case-badge">❌ ΟΧΙ ΟΦΣΑΙΝΤ</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-num">4</div>
+      <h4>Απευθείας από Goal Kick</h4>
+      <p>Ο παίκτης λαμβάνει τη μπάλα <strong>απευθείας</strong> από κλωτσιά τέρματος. <em>Αλλαγή κανονισμού από 2019-2020!</em></p>
+      <div class="case-badge">❌ ΟΧΙ ΟΦΣΑΙΝΤ</div>
+      <p style="margin-top:10px;font-size:12px;color:rgba(255,255,255,0.5);">📅 Νέος κανονισμός IFAB 2019-2020.</p>
+    </div>
+
+    <div class="case-card">
+      <div class="case-num">5</div>
+      <h4>Παίκτης στο Δικό του Μισό</h4>
+      <p>Τη στιγμή της πάσας, ο παίκτης βρίσκεται <strong>στο δικό του μισό γηπέδου</strong>. Δεν μπορεί ποτέ να κριθεί οφσάιντ.</p>
+      <div class="case-badge">❌ ΟΧΙ ΟΦΣΑΙΝΤ</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-num">6</div>
+      <h4>Ισόπαλη Θέση (Level)</h4>
+      <p>Ο παίκτης βρίσκεται <strong>ακριβώς στην ίδια γραμμή</strong> με τον δεύτερο τελευταίο αμυντικό. Χρειάζεται να είναι <em>πιο μπροστά</em>, όχι ισόπαλος.</p>
+      <div class="case-badge">❌ ΟΧΙ ΟΦΣΑΙΝΤ</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-num">7</div>
+      <h4>Παθητική Θέση</h4>
+      <p>Ο παίκτης βρίσκεται σε θέση οφσάιντ αλλά <strong>δεν εμπλέκεται ενεργά</strong> στη φάση — δεν παίζει μπάλα, δεν παρεμποδίζει, δεν αποκτά πλεονέκτημα.</p>
+      <div class="case-badge">❌ ΟΧΙ ΟΦΣΑΙΝΤ</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== SECTION: VIDEO ===================== -->
+<section class="section" id="video-structure">
+  <div class="sec-header">
+    <div class="sec-icon">🎬</div>
+    <div>
+      <h2>Βίντεο</h2>
+      <p>Παρακολούθησε το εκπαιδευτικό βίντεο για τον κανονισμό του οφσάιντ</p>
+    </div>
+  </div>
+
+  <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:16px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,0.1);">
+    <iframe
+      src="https://drive.google.com/file/d/1G8ZzgBz_zk2WLj6S0C766LyeP-f9jnq-/preview"
+      style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+      allow="autoplay"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<!-- ===================== SECTION: QUIZ ===================== -->
+<section class="section" id="quiz">
+  <div class="sec-header">
+    <div class="sec-icon">❓</div>
+    <div>
+      <h2>Διαδραστικό Quiz</h2>
+      <p>10 ερωτήσεις κατανόησης — Δοκίμασε τις γνώσεις σου!</p>
+    </div>
+  </div>
+
+  <div class="quiz-progress" id="quizProgress"></div>
+  <div id="quizContainer"></div>
+  <div id="quizResult" style="display:none;"></div>
+</section>
+
+<!-- ===================== SECTION: SUMMARY ===================== -->
+<section class="section" id="summary">
+  <div class="sec-header">
+    <div class="sec-icon">📊</div>
+    <div>
+      <h2>Ανακεφαλαίωση</h2>
+      <p>Πλήρης πίνακας εξαιρέσεων & βασικές αρχές</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Βασικές Αρχές — Θυμήσου!</h3>
+    <div class="obj-list">
+      <div class="obj-item"><span class="obj-icon">1️⃣</span><p>Η θέση κρίνεται <strong>τη στιγμή της πάσας</strong>, όχι της λήψης.</p></div>
+      <div class="obj-item"><span class="obj-icon">2️⃣</span><p>Χρειάζονται <strong>ΔΥΟ συνθήκες</strong>: σωστή θέση + ενεργή εμπλοκή.</p></div>
+      <div class="obj-item"><span class="obj-icon">3️⃣</span><p>Τα <strong>χέρια/μπράτσα</strong> δεν μετράνε για τον υπολογισμό.</p></div>
+      <div class="obj-item"><span class="obj-icon">4️⃣</span><p>Το <strong>ισόπαλο ΔΕΝ είναι οφσάιντ</strong> — χρειάζεται να είσαι πιο μπροστά.</p></div>
+    </div>
+  </div>
+
+  <div class="card" style="overflow-x:auto;">
+    <h3>Πίνακας Εξαιρέσεων</h3>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Περίπτωση</th>
+          <th>Ισχύει Οφσάιντ;</th>
+          <th>Σημείωση</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Αμυντικός παίζει σκόπιμα τη μπάλα</td><td><span class="badge-no">❌ ΟΧΙ</span></td><td>Deliberate play — ακυρώνεται</td></tr>
+        <tr><td>2</td><td>Απευθείας λήψη από κορνέρ</td><td><span class="badge-no">❌ ΟΧΙ</span></td><td>Γωνιαία εκτέλεση</td></tr>
+        <tr><td>3</td><td>Απευθείας λήψη από throw-in</td><td><span class="badge-no">❌ ΟΧΙ</span></td><td>Ρίψη εντός</td></tr>
+        <tr><td>4</td><td>Απευθείας λήψη από goal kick</td><td><span class="badge-no">❌ ΟΧΙ</span></td><td>Νέος κανονισμός 2019-2020</td></tr>
+        <tr><td>5</td><td>Παίκτης στο δικό του μισό γηπέδου</td><td><span class="badge-no">❌ ΟΧΙ</span></td><td>Κρίνεται τη στιγμή της πάσας</td></tr>
+        <tr><td>6</td><td>Ισόπαλη θέση με αμυντικό (level)</td><td><span class="badge-no">❌ ΟΧΙ</span></td><td>Χρειάζεται να είναι πιο μπροστά</td></tr>
+        <tr><td>7</td><td>Παθητική θέση — χωρίς ενεργή εμπλοκή</td><td><span class="badge-no">❌ ΟΧΙ</span></td><td>Δεν παίζει, δεν παρεμποδίζει</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<footer>
+  <strong>OER: Το Οφσάιντ στο Ποδόσφαιρο</strong> · Φυσική Αγωγή · Γυμνάσιο<br>
+  Θεματική Ενότητα 2.2.1 — Κανονισμοί Αθλημάτων · Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού
+</footer>
+
+<script>
+// ===================== NAV =====================
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const sectionOrder = ['theory','cases','video-structure','quiz','summary'];
+  tabs[sectionOrder.indexOf(id)].classList.add('active');
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+// ===================== QUIZ DATA =====================
+const questions = [
+  {
+    num: 1, type: 'single',
+    q: 'Ένας επιθετικός παίκτης βρίσκεται μπροστά από τον τελευταίο αμυντικό. Πότε καταλογίζεται οφσάιντ;',
+    opts: [
+      'Όταν απλώς βρίσκεται μπροστά από τον τελευταίο αμυντικό',
+      'Όταν βρίσκεται μπροστά από τον τελευταίο αμυντικό ΚΑΙ εμπλέκεται ενεργά στο παιχνίδι',
+      'Όταν βρίσκεται στο μισό του αντιπάλου, ανεξάρτητα από τη θέση του αμυντικού',
+      'Μόνο αν βρίσκεται εντός της περιοχής'
+    ],
+    correct: 1,
+    fb_correct: '✅ Μπράβο! Χρειάζονται δύο συνθήκες ταυτόχρονα: η θέση (μπροστά από τον δεύτερο τελευταίο αμυντικό) ΚΑΙ η ενεργή εμπλοκή στο παιχνίδι.',
+    fb_wrong: '❌ Δεν είναι αυτό! Θυμήσου: το να βρίσκεσαι σε θέση οφσάιντ δεν αρκεί από μόνο του. Χρειάζεται ο παίκτης να εμπλέκεται ενεργά στο παιχνίδι.'
+  },
+  {
+    num: 2, type: 'tf',
+    q: 'Ο επιθετικός βρίσκεται σε θέση οφσάιντ. Ένας αμυντικός κάνει σκόπιμα κεφαλιά στη μπάλα και αυτή φτάνει στον επιθετικό. Ισχύει οφσάιντ;',
+    opts: ['Σωστό', 'Λάθος'],
+    correct: 1,
+    fb_correct: '✅ Σωστά! Επειδή ο αμυντικός έπαιξε σκόπιμα (deliberate play) τη μπάλα, ο επιθετικός δεν μπορεί να κριθεί οφσάιντ.',
+    fb_wrong: '❌ Όχι ακριβώς! Όταν ένας αμυντικός παίζει σκόπιμα τη μπάλα, το οφσάιντ ακυρώνεται — ακόμα κι αν ο επιθετικός ήταν αρχικά σε θέση οφσάιντ.'
+  },
+  {
+    num: 3, type: 'single',
+    q: 'Σε ποια από τις παρακάτω εκτελέσεις ΔΕΝ ισχύει οφσάιντ σε απευθείας λήψη;',
+    opts: [
+      'Γωνιαία εκτέλεση (κορνέρ)',
+      'Ρίψη εντός (throw-in)',
+      'Κλωτσιά τέρματος (goal kick)',
+      'Όλες οι παραπάνω'
+    ],
+    correct: 3,
+    fb_correct: '✅ Άριστα! Κορνέρ, throw-in και goal kick είναι οι τρεις εκτελέσεις από τις οποίες δεν μπορεί να προκύψει οφσάιντ σε άμεση λήψη.',
+    fb_wrong: '❌ Όχι εντελώς! Και οι τρεις εκτελέσεις (κορνέρ, throw-in, goal kick) εξαιρούνται από τον κανονισμό του οφσάιντ.'
+  },
+  {
+    num: 4, type: 'tf',
+    q: 'Ο τερματοφύλακας εκτελεί κλωτσιά τέρματος (goal kick) και ο επιθετικός λαμβάνει τη μπάλα βρισκόμενος πιο μπροστά από τον τελευταίο αμυντικό. Καταλογίζεται οφσάιντ;',
+    opts: ['Σωστό', 'Λάθος'],
+    correct: 1,
+    fb_correct: '✅ Ακριβώς! Από κλωτσιά τέρματος (goal kick) δεν καταλογίζεται ποτέ οφσάιντ σε απευθείας λήψη. Αλλαγή κανονισμού 2019-2020.',
+    fb_wrong: '❌ Λάθος! Από goal kick δεν ισχύει οφσάιντ, ακόμα κι αν ο επιθετικός βρίσκεται μπροστά από τον τελευταίο αμυντικό. Νέος κανονισμός από το 2019!'
+  },
+  {
+    num: 5, type: 'single',
+    q: 'Τη στιγμή της πάσας, ο παίκτης Α βρίσκεται ακριβώς στη μεσαία γραμμή (στο δικό του μισό). Δέχεται πάσα και σουτάρει. Ισχύει οφσάιντ για τον Α;',
+    opts: [
+      'Ναι, γιατί η μπάλα πήγε σε εύρος του μισού αντιπάλου',
+      'Όχι, γιατί ο παίκτης Α βρισκόταν στο δικό του μισό τη στιγμή της πάσας',
+      'Ναι, γιατί δεν υπήρχε αμυντικός μεταξύ Α και τέρματος',
+      'Εξαρτάται από το αν ο τερματοφύλακας ήταν εκτός εστίας'
+    ],
+    correct: 1,
+    fb_correct: '✅ Σωστά! Η θέση του παίκτη κρίνεται τη στιγμή που παίζεται η μπάλα. Αν τότε ο παίκτης βρίσκεται στο δικό του μισό, δεν μπορεί να κριθεί οφσάιντ.',
+    fb_wrong: '❌ Δεν είναι σωστό! Θυμήσου: αξιολογούμε τη θέση τη στιγμή της πάσας, όχι μετά. Αν τότε ήταν στο δικό του μισό, είναι εντάξει.'
+  },
+  {
+    num: 6, type: 'tf',
+    q: 'Ο επιθετικός βρίσκεται ακριβώς στην ίδια γραμμή με τον τελευταίο αμυντικό παίκτη πεδίου. Τη στιγμή της πάσας λαμβάνει τη μπάλα. Καταλογίζεται οφσάιντ;',
+    opts: ['Σωστό', 'Λάθος'],
+    correct: 1,
+    fb_correct: '✅ Σωστά! Το ισόπαλο (level) ΔΕΝ θεωρείται οφσάιντ. Ο παίκτης πρέπει να βρίσκεται πιο κοντά στη γραμμή τέρματος — όχι απλώς ισόπαλος.',
+    fb_wrong: '❌ Όχι! Το ισόπαλο ΔΕΝ είναι οφσάιντ. Χρειάζεται ο επιθετικός να είναι έστω και κατά ελάχιστο μπροστά από τον αμυντικό.'
+  },
+  {
+    num: 7, type: 'single',
+    q: 'Ο παίκτης Χ βρίσκεται σε θέση οφσάιντ κοντά στο τέρμα, αλλά η φάση εξελίσσεται στην άλλη πλευρά. Ο Χ δεν κινείται, δεν παρεμποδίζει κανέναν και δεν αγγίζει τη μπάλα. Άλλος παίκτης σκοράρει. Τι αποφασίζει ο διαιτητής;',
+    opts: [
+      'Καταλογίζει οφσάιντ στον παίκτη Χ γιατί ήταν σε λάθος θέση',
+      'Δέχεται το γκολ γιατί ο παίκτης Χ δεν ενεπλάκη ενεργά',
+      'Ζητά τη γνώμη του VAR για να αποφασίσει',
+      'Διακόπτει πρώτα το παιχνίδι και μετά αξιολογεί'
+    ],
+    correct: 1,
+    fb_correct: '✅ Άριστα! Ο παίκτης Χ ήταν σε παθητική θέση οφσάιντ — δεν εμπλέκεται, δεν παρεμποδίζει, δεν αποκτά πλεονέκτημα. Το γκολ μετράει!',
+    fb_wrong: '❌ Δεν είναι σωστό! Η απλή παρουσία σε θέση οφσάιντ δεν αρκεί. Ο παίκτης πρέπει να εμπλέκεται ενεργά για να καταλογιστεί οφσάιντ.'
+  },
+  {
+    num: 8, type: 'single',
+    q: 'Ποιο μέρος του σώματος ΔΕΝ λαμβάνεται υπόψη για τον καθορισμό της θέσης οφσάιντ;',
+    opts: ['Το κεφάλι', 'Το πόδι', 'Το χέρι / μπράτσο', 'Ο ώμος'],
+    correct: 2,
+    fb_correct: '✅ Σωστά! Τα χέρια και τα μπράτσα εξαιρούνται ρητά από τον κανονισμό IFAB. Υπολογίζονται μόνο κεφάλι, κορμός και πόδια.',
+    fb_wrong: '❌ Θυμήσου: τα χέρια και μπράτσα είναι το μοναδικό μέρος του σώματος που δεν μετράει για τον υπολογισμό του οφσάιντ.'
+  },
+  {
+    num: 9, type: 'single',
+    q: 'Τη στιγμή που ο τερματοφύλακας εκτελεί goal kick, ο επιθετικός Α βρίσκεται πέρα από όλους τους αμυντικούς. Λαμβάνει τη μπάλα και σκοράρει. Τι ισχύει;',
+    opts: [
+      'Οφσάιντ — το γκολ δεν μετράει',
+      'Το γκολ μετράει — από goal kick δεν ισχύει οφσάιντ',
+      'Εξαρτάται αν ο τερματοφύλακας ήταν εντός ή εκτός περιοχής',
+      'Το VAR πρέπει να το ελέγξει πρώτα'
+    ],
+    correct: 1,
+    fb_correct: '✅ Μπράβο! Από κλωτσιά τέρματος, το οφσάιντ δεν ισχύει. Αλλαγή κανονισμού από την αγωνιστική 2019-2020.',
+    fb_wrong: '❌ Λάθος! Από το 2019, από goal kick δεν ισχύει ποτέ οφσάιντ, ακόμα κι αν ο επιθετικός είναι βαθύτερα από όλους τους αμυντικούς.'
+  },
+  {
+    num: 10, type: 'single',
+    q: 'Σε ποια από τις παρακάτω περιπτώσεις ΔΕΝ ισχύει οφσάιντ;',
+    opts: [
+      'Επιθετικός λαμβάνει πάσα από συμπαίκτη, βρισκόμενος πιο μπροστά από τον τελευταίο αμυντικό, στο μισό του αντιπάλου',
+      'Επιθετικός λαμβάνει πάσα από συμπαίκτη, βρισκόμενος στο δικό του μισό γηπέδου',
+      'Επιθετικός σε θέση οφσάιντ παρεμποδίζει τον τερματοφύλακα και σκοράρει συμπαίκτης',
+      'Επιθετικός αναπηδά μπάλα από δοκάρι ενώ βρισκόταν σε θέση οφσάιντ'
+    ],
+    correct: 1,
+    fb_correct: '✅ Άριστα! Αν ο παίκτης βρίσκεται στο δικό του μισό τη στιγμή της πάσας, δεν μπορεί να κριθεί οφσάιντ — ανεξάρτητα από οτιδήποτε άλλο.',
+    fb_wrong: '❌ Πρόσεξε! Η σωστή απάντηση είναι η β): παίκτης στο δικό του μισό δεν μπορεί να κριθεί οφσάιντ. Οι άλλες τρεις είναι παραβάσεις.'
+  }
+];
+
+// ===================== QUIZ LOGIC =====================
+let current = 0;
+let score = 0;
+let answered = [];
+
+function initQuiz() {
+  current = 0; score = 0; answered = new Array(questions.length).fill(null);
+  renderProgress();
+  renderQuestion();
+}
+
+function renderProgress() {
+  const prog = document.getElementById('quizProgress');
+  prog.innerHTML = questions.map((_, i) => {
+    let cls = 'qp-dot';
+    if (i < current) cls += ' done';
+    if (i === current) cls += ' current';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+}
+
+function renderQuestion() {
+  const container = document.getElementById('quizContainer');
+  const result = document.getElementById('quizResult');
+  result.style.display = 'none';
+  container.style.display = 'block';
+
+  if (current >= questions.length) {
+    showResult();
+    return;
+  }
+
+  const q = questions[current];
+  const letters = ['α', 'β', 'γ', 'δ'];
+
+  container.innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-qnum">Ερώτηση ${q.num} από ${questions.length}</div>
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((opt, i) => `
+          <button class="quiz-opt" id="opt-${i}" onclick="selectAnswer(${i})">
+            <span class="opt-letter">${letters[i]}</span>
+            <span>${opt}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+    </div>
+    <div class="quiz-nav">
+      <span style="font-size:13px;color:var(--gray);">Σκορ: <strong style="color:var(--yellow)">${score}</strong> / ${current}</span>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+        ${current === questions.length - 1 ? '🏆 Δες τα αποτελέσματα' : 'Επόμενη ερώτηση →'}
+      </button>
+    </div>
+  `;
+  renderProgress();
+}
+
+function selectAnswer(idx) {
+  if (answered[current] !== null) return;
+  answered[current] = idx;
+  const q = questions[current];
+  const isCorrect = idx === q.correct;
+  if (isCorrect) score++;
+
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach((o, i) => {
+    o.disabled = true;
+    if (i === q.correct) o.classList.add('correct');
+    else if (i === idx && !isCorrect) o.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('quiz-feedback');
+  fb.textContent = isCorrect ? q.fb_correct : q.fb_wrong;
+  fb.className = `quiz-feedback show ${isCorrect ? 'correct-fb' : 'wrong-fb'}`;
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  current++;
+  renderQuestion();
+  renderProgress();
+}
+
+function showResult() {
+  document.getElementById('quizContainer').style.display = 'none';
+  const result = document.getElementById('quizResult');
+  result.style.display = 'block';
+
+  const pct = Math.round((score / questions.length) * 100);
+  let msg, emoji;
+  if (pct >= 90) { msg = 'Εξαιρετικό! Γνωρίζεις πολύ καλά τον κανονισμό!'; emoji = '🏆'; }
+  else if (pct >= 70) { msg = 'Πολύ καλά! Λίγη επανάληψη και θα είσαι άριστος!'; emoji = '⭐'; }
+  else if (pct >= 50) { msg = 'Καλή προσπάθεια! Ξαναδές τις εξαιρέσεις.'; emoji = '📖'; }
+  else { msg = 'Χρειάζεται επανάληψη! Ξεκίνα από τη θεωρία.'; emoji = '💪'; }
+
+  result.innerHTML = `
+    <div class="score-card">
+      <div style="font-size:48px;">${emoji}</div>
+      <div class="score-big">${score}/${questions.length}</div>
+      <div class="score-label">Σωστές απαντήσεις · ${pct}%</div>
+      <div class="score-msg">${msg}</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-yellow" onclick="initQuiz()">🔄 Ξανά από την αρχή</button>
+        <button class="btn btn-secondary" onclick="showSection('theory')">📖 Θεωρία</button>
+        <button class="btn btn-secondary" onclick="showSection('summary')">📊 Ανακεφαλαίωση</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('quizProgress').innerHTML = questions.map(() => '<div class="qp-dot done"></div>').join('');
+}
+
+// Init quiz when tab is clicked
+document.querySelectorAll('.nav-tab').forEach((tab, i) => {
+  tab.addEventListener('click', () => {
+    if (i === 4 && current === 0 && answered.every(a => a === null)) {
+      initQuiz();
+    }
+  });
+});
+
+// Auto-init quiz
+initQuiz();
+</script>
+</body>
+</html>

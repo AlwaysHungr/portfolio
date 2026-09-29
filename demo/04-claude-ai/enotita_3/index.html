@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 3: Οργάνωση &amp; Εξατομίκευση — Projects, Memory &amp; Styles | Claude AI</title>
+<meta name="description" content="Διαδραστικό μάθημα σε μορφή διαφανειών: Projects, Βάση Γνώσης και Instructions, λειτουργία Μνήμης (Memory), αναζήτηση παλιών συνομιλιών, Custom Styles, Incognito mode και διαχείριση ιδιωτικότητας στο Claude AI.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/v2.css">
+</head>
+<body data-course="en3">
+
+<div class="app">
+
+  <!-- ===================== ΠΛΕΥΡΙΚΟ ΜΕΝΟΥ ===================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Περιεχόμενα μαθήματος">
+    <div class="sidebar-header">
+      <div class="brand">
+        <img class="brand-mark" src="assets/images/logo.webp" alt="" aria-hidden="true" width="38" height="38">
+        <span class="brand-text"><strong>Claude AI</strong> Ενότητα 3 · Οργάνωση &amp; Εξατομίκευση</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <p class="nav-group-label">Περιεχόμενα</p>
+      <ul id="navList" style="list-style:none; margin:0; padding:0;"></ul>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="overall"><span>Πρόοδος</span><span id="overallLabel">0 / 0</span></div>
+      <button type="button" class="btn btn-secondary btn-sm" id="resetProgress" style="width:100%;">Επαναφορά προόδου</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- ===================== ΚΥΡΙΑ ΠΕΡΙΟΧΗ ===================== -->
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="icon-btn" id="sidebarToggle" aria-label="Άνοιγμα/κλείσιμο μενού">☰</button>
+      <span class="topbar-title" id="topbarTitle">Ενότητα 3</span>
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Σκούρο θέμα" aria-pressed="false">🌙</button>
+      <div class="topbar-progress" aria-hidden="true">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressLabel">0%</span>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ============ ΔΙΑΦΑΝΕΙΑ 0 — ΑΡΧΙΚΗ ΟΘΟΝΗ (HERO) ============ -->
+      <section class="chapter no-autonav" data-title="Αρχική οθόνη ενότητας">
+        <div class="hero">
+          <span class="hero-badge">Ενότητα 3</span>
+          <h1>Οργάνωση &amp; Εξατομίκευση — Projects, Memory &amp; Styles</h1>
+          <p class="lead">Η πραγματική παραγωγικότητα με την Τεχνητή Νοημοσύνη απαιτεί μια σημαντική αλλαγή. Το μοντέλο πρέπει να σταματήσει να λειτουργεί ως ένας γενικός, ανώνυμος βοηθός. Αντίθετα, οφείλει να μετατραπεί σε έναν απόλυτα εξειδικευμένο συνεργάτη, ο οποίος γνωρίζει σε βάθος τις ανάγκες σας. Ο στόχος αυτής της ενότητας είναι να σας καθοδηγήσει βήμα προς βήμα στη δημιουργία ενός προσωπικού, μόνιμου περιβάλλοντος εργασίας μέσα στο Claude. Μέσω των προηγμένων λειτουργιών των <strong>Projects</strong>, της <strong>Μνήμης (Memory)</strong> και των <strong>Στυλ Γραφής (Custom Styles)</strong>, θα μάθετε πώς να «εκπαιδεύετε» το μοντέλο. Με αυτόν τον τρόπο, το Claude θα διατηρεί σταθερό το εταιρικό ή ακαδημαϊκό σας ύφος. Παράλληλα, θα ανατρέχει αυτόματα σε συγκεκριμένα αρχεία-κλειδιά και θα ευθυγραμμίζεται με τους στρατηγικούς σας στόχους. Έτσι, δεν θα χρειάζεται να επαναλαμβάνετε τις ίδιες οδηγίες σε κάθε νέα συνομιλία.</p>
+          <p>Με την ολοκλήρωση της ενότητας, θα είστε σε θέση να εξοικονομείτε πολύτιμο χρόνο, εξαλείφοντας τη χρονοβόρα διαδικασία της συνεχιζόμενης εισαγωγής πλαισίου (context) και των επαναλαμβανόμενων prompts. Θα μπορείτε να οργανώνετε διαφορετικά έργα σε αυτοτελείς ψηφιακούς χώρους. Παράλληλα, θα είστε σε θέση να διαχειρίζεστε τη μνήμη του συστήματος για τη διατήρηση κρίσιμων πληροφοριών. Τέλος, θα εναλλάσσετε με ευκολία το ύφος επικοινωνίας ανάλογα με το κοινό-στόχο σας. Το αποτέλεσμα θα είναι η λήψη απαντήσεων με ασύγκριτα μεγαλύτερη ακρίβεια, συνέπεια και επιχειρηματική αξία, προσαρμοσμένων αποκλειστικά στα δικά σας επαγγελματικά πρότυπα.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1;">
+            <button type="button" class="btn btn-primary" data-nav="1">Έναρξη μαθήματος →</button>
+            <button type="button" class="btn btn-secondary" id="resumeBtn" hidden>Συνέχεια από το τελευταίο σημείο</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           ΥΠΟΕΝΟΤΗΤΑ 3.1 — PROJECTS
+      ================================================================= -->
+
+      <!-- 3.1 / Διαφάνεια: Εισαγωγή -->
+      <section class="chapter" data-title="Γιατί Projects;" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Υποενότητα 3.1</span>
+        <h1>Projects — τι είναι και πότε αξίζει να φτιάξεις ένα</h1>
+        <p>Όταν εργάζεστε στο Claude, η πιο συνηθισμένη ροή εργασίας είναι η έναρξη μιας απλής συνομιλίας (chat). Ωστόσο, για σύνθετα έργα ή επαναλαμβανόμενες εργασίες, η πλατφόρμα προσφέρει μια πολύ πιο ισχυρή δομή: τα <strong>«Projects»</strong>.</p>
+        <p>Ο στόχος αυτής της υποενότητας είναι να κατανοήσετε σε βάθος τη διαφορά ανάμεσα σε μια απλή συνομιλία και σε ένα Project. Παράλληλα, θα είστε σε θέση να κρίνετε με σαφήνεια πότε απαιτείται η δημιουργία ενός Project για τη βέλτιστη οργάνωση της εργασίας σας, αποφεύγοντας τη χρονοβόρα διαδικασία της συνεχιζόμενης εισαγωγής δεδομένων.</p>
+      </section>
+
+      <!-- 3.1 / Διαφάνεια: Βίντεο -->
+      <section class="chapter" data-title="Βίντεο: Claude Projects" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Υποενότητα 3.1 · Βίντεο</span>
+        <h1>Βίντεο μαθήματος: Claude Projects</h1>
+        <div class="video-block">
+          <span class="video-kicker">▶ Βίντεο μαθήματος</span>
+          <h3>Claude Projects</h3>
+          <p>Το βίντεο παρουσιάζει τη λειτουργία των Projects στο Claude: τι είναι ο αυτόνομος χώρος εργασίας, πώς οργανώνεται ο πίνακας ελέγχου και γιατί τα Projects αλλάζουν ριζικά τον τρόπο που δουλεύετε με το μοντέλο.</p>
+          <p><strong>Τι να προσέξετε:</strong> τη διαφορά «εφήμερου» και «μόνιμου» πλαισίου (context), τον ρόλο της Βάσης Γνώσης (Project Knowledge) και των Οδηγιών (Instructions), καθώς και τα κριτήρια για το πότε αξίζει να δημιουργήσετε ένα Project.</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/1204519422?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="Claude Projects — αυτόνομοι χώροι εργασίας στο Claude"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.1 / Ερώτηση κατανόησης βίντεο -->
+      <section class="chapter" data-title="Ερώτηση: τι είναι το Project" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · Υποενότητα 3.1</span>
+        <h1>Ελέγξτε τι κατανοήσατε</h1>
+        <div class="activity quiz-mini js-mcq" id="q31_video" data-correct="1"
+             data-ok="Σωστά! Το Project είναι ένας αυτόνομος, κλειστός χώρος εργασίας με δικό του ιστορικό συνομιλιών και δική του, ιδιωτική «βάση γνώσης»."
+             data-ko="Δεν είναι σωστό. Το Project δεν είναι ούτε απλή συνομιλία ούτε εξωτερικό πρόγραμμα — είναι ένας αυτόνομος χώρος εργασίας (workspace) μέσα στο Claude, με ξεχωριστό ιστορικό και ιδιωτική βάση γνώσης.">
+          <p class="act-q">Τι είναι ένα Project στο Claude;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Μια απλή συνομιλία με μεγαλύτερο όριο μηνυμάτων.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Ένας αυτόνομος, κλειστός χώρος εργασίας (workspace) με δικό του ιστορικό συνομιλιών και ιδιωτική «βάση γνώσης».</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Ένα εξωτερικό πρόγραμμα διαχείρισης έργων που συνδέεται με το Claude.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <!-- 3.1 / Διαφάνεια: Τι είναι το Project + Η αναλογία του γραφείου -->
+      <section class="chapter" data-title="Τι είναι το Project" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Υποενότητα 3.1</span>
+        <h1>Τι είναι το Project</h1>
+        <p>Ένα Project είναι ένας αυτόνομος, κλειστός χώρος εργασίας (workspace) μέσα στο Claude. Διαθέτει το δικό του, ξεχωριστό ιστορικό συνομιλιών και τη δική του, ιδιωτική <strong>«βάση γνώσης»</strong>. Μέσα σε κάθε Project μπορείτε να ανεβάσετε έγγραφα, να δώσετε συγκεκριμένο πλαίσιο και να πραγματοποιήσετε απόλυτα εστιασμένες συνομιλίες με το μοντέλο.</p>
+        <p>Για να αντιληφθούμε τη διαφορά, αρκεί να σκεφτούμε πώς οργανώνουμε την εργασία μας στο φυσικό μας περιβάλλον — <strong>η αναλογία του φυσικού γραφείου</strong>:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">📄</div>
+            <h3>Η «Απλή» Συνομιλία (Chat)</h3>
+            <p>Είναι σαν να μιλάτε με έναν νέο συνεργάτη πάνω από μια λευκή κόλλα χαρτί. Του εξηγείτε τα πάντα από την αρχή, αλλά μόλις αλλάξετε δωμάτιο (ανοίξετε νέο chat), πρέπει να του ξαναπείτε ποιος είναι, τι θέλετε και να του ξαναδείξετε τα ίδια έγγραφα.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🏢</div>
+            <h3>Το Project</h3>
+            <p>Είναι σαν να έχετε στήσει ένα ολόκληρο, αποκλειστικό γραφείο γι' αυτόν τον συνεργάτη. Ο φάκελος με τα έγγραφα είναι ήδη αρχειοθετημένος στο συρτάρι, οι οδηγίες εργασίας είναι κολλημένες στον τοίχο, και όποια νέα συζήτηση κι αν ανοίξετε εκεί μέσα, το πλαίσιο είναι ήδη ενεργό και δεδομένο.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.1 / Διαφάνεια: Πού βρίσκονται τα Projects -->
+      <section class="chapter" data-title="Πού βρίσκονται τα Projects" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Υποενότητα 3.1</span>
+        <h1>Η επιλογή των Projects στο περιβάλλον του Claude</h1>
+        <p>Όταν συνδέεστε στον λογαριασμό σας, στο αριστερό κάθετο μενού πλοήγησης (Sidebar), κάτω ακριβώς από την επιλογή των απλών συνομιλιών (Chats), θα συναντήσετε την επιλογή <strong>Projects</strong> με το χαρακτηριστικό εικονίδιο του χαρτοφύλακα.</p>
+        <figure class="shot">
+          <img src="assets/images/image001.png" alt="Η επιλογή Projects στο αριστερό μενού πλοήγησης του Claude" loading="lazy">
+          <figcaption>«Projects» στο αριστερό μενού πλοήγησης της κεντρικής οθόνης του Claude</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.1 / Διαφάνεια: Dashboard -->
+      <section class="chapter" data-title="Ο πίνακας ελέγχου (Dashboard)" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Υποενότητα 3.1</span>
+        <h1>Ο κεντρικός πίνακας ελέγχου (Dashboard)</h1>
+        <p>Κάνοντας κλικ στην επιλογή Projects, μεταφέρεστε στον κεντρικό πίνακα ελέγχου (Dashboard) των έργων. Το περιβάλλον αυτό είναι σχεδιασμένο με γνώμονα την καθαρότητα και την εύκολη οργάνωση, περιλαμβάνοντας τα εξής βασικά στοιχεία:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">➕</div>
+            <h4>Κουμπί «New project»</h4>
+            <p>Βρίσκεται στο πάνω δεξί μέρος της οθόνης και αποτελεί την αφετηρία για τη δημιουργία ενός νέου ψηφιακού χώρου εργασίας.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🔍</div>
+            <h4>Μπάρα Αναζήτησης («Search projects...»)</h4>
+            <p>Σας επιτρέπει να αναζητήσετε γρήγορα ένα συγκεκριμένο έργο πληκτρολογώντας τον τίτλο του, λειτουργία ιδιαίτερα χρήσιμη όταν διαχειρίζεστε πολλά Projects ταυτόχρονα.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">↕️</div>
+            <h4>Φίλτρο Ταξινόμησης («Sort by»)</h4>
+            <p>Σας δίνει τη δυνατότητα να ταξινομήσετε τα έργα σας με βάση την πρόσφατη δραστηριότητα (Activity) ή αλφαβητικά.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🗂️</div>
+            <h4>Κάρτες Έργων (Project Cards)</h4>
+            <p>Κάθε Project εμφανίζεται ως μια αυτόνομη τετράγωνη κάρτα. Στην κάρτα αναγράφεται ο τίτλος του έργου, μια σύντομη περιγραφή του σκοπού του, καθώς και η χρονική σήμανση της τελευταίας ενημέρωσης (π.χ. Updated 2 weeks ago), ώστε να γνωρίζετε πότε εργαστήκατε τελευταία φορά σε αυτό.</p>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image002.png" alt="Ο κεντρικός πίνακας ελέγχου των Projects με κάρτες έργων, αναζήτηση και ταξινόμηση" loading="lazy">
+          <figcaption>«Κεντρικός πίνακας ελέγχου (Dashboard) των Projects»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.1 / Διαφάνεια: Εφήμερο vs Μόνιμο πλαίσιο (tabs) -->
+      <section class="chapter" data-title="Εφήμερο vs Μόνιμο πλαίσιο" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Υποενότητα 3.1</span>
+        <h1>Η Ουσιαστική Διαφορά: Εφήμερο έναντι Μόνιμου πλαισίου</h1>
+        <p>Η πραγματική διαφορά ανάμεσα στις δύο λειτουργίες δεν αφορά το μέγεθος της εργασίας («μικρό vs μεγάλο»), αλλά τη <strong>διάρκεια του πλαισίου (context)</strong>.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="ctx-chat" role="tab" aria-selected="true">Εφήμερο πλαίσιο (Chat)</button>
+            <button type="button" class="tab-btn" data-tab="ctx-project" role="tab" aria-selected="false">Μόνιμο πλαίσιο (Project)</button>
+          </div>
+          <div class="tab-panel active" data-tab="ctx-chat" role="tabpanel">
+            <p>Στην απλή συνομιλία, <strong>το πλαίσιο είναι εφήμερο</strong>. Ζει και πεθαίνει μέσα σε εκείνο το ένα και μοναδικό νήμα συζήτησης. Μόλις κλείσετε τη συνομιλία και ανοίξετε μια καινούρια, το Claude δεν θυμάται απολύτως τίποτα. Πρέπει να ξανα-ανεβάσετε τα ίδια αρχεία, να ξανα-εξηγήσετε τον ρόλο του και να ξαναζητήσετε το ύφος που επιθυμείτε.</p>
+          </div>
+          <div class="tab-panel" data-tab="ctx-project" role="tabpanel">
+            <p>Στο Project, το πλαίσιο γίνεται μόνιμο. Παραμένει κοινό και προσβάσιμο για όλες τις επιμέρους συνομιλίες που θα ανοίξετε εντός του, αξιοποιώντας δύο βασικά εργαλεία: 1) την «Βάση Γνώσης» (Project Knowledge) και 2) τις οδηγίες του Project (Instructions).</p>
+            <div class="card-grid">
+              <div class="card">
+                <div class="card-icon" aria-hidden="true">📚</div>
+                <h4>Βάση Γνώσης (Project Knowledge)</h4>
+                <p>Ανεβάζετε τα σχετικά έγγραφα, πρότυπα, κείμενα ή βάσεις δεδομένων μία φορά. Το Claude τα διατηρεί στη μνήμη του και ανατρέχει σε αυτά σε κάθε νέο chat του ίδιου Project.</p>
+              </div>
+              <div class="card">
+                <div class="card-icon" aria-hidden="true">📝</div>
+                <h4>Οδηγίες Project (Project Instructions)</h4>
+                <p>Ορίζετε εκ των προτέρων γενικές οδηγίες (Custom Instructions) για τη συμπεριφορά του μοντέλου, για παράδειγμα, να απαντά πάντα με συγκεκριμένο επίσημο ύφος ή από την οπτική ενός εξειδικευμένου ρόλου.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">💡</span>
+          <div><p>Επομένως, σε μια απλή συνομιλία στήνετε το πλαίσιο <em>κάθε φορά</em>, ενώ σε ένα Project το στήνετε <em>μία φορά</em> και το ξαναχρησιμοποιείτε μόνιμα.</p></div>
+        </div>
+      </section>
+
+      <!-- 3.1 / Διαφάνεια: Συγκριτικός πίνακας -->
+      <section class="chapter" data-title="Σύγκριση: Chat vs Project" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Υποενότητα 3.1</span>
+        <h1>Chat και Project με μια ματιά</h1>
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr><th>Χαρακτηριστικό</th><th>Απλή Συνομιλία (Chat)</th><th>Project</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Διάρκεια Μνήμης</td>
+                <td>Περιορίζεται στα όρια της συγκεκριμένης συζήτησης.</td>
+                <td>Μόνιμη για όλο το υλικό που περιλαμβάνεται στον φάκελο.</td>
+              </tr>
+              <tr>
+                <td>Διαχείριση Αρχείων</td>
+                <td>Τα αρχεία χάνονται μόλις ανοίξετε νέο chat.</td>
+                <td>Τα αρχεία αποθηκεύονται κεντρικά και είναι διαθέσιμα σε κάθε νέο chat.</td>
+              </tr>
+              <tr>
+                <td>Καθορισμός Οδηγιών</td>
+                <td>Απαιτείται επανάληψη του ύφους και του ρόλου σε κάθε prompt.</td>
+                <td>Ορίζετε μία φορά τις «Project Instructions» για όλες τις συζητήσεις.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3.1 / Διαφάνεια: Πότε αξίζει -->
+      <section class="chapter" data-title="Πότε αξίζει ένα Project;" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Υποενότητα 3.1</span>
+        <h1>Πότε αξίζει να δημιουργήσετε ένα Project;</h1>
+        <p>Η δημιουργία ενός Project απαιτεί ελάχιστο χρόνο προετοιμασίας, αλλά σας γλιτώνει από ώρες επαναλαμβανόμενης εργασίας. Μπορείτε να αποφασίζετε πότε να το χρησιμοποιείτε θέτοντας στον εαυτό σας <strong>τρεις ερωτήσεις-φίλτρα</strong>. Αν η απάντηση σε τουλάχιστον δύο από αυτές είναι «ναι», τότε η δημιουργία Project είναι η βέλτιστη επιλογή:</p>
+        <div class="flip-grid">
+          <button type="button" class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">1. «Θα το ξαναπιάσω;»<span class="flip-hint">Κάντε κλικ για την εξήγηση</span></div>
+              <div class="flip-face flip-back"><p>Είναι ένα θέμα ή μια εργασία στην οποία θα επιστρέφετε πολλές φορές, σε διαφορετικές ημέρες ή σε ξεχωριστά νήματα συζήτησης, και όχι μια εφάπαξ ερώτηση.</p></div>
+            </div>
+          </button>
+          <button type="button" class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">2. «Υπάρχει σταθερό υλικό αναφοράς;»<span class="flip-hint">Κάντε κλικ για την εξήγηση</span></div>
+              <div class="flip-face flip-back"><p>Διαθέτετε έγγραφα, δεδομένα, νομοθεσίες, οδηγίες ή προδιαγραφές που, αν δεν είχατε Project, θα έπρεπε να τα μεταφορτώνετε ξανά και ξανά;</p></div>
+            </div>
+          </button>
+          <button type="button" class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">3. «Θέλω συνέπεια;»<span class="flip-hint">Κάντε κλικ για την εξήγηση</span></div>
+              <div class="flip-face flip-back"><p>Επιθυμείτε το Claude να διατηρεί το ίδιο ακριβώς ύφος, τον ίδιο ρόλο ή την ίδια μορφή παραδοτέων κάθε φορά, χωρίς να του το υπενθυμίζετε;</p></div>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- 3.1 / Διαφάνεια: Πότε ΔΕΝ -->
+      <section class="chapter" data-title="Πότε ΔΕΝ χρειάζεται" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Υποενότητα 3.1</span>
+        <h1>Πότε ΔΕΝ χρειάζεται να το χρησιμοποιήσετε;</h1>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">🚫</span>
+          <div>
+            <p>Για να μην υπερφορτώνετε το περιβάλλον εργασίας σας, αποφύγετε τα Projects όταν πρόκειται για παράδειγμα για:</p>
+            <ul>
+              <li>Μια μεμονωμένη, γρήγορη ερώτηση (π.χ. «μετάφρασέ μου αυτή την παράγραφο»).</li>
+              <li>Μια εργασία χωρίς υποστηρικτικό υλικό που θα ξαναχρειαστεί στο μέλλον.</li>
+              <li>Διερευνητικές, άσχετες μεταξύ τους ερωτήσεις (εκεί η απλή συνομιλία είναι πιο γρήγορη και καθαρή).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.1 / Ερώτηση: σενάριο απόφασης -->
+      <section class="chapter" data-title="Σενάριο: Project ή chat;" data-group="3.1 Projects — τι είναι και πότε αξίζει να φτιάξεις ένα">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · Υποενότητα 3.1</span>
+        <h1>Εφαρμόστε το σε σενάριο</h1>
+        <div class="activity quiz-mini js-mcq" id="q31_scenario" data-correct="2"
+             data-ok="Ακριβώς! Και οι τρεις ερωτήσεις-φίλτρα απαντώνται «ναι»: θα το ξαναπιάσετε, υπάρχει σταθερό υλικό αναφοράς και θέλετε συνέπεια — άρα το Project είναι η βέλτιστη επιλογή."
+             data-ko="Ξανασκεφτείτε τα τρία φίλτρα: «Θα το ξαναπιάσω;», «Υπάρχει σταθερό υλικό αναφοράς;», «Θέλω συνέπεια;». Αν τουλάχιστον δύο απαντήσεις είναι «ναι», αξίζει Project.">
+          <p class="act-q">Συντάσσετε κάθε εβδομάδα αναφορές για τον ίδιο πελάτη, βασισμένες στα ίδια έγγραφα προδιαγραφών, και θέλετε πάντα την ίδια δομή παραδοτέου. Τι σας συμφέρει;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Απλή συνομιλία — είναι πάντα πιο γρήγορη επιλογή.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Νέα συνομιλία κάθε εβδομάδα, ανεβάζοντας ξανά τα έγγραφα.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Δημιουργία Project — και οι τρεις ερωτήσεις-φίλτρα απαντώνται «ναι».</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           ΥΠΟΕΝΟΤΗΤΑ 3.2 — ΔΗΜΙΟΥΡΓΙΑ PROJECT
+      ================================================================= -->
+
+      <!-- 3.2 / Διαφάνεια: Εισαγωγή -->
+      <section class="chapter" data-title="Από τη θεωρία στην πράξη" data-group="3.2 Δημιουργία Project με instructions και knowledge base">
+        <span class="chapter-kicker">Υποενότητα 3.2</span>
+        <h1>Δημιουργία Project με instructions και knowledge base</h1>
+        <p>Αφού κατανοήσαμε τη θεωρητική υπεροχή των Projects, ήρθε η ώρα να περάσουμε στην πράξη. Ο στόχος αυτής της υποενότητας είναι να μπορείτε να δημιουργείτε ένα Project από το μηδέν, να τροφοδοτείτε τη Βάση Γνώσης (Knowledge Base) με τα κατάλληλα αρχεία αναφοράς και να συντάσσετε αποτελεσματικές Προσαρμοσμένες Οδηγίες (Custom Instructions), ορίζοντας με ακρίβεια τη συμπεριφορά του Claude.</p>
+      </section>
+
+      <!-- 3.2 / Διαφάνεια: Βήμα 1 -->
+      <section class="chapter" data-title="Βήμα 1: Δημιουργία Project" data-group="3.2 Δημιουργία Project με instructions και knowledge base">
+        <span class="chapter-kicker">Υποενότητα 3.2 · Βήμα 1</span>
+        <h1>Βήμα 1: Αρχική Δημιουργία του Project</h1>
+        <ol class="steps">
+          <li><strong class="step-title">Επιλέγετε το κουμπί «New Project»</strong></li>
+          <li><strong class="step-title">Δίνετε ταυτότητα στο Project</strong> Στο παράθυρο διαλόγου που εμφανίζεται, θα πρέπει να συμπληρώσετε δύο βασικά πεδία για να δώσετε ταυτότητα στο νέο σας Project: 1) <strong>What are you working on? (Name your project):</strong> Εδώ πληκτρολογείτε τον τίτλο του έργου σας. 2) <strong>What are you trying to achieve? (Description):</strong> Στο πεδίο αυτό εισάγετε μια σύντομη περιγραφή του σκοπού και των στόχων του Project, ώστε να δώσετε ένα αρχικό γενικό πλαίσιο στο μοντέλο.</li>
+          <li><strong class="step-title">Κάντε κλικ στο κουμπί «Create Project»</strong> Πλέον, έχετε δημιουργήσει τον δικό σας αυτόνομο ψηφιακό χώρο εργασίας.</li>
+        </ol>
+        <figure class="shot">
+          <img src="assets/images/image003.png" alt="Παράθυρο δημιουργίας Project με πεδία ονόματος και περιγραφής" loading="lazy">
+          <figcaption>«Όνομα και Περιγραφή του Project»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.2 / Διαφάνεια: Βήμα 2 (tabs) -->
+      <section class="chapter" data-title="Βήμα 2: Βάση Γνώσης (Files)" data-group="3.2 Δημιουργία Project με instructions και knowledge base">
+        <span class="chapter-kicker">Υποενότητα 3.2 · Βήμα 2</span>
+        <h1>Βήμα 2: Εμπλουτισμός της Βάσης Γνώσης (Knowledge Base)</h1>
+        <p>Μόλις δημιουργηθεί το Project, μεταφέρεστε αυτόματα στο εσωτερικό του περιβάλλον. Στη δεξιά πλευρά της οθόνης σας βρίσκεται το κεντρικό πάνελ ρυθμίσεων και διαχείρισης του έργου. Η εισαγωγή του υλικού αναφοράς γίνεται μέσω της τρίτης κατά σειρά ενότητας, η οποία ονομάζεται <strong>Files</strong>.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="files-how" role="tab" aria-selected="true">Τι κάνετε</button>
+            <button type="button" class="tab-btn" data-tab="files-what" role="tab" aria-selected="false">Τι μπορείτε να ανεβάσετε</button>
+          </div>
+          <div class="tab-panel active" data-tab="files-how" role="tabpanel">
+            <p><strong>Τι κάνετε:</strong> Για να προσθέσετε περιεχόμενο, μπορείτε είτε να κάνετε κλικ στο εικονίδιο της προσθήκης <strong>«+»</strong> που βρίσκεται στα δεξιά του τίτλου Files, είτε να σύρετε (drag and drop) τα αρχεία σας απευθείας μέσα στο πλαίσιο που αναγράφει «Add PDFs, documents, or other text to reference in this project».</p>
+          </div>
+          <div class="tab-panel" data-tab="files-what" role="tabpanel">
+            <p><strong>Τι μπορείτε να ανεβάσετε:</strong> Αναφορές σε PDF, υπολογιστικά φύλλα Excel, ή ακόμη και αρχεία κώδικα. Αυτά τα αρχεία αποτελούν πλέον τα μόνιμα δεδομένα στα οποία θα βασίζεται το Claude για να σας απαντά.</p>
+            <figure class="shot">
+              <img src="assets/images/image004.png" alt="Η ενότητα Files του Project για την προσθήκη αρχείων στη Βάση Γνώσης" loading="lazy">
+              <figcaption>«Βάση Γνώσης στην Κατηγορία Files — Προσθήκη των αρχείων που θα εργαστείτε»</figcaption>
+            </figure>
+            <div class="callout callout-note">
+              <span class="co-icon" aria-hidden="true">📌</span>
+              <div><p>Μόλις μεταφορτωθούν, τα αρχεία αυτά αποθηκεύονται μόνιμα στο συγκεκριμένο Project και αποτελούν τη σταθερή βάση γνώσης πάνω στην οποία θα βασίζεται το Claude για να απαντά σε κάθε νέα συνομιλία που ανοίγετε.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.2 / Διαφάνεια: Βήμα 3 (tabs) -->
+      <section class="chapter" data-title="Βήμα 3: Set Instructions" data-group="3.2 Δημιουργία Project με instructions και knowledge base">
+        <span class="chapter-kicker">Υποενότητα 3.2 · Βήμα 3</span>
+        <h1>Βήμα 3: Προσθήκη Οδηγιών Project (Project Instructions)</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="instr-set" role="tab" aria-selected="true">Η επιλογή Set Instructions</button>
+            <button type="button" class="tab-btn" data-tab="instr-field" role="tab" aria-selected="false">Το πεδίο συγγραφής των οδηγιών</button>
+          </div>
+          <div class="tab-panel active" data-tab="instr-set" role="tabpanel">
+            <p>Στο ίδιο δεξί μενού, κάτω από τη βάση γνώσης, θα βρείτε την επιλογή <strong>Set Instructions</strong>. Εδώ βρίσκεται η «καρδιά» της εξατομίκευσης. Οι οδηγίες που θα πληκτρολογήσετε σε αυτό το πεδίο θα εφαρμόζονται αυτόματα σε κάθε νέο chat που ανοίγετε μέσα στο συγκεκριμένο Project. Οι οδηγίες του Project σάς επιτρέπουν να «κλειδώσετε» μόνιμα τη συμπεριφορά, τον ρόλο και το ύφος του Claude για οποιαδήποτε συζήτηση πραγματοποιηθεί μέσα σε αυτόν τον χώρο εργασίας.</p>
+            <figure class="shot">
+              <img src="assets/images/image005.png" alt="Η επιλογή Set Instructions στο πλαϊνό πάνελ του Project" loading="lazy">
+              <figcaption>«Καθορισμός Οδηγιών Project»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="instr-field" role="tabpanel">
+            <p>Πατώντας πάνω στο «+» που βρίσκεται δίπλα στο Instruction, οδηγείστε στην επόμενη εικόνα, ώστε να γράψετε τις οδηγίες για το Project.</p>
+            <figure class="shot">
+              <img src="assets/images/image006.png" alt="Πεδίο συγγραφής των οδηγιών του Project" loading="lazy">
+              <figcaption>«Οδηγίες Project»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.2 / Δραστηριότητα: σειρά βημάτων -->
+      <section class="chapter" data-title="Δραστηριότητα: τα 5 βήματα" data-group="3.2 Δημιουργία Project με instructions και knowledge base">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · Υποενότητα 3.2</span>
+        <h1>Βάλτε τα βήματα στη σειρά</h1>
+        <div class="activity js-seq" id="q32_seq"
+             data-ok="Σωστή σειρά! Πρώτα δημιουργείτε το Project, μετά του δίνετε ταυτότητα, έπειτα το τροφοδοτείτε με αρχεία και τέλος «κλειδώνετε» τη συμπεριφορά του με Instructions."
+             data-ko="Η σειρά δεν είναι σωστή. Θυμηθείτε τη ροή: New Project → Όνομα &amp; Περιγραφή → Create Project → Files (Βάση Γνώσης) → Set Instructions.">
+          <p class="act-q">Τοποθετήστε τα βήματα δημιουργίας ενός πλήρους Project στη σωστή σειρά (κάντε κλικ στα βήματα με τη σειρά που εκτελούνται):</p>
+          <div class="seq-pool">
+            <button type="button" class="seq-item" data-step="4">Προσθήκη αρχείων στην ενότητα Files (Βάση Γνώσης)</button>
+            <button type="button" class="seq-item" data-step="2">Συμπλήρωση ονόματος &amp; περιγραφής του Project</button>
+            <button type="button" class="seq-item" data-step="5">Συγγραφή των Project Instructions (Set Instructions)</button>
+            <button type="button" class="seq-item" data-step="1">Κλικ στο κουμπί «New Project»</button>
+            <button type="button" class="seq-item" data-step="3">Κλικ στο «Create Project»</button>
+          </div>
+          <div class="seq-slots">
+            <div class="seq-slot"><span class="slot-num">1.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">2.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">3.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">4.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">5.</span><span class="slot-text"></span></div>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <!-- 3.2 / Διαφάνεια: Γιατί οι Οδηγίες (1-2) -->
+      <section class="chapter" data-title="Γιατί οι Οδηγίες; (ρόλος &amp; ύφος)" data-group="3.2 Δημιουργία Project με instructions και knowledge base">
+        <span class="chapter-kicker">Υποενότητα 3.2</span>
+        <h1>Γιατί είναι τόσο σημαντικές οι Οδηγίες Project;</h1>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🎭</div>
+            <h4>1. Μόνιμος Ρόλος (Persona)</h4>
+            <p>Ορίζετε μία φορά την ιδιότητα του Claude (π.χ. «Θέλω να λειτουργείς ως έμπειρος Social Media Manager» ή «ως Νομικός Σύμβουλος»). Το μοντέλο δεν θα βγει ποτέ από αυτόν τον ρόλο, όσα νέα chat κι αν ανοίξετε.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🖋️</div>
+            <h4>2. Σταθερό Ύφος και Μορφοποίηση</h4>
+            <p>Μπορείτε να του επιβάλετε συγκεκριμένους κανόνες εμφάνισης των αποτελεσμάτων. Για παράδειγμα, να χρησιμοποιεί πάντα επίσημο ύφος, να αποφεύγει τα μακροσκελή κείμενα, να απαντά με bullet points ή να ενσωματώνει συγκεκριμένα hashtags και emojis αν πρόκειται για υλικό marketing.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🔗</div>
+            <h4>3. Αυτόματη Διασύνδεση με τα Αρχεία σας</h4>
+            <p>Μέσα στις οδηγίες μπορείτε να του δώσετε την εντολή να ανατρέχει πάντα στα έγγραφα που έχετε ανεβάσει στην ενότητα <strong>Files</strong>, να διασταυρώνει τις πληροφορίες μαζί τους και να αναφέρει ακόμη και τις σελίδες των πηγών για λόγους τεκμηρίωσης.</p>
+          </div>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">✨</span>
+          <div><p><strong>Το Μεγάλο Όφελος:</strong> Οι οδηγίες λειτουργούν ως ένα μόνιμο «αόρατο prompt» που εκτελείται στο υπόβαθρο κάθε συνομιλίας. Έτσι, εσείς γράφετε πλέον ελάχιστες λέξεις στο chat (π.χ. «Φτιάξε το post της εβδομάδας») και το Claude αναλαμβάνει να το υλοποιήσει ακολουθώντας πιστά όλους τους σύνθετους κανόνες που έχετε ορίσει στις Instructions.</p></div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           ΥΠΟΕΝΟΤΗΤΑ 3.3 — ΠΑΡΑΔΕΙΓΜΑΤΑ PROJECTS
+      ================================================================= -->
+
+      <!-- 3.3 / Διαφάνεια: Εισαγωγή -->
+      <section class="chapter" data-title="Έτοιμα blueprints" data-group="3.3 Παραδείγματα Projects για διαφορετικά profiles">
+        <span class="chapter-kicker">Υποενότητα 3.3</span>
+        <h1>Παραδείγματα Projects για διαφορετικά profiles</h1>
+        <p>Η δύναμη των Projects κρύβεται στην ευελιξία τους να μεταμορφώνονται ανάλογα με τον επαγγελματικό ή ακαδημαϊκό ρόλο του χρήστη. Ο στόχος αυτής της υποενότητας είναι να σας προσφέρει έτοιμα, δοκιμασμένα πρότυπα (blueprints) για διαφορετικά προφίλ, τα οποία μπορείτε να αντιγράψετε και να προσαρμόσετε άμεσα στις δικές σας ανάγκες.</p>
+      </section>
+
+      <!-- 3.3 / Διαφάνεια: Προφίλ SMM — στήσιμο (tabs) -->
+      <section class="chapter" data-title="Προφίλ: Social Media Manager" data-group="3.3 Παραδείγματα Projects για διαφορετικά profiles">
+        <span class="chapter-kicker">Υποενότητα 3.3 · Παράδειγμα 1ο</span>
+        <h1>Το Προφίλ του Διαχειριστή Μέσων Κοινωνικής Δικτύωσης (Social Media Manager)</h1>
+        <p>Για έναν Social Media Manager, η καθημερινή πρόκληση δεν είναι απλώς η συγγραφή κειμένων, αλλά η διατήρηση μιας σταθερής και αναγνωρίσιμης εταιρικής ταυτότητας (Brand Voice) για διαφορετικά brands ή καμπάνιες. Η δημιουργία ενός εξειδικευμένου Project στο Claude σάς επιτρέπει να «κλειδώσετε» το ύφος μιας εταιρείας, μετατρέποντας το μοντέλο σε έναν μόνιμο Content Creator που γνωρίζει το κοινό σας όσο εσείς.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="smm-files" role="tab" aria-selected="true">1. Files (Βάση Γνώσης)</button>
+            <button type="button" class="tab-btn" data-tab="smm-instr-a" role="tab" aria-selected="false">2. Instructions: ρόλος &amp; ύφος</button>
+            <button type="button" class="tab-btn" data-tab="smm-instr-b" role="tab" aria-selected="false">Instructions: κανάλια &amp; δομή</button>
+            <button type="button" class="tab-btn" data-tab="smm-screen" role="tab" aria-selected="false">Στο περιβάλλον του Claude</button>
+          </div>
+          <div class="tab-panel active" data-tab="smm-files" role="tabpanel">
+            <h3>1. Τι θα ανεβάσετε στην ενότητα «Files» (Βάση Γνώσης)</h3>
+            <p>Για να αποκτήσει το Claude πλήρη γνώση του brand και της στρατηγικής σας, μεταφορτώνετε τα αρχεία σας, όπως για παράδειγμα:</p>
+            <ul class="checklist">
+              <li>Ένα έγγραφο με τις κατευθυντήριες γραμμές της εταιρείας (απαγορευμένες λέξεις, επιθυμητή ορολογία, φιλοσοφία).</li>
+              <li>Αναλυτικές περιγραφές των ιδανικών πελατών στους οποίους απευθύνεστε (δημογραφικά στοιχεία, ενδιαφέροντα, ανάγκες).</li>
+              <li>Το πλάνο με τη θεματολογία της χρονιάς ή της τρέχουσας καμπάνιας.</li>
+            </ul>
+            <figure class="shot">
+              <img src="assets/images/image007.png" alt="Ανεβασμένα έγγραφα του brand στη Βάση Γνώσης του Project" loading="lazy">
+              <figcaption>«Ανεβασμένα έγγραφα στην Βάση Γνώσης»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="smm-instr-a" role="tabpanel">
+            <h3>2. Τι θα γράψετε στην ενότητα «Instructions» (Οδηγίες Project)</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Prompt για τις Οδηγίες Project (Social Media Manager)</span>
+              <p class="pb-text">«Θέλω να λειτουργείς ως Creative Social Media Manager και Copywriter υψηλού επιπέδου. Σε αυτό το Project, θα δημιουργούμε περιεχόμενο για τα κανάλια επικοινωνίας μας, βασιζόμενοι αυστηρά στο Brand Style Guide και στις Buyer Personas που βρίσκονται στα Files.</p>
+              <p><strong>Κανόνες Συμπεριφοράς και Ύφους:</strong></p>
+              <p><strong>1. Ύφος και Τόνος:</strong> Η φωνή του brand μας είναι σύγχρονη, ενθαρρυντική, γεμάτη ενέργεια και απόλυτα φιλική. Χρησιμοποίησε άμεσο λόγο που χτίζει κοινότητα (ενικό ή πληθυντικό ανάλογα με το μέσο), αποφεύγοντας το στεγνό ή υπερβολικά τυπικό εταιρικό ύφος.</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="smm-instr-b" role="tabpanel">
+            <h3>Το prompt των οδηγιών — συνέχεια</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Prompt για τις Οδηγίες Project (συνέχεια)</span>
+              <p><strong>2. Προσαρμογή ανά Κανάλι:</strong></p>
+              <ul>
+                <li><strong>LinkedIn:</strong> Επαγγελματικό, industry-focused ύφος, δομημένο με σύντομες παραγράφους (hook-driven) και έμφαση σε business insights.</li>
+                <li><strong>Instagram/Facebook:</strong> Πιο χαλαρό ύφος, χρήση emojis για οπτικό διαχωρισμό του κειμένου και έντονο Call to Action (CTA).</li>
+              </ul>
+              <p><strong>3. Δομή Δημοσίευσης:</strong> Κάθε post πρέπει να περιλαμβάνει: α) Ένα δυνατό "Hook" (πιασάρικη πρώτη γραμμή), β) Το κυρίως σώμα σε ευανάγνωστη μορφή και γ) Ένα ξεκάθαρο Call to Action (CTA) που προτρέπει σε σχόλιο ή κλικ, ακολουθούμενο από τα σταθερά hashtags της εταιρείας.</p>
+              <p>Αποθήκευσε αυτούς τους κανόνες και εφάρμοσέ τους σε κάθε νέο chat.»</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="smm-screen" role="tabpanel">
+            <h3>Οι οδηγίες μέσα στο περιβάλλον του Claude</h3>
+            <figure class="shot">
+              <img src="assets/images/image008.png" alt="Το prompt των οδηγιών Project για τον ρόλο Social Media Manager" loading="lazy">
+              <figcaption>«Prompt για τις Οδηγίες Project (Social Media Manager)»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image009.png" alt="Το Project με συμπληρωμένα Instructions και Files" loading="lazy">
+              <figcaption>«Instructions &amp; Files»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.3 / Διαφάνεια: SMM στην πράξη (tabs) -->
+      <section class="chapter" data-title="SMM: χρήση στην πράξη" data-group="3.3 Παραδείγματα Projects για διαφορετικά profiles">
+        <span class="chapter-kicker">Υποενότητα 3.3 · Παράδειγμα 1ο</span>
+        <h1>3. Πώς το χρησιμοποιείτε στην πράξη</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="smm-use" role="tab" aria-selected="true">Χρήση στην πράξη</button>
+            <button type="button" class="tab-btn" data-tab="smm-result" role="tab" aria-selected="false">Το Claude επί το έργον</button>
+          </div>
+          <div class="tab-panel active" data-tab="smm-use" role="tabpanel">
+            <p>Αφού αποθηκεύσετε τις οδηγίες, η καθημερινή παραγωγή περιεχομένου απλοποιείται στο μέγιστο. Ανοίγετε ένα νέο chat μέσα στο Project και πληκτρολογείτε:</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">Prompt Χρήστη στο Chat</span>
+              <p class="pb-text">«Με βάση τη «Persona» που έχουμε στα αρχεία μας, γράψε ένα post για το Instagram που θα ανακοινώνει την έναρξη του καλοκαιρινού μας διαγωνισμού.»</p>
+            </div>
+            <p>Το Claude θα ανατρέξει αμέσως στα Files για να θυμηθεί τα χαρακτηριστικά της Persona, θα εφαρμόσει το ενεργητικό ύφος, θα δημιουργήσει το Hook, θα προσθέσει τα κατάλληλα emojis και θα κλείσει με το σωστό CTA και τα hashtags, χωρίς να χρειαστεί να του επαναλάβετε κανέναν κανόνα.</p>
+          </div>
+          <div class="tab-panel" data-tab="smm-result" role="tabpanel">
+            <h3>Το Claude επί το έργον</h3>
+            <figure class="shot">
+              <img src="assets/images/image010.png" alt="Στάδιο προετοιμασίας του Claude με το μήνυμα Extracting text from" loading="lazy">
+              <figcaption>«Στάδιο προετοιμασίας του Claude αμέσως μετά την υποβολή του prompt. Το μοντέλο αναγνωρίζει τις οδηγίες του Project και εμφανίζει το μήνυμα «Extracting text from….»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image011.png" alt="Ανάλυση του Claude σε πραγματικό χρόνο για τη δημιουργία του post" loading="lazy">
+              <figcaption>«Ανάλυση του Claude σε πραγματικό χρόνο»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.3 / Διαφάνεια: Προφίλ Business Consultant — στήσιμο (tabs) -->
+      <section class="chapter" data-title="Προφίλ: Business Consultant" data-group="3.3 Παραδείγματα Projects για διαφορετικά profiles">
+        <span class="chapter-kicker">Υποενότητα 3.3 · Πλάνο 2ο</span>
+        <h1>Το Προφίλ του Συμβούλου Επιχειρήσεων / Αναλυτή Έργων (Business Consultant / Project Analyst)</h1>
+        <p>Για έναν σύμβουλο επιχειρήσεων ή αναλυτή, η καθημερινότητα περιλαμβάνει τη διαχείριση μεγάλου όγκου εταιρικών δεδομένων, οικονομικών αναφορών και προδιαγραφών έργων. Η δημιουργία ενός Project στο Claude λειτουργεί ως ένας μόνιμος, ιδιωτικός «Συνεργάτης Στρατηγικής» (Strategy Partner), ο οποίος γνωρίζει τις ιδιαιτερότητες του πελάτη ή του κλάδου και βοηθά στην ταχύτατη εξαγωγή συμπερασμάτων και τη σύνταξη παραδοτέων.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="con-files" role="tab" aria-selected="true">1. Files (Βάση Γνώσης)</button>
+            <button type="button" class="tab-btn" data-tab="con-instr-a" role="tab" aria-selected="false">2. Instructions: ύφος</button>
+            <button type="button" class="tab-btn" data-tab="con-instr-b" role="tab" aria-selected="false">Instructions: δομή αναφορών</button>
+          </div>
+          <div class="tab-panel active" data-tab="con-files" role="tabpanel">
+            <h3>1. Τι θα ανεβάσετε στην ενότητα «Files» (Βάση Γνώσης)</h3>
+            <p>Για να αποκτήσει το Claude το απαραίτητο επιχειρηματικό υπόβαθρο, μεταφορτώνετε:</p>
+            <ul class="checklist">
+              <li><strong>Οικονομικές Αναφορές &amp; Data:</strong> Αρχεία Excel ή PDF με ισολογισμούς, τριμηνιαία αποτελέσματα ή δεδομένα πωλήσεων της υπό εξέταση εταιρείας.</li>
+              <li><strong>Κανονιστικό Πλαίσιο / Industry Reports:</strong> Μελέτες αγοράς για τον συγκεκριμένο κλάδο ή το νομικό/θεσμικό πλαίσιο που επηρεάζει το έργο.</li>
+              <li><strong>Πρότυπα Παραδοτέων (Templates):</strong> Ένα αρχείο Word που δείχνει τη δομή που πρέπει να έχει μια επίσημη επιχειρηματική πρόταση (Business Proposal) ή μια ανάλυση βιωσιμότητας.</li>
+            </ul>
+          </div>
+          <div class="tab-panel" data-tab="con-instr-a" role="tabpanel">
+            <h3>2. Τι θα γράψετε στην ενότητα «Instructions» (Οδηγίες Project)</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Prompt για τις Οδηγίες Project (Business Consultant)</span>
+              <p class="pb-text">«Θέλω να λειτουργείς ως Ανώτατος Σύμβουλος Επιχειρήσεων (Management Consultant) και Οικονομικός Αναλυτής. Σε αυτό το Project, θα αναλύουμε δεδομένα και θα συντάσσουμε αναφορές βασιζόμενοι αυστηρά στα εταιρικά αρχεία και τις μελέτες που βρίσκονται στα Files.</p>
+              <p><strong>Κανόνες Συμπεριφοράς και Ύφους:</strong></p>
+              <p><strong>Ύφος:</strong> Το ύφος σου πρέπει να είναι απόλυτα επαγγελματικό, εταιρικό, αντικειμενικό και αναλυτικό. Απόφευγε γενικόλογες εκφράσεις και εντυπωσιακά επίθετα (π.χ. "φανταστική απόδοση"). Κάθε ισχυρισμός σου πρέπει να υποστηρίζεται από τα δεδομένα των αρχείων.</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="con-instr-b" role="tabpanel">
+            <h3>Το prompt των οδηγιών — συνέχεια</h3>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">✔ Prompt για τις Οδηγίες Project (συνέχεια)</span>
+              <p><strong>Δομή Αναφορών:</strong> Όταν σου ζητώ τη σύνταξη business κειμένων, θα χρησιμοποιείς δομή Executive Summary: α) Κύριο Συμπέρασμα (Bottom Line Up Front), β) Ποσοτική Ανάλυση (με νούμερα και ποσοστά), γ) Εντοπισμός Ρίσκων/Προκλήσεων και δ) 3 Στρατηγικές Προτάσεις (Recommendations).</p>
+              <p><strong>Διαχείριση Δεδομένων:</strong> Σε κάθε ανάλυση, υπολόγιζε και ανάφερε πάντα τις ποσοστιαίες μεταβολές (π.χ. αύξηση YoY) ή τους σχετικούς δείκτες (KPIs) που προκύπτουν από τα υπολογιστικά φύλλα των Files.</p>
+              <p>Αποθήκευσε αυτούς τους κανόνες και εφάρμοσέ τους σε κάθε νέο chat.»</p>
+            </div>
+            <figure class="shot">
+              <img src="assets/images/image012.png" alt="Ολοκληρωμένο περιβάλλον του Project Business Consultant / Project Analyst" loading="lazy">
+              <figcaption>«Ολοκληρωμένο περιβάλλον του Project «Business Consultant / Project Analyst»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.3 / Διαφάνεια: Consultant στην πράξη (tabs) -->
+      <section class="chapter" data-title="Consultant: χρήση στην πράξη" data-group="3.3 Παραδείγματα Projects για διαφορετικά profiles">
+        <span class="chapter-kicker">Υποενότητα 3.3 · Πλάνο 2ο</span>
+        <h1>3. Πώς το χρησιμοποιείτε στην πράξη (Παράδειγμα Chat)</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="con-use" role="tab" aria-selected="true">Χρήση στην πράξη</button>
+            <button type="button" class="tab-btn" data-tab="con-result" role="tab" aria-selected="false">Από τη «σκέψη» στο παραδοτέο</button>
+          </div>
+          <div class="tab-panel active" data-tab="con-use" role="tabpanel">
+            <p>Ανοίγετε ένα νέο chat μέσα στο Project και πληκτρολογείτε μια σύντομη εντολή, χωρίς να χρειάζεται να επαναδιατυπώσετε το πλαίσιο:</p>
+            <div class="prompt-box prompt-good">
+              <span class="pb-label">Prompt Χρήστη στο Chat</span>
+              <p class="pb-text">«Με βάση τα οικονομικά δεδομένα του τελευταίου τριμήνου που έχουμε στα Files, κάνε μια σύντομη αναφορά για τη Γενική Διεύθυνση σχετικά με την πορεία των λειτουργικών εξόδων και πρότεινε 3 μέτρα περιορισμού του κόστους.»</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab="con-result" role="tabpanel">
+            <h3>Από τη «σκέψη» στο τελικό παραδοτέο</h3>
+            <figure class="shot">
+              <img src="assets/images/image013.png" alt="Το στάδιο της εσωτερικής σκέψης και προετοιμασίας του Claude" loading="lazy">
+              <figcaption>«Το στάδιο της εσωτερικής «σκέψης» και προετοιμασίας του Claude»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image014.png" alt="Το τελικό παραδοτέο του Claude για το Project του Συμβούλου Επιχειρήσεων" loading="lazy">
+              <figcaption>«Το τελικό παραδοτέο του Claude για το Project του Συμβούλου Επιχειρήσεων»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.3 / Δραστηριότητα: αντιστοίχιση προφίλ -->
+      <section class="chapter" data-title="Δραστηριότητα: αντιστοίχιση" data-group="3.3 Παραδείγματα Projects για διαφορετικά profiles">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · Υποενότητα 3.3</span>
+        <h1>Αντιστοιχίστε τα στοιχεία με το προφίλ</h1>
+        <div class="activity js-match" id="q33_match" data-ok="Εξαιρετικά! Αντιστοιχίσατε σωστά κάθε στοιχείο με το κατάλληλο προφίλ Project.">
+          <p class="act-q">Αντιστοιχίστε κάθε στοιχείο με το προφίλ Project στο οποίο ανήκει (επιλέξτε ένα στοιχείο από κάθε στήλη):</p>
+          <div class="match-cols">
+            <div class="match-col" aria-label="Στοιχεία Project">
+              <button type="button" class="match-btn" data-pair="a">Brand Style Guide &amp; Buyer Personas στα Files</button>
+              <button type="button" class="match-btn" data-pair="b">Ισολογισμοί και τριμηνιαία αποτελέσματα στα Files</button>
+              <button type="button" class="match-btn" data-pair="c">Δομή post: Hook → σώμα → CTA + hashtags</button>
+              <button type="button" class="match-btn" data-pair="d">Δομή Executive Summary με BLUF και 3 Recommendations</button>
+            </div>
+            <div class="match-col" aria-label="Προφίλ">
+              <button type="button" class="match-btn" data-pair="d">Business Consultant — μορφή αναφορών</button>
+              <button type="button" class="match-btn" data-pair="a">Social Media Manager — βάση γνώσης</button>
+              <button type="button" class="match-btn" data-pair="c">Social Media Manager — κανόνας δημοσίευσης</button>
+              <button type="button" class="match-btn" data-pair="b">Business Consultant — βάση γνώσης</button>
+            </div>
+          </div>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           ΥΠΟΕΝΟΤΗΤΑ 3.4 — MEMORY
+      ================================================================= -->
+
+      <!-- 3.4 / Διαφάνεια: Εισαγωγή -->
+      <section class="chapter" data-title="Το τρίτο επίπεδο: Memory" data-group="3.4 Memory — πώς θυμάται το Claude και πώς το ελέγχεις">
+        <span class="chapter-kicker">Υποενότητα 3.4</span>
+        <h1>Memory — πώς θυμάται το Claude και πώς το ελέγχεις</h1>
+        <p>Μέχρι τώρα εξετάσαμε πώς μπορούμε να εκπαιδεύσουμε το Claude στο περιβάλλον ενός Project, παρέχοντάς του σταθερά δεδομένα (μέσω των αρχείων Files) και απόλυτους, προκαθορισμένους κανόνες (μέσω των Instructions). Υπάρχει, ωστόσο, και ένα τρίτο, εξαιρετικά δυναμικό επίπεδο εξατομίκευσης που προσφέρει αποκλειστικά η επιλογή των Projects: η λειτουργία της <strong>Μνήμης (Memory)</strong>.</p>
+        <p>Ο στόχος αυτής της υποενότητας είναι να κατανοήσετε πώς το μοντέλο μαθαίνει αυτόματα από τις συνομιλίες σας, πώς μπορείτε να ελέγχετε αυτή τη λειτουργία (ενεργοποίηση/απενεργοποίηση) και, κυρίως, πώς να αξιολογείτε, να επεξεργάζεστε και να διαγράφετε τις αναμνήσεις του ώστε να παραμένει απόλυτα αποδοτικό.</p>
+      </section>
+
+      <!-- 3.4 / Διαφάνεια: Φιλοσοφία -->
+      <section class="chapter" data-title="Η φιλοσοφία της Μνήμης" data-group="3.4 Memory — πώς θυμάται το Claude και πώς το ελέγχεις">
+        <span class="chapter-kicker">Υποενότητα 3.4</span>
+        <h1>Η Φιλοσοφία της Μνήμης: Καθολική και Δυναμική Μάθηση</h1>
+        <p>Η Μνήμη (Memory) λειτουργεί ως ένας μηχανισμός αυτόματης εξαγωγής γνώσης. Καθώς αλληλεπιδράτε με το Claude στις απλές, καθημερινές σας συνομιλίες (Chats) και κάνετε διορθώσεις στον τρόπο που σας απαντά (π.χ., «Μην χρησιμοποιείς τόσο μεγάλες προτάσεις» ή «Προτιμώ τα δεδομένα αποκλειστικά σε μορφή πίνακα»), το σύστημα εντοπίζει αυτές τις πάγιες προτιμήσεις και τις αποθηκεύει αυτόματα.</p>
+        <p>Με αυτόν τον τρόπο, το μοντέλο «θυμάται» τις υποδείξεις σας και τις εφαρμόζει σε όλες τις μελλοντικές, ανεξάρτητες συνομιλίες σας, δημιουργώντας ένα μόνιμο, εξατομικευμένο προφίλ απαντήσεων που σας ακολουθεί παντού, χωρίς να περιορίζεται στα στενά όρια ενός συγκεκριμένου ψηφιακού φακέλου.</p>
+      </section>
+
+      <!-- 3.4 / Διαφάνεια: Πρόσβαση -->
+      <section class="chapter" data-title="Πρόσβαση στη Μνήμη" data-group="3.4 Memory — πώς θυμάται το Claude και πώς το ελέγχεις">
+        <span class="chapter-kicker">Υποενότητα 3.4</span>
+        <h1>Πρόσβαση, Ενεργοποίηση και Απενεργοποίηση της Κεντρικής Μνήμης</h1>
+        <p>Η κεντρική Μνήμη δεν βρίσκεται μέσα στα παράθυρα των συνομιλιών, αλλά στον πυρήνα του προφίλ σας. Για να αποκτήσετε πρόσβαση:</p>
+        <ol class="steps">
+          <li><strong class="step-title">Εικονίδιο προφίλ</strong> Μεταβείτε στο κάτω αριστερό μέρος της οθόνης και κάντε κλικ στο εικονίδιο του προφίλ σας (ή στο όνομά σας).</li>
+          <li><strong class="step-title">Ρυθμίσεις</strong> Επιλέξτε τις <strong>Ρυθμίσεις (Settings)</strong>.</li>
+          <li><strong class="step-title">Καρτέλα Memory</strong> Πλοηγηθείτε στην καρτέλα <strong>Memory</strong> (Μνήμη).</li>
+        </ol>
+        <figure class="shot">
+          <img src="assets/images/image015.png" alt="Η επιλογή Settings στο μενού προφίλ του Claude" loading="lazy">
+          <figcaption>«Επιλογή Settings»</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/images/image016.png" alt="Η καρτέλα Memory στις ρυθμίσεις Capabilities" loading="lazy">
+          <figcaption>«Capabilities — Memory»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.4 / Διαφάνεια: Search and reference chats (cards) -->
+      <section class="chapter" data-title="1. Search &amp; reference chats" data-group="3.4 Memory — πώς θυμάται το Claude και πώς το ελέγχεις">
+        <span class="chapter-kicker">Υποενότητα 3.4 · Λειτουργία 1</span>
+        <h1>1. Search and reference chats (Αναζήτηση &amp; αναφορά σε παλιές συνομιλίες)</h1>
+        <p>Η συγκεκριμένη λειτουργία επιτρέπει στο Claude να ανατρέχει στο ιστορικό σας για να ανακτήσει σχετικές λεπτομέρειες όποτε αυτό κρίνεται απαραίτητο.</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🗣️</div>
+            <h4>Πώς λειτουργεί</h4>
+            <p>Το μοντέλο πραγματοποιεί στοχευμένη αναζήτηση στο παρελθόν. Η διαδικασία αυτή δεν εκτελείται αυτόματα, αλλά ενεργοποιείται κατόπιν δικής σας σχετικής εντολής (π.χ. «Σε παρακαλώ, υπενθύμισέ μου τι είχαμε αναφέρει για το συγκεκριμένο θέμα», «Θυμάσαι που είχαμε δημιουργήσει το Χ κείμενο…»).</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🚧</div>
+            <h4>Περιορισμός Εμβέλειας</h4>
+            <p>Η αναζήτηση διεξάγεται είτε στο σύνολο των απλών συνομιλιών σας, είτε αυστηρά εντός ενός συγκεκριμένου Project. Το σύστημα <strong>δεν</strong> διασταυρώνει δεδομένα μεταξύ διαφορετικών Projects, διασφαλίζοντας την απόλυτη απομόνωση της πληροφορίας.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🔕</div>
+            <h4>Απενεργοποίηση (Toggle Off)</h4>
+            <p>Κλείνοντας τον διακόπτη, το Claude χάνει τη δυνατότητα πρόσβασης στο ιστορικό σας. Κάθε νέα συνομιλία εκκινεί ως ένας «λευκός καμβάς», χωρίς να αντλεί κανένα πλαίσιο (context) από προηγούμενες αλληλεπιδράσεις.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.4 / Διαφάνεια: Generate memory -->
+      <section class="chapter" data-title="2. Generate memory" data-group="3.4 Memory — πώς θυμάται το Claude και πώς το ελέγχεις">
+        <span class="chapter-kicker">Υποενότητα 3.4 · Λειτουργία 2</span>
+        <h1>2. Generate memory from chat history (Δημιουργία μνήμης από το ιστορικό)</h1>
+        <p>Αποτελεί την πιο νευραλγική λειτουργία εξατομίκευσης. Με αυτήν, το Claude μετατρέπεται σε έναν ψηφιακό συνεργάτη που χτίζει σταδιακά μια βαθιά κατανόηση του προφίλ σας.</p>
+        <ul>
+          <li>Το σύστημα δημιουργεί αυτόματα μια σύνοψη των βασικών στοιχείων από τις απλές συνομιλίες σας.</li>
+          <li>Αποθηκεύει τον επαγγελματικό σας ρόλο, το επικοινωνιακό σας ύφος, τις τεχνικές σας προτιμήσεις (π.χ. δομή αναφορών), καθώς και καίριες λεπτομέρειες από την τρέχουσα εργασία σας.</li>
+        </ul>
+        <figure class="shot">
+          <img src="assets/images/image017.png" alt="Ο διακόπτης Generate memory from chat history στις ρυθμίσεις" loading="lazy">
+          <figcaption>«Διαχείριση μνήμης»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.4 / Διαφάνεια: Pause vs Reset -->
+      <section class="chapter" data-title="Pause ή Reset;" data-group="3.4 Memory — πώς θυμάται το Claude και πώς το ελέγχεις">
+        <span class="chapter-kicker">Υποενότητα 3.4 · Λειτουργία 2</span>
+        <h1>Επιλογές Απενεργοποίησης</h1>
+        <p>Εάν επιλέξετε να κλείσετε τη λειτουργία, θα κληθείτε να επιλέξετε μεταξύ δύο καταστάσεων με ριζικά διαφορετικές συνέπειες:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">⏸️</div>
+            <h4>Pause memory (Παύση)</h4>
+            <p>Το μοντέλο διατηρεί την υπάρχουσα μνήμη ανέπαφη, αλλά δεν τη χρησιμοποιεί και δεν προσθέτει νέα δεδομένα. Οι ενδιάμεσες συζητήσεις δεν θα καταγραφούν όταν την επανενεργοποιήσετε.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🗑️</div>
+            <h4>Reset memory (Επαναφορά)</h4>
+            <p>Διαγράφει οριστικά και αμετάκλητα όλες τις μνήμες, συμπεριλαμβανομένων αυτών των Projects. Σε περίπτωση επανενεργοποίησης, το σύστημα ξεκινά τη μάθηση από το μηδέν.</p>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image018.png" alt="Οι δύο επιλογές απενεργοποίησης της μνήμης Pause και Reset" loading="lazy">
+          <figcaption>«2 επιλογές απενεργοποίησης»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.4 / Διαφάνεια: View and manage memory (tabs) -->
+      <section class="chapter" data-title="3. View &amp; manage memory" data-group="3.4 Memory — πώς θυμάται το Claude και πώς το ελέγχεις">
+        <span class="chapter-kicker">Υποενότητα 3.4 · Λειτουργία 3</span>
+        <h1>3. View and manage memory (Προβολή &amp; διαχείριση μνήμης)</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="mem-view" role="tab" aria-selected="true">Προβολή</button>
+            <button type="button" class="tab-btn" data-tab="mem-manage" role="tab" aria-selected="false">Διαχείριση των αναμνήσεων</button>
+          </div>
+          <div class="tab-panel active" data-tab="mem-view" role="tabpanel">
+            <p>Πρόκειται για το κέντρο ελέγχου των αναμνήσεων. Η σχετική ένδειξη χρόνου (π.χ. Updated 7 hours ago) σας ενημερώνει για το πότε πραγματοποιήθηκε η τελευταία αυτόματη σύνθεση δεδομένων.</p>
+            <figure class="shot">
+              <img src="assets/images/image019.png" alt="Η επιλογή View and manage memory στις ρυθμίσεις" loading="lazy">
+              <figcaption>«Προβολή &amp; διαχείριση μνήμης»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="mem-manage" role="tabpanel">
+            <p><strong>Διαχείριση:</strong> Επιλέγοντας αυτό το πεδίο, ανοίγει το αναδυόμενο παράθυρο «Manage memory», όπου μπορείτε να δείτε ακριβώς τι γνωρίζει το Claude για εσάς. Σας δίνεται η δυνατότητα να ζητήσετε την επεξεργασία της σύνοψης ή να προσθέσετε χειροκίνητα τις δικές σας προσαρμοσμένες οδηγίες, κάνοντας κλικ στο εικονίδιο του επεξεργαστή (μολύβι).</p>
+            <figure class="shot">
+              <img src="assets/images/image020.png" alt="Το παράθυρο Manage memory με τη σύνοψη όσων γνωρίζει το Claude" loading="lazy">
+              <figcaption>«Διαχείριση μνήμης»</figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <span class="co-icon" aria-hidden="true">⚡</span>
+              <div><p><strong>Σημαντική Λεπτομέρεια:</strong> Έχετε τη δυνατότητα να ενημερώσετε τη μνήμη απευθείας μέσα από οποιαδήποτε ενεργή συνομιλία. Αρκεί να δώσετε στο Claude την άμεση οδηγία να θυμάται ένα συγκεκριμένο στοιχείο. Η αλλαγή εφαρμόζεται ακαριαία στην επόμενη αλληλεπίδρασή σας, χωρίς να απαιτείται αναμονή για την ημερήσια ανανέωση του συστήματος.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.4 / Διαφάνεια: Import memory -->
+      <section class="chapter" data-title="4. Import memory" data-group="3.4 Memory — πώς θυμάται το Claude και πώς το ελέγχεις">
+        <span class="chapter-kicker">Υποενότητα 3.4 · Λειτουργία 4</span>
+        <h1>4. Import memory from other AI providers (Εισαγωγή μνήμης από άλλα AI)</h1>
+        <p>Μια καινοτόμος λειτουργία, η οποία σας επιτρέπει να μεταφέρετε το εξατομικευμένο γνωστικό υπόβαθρο (context) που έχετε ήδη αναπτύξει σε άλλες πλατφόρμες (όπως το ChatGPT). Κάνοντας κλικ στο <strong>«Start import»</strong>, το σύστημα σας παρέχει ένα έτοιμο, διαμορφωμένο prompt. Εισάγοντας αυτό το κείμενο στον λογαριασμό σας στον έτερο πάροχο, μπορείτε να εξάγετε τη μνήμη σας και να την ενσωματώσετε απευθείας στο περιβάλλον του Claude, εξοικονομώντας πολύτιμο χρόνο εκπαίδευσης του μοντέλου.</p>
+        <figure class="shot">
+          <img src="assets/images/image021.png" alt="Η λειτουργία εισαγωγής μνήμης από άλλα γλωσσικά μοντέλα" loading="lazy">
+          <figcaption>«Εισαγωγή μνήμης από άλλα γλωσσικά μοντέλα»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.4 / Δραστηριότητα: συμπλήρωση κενών -->
+      <section class="chapter" data-title="Δραστηριότητα: οι 4 λειτουργίες" data-group="3.4 Memory — πώς θυμάται το Claude και πώς το ελέγχεις">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · Υποενότητα 3.4</span>
+        <h1>Αντιστοιχίστε τις 4 λειτουργίες της Μνήμης</h1>
+        <div class="activity js-fill" id="q34_fill"
+             data-ok="Σωστά! Γνωρίζετε πλέον σε ποια λειτουργία της Μνήμης αντιστοιχεί κάθε δυνατότητα."
+             data-ko="Κάποιες επιλογές δεν είναι σωστές. Θυμηθείτε τις 4 λειτουργίες: Search and reference chats, Generate memory from chat history, View and manage memory, Import memory.">
+          <p class="act-q">Συμπληρώστε σε ποια λειτουργία της Μνήμης αντιστοιχεί κάθε περιγραφή:</p>
+          <p class="fill-blank">«Θυμάσαι που είχαμε δημιουργήσει το Χ κείμενο;» — στοχευμένη αναζήτηση στο ιστορικό κατόπιν εντολής σας →
+            <select data-answer="search" aria-label="Λειτουργία πρώτης περιγραφής">
+              <option value="">— επιλέξτε —</option>
+              <option value="search">Search and reference chats</option>
+              <option value="generate">Generate memory from chat history</option>
+              <option value="manage">View and manage memory</option>
+              <option value="import">Import memory from other AI providers</option>
+            </select>
+          </p>
+          <p class="fill-blank">Αυτόματη σύνοψη του ρόλου, του ύφους και των προτιμήσεών σας από τις συνομιλίες →
+            <select data-answer="generate" aria-label="Λειτουργία δεύτερης περιγραφής">
+              <option value="">— επιλέξτε —</option>
+              <option value="search">Search and reference chats</option>
+              <option value="generate">Generate memory from chat history</option>
+              <option value="manage">View and manage memory</option>
+              <option value="import">Import memory from other AI providers</option>
+            </select>
+          </p>
+          <p class="fill-blank">Παράθυρο «Manage memory» με επεξεργασία της σύνοψης μέσω του εικονιδίου-μολυβιού →
+            <select data-answer="manage" aria-label="Λειτουργία τρίτης περιγραφής">
+              <option value="">— επιλέξτε —</option>
+              <option value="search">Search and reference chats</option>
+              <option value="generate">Generate memory from chat history</option>
+              <option value="manage">View and manage memory</option>
+              <option value="import">Import memory from other AI providers</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Start import» — μεταφορά context από άλλες πλατφόρμες όπως το ChatGPT →
+            <select data-answer="import" aria-label="Λειτουργία τέταρτης περιγραφής">
+              <option value="">— επιλέξτε —</option>
+              <option value="search">Search and reference chats</option>
+              <option value="generate">Generate memory from chat history</option>
+              <option value="manage">View and manage memory</option>
+              <option value="import">Import memory from other AI providers</option>
+            </select>
+          </p>
+          <button type="button" class="btn btn-primary btn-sm fill-check" style="margin-top:10px;">Έλεγχος απαντήσεων</button>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           ΥΠΟΕΝΟΤΗΤΑ 3.5 — SEARCH PAST CHATS
+      ================================================================= -->
+
+      <!-- 3.5 / Διαφάνεια: Εισαγωγή -->
+      <section class="chapter" data-title="Search past chats" data-group="3.5 Search past chats">
+        <span class="chapter-kicker">Υποενότητα 3.5</span>
+        <h1>Search past chats</h1>
+        <p>Θα μπορείς να <strong>εντοπίζεις γρήγορα παλιές συνομιλίες</strong>, να <strong>αξιοποιείς ξανά prompts που λειτούργησαν</strong> και να <strong>ανατρέχεις σε προηγούμενο υλικό χωρίς αντιγραφή-επικόλληση</strong>.</p>
+        <div class="callout callout-note">
+          <span class="co-icon" aria-hidden="true">💡</span>
+          <div><p><strong>Πρακτικό όφελος:</strong> ένα prompt που «δούλεψε» τέλεια πριν από εβδομάδες δεν χρειάζεται να ξαναγραφτεί από το μηδέν — ζητήστε από το Claude να το ανακαλέσει και συνεχίστε από εκεί που είχατε μείνει.</p></div>
+        </div>
+      </section>
+
+      <!-- 3.5 / Διαφάνεια: Πώς το αξιοποιείτε -->
+      <section class="chapter" data-title="Πώς το αξιοποιείτε" data-group="3.5 Search past chats">
+        <span class="chapter-kicker">Υποενότητα 3.5</span>
+        <h1>Πώς το αξιοποιείτε στην πράξη</h1>
+        <p>Η δυνατότητα αυτή στηρίζεται στη λειτουργία <strong>«Search and reference chats»</strong> που γνωρίσατε στην υποενότητα 3.4. Θυμηθείτε τα βασικά της σημεία:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🗣️</div>
+            <h4>Ενεργοποιείται με δική σας εντολή</h4>
+            <p>Η αναζήτηση στο παρελθόν δεν εκτελείται αυτόματα — τη ζητάτε εσείς μέσα στη συνομιλία.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🚧</div>
+            <h4>Αυστηρή εμβέλεια</h4>
+            <p>Η αναζήτηση γίνεται είτε στις απλές συνομιλίες σας είτε αυστηρά εντός ενός συγκεκριμένου Project — ποτέ διασταυρωμένα μεταξύ Projects.</p>
+          </div>
+        </div>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Παραδείγματα εντολών ανάκλησης</span>
+          <p class="pb-text">«Σε παρακαλώ, υπενθύμισέ μου τι είχαμε αναφέρει για το συγκεκριμένο θέμα.»<br>«Θυμάσαι που είχαμε δημιουργήσει το Χ κείμενο; Θέλω να το χρησιμοποιήσουμε ως βάση.»</p>
+        </div>
+      </section>
+
+      <!-- 3.5 / Ερώτηση: εμβέλεια -->
+      <section class="chapter" data-title="Ερώτηση: εμβέλεια αναζήτησης" data-group="3.5 Search past chats">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · Υποενότητα 3.5</span>
+        <h1>Σωστό ή Λάθος;</h1>
+        <div class="activity quiz-mini js-mcq" id="q35_scope" data-correct="1"
+             data-ok="Σωστά! Είναι Λάθος: η αναζήτηση γίνεται είτε στις απλές συνομιλίες είτε αυστηρά εντός ενός συγκεκριμένου Project — ποτέ διασταυρωμένα μεταξύ διαφορετικών Projects."
+             data-ko="Προσοχή: το σύστημα ΔΕΝ διασταυρώνει δεδομένα μεταξύ διαφορετικών Projects. Η αναζήτηση περιορίζεται είτε στις απλές συνομιλίες είτε εντός ενός συγκεκριμένου Project.">
+          <p class="act-q">Σωστό ή Λάθος: Όταν το Claude αναζητά σε παλιές συνομιλίες, μπορεί να διασταυρώσει δεδομένα από διαφορετικά Projects μεταξύ τους.</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Σωστό</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Λάθος</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           ΥΠΟΕΝΟΤΗΤΑ 3.6 — CUSTOM STYLES
+      ================================================================= -->
+
+      <!-- 3.6 / Διαφάνεια: Εισαγωγή -->
+      <section class="chapter" data-title="Τι είναι τα Custom Styles" data-group="3.6 Custom Styles — το δικό σου ύφος γραφής">
+        <span class="chapter-kicker">Υποενότητα 3.6</span>
+        <h1>Custom Styles — το δικό σου ύφος γραφής</h1>
+        <p>Η δυνατότητα δημιουργίας «Custom Styles» (Προσαρμοσμένων Στυλ) αποτελεί ένα από τα σημαντικότερα εργαλεία εξατομίκευσης του Claude. Ουσιαστικά, σας επιτρέπει να ορίσετε με απόλυτη ακρίβεια τον τόνο, το λεξιλόγιο, τη μορφοποίηση και το επίπεδο λεπτομέρειας κάθε απάντησης. Αντί να προσπαθείτε να εξηγήσετε στο μοντέλο πώς ακριβώς θέλετε να γράψει μέσα σε κάθε νέο prompt, του διδάσκετε μία φορά το επιθυμητό ύφος και το εφαρμόζετε άμεσα, αλλάζοντάς το ακόμη και στη μέση μιας συνομιλίας, ανάλογα με το επικοινωνιακό σας πλαίσιο.</p>
+        <figure class="shot">
+          <img src="assets/images/image022.png" alt="Το μενού Use styles στο πεδίο συνομιλίας του Claude" loading="lazy">
+          <figcaption>«Μενού Use styles»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.6 / Διαφάνεια: Preset Styles (tabs) -->
+      <section class="chapter" data-title="Τα Preset Styles" data-group="3.6 Custom Styles — το δικό σου ύφος γραφής">
+        <span class="chapter-kicker">Υποενότητα 3.6</span>
+        <h1>Τα Προκαθορισμένα (Preset) Styles του Claude</h1>
+        <p>Πριν προχωρήσουμε στη δημιουργία ενός απόλυτα προσωποποιημένου ύφους, είναι σημαντικό να γνωρίζετε ότι η πλατφόρμα παρέχει ήδη ορισμένες έτοιμες επιλογές. Αυτά τα προκαθορισμένα styles αποτελούν ένα εξαιρετικό σημείο εκκίνησης για να εξοικειωθείτε με τη λειτουργία και να δείτε στην πράξη πώς η αλλαγή των ρυθμίσεων επηρεάζει δραστικά την τελική απάντηση.</p>
+        <p>Μέσα από το σχετικό μενού, μπορείτε να επιλέξετε ανάμεσα σε τέσσερις βασικές κατηγορίες.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="st-normal" role="tab" aria-selected="true">Normal</button>
+            <button type="button" class="tab-btn" data-tab="st-concise" role="tab" aria-selected="false">Concise</button>
+            <button type="button" class="tab-btn" data-tab="st-formal" role="tab" aria-selected="false">Formal</button>
+            <button type="button" class="tab-btn" data-tab="st-expl" role="tab" aria-selected="false">Explanatory</button>
+          </div>
+          <div class="tab-panel active" data-tab="st-normal" role="tabpanel">
+            <p><strong>Normal (Κανονικό):</strong> Αποτελεί την προεπιλεγμένη συμπεριφορά του μοντέλου, προσφέροντας έναν ισορροπημένο, φυσικό και ουδέτερο τόνο.</p>
+          </div>
+          <div class="tab-panel" data-tab="st-concise" role="tabpanel">
+            <p><strong>Concise (Συνοπτικό):</strong> Ιδανικό για περιπτώσεις όπου ο χρόνος είναι περιορισμένος. Το Claude αφαιρεί τις περιττές αναλύσεις και παραδίδει απαντήσεις άμεσες, σύντομες και απολύτως εστιασμένες στο ζητούμενο.</p>
+          </div>
+          <div class="tab-panel" data-tab="st-formal" role="tabpanel">
+            <p><strong>Formal (Επίσημο):</strong> Μετατρέπει το κείμενο σε αυστηρά επιμελημένο, δομημένο και επαγγελματικό. Είναι η βέλτιστη επιλογή για εταιρικές αναφορές, επίσημα email ή ακαδημαϊκά κείμενα.</p>
+          </div>
+          <div class="tab-panel" data-tab="st-expl" role="tabpanel">
+            <p><strong>Explanatory (Επεξηγηματικό):</strong> Λειτουργεί ως ένας υπομονετικός εκπαιδευτής. Όταν επιλέγετε αυτό το style, το μοντέλο αναλαμβάνει να αναλύσει πολύπλοκες έννοιες με απλό και διδακτικό τρόπο, καθιστώντας το ιδανικό για την εκμάθηση νέων γνωστικών αντικειμένων.</p>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image023.png" alt="Τα τέσσερα έτοιμα στυλ Normal, Concise, Formal και Explanatory" loading="lazy">
+          <figcaption>«Έτοιμα στυλ»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.6 / Διαφάνεια: Δημιουργία Προσωπικού Style (tabs) -->
+      <section class="chapter" data-title="Δημιουργία Προσωπικού Style" data-group="3.6 Custom Styles — το δικό σου ύφος γραφής">
+        <span class="chapter-kicker">Υποενότητα 3.6 · Δημιουργία Style</span>
+        <h1>Δημιουργία Προσωπικού Style — δύο μέθοδοι</h1>
+        <p>Η διαδικασία ξεκινά από το μενού «Use style» επιλέγοντας «Create custom style». Το σύστημα σας παρέχει δύο διαφορετικές προσεγγίσεις.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="style-example" role="tab" aria-selected="true">Μέθοδος 1η: Add Writing Example</button>
+            <button type="button" class="tab-btn" data-tab="style-describe" role="tab" aria-selected="false">Μέθοδος 2η: Βάσει Περιγραφής</button>
+          </div>
+          <div class="tab-panel active" data-tab="style-example" role="tabpanel">
+            <p><strong>Μέθοδος 1η:</strong> Αυτή είναι η πιο αποδοτική λειτουργία για να διδάξετε στο Claude τη δική σας «φωνή».</p>
+            <ul>
+              <li>Επιλέγετε <strong>«Add Writing Example»</strong>.</li>
+              <li>Ανεβάζετε ένα αρχείο από τη συσκευή σας ή επικολλάτε απευθείας ένα κείμενο που έχετε γράψει εσείς.</li>
+              <li>Το Claude αναλύει σε βάθος το δείγμα σας, μελετώντας το επίπεδο του λεξιλογίου, τη δομή των προτάσεων και τα αφηγηματικά σας στοιχεία και δημιουργεί ένα αυτοματοποιημένο προφίλ που μιμείται με ακρίβεια τον τρόπο που γράφετε.</li>
+            </ul>
+            <figure class="shot">
+              <img src="assets/images/image024.png" alt="Εισαγωγή προσωπικού κειμένου ως δείγμα γραφής για το custom style" loading="lazy">
+              <figcaption>«Εισαγωγή προσωπικού κειμένου»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="style-describe" role="tabpanel">
+            <p>Εάν δεν διαθέτετε έτοιμο δείγμα κειμένου, επιλέγετε <strong>«Describe style instead»</strong>. Εδώ, περιγράφετε λεκτικά και αναλυτικά τα χαρακτηριστικά του επιθυμητού ύφους (π.χ. «Θέλω ένα κείμενο άκρως επαγγελματικό, με χρήση παθητικής φωνής, κατάλληλο για ακαδημαϊκή δημοσίευση»).</p>
+            <figure class="shot">
+              <img src="assets/images/image025.png" alt="Δημιουργία στυλ μέσω λεκτικής περιγραφής από τον χρήστη" loading="lazy">
+              <figcaption>«Δημιουργία στυλ μέσω περιγραφής από τον χρήστη»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.6 / Ερώτηση: επιλογή μεθόδου -->
+      <section class="chapter" data-title="Ερώτηση: ποια μέθοδος;" data-group="3.6 Custom Styles — το δικό σου ύφος γραφής">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · Υποενότητα 3.6</span>
+        <h1>Εφαρμόστε το σε σενάριο</h1>
+        <div class="activity quiz-mini js-mcq" id="q36_method" data-correct="0"
+             data-ok="Σωστά! Με έτοιμο δείγμα κειμένου, το «Add Writing Example» είναι η πιο αποδοτική μέθοδος — το Claude αναλύει λεξιλόγιο, δομή προτάσεων και αφηγηματικά στοιχεία και μιμείται τη «φωνή» σας."
+             data-ko="Όχι. Αφού διαθέτετε ήδη δείγματα κειμένων σας, η βέλτιστη μέθοδος είναι το «Add Writing Example» — η λεκτική περιγραφή («Describe style instead») προορίζεται για όσους δεν έχουν έτοιμο δείγμα.">
+          <p class="act-q">Έχετε ένα εξαιρετικό blog post που αντιπροσωπεύει πλήρως το ύφος σας και θέλετε το Claude να γράφει «σαν εσάς». Ποια μέθοδο δημιουργίας custom style θα επιλέξετε;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> «Add Writing Example» — ανέβασμα του κειμένου ως δείγμα γραφής.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> «Describe style instead» — λεκτική περιγραφή του ύφους.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Το preset style «Formal» — καλύπτει κάθε προσωπικό ύφος.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <!-- 3.6 / Διαφάνεια: Πρακτικές Συμβουλές (accordion) -->
+      <section class="chapter" data-title="Πρακτικές Συμβουλές" data-group="3.6 Custom Styles — το δικό σου ύφος γραφής">
+        <span class="chapter-kicker">Υποενότητα 3.6 · Πρακτικές Συμβουλές</span>
+        <h1>Πρακτικές Συμβουλές για Άριστα Αποτελέσματα</h1>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Ένα Style ανά Πλαίσιο (Context) <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Μην προσπαθείτε να δημιουργήσετε ένα καθολικό style «για όλα». Αν δουλεύετε με διαφορετικά κοινά, δημιουργήστε διακριτά προφίλ. Φτιάξτε ένα style για εσωτερικές συνοπτικές σημειώσεις ομάδας και ένα διαφορετικό για αναλυτικά έγγραφα προς πελάτες, ώστε να εναλλάσσεστε μεταξύ τους σε δευτερόλεπτα.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Η Ποιότητα του Δείγματος <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Το κείμενο αναφοράς που θα ανεβάσετε πρέπει να σας αντιπροσωπεύει πλήρως. Επιλέξτε ένα εξαιρετικό blog post σας, μερικά καλογραμμένα emails ή ένα άρθρο με το οποίο είστε απόλυτα ικανοποιημένοι. Όσο πιο εστιασμένο είναι το δείγμα, τόσο πιο ακριβής θα είναι η ταύτιση του ύφους.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Στρατηγική Ονοματολογία <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Δώστε στα styles σας ξεκάθαρους, περιγραφικούς τίτλους που δηλώνουν τον σκοπό τους (π.χ. <code>SEO_Blog_Posts_Casual</code>, <code>Academic_Report_Formal</code>). Αυτό διατηρεί τον χώρο εργασίας σας οργανωμένο και επιταχύνει τη ροή σας.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Διαρκής Βελτιστοποίηση (Refinement) <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Σπάνια το πρώτο αποτέλεσμα είναι τέλειο. Το σύστημα σας επιτρέπει να επεξεργαστείτε εκ των υστέρων την περιγραφή του style. Μπορείτε να ζητήσετε από το Claude να το προσαρμόσει περαιτέρω δίνοντας εντολές όπως: «Κάνε το κείμενο λίγο λιγότερο επίσημο» ή «Αφαίρεσε την τάση του μοντέλου να χρησιμοποιεί συνεχώς αριθμημένες λίστες».</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           ΥΠΟΕΝΟΤΗΤΑ 3.7 — INCOGNITO & ΙΔΙΩΤΙΚΟΤΗΤΑ
+      ================================================================= -->
+
+      <!-- 3.7 / Διαφάνεια: Εισαγωγή -->
+      <section class="chapter" data-title="Ιδιωτικότητα: γιατί μετράει" data-group="3.7 Incognito mode &amp; διαχείριση ιδιωτικότητας">
+        <span class="chapter-kicker">Υποενότητα 3.7</span>
+        <h1>Incognito mode &amp; διαχείριση ιδιωτικότητας</h1>
+        <p>Κατά την επαγγελματική χρήση εργαλείων Τεχνητής Νοημοσύνης, ο έλεγχος των δεδομένων και η προστασία της εμπιστευτικότητας αποτελούν αδιαπραγμάτευτες προτεραιότητες. Η πλατφόρμα του Claude προσφέρει συγκεκριμένους μηχανισμούς για να ελέγχετε απόλυτα το ψηφιακό σας αποτύπωμα, με κυριότερο τη λειτουργία του <strong>Incognito</strong>.</p>
+      </section>
+
+      <!-- 3.7 / Διαφάνεια: Incognito mode -->
+      <section class="chapter" data-title="Το Incognito Mode" data-group="3.7 Incognito mode &amp; διαχείριση ιδιωτικότητας">
+        <span class="chapter-kicker">Υποενότητα 3.7</span>
+        <h1>1. Το Incognito Mode (Ανώνυμη Περιήγηση)</h1>
+        <p>Η λειτουργία Incognito είναι διαθέσιμη δωρεάν σε όλους τους χρήστες (στα πλάνα Free, Pro και Max). Ενεργοποιείται αποκλειστικά κατά την <strong>έναρξη μιας νέας συνομιλίας, πριν στείλετε το πρώτο σας prompt</strong>, κάνοντας κλικ στο χαρακτηριστικό εικονίδιο του «φαντάσματος» (ghost icon).</p>
+        <figure class="shot">
+          <img src="assets/images/image026.png" alt="Το εικονίδιο-φάντασμα ενεργοποίησης του Incognito mode" loading="lazy">
+          <figcaption>«Incognito mode»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.7 / Διαφάνεια: Τι διασφαλίζει -->
+      <section class="chapter" data-title="Τι διασφαλίζει" data-group="3.7 Incognito mode &amp; διαχείριση ιδιωτικότητας">
+        <span class="chapter-kicker">Υποενότητα 3.7</span>
+        <h1>Τι ακριβώς διασφαλίζει</h1>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🗂️</div>
+            <h4>1. Καμία Αποθήκευση στο Ιστορικό</h4>
+            <p>Η συνομιλία δεν εμφανίζεται ποτέ στην πλαϊνή μπάρα του λογαριασμού σας.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🤖</div>
+            <h4>2. Καμία Εκπαίδευση Μοντέλου</h4>
+            <p>Τα δεδομένα της συνεδρίας δεν χρησιμοποιούνται ποτέ για την εκπαίδευση των αλγορίθμων της Anthropic, ακόμη και αν έχετε γενικά ενεργοποιημένη τη ρύθμιση «Help Improve Claude».</p>
+          </div>
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">🧠</div>
+            <h4>3. Απομόνωση Μνήμης (Memory)</h4>
+            <p>Οι συνομιλίες σε Incognito mode δεν τροφοδοτούν το σύστημα Μνήμης. Οτιδήποτε συζητηθεί παραμένει αυστηρά στη συγκεκριμένη συνεδρία και δεν πρόκειται να επηρεάσει το τι θα «θυμάται» το Claude για εσάς σε μελλοντικές συνομιλίες.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.7 / Διαφάνεια: Σενάρια χρήσης -->
+      <section class="chapter" data-title="Πότε το χρησιμοποιείτε" data-group="3.7 Incognito mode &amp; διαχείριση ιδιωτικότητας">
+        <span class="chapter-kicker">Υποενότητα 3.7</span>
+        <h1>Στρατηγικά Σενάρια Χρήσης</h1>
+        <p>Σκεφτείτε το Incognito ως ένα «ιδιωτικό παράθυρο». Είναι σχεδιασμένο για καταστάσεις όπου απαιτείται αυστηρή εμπιστευτικότητα ή μια απολύτως «καθαρή» αλληλεπίδραση, χωρίς κανένα προηγούμενο context. Ενδείκνυται για:</p>
+        <div class="flip-grid">
+          <button type="button" class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">Ευαίσθητες Συζητήσεις<span class="flip-hint">Κάντε κλικ για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back"><p>Ανάλυση ευαίσθητων εταιρικών δεδομένων, διαχείριση κρίσεων ή επίλυση λεπτών εργασιακών/προσωπικών ζητημάτων που δεν πρέπει να καταγραφούν.</p></div>
+            </div>
+          </button>
+          <button type="button" class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">Καθαρό Brainstorming<span class="flip-hint">Κάντε κλικ για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back"><p>Όταν θέλετε το μοντέλο να σας απαντήσει χωρίς να επηρεαστεί από τις προηγούμενες προτιμήσεις σας, σαν να του μιλάτε για πρώτη φορά.</p></div>
+            </div>
+          </button>
+          <button type="button" class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">Πειραματισμός χωρίς ρίσκο<span class="flip-hint">Κάντε κλικ για λεπτομέρειες</span></div>
+              <div class="flip-face flip-back"><p>Όταν δοκιμάζετε νέα prompts και δεν θέλετε οι διορθώσεις σας να καταγραφούν ως μόνιμοι κανόνες στη Μνήμη του λογαριασμού σας.</p></div>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- 3.7 / Διαφάνεια: Τι ΔΕΝ προσφέρει -->
+      <section class="chapter" data-title="Τι ΔΕΝ προσφέρει" data-group="3.7 Incognito mode &amp; διαχείριση ιδιωτικότητας">
+        <span class="chapter-kicker">Υποενότητα 3.7</span>
+        <h1>Τι ΔΕΝ προσφέρει το Incognito mode (Η διαφορά της Ανωνυμίας)</h1>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">⚠️</span>
+          <div><p>Το Incognito mode αφαιρεί τις συνομιλίες από την οθόνη σας και σας εξαιρεί από τα δεδομένα εκπαίδευσης, αλλά <strong>δεν σας καθιστά αόρατους στην εταιρεία (Anthropic)</strong>. Οι συνομιλίες αυτές δεν διαγράφονται ακαριαία από τους διακομιστές. Αποθηκεύονται κρυπτογραφημένες στο παρασκήνιο για τουλάχιστον 30 ημέρες, αποκλειστικά για λόγους ασφαλείας, ελέγχου κακόβουλης χρήσης (Trust &amp; Safety) και συμμόρφωσης με νομικές απαιτήσεις.</p></div>
+        </div>
+      </section>
+
+      <!-- 3.7 / Διαφάνεια: Ιστορικό συνομιλιών -->
+      <section class="chapter" data-title="Το ιστορικό συνομιλιών" data-group="3.7 Incognito mode &amp; διαχείριση ιδιωτικότητας">
+        <span class="chapter-kicker">Υποενότητα 3.7</span>
+        <h1>2. Διαχείριση και Οριστική Διαγραφή Ιστορικού</h1>
+        <p>Η διαχείριση του ιστορικού των συνομιλιών σας (για τις συνεδρίες που πραγματοποιούνται εκτός της λειτουργίας Incognito) αποτελεί ένα κρίσιμο κομμάτι της καθημερινής οργάνωσης του ψηφιακού σας χώρου εργασίας. Το Claude σας παρέχει τον πλήρη και απόλυτο έλεγχο του προσωπικού σας αρχείου, επιτρέποντάς σας να διατηρείτε το περιβάλλον σας τακτοποιημένο, λειτουργικό και ασφαλές. Κάθε φορά που αλληλεπιδράτε με το μοντέλο σε κανονική λειτουργία, η συνομιλία αποθηκεύεται και καταχωρείται αυτόματα στην αριστερή πλευρική μπάρα (sidebar) της οθόνης σας.</p>
+        <figure class="shot">
+          <img src="assets/images/image027.png" alt="Το ιστορικό συνομιλιών στην αριστερή πλευρική μπάρα" loading="lazy">
+          <figcaption>«Ιστορικό συνομιλιών»</figcaption>
+        </figure>
+      </section>
+
+      <!-- 3.7 / Διαφάνεια: Διαγραφή + Οριστικότητα & Rename (accordion) -->
+      <section class="chapter" data-title="Διαγραφή συνομιλίας" data-group="3.7 Incognito mode &amp; διαχείριση ιδιωτικότητας">
+        <span class="chapter-kicker">Υποενότητα 3.7</span>
+        <h1>Πώς διαγράφετε μια συνομιλία</h1>
+        <p>Εάν επιθυμείτε να αφαιρέσετε μια παλαιότερη ή παρωχημένη συζήτηση, είτε με σκοπό την εκκαθάριση του χώρου εργασίας από δοκιμαστικά prompts, είτε για την απομάκρυνση πληροφοριών που δεν σας είναι πλέον χρήσιμες, η διαδικασία είναι άμεση και στοχευμένη. Αρκεί να εντοπίσετε τον τίτλο της εκάστοτε συνομιλίας στο αριστερό μενού, να κάνετε κλικ στο εικονίδιο επιλογών με τις τρεις τελείες (...) που εμφανίζεται δίπλα στο όνομά της και να επιλέξετε την εντολή διαγραφής (Delete).</p>
+        <figure class="shot">
+          <img src="assets/images/image028.png" alt="Το μενού με τις τρεις τελείες και η επιλογή διαγραφής συνομιλίας" loading="lazy">
+          <figcaption>«Διαγραφή συνομιλίας»</figcaption>
+        </figure>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">❗ Οριστική ενέργεια <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Είναι εξαιρετικά σημαντικό να θυμάστε ότι η συγκεκριμένη ενέργεια είναι <strong>οριστική και αυστηρά μη αναστρέψιμη</strong>. Από τη στιγμή που θα επιβεβαιώσετε τη διαγραφή, η συνομιλία διαγράφεται μόνιμα από το περιβάλλον διεπαφής σας και η πρόσβαση στα δεδομένα της συγκεκριμένης συνεδρίας χάνεται διά παντός.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">✏️ Η δυνατότητα Rename <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Αξίζει, επίσης, να σημειωθεί ότι μέσα από το ίδιο ακριβώς αναδυόμενο μενού (...), σας δίνεται η δυνατότητα <strong>μετονομασίας (Rename)</strong> των συζητήσεων. Αυτή η λειτουργία είναι ιδιαίτερα χρήσιμη προκειμένου να κατηγοριοποιείτε με σαφήνεια τα θέματά σας, διευκολύνοντας έτσι τον άμεσο διαχωρισμό των σημαντικών αρχείων από εκείνα που προορίζονται για οριστική διαγραφή.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.7 / Διαφάνεια: Πολιτική δεδομένων — 3 κανόνες (accordion) -->
+      <section class="chapter" data-title="Πολιτική δεδομένων Anthropic" data-group="3.7 Incognito mode &amp; διαχείριση ιδιωτικότητας">
+        <span class="chapter-kicker">Υποενότητα 3.7</span>
+        <h1>3. Η Πολιτική Δεδομένων της Anthropic (Τι διατηρείται και τι όχι)</h1>
+        <p>Η πλήρης κατανόηση του τρόπου με τον οποίο η Anthropic διαχειρίζεται τα δεδομένα σας είναι θεμελιώδης, ειδικά όταν το εργαλείο αξιοποιείται σε αυστηρά επαγγελματικό επίπεδο. Για να χρησιμοποιείτε το Claude με απόλυτη ασφάλεια και εμπιστοσύνη, είναι κρίσιμο να γνωρίζετε τρεις βασικούς κανόνες.</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🔒 Δεν γίνεται πώληση δεδομένων <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Η εταιρεία δεσμεύεται ρητά από τους όρους χρήσης της ότι το ψηφιακό σας αποτύπωμα, το περιεχόμενο των συνομιλιών και τα μεταφορτωμένα αρχεία σας δεν παραχωρούνται ούτε πωλούνται σε τρίτους (π.χ. data brokers ή διαφημιστικές εταιρείες).</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🎓 Εκπαίδευση Μοντέλου (Training) &amp; Δικαίωμα Εξαίρεσης (Opt-out) <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Στα επαγγελματικά και εταιρικά πλάνα (όπως το Team/Enterprise), τα δεδομένα σας εξαιρούνται εξ ορισμού από την εκπαίδευση των αλγορίθμων. Ωστόσο, στους απλούς λογαριασμούς (Free/Pro), το σύστημα ενδέχεται να αξιοποιήσει τις κανονικές συνομιλίες σας για τη βελτίωση του μοντέλου. Έχετε τη δυνατότητα να προστατεύσετε πλήρως την πνευματική σας ιδιοκτησία, επιλέγοντας την εξαίρεσή σας από αυτή τη διαδικασία. Αρκεί να μεταβείτε στις ρυθμίσεις του προφίλ σας και να απενεργοποιήσετε τον διακόπτη <strong>«Help Improve Claude»</strong>.</p>
+              <figure class="shot">
+                <img src="assets/images/image029.png" alt="Απενεργοποίηση του διακόπτη Help Improve Claude στις ρυθμίσεις" loading="lazy">
+                <figcaption>«Απενεργοποίηση της επιλογής προκειμένου να διασφαλιστεί ότι τα δεδομένα των συνομιλιών δεν θα χρησιμοποιηθούν για την εκπαίδευση του μοντέλου.»</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🗓️ Ο Κανόνας Διατήρησης των 30 Ημερών <span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Όπως ισχύει και στη λειτουργία της Ανώνυμης Περιήγησης (Incognito), είναι ζωτικής σημασίας να γνωρίζετε ότι η οριστική διαγραφή μιας συνομιλίας από την οθόνη σας την αφαιρεί αποκλειστικά από το δικό σας οπτικό πεδίο. Στην πραγματικότητα, τα δεδομένα παραμένουν κρυπτογραφημένα στους κεντρικούς διακομιστές της Anthropic για ένα κυλιόμενο παράθυρο 30 ημερών. Αυτή η διατήρηση γίνεται αυστηρά και μόνο για λόγους ασφαλείας, ελέγχου πιθανής κακόβουλης χρήσης (Trust &amp; Safety) και νομικής συμμόρφωσης, προτού τα δεδομένα καταστραφούν ολοσχερώς και οριστικά.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.7 / Ερώτηση: Opt-out σενάριο -->
+      <section class="chapter" data-title="Σενάριο: εξαίρεση δεδομένων" data-group="3.7 Incognito mode &amp; διαχείριση ιδιωτικότητας">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · Υποενότητα 3.7</span>
+        <h1>Εφαρμόστε το σε σενάριο</h1>
+        <div class="activity quiz-mini js-mcq" id="q37_optout" data-correct="1"
+             data-ok="Σωστά! Στους απλούς λογαριασμούς (Free/Pro) το σύστημα ενδέχεται να αξιοποιήσει τις κανονικές συνομιλίες για βελτίωση του μοντέλου. Η εξαίρεση (opt-out) γίνεται με απενεργοποίηση του «Help Improve Claude» — στα Team/Enterprise η εξαίρεση ισχύει εξ ορισμού."
+             data-ko="Όχι. Στα Free/Pro η εξαίρεση ΔΕΝ ισχύει εξ ορισμού — πρέπει να απενεργοποιήσετε τον διακόπτη «Help Improve Claude» στις ρυθμίσεις του προφίλ σας.">
+          <p class="act-q">Χρησιμοποιείτε λογαριασμό Free/Pro με ευαίσθητα επαγγελματικά δεδομένα και θέλετε οι κανονικές συνομιλίες σας να εξαιρεθούν από την εκπαίδευση του μοντέλου. Τι κάνετε;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Τίποτα — η εξαίρεση ισχύει εξ ορισμού σε όλα τα πλάνα.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Απενεργοποιείτε τον διακόπτη «Help Improve Claude» στις ρυθμίσεις του προφίλ σας.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Διαγράφετε κάθε συνομιλία αμέσως μετά τη λήξη της.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Δ</span> Μετονομάζετε τις συνομιλίες ώστε να μην αναγνωρίζονται.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <!-- ============ ΤΕΛΕΥΤΑΙΑ ΔΙΑΦΑΝΕΙΑ — ΑΝΑΚΕΦΑΛΑΙΩΣΗ ============ -->
+      <section class="chapter" data-title="Ανακεφαλαίωση" data-group="Ανακεφαλαίωση">
+        <span class="chapter-kicker">Ανακεφαλαίωση</span>
+        <h1>Ανακεφαλαίωση Ενότητας 3</h1>
+        <ol class="recap-list">
+          <li>Το <strong>Project</strong> είναι ένας αυτόνομος, κλειστός χώρος εργασίας (workspace) με δικό του ιστορικό συνομιλιών και ιδιωτική «βάση γνώσης». Η ουσιαστική διαφορά από την απλή συνομιλία είναι η <strong>διάρκεια του πλαισίου</strong>: εφήμερο στο chat, μόνιμο στο Project.</li>
+          <li>Αποφασίζετε αν χρειάζεστε Project με τις <strong>τρεις ερωτήσεις-φίλτρα</strong>: «Θα το ξαναπιάσω;», «Υπάρχει σταθερό υλικό αναφοράς;», «Θέλω συνέπεια;» — αν τουλάχιστον δύο απαντήσεις είναι «ναι», δημιουργήστε Project.</li>
+          <li>Η δημιουργία γίνεται σε τρία βήματα: <strong>New Project</strong> (όνομα + περιγραφή → Create Project), εμπλουτισμός της <strong>Βάσης Γνώσης</strong> μέσω των Files και <strong>Set Instructions</strong> — οι οδηγίες που εφαρμόζονται σε κάθε νέο chat ως μόνιμο «αόρατο prompt».</li>
+          <li>Έτοιμα <strong>blueprints</strong>: ο Social Media Manager «κλειδώνει» το Brand Voice (Style Guide, Buyer Personas, δομή Hook–σώμα–CTA–hashtags), ενώ ο Business Consultant αποκτά μόνιμο «Συνεργάτη Στρατηγικής» (οικονομικά δεδομένα, δομή Executive Summary).</li>
+          <li>Η <strong>Μνήμη (Memory)</strong> μαθαίνει αυτόματα τις πάγιες προτιμήσεις σας. Ελέγχεται από Προφίλ → Settings → Memory, με 4 λειτουργίες: Search and reference chats, Generate memory (Pause = διατήρηση / Reset = οριστική διαγραφή), View and manage memory, Import memory από άλλα AI.</li>
+          <li>Με το <strong>Search past chats</strong> εντοπίζετε γρήγορα παλιές συνομιλίες και επαναχρησιμοποιείτε prompts που λειτούργησαν, χωρίς αντιγραφή-επικόλληση.</li>
+          <li>Τα <strong>Custom Styles</strong> ορίζουν τόνο, λεξιλόγιο και μορφοποίηση. Presets: Normal, Concise, Formal, Explanatory. Δημιουργία προσωπικού style με «Add Writing Example» ή «Describe style instead».</li>
+          <li>Το <strong>Incognito mode</strong> (ghost icon, πριν από το πρώτο prompt) εξασφαλίζει: καμία αποθήκευση στο ιστορικό, καμία εκπαίδευση μοντέλου, απομόνωση Μνήμης — αλλά ΟΧΙ ακαριαία διαγραφή από τους διακομιστές (κρυπτογραφημένη διατήρηση για τουλάχιστον 30 ημέρες). Opt-out από την εκπαίδευση: απενεργοποίηση του «Help Improve Claude».</li>
+        </ol>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🎉</span>
+          <div><p><strong>Συγχαρητήρια!</strong> Ολοκληρώσατε την Ενότητα 3. Μπορείτε να επιστρέψετε σε οποιαδήποτε διαφάνεια από το μενού περιεχομένων για επανάληψη.</p></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/v2.js"></script>
+</body>
+</html>

@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 1: Γνωριμία με το Claude — Τα Πρώτα Βήματα | Claude AI</title>
+<meta name="description" content="Διαδραστικό μάθημα σε μορφή διαφανειών: Γνωριμία με το Claude AI — φιλοσοφία, εκδόσεις, δημιουργία λογαριασμού, πρώτη συνομιλία, κανόνες prompting και ρυθμίσεις.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/v2.css">
+</head>
+<body data-course="en1">
+
+<div class="app">
+
+  <!-- ===================== ΠΛΕΥΡΙΚΟ ΜΕΝΟΥ ===================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Περιεχόμενα μαθήματος">
+    <div class="sidebar-header">
+      <div class="brand">
+        <img class="brand-mark" src="assets/images/logo.webp" alt="" aria-hidden="true" width="38" height="38">
+        <span class="brand-text"><strong>Claude AI</strong> Ενότητα 1 · Γνωριμία με το Claude</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <p class="nav-group-label">Περιεχόμενα</p>
+      <ul id="navList" style="list-style:none; margin:0; padding:0;"></ul>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="overall"><span>Πρόοδος</span><span id="overallLabel">0 / 0</span></div>
+      <button type="button" class="btn btn-secondary btn-sm" id="resetProgress" style="width:100%;">Επαναφορά προόδου</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- ===================== ΚΥΡΙΑ ΠΕΡΙΟΧΗ ===================== -->
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="icon-btn" id="sidebarToggle" aria-label="Άνοιγμα/κλείσιμο μενού">☰</button>
+      <span class="topbar-title" id="topbarTitle">Ενότητα 1</span>
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Σκούρο θέμα" aria-pressed="false">🌙</button>
+      <div class="topbar-progress" aria-hidden="true">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressLabel">0%</span>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ============ ΔΙΑΦΑΝΕΙΑ 0 — ΑΡΧΙΚΗ ΟΘΟΝΗ ============ -->
+      <section class="chapter no-autonav" data-title="Αρχική οθόνη ενότητας" data-group="Εισαγωγή">
+        <div class="hero">
+          <span class="hero-badge">Ενότητα 1</span>
+          <h1>Γνωριμία με το Claude — Τα Πρώτα Βήματα</h1>
+          <p class="lead">Σκοπός της παρούσας ενότητας είναι να θέσει τα γερά θεμέλια για την ομαλή μετάβασή σας στον κόσμο της γενετικής τεχνητής νοημοσύνης — ώστε να χρησιμοποιείτε το Claude με απόλυτη αυτοπεποίθηση ως έναν καθημερινό ψηφιακό συνεργάτη.</p>
+          <div class="objectives">
+            <h3>Μαθησιακοί στόχοι</h3>
+            <ul>
+              <li>Να κατανοήσετε τι είναι το Claude και τη φιλοσοφία του Constitutional AI.</li>
+              <li>Να συγκρίνετε τα πλάνα Free, Pro, Max, Team και Enterprise και να επιλέξετε το κατάλληλο.</li>
+              <li>Να δημιουργήσετε λογαριασμό και να εγκαταστήσετε την εφαρμογή σε υπολογιστή και κινητό.</li>
+              <li>Να πραγματοποιήσετε την πρώτη σας συνομιλία και να αξιοποιείτε τα follow-up prompts.</li>
+              <li>Να εφαρμόζετε τους 4 πυλώνες του καλού prompting (Ρόλος, Πλαίσιο, Στόχος, Παραδείγματα).</li>
+              <li>Να ρυθμίσετε σωστά τα Settings: Custom Instructions, ιδιωτικότητα, capabilities και όρια χρήσης.</li>
+            </ul>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1;">
+            <button type="button" class="btn btn-primary" data-nav="1">Έναρξη μαθήματος →</button>
+            <button type="button" class="btn btn-secondary" id="resumeBtn" hidden>Συνέχεια από το τελευταίο σημείο</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ΕΙΣΑΓΩΓΗ ============ -->
+      <section class="chapter" data-title="Σκοπός της ενότητας" data-group="Εισαγωγή">
+        <span class="chapter-kicker">Εισαγωγή</span>
+        <h1>Σκοπός της ενότητας</h1>
+        <figure class="shot">
+          <img src="assets/images/image001.png" alt="Ενότητα 1: Γνωριμία με το Claude — Τα Πρώτα Βήματα" loading="lazy">
+        </figure>
+        <p>Σκοπός της παρούσας ενότητας είναι να θέσει τα γερά θεμέλια για την ομαλή μετάβασή σας στον κόσμο της γενετικής τεχνητής νοημοσύνης. Ολοκληρώνοντας αυτό το κεφάλαιο, δεν θα έχετε απλώς εξοικειωθεί με το βασικό περιβάλλον του Claude, αλλά θα είστε σε θέση να το χρησιμοποιείτε με απόλυτη αυτοπεποίθηση ως έναν καθημερινό ψηφιακό συνεργάτη.</p>
+        <p>Πιο συγκεκριμένα, θα κατανοήσετε την ιδιαίτερη φιλοσοφία του μοντέλου, ώστε να αξιολογήσετε και να επιλέξετε με στρατηγικό κριτήριο την κατάλληλη συνδρομητική έκδοση για τις δικές σας ανάγκες. Το κυριότερο, όμως, είναι ότι θα μάθετε να συντάσσετε δομημένα και στοχευμένα prompts (οδηγίες), τα οποία θα εξασφαλίζουν σταθερά υψηλής ποιότητας αποτελέσματα.</p>
+      </section>
+
+      <!-- ============ 1.1 ΤΙ ΕΙΝΑΙ ΤΟ CLAUDE ============ -->
+      <section class="chapter" data-title="Τι είναι το Claude" data-group="1.1 Τι είναι το Claude και τι το ξεχωρίζει">
+        <span class="chapter-kicker">Υποενότητα 1.1</span>
+        <h1>Τι είναι το Claude και τι το ξεχωρίζει</h1>
+        <p>Στην αρχή αυτού του εκπαιδευτικού ταξιδιού, είναι απαραίτητο να κατανοήσετε την ταυτότητα και τη φιλοσοφία πίσω από ένα από τα πιο ισχυρά εργαλεία τεχνητής νοημοσύνης. Το Claude είναι ένα προηγμένο μεγάλο γλωσσικό μοντέλο (Large Language Model - LLM), το οποίο έχει σχεδιαστεί για να λειτουργεί ως ένας ευφυής ψηφιακός βοηθός. Μπορεί να επεξεργαστεί, να αναλύσει και να παράγει κείμενο, κώδικα και δεδομένα με εξαιρετική ακρίβεια.</p>
+        <p>Το Claude δημιουργήθηκε από την εταιρεία Anthropic, η οποία ιδρύθηκε το 2021 από πρώην ηγετικά στελέχη και ερευνητές της OpenAI. Η Anthropic διαφοροποιήθηκε στον κλάδο θέτοντας ως απόλυτη προτεραιότητα την ανάπτυξη μιας «ασφαλούς, επεξηγήσιμης και ευθυγραμμισμένης» τεχνητής νοημοσύνης. Η προσέγγιση αυτή ονομάζεται <strong>Constitutional AI</strong> (Συνταγματική Τεχνητή Νοημοσύνη), καθώς το μοντέλο εκπαιδεύεται με βάση ένα σύνολο γραπτών αρχών, ένα «σύνταγμα» (<a href="https://www.anthropic.com/constitution" target="_blank" rel="noopener">https://www.anthropic.com/constitution</a>), το οποίο αντλεί έμπνευση από παγκόσμια κείμενα, όπως η Οικουμενική Διακήρυξη των Δικαιωμάτων του Ανθρώπου, καθώς και από κανόνες ασφάλειας στον κυβερνοχώρο. Η φιλοσοφία αυτή προάγει την αντικειμενικότητα, την αποφυγή παραπληροφόρησης και τον σεβασμό προς τον χρήστη.</p>
+      </section>
+
+      <section class="chapter" data-title="Η ιεραρχία του «Συντάγματος»" data-group="1.1 Τι είναι το Claude και τι το ξεχωρίζει">
+        <span class="chapter-kicker">Υποενότητα 1.1</span>
+        <h1>Η ιεραρχία του «Συντάγματος»</h1>
+        <p>Αξίζει να σημειωθεί ότι το Σύνταγμα αυτό θέτει μια αυστηρή ιεραρχία στις προτεραιότητες του Claude. Για παράδειγμα, αν μια οδηγία του χρήστη έρχεται σε σύγκρουση με τους κανόνες ασφάλειας, το μοντέλο είναι προγραμματισμένο να δώσει προτεραιότητα στην καθολική ασφάλεια και την ηθική, αρνούμενο ευγενικά να εκτελέσει μια επιζήμια εντολή.</p>
+        <div class="callout callout-note">
+          <span class="co-icon" aria-hidden="true">🔄</span>
+          <div>
+            <p>Η Anthropic επισημαίνει με ειλικρίνεια ότι η διαμόρφωση αυτού του Συντάγματος αποτελεί ένα «έργο σε συνεχή εξέλιξη» (work in progress), το οποίο αναθεωρείται διαρκώς καθώς η τεχνολογία εξελίσσεται, με σκοπό το Claude να παραμένει ένας εξαιρετικά ευφυής, αλλά ταυτόχρονα έντιμος και προσεκτικός βοηθός για την κοινωνία.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Βίντεο: Τι είναι το Claude" data-group="1.1 Τι είναι το Claude και τι το ξεχωρίζει">
+        <span class="chapter-kicker">Υποενότητα 1.1 · Βίντεο</span>
+        <h1>Claude: Τι είναι και ποιες εκδόσεις διαθέτει</h1>
+        <div class="video-block">
+          <span class="video-kicker">▶ Βίντεο μαθήματος</span>
+          <h3>Claude: Τι είναι και ποιες εκδόσεις διαθέτει</h3>
+          <p>Το βίντεο παρουσιάζει συνοπτικά την ταυτότητα του Claude και τις διαθέσιμες εκδόσεις του — μια ιδανική γέφυρα για την επόμενη υποενότητα, όπου θα αναλύσουμε τα πλάνα ένα προς ένα.</p>
+          <p><strong>Τι να προσέξετε:</strong> τη φιλοσοφία της Anthropic, τα σημεία που διαφοροποιούν το Claude από άλλα εργαλεία ΤΝ και τα κριτήρια με τα οποία ξεχωρίζουν μεταξύ τους οι εκδόσεις.</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://player.vimeo.com/video/1204519604?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="Claude: Τι είναι και ποιες εκδόσεις διαθέτει"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Ερώτηση για το βίντεο" data-group="1.1 Τι είναι το Claude και τι το ξεχωρίζει">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · 1.1</span>
+        <h1>Ερώτηση κατανόησης</h1>
+        <div class="activity quiz-mini js-mcq" id="act_03" data-correct="1"
+             data-ok="Σωστά! Το Constitutional AI σημαίνει ότι το μοντέλο εκπαιδεύεται με βάση ένα γραπτό σύνολο αρχών («σύνταγμα») που προάγει την ασφάλεια και την αντικειμενικότητα."
+             data-ko="Δεν είναι σωστό. Το Constitutional AI αναφέρεται στην εκπαίδευση του μοντέλου με βάση ένα γραπτό «σύνταγμα» αρχών — όχι σε νομικό ή κρατικό πλαίσιο.">
+          <p class="act-q">Τι σημαίνει στην πράξη η προσέγγιση «Constitutional AI» της Anthropic;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Ότι το Claude ελέγχεται νομικά από κρατικούς φορείς.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Ότι το μοντέλο εκπαιδεύεται με βάση ένα γραπτό σύνολο αρχών που δίνει προτεραιότητα στην ασφάλεια και την ηθική.</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Ότι το Claude απαντά μόνο σε ερωτήσεις συνταγματικού δικαίου.</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+      <!-- ============ 1.2 ΠΛΑΝΑ ============ -->
+      <section class="chapter" data-title="Τα διαθέσιμα πλάνα χρήσης" data-group="1.2 Free vs Pro vs Max vs Team vs Enterprise">
+        <span class="chapter-kicker">Υποενότητα 1.2</span>
+        <h1>Free vs Pro vs Max vs Team vs Enterprise — Ποια έκδοση χρειάζομαι</h1>
+        <p>Για να μπορέσετε να εντάξετε το Claude αποτελεσματικά στην καθημερινή ή την επαγγελματική σας δραστηριότητα, είναι απαραίτητο να κατανοήσετε τις επιλογές που έχετε όσον αφορά τα διαθέσιμα πλάνα χρήσης. Η Anthropic προσφέρει διαφορετικά επίπεδα πρόσβασης, προκειμένου να καλύψει από απλές, καθημερινές ανάγκες έως και εξαιρετικά απαιτητικά εταιρικά περιβάλλοντα εργασίας.</p>
+        <figure class="shot">
+          <img src="assets/images/image002.png" alt="Οθόνη επιλογής των διαθέσιμων πλάνων του Claude AI" loading="lazy">
+        </figure>
+        <figure class="shot">
+          <img src="assets/images/image003.png" alt="Πίνακας τιμολόγησης των πλάνων του Claude AI" loading="lazy">
+          <figcaption>«Τα διαθέσιμα πλάνα χρήσης και η τιμολόγηση του Claude AI»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Free Plan" data-group="1.2 Free vs Pro vs Max vs Team vs Enterprise">
+        <span class="chapter-kicker">Υποενότητα 1.2 · Ανάλυση και Σύγκριση των Διαθέσιμων Πλάνων</span>
+        <h1>Δωρεάν Πλάνο (Free Plan — $0 / μήνα)</h1>
+        <p>Το δωρεάν πλάνο αποτελεί την πύλη εισόδου σας στον κόσμο του Claude. Η Anthropic έχει αναβαθμίσει σημαντικά το δωρεάν πλάνο, επιτρέποντάς σας να χρησιμοποιείτε τις περισσότερες από τις βασικές και προηγμένες λειτουργίες της πλατφόρμας, αλλά με <strong>αυστηρούς περιορισμούς στη συχνότητα χρήσης (Usage Limits)</strong>.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="free-incl" role="tab" aria-selected="true">✔ Περιλαμβάνει</button>
+            <button type="button" class="tab-btn" data-tab="free-lim" role="tab" aria-selected="false">✘ Δεν περιλαμβάνει / Περιορισμοί</button>
+          </div>
+          <div class="tab-panel active" data-tab="free-incl">
+            <ul>
+              <li><strong>Πολυμεσική πρόσβαση:</strong> Μπορείτε να συνομιλείτε με το Claude στο Web, σε συσκευές iOS και Android, καθώς και στην εφαρμογή για υπολογιστές (Desktop App).</li>
+              <li><strong>Παραγωγή περιεχομένου και κώδικα:</strong> Έχετε τη δυνατότητα να γράφετε, να επεξεργάζεστε κείμενα, να δημιουργείτε περιεχόμενο, να παράγετε κώδικα προγραμματισμού και να οπτικοποιείτε δεδομένα (μέσω των Artifacts).</li>
+              <li><strong>Πρόσβαση στο Διαδίκτυο (Web Search):</strong> Μπορείτε να ζητάτε από το Claude να ανατρέχει στο internet σε πραγματικό χρόνο για την εύρεση επίκαιρων πληροφοριών.</li>
+              <li><strong>Μνήμη (Memory):</strong> Το μοντέλο μπορεί να συγκρατεί πληροφορίες και προτιμήσεις σας ανάμεσα σε διαφορετικές συνομιλίες.</li>
+              <li><strong>Εκτέλεση κώδικα (Code Execution):</strong> Το Claude μπορεί να δημιουργεί αρχεία και να εκτελεί κώδικα σε ένα ασφαλές περιβάλλον για να επαληθεύει τα αποτελέσματά του.</li>
+              <li><strong>Βασική διασύνδεση εφαρμογών (Connectors &amp; Extensions):</strong> Μπορείτε να επεκτείνετε τις δυνατότητές του με desktop extensions και να συνδέσετε υπηρεσίες όπως το Google Workspace και το Slack για να αναλύει αρχεία.</li>
+              <li><strong>Extended Thinking:</strong> Μπορείτε να ενεργοποιήσετε τη λειτουργία παρατεταμένης σκέψης για την επίλυση πιο σύνθετων προβλημάτων.</li>
+            </ul>
+          </div>
+          <div class="tab-panel" data-tab="free-lim">
+            <ul>
+              <li><strong>Περιορισμένος αριθμός μηνυμάτων (Usage Limits):</strong> Οι δωρεάν χρήστες μπορούν να στείλουν περίπου 30 έως 100 μηνύματα την ημέρα. Η μεταφόρτωση ή η ανάλυση μεγάλων εγγράφων καταναλώνει το όριο αυτό πολύ πιο γρήγορα. Μόλις το όριο εξαντληθεί, απαιτείται αναμονή 4 έως 8 ωρών για την επαναφορά του.</li>
+              <li><strong>Απουσία του μοντέλου Claude Opus:</strong> Το Free πλάνο περιλαμβάνει το μοντέλο Sonnet 4.6 και Haiku 4.5. Δεν σας δίνει πρόσβαση στο ισχυρότερο μοντέλο Claude Opus 4.6/4.8 και Fable 5, τα οποία αξιοποιούν στο μέγιστο το παράθυρο πλαισίου (context window) του 1 εκατομμυρίου tokens, προσφέροντας παράλληλα κορυφαίες επιδόσεις σε σύνθετη λογική σκέψη, προηγμένο κώδικα και αυτόνομες ροές εργασίας (agentic workflows).</li>
+              <li><strong>Απεριόριστα Projects (Unlimited Projects):</strong> Αν και η Anthropic άνοιξε τη βασική χρήση των Projects για όλους, το Free πλάνο δεν περιλαμβάνει τη δυνατότητα να δημιουργείτε απεριόριστους φακέλους εργασίας (Unlimited Projects) για να οργανώνετε μόνιμα διαφορετικές βάσεις γνώσης, βιβλία και εταιρικά αρχεία.</li>
+              <li><strong>Προτεραιότητα πρόσβασης (Priority Access):</strong> Το Free πλάνο δεν σας εγγυάται σταθερή ταχύτητα και διαθεσιμότητα. Σε ώρες αιχμής (υψηλής κίνησης από χρήστες παγκοσμίως), οι δωρεάν χρήστες ενδέχεται να υποστούν καθυστερήσεις, μειωμένα όρια ή ακόμη και προσωρινό αποκλεισμό από την πλατφόρμα.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Pro Plan" data-group="1.2 Free vs Pro vs Max vs Team vs Enterprise">
+        <span class="chapter-kicker">Υποενότητα 1.2</span>
+        <h1>Pro Plan ($20/μήνα ή $17/μήνα με ετήσια δέσμευση — $200 προκαταβολικά)</h1>
+        <p>Πέρα από όλες τις δυνατότητες που παρέχονται ήδη στην έκδοση Free, με την αναβάθμισή σας σε Pro ξεκλειδώνετε τα εξής προνομιακά χαρακτηριστικά:</p>
+        <h2>Περιλαμβάνει:</h2>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Σημαντικά Μεγαλύτερη Χρήση (More usage)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Απελευθερώνεστε από τα στενά όρια του δωρεάν πλάνου. Σας παρέχεται πολύ μεγαλύτερη χωρητικότητα μηνυμάτων, επιτρέποντάς σας να πραγματοποιείτε εκτενείς συνομιλίες και να αναλύετε μεγάλα έγγραφα χωρίς τον φόβο της άμεσης εξάντλησης του ορίου.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Πρόσβαση στο Claude Code<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Αποκτάτε πρόσβαση στο εξειδικευμένο εργαλείο της Anthropic για προγραμματιστές, το οποίο λειτουργεί απευθείας μέσα από το τερματικό σας (terminal-based agent) για την αυτοματοποίηση, τη συγγραφή και τον έλεγχο κώδικα.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Πρόσβαση στο Claude Cowork<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Ενεργοποιείτε ένα εξελιγμένο περιβάλλον συνεργασίας με το μοντέλο, ιδανικό για τη συνδιαχείριση σύνθετων workflows και την οργάνωση μακροπρόθεσμων εργασιών.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Απεριόριστα Projects (Unlimited Projects)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Μπορείτε να δημιουργείτε όσους ψηφιακούς φακέλους εργασίας επιθυμείτε. Σε κάθε Project μπορείτε να αποθηκεύετε μόνιμα συγκεκριμένα έγγραφα, βιβλία, οδηγίες ή αρχεία κώδικα, ώστε το Claude να απαντά πάντα ευθυγραμμισμένο με τη δική σας εξειδικευμένη βάση γνώσης.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Πρόσβαση στη λειτουργία Research<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Ξεκλειδώνετε προηγμένες δυνατότητες έρευνας, όπου το μοντέλο μπορεί να πραγματοποιεί βαθύτερες αναζητήσεις, να διασταυρώνει πηγές και να συνθέτει αναλυτικές αναφορές για σύνθετα ζητήματα.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Δυνατότητα Χρήσης Περισσότερων Μοντέλων (More Claude models)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Σας δίνεται η ελευθερία να επιλέγετε ανάμεσα σε διαφορετικά μοντέλα της Anthropic (όπως το κορυφαίο Claude Opus για εξαιρετικά περίπλοκη λογική σκέψη και μεγάλα contexts), ανάλογα με τις απαιτήσεις της εργασίας σας.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Πλήρης Ενσωμάτωση με το Microsoft Οικοσύστημα<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Περιλαμβάνει τις native εφαρμογές <strong>Claude for Microsoft 365</strong> και <strong>Claude for Microsoft Outlook</strong>, επιτρέποντάς σας να αλληλεπιδράτε με τα email, τα ημερολόγια και τα έγγραφα εργασίας σας απευθείας μέσα από τα εργαλεία της Microsoft.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Max Plan" data-group="1.2 Free vs Pro vs Max vs Team vs Enterprise">
+        <span class="chapter-kicker">Υποενότητα 1.2</span>
+        <h1>Max Plan ($100/μήνα)</h1>
+        <p>Το πλάνο Max αποτελεί την premium επιλογή της Anthropic για «power users», αναλυτές δεδομένων και επαγγελματίες προγραμματιστές που απαιτούν τη μέγιστη δυνατή ισχύ και χωρητικότητα από έναν ψηφιακό βοηθό. Το κόστος του ξεκινά από τα $100 τον μήνα, αποτελώντας μια flat συνδρομητική λύση για όσους κάνουν εξαιρετικά βαριά χρήση και θα ξόδευαν πολύ μεγαλύτερα ποσά μέσω της χρήσης API.</p>
+        <p>Επιλέγοντας το πλάνο Max, διατηρείτε όλα τα εργαλεία και τις δυνατότητες της έκδοσης Pro (συμπεριλαμβανομένων των Claude Code, Claude Cowork, Research και των ενσωματώσεων με Microsoft 365/Outlook), αλλά ξεκλειδώνετε τα εξής κορυφαία πλεονεκτήματα:</p>
+        <h2>Περιλαμβάνει:</h2>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Επιλογή για 5x ή 20x Μεγαλύτερη Χρήση από το Pro<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Αυτό είναι το βασικό χαρακτηριστικό του πλάνου. Ανάλογα με το επίπεδο συνδρομής που θα επιλέξετε (Max 5x ή Max 20x), αποκτάτε πενταπλάσιο ή εικοσαπλάσιο όριο μηνυμάτων και tokens σε σχέση με το ήδη αυξημένο πλάνο Pro. Αυτό σας επιτρέπει να εργάζεστε αδιάκοπα όλο το εικοσιτετράωρο, ακόμη και με τα πιο «βαριά» μοντέλα.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Υψηλότερα Όρια Παραγωγής Αποτελεσμάτων (Higher output limits)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Το Claude Max σας επιτρέπει να λαμβάνετε πολύ πιο εκτενείς απαντήσεις σε μία μόνο αναζήτηση. Είναι ιδανικό για τη δημιουργία τεράστιων ενοτήτων κώδικα, πολυσέλιδων αναφορών ή ολόκληρων κεφαλαίων κειμένου, χωρίς το μοντέλο να σταματά στη μέση λόγω περιορισμών στο output.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Πρώιμη Πρόσβαση σε Προηγμένα Χαρακτηριστικά (Early access)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Ως συνδρομητές Max, βρίσκεστε στην πρώτη γραμμή των εξελίξεων της Anthropic. Έχετε αποκλειστική και άμεση πρόσβαση σε νέα μοντέλα, πειραματικές λειτουργίες και advanced εργαλεία πριν αυτά κυκλοφορήσουν στο ευρύ κοινό ή στους χρήστες Pro.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Απόλυτη Προτεραιότητα Πρόσβασης (Priority access)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Σας διασφαλίζεται η μέγιστη δυνατή ταχύτητα απόκρισης και μηδενική αναμονή, ακόμη και κατά τις ώρες παγκόσμιας αιχμής, όπου η κίνηση στους διακομιστές της εταιρείας χτυπάει κόκκινο.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος" data-group="1.2 Free vs Pro vs Max vs Team vs Enterprise">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · 1.2</span>
+        <h1>Ερώτηση κατανόησης</h1>
+        <div class="activity quiz-mini js-mcq" id="act_06" data-correct="2"
+             data-ok="Σωστά! Το Max Plan ($100/μήνα) προσφέρει Max 5x ή Max 20x μεγαλύτερη χρήση, υψηλότερα όρια output και early access."
+             data-ko="Δεν είναι σωστό. Το Max Plan ($100/μήνα) προσφέρει Max 5x ή Max 20x μεγαλύτερη χρήση, υψηλότερα όρια output και early access.">
+          <p class="act-q">Ποιο πλάνο προσφέρει επιλογή 5x ή 20x μεγαλύτερης χρήσης σε σχέση με το Pro;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Το Team</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Το Enterprise</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Το Max</button>
+            <button type="button" class="option-btn"><span class="opt-key">Δ</span> Το Free</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Claude Team" data-group="1.2 Free vs Pro vs Max vs Team vs Enterprise">
+        <span class="chapter-kicker">Υποενότητα 1.2</span>
+        <h1>Claude Team (για ομάδες από 5-150 άτομα)</h1>
+        <p>Το πλάνο Team είναι ειδικά σχεδιασμένο για επιχειρήσεις και οργανισμούς (από 5 έως 150 άτομα) που επιθυμούν να εντάξουν την τεχνητή νοημοσύνη στις καθημερινές τους διαδικασίες, διασφαλίζοντας παράλληλα κεντρικό έλεγχο, προηγμένη ασφάλεια δεδομένων και δυνατότητες συνεργασίας.</p>
+        <p>Η Anthropic προσφέρει τη δυνατότητα να συνδυάσετε διαφορετικούς τύπους θέσεων (mix and match seat types) μέσα στην ίδια ομάδα, ανάλογα με τις ανάγκες του κάθε υπαλλήλου.</p>
+        <p>Το εταιρικό περιβάλλον χωρίζεται σε δύο επίπεδα θέσεων εργασίας (seats):</p>
+        <h2>Οι δύο τύποι θέσεων του Team</h2>
+        <div class="card-grid">
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">💼</span>
+            <h3>Α. Θέση Standard (Standard seat)</h3>
+            <p>Απευθύνεται στα μέλη της ομάδας που χρειάζονται συστηματική πρόσβαση για καθημερινές εργασίες παραγωγικότητας.</p>
+            <ul>
+              <li><strong>Κόστος:</strong> <strong>$20 ανά θέση / μήνα</strong> με ετήσια χρέωση (ή $25 ανά θέση με μηνιαία χρέωση).</li>
+              <li><strong>Δυνατότητες:</strong> Περιλαμβάνει όλες τις δυνατότητες του Claude, καθώς και σημαντικά μεγαλύτερη χρήση (more usage) σε σχέση με το ατομικό πλάνο Pro.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🚀</span>
+            <h3>Β. Θέση Premium (Premium seat)</h3>
+            <p>Σχεδιασμένη για τους "power users" της επιχείρησης, όπως full-time developers ή αναλυτές.</p>
+            <ul>
+              <li><strong>Κόστος:</strong> <strong>$100 ανά θέση / μήνα</strong> με ετήσια χρέωση (ή $125 ανά θέση με μηνιαία χρέωση).</li>
+              <li><strong>Δυνατότητες:</strong> Προσφέρει 5 φορές μεγαλύτερη χρήση σε σχέση με τις θέσεις Standard, ενώ περιλαμβάνει αποκλειστικά την πρόσβαση στα advanced εργαλεία Claude Code (για το τερματικό) και Claude Cowork.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Team — κεντρικά προνόμια" data-group="1.2 Free vs Pro vs Max vs Team vs Enterprise">
+        <span class="chapter-kicker">Υποενότητα 1.2 · Claude Team</span>
+        <h1>Τα Κεντρικά Προνόμια του Πλάνου Team</h1>
+        <p>Επιλέγοντας το πλάνο Team, η επιχείρησή σας ξεκλειδώνει μια σειρά από προηγμένες δυνατότητες διαχείρισης και ασφάλειας:</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Διασύνδεση Εταιρικών Εφαρμογών<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Μπορείτε να συνδέσετε κεντρικά το Microsoft 365, το Slack και άλλες καθημερινές υπηρεσίες για την άμεση ροή πληροφοριών.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Εταιρική Αναζήτηση (Enterprise search)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Το Claude μπορεί να πραγματοποιεί αναζητήσεις σε ολόκληρη τη βάση γνώσης και τα έγγραφα του οργανισμού σας, λειτουργώντας ως ένας κεντρικός ψηφιακός αρχειοθέτης.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Κεντρική Τιμολόγηση και Διαχείριση (Central billing &amp; administration)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Ο διαχειριστής έχει τον απόλυτο έλεγχο των συνδρομών, των χρηστών και των πληρωμών από ένα ενιαίο περιβάλλον.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Ασφάλεια Single Sign-On (SSO)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Διασφαλίζεται η εύκολη και ασφαλής πρόσβαση των υπαλλήλων μέσω των εταιρικών τους κωδικών.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Έλεγχος Διαχειριστή για Connectors (Admin controls)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Ο διαχειριστής μπορεί να ορίζει και να ελέγχει ποιοι τοπικοί ή απομακρυσμένοι σύνδεσμοι (connectors/MCP) επιτρέπεται να χρησιμοποιηθούν στην εταιρεία.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Εταιρική Εγκατάσταση (Enterprise deployment)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Υποστηρίζεται η μαζική και ελεγχόμενη εγκατάσταση της desktop εφαρμογής του Claude στους υπολογιστές του οργανισμού.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Απόλυτη Προστασία Δεδομένων (No model training)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Το πιο κρίσιμο χαρακτηριστικό για επιχειρήσεις. Η Anthropic εγγυάται ότι, εξ ορισμού (by default), κανένα δεδομένο, έγγραφο ή συνομιλία της ομάδας σας δεν χρησιμοποιείται για την εκπαίδευση των μοντέλων της.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Enterprise" data-group="1.2 Free vs Pro vs Max vs Team vs Enterprise">
+        <span class="chapter-kicker">Υποενότητα 1.2</span>
+        <h1>Enterprise</h1>
+        <p>Το πλάνο Enterprise αποτελεί την κορυφαία βαθμίδα υπηρεσιών της Anthropic, σχεδιασμένη αποκλειστικά για μεγάλους οργανισμούς και επιχειρήσεις που λειτουργούν σε μεγάλη κλίμακα (at scale). Προσφέρει τη μέγιστη δυνατή ασφάλεια, απόλυτο έλεγχο των δεδομένων και προηγμένα εργαλεία συμμόρφωσης.</p>
+        <p>Η τιμολόγηση αυτού του πλάνου βασίζεται σε ένα υβριδικό μοντέλο: υπάρχει μια σταθερή χρέωση $20 ανά θέση (seat), ενώ το κόστος χρήσης κλιμακώνεται ανάλογα με τα μοντέλα και τις εργασίες που εκτελούνται, με βάση τις τιμές API (API rates).</p>
+        <p>Εκτός από όλα τα χαρακτηριστικά που περιλαμβάνει το πλάνο Team, το Enterprise ξεκλειδώνει μια ολοκληρωμένη σουίτα εργαλείων για τη διαχείριση, την ασφάλεια και τη συμμόρφωση του οργανισμού σας:</p>
+        <h2>Εργαλεία διαχείρισης και ασφάλειας</h2>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Διαχείριση Ορίων Δαπανών (Spend limits)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Οι διαχειριστές του συστήματος (Admins) έχουν τη δυνατότητα να θέτουν αυστηρά όρια δαπανών τόσο σε επίπεδο μεμονωμένου χρήστη όσο και σε επίπεδο ολόκληρου του οργανισμού, εξασφαλίζοντας τον πλήρη έλεγχο του προϋπολογισμού.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Πρόσβαση βάσει Ρόλων (Role-based access)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Επιτρέπει τη λεπτομερή ρύθμιση δικαιωμάτων (fine grained permissioning). Μπορείτε να ορίζετε με ακρίβεια ποιοι υπάλληλοι ή ποιες ομάδες έχουν πρόσβαση σε συγκεκριμένα δεδομένα, Projects ή λειτουργίες του Claude.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Σύστημα SCIM (Cross-domain Identity Management)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Διασφαλίζει την αυτοματοποιημένη διαχείριση των ταυτοτήτων των χρηστών, επιτρέποντας στο τμήμα IT να δημιουργεί, να τροποποιεί ή να διαγράφει λογαριασμούς χρηστών αυτόματα, συγχρονίζοντας το Claude με τα εσωτερικά συστήματα της εταιρείας.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Αρχεία Καταγραφής Ελέγχου (Audit logs)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Παρέχεται πλήρες ιστορικό και καταγραφή των ενεργειών που πραγματοποιούνται στην πλατφόρμα, εργαλείο απαραίτητο για τον εσωτερικό έλεγχο και την ασφάλεια του οργανισμού.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">API Συμμόρφωσης (Compliance API)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Προσφέρει εξειδικευμένα εργαλεία για την παρακολούθηση, την παρατηρησιμότητα (observability) και το monitoring της χρήσης, διασφαλίζοντας ότι η αλληλεπίδραση με την τεχνητή νοημοσύνη είναι συμβατή με τους εσωτερικούς κανονισμούς της εταιρείας.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Προσαρμοσμένη Διατήρηση Δεδομένων (Custom data retention)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Σας δίνεται ο απόλυτος έλεγχος των δεδομένων σας, με τη δυνατότητα να ορίζετε εσείς για πόσο χρονικό διάστημα θα διατηρούνται οι συνομιλίες και τα αρχεία στους διακομιστές.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Συμμόρφωση με HIPAA (HIPAA-ready)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Διατίθεται ειδική έκδοση έτοιμη να ανταποκριθεί στις αυστηρές προδιαγραφές του προτύπου HIPAA, καθιστώντας το πλάνο ιδανικό για οργανισμούς που διαχειρίζονται ευαίσθητα ιατρικά ή προσωπικά δεδομένα.</p></div>
+          </div>
+        </div>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">⚠️</span>
+          <div><p><strong>Σημείωση:</strong> Τα όρια χρήσης (usage limits), οι διαθέσιμες βαθμίδες και το ακριβές κόστος των συνδρομών ενδέχεται να αναπροσαρμόζονται από την εταιρεία. Συστήνεται πάντα ο έλεγχος της επίσημης σελίδας τιμολόγησης της Anthropic για τα πιο πρόσφατα δεδομένα.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: Αντιστοίχιση πλάνων" data-group="1.2 Free vs Pro vs Max vs Team vs Enterprise">
+        <span class="chapter-kicker">Δραστηριότητα · 1.2</span>
+        <h1>Αντιστοίχιση πλάνων</h1>
+        <div class="activity js-match" id="act_08" data-ok="Εξαιρετικά! Αντιστοιχίσατε σωστά όλα τα πλάνα με τα χαρακτηριστικά τους.">
+          <p class="act-q">Αντιστοιχίστε κάθε πλάνο με το χαρακτηριστικό που το περιγράφει καλύτερα (επιλέξτε ένα στοιχείο από κάθε στήλη):</p>
+          <div class="match-cols">
+            <div class="match-col" aria-label="Πλάνα">
+              <button type="button" class="match-btn" data-pair="a">Free</button>
+              <button type="button" class="match-btn" data-pair="b">Pro</button>
+              <button type="button" class="match-btn" data-pair="c">Max</button>
+              <button type="button" class="match-btn" data-pair="d">Team</button>
+              <button type="button" class="match-btn" data-pair="e">Enterprise</button>
+            </div>
+            <div class="match-col" aria-label="Χαρακτηριστικά">
+              <button type="button" class="match-btn" data-pair="c">Επιλογή 5x ή 20x μεγαλύτερης χρήσης και early access</button>
+              <button type="button" class="match-btn" data-pair="e">SCIM, audit logs και συμμόρφωση HIPAA</button>
+              <button type="button" class="match-btn" data-pair="a">Περίπου 30–100 μηνύματα την ημέρα με αναμονή 4–8 ωρών</button>
+              <button type="button" class="match-btn" data-pair="d">Θέσεις Standard &amp; Premium για 5–150 άτομα</button>
+              <button type="button" class="match-btn" data-pair="b">$20/μήνα με απεριόριστα Projects και Research</button>
+            </div>
+          </div>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+      <!-- ============ 1.3 ΛΟΓΑΡΙΑΣΜΟΣ & INTERFACE ============ -->
+      <section class="chapter" data-title="Προετοιμασία περιβάλλοντος" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Δημιουργία λογαριασμού &amp; ξενάγηση στο interface</h1>
+        <p>Η έναρξη της διαδρομής σας με το Claude προϋποθέτει τη σωστή προετοιμασία του ψηφιακού σας περιβάλλοντος. Στην παρούσα υποενότητα θα αναλύσουμε βήμα προς βήμα τη διαδικασία δημιουργίας του λογαριασμού σας, τις επιλογές εγκατάστασης της εφαρμογής στις συσκευές σας και, τέλος, θα πραγματοποιήσουμε μια πλήρη περιήγηση στο περιβάλλον εργασίας για τον άμεσο εντοπισμό όλων των βασικών λειτουργιών.</p>
+      </section>
+
+      <section class="chapter" data-title="Δημιουργία λογαριασμού" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Δημιουργία Λογαριασμού στο Claude.ai</h1>
+        <p>Η διαδικασία εγγραφής στην πλατφόρμα είναι απλή, γρήγορη και σχεδιασμένη με γνώμονα την ασφάλεια των χρηστών. Αρχικά, επισκεφτείτε την επίσημη ηλεκτρονική διεύθυνση <a href="https://claude.com" target="_blank" rel="noopener"><strong>https://claude.com</strong></a> (ή claude.ai) από το πρόγραμμα περιήγησης (browser) του υπολογιστή σας.</p>
+        <p>Εδώ έχετε την επιλογή να συνδεθείτε με 2 τρόπους, είτε να κάνετε σύνδεση μέσω του υπάρχοντος λογαριασμού σας Google, είτε με την εισαγωγή οποιασδήποτε ηλεκτρονικής σας διεύθυνσης (e-mail).</p>
+        <figure class="shot">
+          <img src="assets/images/image004.png" alt="Οθόνη σύνδεσης στο Claude με επιλογές Google ή e-mail" loading="lazy">
+          <figcaption>«Σύνδεση με Claude»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Όροι χρήσης &amp; ηλικία" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Αποδοχή όρων και επιβεβαίωση ηλικίας</h1>
+        <p>Στη συνέχεια, αποδέχεστε τους όρους χρήσης και την πολιτική απορρήτου της εταιρείας. Ο λογαριασμός σας είναι πλέον έτοιμος προς χρήση.</p>
+        <figure class="shot">
+          <img src="assets/images/image005.png" alt="Παράθυρο αποδοχής όρων χρήσης και πολιτικής απορρήτου" loading="lazy">
+          <figcaption>«Αποδοχή των όρων χρήσης (Terms &amp; Policy)»</figcaption>
+        </figure>
+        <p>Μετά την αποδοχή των όρων, το Claude ζητάει από τον χρήστη να συμπληρώσει την ημερομηνία γέννησής του, προκειμένου να διαπιστωθεί ότι πληρείτε τα απαραίτητα ηλικιακά κριτήρια για τη χρήση της υπηρεσίας.</p>
+        <figure class="shot">
+          <img src="assets/images/image006.png" alt="Οθόνη επιβεβαίωσης ηλικίας χρήστη" loading="lazy">
+          <figcaption>«Επιβεβαίωση ηλικίας χρήστη»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Claude for desktop" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Η οθόνη «Claude for desktop»</h1>
+        <p>Μετά την επιβεβαίωση της ηλικίας, το σύστημα σας μεταφέρει στην οθόνη προώθησης της desktop εφαρμογής («Get the most out of Claude on your desktop»). Από εδώ μπορείτε να κατεβάσετε απευθείας την έκδοση για το λειτουργικό σας σύστημα (π.χ. Download for Windows) ή να επιλέξετε «Skip» για να συνεχίσετε στο περιβάλλον του browser σας.</p>
+        <figure class="shot">
+          <img src="assets/images/image007.png" alt="Οθόνη προώθησης της desktop εφαρμογής Claude" loading="lazy">
+          <figcaption>«Claude for desktop»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Before your first chat" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>«Before your first chat»</h1>
+        <p>Επιλέγοντας Skip στην προηγούμενη οθόνη, στη συνέχεια το Claude εμφανίζει ένα ακόμη παράθυρο με τίτλο «Before your first chat», το οποίο περιλαμβάνει μερικά πράγματα που πρέπει να γνωρίζετε, συν μια ρύθμιση που πρέπει να ελέγξετε.</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">1. Ad-free chats<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Η εταιρεία ξεκαθαρίζει ότι δεν εμφανίζει διαφημίσεις και δεν επιτρέπει σε διαφημιστές να επηρεάζουν τις απαντήσεις του Claude.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">2. Built to help, not harm<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Επισημαίνεται η ύπαρξη αυτοματοποιημένων δικλείδων ασφαλείας που προστατεύουν τις συνομιλίες σας από βίαιο, υβριστικό ή παραπλανητικό περιεχόμενο.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">3. Help Claude improve (Διακόπτης Επιλογής)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Στο σημείο αυτό υπάρχει ένας ενεργοποιημένος διακόπτης (toggle). Αν τον αφήσετε ενεργό, επιτρέπετε στην Anthropic να χρησιμοποιεί τις συνομιλίες και τις συνεδρίες κώδικά σας για την εκπαίδευση και τη βελτίωση του Claude. Μπορείτε να τον απενεργοποιήσετε αμέσως αν επιθυμείτε απόλυτη ιδιωτικότητα, ενώ η εταιρεία υπενθυμίζει ότι η ρύθμιση αυτή αλλάζει ανά πάσα στιγμή μέσα από τα Privacy Settings.</p></div>
+          </div>
+        </div>
+        <p>Πατώντας το κουμπί <strong>«Continue»</strong>, ολοκληρώνεται η διαδικασία και εισέρχεστε πλέον στο επίσημο περιβάλλον εργασίας.</p>
+        <figure class="shot">
+          <img src="assets/images/image008.png" alt="Παράθυρο ενημέρωσης ιδιωτικότητας και ρυθμίσεων δεδομένων πριν από την πρώτη συνομιλία" loading="lazy">
+          <figcaption>«Ενημέρωση ιδιωτικότητας και ρυθμίσεων δεδομένων»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Το όνομά σας" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Πληκτρολογήστε το όνομά σας</h1>
+        <p>Μετά την ολοκλήρωση των ρυθμίσεων ιδιωτικότητας, εμφανίζεται η επόμενη οθόνη στην οποία καλείστε να πληκτρολογήσετε το όνομά σας ή το όνομα που προτιμάτε. Το όνομα αυτό είναι ο τρόπος με τον οποίο το Claude θα γνωρίζει πώς να σας καλωσορίζει και να απευθύνεται σε εσάς κατά τη διάρκεια των συνεδριών σας.</p>
+        <figure class="shot">
+          <img src="assets/images/image009.png" alt="Οθόνη εισαγωγής ονόματος χρήστη στο Claude" loading="lazy">
+          <figcaption>«Πληκτρολογήστε το όνομά σας ή το όνομα που επιθυμείτε»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Επαγγελματικό προφίλ" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>«What kind of work do you do?»</h1>
+        <p>Αμέσως μετά, το Claude σας ζητά να καθορίσετε το επαγγελματικό σας προφίλ μέσα από την οθόνη με τίτλο <strong>«What kind of work do you do?»</strong>.</p>
+        <p>Σκοπός αυτού του βήματος είναι να βοηθήσετε την πλατφόρμα να προσαρμόσει την εμπειρία σας (tailor your experience) στις δικές σας ανάγκες. Πατώντας στο αναπτυσσόμενο μενού <strong>«Select your role»</strong>, καλείστε να επιλέξετε την ειδικότητα ή τον τομέα εργασίας σας. Με αυτόν τον τρόπο, το μοντέλο αντιλαμβάνεται καλύτερα το υπόβαθρό σας και μπορεί να παρέχει πιο στοχευμένες και σχετικές απαντήσεις στις μελλοντικές σας συνομιλίες.</p>
+        <figure class="shot">
+          <img src="assets/images/image010.png" alt="Οθόνη επιλογής επαγγελματικού προφίλ What kind of work do you do" loading="lazy">
+          <figcaption>«Προσαρμόστε το επαγγελματικό σας προφίλ»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Προτεινόμενες ενέργειες" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Προτάσεις προσαρμοσμένες στο επάγγελμά σας</h1>
+        <p>Σε αυτό το σημείο, το Claude προτείνει ορισμένες προτάσεις σχετικά με το επάγγελμα που επιλέξατε, ώστε να προσαρμόσει την εμπειρία του. Ενδεικτικά εμφανίζονται:</p>
+        <div class="card-grid">
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">📅</span>
+            <h3>Plan my week</h3>
+            <p>Οργάνωση και προγραμματισμός των δραστηριοτήτων της εβδομάδας σας.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">⚖️</span>
+            <h3>Weigh a hard decision</h3>
+            <p>Ανάλυση δεδομένων για βοήθεια στη λήψη μιας δύσκολης απόφασης.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">📝</span>
+            <h3>Explain, then quiz me</h3>
+            <p>Επεξήγηση μιας έννοιας και στη συνέχεια δημιουργία ενός σύντομου τεστ γνώσεων (quiz) για εμπέδωση.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="«I have my own topic»" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>«I have my own topic» και καλωσόρισμα</h1>
+        <p>Αν δεν επιθυμείτε να χρησιμοποιήσετε καμία από τις προκαθορισμένες επιλογές, στο κάτω μέρος της οθόνης υπάρχει η επιλογή <strong>«I have my own topic»</strong> (Έχω το δικό μου θέμα). Πατώντας την, παρακάμπτετε τις προτάσεις του συστήματος και μεταφέρεστε απευθείας στο κεντρικό περιβάλλον εργασίας, ώστε να πληκτρολογήσετε τη δική σας, ελεύθερη οδηγία.</p>
+        <figure class="shot">
+          <img src="assets/images/image011.png" alt="Προτεινόμενες ενέργειες προσαρμοσμένες στο επάγγελμα του χρήστη" loading="lazy">
+          <figcaption>«Προσαρμογή μοντέλου βασιζόμενη στο επάγγελμα του χρήστη»</figcaption>
+        </figure>
+        <p>Τέλος, μεταφέρεστε πλέον στο επίσημο περιβάλλον εργασίας με ένα μήνυμα καλωσορίσματος.</p>
+        <figure class="shot">
+          <img src="assets/images/image012.png" alt="Αρχική οθόνη καλωσορίσματος του Claude" loading="lazy">
+          <figcaption>«Αρχική οθόνη Καλωσορίσματος»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: Σειρά βημάτων" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Δραστηριότητα · 1.3</span>
+        <h1>Βάλτε τα βήματα στη σωστή σειρά</h1>
+        <div class="activity js-seq" id="act_10"
+             data-ok="Σωστή σειρά! Αυτή είναι η ροή δημιουργίας λογαριασμού στο Claude."
+             data-ko="Η σειρά δεν είναι σωστή. Θυμηθείτε: πρώτα η διεύθυνση, μετά οι όροι, η ηλικία, η οθόνη desktop και τέλος το όνομα.">
+          <p class="act-q">Τοποθετήστε τα βήματα της δημιουργίας λογαριασμού στη σωστή σειρά (κάντε κλικ στα βήματα με τη σειρά που εκτελούνται):</p>
+          <div class="seq-pool">
+            <button type="button" class="seq-item" data-step="3">Επιβεβαίωση ηλικίας</button>
+            <button type="button" class="seq-item" data-step="1">Επίσκεψη στο claude.com και σύνδεση</button>
+            <button type="button" class="seq-item" data-step="5">Εισαγωγή ονόματος &amp; ρόλου</button>
+            <button type="button" class="seq-item" data-step="2">Αποδοχή όρων χρήσης</button>
+            <button type="button" class="seq-item" data-step="4">Οθόνη desktop app / Skip</button>
+          </div>
+          <div class="seq-slots">
+            <div class="seq-slot"><span class="slot-num">1.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">2.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">3.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">4.</span><span class="slot-text"></span></div>
+            <div class="seq-slot"><span class="slot-num">5.</span><span class="slot-text"></span></div>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Εγκατάσταση σε υπολογιστή" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Εγκατάσταση της Εφαρμογής σε Υπολογιστή (Desktop App)</h1>
+        <p>Για να μεγιστοποιήσετε την παραγωγικότητά σας, η Anthropic προσφέρει αυτόνομες εφαρμογές που σας επιτρέπουν να χρησιμοποιείτε το Claude χωρίς να εξαρτάστε από τον browser σας, διατηρώντας παράλληλα το ιστορικό σας πλήρως συγχρονισμένο σε όλες τις συσκευές.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="dsk-intro" role="tab" aria-selected="true">💻 Λήψη της εφαρμογής</button>
+            <button type="button" class="tab-btn" data-tab="dsk-steps" role="tab" aria-selected="false">🪜 Βήματα εγκατάστασης</button>
+            <button type="button" class="tab-btn" data-tab="dsk-first" role="tab" aria-selected="false">✨ Το πρώτο άνοιγμα</button>
+          </div>
+          <div class="tab-panel active" data-tab="dsk-intro">
+            <h3>Εγκατάσταση σε Υπολογιστή (Desktop App)</h3>
+            <p>Εάν κατά τη διάρκεια της αρχικής εγγραφής επιλέξατε να προσπεράσετε («Skip») τη λήψη της εφαρμογής για τον υπολογιστή, η πλατφόρμα σάς δίνει τη δυνατότητα να την κατεβάσετε ανά πάσα στιγμή μέσα από το κεντρικό περιβάλλον εργασίας.</p>
+          </div>
+          <div class="tab-panel" data-tab="dsk-steps">
+            <h3>Η διαδικασία είναι εξαιρετικά απλή</h3>
+            <ol class="steps">
+              <li>Στην αριστερή πλευρική μπάρα (sidebar) της οθόνης, εντοπίστε την ενότητα <strong>«Try the basics»</strong>.</li>
+              <li>Στο συγκεκριμένο μενού εμφανίζονται τρεις προτεινόμενες ενέργειες. Επιλέγετε την τρίτη κατά σειρά επιλογή, με την ένδειξη <strong>«Get the desktop app»</strong> (Hand off tasks, code with Claude, and do more from your desktop).</li>
+              <li>Κάνοντας κλικ σε αυτή την επιλογή, ξεκινά αυτόματα η λήψη του αρχείου εγκατάστασης (π.χ. Claude Install) στον υπολογιστή σας.</li>
+              <li>Μόλις ολοκληρωθεί η λήψη, εντοπίζετε το αρχείο στον φάκελο «Λήψεις» (Downloads), το εκτελείτε και ακολουθείτε τα σύντομα βήματα εγκατάστασης.</li>
+            </ol>
+            <figure class="shot">
+              <img src="assets/images/image013.png" alt="Επιλογή Get the desktop app στο πλευρικό μενού Try the basics" loading="lazy">
+              <figcaption>«Επιλογή για εγκατάσταση του Claude στον υπολογιστή»</figcaption>
+            </figure>
+          </div>
+          <div class="tab-panel" data-tab="dsk-first">
+            <h3>Το πρώτο άνοιγμα της desktop εφαρμογής</h3>
+            <figure class="shot">
+              <img src="assets/images/image014.png" alt="Παράθυρο εγκατάστασης της desktop εφαρμογής Claude" loading="lazy">
+              <figcaption>«Εγκατάσταση desktop app»</figcaption>
+            </figure>
+            <p>Μόλις ολοκληρωθεί η εγκατάσταση και ανοίξετε για πρώτη φορά την εφαρμογή για υπολογιστή (desktop app), θα παρατηρήσετε ότι το περιβάλλον διαφέρει ελαφρώς από τη web έκδοση, καθώς εστιάζει στην ενισχυμένη παραγωγικότητα. Η αρχική οθόνη είναι προσανατολισμένη στη λειτουργία <strong>Cowork</strong>.</p>
+            <p>Η αναλυτική λειτουργία του Cowork, καθώς και ο τρόπος με τον οποίο οργανώνονται οι εργασίες εντός της desktop εφαρμογής, θα παρουσιαστούν διεξοδικά σε επόμενο κεφάλαιο του οδηγού.</p>
+            <figure class="shot">
+              <img src="assets/images/image015.png" alt="Κεντρική οθόνη της εφαρμογής desktop Claude με προσανατολισμό στο Cowork" loading="lazy">
+              <figcaption>«Κεντρική οθόνη της εφαρμογής desktop Claude»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Εγκατάσταση σε κινητά" data-group="1.3 Δημιουργία λογαριασμού &amp; ξενάγηση στο interface">
+        <span class="chapter-kicker">Υποενότητα 1.3</span>
+        <h1>Εγκατάσταση σε Κινητές Συσκευές (Smartphones &amp; Tablets)</h1>
+        <p>Η εγκατάσταση του Claude στην κινητή σας συσκευή αποτελεί μια απλή και γρήγορη διαδικασία, επιτρέποντάς σας να έχετε τον ψηφιακό σας βοηθό διαθέσιμο ανά πάσα στιγμή, εν κινήσει. Η εφαρμογή διατίθεται δωρεάν για τα δύο κορυφαία λειτουργικά συστήματα.</p>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="mob-android" role="tab" aria-selected="true">🤖 Android</button>
+            <button type="button" class="tab-btn" data-tab="mob-ios" role="tab" aria-selected="false">🍎 iPhone / iPad</button>
+            <button type="button" class="tab-btn" data-tab="mob-qr" role="tab" aria-selected="false">🔳 Μέσω QR Code</button>
+          </div>
+          <div class="tab-panel active" data-tab="mob-android">
+            <h3>Για συσκευές Android:</h3>
+            <ol class="steps">
+              <li>Μεταβείτε στο ψηφιακό κατάστημα <strong>Google Play Store</strong> της συσκευής σας.</li>
+              <li>Πραγματοποιήστε αναζήτηση πληκτρολογώντας <strong>"Claude"</strong>. Βεβαιωθείτε ότι ως κατασκευαστής (developer) αναγράφεται η εταιρεία <strong>Anthropic</strong>, προς αποφυγή λήψης ανεπίσημων ή παραπλανητικών εφαρμογών.</li>
+              <li>Επιλέξτε <strong>Εγκατάσταση (Install)</strong>.</li>
+              <li>Μετά την ολοκλήρωση της λήψης, ανοίξτε την εφαρμογή για να συνδεθείτε στον υπάρχοντα λογαριασμό σας ή να δημιουργήσετε έναν νέο.</li>
+            </ol>
+          </div>
+          <div class="tab-panel" data-tab="mob-ios">
+            <h3>Για συσκευές Apple (iPhone / iPad)</h3>
+            <ol class="steps">
+              <li>Ανοίξτε το ψηφιακό κατάστημα <strong>App Store</strong>.</li>
+              <li>Αναζητήστε την εφαρμογή με τον όρο <strong>"Claude"</strong> (επαληθεύοντας ξανά την Anthropic ως δημιουργό).</li>
+              <li>Πατήστε <strong>Λήψη (Get)</strong>.</li>
+              <li>Μόλις ολοκληρωθεί η διαδικασία, ανοίξτε την εφαρμογή και προχωρήστε στην είσοδο ή την εγγραφή σας.</li>
+            </ol>
+          </div>
+          <div class="tab-panel" data-tab="mob-qr">
+            <h3>Εναλλακτικός και Ταχύτερος Τρόπος Εγκατάστασης Claude App (Μέσω QR Code)</h3>
+            <p>Εάν βρίσκεστε ήδη συνδεδεμένοι στο Claude μέσω του υπολογιστή σας (browser), υπάρχει ένας πιο άμεσος τρόπος να εγκαταστήσετε την εφαρμογή στο κινητό σας, αποφεύγοντας τη χειροκίνητη αναζήτηση στα ψηφιακά καταστήματα:</p>
+            <ol class="steps">
+              <li>Στο περιβάλλον εργασίας του browser, μεταβείτε στην αριστερή πλευρική μπάρα.</li>
+              <li>Κάντε κλικ στο προφίλ/όνομα του λογαριασμού σας (κάτω αριστερά) και από το μενού που θα ανοίξει επιλέξτε <strong>«Get apps and extensions»</strong>.</li>
+              <li>Στην ενότητα που αφορά τις κινητές συσκευές (Mobile), επιλέξτε τη λήψη (Download) για το λειτουργικό σύστημα του smartphone σας (Android ή iOS).</li>
+              <li>Στην οθόνη του υπολογιστή σας θα εμφανιστεί αμέσως ένας κωδικός <strong>QR (Take Claude on the go)</strong>.</li>
+              <li>Ανοίξτε την κάμερα του κινητού σας τηλεφώνου και σκανάρετε τον κωδικό QR.</li>
+            </ol>
+            <h3>Λήψη εφαρμογής και κωδικός QR</h3>
+            <figure class="shot">
+              <img src="assets/images/image016.png" alt="Επιλογή λήψης της εφαρμογής Claude για iOS και Android" loading="lazy">
+              <figcaption>«Επιλογή λήψης της εφαρμογής σε συσκευές iOS και Android»</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/images/image017.png" alt="Κωδικός QR για λήψη της εφαρμογής Claude σε Android" loading="lazy">
+              <figcaption>«Εμφάνιση κωδικού QR για το Claude android app»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      <!-- ============ 1.4 Η ΠΡΩΤΗ ΣΟΥ ΣΥΝΟΜΙΛΙΑ ============ -->
+      <section class="chapter" data-title="Όχι απλή μηχανή αναζήτησης" data-group="1.4 Η πρώτη σου συνομιλία">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>Η πρώτη σου συνομιλία</h1>
+        <p>Το συχνότερο σφάλμα κατά την πρώτη επαφή με ένα Μεγάλο Γλωσσικό Μοντέλο (LLM) είναι η αντιμετώπισή του ως μια απλή μηχανή αναζήτησης. Το Claude δεν αναζητά απλώς λέξεις-κλειδιά, αλλά κατανοεί φυσική γλώσσα και πλαίσιο (context). Για να λάβετε μια χρήσιμη απάντηση, η πρώτη σας οδηγία (prompt) πρέπει να είναι όσο το δυνατόν πιο σαφής.</p>
+      </section>
+
+      <section class="chapter" data-title="Ελλιπής οδηγία" data-group="1.4 Η πρώτη σου συνομιλία">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>Ελλιπής οδηγία από τον χρήστη</h1>
+        <div class="prompt-box prompt-bad">
+          <span class="pb-label">✘ Ελλιπής οδηγία από τον χρήστη</span>
+          <p class="pb-text">«Συγγραφή επαγγελματικού email»</p>
+        </div>
+        <p>Όπως φαίνεται και στο παρακάτω παράδειγμα, εάν εισάγετε μια τόσο ελλιπή οδηγία, το Claude είναι προγραμματισμένο να αναγνωρίζει την απουσία πληροφοριών. Αντί να προσπαθήσει να μαντέψει τυχαία τι θέλετε, θα ενεργοποιήσει έναν μηχανισμό υποβοήθησης. Θα σας εμφανίσει ένα μενού επιλογών, ρωτώντας σας για τον <strong>σκοπό</strong> του email (π.χ. Αίτηση εργασίας, Συνεργασία/Πρόταση, Παρακολούθηση/Follow-up κ.λπ.), προσπαθώντας να σας καθοδηγήσει να του δώσετε το απαραίτητο πλαίσιο.</p>
+        <figure class="shot">
+          <img src="assets/images/image018.png" alt="Απόκριση του Claude σε ελλιπές prompt με μενού επιλογών σκοπού" loading="lazy">
+          <figcaption>«Ελλιπές prompt χρήστη — δυναμική ανταπόκριση Claude»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Ορθή πρακτική" data-group="1.4 Η πρώτη σου συνομιλία">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>Η ορθή πρακτική</h1>
+        <p>Για να αποφύγετε αυτή την διαδικασία και να έχετε το επιθυμητό αποτέλεσμα άμεσα, προτείνεται η χρήση της ορθής πρακτικής (Λογική Ψηφιακού Βοηθού):</p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Ορθή πρακτική</span>
+          <p class="pb-text">«Ανάλαβε τον ρόλο ενός υπεύθυνου ανθρώπινου δυναμικού. Γράψε ένα σύντομο και επίσημο email προς έναν υποψήφιο, ενημερώνοντάς τον ότι πέρασε επιτυχώς στο δεύτερο στάδιο των συνεντεύξεων. Το ύφος πρέπει να είναι ενθαρρυντικό αλλά επαγγελματικό.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image019.png" alt="Απάντηση του Claude σε σαφή και ολοκληρωμένη οδηγία για email" loading="lazy">
+          <figcaption>«Ορθή πρακτική με μια σαφή και ολοκληρωμένη οδηγία»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="«Send via Gmail»" data-group="1.4 Η πρώτη σου συνομιλία">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>Μια εξαιρετικά πρακτική λεπτομέρεια</h1>
+        <p>Στο συγκεκριμένο παράδειγμα αξίζει να σταθούμε σε μια εξαιρετικά πρακτική λεπτομέρεια. Όπως παρατηρείτε στην κάτω δεξιά γωνία του πλαισίου της απάντησης, το Claude εμφανίζει το κουμπί «Send via Gmail» (Αποστολή μέσω Gmail) και επιλέγοντας το βελάκι έχει και την επιλογή «Open in Mail».</p>
+        <p>Αξιοποιώντας τις δυνατότητες διασύνδεσης της πλατφόρμας (ένα θέμα που θα αναλύσουμε διεξοδικά σε επόμενο κεφάλαιο), το Claude σας επιτρέπει να προωθήσετε το κείμενο απευθείας στον λογαριασμό σας, έτοιμο προς αποστολή. Αυτή η αυτοματοποίηση καταργεί την παραδοσιακή διαδικασία της μηχανικής αντιγραφής και επικόλλησης (copy-paste), βελτιστοποιώντας σημαντικά την καθημερινή σας ροή εργασίας.</p>
+      </section>
+
+      <section class="chapter" data-title="Παράλειψη follow-up" data-group="1.4 Η πρώτη σου συνομιλία">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>Παράλειψη της Ανατροφοδότησης (Follow-up)</h1>
+        <p>Ένα από τα πιο συνηθισμένα σφάλματα των νέων χρηστών είναι η προσέγγιση της τεχνητής νοημοσύνης με τη νοοτροπία της «μιας και μόνο εντολής». Συχνά, εάν η πρώτη απάντηση του Claude δεν ανταποκρίνεται απόλυτα στις προσδοκίες τους, ο χρήστης θεωρεί ότι το εργαλείο δεν είναι κατάλληλο και είτε εγκαταλείπει τη συνομιλία, είτε προσπαθεί να ξεκινήσει από την αρχή με μια νέα, διαφορετική οδηγία. Είναι κρίσιμο να αντιλαμβάνεστε το Claude ως έναν συνεργάτη με τον οποίο διεξάγετε διάλογο. Η πρώτη απάντηση που λαμβάνετε αποτελεί συχνά μόνο την «πρώτη προσέγγιση» του μοντέλου.</p>
+      </section>
+
+      <section class="chapter" data-title="«Σμιλεύοντας» την απάντηση" data-group="1.4 Η πρώτη σου συνομιλία">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>«Σμιλεύοντας» την απάντηση με follow-up prompts</h1>
+        <p>Αντί να απορρίψετε το αποτέλεσμα, μάθετε να «σμιλεύετε» την απάντηση μέσω συμπληρωματικών οδηγιών (follow-up prompts). Για παράδειγμα:</p>
+        <ul class="checklist">
+          <li>Αν η απάντηση είναι υπερβολικά τεχνική, ζητήστε: <em>«Γράψε το ίδιο κείμενο πιο απλά, ώστε να γίνει κατανοητό από κάποιον χωρίς τεχνικό υπόβαθρο».</em></li>
+          <li>Σε περίπτωση που το περιεχόμενο είναι εκτενές, ζητήστε: <em>«Κάνε το κείμενο πιο συνοπτικό, διατηρώντας μόνο τα κύρια σημεία».</em></li>
+          <li>Αν το ύφος δεν ταιριάζει στο πλαίσιο, ζητήστε: <em>«Μετάτρεψε το ύφος σε πιο επίσημο/φιλικό/περιγραφικό».</em></li>
+        </ul>
+        <p>Η ποιότητα του τελικού παραδοτέου εξαρτάται άμεσα από τη δική σας ικανότητα να καθοδηγείτε το μοντέλο. Η αποτελεσματική αλληλεπίδραση είναι μια επαναληπτική διαδικασία (iterative process), όσο περισσότερο «εκπαιδεύετε» το μοντέλο μέσα στην ίδια συνομιλία, τόσο πιο κοντά στο επιθυμητό αποτέλεσμα φτάνετε.</p>
+      </section>
+
+      <section class="chapter" data-title="Chat Controls" data-group="1.4 Η πρώτη σου συνομιλία">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>Εργαλεία Ελέγχου της Απάντησης (Chat Controls)</h1>
+        <p>Κάτω από κάθε απάντηση που σας δίνει το Claude, θα παρατηρήσετε μια σειρά από διακριτικά εικονίδια. Αυτά τα εργαλεία έχουν σχεδιαστεί για να διευκολύνουν τη διαχείριση του παραγόμενου κειμένου και την αλληλεπίδρασή σας με το μοντέλο:</p>
+        <div class="card-grid">
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">📋</span>
+            <h3>Αντιγραφή (Copy)</h3>
+            <p>Το πρώτο εικονίδιο (δύο επικαλυπτόμενα τετράγωνα) είναι ένα αρκετά χρήσιμο εργαλείο για κάθε χρήστη. Με ένα μόνο κλικ, αντιγράφει ολόκληρο το κείμενο της απάντησης στο πρόχειρο (clipboard). Έτσι, μπορείτε να το επικολλήσετε άμεσα σε ένα έγγραφο Word, σε ένα email ή σε οποιαδήποτε άλλη εφαρμογή, αποφεύγοντας την κουραστική χειροκίνητη επιλογή του κειμένου (drag and drop).</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">👍</span>
+            <h3>Αξιολόγηση (Thumbs Up / Thumbs Down)</h3>
+            <p>Τα δύο μεσαία εικονίδια σάς επιτρέπουν να αξιολογήσετε την ποιότητα της απάντησης (θετικά ή αρνητικά). Η ανατροφοδότηση αυτή είναι ανώνυμη και βοηθά την Anthropic να βελτιώνει συνεχώς την απόδοση του συστήματος.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🔄</span>
+            <h3>Νέα Εκδοχή / Επανάληψη (Retry)</h3>
+            <p>Το τελευταίο εικονίδιο (το κυκλικό βέλος) είναι εξαιρετικά πρακτικό εάν δεν είστε ικανοποιημένοι με το αποτέλεσμα. Πατώντας το, δίνετε εντολή στο Claude να διαγράψει νοητά τη συγκεκριμένη απάντηση και να δημιουργήσει μια εντελώς νέα, βασισμένη στην ίδια ακριβώς αρχική σας οδηγία, δίνοντάς σας μια νέα οπτική.</p>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image020.png" alt="Εικονίδια διαχείρισης απάντησης: Copy, αξιολόγηση, Retry" loading="lazy">
+          <figcaption>«Εικονίδια διαχείρισης (Copy, Αξιολόγηση, Retry)»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος" data-group="1.4 Η πρώτη σου συνομιλία">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · 1.4</span>
+        <h1>Ερώτηση κατανόησης</h1>
+        <div class="activity quiz-mini js-mcq" id="act_12" data-correct="2"
+             data-ok="Σωστά! Το Retry δημιουργεί νέα εκδοχή απάντησης βασισμένη στην ίδια αρχική οδηγία — μια νέα οπτική."
+             data-ko="Δεν είναι σωστό. Το Retry δημιουργεί νέα εκδοχή απάντησης βασισμένη στην ίδια αρχική οδηγία — μια νέα οπτική.">
+          <p class="act-q">Τι κάνει το εικονίδιο με το κυκλικό βέλος (Retry) κάτω από μια απάντηση;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Αντιγράφει την απάντηση στο πρόχειρο</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Διαγράφει οριστικά τη συνομιλία</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Ζητά από το Claude μια εντελώς νέα απάντηση στην ίδια οδηγία</button>
+            <button type="button" class="option-btn"><span class="opt-key">Δ</span> Στέλνει την απάντηση μέσω Gmail</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Διαχείριση της συνομιλίας" data-group="1.4 Η πρώτη σου συνομιλία">
+        <span class="chapter-kicker">Υποενότητα 1.4</span>
+        <h1>Η Διαχείριση της Συνομιλίας (Ιστορικό και Μετονομασία)</h1>
+        <p>Ένα από τα κύρια πλεονεκτήματα του Claude είναι η δυνατότητα διατήρησης του ιστορικού των αλληλεπιδράσεών σας. Ο νέος χρήστης συχνά ανησυχεί για την αποθήκευση των δεδομένων του, ωστόσο η διαδικασία είναι πλήρως αυτοματοποιημένη:</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Αυτόματη Αποθήκευση<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Κάθε νέα συνομιλία αποθηκεύεται αυτόματα στην αριστερή πλευρική μπάρα (sidebar) της εφαρμογής. Δεν απαιτείται καμία χειροκίνητη ενέργεια για τη διασφάλιση των δεδομένων σας.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Αυτοματοποιημένη Ονοματοδοσία<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Μετά το πρώτο μήνυμα που θα ανταλλάξετε, το Claude αναλύει το περιεχόμενο και αναθέτει αυτόματα έναν τίτλο στη συνομιλία, ώστε να μπορείτε να την αναγνωρίσετε εύκολα αργότερα. Ωστόσο, για καλύτερη οργάνωση του αρχείου σας, μπορείτε να μετονομάσετε τη συνομιλία ανά πάσα στιγμή. Μεταβείτε στην αριστερή πλευρική μπάρα, εντοπίστε τη συνομιλία που σας ενδιαφέρει, επιλέξτε τις τρεις τελείες που βρίσκονται δίπλα στον τίτλο της και επιλέξτε «Rename» (Μετονομασία).</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Οργάνωση και Διαχείριση<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Το σύστημα παρέχει επιπλέον δυνατότητες διαχείρισης. Από το ίδιο μενού μπορείτε να διαγράψετε μια συνομιλία που δεν χρειάζεστε πλέον.</p></div>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image021.png" alt="Μενού μετονομασίας συνομιλίας στην πλευρική μπάρα" loading="lazy">
+          <figcaption>«Μετονομασία συνομιλίας»</figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ 1.5 ΚΑΝΟΝΕΣ ΚΑΛΟΥ PROMPTING ============ -->
+      <section class="chapter" data-title="Οι 4 πυλώνες" data-group="1.5 Βασικοί κανόνες καλού prompting">
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>Βασικοί κανόνες καλού prompting</h1>
+        <p>Για να αντλήσετε τη μέγιστη δυνατή αξία από το Claude, δεν αρκεί απλώς να θέτετε μια ερώτηση. Απαιτείται η δομημένη διατύπωση οδηγιών (prompting) που παρέχουν στο μοντέλο όλα τα απαραίτητα εφόδια για να παράγει ένα ποιοτικό αποτέλεσμα.</p>
+        <p>Η διαφορά μεταξύ ενός μέτριου και ενός εξαιρετικού αποτελέσματος έγκειται στην εφαρμογή των τεσσάρων πυλώνων του καλού prompt.</p>
+        <p>Κάθε φορά που συντάσσετε μια οδηγία, προσπαθήστε να συμπεριλάβετε τα παρακάτω τέσσερα στοιχεία:</p>
+      </section>
+
+      <section class="chapter" data-title="Ρόλος, Πλαίσιο, Στόχος, Παραδείγματα" data-group="1.5 Βασικοί κανόνες καλού prompting">
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>Οι τέσσερις πυλώνες του καλού prompt</h1>
+        <div class="flip-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));">
+          <button type="button" class="flip-card" style="min-height:250px;" aria-label="Κάρτα: Ρόλος (Role) — πατήστε για τον ορισμό">
+            <span class="flip-inner" style="min-height:250px;">
+              <span class="flip-face flip-front">🎭 Ρόλος (Role)<span class="flip-hint">Πατήστε για τον ορισμό</span></span>
+              <span class="flip-face flip-back">Καθορίστε την ιδιότητα που θέλετε να υιοθετήσει το Claude. Όταν το μοντέλο «γνωρίζει» αν ενεργεί ως καθηγητής, ως προγραμματιστής, ή ως σύμβουλος marketing, προσαρμόζει αυτόματα το λεξιλόγιο και τη δομή της απάντησής του.</span>
+            </span>
+          </button>
+          <button type="button" class="flip-card" style="min-height:250px;" aria-label="Κάρτα: Πλαίσιο (Context) — πατήστε για τον ορισμό">
+            <span class="flip-inner" style="min-height:250px;">
+              <span class="flip-face flip-front">🧭 Πλαίσιο (Context)<span class="flip-hint">Πατήστε για τον ορισμό</span></span>
+              <span class="flip-face flip-back">Δώστε πληροφορίες για το υπόβαθρο. Ποιος είναι ο στόχος σας; Σε ποιους απευθύνεστε; Υπάρχουν περιορισμοί ή συγκεκριμένες συνθήκες που πρέπει να ληφθούν υπόψη; Όσο περισσότερο πλαίσιο παρέχετε, τόσο λιγότερο "γενικόλογη" θα είναι η απάντηση.</span>
+            </span>
+          </button>
+          <button type="button" class="flip-card" style="min-height:250px;" aria-label="Κάρτα: Στόχος (Task) — πατήστε για τον ορισμό">
+            <span class="flip-inner" style="min-height:250px;">
+              <span class="flip-face flip-front">🎯 Στόχος (Task)<span class="flip-hint">Πατήστε για τον ορισμό</span></span>
+              <span class="flip-face flip-back">Περιγράψτε με σαφήνεια τι ακριβώς θέλετε να επιτύχετε. Χρησιμοποιήστε ρήματα δράσης (π.χ. "σύνοψισε", "ανάλυσε", "συνέταξε", "διόρθωσε").</span>
+            </span>
+          </button>
+          <button type="button" class="flip-card" style="min-height:250px;" aria-label="Κάρτα: Παραδείγματα (Few-Shot Prompting) — πατήστε για τον ορισμό">
+            <span class="flip-inner" style="min-height:250px;">
+              <span class="flip-face flip-front">📄 Παραδείγματα (Few-Shot Prompting)<span class="flip-hint">Πατήστε για τον ορισμό</span></span>
+              <span class="flip-face flip-back">Εάν το αποτέλεσμα πρέπει να έχει μια συγκεκριμένη μορφή, δώστε ένα δείγμα. Αν θέλετε μια λίστα, ένα email ή έναν κώδικα, δείξτε στο Claude πώς μοιάζει το ιδανικό αποτέλεσμα για εσάς.</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="1ο Παράδειγμα — μέτριο prompt" data-group="1.5 Βασικοί κανόνες καλού prompting">
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>Αναβαθμίζοντας το Prompt: Από το Μέτριο στο Εξαιρετικό</h1>
+        <p>Ας δούμε πρακτικά πώς η εφαρμογή αυτών των πυλώνων μεταμορφώνει το αποτέλεσμα.</p>
+        <div class="prompt-box prompt-bad">
+          <span class="pb-label">Μέτριο Prompt</span>
+          <p class="pb-text">«Γράψε μου μια ανάλυση για τις ανανεώσιμες πηγές ενέργειας.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image022.png" alt="Μέρος της απάντησης του Claude στο μέτριο prompt" loading="lazy">
+          <figcaption>«Μέρος από την απάντηση του μέτριου prompt»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="1ο Παράδειγμα — εξειδικευμένο prompt" data-group="1.5 Βασικοί κανόνες καλού prompting">
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>Εξειδικευμένο Prompt (Εφαρμογή των 4 Πυλώνων)</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">Εξειδικευμένο Prompt</span>
+          <p class="pb-text">«<strong>(Ρόλος)</strong> Ενέργησε ως ειδικός σύμβουλος περιβαλλοντικής πολιτικής. <strong>(Πλαίσιο)</strong> Απευθύνομαι σε ένα κοινό επιχειρηματιών που δεν έχουν τεχνική κατάρτιση. <strong>(Στόχος)</strong> Συνέταξε μια ανάλυση 300 λέξεων για τα πλεονεκτήματα της ηλιακής ενέργειας στην Ελλάδα, εστιάζοντας στο οικονομικό όφελος. <strong>(Παράδειγμα)</strong> Χρησιμοποίησε δομή με τίτλους και bullet points, όπως ακριβώς σε ένα επαγγελματικό executive summary.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image023.png" alt="Μέρος της απάντησης του Claude στο εξειδικευμένο prompt με τους 4 πυλώνες" loading="lazy">
+          <figcaption>«Μέρος από την απάντηση του prompt με βάση τους 4 πυλώνες»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="2ο Παράδειγμα — Digital Marketing" data-group="1.5 Βασικοί κανόνες καλού prompting">
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>2ο Παράδειγμα: Εφαρμογή στον τομέα του Digital Marketing</h1>
+        <div class="compare-grid">
+          <div class="prompt-box prompt-bad">
+            <span class="pb-label">Μέτριο Prompt</span>
+            <p class="pb-text">«Δώσε μου ιδέες για social media posts για ένα e-shop με ρούχα.»</p>
+          </div>
+          <div class="prompt-box prompt-good">
+            <span class="pb-label">Εξειδικευμένο Prompt (Εφαρμογή των 4 Πυλώνων)</span>
+            <p class="pb-text">«<strong>(Ρόλος)</strong> Ενέργησε ως έμπειρος Social Media Strategist. <strong>(Πλαίσιο)</strong> Το brand μου αφορά βιώσιμη μόδα (sustainable fashion) για γυναίκες 25-40 ετών που ενδιαφέρονται για το περιβάλλον. <strong>(Στόχος)</strong> Δημιούργησε ένα πρόγραμμα περιεχομένου για 3 ημέρες, με σκοπό την αύξηση του engagement και την εκπαίδευση του κοινού για την αξία των οργανικών υλικών. <strong>(Παράδειγμα)</strong> Χρησιμοποίησε μια δομή με: [Τίτλο Post], [Κείμενο λεζάντας - με τόνο εμπνευσμένο αλλά φιλικό], [Πρόταση για το είδος του visual/video] και [Hashtags].»</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Δραστηριότητα: Αναγνώριση πυλώνων" data-group="1.5 Βασικοί κανόνες καλού prompting">
+        <span class="chapter-kicker">Δραστηριότητα · 1.5</span>
+        <h1>Αναγνωρίστε τους πυλώνες</h1>
+        <div class="activity js-fill" id="act_14"
+             data-ok="Σωστά! Αναγνωρίσατε και τους τέσσερις πυλώνες στο prompt."
+             data-ko="Κάποιες επιλογές δεν είναι σωστές. Θυμηθείτε: Ρόλος = ποιος «μιλάει», Πλαίσιο = υπόβαθρο/κοινό, Στόχος = τι ζητάμε, Παράδειγμα = μορφή αποτελέσματος.">
+          <p class="act-q">Συμπληρώστε ποιον πυλώνα εκφράζει κάθε τμήμα του prompt:</p>
+          <p class="fill-blank">«Ενέργησε ως διατροφολόγος» →
+            <select data-answer="role" aria-label="Πυλώνας πρώτου τμήματος">
+              <option value="">— επιλέξτε —</option>
+              <option value="role">Ρόλος</option>
+              <option value="context">Πλαίσιο</option>
+              <option value="task">Στόχος</option>
+              <option value="example">Παράδειγμα</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Απευθύνομαι σε αθλητές που προπονούνται πρωί» →
+            <select data-answer="context" aria-label="Πυλώνας δεύτερου τμήματος">
+              <option value="">— επιλέξτε —</option>
+              <option value="role">Ρόλος</option>
+              <option value="context">Πλαίσιο</option>
+              <option value="task">Στόχος</option>
+              <option value="example">Παράδειγμα</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Συνέταξε εβδομαδιαίο πρόγραμμα γευμάτων» →
+            <select data-answer="task" aria-label="Πυλώνας τρίτου τμήματος">
+              <option value="">— επιλέξτε —</option>
+              <option value="role">Ρόλος</option>
+              <option value="context">Πλαίσιο</option>
+              <option value="task">Στόχος</option>
+              <option value="example">Παράδειγμα</option>
+            </select>
+          </p>
+          <p class="fill-blank">«Παρουσίασέ το σε πίνακα με στήλες Ημέρα/Γεύμα/Θερμίδες» →
+            <select data-answer="example" aria-label="Πυλώνας τέταρτου τμήματος">
+              <option value="">— επιλέξτε —</option>
+              <option value="role">Ρόλος</option>
+              <option value="context">Πλαίσιο</option>
+              <option value="task">Στόχος</option>
+              <option value="example">Παράδειγμα</option>
+            </select>
+          </p>
+          <button type="button" class="btn btn-primary btn-sm fill-check" style="margin-top:10px;">Έλεγχος απαντήσεων</button>
+          <div class="feedback" role="status"></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Συμπέρασμα" data-group="1.5 Βασικοί κανόνες καλού prompting">
+        <span class="chapter-kicker">Υποενότητα 1.5</span>
+        <h1>Συμπέρασμα</h1>
+        <p>Το μέτριο prompt περιορίζεται σε μια αυτονόητη και γενικόλογη λίστα ιδεών, ενώ το εξειδικευμένο prompt λειτουργεί ως ειδικός συνεργάτης. Με τα δεδομένα που του δώσαμε (ρόλο, πλαίσιο, στόχο και δομή), το Claude δεν προτείνει απλώς τι να κάνουμε, αλλά παράγει μια ολοκληρωμένη στρατηγική πρόταση που είναι άμεσα εφαρμόσιμη και απόλυτα ευθυγραμμισμένη με το κοινό και τους στόχους της επιχείρησής μας.</p>
+      </section>
+
+      <!-- ============ 1.6 SETTINGS ============ -->
+      <section class="chapter" data-title="Γιατί μετράνε οι ρυθμίσεις" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Settings που πρέπει να ξέρεις από την αρχή</h1>
+        <p>Η σωστή παραμετροποίηση του Claude αποτελεί το πρώτο και σημαντικότερο βήμα για τη μετάβαση από έναν περιστασιακό χρήστη σε έναν αποδοτικό συνεργάτη τεχνητής νοημοσύνης. Οι ρυθμίσεις της πλατφόρμας δεν είναι απλώς τεχνικές επιλογές, είναι ο μηχανισμός μέσα από τον οποίο «διδάσκετε» στο Claude τον δικό σας τρόπο εργασίας, τις προτιμήσεις σας και τις ανάγκες σας.</p>
+        <p>Η αφιέρωση χρόνου στη διαμόρφωση των ρυθμίσεων (User Preferences) από την αρχή είναι καθοριστικής σημασίας για τους εξής λόγους:</p>
+        <div class="card-grid">
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🎯</span>
+            <h3>1. Εξατομίκευση (Personalization)</h3>
+            <p>Καθορίζοντας το επιθυμητό ύφος, τη γλώσσα και τη δομή των απαντήσεων, το Claude προσαρμόζεται αυτόματα στο προφίλ σας, απαλλάσσοντάς σας από την ανάγκη να επαναλαμβάνετε τις προτιμήσεις σας σε κάθε νέα συνομιλία.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">⚡</span>
+            <h3>2. Βελτιστοποίηση Ροής Εργασίας</h3>
+            <p>Μέσω των σωστών ρυθμίσεων, μπορείτε να έχετε άμεση πρόσβαση στα εργαλεία και τις διασυνδέσεις που χρησιμοποιείτε καθημερινά, αυξάνοντας κατακόρυφα την παραγωγικότητά σας.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🔍</span>
+            <h3>3. Έλεγχος και Διαφάνεια</h3>
+            <p>Η εξοικείωση με τις δυνατότητες (capabilities) και τα όρια χρήσης (usage) σας επιτρέπει να διαχειρίζεστε το Claude με σύνεση, γνωρίζοντας ακριβώς τι μπορεί να προσφέρει και ποια είναι η διαθεσιμότητά του.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🛡️</span>
+            <h3>4. Ιδιωτικότητα</h3>
+            <p>Η κατανόηση των ρυθμίσεων ασφαλείας σάς δίνει τον απόλυτο έλεγχο πάνω στον τρόπο με τον οποίο τα δεδομένα σας αλληλεπιδρούν με το σύστημα, διασφαλίζοντας την εμπιστευτικότητα των συνομιλιών σας.</p>
+          </div>
+        </div>
+        <p>Στην παρούσα ενότητα, θα περιηγηθούμε αναλυτικά στο μενού των ρυθμίσεων, ώστε να αποκτήσετε την πλήρη εποπτεία του περιβάλλοντος εργασίας σας και να διαμορφώσετε το Claude σύμφωνα με τις δικές σας απαιτήσεις.</p>
+      </section>
+
+      <section class="chapter" data-title="Custom Instructions" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Custom Instructions</h1>
+        <div class="tabs">
+          <div class="tab-list" role="tablist">
+            <button type="button" class="tab-btn active" data-tab="ci-what" role="tab" aria-selected="true">Τι είναι</button>
+            <button type="button" class="tab-btn" data-tab="ci-offer" role="tab" aria-selected="false">Τι προσφέρουν στον χρήστη</button>
+            <button type="button" class="tab-btn" data-tab="ci-how" role="tab" aria-selected="false">Πώς να το χρησιμοποιήσετε</button>
+          </div>
+          <div class="tab-panel active" data-tab="ci-what">
+            <p>Τα Custom Instructions (Προσαρμοσμένες Οδηγίες) είναι ουσιαστικά ο «προγραμματισμός» του Claude με βάση τις δικές σας ανάγκες. Αντί να εξηγείτε σε κάθε νέα συνομιλία ότι θέλετε απαντήσεις στα ελληνικά, με συγκεκριμένο επαγγελματικό ύφος και δομή, εισάγετε αυτές τις οδηγίες μία φορά στο πεδίο «Instructions for Claude».</p>
+          </div>
+          <div class="tab-panel" data-tab="ci-offer">
+            <p><strong>Συνέπεια:</strong> Το Claude διατηρεί το ύφος, το στυλ γραφής και τη δομή των απαντήσεων που επιθυμείτε σε κάθε αλληλεπίδραση. Δεν χρειάζεται πλέον να δίνετε επανειλημμένα οδηγίες ή να διορθώνετε το μοντέλο, καθώς οι βασικές προτιμήσεις σας (όπως η γλώσσα, ο βαθμός επισημότητας ή ο τρόπος παρουσίασης των δεδομένων) είναι ενσωματωμένες στις μόνιμες παραμέτρους του συστήματος.</p>
+            <p><strong>Εξοικονόμηση Χρόνου:</strong> Κάθε prompt που στέλνετε είναι ήδη «προσαρμοσμένο» από το σύστημα. Δεν σπαταλάτε τις πρώτες σειρές του διαλόγου δίνοντας οδηγίες για το πώς θέλετε να εργαστεί το μοντέλο.</p>
+            <p><strong>Ποιότητα Αποτελεσμάτων:</strong> Ορίζοντας σαφή πλαίσια (π.χ. "είσαι έμπειρος μηχανικός λογισμικού, πάντα να παρέχεις σχολιασμένο κώδικα"), το Claude λειτουργεί εξαρχής με τον κατάλληλο ρόλο, παράγοντας πιο ακριβή και εξειδικευμένα αποτελέσματα.</p>
+          </div>
+          <div class="tab-panel" data-tab="ci-how">
+            <p>Στο πεδίο των Custom Instructions, μπορείτε να γράψετε οτιδήποτε καθορίζει την εργασία σας. Για παράδειγμα: «Απαντάς πάντα στα Ελληνικά.», «Το ύφος σου είναι επίσημο και επαγγελματικό, κατάλληλο για ακαδημαϊκό ή επιχειρηματικό πλαίσιο.», «Στις τεχνικές αναλύσεις, να χρησιμοποιείς πάντα δομή με bullet points για καλύτερη αναγνωσιμότητα.», «Πριν δώσεις μια λύση, σκέψου βήμα-βήμα (Chain of Thought).»</p>
+            <h3>Διαφορετικές οδηγίες ανά Project</h3>
+            <div class="callout callout-note">
+              <span class="co-icon" aria-hidden="true">📁</span>
+              <div><p><strong>Σημείωση:</strong> Αν χρησιμοποιείτε διαφορετικά Projects για διαφορετικές ανάγκες (π.χ. ένα για Αυτοματοποίηση Διοικητικών Διαδικασιών και ένα για Business Process Modeling σε BPMN), μπορείτε να ορίσετε διαφορετικές Custom Instructions σε κάθε Project, ώστε το Claude να αλλάζει "προσωπικότητα" ανάλογα με το θέμα.</p></div>
+            </div>
+            <figure class="shot">
+              <img src="assets/images/image024.png" alt="Πεδίο Custom Instructions με προσωποποιημένες οδηγίες χρήστη" loading="lazy">
+              <figcaption>«Προσωποποιημένες Οδηγίες χρήστη»</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · 1.6</span>
+        <h1>Ερώτηση κατανόησης</h1>
+        <div class="activity quiz-mini js-mcq" id="act_16" data-correct="0"
+             data-ok="Σωστά! Τα Custom Instructions είναι ο «προγραμματισμός» του Claude: μόνιμες οδηγίες ύφους, γλώσσας και δομής σε κάθε αλληλεπίδραση."
+             data-ko="Δεν είναι σωστό. Τα Custom Instructions είναι ο «προγραμματισμός» του Claude: μόνιμες οδηγίες ύφους, γλώσσας και δομής σε κάθε αλληλεπίδραση.">
+          <p class="act-q">Θέλετε το Claude να απαντά πάντα στα ελληνικά με επίσημο ύφος, χωρίς να το ζητάτε κάθε φορά. Ποια ρύθμιση θα χρησιμοποιήσετε;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Custom Instructions</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> Appearance</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Usage Credits</button>
+            <button type="button" class="option-btn"><span class="opt-key">Δ</span> Organization ID</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Appearance (Εμφάνιση)" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Appearance (Εμφάνιση)</h1>
+        <p>Η επιλογή της κατάλληλης οπτικής διεπαφής δεν αφορά μόνο την αισθητική, αλλά τη βελτιστοποίηση της εργονομίας και της συγκέντρωσής σας κατά τη διάρκεια της εργασίας. Το Claude παρέχει τη δυνατότητα παραμετροποίησης του περιβάλλοντος (Theme), επιτρέποντάς σας να προσαρμόσετε την εμφάνιση στις συνθήκες φωτισμού του χώρου σας.</p>
+        <h2>Επιλογές Διαμόρφωσης:</h2>
+        <div class="card-grid">
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🌙</span>
+            <h3>Dark Mode (Σκοτεινό Θέμα)</h3>
+            <p>Ιδανικό για εργασία σε περιβάλλοντα με χαμηλό φωτισμό ή κατά τη διάρκεια νυχτερινών ωρών.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">☀️</span>
+            <h3>Light Mode (Φωτεινό Θέμα)</h3>
+            <p>Κατάλληλο για εργασία σε χώρους με έντονο φυσικό φως, καθώς προσφέρει υψηλή αντίθεση και ευκρίνεια.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🖥️</span>
+            <h3>System Default (Αυτόματη ρύθμιση)</h3>
+            <p>Επιλέγοντας αυτή την επιλογή, το Claude θα προσαρμόζει αυτόματα το θέμα του (Dark ή Light) βάσει των ρυθμίσεων του λειτουργικού συστήματος της συσκευής σας. Εάν εργάζεστε εναλλάξ σε διαφορετικά περιβάλλοντα, καθώς διασφαλίζει ότι η εφαρμογή θα ακολουθεί πάντα το «πρότυπο» που έχετε ορίσει για το σύνολο των εφαρμογών σας.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Data Controls &amp; Privacy" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Data Controls &amp; Privacy</h1>
+        <p>Η κατηγορία στις πρακτικές διαχείρισης δεδομένων αποτελεί θεμελιώδη πυλώνα της Anthropic. Η κατανόηση των ρυθμίσεων ιδιωτικότητας δεν είναι προαιρετική, αλλά αναγκαία προϋπόθεση για τη συμμόρφωση με τον επαγγελματικό δεοντολογικό κώδικα και την ασφάλεια των πληροφοριών που εισάγει στο σύστημα.</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Location Metadata (Μεταδεδομένα Τοποθεσίας)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Επιτρέποντας τη χρήση γενικευμένων δεδομένων τοποθεσίας (πόλη/περιοχή), το Claude μπορεί να παρέχει πιο σχετικές απαντήσεις βάσει του γεωγραφικού σας πλαισίου. <strong>Σύσταση:</strong> Εάν εργάζεστε με δεδομένα που απαιτούν αυστηρή τοπική ανωνυμία, απενεργοποιήστε αυτή την επιλογή.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Help improve Claude (Βελτίωση του Μοντέλου)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Αυτή είναι η πιο κρίσιμη ρύθμιση. Όταν είναι ενεργοποιημένη, οι συνομιλίες σας και οι συνεδρίες κώδικα μπορεί να χρησιμοποιηθούν από την Anthropic για την εκπαίδευση μελλοντικών μοντέλων. Θα πρέπει να γνωρίζετε, πως εάν εισάγετε ευαίσθητα εταιρικά δεδομένα ή προσωπικά στοιχεία (ωστόσο δεν θα πρέπει ποτέ να εισάγετε προσωπικά σας δεδομένα), προτείνεται η απενεργοποίηση αυτής της λειτουργίας. Με τον τρόπο αυτό, διασφαλίζετε ότι οι πληροφορίες σας παραμένουν ιδιωτικές και δεν εισέρχονται στον κύκλο εκπαίδευσης του μοντέλου.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Export Data (Εξαγωγή Δεδομένων)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Το Claude σάς παρέχει τη δυνατότητα να εξάγετε ολόκληρο το ιστορικό των συνομιλιών σας. Αυτή η λειτουργία είναι χρήσιμη για σκοπούς αρχειοθέτησης ή μεταφοράς δεδομένων σε άλλο περιβάλλον.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Shared Chats (Κοινόχρηστες Συνομιλίες)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Μέσω αυτού του διαχειριστικού μενού, μπορείτε να δείτε ποιες συνομιλίες έχετε μοιραστεί με τρίτους και να ανακαλέσετε την πρόσβαση σε αυτές, διασφαλίζοντας ότι έχετε τον έλεγχο των πληροφοριών που έχετε διαμοιράσει.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">Memory Preferences (Προτιμήσεις Μνήμης)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Αυτή η λειτουργία επιτρέπει στο Claude να "θυμάται" συγκεκριμένες πληροφορίες για εσάς σε βάθος χρόνου, καθιστώντας τις μελλοντικές αλληλεπιδράσεις πιο προσωποποιημένες. Μπορείτε να διαχειριστείτε ή να διαγράψετε αυτές τις αναμνήσεις ανά πάσα στιγμή από το μενού <strong>Manage</strong>.</p></div>
+          </div>
+        </div>
+        <h2>Βέλτιστη πρακτική</h2>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">🛡️</span>
+          <div><p><strong>Σημείωση!</strong> Η βέλτιστη πρακτική είναι να αξιολογείτε ανά τακτά χρονικά διαστήματα τις ρυθμίσεις σας. Εάν το περιεχόμενο της εργασίας σας περιλαμβάνει δεδομένα υπό καθεστώς εμπιστευτικότητας, βεβαιωθείτε ότι η επιλογή «Help improve Claude» είναι απενεργοποιημένη και ελέγχετε περιοδικά τα "Shared Chats" για να διασφαλίσετε ότι δεν υπάρχουν ενεργοί σύνδεσμοι προς ευαίσθητες πληροφορίες.</p></div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image025.png" alt="Μενού ρυθμίσεων Privacy του Claude" loading="lazy">
+          <figcaption>«Ρύθμιση του Privacy»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Capabilities" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Capabilities</h1>
+        <p>Οι «Capabilities» αποτελούν τον τρόπο με τον οποίο το Claude λειτουργεί στις συνομιλίες σας. Είναι σημαντικό να αντιληφθείτε ότι οι ρυθμίσεις αυτές δεν καθορίζουν μόνο το εύρος των λειτουργιών του μοντέλου, αλλά επηρεάζουν άμεσα και τον τρόπο με τον οποίο το σύστημα επεξεργάζεται τα δεδομένα σας. Το μενού αυτό σάς επιτρέπει να ορίσετε το πλαίσιο δράσης του Claude, μετατρέποντάς το από έναν απλό συνομιλητή σε έναν εξειδικευμένο ψηφιακό συνεργάτη, ικανό να αναλύει δεδομένα, να εκτελεί κώδικα και να οπτικοποιεί σύνθετες πληροφορίες.</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🧠 Memory (Μνήμη)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <ul>
+                <li><strong>Generate memory from chat history:</strong> Επιτρέπει στο Claude να «θυμάται» σημαντικές πληροφορίες από προηγούμενες συνομιλίες σας, χτίζοντας ένα πλαίσιο που κάνει τις απαντήσεις του πιο εύστοχες με την πάροδο του χρόνου.</li>
+                <li><strong>Import memory:</strong> Δυνατότητα μεταφοράς πλαισίου από άλλους AI παρόχους, ώστε να μην ξεκινάτε την εκπαίδευση του βοηθού σας από το μηδέν.</li>
+              </ul>
+              <figure class="shot">
+                <img src="assets/images/image026.png" alt="Ρυθμίσεις μνήμης του Claude" loading="lazy">
+                <figcaption>«Ρυθμίσεις Μνήμης»</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🔌 General<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Στο υπομενού αυτό διαχειρίζεστε τον τρόπο με τον οποίο το Claude αλληλεπιδρά με τα εξωτερικά εργαλεία (connectors) που έχετε συνδέσει.</p>
+              <ul>
+                <li><strong>Tool access mode:</strong> Καθορίζει πώς φορτώνονται τα εργαλεία συνδεσιμότητας (connectors) στις νέες συνομιλίες σας. Επιλέγοντας <strong>"Load tools when needed"</strong>, το Claude ενεργοποιεί τα απαραίτητα εργαλεία μόνο όταν η φύση της ερώτησής σας απαιτεί εξωτερική πρόσβαση. Αυτό εξασφαλίζει μεγαλύτερη ταχύτητα απόκρισης και καλύτερη διαχείριση των πόρων.</li>
+                <li><strong>Connector discovery:</strong> Ενεργοποιώντας αυτή τη ρύθμιση, δίνετε στο Claude την άδεια να «ανακαλύπτει» και να σας προτείνει μόνο του ποιοι διαθέσιμοι σύνδεσμοι (connectors) από τον κατάλογο της εφαρμογής μπορεί να είναι χρήσιμοι για την τρέχουσα συνομιλία σας. Είναι ένας αποτελεσματικός τρόπος για να ανακαλύψετε αυτοματισμούς που ίσως δεν γνωρίζατε ότι είναι διαθέσιμοι για τις εργασίες σας.</li>
+              </ul>
+              <figure class="shot">
+                <img src="assets/images/image027.png" alt="Γενικές ρυθμίσεις συνδεσιμότητας connectors" loading="lazy">
+                <figcaption>«Γενικές Ρυθμίσεις Συνδεσιμότητας»</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">📊 Visuals (Οπτικοποίηση)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Στο τμήμα των <strong>Visuals</strong>, καθορίζετε τον τρόπο με τον οποίο το Claude παρουσιάζει τα παραδοτέα του, αναβαθμίζοντας την αλληλεπίδραση από ένα απλό κείμενο σε μια πολυμεσική εμπειρία.</p>
+              <ul>
+                <li><strong>Artifacts:</strong> Μια από τις ισχυρότερες λειτουργίες του Claude. Όταν είναι ενεργοποιημένο, το Claude μπορεί να δημιουργεί κώδικα, έγγραφα, ή προσχέδια σχεδίων σε ένα ειδικό, διακριτό παράθυρο δίπλα στη συνομιλία σας. Αυτό επιτρέπει την άμεση επεξεργασία, προεπισκόπηση και διαχείριση του περιεχομένου χωρίς να διακόπτεται η ροή του διαλόγου.</li>
+                <li><strong>AI-powered artifacts:</strong> Πρόκειται για μια προηγμένη επέκταση των Artifacts. Επιτρέπει στο Claude να δημιουργεί διαδραστικές εφαρμογές (apps) και δυναμικά έγγραφα που «ενσωματώνουν» το ίδιο το μοντέλο στο εσωτερικό τους. Είναι ιδανικό για χρήστες που θέλουν να κατασκευάσουν μικρά ψηφιακά εργαλεία ή διαδραστικά projects χρησιμοποιώντας τεχνολογία αιχμής.</li>
+                <li><strong>Inline visualizations:</strong> Επιτρέπει στο Claude να παράγει διαδραστικά διαγράμματα, χάρτες και εξειδικευμένα γραφήματα απευθείας μέσα στη συνομιλία. Είναι απαραίτητο για την ανάλυση δεδομένων, καθώς σας επιτρέπει να «διαβάζετε» την πληροφορία οπτικά, καθιστώντας την κατανόηση σύνθετων μεγεθών άμεση και εύληπτη.</li>
+              </ul>
+              <figure class="shot">
+                <img src="assets/images/image028.png" alt="Ρυθμίσεις Visuals με Artifacts και inline visualizations" loading="lazy">
+                <figcaption>«Ρύθμιση των visuals»</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🧪 Code execution and file creation<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <ul>
+                <li><strong>Code execution and file creation:</strong> Επιτρέπει στο Claude να εκτελεί πραγματικό κώδικα (συνήθως Python) για να επεξεργάζεται υπολογιστικά φύλλα, να συντάσσει αρχεία PDF ή να αναλύει δεδομένα.</li>
+                <li><strong>Allow network egress (Δικτυακή πρόσβαση):</strong> Επιτρέπει στο Claude να συνδέεται με εξωτερικές πηγές (όπως package managers) για να εγκαθιστά βιβλιοθήκες που χρειάζεται για την ανάλυση των δεδομένων σας.</li>
+              </ul>
+              <div class="callout callout-warn">
+                <span class="co-icon" aria-hidden="true">⚠️</span>
+                <div><p><strong>Προειδοποίηση Ασφαλείας:</strong> Η επιλογή αυτή έρχεται με πιθανούς κινδύνους ασφαλείας, καθώς το μοντέλο αποκτά πρόσβαση στο διαδίκτυο για συγκεκριμένες εργασίες. Πρέπει να την ενεργοποιείτε μόνο όταν είναι απαραίτητο για σύνθετες εργασίες ανάλυσης.</p></div>
+              </div>
+              <figure class="shot">
+                <img src="assets/images/image029.png" alt="Ρύθμιση εκτέλεσης κώδικα και δημιουργίας αρχείων" loading="lazy">
+                <figcaption>«Ρύθμιση Εκτέλεσης Κώδικα»</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Usage (Όρια Χρήσης)" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Usage (Όρια Χρήσης)</h1>
+        <p>Η κατανόηση της κατανάλωσης των πόρων είναι απαραίτητη για τη διασφάλιση της αδιάλειπτης εργασίας σας. Το μενού <strong>Usage</strong> παρέχει μια πλήρη εικόνα για το πώς χρησιμοποιείτε το Claude μέσα στο χρονικό διάστημα που ορίζει το πλάνο σας.</p>
+        <div class="callout callout-note">
+          <span class="co-icon" aria-hidden="true">ℹ️</span>
+          <div><p><strong>Σημείωση:</strong> Η δυνατότητα αναλυτικής παρακολούθησης των ορίων χρήσης και η διαχείριση "usage credits" δεν είναι διαθέσιμη στο Free Plan.</p></div>
+        </div>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">⏱️ Current Session (Τρέχουσα Συνεδρία)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Αυτή η μπάρα παρακολουθεί τη χρήση σας σε πραγματικό χρόνο κατά τη διάρκεια της ενεργής σας συνεδρίας. Η μέτρηση ξεκινά αυτόματα τη στιγμή που αποστέλλετε το πρώτο μήνυμα σε μια συνομιλία. Σας δίνει μια άμεση εικόνα του πόσο "βαριά" είναι η τρέχουσα αλληλεπίδρασή σας με το μοντέλο, βοηθώντας σας να διαχειριστείτε τον όγκο της πληροφορίας που ζητάτε.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">📆 Weekly Limits (Εβδομαδιαία Όρια)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <ul>
+                <li><strong>All models (Όλα τα μοντέλα):</strong> Αυτή η ένδειξη αφορά τη συνολική χρήση των κύριων μοντέλων του Claude. Εδώ παρακολουθείτε το ποσοστό κατανάλωσης και τη χρονική στιγμή του επόμενου "reset" (π.χ. Resets Sat 11:59 AM), ώστε να προγραμματίζετε τις πιο απαιτητικές σας εργασίες πριν από την ανανέωση των ορίων.</li>
+                <li><strong>Claude Design:</strong> Μια ξεχωριστή κατηγορία ορίων που αφορά τις λειτουργίες σχεδιασμού (design/prototyping). Είναι σημαντικό να διαχωρίζετε τη χρήση εδώ, καθώς οι εργασίες σχεδιασμού ενδέχεται να καταναλώνουν διαφορετικό ποσοστό των ορίων σας σε σχέση με τη γενική επεξεργασία κειμένου.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">➕ Additional features (Πρόσθετες Λειτουργίες)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p><strong>Daily Included routine runs:</strong> Εδώ εμφανίζεται η χρήση των αυτοματοποιημένων διαδικασιών («routines») που εκτελείτε καθημερινά. Το Claude παρέχει έναν συγκεκριμένο αριθμό τέτοιων εκτελέσεων ανά ημέρα (π.χ. 5/5). Είναι μια πολύ χρήσιμη ένδειξη αν χρησιμοποιείτε το Claude για επαναλαμβανόμενες εργασίες, ώστε να διασφαλίσετε ότι δεν θα ξεπεράσετε το ημερήσιο όριό σας σε αυτοματισμούς.</p>
+              <figure class="shot">
+                <img src="assets/images/image030.png" alt="Επισκόπηση ορίων χρήσης του Claude" loading="lazy">
+                <figcaption>«Επισκόπηση Ορίων Χρήσης»</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">💳 Usage Credits (Πιστώσεις Χρήσης)<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body">
+              <p>Για να διασφαλίσετε την αδιάλειπτη εργασία σας, το Claude προσφέρει τη δυνατότητα ενεργοποίησης <strong>Usage Credits</strong>. Πρόκειται για μια προαιρετική λειτουργία που εξασφαλίζει ότι η ροή της εργασίας σας δεν θα διακοπεί εάν εξαντλήσετε κατά λάθος τα εβδομαδιαία όρια του πλάνου σας.</p>
+              <ul>
+                <li><strong>Turn on usage credits to keep using Claude if you hit a limit (Toggle Switch):</strong> Επιτρέπετε στο σύστημα να χρησιμοποιεί πιστώσεις εάν φτάσετε στο όριο χρήσης σας.</li>
+                <li><strong>Monthly Spend Limit (Μηνιαίο Όριο Δαπάνης):</strong> Μπορείτε να ορίσετε ένα συγκεκριμένο ποσό (π.χ. €20) ως μέγιστο όριο μηνιαίας δαπάνης. Το εργαλείο <strong>"Adjust limit"</strong> σάς δίνει την ευελιξία να προσαρμόζετε αυτό το όριο ανάλογα με τις τρέχουσες ανάγκες των project σας.</li>
+                <li><strong>Buy Usage Credits (Αγορά Πιστώσεων):</strong> Μπορείτε να προαγοράσετε πιστώσεις (με δυνατότητα έκπτωσης), οι οποίες προστίθενται στο <strong>Current balance</strong>.</li>
+                <li><strong>Auto-reload:</strong> Μια χρήσιμη επιλογή (On/Off) που μπορεί να αυτοματοποιήσει την ανανέωση του υπολοίπου σας, ώστε να μην χρειάζεται να ελέγχετε χειροκίνητα αν έχετε διαθέσιμο υπόλοιπο.</li>
+              </ul>
+              <figure class="shot">
+                <img src="assets/images/image031.png" alt="Διαχείριση πιστώσεων χρήσης και ορίων δαπανών" loading="lazy">
+                <figcaption>«Διαχείριση Πιστώσεων Χρήσης &amp; Ορίων Δαπανών»</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Γρήγορος έλεγχος" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Γρήγορος έλεγχος · 1.6</span>
+        <h1>Ερώτηση κατανόησης</h1>
+        <div class="activity quiz-mini js-mcq" id="act_17" data-correct="1"
+             data-ok="Σωστά! Η ρύθμιση «Help improve Claude» καθορίζει αν οι συνομιλίες σας χρησιμοποιούνται για εκπαίδευση μοντέλων — με εμπιστευτικά δεδομένα πρέπει να είναι απενεργοποιημένη."
+             data-ko="Όχι. Η κρίσιμη ρύθμιση ιδιωτικότητας είναι το «Help improve Claude» στα Data Controls &amp; Privacy.">
+          <p class="act-q">Εργάζεστε με εμπιστευτικά εταιρικά έγγραφα. Ποια ρύθμιση πρέπει οπωσδήποτε να ελέγξετε/απενεργοποιήσετε;</p>
+          <div class="options">
+            <button type="button" class="option-btn"><span class="opt-key">Α</span> Dark Mode στο Appearance</button>
+            <button type="button" class="option-btn"><span class="opt-key">Β</span> «Help improve Claude» στα Data Controls &amp; Privacy</button>
+            <button type="button" class="option-btn"><span class="opt-key">Γ</span> Auto-reload στα Usage Credits</button>
+          </div>
+          <div class="feedback" role="status"></div>
+          <button type="button" class="btn btn-secondary btn-sm act-retry" hidden>Νέα προσπάθεια</button>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Account (Λογαριασμός)" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Account (Διαχείριση Λογαριασμού)</h1>
+        <p>Το μενού <strong>Account</strong> προσφέρει εργαλεία για τον άμεσο έλεγχο της πρόσβασης και της κατάστασης του λογαριασμού σας. Είναι ένας χώρος που σπάνια χρειάζεται παρέμβαση, αλλά είναι απαραίτητο να γνωρίζετε τη λειτουργία του σε περίπτωση χρήσης του.</p>
+        <div class="card-grid">
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🚪</span>
+            <h3>Log out of all devices</h3>
+            <p>Μια κρίσιμη λειτουργία ασφαλείας. Εάν υποψιάζεστε ότι ο λογαριασμός σας έχει παραμείνει ανοιχτός σε κάποια κοινόχρηστη συσκευή ή αν η ασφάλεια της πρόσβασής σας έχει τεθεί σε κίνδυνο, αυτή η επιλογή αποσυνδέει το Claude από όλες τις ενεργές συσκευές ταυτόχρονα.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🗑️</span>
+            <h3>Delete your account</h3>
+            <p>Η οριστική επιλογή διαγραφής του λογαριασμού σας. Όπως είναι αυτονόητο, η ενέργεια αυτή είναι μη αναστρέψιμη και συνεπάγεται τη διαγραφή όλων των συνομιλιών, των δεδομένων και των ρυθμίσεων που έχουν αποθηκευτεί στο Claude.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon" aria-hidden="true">🆔</span>
+            <h3>Organization ID</h3>
+            <p>Ένας μοναδικός αναγνωριστικός κωδικός που συνδέει τον λογαριασμό σας με το οργανωτικό πλαίσιο της Anthropic. Είναι χρήσιμος κυρίως για σκοπούς τεχνικής υποστήριξης, εάν ποτέ χρειαστεί να επικοινωνήσετε με το κέντρο βοήθειας της εταιρείας για κάποιο ζήτημα που αφορά τον λογαριασμό σας.</p>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image032.png" alt="Επιλογές διαχείρισης και ασφάλειας λογαριασμού" loading="lazy">
+          <figcaption>«Επιλογές Διαχείρισης και Ασφάλειας Λογαριασμού»</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Billing (Συνδρομή)" data-group="1.6 Settings που πρέπει να ξέρεις από την αρχή">
+        <span class="chapter-kicker">Υποενότητα 1.6</span>
+        <h1>Billing (Συνδρομή και Πλάνα)</h1>
+        <p>Το μενού Billing αποτελεί τον κεντρικό διαχειριστικό κόμβο για τη συνδρομή σας. Εδώ μπορείτε να δείτε την τρέχουσα κατάσταση του λογαριασμού σας, να αναβαθμίσετε το πλάνο σας και να ενημερωθείτε για τις παροχές που περιλαμβάνονται.</p>
+        <figure class="shot">
+          <img src="assets/images/image033.png" alt="Μενού Billing με την τρέχουσα κατάσταση λογαριασμού" loading="lazy">
+          <figcaption>«Τρέχουσα κατάσταση λογαριασμού»</figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ ΑΝΑΚΕΦΑΛΑΙΩΣΗ ============ -->
+      <section class="chapter" data-title="Ανακεφαλαίωση (1/2)" data-group="Ανακεφαλαίωση">
+        <span class="chapter-kicker">Ανακεφαλαίωση</span>
+        <h1>Ανακεφαλαίωση Ενότητας 1</h1>
+        <p>Ας συνοψίσουμε τα βασικά σημεία της ενότητας:</p>
+        <ol class="recap-list">
+          <li>Το <strong>Claude</strong> είναι προηγμένο LLM της <strong>Anthropic</strong> (ίδρυση 2021), εκπαιδευμένο με την προσέγγιση <strong>Constitutional AI</strong>: ένα γραπτό «σύνταγμα» αρχών που δίνει προτεραιότητα στην ασφάλεια, την αντικειμενικότητα και τον σεβασμό προς τον χρήστη.</li>
+          <li>Τα πλάνα κλιμακώνονται: <strong>Free</strong> (βασική χρήση με όρια 30–100 μηνυμάτων/ημέρα), <strong>Pro</strong> ($20/μήνα — Claude Code, Cowork, Research, απεριόριστα Projects, Microsoft 365), <strong>Max</strong> ($100/μήνα — 5x/20x χρήση, early access), <strong>Team</strong> (5–150 άτομα, θέσεις Standard/Premium, no model training) και <strong>Enterprise</strong> (SCIM, audit logs, HIPAA-ready).</li>
+          <li>Η εγγραφή γίνεται στο <strong>claude.com</strong> με Google ή e-mail· ακολουθούν όροι χρήσης, επιβεβαίωση ηλικίας, ρύθμιση ιδιωτικότητας «Help Claude improve», όνομα και επαγγελματικό προφίλ.</li>
+          <li>Η εφαρμογή εγκαθίσταται σε <strong>υπολογιστή</strong> (μέσω «Get the desktop app»), σε <strong>Android/iOS</strong> (stores — πάντα developer: Anthropic) ή ταχύτερα μέσω <strong>QR code</strong> («Get apps and extensions»).</li>
+        </ol>
+      </section>
+
+      <section class="chapter" data-title="Ανακεφαλαίωση (2/2)" data-group="Ανακεφαλαίωση">
+        <span class="chapter-kicker">Ανακεφαλαίωση</span>
+        <h1>Ανακεφαλαίωση Ενότητας 1 (συνέχεια)</h1>
+        <ol class="recap-list" start="5">
+          <li>Στην πρώτη συνομιλία: σαφή prompts αντί για λέξεις-κλειδιά, <strong>follow-up οδηγίες</strong> για βελτίωση («πιο απλά», «πιο συνοπτικά», «άλλαξε ύφος»), και εργαλεία <strong>Copy / Αξιολόγηση / Retry</strong> κάτω από κάθε απάντηση.</li>
+          <li>Οι <strong>4 πυλώνες του καλού prompting</strong>: Ρόλος (Role), Πλαίσιο (Context), Στόχος (Task), Παραδείγματα (Few-Shot).</li>
+          <li>Στα <strong>Settings</strong>: Custom Instructions για μόνιμες οδηγίες, Appearance (Dark/Light/System), Data Controls &amp; Privacy (κρίσιμο το «Help improve Claude»), Capabilities (Memory, Connectors, Artifacts, Code execution), Usage (όρια &amp; credits), Account &amp; Billing.</li>
+        </ol>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🚀</span>
+          <div><p><strong>Συγχαρητήρια!</strong> Ολοκληρώσατε την Ενότητα 1. Μπορείτε να επιστρέψετε σε οποιαδήποτε διαφάνεια από το πλευρικό μενού για επανάληψη — η πρόοδός σας αποθηκεύεται αυτόματα.</p></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/v2.js"></script>
+</body>
+</html>

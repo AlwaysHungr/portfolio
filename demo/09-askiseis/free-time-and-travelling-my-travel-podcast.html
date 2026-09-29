@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free time and travelling — My travel podcast</title>
+<style>
+:root{
+  --ink:#0E2136;
+  --ink-2:#1B3757;
+  --ink-3:#3C5A7A;
+  --paper:#F3F1EA;
+  --paper-2:#FBFAF6;
+  --amber:#E5A138;
+  --amber-dk:#B87A16;
+  --aqua:#2A9D9F;
+  --aqua-dk:#1B7476;
+  --live:#DC4B2C;
+  --line:rgba(14,33,54,.14);
+  --shadow:0 10px 34px rgba(14,33,54,.13);
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 88% -8%, rgba(42,157,159,.16), transparent 62%),
+    radial-gradient(760px 460px at 4% 108%, rgba(229,161,56,.18), transparent 60%),
+    var(--paper);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;z-index:0;
+  background-image:radial-gradient(rgba(14,33,54,.055) 1px, transparent 1px);
+  background-size:22px 22px;
+}
+.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 18px 130px}
+
+/* ---------- Departure board (signature nav) ---------- */
+.board{
+  position:sticky;top:0;z-index:40;
+  margin:0 -18px 26px;padding:10px 18px 0;
+  background:linear-gradient(180deg,var(--ink) 0%,var(--ink) 78%,rgba(14,33,54,.94) 100%);
+  box-shadow:0 12px 26px rgba(14,33,54,.28);
+  border-bottom:3px solid var(--amber);
+}
+.board-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-bottom:8px}
+.brandmark{display:flex;align-items:center;gap:9px;color:var(--paper-2)}
+.brandmark svg{display:block}
+.brandmark b{font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+.brandmark span{font-size:11px;letter-spacing:.22em;color:rgba(243,241,234,.55);text-transform:uppercase}
+.board-code{
+  margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+  color:var(--amber);border:1px solid rgba(229,161,56,.4);border-radius:4px;padding:4px 9px;
+}
+.gates{display:flex;gap:5px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.gates::-webkit-scrollbar{display:none}
+.gate{
+  flex:0 0 auto;display:flex;flex-direction:column;gap:2px;align-items:flex-start;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);
+  border-radius:7px 7px 0 0;border-bottom:3px solid transparent;
+  padding:7px 12px 6px;cursor:pointer;color:rgba(243,241,234,.62);
+  font:inherit;transition:background .18s,color .18s,border-color .18s,transform .18s;
+}
+.gate:hover{background:rgba(255,255,255,.12);color:#fff;transform:translateY(-1px)}
+.gate .n{font-family:var(--mono);font-size:10px;letter-spacing:.14em}
+.gate .t{font-size:12.5px;font-weight:600;white-space:nowrap;letter-spacing:.01em}
+.gate[aria-current="true"]{background:rgba(229,161,56,.17);border-bottom-color:var(--amber);color:#fff}
+.gate.done .n::after{content:" ✓";color:var(--aqua)}
+.gate:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* ---------- Screens ---------- */
+.screen{display:none;animation:rise .42s cubic-bezier(.22,.9,.3,1)}
+.screen.active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--aqua-dk);display:flex;align-items:center;gap:10px;margin:0 0 12px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+h1{
+  font-family:var(--serif);font-weight:700;line-height:1.03;letter-spacing:-.02em;
+  font-size:clamp(2.3rem,6.4vw,4.05rem);margin:0 0 10px;
+}
+h2{font-family:var(--serif);font-size:clamp(1.55rem,3.6vw,2.2rem);line-height:1.14;margin:0 0 14px;letter-spacing:-.01em}
+h3{font-size:1.06rem;margin:0 0 10px;letter-spacing:.005em}
+p{line-height:1.68;margin:0 0 14px;font-size:1.02rem}
+.card{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:14px;
+  padding:24px 26px;box-shadow:var(--shadow);
+}
+.card + .card{margin-top:16px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.pair{grid-template-columns:1fr}}
+.lang{
+  display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  padding:3px 8px;border-radius:20px;margin-bottom:12px;text-transform:uppercase;
+}
+.lang.en{background:rgba(42,157,159,.14);color:var(--aqua-dk)}
+.lang.el{background:rgba(229,161,56,.2);color:var(--amber-dk)}
+ul.plain{margin:0;padding-left:20px}
+ul.plain li{line-height:1.62;margin-bottom:9px;padding-left:2px}
+ul.plain li::marker{color:var(--aqua)}
+
+/* ---------- Cover ---------- */
+.cover{
+  position:relative;overflow:hidden;border-radius:18px;
+  background:linear-gradient(150deg,var(--ink) 0%,var(--ink-2) 58%,#24507C 100%);
+  color:var(--paper-2);padding:44px 40px 38px;box-shadow:0 20px 50px rgba(14,33,54,.32);
+}
+.cover h1{color:#fff}
+.cover .sub{font-size:1.08rem;color:rgba(243,241,234,.82);max-width:52ch;line-height:1.6}
+.cover .horizon{position:absolute;right:-30px;bottom:-24px;opacity:.5;pointer-events:none}
+.tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tag{
+  font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:6px 13px;color:rgba(243,241,234,.9);
+}
+.tag.hot{background:var(--amber);border-color:var(--amber);color:#2A1A00;font-weight:700}
+
+/* ---------- Buttons ---------- */
+.btn{
+  font:inherit;font-weight:650;cursor:pointer;border-radius:9px;padding:12px 22px;
+  border:1px solid transparent;transition:transform .16s,box-shadow .16s,background .16s,color .16s;
+  display:inline-flex;align-items:center;gap:9px;
+}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.btn.primary{background:var(--amber);color:#2A1A00;box-shadow:0 5px 0 var(--amber-dk)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--amber-dk)}
+.btn.primary:active{transform:translateY(3px);box-shadow:0 2px 0 var(--amber-dk)}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{background:rgba(14,33,54,.05)}
+.btn.aqua{background:var(--aqua);color:#fff;box-shadow:0 5px 0 var(--aqua-dk)}
+.btn.aqua:hover{transform:translateY(-2px)}
+.btn.aqua:active{transform:translateY(3px);box-shadow:0 2px 0 var(--aqua-dk)}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.btn.on-dark{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff}
+.btn.on-dark:hover{background:rgba(255,255,255,.2)}
+
+/* ---------- Reading passage ---------- */
+.passage{
+  font-family:var(--serif);font-size:1.14rem;line-height:1.86;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.7)),
+    repeating-linear-gradient(180deg,transparent 0 35px,rgba(42,157,159,.09) 35px 36px);
+  border-left:4px solid var(--amber);border-radius:0 12px 12px 0;
+  padding:26px 30px;margin:0;
+}
+.passage .ttl{
+  display:block;font-size:1.5rem;font-weight:700;text-align:center;margin-bottom:18px;letter-spacing:-.01em;
+}
+.passage span{transition:background .3s}
+.hl-benefit .b-s{background:linear-gradient(180deg,transparent 58%,rgba(42,157,159,.35) 58%);border-radius:2px}
+.hl-challenge .c-s{background:linear-gradient(180deg,transparent 58%,rgba(220,75,44,.28) 58%);border-radius:2px}
+.lens{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.lens .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.chip-t{
+  font:inherit;font-size:.86rem;font-weight:600;cursor:pointer;border-radius:20px;padding:7px 14px;
+  border:1px solid var(--line);background:#fff;color:var(--ink-3);transition:all .18s;
+}
+.chip-t:hover{border-color:var(--ink-3);color:var(--ink)}
+.chip-t[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.readmeter{
+  display:flex;align-items:center;gap:10px;margin-top:16px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3);
+}
+.readmeter .bar{flex:1;height:5px;border-radius:5px;background:rgba(14,33,54,.1);overflow:hidden}
+.readmeter .bar i{display:block;height:100%;width:0;background:var(--aqua);transition:width .25s}
+
+/* ---------- Prep questions ---------- */
+.qlist{display:flex;flex-direction:column;gap:12px}
+.q{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.q.filled{border-color:var(--aqua);box-shadow:0 0 0 3px rgba(42,157,159,.11)}
+.q > button{
+  width:100%;display:flex;gap:14px;align-items:flex-start;text-align:left;
+  background:none;border:0;font:inherit;cursor:pointer;padding:16px 18px;color:var(--ink);
+}
+.q .num{
+  flex:0 0 30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;
+  display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:700;
+}
+.q.filled .num{background:var(--aqua)}
+.q .qt{font-weight:600;line-height:1.5;flex:1}
+.q .caret{color:var(--ink-3);transition:transform .25s;flex:0 0 auto;margin-top:4px}
+.q.open .caret{transform:rotate(180deg)}
+.q .body{display:none;padding:0 18px 18px 62px}
+.q.open .body{display:block}
+.q textarea{
+  width:100%;min-height:88px;resize:vertical;font:inherit;font-size:.98rem;line-height:1.6;
+  border:1px solid var(--line);border-radius:9px;padding:12px 14px;background:var(--paper);color:var(--ink);
+}
+.q textarea:focus{outline:2px solid var(--aqua);outline-offset:1px;background:#fff}
+.q .hintline{font-size:.82rem;color:var(--ink-3);margin:8px 0 0}
+
+/* ---------- Word bank ---------- */
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.word{
+  font:inherit;font-size:.94rem;cursor:pointer;border-radius:8px;padding:9px 14px;
+  border:1px dashed rgba(14,33,54,.28);background:#fff;color:var(--ink-2);
+  transition:all .16s;position:relative;
+}
+.word:hover{transform:translateY(-2px);border-color:var(--aqua);color:var(--aqua-dk)}
+.word[aria-pressed="true"]{
+  background:var(--aqua);border:1px solid var(--aqua-dk);border-style:solid;color:#fff;
+  box-shadow:0 3px 0 var(--aqua-dk);
+}
+.word[aria-pressed="true"]::before{content:"✓ ";font-weight:700}
+.phrase{
+  font:inherit;font-size:.96rem;cursor:pointer;text-align:left;border-radius:9px;padding:11px 15px;
+  border:1px solid var(--line);background:#fff;color:var(--ink);transition:all .16s;
+  display:flex;gap:10px;align-items:baseline;
+}
+.phrase .pn{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.phrase:hover{border-color:var(--amber);transform:translateX(3px)}
+.phrase[aria-pressed="true"]{background:rgba(229,161,56,.16);border-color:var(--amber)}
+.phrase[aria-pressed="true"] .pn{color:var(--amber-dk);font-weight:700}
+.phrasegrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:700px){.phrasegrid{grid-template-columns:1fr}}
+.counter{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3);
+  border:1px solid var(--line);border-radius:20px;padding:5px 12px;white-space:nowrap;
+}
+.counter b{color:var(--aqua-dk);font-size:13px}
+.headrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.headrow h3{margin:0}
+
+/* ---------- Studio / recorder ---------- */
+.studio{
+  background:linear-gradient(160deg,var(--ink) 0%,#16304F 100%);
+  border-radius:16px;padding:30px 28px;color:var(--paper-2);box-shadow:0 18px 44px rgba(14,33,54,.3);
+  position:relative;overflow:hidden;
+}
+.onair{
+  display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;padding:6px 14px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.22);color:rgba(243,241,234,.55);
+}
+.onair .dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.3)}
+.studio.live .onair{border-color:var(--live);color:#fff;background:rgba(220,75,44,.2)}
+.studio.live .onair .dot{background:var(--live);animation:pulse 1.1s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(220,75,44,.7)}50%{opacity:.65;box-shadow:0 0 0 8px rgba(220,75,44,0)}}
+.mic-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;margin:22px 0 6px}
+.mic{
+  width:104px;height:104px;border-radius:50%;border:0;cursor:pointer;position:relative;
+  background:radial-gradient(circle at 32% 28%,#F4BE6A,var(--amber) 55%,var(--amber-dk));
+  box-shadow:0 10px 30px rgba(229,161,56,.42);display:grid;place-items:center;
+  transition:transform .2s,box-shadow .2s;
+}
+.mic:hover{transform:scale(1.06)}
+.mic:active{transform:scale(.97)}
+.mic:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.mic svg{width:44px;height:44px;fill:#2A1A00}
+.mic.rec{background:radial-gradient(circle at 32% 28%,#F08A6C,var(--live) 55%,#A8351A);box-shadow:0 10px 34px rgba(220,75,44,.5)}
+.mic.rec svg{fill:#fff}
+.mic.rec::after{
+  content:"";position:absolute;inset:-14px;border-radius:50%;border:2px solid rgba(220,75,44,.5);
+  animation:ring 1.6s infinite ease-out;
+}
+@keyframes ring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.32);opacity:0}}
+.mic-label{font-size:.95rem;color:rgba(243,241,234,.78);text-align:center}
+canvas#wave{width:100%;height:78px;display:block;border-radius:10px;background:rgba(0,0,0,.24);margin-top:6px}
+.timer{
+  font-family:var(--mono);font-size:2.35rem;letter-spacing:.06em;text-align:center;margin:14px 0 4px;color:#fff;
+}
+.timer small{font-size:.95rem;color:rgba(243,241,234,.5);letter-spacing:.16em}
+.targetbar{height:9px;border-radius:9px;background:rgba(255,255,255,.13);position:relative;overflow:hidden;margin-bottom:6px}
+.targetbar .zone{position:absolute;top:0;bottom:0;left:55.5%;right:16.7%;background:rgba(42,157,159,.5)}
+.targetbar i{position:absolute;top:0;bottom:0;left:0;width:0;background:var(--amber);transition:width .3s linear}
+.targetlabels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:rgba(243,241,234,.5)}
+.playbackrow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+audio{width:100%;margin-top:18px;border-radius:9px}
+.notice{
+  margin-top:16px;font-size:.88rem;line-height:1.6;color:rgba(243,241,234,.6);
+  border-top:1px solid rgba(255,255,255,.14);padding-top:14px;
+}
+.checkrun{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.checkrun .ck{
+  font-size:.84rem;padding:7px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.2);
+  color:rgba(243,241,234,.62);
+}
+.checkrun .ck.on{background:rgba(42,157,159,.28);border-color:var(--aqua);color:#fff}
+
+/* ---------- Stamp / finish ---------- */
+.stamp{
+  border:3px double var(--live);color:var(--live);border-radius:10px;padding:14px 22px;
+  font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+  transform:rotate(-7deg);display:inline-block;opacity:.85;font-weight:700;
+}
+.keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.kw{background:rgba(42,157,159,.13);color:var(--aqua-dk);border-radius:20px;padding:7px 14px;font-size:.9rem;font-weight:600}
+
+/* ---------- Footer nav ---------- */
+.footnav{
+  position:fixed;left:0;right:0;bottom:0;z-index:45;
+  background:rgba(251,250,246,.93);backdrop-filter:blur(9px);
+  border-top:1px solid var(--line);padding:11px 18px;
+}
+.footinner{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.dots{display:flex;gap:7px;margin:0 auto}
+.dot-n{width:9px;height:9px;border-radius:50%;background:rgba(14,33,54,.2);border:0;padding:0;cursor:pointer;transition:all .2s}
+.dot-n:hover{background:var(--ink-3);transform:scale(1.25)}
+.dot-n[aria-current="true"]{background:var(--amber);width:26px;border-radius:9px}
+.kbd-hint{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-3)}
+@media(max-width:640px){.kbd-hint{display:none}.footinner{gap:8px}.btn{padding:11px 16px;font-size:.92rem}}
+
+/* ---------- Image lightbox ---------- */
+.figure{margin:18px 0;text-align:center}
+.figure img{
+  max-width:100%;border-radius:12px;border:1px solid var(--line);cursor:zoom-in;
+  box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;
+}
+.figure img:hover{transform:scale(1.012);box-shadow:0 14px 40px rgba(14,33,54,.2)}
+.figure figcaption{font-size:.85rem;color:var(--ink-3);margin-top:8px;line-height:1.5}
+#alttip{
+  position:fixed;z-index:999;pointer-events:none;opacity:0;transform:translateY(6px);
+  transition:opacity .16s,transform .16s;max-width:320px;
+  background:var(--ink);color:var(--paper-2);font-size:.83rem;line-height:1.45;
+  padding:9px 12px;border-radius:8px;box-shadow:0 8px 24px rgba(14,33,54,.35);
+}
+#alttip.show{opacity:1;transform:none}
+#lightbox{
+  position:fixed;inset:0;z-index:1000;background:rgba(9,20,33,.93);
+  display:none;align-items:center;justify-content:center;padding:34px;
+}
+#lightbox.show{display:flex;animation:fade .22s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+#lightbox img{max-width:94vw;max-height:80vh;border-radius:10px;box-shadow:0 24px 70px rgba(0,0,0,.6)}
+#lightbox .lb-cap{color:rgba(243,241,234,.8);font-size:.9rem;margin-top:14px;text-align:center;max-width:70ch}
+#lbclose{
+  position:absolute;top:20px;right:22px;width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;
+  font-size:24px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:all .18s;
+}
+#lbclose:hover{background:var(--live);border-color:var(--live);transform:rotate(90deg)}
+.lb-inner{display:flex;flex-direction:column;align-items:center}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+
+<div class="board">
+  <div class="board-top">
+    <div class="brandmark">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M2 13.5l3-1 4.5 1.6L12 8l2.2 6.7 5.3 1.8c.9.3 1.6-.9.9-1.6L15 9.4l1.6-6.1c.2-.9-.9-1.5-1.5-.8L11 7.2 4.6 5.3c-.9-.3-1.6.9-.9 1.5L7 9.9 2.1 12c-.6.3-.6 1.3-.1 1.5z" fill="#E5A138"/>
+      </svg>
+      <div>
+        <b>My travel podcast</b><br>
+        <span>Free time and travelling</span>
+      </div>
+    </div>
+  </div>
+  <div class="gates" id="gates" role="tablist" aria-label="Στάσεις του μαθήματος"></div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ 1 ============ -->
+<section class="screen active" data-title="Καλωσόρισμα">
+  <div class="cover">
+    <svg class="horizon" width="360" height="200" viewBox="0 0 360 200" aria-hidden="true">
+      <circle cx="250" cy="72" r="46" fill="#E5A138" opacity=".55"/>
+      <path d="M0 150 Q70 118 140 146 T290 138 T360 152 L360 200 L0 200Z" fill="#2A9D9F" opacity=".45"/>
+      <path d="M0 172 Q90 148 180 170 T360 168 L360 200 L0 200Z" fill="#0E2136" opacity=".55"/>
+      <path d="M40 60l14-4 20 7 11-24 10 30 24 8" stroke="#F3F1EA" stroke-width="2" fill="none" opacity=".5" stroke-linecap="round"/>
+    </svg>
+    <div class="eyebrow" style="color:rgba(229,161,56,.9)">Αγγλικά · Δραστηριότητα παραγωγής προφορικού λόγου</div>
+    <h1>Free time<br>and travelling</h1>
+    <p class="sub">Welcome to this activity, in which you will have the chance to record your own podcast about free time and travelling.</p>
+    <p class="sub" style="font-size:.98rem;color:rgba(243,241,234,.66)">Καλώς ήρθες σε αυτή τη δραστηριότητα, όπου θα έχεις την ευκαιρία να ηχογραφήσεις το δικό σου podcast για τον ελεύθερο χρόνο και τα ταξίδια.</p>
+    <div class="tagrow">
+      <span class="tag hot">My travel podcast</span>
+      <span class="tag">2–3 minutes</span>
+      <span class="tag">Speaking</span>
+      <span class="tag">Audio recorder</span>
+    </div>
+    <div style="margin-top:26px">
+      <button class="btn primary" data-go="1">Ξεκίνα →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="screen" data-title="Γιατί">
+  <div class="eyebrow">Στάση 02 · Why is this important?</div>
+  <h2>Τι θα κερδίσεις από αυτή τη δραστηριότητα</h2>
+  <div class="pair">
+    <div class="card">
+      <span class="lang en">English</span>
+      <h3 style="font-family:var(--serif);font-size:1.3rem">Why is this important?</h3>
+      <ul class="plain">
+        <li>To practise sharing complex information about everyday topics, such as travelling.</li>
+        <li>To practise advising people on everyday topics, such as travelling.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="lang el">Ελληνικά</span>
+      <h3 style="font-family:var(--serif);font-size:1.3rem">Γιατί είναι σημαντικό;</h3>
+      <ul class="plain">
+        <li>Για να εξασκηθείς στο να μοιράζεσαι σύνθετες πληροφορίες για καθημερινά θέματα, όπως τα ταξίδια.</li>
+        <li>Για να εξασκηθείς στο να δίνεις συμβουλές για καθημερινά θέματα, όπως τα ταξίδια.</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top:22px"><button class="btn primary" data-go="2">Οδηγίες δραστηριότητας →</button></div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="screen" data-title="Οδηγίες">
+  <div class="eyebrow">Στάση 03 · Οδηγίες για τη δραστηριότητα</div>
+  <h2>Δύο βήματα: διάβασε — ηχογράφησε</h2>
+  <div class="pair">
+    <div class="card">
+      <span class="lang en">English</span>
+      <p style="font-weight:650;font-size:1.06rem;line-height:1.62">To do this activity, read the text about travelling to get some ideas and, then, click on the microphone to record your own podcast about travelling!</p>
+    </div>
+    <div class="card">
+      <span class="lang el">Ελληνικά</span>
+      <p style="font-weight:650;font-size:1.06rem;line-height:1.62">Για να ολοκληρώσεις τη δραστηριότητα, διάβασε το κείμενο για τα ταξίδια για να πάρεις ιδέες και, έπειτα, κάνε κλικ στο μικρόφωνο, για να καταγράψεις το δικό σου podcast για τα ταξίδια!</p>
+    </div>
+  </div>
+  <div style="margin-top:22px"><button class="btn primary" data-go="3">Πάμε στο κείμενο →</button></div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="screen" data-title="Κείμενο">
+  <div class="eyebrow">Στάση 04 · Reading</div>
+  <div class="card">
+    <p style="font-weight:650">Read the following text that discusses various benefits and drawbacks of travelling. Pay attention to what it says, as you can use it to get ideas about your own travel podcast which you will record in the next part of the activity:</p>
+
+    <div class="lens">
+      <span class="lbl">Reading lens</span>
+      <button class="chip-t" id="lensBen" aria-pressed="false">Benefits</button>
+      <button class="chip-t" id="lensCha" aria-pressed="false">Challenges</button>
+    </div>
+
+    <div class="passage" id="passage">
+      <span class="ttl">Free Time and Travelling</span>
+      <span>Free time is an important part of a balanced lifestyle because it helps people relax, learn new skills, and spend time with others.</span>
+      <span>Many people enjoy activities such as reading, playing sports, listening to music, or travelling.</span>
+      <span class="b-s">Travelling, in particular, offers many benefits.</span>
+      <span class="b-s">It allows people to explore new places, experience different cultures, and improve valuable skills such as communication, problem-solving, and independence.</span>
+      <span class="b-s">For example, a student visiting Italy may learn about its history while practising English with other travellers.</span>
+      <span class="c-s">However, travelling also has some challenges.</span>
+      <span class="c-s">It can be expensive, especially during busy seasons, and planning a trip often takes time and careful organisation.</span>
+      <span class="c-s">In addition, frequent air travel can have a negative impact on the environment.</span>
+      <span>Despite these difficulties, travelling remains a rewarding experience that creates lasting memories and broadens people's perspectives.</span>
+    </div>
+
+    <div class="readmeter">
+      <span>Reading</span>
+      <span class="bar"><i id="readBar"></i></span>
+      <span id="readPct">0%</span>
+    </div>
+  </div>
+  <div style="margin-top:22px"><button class="btn primary" data-go="4">Ετοίμασε το podcast σου →</button></div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="screen" data-title="Προετοιμασία">
+  <div class="eyebrow">Στάση 05 · Prepare</div>
+  <div class="card">
+    <p style="font-weight:650;font-size:1.06rem">Now, it's time to create your own 2-3-minute podcast about travelling and what role it plays in young people's lives. As you will be talking on your own for that time, it's important to prepare what you want to say. Take a few minutes to think of:</p>
+
+    <div class="qlist" id="qlist">
+      <div class="q" data-q="0">
+        <button type="button">
+          <span class="num">1</span>
+          <span class="qt">The advantages and disadvantages of travelling that you want to highlight.</span>
+          <span class="caret">▾</span>
+        </button>
+        <div class="body">
+          <textarea placeholder="Κράτησε τις σημειώσεις σου εδώ…" aria-label="Σημειώσεις για την ερώτηση 1"></textarea>
+          <p class="hintline">Οι σημειώσεις είναι δικές σου — δεν αποθηκεύονται πουθενά.</p>
+        </div>
+      </div>
+      <div class="q" data-q="1">
+        <button type="button">
+          <span class="num">2</span>
+          <span class="qt">How is travelling different for youngsters (compared to older people)?</span>
+          <span class="caret">▾</span>
+        </button>
+        <div class="body">
+          <textarea placeholder="Κράτησε τις σημειώσεις σου εδώ…" aria-label="Σημειώσεις για την ερώτηση 2"></textarea>
+          <p class="hintline">Οι σημειώσεις είναι δικές σου — δεν αποθηκεύονται πουθενά.</p>
+        </div>
+      </div>
+      <div class="q" data-q="2">
+        <button type="button">
+          <span class="num">3</span>
+          <span class="qt">Do you have any personal experiences/examples that you wish to share?</span>
+          <span class="caret">▾</span>
+        </button>
+        <div class="body">
+          <textarea placeholder="Κράτησε τις σημειώσεις σου εδώ…" aria-label="Σημειώσεις για την ερώτηση 3"></textarea>
+          <p class="hintline">Οι σημειώσεις είναι δικές σου — δεν αποθηκεύονται πουθενά.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p style="font-weight:650;margin-bottom:18px">Here's some useful vocabulary and phrases to get you started!</p>
+
+    <div class="headrow">
+      <h3>Useful vocabulary</h3>
+      <span class="counter">Διάλεξες <b id="wCount">0</b> / 15</span>
+    </div>
+    <p style="font-size:.9rem;color:var(--ink-3);margin-bottom:12px">Κάνε κλικ στις λέξεις που θέλεις να χρησιμοποιήσεις στο podcast σου.</p>
+    <div class="bank" id="bank"></div>
+
+    <div class="headrow" style="margin-top:26px">
+      <h3>Useful phrases</h3>
+      <span class="counter">Διάλεξες <b id="pCount">0</b> / 8</span>
+    </div>
+    <div class="phrasegrid" id="phrases"></div>
+  </div>
+
+  <div style="margin-top:22px"><button class="btn primary" data-go="5">🎙 When you are ready, click on the microphone →</button></div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="screen" data-title="Ηχογράφηση">
+  <div class="eyebrow">Στάση 06 · Audio recorder</div>
+  <div class="studio" id="studio">
+    <span class="onair"><span class="dot"></span> On air</span>
+    <h2 style="color:#fff;margin-top:16px">Now, click on the microphone to record your podcast!</h2>
+
+    <div class="mic-wrap">
+      <button class="mic" id="micBtn" aria-label="Ξεκίνα ή σταμάτα την ηχογράφηση">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3.5 3.5 0 003.5-3.5v-6a3.5 3.5 0 10-7 0v6A3.5 3.5 0 0012 15zm6.5-3.5a.9.9 0 10-1.8 0 4.7 4.7 0 01-9.4 0 .9.9 0 10-1.8 0 6.5 6.5 0 005.6 6.4V21h-2a.9.9 0 100 1.8h5.8a.9.9 0 100-1.8h-2v-3.1a6.5 6.5 0 005.6-6.4z"/></svg>
+      </button>
+      <div class="mic-label" id="micLabel">Πάτησε το μικρόφωνο για να ξεκινήσεις</div>
+    </div>
+
+    <canvas id="wave" height="78" aria-hidden="true"></canvas>
+
+    <div class="timer" id="timer">00:00 <small>/ 02:00–03:00</small></div>
+    <div class="targetbar"><span class="zone"></span><i id="tBar"></i></div>
+    <div class="targetlabels"><span>0:00</span><span>2:00</span><span>3:00</span><span>3:36</span></div>
+
+    <div class="playbackrow" id="pbRow" style="display:none">
+      <button class="btn on-dark" id="againBtn">↺ Ηχογράφησε ξανά</button>
+      <button class="btn primary" id="dlBtn">⤓ Κατέβασε το podcast</button>
+    </div>
+    <audio id="player" controls style="display:none"></audio>
+
+    <div class="checkrun" id="checkrun">
+      <span class="ck" data-ck="0">1 · Advantages &amp; disadvantages</span>
+      <span class="ck" data-ck="1">2 · Youngsters vs older people</span>
+      <span class="ck" data-ck="2">3 · Personal experiences</span>
+    </div>
+
+    <p class="notice" id="notice">Το μικρόφωνο λειτουργεί μέσα στον περιηγητή. Όταν σου ζητηθεί άδεια πρόσβασης, επίλεξε «Να επιτρέπεται». Η ηχογράφηση μένει στη συσκευή σου.</p>
+  </div>
+  <div style="margin-top:22px"><button class="btn ghost" data-go="6">Ολοκλήρωση →</button></div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="screen" data-title="Ολοκλήρωση">
+  <div class="eyebrow">Στάση 07 · Ολοκλήρωση</div>
+  <h2>Ολοκλήρωσες τη δραστηριότητα</h2>
+  <div class="card">
+    <div style="text-align:center;margin-bottom:20px"><span class="stamp">Podcast recorded</span></div>
+    <p>Δραστηριότητα ανοιχτού τύπου, οι μαθητές/μαθήτριες λαμβάνουν ανατροφοδότηση από τον/την εκπαιδευτικό, εκτός πλατφόρμας.</p>
+  </div>
+  <div class="card">
+    <h3>Λέξεις κλειδιά</h3>
+    <div class="keywords">
+      <span class="kw">ελεύθερος χρόνος</span>
+      <span class="kw">ταξίδια</span>
+      <span class="kw">free time</span>
+      <span class="kw">travelling</span>
+      <span class="kw">podcast</span>
+    </div>
+  </div>
+  <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn ghost" data-go="5">← Πίσω στην ηχογράφηση</button>
+    <button class="btn aqua" data-go="0">↺ Από την αρχή</button>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<div class="footnav">
+  <div class="footinner">
+    <button class="btn ghost" id="prevBtn">← Πίσω</button>
+    <div class="dots" id="dots"></div>
+    <span class="kbd-hint">← → πλοήγηση</span>
+    <button class="btn primary" id="nextBtn">Επόμενο →</button>
+  </div>
+</div>
+
+<div id="alttip" role="tooltip"></div>
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Μεγέθυνση εικόνας">
+  <button id="lbclose" aria-label="Κλείσιμο εικόνας">×</button>
+  <div class="lb-inner"><img id="lbimg" alt=""><div class="lb-cap" id="lbcap"></div></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Screens & nav ---------- */
+  var screens = Array.prototype.slice.call(document.querySelectorAll('.screen'));
+  var gates = document.getElementById('gates');
+  var dots  = document.getElementById('dots');
+  var cur = 0, visited = {0:true};
+
+  screens.forEach(function(s,i){
+    var g = document.createElement('button');
+    g.className='gate'; g.setAttribute('role','tab'); g.type='button';
+    g.innerHTML = '<span class="n">'+String(i+1).padStart(2,'0')+'</span><span class="t">'+s.dataset.title+'</span>';
+    g.addEventListener('click',function(){go(i);});
+    gates.appendChild(g);
+
+    var d = document.createElement('button');
+    d.className='dot-n'; d.type='button';
+    d.setAttribute('aria-label','Οθόνη '+(i+1)+': '+s.dataset.title);
+    d.addEventListener('click',function(){go(i);});
+    dots.appendChild(d);
+  });
+
+  function go(i){
+    if(i<0||i>=screens.length) return;
+    screens[cur].classList.remove('active');
+    cur=i; visited[i]=true;
+    screens[cur].classList.add('active');
+    sync();
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(i===3) setTimeout(measureRead,60);
+  }
+  function sync(){
+    Array.prototype.forEach.call(gates.children,function(g,i){
+      g.setAttribute('aria-current', i===cur?'true':'false');
+      g.classList.toggle('done', !!visited[i] && i!==cur);
+    });
+    Array.prototype.forEach.call(dots.children,function(d,i){
+      d.setAttribute('aria-current', i===cur?'true':'false');
+    });
+    document.getElementById('prevBtn').disabled = (cur===0);
+    document.getElementById('nextBtn').disabled = (cur===screens.length-1);
+    var g = gates.children[cur];
+    if(g) g.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  }
+  document.getElementById('prevBtn').addEventListener('click',function(){go(cur-1);});
+  document.getElementById('nextBtn').addEventListener('click',function(){go(cur+1);});
+  document.addEventListener('click',function(e){
+    var b = e.target.closest ? e.target.closest('[data-go]') : null;
+    if(b) go(parseInt(b.dataset.go,10));
+  });
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+    if(document.getElementById('lightbox').classList.contains('show')) return;
+    if(e.key==='ArrowRight'){go(cur+1);}
+    if(e.key==='ArrowLeft'){go(cur-1);}
+  });
+  sync();
+
+  /* ---------- Reading lens + meter ---------- */
+  var passage = document.getElementById('passage');
+  document.getElementById('lensBen').addEventListener('click',function(){
+    var on = this.getAttribute('aria-pressed')==='true';
+    this.setAttribute('aria-pressed', on?'false':'true');
+    passage.classList.toggle('hl-benefit', !on);
+  });
+  document.getElementById('lensCha').addEventListener('click',function(){
+    var on = this.getAttribute('aria-pressed')==='true';
+    this.setAttribute('aria-pressed', on?'false':'true');
+    passage.classList.toggle('hl-challenge', !on);
+  });
+
+  var readBar=document.getElementById('readBar'), readPct=document.getElementById('readPct'), readMax=0;
+  function measureRead(){
+    var r = passage.getBoundingClientRect();
+    var vh = window.innerHeight || 800;
+    var total = r.height + vh;
+    var seen = Math.min(Math.max(vh - r.top, 0), total);
+    var pct = Math.round(Math.min(seen/(r.height||1),1)*100);
+    if(pct>readMax){readMax=pct; readBar.style.width=pct+'%'; readPct.textContent=pct+'%';}
+  }
+  window.addEventListener('scroll',function(){ if(cur===3) measureRead(); },{passive:true});
+  window.addEventListener('resize',function(){ if(cur===3) measureRead(); });
+
+  /* ---------- Prep questions ---------- */
+  var qDone=[false,false,false];
+  Array.prototype.forEach.call(document.querySelectorAll('.q'),function(q){
+    q.querySelector('button').addEventListener('click',function(){ q.classList.toggle('open'); });
+    var ta=q.querySelector('textarea');
+    ta.addEventListener('input',function(){
+      var filled = ta.value.trim().length>0;
+      q.classList.toggle('filled', filled);
+      qDone[parseInt(q.dataset.q,10)] = filled;
+      paintChecks();
+    });
+  });
+  function paintChecks(){
+    Array.prototype.forEach.call(document.querySelectorAll('.ck'),function(c){
+      c.classList.toggle('on', qDone[parseInt(c.dataset.ck,10)]);
+    });
+  }
+
+  /* ---------- Word bank ---------- */
+  var VOCAB = ["abroad","cultural exchange","local traditions","unforgettable experience",
+    "broaden your horizons","budget-friendly","sustainable tourism","independent traveller",
+    "step outside your comfort zone","lifelong memories","language barrier","make new friends",
+    "personal growth","travel itinerary","environmental impact"];
+  var PHRASES = ["In my opinion...","One of the biggest advantages is...","On the other hand...",
+    "From my experience,","It's worth mentioning that...","One challenge is...",
+    "Another important point is...","I would definitely recommend..."];
+
+  var bank=document.getElementById('bank'), wCount=document.getElementById('wCount');
+  VOCAB.forEach(function(w){
+    var b=document.createElement('button');
+    b.type='button'; b.className='word'; b.textContent=w; b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){
+      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true');
+      wCount.textContent = document.querySelectorAll('.word[aria-pressed="true"]').length;
+    });
+    bank.appendChild(b);
+  });
+
+  var pg=document.getElementById('phrases'), pCount=document.getElementById('pCount');
+  PHRASES.forEach(function(p,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='phrase'; b.setAttribute('aria-pressed','false');
+    b.innerHTML='<span class="pn">'+(i+1)+'</span><span>'+p.replace(/'/g,"&#39;")+'</span>';
+    b.addEventListener('click',function(){
+      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true');
+      pCount.textContent = document.querySelectorAll('.phrase[aria-pressed="true"]').length;
+    });
+    pg.appendChild(b);
+  });
+
+  /* ---------- Recorder ---------- */
+  var micBtn=document.getElementById('micBtn'), micLabel=document.getElementById('micLabel'),
+      studio=document.getElementById('studio'), timerEl=document.getElementById('timer'),
+      tBar=document.getElementById('tBar'), pbRow=document.getElementById('pbRow'),
+      player=document.getElementById('player'), notice=document.getElementById('notice'),
+      canvas=document.getElementById('wave'), ctx=canvas.getContext('2d');
+  var rec=null, chunks=[], stream=null, actx=null, analyser=null, raf=null,
+      t0=0, tick=null, blobUrl=null, MAXBAR=216; /* 3:36 = full bar */
+
+  function fmt(s){var m=Math.floor(s/60),x=Math.floor(s%60);return String(m).padStart(2,'0')+':'+String(x).padStart(2,'0');}
+
+  function drawIdle(){
+    var w=canvas.width=canvas.offsetWidth*2, h=canvas.height=156;
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle='rgba(243,241,234,.22)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(0,h/2); ctx.lineTo(w,h/2); ctx.stroke();
+  }
+  drawIdle();
+  window.addEventListener('resize',function(){ if(!rec||rec.state!=='recording') drawIdle(); });
+
+  function draw(){
+    raf=requestAnimationFrame(draw);
+    var w=canvas.width, h=canvas.height;
+    var n=analyser.frequencyBinCount, data=new Uint8Array(n);
+    analyser.getByteFrequencyData(data);
+    ctx.clearRect(0,0,w,h);
+    var bars=64, bw=w/bars;
+    for(var i=0;i<bars;i++){
+      var v=data[Math.floor(i*n/bars/1.7)]/255;
+      var bh=Math.max(3, v*h*.86);
+      var grd=ctx.createLinearGradient(0,h/2-bh/2,0,h/2+bh/2);
+      grd.addColorStop(0,'#E5A138'); grd.addColorStop(.5,'#F0C77E'); grd.addColorStop(1,'#2A9D9F');
+      ctx.fillStyle=grd;
+      ctx.fillRect(i*bw+bw*.22, h/2-bh/2, bw*.56, bh);
+    }
+  }
+
+  micBtn.addEventListener('click',function(){
+    if(rec && rec.state==='recording'){ stop(); } else { start(); }
+  });
+
+  function start(){
+    if(!navigator.mediaDevices || !window.MediaRecorder){
+      notice.textContent='Ο περιηγητής σου δεν υποστηρίζει ηχογράφηση. Δοκίμασε Chrome, Edge, Firefox ή Safari σε ενημερωμένη έκδοση.';
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(s){
+      stream=s; chunks=[];
+      if(blobUrl){URL.revokeObjectURL(blobUrl);blobUrl=null;}
+      player.style.display='none'; pbRow.style.display='none';
+      actx = new (window.AudioContext||window.webkitAudioContext)();
+      var src=actx.createMediaStreamSource(s);
+      analyser=actx.createAnalyser(); analyser.fftSize=512; src.connect(analyser);
+      canvas.width=canvas.offsetWidth*2; canvas.height=156;
+      draw();
+
+      rec=new MediaRecorder(s);
+      rec.ondataavailable=function(e){ if(e.data.size>0) chunks.push(e.data); };
+      rec.onstop=function(){
+        var blob=new Blob(chunks,{type:rec.mimeType||'audio/webm'});
+        blobUrl=URL.createObjectURL(blob);
+        player.src=blobUrl; player.style.display='block'; pbRow.style.display='flex';
+        micLabel.textContent='Άκουσέ το — και ηχογράφησε ξανά αν θέλεις';
+      };
+      rec.start();
+      t0=Date.now(); studio.classList.add('live'); micBtn.classList.add('rec');
+      micLabel.textContent='Ηχογραφείς… Πάτησε ξανά για να σταματήσεις';
+      notice.textContent='Μιλάς τώρα. Στόχος: 2–3 λεπτά συνεχούς ομιλίας.';
+      tick=setInterval(function(){
+        var el=(Date.now()-t0)/1000;
+        timerEl.innerHTML=fmt(el)+' <small>/ 02:00–03:00</small>';
+        tBar.style.width=Math.min(el/MAXBAR*100,100)+'%';
+      },200);
+    }).catch(function(){
+      notice.textContent='Δεν δόθηκε πρόσβαση στο μικρόφωνο. Έλεγξε τις άδειες του περιηγητή και δοκίμασε ξανά.';
+    });
+  }
+
+  function stop(){
+    if(rec && rec.state==='recording') rec.stop();
+    if(stream) stream.getTracks().forEach(function(t){t.stop();});
+    if(tick){clearInterval(tick);tick=null;}
+    if(raf){cancelAnimationFrame(raf);raf=null;}
+    if(actx){actx.close();actx=null;}
+    studio.classList.remove('live'); micBtn.classList.remove('rec');
+    drawIdle();
+  }
+
+  document.getElementById('againBtn').addEventListener('click',function(){
+    player.style.display='none'; pbRow.style.display='none';
+    timerEl.innerHTML='00:00 <small>/ 02:00–03:00</small>'; tBar.style.width='0';
+    micLabel.textContent='Πάτησε το μικρόφωνο για να ξεκινήσεις';
+    start();
+  });
+  document.getElementById('dlBtn').addEventListener('click',function(){
+    if(!blobUrl) return;
+    var a=document.createElement('a');
+    a.href=blobUrl; a.download='my-travel-podcast.webm'; a.click();
+  });
+
+  /* ---------- Image lightbox + alt tooltip (any <img> in .figure) ---------- */
+  var tip=document.getElementById('alttip'), lb=document.getElementById('lightbox'),
+      lbimg=document.getElementById('lbimg'), lbcap=document.getElementById('lbcap');
+
+  function bindImages(){
+    Array.prototype.forEach.call(document.querySelectorAll('.figure img'),function(img){
+      if(img.dataset.bound) return; img.dataset.bound='1';
+      img.setAttribute('tabindex','0');
+      img.setAttribute('title','');
+      img.addEventListener('mousemove',function(e){
+        if(!img.alt) return;
+        tip.textContent=img.alt; tip.classList.add('show');
+        var x=Math.min(e.clientX+16, window.innerWidth-tip.offsetWidth-14);
+        var y=Math.min(e.clientY+18, window.innerHeight-tip.offsetHeight-14);
+        tip.style.left=x+'px'; tip.style.top=y+'px';
+      });
+      img.addEventListener('mouseleave',function(){ tip.classList.remove('show'); });
+      img.addEventListener('click',function(){ open(img); });
+      img.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open(img);} });
+    });
+  }
+  function open(img){
+    tip.classList.remove('show');
+    lbimg.src=img.currentSrc||img.src; lbimg.alt=img.alt||'';
+    lbcap.textContent=img.alt||'';
+    lb.classList.add('show');
+    document.getElementById('lbclose').focus();
+  }
+  function close(){ lb.classList.remove('show'); lbimg.src=''; }
+  document.getElementById('lbclose').addEventListener('click',close);
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  bindImages();
+
+})();
+</script>
+</body>
+</html>

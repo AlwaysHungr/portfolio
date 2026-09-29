@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Γλωσσικές επιλογές του Πλάτωνα στην Αλληγορία του Σπηλαίου</title>
+<style>
+/* ===== base ===== */
+*{box-sizing:border-box}
+:root{
+  --ink:#16273A; --muted:#5B6B7B; --paper:#FFFFFF; --bg:#F1F5F9;
+  --brand:#1F5FA8; --brand2:#0E3E7A; --accent:#F0A63A; --ok:#2E8B57; --bad:#C63B3B; --line:#D9E2EC;
+  --radius:16px; --topH:56px;
+  --red:#F2B0AA; --redS:#B7362B; --blue:#B8D3F0; --blueS:#1F5FA8; --yel:#F3D97C; --yelS:#9C6F07;
+  --grn:#B8E2C0; --grnS:#2E8B57; --pur:#D5B3E8; --purS:#7B3FA0;
+}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);
+  font:16px/1.55 "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+.app{height:100dvh;display:flex;flex-direction:column}
+/* ===== header ===== */
+.top{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 10px 14px -10px rgba(0,0,0,.15);z-index:5}
+.top .ttl{font-weight:800;font-size:17px;letter-spacing:.2px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .lbl{font-size:13px;color:var(--muted);white-space:nowrap}
+.prog{height:4px;background:var(--line);flex:0 0 auto}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));transition:width .4s}
+/* ===== screens ===== */
+.screens{flex:1;min-height:0;position:relative}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:auto;padding:18px 22px}
+.screen.on{display:flex;animation:fadein .35s}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wrap{width:100%;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0;gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:0 6px 18px -12px rgba(0,0,0,.18)}
+.card.pad{padding:22px 26px}
+h1{font-size:clamp(24px,3.4vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.3px}
+h2{font-size:clamp(19px,2.2vw,26px);margin:0 0 8px}
+h3{font-size:17px;margin:0 0 6px}
+p{margin:0 0 10px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:none;color:var(--brand);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#E8F0FA;color:var(--brand2);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
+/* ===== buttons ===== */
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:11px 18px;font-weight:800;
+  background:var(--brand);color:#fff;box-shadow:0 8px 18px -10px rgba(31,95,168,.8);transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px);background:var(--brand2)}
+.btn.ghost{background:transparent;color:var(--brand);box-shadow:none;border:2px solid var(--brand)}
+.btn.ghost:hover{background:#E8F0FA}
+.btn.sm{padding:8px 13px;font-size:14px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.btn[hidden]{display:none}
+/* ===== bottom nav ===== */
+.nav{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:var(--paper);border-top:1px solid var(--line)}
+.dots{display:flex;gap:8px;align-items:center}
+.dots button{width:11px;height:11px;border-radius:50%;border:2px solid var(--brand);background:transparent;padding:0}
+.dots button.on{background:var(--brand);transform:scale(1.25)}
+.dots button.done{background:#9DBCE3;border-color:#9DBCE3}
+/* ===== images: alt-tooltip + zoom ===== */
+.zi{position:relative;display:inline-block;max-width:100%;cursor:zoom-in;border-radius:12px;line-height:0}
+.zi img{border-radius:12px;width:100%;height:auto}
+.zi .mag{position:absolute;right:9px;top:9px;width:30px;height:30px;border-radius:50%;background:#0E2233;color:#fff;
+  display:grid;place-items:center;font-size:15px;opacity:.85;pointer-events:none;line-height:1}
+.zi::after{content:attr(data-alt);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%);
+  background:#0E2233;color:#fff;font-size:13px;line-height:1.35;padding:8px 11px;border-radius:9px;max-width:min(320px,78vw);
+  width:max-content;white-space:normal;text-align:center;display:none;z-index:31;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.zi::before{content:"";position:absolute;left:50%;bottom:calc(100% + 3px);transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:#0E2233;display:none;z-index:31;pointer-events:none}
+.zi:hover::after,.zi:focus-visible::after,.zi.on::after,.zi:hover::before,.zi:focus-visible::before,.zi.on::before{display:block;animation:tipin .18s}
+.zi.below::after{bottom:auto;top:calc(100% + 9px)}
+.zi.below::before{bottom:auto;top:calc(100% + 3px);border-top-color:transparent;border-bottom-color:#0E2233}
+.zi.inset::after{bottom:auto;top:14px;left:14px;transform:none;max-width:70%;text-align:left}
+.zi.inset::before{display:none!important}
+.zi:hover,.zi:focus-visible,.zi.on{z-index:30}
+@keyframes tipin{from{opacity:0;transform:translate(-50%,4px)}to{opacity:1}}
+.zi.inset:hover::after{animation:none}
+figure{margin:0}
+figcaption{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:6px}
+/* lightbox */
+.lbx{position:fixed;inset:0;background:rgba(6,16,28,.92);display:none;z-index:90;padding:16px;overflow:auto}
+.lbx.on{display:grid;place-items:center}
+.lbx .box{width:100%;max-width:1200px;min-width:0;text-align:center}
+.lbx img{width:auto;height:auto;max-width:100%;max-height:82vh;margin:0 auto;border-radius:8px}
+.lbx .cap{color:#DCE6F0;font-size:14px;margin-top:10px}
+.lbx .x{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:#0E2233;color:#fff;border:2px solid #fff;
+  font-size:24px;line-height:1;display:grid;place-items:center;z-index:91;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+/* ===== activities ===== */
+.q{display:flex;flex-direction:column;gap:12px}
+.q .stem{font-weight:700;font-size:17px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:12px;text-align:left;border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:12px 14px;transition:.15s}
+.opt:hover{border-color:var(--brand);background:#F5F9FE}
+.opt .k{flex:0 0 30px;height:30px;border-radius:50%;background:#E8F0FA;color:var(--brand2);display:grid;place-items:center;font-weight:800;font-size:14px}
+.opt.sel{border-color:var(--brand);background:#EAF2FC}
+.opt.good{border-color:var(--ok);background:#EAF7EF}
+.opt.good .k{background:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:#FBEDED}
+.opt.bad .k{background:var(--bad);color:#fff}
+.opt.dim{opacity:.5}
+.opts.locked .opt{cursor:default}
+.opts.locked .opt:hover{border-color:var(--line);background:var(--paper)}
+.opts.locked .opt.good:hover{border-color:var(--ok);background:#EAF7EF}
+.opts.locked .opt.bad:hover{border-color:var(--bad);background:#FBEDED}
+.fb{border-radius:12px;padding:12px 14px;border:2px solid;font-size:15px}
+.fb.ok{border-color:var(--ok);background:#EAF7EF;color:#1B5E3A}
+.fb.no{border-color:var(--bad);background:#FBEDED;color:#8A2626}
+.fb.rev{border-color:var(--accent);background:#FFF6E5;color:#6B4A00}
+.fb[hidden]{display:none}
+.tries{font-size:13px;color:var(--muted)}
+.steps{display:flex;gap:6px;flex-wrap:wrap}
+.steps i{width:22px;height:8px;border-radius:4px;background:var(--line)}
+.steps i.on{background:var(--brand)} .steps i.ok{background:var(--ok)} .steps i.no{background:var(--bad)}
+/* results ring */
+.ring{width:150px;height:150px}
+.ring circle{fill:none;stroke-width:12}
+.ring .bg{stroke:var(--line)} .ring .v{stroke:var(--ok);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .8s}
+.ring text{font-weight:900;font-size:26px;fill:var(--ink);text-anchor:middle;dominant-baseline:middle}
+.band{border-left:8px solid var(--accent);border-radius:12px;padding:12px 16px;background:#FFF9EE}
+.band.mute{opacity:.45;border-left-color:var(--line);background:#F7F9FB}
+/* misc */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.two>*{min-width:0;min-height:0}
+.grow{flex:1;min-height:0;overflow:auto}
+.center{text-align:center}
+.src{font-size:12.5px;color:var(--muted)}
+.srclist{columns:2;column-gap:22px;font-size:13px;color:var(--muted)}
+.srclist li{break-inside:avoid;margin-bottom:6px}
+a{color:var(--brand)}
+
+/* ===== cover ===== */
+.cover{flex:1 0 auto;display:flex;align-items:center;gap:26px;flex-wrap:wrap;position:relative;padding-bottom:70px}
+.cover>*{position:relative;z-index:1}
+.cavebg{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:0;pointer-events:none;opacity:.14;border-radius:0 0 var(--radius) var(--radius);overflow:hidden}
+.cavebg svg{width:100%;height:100%;display:block}
+.flame{transform-origin:50% 100%;animation:flick 1.2s ease-in-out infinite alternate}
+.flame.f2{animation-duration:.9s;animation-delay:.3s}
+@keyframes flick{from{transform:scaleY(.92) scaleX(1.03)}to{transform:scaleY(1.08) scaleX(.96)}}
+.shadowp{animation:sway 4s ease-in-out infinite alternate;transform-origin:50% 100%}
+@keyframes sway{from{transform:skewX(-3deg)}to{transform:skewX(3deg)}}
+.covfig{flex:0 1 240px;min-width:0;display:flex;flex-direction:column;align-items:center}
+.covfig .zi{width:min(240px,60vw)}
+.covfig .zi img{border-radius:50%;box-shadow:0 12px 30px -12px rgba(0,0,0,.45)}
+.covfig .zi{border-radius:50%}
+.covfig .zi .mag{right:14px;top:14px}
+
+/* ===== graph (screen 2) ===== */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;flex:0 0 auto;scrollbar-width:thin}
+.tab{flex:0 0 auto;border:2px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px;
+  display:inline-flex;align-items:center;gap:8px;color:var(--ink);transition:.15s;white-space:nowrap}
+.tab i{width:12px;height:12px;border-radius:50%;background:var(--c);display:inline-block;box-shadow:0 0 0 2px var(--cs) inset}
+.tab:hover{border-color:var(--cs)}
+.tab.on{background:var(--c);border-color:var(--cs);color:#111}
+.tab.jump{border-style:dashed;color:var(--brand)}
+.legend{display:flex;flex-wrap:wrap;gap:6px;align-items:center;flex:0 0 auto;font-size:13px;min-height:0}
+.legend[hidden]{display:none}
+.legend .lg{border:0;border-radius:8px;padding:4px 9px;background:var(--c);color:#1a1a1a;font-size:13px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.legend .lg.seen{box-shadow:inset 0 0 0 2px var(--cs)}
+.legend .lg:hover{transform:translateY(-1px)}
+.legend .lname{font-weight:800;margin-right:4px}
+.glay{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:14px;flex:1;min-height:0}
+.glay>*{min-width:0;min-height:0}
+.txtcard{overflow:auto;display:flex;flex-direction:column}
+.txtcard h3{margin-bottom:2px}
+.anc{font-size:22px;line-height:1.7;font-family:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif}
+.anc p{margin:0 0 12px}
+.hl{border-radius:5px;padding:0;background:var(--c);box-shadow:0 0 0 3px var(--c);cursor:pointer;transition:.15s;font-weight:inherit;color:inherit;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hl.seen{box-shadow:0 0 0 3px var(--c),0 2px 0 3px var(--cs)}
+.hl.cur{box-shadow:0 0 0 3px var(--cs);background:var(--c)}
+.hl:hover{filter:brightness(.94)}
+.anc.static .hl{cursor:default}
+.anc.static .hl:hover{filter:none}
+.anc.flt .hl:not(.f){background:transparent;box-shadow:none}
+.apanel{overflow:auto;display:flex;flex-direction:column;gap:10px;position:relative}
+.apanel .ph{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:safe center;gap:10px;text-align:center}
+.apanel .ph[hidden]{display:none}
+.apanel .body{display:flex;flex-direction:column;gap:10px}
+.apanel .body[hidden]{display:none}
+.cat{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:800;background:var(--c);color:#1a1a1a;width:max-content}
+.cat i{width:10px;height:10px;border-radius:50%;background:var(--cs);display:inline-block}
+.aphr{font-size:19px;font-weight:800;font-family:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;line-height:1.35;border-left:5px solid var(--cs);padding-left:10px}
+.atxt{font-size:15.5px;line-height:1.6}
+.pnav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:auto}
+.pnav .cnt{margin-left:auto;font-size:13px;color:var(--muted)}
+.xp{display:none}
+.mini{width:110px;height:110px}
+.mini circle{fill:none;stroke-width:10}
+.mini .bg{stroke:var(--line)} .mini .v{stroke:var(--brand);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .5s}
+.mini text{font-weight:900;font-size:22px;fill:var(--ink);text-anchor:middle;dominant-baseline:middle}
+.scrim{position:fixed;inset:0;background:rgba(6,16,28,.45);z-index:58;display:none}
+@media (max-width:900px){
+  .glay{display:flex;flex-direction:column;flex:0 0 auto}
+  .txtcard{overflow:visible}
+  .anc{font-size:19px}
+  .apanel{position:fixed;left:0;right:0;bottom:0;max-height:82vh;z-index:60;border-radius:18px 18px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.3);display:none}
+  .apanel.open{display:flex}
+  .scrim.on{display:block}
+  .xp{display:inline-flex}
+  .apanel .ph{display:none}
+}
+
+/* ===== translation (screen 3) ===== */
+.par{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 18px;border-bottom:1px dashed var(--line);padding:10px 0}
+.par>*{min-width:0}
+.par:hover{background:#F7FAFD}
+.par .anc{font-size:18px;line-height:1.6}
+.par .tr{font-size:15.5px;line-height:1.6;color:#223}
+.par .anc p,.par .tr p{margin:0}
+.thead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 18px;font-size:13px;color:var(--muted);font-weight:800;padding-bottom:6px;border-bottom:2px solid var(--line)}
+@media (max-width:760px){
+  .par,.thead{grid-template-columns:minmax(0,1fr)}
+  .thead>:last-child{display:none}
+  .par .anc{font-size:17px}
+  .par .tr{margin-top:8px;padding-top:8px;border-top:1px dotted var(--line)}
+}
+
+/* ===== matching ===== */
+.mzones{display:grid;gap:10px}
+.mz{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--paper)}
+.mz>*{min-width:0}
+.mzl{font-weight:700;font-size:15px}
+.mzl small{display:block;font-weight:400;color:var(--muted);font-size:13px;font-family:"Palatino Linotype",Palatino,Georgia,serif}
+.mslot{min-height:44px;border:2px dashed #B9C7D6;border-radius:10px;display:flex;align-items:center;padding:4px;position:relative;transition:.15s;background:#F7FAFD}
+.mslot.over,.mz.tgt .mslot{border-color:var(--brand);background:#EAF2FC}
+.mslot .mc{margin:0;width:100%}
+.mz.good{border-color:var(--ok);background:#EAF7EF}
+.mz.bad{border-color:var(--bad);background:#FBEDED}
+.mz .mk{position:absolute;right:-12px;top:-12px;width:24px;height:24px;border-radius:50%;display:none;place-items:center;color:#fff;font-size:13px;font-weight:900}
+.mz.good .mk{display:grid;background:var(--ok)} .mz.bad .mk{display:grid;background:var(--bad)}
+.mpool{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;border:2px solid var(--line);border-radius:12px;padding:8px;background:#F7F9FB}
+.mc{border:2px solid var(--brand);background:var(--paper);color:var(--ink);border-radius:10px;padding:7px 12px;font-size:15px;text-align:left;
+  font-family:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;touch-action:none;user-select:none;-webkit-user-select:none;transition:box-shadow .15s}
+.mc.sans{font-family:inherit;font-size:14.5px}
+.mc.sel{background:#EAF2FC;box-shadow:0 0 0 3px #BBD3EE}
+.mc.lift{position:fixed;z-index:70;pointer-events:none;box-shadow:0 14px 30px rgba(0,0,0,.3);transform:rotate(-2deg);margin:0}
+.match.locked .mc{cursor:default;border-color:var(--line)}
+.revl{margin:0;padding-left:18px;font-size:14.5px}
+.revl li{margin:2px 0}
+.revl b{font-family:"Palatino Linotype",Palatino,Georgia,serif;font-weight:600}
+/* ===== fill (act 2) ===== */
+.fill{display:grid;gap:10px}
+.fitem{border:2px solid var(--line);border-radius:12px;padding:10px 14px;font-size:15.5px;line-height:1.7;background:var(--paper)}
+.fitem select{font:inherit;font-size:15px;padding:4px 8px;border:2px solid var(--brand);border-radius:8px;background:#F7FAFD;color:var(--ink);max-width:100%;vertical-align:baseline}
+.fitem.good{border-color:var(--ok);background:#EAF7EF} .fitem.good select{border-color:var(--ok)}
+.fitem.bad{border-color:var(--bad);background:#FBEDED} .fitem.bad select{border-color:var(--bad)}
+.fitem .ans{display:none;font-size:13.5px;color:#6B4A00;margin-top:4px}
+.fitem.bad .ans{display:block}
+.fill.locked select{pointer-events:none}
+.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.qhead .num{background:var(--brand);color:#fff;border-radius:8px;padding:2px 10px;font-weight:800;font-size:13px}
+.pnl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+/* ===== results ===== */
+.res{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;flex:1;min-height:0;align-items:stretch}
+.res>*{min-width:0;min-height:0}
+.rleft{display:flex;flex-direction:column;align-items:center;gap:10px;align-self:start;text-align:center}
+.rscroll{overflow:auto;display:flex;flex-direction:column;gap:10px}
+.rscroll>*{flex:0 0 auto}
+.recap{font-size:14px;margin:0;padding-left:18px}
+.recap li{margin:2px 0}
+.recap b{font-weight:800}
+.recap i{font-style:normal;font-family:"Palatino Linotype",Palatino,Georgia,serif}
+.kw{display:flex;flex-direction:column;gap:14px;max-height:100%;min-height:0}
+.kw .srcbox{flex:0 1 auto;min-height:0;overflow:auto}
+@media (max-width:760px){
+  .screen{padding:12px 12px}
+  .two{grid-template-columns:minmax(0,1fr)}
+  .srclist{columns:1}
+  .top .ttl{font-size:15px}
+  h1{font-size:24px}
+  .res{display:flex;flex-direction:column;flex:0 0 auto}
+  .rscroll{overflow:visible}
+  .mz{grid-template-columns:minmax(0,1fr)}
+  .cover{align-items:flex-start}
+  .kw{max-height:none}
+  .kw .srcbox{overflow:visible}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="ttl">Γλωσσικές επιλογές του Πλάτωνα στην <i>Αλληγορία του Σπηλαίου</i></div>
+    <div class="lbl" id="lbl">Εξώφυλλο</div>
+  </header>
+  <div class="prog"><i id="prog"></i></div>
+
+  <main class="screens" id="screens">
+
+    <!-- 1. ΕΞΩΦΥΛΛΟ -->
+    <section class="screen on" data-name="Εξώφυλλο">
+      <div class="wrap">
+        <div class="card pad cover">
+          <div class="cavebg" aria-hidden="true">
+            <svg viewBox="0 0 1000 220" preserveAspectRatio="xMidYMax slice">
+              <rect x="0" y="186" width="1000" height="34" fill="#0E2233"/>
+              <rect x="0" y="0" width="70" height="186" fill="#0E2233" opacity=".5"/>
+              <g class="shadowp" fill="#0E2233" opacity=".8"><ellipse cx="40" cy="70" rx="14" ry="16"/><path d="M14 186 L20 96 Q40 80 60 96 L66 186Z"/></g>
+              <g fill="#0E2233"><circle cx="190" cy="118" r="17"/><path d="M160 186 Q160 140 190 140 Q220 140 220 186Z"/>
+                <circle cx="300" cy="118" r="17"/><path d="M270 186 Q270 140 300 140 Q330 140 330 186Z"/>
+                <circle cx="410" cy="118" r="17"/><path d="M380 186 Q380 140 410 140 Q440 140 440 186Z"/></g>
+              <rect x="600" y="120" width="26" height="66" fill="#0E2233"/>
+              <g fill="#0E2233"><circle cx="655" cy="86" r="14"/><rect x="641" y="100" width="28" height="86" rx="10"/><rect x="668" y="70" width="34" height="20" rx="4" transform="rotate(-20 668 70)"/></g>
+              <g transform="translate(860 186)"><ellipse cx="0" cy="8" rx="60" ry="10" fill="#F0A63A" opacity=".5"/>
+                <path class="flame" d="M0 6 C-34 -20 -26 -60 0 -96 C26 -60 34 -20 0 6Z" fill="#F0A63A"/>
+                <path class="flame f2" d="M0 6 C-16 -14 -12 -36 0 -56 C12 -36 16 -14 0 6Z" fill="#FFE08A"/></g>
+            </svg>
+          </div>
+          <div style="flex:1 1 320px;min-width:0">
+            <div class="eyebrow">ΜΑΘΗΜΑ</div>
+            <h1>Γλωσσικές επιλογές του Πλάτωνα στην <i>Αλληγορία του Σπηλαίου</i></h1>
+            <p class="chips"><span class="chip">πολυσύνδετο σχήμα</span><span class="chip">διαλογική μορφή</span><span class="chip">β' ενικό πρόσωπο</span><span class="chip">εικόνες</span><span class="chip">εκφραστικοί τρόποι</span></p>
+            <p style="margin-top:18px"><button class="btn" onclick="go(1)">Ξεκίνα →</button></p>
+          </div>
+          <figure class="covfig">
+            <span class="zi" tabindex="0" data-alt="Ραφαήλ (1509). Ο Πλάτων (λεπτομέρεια από «Η Σχολή των Αθηνών»)"><img data-key="k0" alt="Ραφαήλ (1509). Ο Πλάτων (λεπτομέρεια από «Η Σχολή των Αθηνών»)"><span class="mag">🔍</span></span>
+            <figcaption>Ραφαήλ. (1509). <i>Ο Πλάτων (λεπτομέρεια από «Η Σχολή των Αθηνών»)</i> [Ζωγραφικό έργο]. Wikimedia Commons.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ΓΡΑΦΗΜΑ -->
+    <section class="screen" data-name="Γράφημα ανάλυσης" id="sGraph">
+      <div class="wrap">
+        <div style="flex:0 0 auto">
+          <h2 style="margin:0 0 6px">Γράφημα ανάλυσης των γλωσσικών επιλογών του Πλάτωνα στην <i>Αλληγορία του σπηλαίου</i> (514a-515a)</h2>
+          <div class="tabs" id="tabs"></div>
+          <div class="legend" id="legend" hidden></div>
+        </div>
+        <div class="glay">
+          <div class="card txtcard">
+            <h3>Πρωτότυπο κείμενο <i>Αλληγορία του σπηλαίου</i> (514a-515a)</h3>
+            <p class="src">Πηγή: <a href="https://www.greek-language.gr/digitalResources/ancient_greek/anthology/literature/browse.html?text_id=319" target="_blank" rel="noopener">Ελληνική Πύλη</a></p>
+            <div class="anc" id="ancI" lang="grc"></div>
+          </div>
+          <div class="card apanel" id="apanel">
+            <div class="ph" id="aph">
+              <svg class="mini" viewBox="0 0 150 150"><circle class="bg" cx="75" cy="75" r="60"/><circle class="v" cx="75" cy="75" r="60"/><text x="75" y="76">0/19</text></svg>
+              <div style="font-weight:800">Εξερεύνησες <span id="expN">0</span>/19</div>
+            </div>
+            <div class="body" id="abody" hidden>
+              <div class="cat" id="acat"><i></i><span></span></div>
+              <div class="aphr" id="aphr" lang="grc"></div>
+              <div class="atxt" id="atxt"></div>
+              <div class="pnav">
+                <button class="btn ghost sm" id="aprev">‹ Προηγούμενο σημείο</button>
+                <button class="btn sm" id="anext">Επόμενο σημείο ›</button>
+                <button class="btn ghost sm xp" id="aclose">Κλείσιμο</button>
+                <span class="cnt">Εξερεύνησες <span id="expN2">0</span>/19</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ΝΕΟΕΛΛΗΝΙΚΗ ΑΠΟΔΟΣΗ -->
+    <section class="screen" data-name="Νεοελληνική απόδοση">
+      <div class="wrap">
+        <div class="card pad grow" style="display:flex;flex-direction:column">
+          <h2>Νεοελληνική απόδοση του κειμένου <small style="font-weight:600;font-size:15px;color:var(--muted)">(Μετάφραση Νίκος Σκουτερόπουλος)</small></h2>
+          <div class="thead"><div>Πρωτότυπο κείμενο <i>Αλληγορία του σπηλαίου</i> (514a-515a)</div><div>Νεοελληνική απόδοση</div></div>
+          <div id="parlist"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ΔΡΑΣΤΗΡΙΟΤΗΤΑ 1 -->
+    <section class="screen" data-name="Δραστηριότητα 1">
+      <div class="wrap">
+        <div class="card pad grow q">
+          <div class="qhead"><span class="num">Δραστηριότητα 1</span><h3 style="margin:0">Αντιστοίχιση γλωσσικού φαινομένου με παράδειγμα</h3></div>
+          <p class="stem">Αντιστοίχισε κάθε γλωσσικό φαινόμενο με το σωστό παράδειγμα από το χωρίο.</p>
+          <div class="match" id="m1"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ΔΡΑΣΤΗΡΙΟΤΗΤΑ 2 -->
+    <section class="screen" data-name="Δραστηριότητα 2">
+      <div class="wrap">
+        <div class="card pad grow q">
+          <div class="qhead"><span class="num">Δραστηριότητα 2</span><h3 style="margin:0">Συμπλήρωση κενών με το σωστό γλωσσικό φαινόμενο</h3></div>
+          <p class="stem">Συμπλήρωσε τα κενά επιλέγοντας το σωστό γλωσσικό φαινόμενο με βάση τη λειτουργία που περιγράφεται.</p>
+          <div id="a2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ΔΡΑΣΤΗΡΙΟΤΗΤΑ 3 -->
+    <section class="screen" data-name="Δραστηριότητα 3">
+      <div class="wrap">
+        <div class="card pad grow q">
+          <div class="qhead"><span class="num">Δραστηριότητα 3</span><h3 style="margin:0">Κατανόηση του ερμηνευτικού ρόλου των γλωσσικών επιλογών</h3></div>
+          <p class="stem">Αντιστοίχισε κάθε κατηγορία γλωσσικού φαινομένου με τον ευρύτερο ερμηνευτικό της ρόλο στο κείμενο.</p>
+          <div class="match" id="m3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ΔΡΑΣΤΗΡΙΟΤΗΤΑ 4 -->
+    <section class="screen" data-name="Δραστηριότητα 4">
+      <div class="wrap">
+        <div class="card pad grow q">
+          <div class="qhead"><span class="num">Δραστηριότητα 4</span><h3 style="margin:0">Ερμηνεία της λειτουργίας των επισημασμένων σημείων</h3></div>
+          <p class="stem" style="font-weight:600">Διάλεξε ποια ερμηνεία αποδίδει καλύτερα τη λειτουργία των επισημασμένων στοιχείων στο απόσπασμα.</p>
+          <div class="mcq" id="a4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ΔΡΑΣΤΗΡΙΟΤΗΤΑ 5 -->
+    <section class="screen" data-name="Δραστηριότητα 5">
+      <div class="wrap">
+        <div class="card pad grow q">
+          <div class="qhead"><span class="num">Δραστηριότητα 5</span><h3 style="margin:0">Σύνθεση και αξιολόγηση της ρητορικής λειτουργίας των γλωσσικών επιλογών</h3></div>
+          <p class="stem" style="font-weight:600">Επίλεξε τη σωστή απάντηση, συνδυάζοντας όσα παρατήρησες στο γράφημα και στο χωρίο.</p>
+          <div class="mcq" id="a5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. ΑΠΟΤΕΛΕΣΜΑΤΑ -->
+    <section class="screen" data-name="Αποτελέσματα">
+      <div class="wrap">
+        <div class="card pad grow res">
+          <div class="rleft">
+            <svg class="ring" id="ring" viewBox="0 0 150 150"><circle class="bg" cx="75" cy="75" r="60"/><circle class="v" cx="75" cy="75" r="60"/><text x="75" y="76">0/22</text></svg>
+            <div style="font-weight:800">Σωστές απαντήσεις <span id="scoreTxt">0/22</span></div>
+            <div class="src" id="pctTxt"></div>
+            <button class="btn" id="btnReset">Επανάληψη</button>
+          </div>
+          <div class="rscroll">
+            <h2 style="margin:0">Συνολική Ανατροφοδότηση</h2>
+            <div id="bands" style="display:flex;flex-direction:column;gap:8px"></div>
+            <h3 style="margin-top:8px">Σωστές απαντήσεις</h3>
+            <div id="recap"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. ΛΕΞΕΙΣ-ΚΛΕΙΔΙΑ & ΠΗΓΕΣ -->
+    <section class="screen" data-name="Λέξεις-κλειδιά & Πηγές">
+      <div class="wrap">
+        <div class="card pad grow kw">
+          <div>
+            <h2>Λέξεις κλειδιά</h2>
+            <p class="chips"><span class="chip">πολυσύνδετο σχήμα</span><span class="chip">διαλογική μορφή</span><span class="chip">β' ενικό πρόσωπο</span><span class="chip">εικόνες</span><span class="chip">εκφραστικοί τρόποι</span></p>
+          </div>
+          <div class="srcbox">
+            <h2>Πηγές</h2>
+            <ul class="srclist" style="columns:1">
+              <li>Πρωτότυπο κείμενο <i>Αλληγορία του σπηλαίου</i> (514a-515a): Ελληνική Πύλη — <a href="https://www.greek-language.gr/digitalResources/ancient_greek/anthology/literature/browse.html?text_id=319" target="_blank" rel="noopener">greek-language.gr</a></li>
+              <li>Νεοελληνική απόδοση του κειμένου (Μετάφραση Νίκος Σκουτερόπουλος)</li>
+              <li>Ραφαήλ. (1509). <i>Ο Πλάτων (λεπτομέρεια από «Η Σχολή των Αθηνών»)</i> [Ζωγραφικό έργο]. Wikimedia Commons. Ανακτήθηκε στις 20 Μαρτίου 2026. — <a href="https://commons.wikimedia.org/wiki/File:Plato-small.png" target="_blank" rel="noopener">commons.wikimedia.org</a></li>
+            </ul>
+          </div>
+          <p style="margin-top:auto"><button class="btn ghost" onclick="go(0)">Πίσω στο εξώφυλλο</button></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="btn ghost sm" id="prev" onclick="go(cur-1)">‹ Πίσω</button>
+    <div class="dots" id="dots"></div>
+    <button class="btn sm" id="next" onclick="go(cur+1)">Μπροστά ›</button>
+  </nav>
+</div>
+<div class="scrim" id="scrim"></div>
+
+<!-- lightbox -->
+<div class="lbx" id="lbx" aria-modal="true" role="dialog">
+  <button class="x" id="lbxX" aria-label="Κλείσιμο">✕</button>
+  <div class="box"><img id="lbxImg" alt=""><div class="cap" id="lbxCap"></div></div>
+</div>
+
+<script>
+/* ===== navigation ===== */
+var screens=[].slice.call(document.querySelectorAll('.screen')),cur=0;
+var dots=document.getElementById('dots');
+screens.forEach(function(s,i){var b=document.createElement('button');b.title=s.dataset.name||('Οθόνη '+(i+1));b.setAttribute('aria-label',b.title);b.onclick=function(){go(i)};dots.appendChild(b)});
+function go(n){
+  if(n<0||n>=screens.length)return;
+  screens[cur].classList.remove('on');cur=n;screens[cur].classList.add('on');screens[cur].scrollTop=0;
+  [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===cur);d.classList.toggle('done',i<cur)});
+  document.getElementById('lbl').textContent=screens[cur].dataset.name||'';
+  document.getElementById('prog').style.width=((cur+1)/screens.length*100)+'%';
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===screens.length-1;
+  document.querySelectorAll('.zi.on').forEach(function(z){z.classList.remove('on')});
+  if(window.onScreen)onScreen(cur);
+}
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('lbx').classList.contains('on')){if(e.key==='Escape')closeLbx();return}
+  var t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;
+  if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);
+});
+go(0);
+
+/* ===== images: tooltip side + lightbox ===== */
+function side(z){var r=z.getBoundingClientRect();z.classList.toggle('below',r.top<130&&!z.classList.contains('inset'))}
+var lbx=document.getElementById('lbx'),lbxImg=document.getElementById('lbxImg'),lbxCap=document.getElementById('lbxCap');
+function openLbx(z){var im=z.querySelector('img');lbxImg.src=im.src;lbxImg.alt=im.alt;lbxCap.textContent=z.dataset.alt||im.alt||'';
+  document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});lbx.classList.add('on')}
+function closeLbx(){lbx.classList.remove('on');lbxImg.src=''}
+document.getElementById('lbxX').onclick=closeLbx;
+lbx.addEventListener('click',function(e){if(e.target===lbx||e.target.classList.contains('box'))closeLbx()});
+document.addEventListener('click',function(e){var z=e.target.closest('.zi');if(!z)return;if(e.target.closest('.hs'))return;openLbx(z)});
+document.addEventListener('mouseover',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('focusin',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('zi'))openLbx(e.target)});
+/* touch: first tap shows alt, second opens */
+document.addEventListener('touchstart',function(e){var z=e.target.closest('.zi');if(!z)return;
+  if(!z.classList.contains('on')){e.preventDefault();document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});z.classList.add('on');side(z)}},{passive:false});
+
+/* ===== helpers ===== */
+function ring(el,n,total){var c=2*Math.PI*60;var v=el.querySelector('.v');var pc=total?n/total:0;v.style.strokeDasharray=(c*pc)+' '+c;v.style.opacity=pc?1:0;el.querySelector('text').textContent=n+'/'+total}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+/* ===== data: categories ===== */
+var CATS={
+  red:{name:'Πολυσύνδετο Σχήμα',color:'κόκκινο',c:'var(--red)',cs:'var(--redS)',ico:'🔗'},
+  blue:{name:'Διαλογική Μορφή',color:'μπλε',c:'var(--blue)',cs:'var(--blueS)',ico:'💬'},
+  yel:{name:'Β΄ Ενικό Πρόσωπο',color:'κίτρινο',c:'var(--yel)',cs:'var(--yelS)',ico:'👤'},
+  grn:{name:'Εικόνες',color:'πράσινο',c:'var(--grn)',cs:'var(--grnS)',ico:'🎨'},
+  pur:{name:'Εκφραστικοί Τρόποι',color:'μωβ',c:'var(--pur)',cs:'var(--purS)',ico:'✨'}
+};
+var CATORDER=['red','blue','yel','grn','pur'];
+/* ===== data: analyses (id, category, title, text) ===== */
+var A={
+ 1:{cat:'red',t:'«ἐν δεσμοῖς καὶ τὰ σκέλη καὶ τοὺς αὐχένας»',x:'Η διαδοχική χρήση του «καί» λειτουργεί ως πολυσύνδετο σχήμα και δίνει έμφαση στη συνολική κατάσταση των δεσμωτών. Συντακτικά, η φράση προσδιορίζει την έκταση της δέσμευσής τους, δείχνοντας ότι δεν είναι δεσμευμένοι μερικώς αλλά ολοκληρωτικά. Ο ρόλος του πολυσύνδετου σχήματος είναι να ενισχύσει την αίσθηση της καθήλωσης και της ασφυκτικής ακινησίας. Στο φιλοσοφικό επίπεδο, η πλήρης δέσμευση συμβολίζει τον εγκλωβισμό του ανθρώπου στην άγνοια και στην αδυναμία του να στραφεί μόνος του προς την αλήθεια.'},
+ 2:{cat:'red',t:'«ὥστε μένειν τε αὐτοὺς εἴς τε τὸ πρόσθεν μόνον ὁρᾶν»',x:'Η επανάληψη του «τε» λειτουργεί ως στοιχείο πολυσυνδέτου σχήματος και εντείνει την αίσθηση του περιορισμού. Οι δεσμώτες μένουν ακίνητοι και βλέπουν μόνο προς μία κατεύθυνση. Ο ρόλος της φράσης είναι να αποδώσει με σαφήνεια το αποτέλεσμα της σωματικής ακινησίας: τον περιορισμό της αντίληψης. Η μονοκατευθυνόμενη όραση συμβολίζει τον άνθρωπο που έχει πρόσβαση μόνο σε ένα φαινομενικό και περιορισμένο επίπεδο πραγματικότητας.'},
+ 3:{cat:'red',t:'«σκευή τε παντοδαπὰ … καὶ ἀνδριάντας καὶ ἄλλα ζῷα»',x:'Η παράθεση πολλών αντικειμένων με επαναλαμβανόμενους συνδέσμους δημιουργεί πολυσύνδετο και ταυτόχρονα συσσώρευση εικόνων. Πρόκειται για διαδοχικά αντικείμενα που πυκνώνουν τη σκηνή. Ο ρόλος της φράσης είναι να προσδώσει παραστατικότητα και να παρουσιάσει τον κόσμο των ειδώλων ως πλούσιο και εντυπωσιακό. Στο φιλοσοφικό επίπεδο, η πληθώρα των αντικειμένων δείχνει ότι ο κόσμος της πλάνης μπορεί να είναι ελκυστικός, πολύμορφος και πειστικός, χωρίς όμως να είναι ο αληθινός.'},
+ 4:{cat:'red',t:'«λίθινά τε καὶ ξύλινα καὶ παντοῖα»',x:'Η χρήση των συνδέσμων οργανώνει μια κλιμακωτή παράθεση υλικών και μορφών. Το πολυσύνδετο σχήμα εδώ ενισχύει την εντύπωση ποικιλίας και πληθώρας. Ο ρόλος της φράσης είναι να καταστήσει πιο πλούσια και απτή τη σκηνή του σπηλαίου. Αυτή η ποικιλία συμβολίζει ότι οι ψευδαισθήσεις και τα είδωλα δεν εμφανίζονται με μία μόνο μορφή, αλλά μπορούν να παίρνουν πολλές εκδοχές και έτσι να γίνονται πιο πειστικά για τον άνθρωπο.'},
+ 5:{cat:'blue',t:'«(Ὁρῶ,) ἔφη.»',x:'Το ρήμα «ἔφη» δηλώνει την απόκριση του συνομιλητή και συντηρεί τη διαλογική δομή του πλατωνικού κειμένου. Η φράση, έστω και σύντομη, παίζει σημαντικό ρόλο στη ροή του διαλόγου, γιατί δείχνει ότι η σκέψη προχωρά μέσα από ερώτηση και απόκριση. Η διαλογική μορφή προσδίδει αμεσότητα, φυσικότητα και ζωντάνια. Στο φιλοσοφικό επίπεδο, η αλήθεια δεν παρουσιάζεται ως έτοιμη διδασκαλία, αλλά ως αποτέλεσμα συμμετοχής και διαλεκτικής διερεύνησης.'},
+ 6:{cat:'blue',t:'«(Ἄτοπον,) ἔφη…»',x:'Η επαναλαμβανόμενη παρουσία του «ἔφη» ενισχύει τη συνομιλιακή φύση του κειμένου και δείχνει ότι ο συνομιλητής παρακολουθεί και αντιδρά σταδιακά. Ο ρόλος της φράσης είναι να κρατά ενεργό τον διάλογο και να αποδίδει την πορεία της σκέψης ως ζωντανή διαδικασία. Η διαλογική μορφή υπηρετεί το φιλοσοφικό μήνυμα του Πλάτωνα, επειδή η γνώση παρουσιάζεται ως αποτέλεσμα συνομιλίας και πνευματικής καθοδήγησης.'},
+ 7:{cat:'blue',t:'«ἦν δ᾽ ἐγώ»',x:'Η φράση δηλώνει την επανείσοδο του Σωκράτη στον διάλογο και λειτουργεί ως μετάβαση από την απόκριση του συνομιλητή στη νέα φάση της φιλοσοφικής ανάπτυξης. Έτσι εξασφαλίζεται η συνοχή του διαλόγου και η σταδιακή πρόοδος της σκέψης. Στο βαθύτερο επίπεδο, η διαλογική μορφή δείχνει ότι η φιλοσοφία είναι κοινή αναζήτηση και όχι μονολογική επιβολή γνώμης.'},
+ 8:{cat:'yel',t:'«ἀπείκασον»',x:'Η προστακτική στο β΄ ενικό πρόσωπο απευθύνεται άμεσα στον συνομιλητή και τον καθιστά ενεργό δέκτη της σκέψης. Λειτουργεί ως άμεση προτροπή. Ο ρόλος της είναι να εμπλέξει προσωπικά τον συνομιλητή στη νοητική διαδικασία και να τον υποχρεώσει να σχηματίσει ο ίδιος την αναλογία. Στο φιλοσοφικό επίπεδο, το β΄ ενικό δείχνει ότι η γνώση δεν προσφέρεται παθητικά, αλλά απαιτεί εσωτερική συμμετοχή και πνευματική κινητοποίηση.'},
+ 9:{cat:'yel',t:'«ἰδὲ»',x:'Το β’ ενικό πρόσωπο της προστακτικής αυτής καλεί τον συνομιλητή να στραφεί ενεργά στην παρατήρηση. Ο ρόλος της είναι διδακτικός και καθοδηγητικός, γιατί ο Σωκράτης δεν αφηγείται απλώς, αλλά κατευθύνει τη συζήτηση. Στο φιλοσοφικό επίπεδο, η λέξη υποδηλώνει ότι η κατανόηση της αλήθειας συνδέεται με την προσεκτική και συνειδητή παρατήρηση.'},
+ 10:{cat:'yel',t:'«ἰδὲ»',x:'Η επανάληψη της προστακτικής ενισχύει την επιμονή του διδάσκοντος στην ενεργή συμμετοχή του συνομιλητή. Η λέξη λειτουργεί ως σημείο εστίασης της προσοχής σε συγκεκριμένο στοιχείο της σκηνής. Στο φιλοσοφικό μήνυμα, δείχνει ότι η παιδεία είναι πορεία διαρκούς καθοδήγησης προς τη σωστή θέαση.'},
+ 11:{cat:'yel',t:'«Ὅρα»',x:'Το β’ ενικό πρόσωπο της προστακτικής «Ὅρα» συνδέει την όραση με τη νοητική κατανόηση. Ο ρόλος της είναι να μεταβάλει τον συνομιλητή από απλό ακροατή σε ενεργό παρατηρητή. Στο φιλοσοφικό επίπεδο, η λέξη υποδηλώνει τη μετάβαση από την εξωτερική θέαση στη βαθύτερη ερμηνεία.'},
+ 12:{cat:'grn',t:'«ἐν καταγείῳ οἰκήσει σπηλαιώδει»',x:'Η φράση δημιουργεί έντονη οπτική εικόνα του χώρου. Ο προσδιορισμός του τόπου αποδίδει ένα κλειστό, σκοτεινό και υπόγειο περιβάλλον. Ο ρόλος της εικόνας είναι να θεμελιώσει συμβολικά το πλαίσιο της αλληγορίας. Στο φιλοσοφικό επίπεδο, το σπήλαιο συμβολίζει τον κόσμο της άγνοιας, της πλάνης και της περιορισμένης ανθρώπινης αντίληψης.'},
+ 13:{cat:'grn',t:'«ἀναπεπταμένην πρὸς τὸ φῶς τὴν εἴσοδον»',x:'Η οπτική αυτή εικόνα εισάγει την αντίθεση σκοταδιού και φωτός. Η είσοδος προς το φως λειτουργεί ως σύμβολο εξόδου από την άγνοια. Ο ρόλος της φράσης είναι να αναδείξει την πορεία προς τη γνώση και την απελευθέρωση. Το φως αντιστοιχεί στην αλήθεια και στη νόηση.'},
+ 14:{cat:'grn',t:'«φῶς δὲ αὐτοῖς πυρὸς ἄνωθεν καὶ πόρρωθεν καόμενον ὄπισθεν αὐτῶν»',x:'Η φράση συγκροτεί μια σύνθετη οπτική εικόνα της σκηνοθεσίας του σπηλαίου. Το φως προέρχεται από φωτιά και όχι από τον ήλιο, επομένως είναι τεχνητό και παραπλανητικό. Ο ρόλος της εικόνας είναι να οργανώσει τη σκηνή της ψευδαίσθησης. Στο φιλοσοφικό επίπεδο, η φωτιά συμβολίζει μια κατώτερη μορφή γνώσης, που φωτίζει ατελώς και δεν οδηγεί στην αλήθεια.'},
+ 15:{cat:'grn',t:'«οἷον εἰκὸς τοὺς μὲν φθεγγομένους, τοὺς δὲ σιγῶντας τῶν παραφερόντων»',x:'Εδώ ενεργοποιείται κυρίως η ακουστική εικόνα. Η σκηνή δεν είναι μόνο ορατή αλλά και ηχητικά ζωντανή. Ο ρόλος αυτής της αισθητηριακής διάστασης είναι να κάνει το σκηνικό της πλάνης πιο πλήρες και πιο πειστικό. Στο φιλοσοφικό μήνυμα, φανερώνει ότι η πλάνη μπορεί να καταλαμβάνει συνολικά την εμπειρία του ανθρώπου και να μην περιορίζεται μόνο σε μία αίσθηση.'},
+ 16:{cat:'grn',t:'«τὰς σκιὰς… προσπιπτούσας»',x:'Η εικόνα των σκιών είναι η πιο χαρακτηριστική οπτική εικόνα της αλληγορίας. Οι σκιές λειτουργούν ως ορατό αποτέλεσμα της ψευδαίσθησης. Ο ρόλος της φράσης είναι να αποδώσει παραστατικά αυτό που οι δεσμώτες θεωρούν πραγματικότητα. Στο φιλοσοφικό επίπεδο, οι σκιές συμβολίζουν τις απατηλές γνώμες και τη φαινομενική γνώση.'},
+ 17:{cat:'pur',t:'«ὥσπερ τοῖς θαυματοποιοῖς…»',x:'Η παρομοίωση με τους θαυματοποιούς κάνει τη σκηνή πιο κατανοητή και πιο παραστατική. Ο Σωκράτης χρησιμοποιεί μια οικεία εμπειρία για να διευκολύνει τον συνομιλητή να συλλάβει τη λειτουργία των φαινομένων και της ψευδαίσθησης. Στο φιλοσοφικό επίπεδο, η παρομοίωση δείχνει ότι ο κόσμος των εντυπώσεων μπορεί να είναι τεχνητά κατασκευασμένος και παραπλανητικός.'},
+ 18:{cat:'pur',t:'«Ἄτοπον … ἀτόπους»',x:'Η επανάληψη ομόρριζων λέξεων ενισχύει την αίσθηση της απορίας και της παραδοξότητας. Ο ρόλος της είναι να δώσει έμφαση στο παράδοξο της σκηνής του σπηλαίου. Στο φιλοσοφικό επίπεδο, η απορία είναι η αφετηρία της φιλοσοφικής αναζήτησης, γιατί ο άνθρωπος αρχίζει να σκέφτεται βαθύτερα, όταν αμφισβητεί το προφανές.'},
+ 19:{cat:'pur',t:'«Ὁμοίους ἡμῖν»',x:'Η φράση εκφράζει σύγκριση ανάμεσα στους δεσμώτες και στους ανθρώπους της κοινωνίας. Ο ρόλος της είναι κομβικός, γιατί μεταφέρει την αφήγηση από το επίπεδο της εικόνας στο επίπεδο της ανθρώπινης πραγματικότητας. Στο φιλοσοφικό μήνυμα, η σύγκριση αυτή δείχνει ότι οι δεσμώτες είμαστε «εμείς», όταν ζούμε μέσα στην άγνοια και θεωρούμε ως αλήθεια τις σκιές των πραγμάτων. Έτσι, η αλληγορία αποκτά καθολική σημασία και γίνεται στοχασμός για την ανθρώπινη κατάσταση συνολικά.'}
+};
+/* textual order of the 19 points */
+var ORDER=[8,9,12,13,1,2,14,10,17,5,11,3,4,15,18,6,19,7,16];
+/* original text with markers [[id|text]] — one string per paragraph */
+var TXT=[
+ 'Μετὰ ταῦτα δή, εἶπον, [[8|ἀπείκασον]] τοιούτῳ πάθει τὴν ἡμετέραν φύσιν παιδείας τε πέρι καὶ ἀπαιδευσίας. [[9|ἰδὲ]] γὰρ ἀνθρώπους οἷον [[12|ἐν καταγείῳ οἰκήσει σπηλαιώδει]], [[13|ἀναπεπταμένην πρὸς τὸ φῶς τὴν εἴσοδον]] ἐχούσῃ μακρὰν παρὰ πᾶν τὸ σπήλαιον, ἐν ταύτῃ ἐκ παίδων ὄντας [[1|ἐν δεσμοῖς καὶ τὰ σκέλη καὶ τοὺς αὐχένας]], [[2|ὥστε μένειν τε αὐτοὺς εἴς τε τὸ πρόσθεν μόνον ὁρᾶν]], κύκλῳ δὲ τὰς κεφαλὰς ὑπὸ τοῦ δεσμοῦ ἀδυνάτους περιάγειν, [[14|φῶς δὲ αὐτοῖς πυρὸς ἄνωθεν καὶ πόρρωθεν καόμενον ὄπισθεν αὐτῶν]], μεταξὺ δὲ τοῦ πυρὸς καὶ τῶν δεσμωτῶν ἐπάνω ὁδόν, παρ᾽ ἣν [[10|ἰδὲ]] τειχίον παρῳκοδομημένον, [[17|ὥσπερ τοῖς θαυματοποιοῖς πρὸ τῶν ἀνθρώπων πρόκειται τὰ παραφράγματα]], ὑπὲρ ὧν τὰ θαύματα δεικνύασιν.',
+ 'Ὁρῶ, [[5|ἔφη]].',
+ '[[11|Ὅρα]] τοίνυν παρὰ τοῦτο τὸ τειχίον φέροντας ἀνθρώπους [[3|σκεύη τε παντοδαπὰ ὑπερέχοντα τοῦ τειχίου καὶ ἀνδριάντας καὶ ἄλλα ζῷα]] [[4|λίθινά τε καὶ ξύλινα καὶ παντοῖα]] εἰργασμένα, [[15|οἷον εἰκὸς τοὺς μὲν φθεγγομένους, τοὺς δὲ σιγῶντας τῶν παραφερόντων]].',
+ '[[18|Ἄτοπον]], [[6|ἔφη]], [[18|λέγεις εἰκόνα καὶ δεσμώτας ἀτόπους]].',
+ '[[19|Ὁμοίους ἡμῖν]], [[7|ἦν δ᾽ ἐγώ]]· τοὺς γὰρ τοιούτους πρῶτον μὲν ἑαυτῶν τε καὶ ἀλλήλων οἴει ἄν τι ἑωρακέναι ἄλλο πλὴν [[16|τὰς σκιὰς τὰς ὑπὸ τοῦ πυρὸς εἰς τὸ καταντικρὺ αὐτῶν τοῦ σπηλαίου προσπιπτούσας]];'
+];
+var TR=[
+ 'Ύστερα από αυτά, είπα, δοκίμασε να απεικονίσεις την ανθρώπινη φύση μας ως προς την παιδεία και την απαιδευσία της, πλάθοντας με το νου σου μια κατάσταση όπως η ακόλουθη: Φαντάσου δηλαδή ανθρώπους σ᾽ ένα οίκημα υπόγειο, κάτι σαν σπηλιά, που το άνοιγμά της, ελεύθερο στο φως σε μεγάλο μάκρος, θα απλώνεται σε όλο το πλάτος της σπηλιάς, και τους ανθρώπους αυτούς να βρίσκονται εκεί μέσα από παιδιά κιόλας, αλυσοδεμένοι από τα σκέλια και τον αυχένα, ώστε να μένουν στην ίδια θέση και να κοιτάζουν μόνο προς τα εμπρός χωρίς να μπορούν, έτσι αλυσοδεμένοι καθώς θα είναι, να στρέφουν γύρω το κεφάλι τους· κι ένα φως να τους έρχεται από ψηλά κι από μακριά, από μια φωτιά που θα καίει πίσω τους, κι ανάμεσα στη φωτιά και τους δεσμώτες, στην επιφάνεια του εδάφους, να περνάει ένας δρόμος, κι εκεί δίπλα φαντάσου ένα τειχάκι χτισμένο παράλληλα στο δρόμο σαν εκείνα τα χαμηλά παραπετάσματα που στήνουν οι ταχυδακτυλουργοί μπροστά στους θεατές για να δείχνουν από εκεί τα τεχνάσματά τους.',
+ '- Φαντάζομαι, είπε.',
+ '- Φαντάσου ακόμη ότι κατά μήκος σε αυτό το τειχάκι κάποιοι άνθρωποι μεταφέρουν κάθε λογής κατασκευάσματα, που εξέχουν από το τειχάκι, αγάλματα και άλλα ομοιώματα ζώων, από πέτρα, από ξύλο ή από οτιδήποτε άλλο, κι ότι, όπως είναι φυσικό, άλλοι από τους ανθρώπους που κουβαλάνε αυτά τα πράγματα μιλούν και άλλοι είναι σιωπηλοί.',
+ '- Αλλόκοτη, είπε, η εικόνα που περιγράφεις, και οι δεσμώτες αλλόκοτοι κι αυτοί.',
+ '- Όμοιοι με εμάς, έκανα εγώ· γιατί πρώτα-πρώτα μήπως φαντάζεσαι ότι οι δεσμώτες αυτοί εκτός από τον εαυτό τους και τους διπλανούς τους έχουν ιδωμένο τίποτε άλλο πέρα από τις σκιές που ρίχνει το φως αντικρύ τους στον τοίχο της σπηλιάς;'
+];
+function renderPar(s,interactive){
+  return '<p>'+esc(s).replace(/\[\[(\d+)\|([^\]]+)\]\]/g,function(m,id,t){var c=CATS[A[id].cat];
+    return '<span class="hl c-'+A[id].cat+'" data-id="'+id+'" style="--c:'+c.c+';--cs:'+c.cs+'"'+(interactive?' role="button" tabindex="0"':'')+'>'+t+'</span>'})+'</p>';
+}
+/* ---- screen 2: graph ---- */
+(function(){
+  var anc=document.getElementById('ancI');anc.innerHTML=TXT.map(function(s){return renderPar(s,true)}).join('');
+  var tabs=document.getElementById('tabs'),legend=document.getElementById('legend');
+  var filt=null,seen={},curId=null;
+  CATORDER.forEach(function(k){var c=CATS[k];var b=document.createElement('button');b.className='tab';b.dataset.cat=k;b.style.setProperty('--c',c.c);b.style.setProperty('--cs',c.cs);
+    b.innerHTML='<i></i>'+c.ico+' '+esc(c.name);b.onclick=function(){setFilter(filt===k?null:k)};tabs.appendChild(b)});
+  var j=document.createElement('button');j.className='tab jump';j.innerHTML='📝 Ασκήσεις';j.onclick=function(){go(3)};tabs.appendChild(j);
+  function setFilter(k){filt=k;
+    [].forEach.call(tabs.querySelectorAll('.tab'),function(t){t.classList.toggle('on',t.dataset.cat===k)});
+    anc.classList.toggle('flt',!!k);
+    [].forEach.call(anc.querySelectorAll('.hl'),function(h){h.classList.toggle('f',!!k&&A[h.dataset.id].cat===k)});
+    if(!k){legend.hidden=true;legend.innerHTML='';return}
+    var c=CATS[k];legend.hidden=false;
+    legend.innerHTML='<span class="lname">'+esc(c.name)+' ('+c.color+'):</span>'+ORDER.filter(function(id){return A[id].cat===k}).map(function(id){
+      return '<button class="lg'+(seen[id]?' seen':'')+'" data-id="'+id+'" style="--c:'+c.c+';--cs:'+c.cs+'" lang="grc">'+esc(A[id].t)+'</button>'}).join('');
+  }
+  legend.addEventListener('click',function(e){var b=e.target.closest('.lg');if(!b)return;show(+b.dataset.id);
+    var h=anc.querySelector('.hl[data-id="'+b.dataset.id+'"]');if(h)h.scrollIntoView({block:'center',behavior:'smooth'})});
+  anc.addEventListener('click',function(e){var h=e.target.closest('.hl');if(!h)return;show(+h.dataset.id)});
+  anc.addEventListener('keydown',function(e){if(e.key!=='Enter'&&e.key!==' ')return;var h=e.target.closest('.hl');if(!h)return;e.preventDefault();show(+h.dataset.id)});
+  var ph=document.getElementById('aph'),body=document.getElementById('abody'),panel=document.getElementById('apanel'),scrim=document.getElementById('scrim');
+  function cnt(){var n=Object.keys(seen).length;document.getElementById('expN').textContent=n;document.getElementById('expN2').textContent=n;
+    ring(panel.querySelector('.mini'),n,19)}
+  function show(id){curId=id;seen[id]=1;var a=A[id],c=CATS[a.cat];
+    [].forEach.call(anc.querySelectorAll('.hl'),function(h){h.classList.toggle('cur',+h.dataset.id===id);if(+h.dataset.id===id)h.classList.add('seen')});
+    [].forEach.call(legend.querySelectorAll('.lg'),function(l){if(+l.dataset.id===id)l.classList.add('seen')});
+    var cat=document.getElementById('acat');cat.style.setProperty('--c',c.c);cat.style.setProperty('--cs',c.cs);cat.querySelector('span').textContent=c.name;
+    var ap=document.getElementById('aphr');ap.style.setProperty('--cs',c.cs);ap.textContent=a.t;
+    document.getElementById('atxt').textContent=a.x;
+    ph.hidden=true;body.hidden=false;panel.classList.add('open');scrim.classList.add('on');
+    var i=ORDER.indexOf(id);document.getElementById('aprev').disabled=i<=0;document.getElementById('anext').disabled=i>=ORDER.length-1;
+    panel.scrollTop=0;cnt();
+  }
+  function hide(){panel.classList.remove('open');scrim.classList.remove('on');
+    [].forEach.call(anc.querySelectorAll('.hl.cur'),function(h){h.classList.remove('cur')})}
+  document.getElementById('aprev').onclick=function(){var i=ORDER.indexOf(curId);if(i>0)show(ORDER[i-1])};
+  document.getElementById('anext').onclick=function(){var i=ORDER.indexOf(curId);if(i<ORDER.length-1)show(ORDER[i+1])};
+  document.getElementById('aclose').onclick=hide;scrim.onclick=hide;
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('open'))hide()});
+  window.onScreen=function(n){if(n!==1)hide()};
+})();
+/* ---- screen 3: translation ---- */
+(function(){
+  var pl=document.getElementById('parlist');
+  pl.innerHTML=TXT.map(function(s,i){return '<div class="par"><div class="anc static" lang="grc">'+renderPar(s,false)+'</div><div class="tr"><p>'+esc(TR[i])+'</p></div></div>'}).join('');
+})();
+
+/* ===== SCORE ===== */
+var TOTAL=22;
+var SC={m1:0,a2:0,m3:0,a4:[],a5:[]};
+function total(){var s=SC.m1+SC.a2+SC.m3;SC.a4.forEach(function(v){s+=v});SC.a5.forEach(function(v){s+=v});return s}
+/* ===== matching component ===== */
+function Match(rootId,cfg){
+  var root=document.getElementById(rootId);var sel=null,locked=false,sup=false;
+  function build(){
+    locked=false;sel=null;
+    var pool=shuffle(cfg.items.slice());
+    root.className='match';
+    root.innerHTML='<div class="mzones">'+cfg.zones.map(function(z){return '<div class="mz" data-key="'+z.key+'"><div class="mzl">'+esc(z.label)+(z.sub?'<small lang="grc">'+esc(z.sub)+'</small>':'')+'</div><div class="mslot"></div><span class="mk"></span></div>'}).join('')+'</div>'
+      +'<div class="mpool" id="'+rootId+'pool">'+pool.map(function(it){return '<button type="button" class="mc'+(cfg.sans?' sans':'')+'" data-key="'+it.key+'"'+(cfg.grc?' lang="grc"':'')+'>'+esc(it.text)+'</button>'}).join('')+'</div>'
+      +'<div class="pnl"><button class="btn" id="'+rootId+'chk" disabled>Έλεγχος</button><span class="tries" id="'+rootId+'st"></span></div>'
+      +'<div class="fb" id="'+rootId+'fb" hidden></div>'
+      +'<div class="fb rev" id="'+rootId+'rv" hidden></div>';
+    root.querySelector('#'+rootId+'chk').onclick=check;
+    upd();
+  }
+  function poolEl(){return root.querySelector('.mpool')}
+  function upd(){var full=root.querySelectorAll('.mslot .mc').length===cfg.zones.length;root.querySelector('#'+rootId+'chk').disabled=!full||locked;
+    root.querySelector('#'+rootId+'st').textContent=root.querySelectorAll('.mslot .mc').length+'/'+cfg.zones.length}
+  function place(chip,zone){if(locked)return;var slot=zone.querySelector('.mslot');var old=slot.querySelector('.mc');if(old&&old!==chip)poolEl().appendChild(old);
+    slot.appendChild(chip);chip.classList.remove('sel');sel=null;
+    [].forEach.call(root.querySelectorAll('.mz.tgt'),function(z){z.classList.remove('tgt')});upd()}
+  function toPool(chip){if(locked)return;poolEl().appendChild(chip);chip.classList.remove('sel');sel=null;
+    [].forEach.call(root.querySelectorAll('.mz.tgt'),function(z){z.classList.remove('tgt')});upd()}
+  /* click behaviour */
+  root.addEventListener('click',function(e){
+    if(sup){sup=false;return}
+    if(locked)return;
+    var chip=e.target.closest('.mc');
+    if(chip){
+      if(chip.parentElement.classList.contains('mslot')){toPool(chip);return}
+      if(sel===chip){chip.classList.remove('sel');sel=null;[].forEach.call(root.querySelectorAll('.mz.tgt'),function(z){z.classList.remove('tgt')});return}
+      if(sel)sel.classList.remove('sel');sel=chip;chip.classList.add('sel');
+      [].forEach.call(root.querySelectorAll('.mz'),function(z){z.classList.add('tgt')});return}
+    var zone=e.target.closest('.mz');
+    if(zone&&sel){place(sel,zone)}
+  });
+  /* pointer drag */
+  var drag=null;
+  root.addEventListener('pointerdown',function(e){if(locked)return;var chip=e.target.closest('.mc');if(!chip||e.button)return;
+    var r=chip.getBoundingClientRect();drag={chip:chip,x0:e.clientX,y0:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,w:r.width,h:r.height,lifted:false};
+    chip.setPointerCapture(e.pointerId)});
+  root.addEventListener('pointermove',function(e){if(!drag)return;var d=drag;
+    if(!d.lifted){if(Math.abs(e.clientX-d.x0)<7&&Math.abs(e.clientY-d.y0)<7)return;d.lifted=true;d.chip.style.width=d.w+'px';d.chip.classList.add('lift')}
+    d.chip.style.left=(e.clientX-d.dx)+'px';d.chip.style.top=(e.clientY-d.dy)+'px';
+    var el=document.elementFromPoint(e.clientX,e.clientY);var z=el&&el.closest('.mz');
+    [].forEach.call(root.querySelectorAll('.mslot.over'),function(s){s.classList.remove('over')});
+    if(z&&root.contains(z))z.querySelector('.mslot').classList.add('over')});
+  function endDrag(e){if(!drag)return;var d=drag;drag=null;if(!d.lifted)return;
+    d.chip.classList.remove('lift');d.chip.style.left='';d.chip.style.top='';d.chip.style.width='';
+    [].forEach.call(root.querySelectorAll('.mslot.over'),function(s){s.classList.remove('over')});
+    var el=document.elementFromPoint(e.clientX,e.clientY);var z=el&&el.closest('.mz');
+    if(z&&root.contains(z))place(d.chip,z);else if(el&&el.closest('.mpool')&&root.contains(el))toPool(d.chip);
+    sup=true;setTimeout(function(){sup=false},50)}
+  root.addEventListener('pointerup',endDrag);root.addEventListener('pointercancel',endDrag);
+  root.addEventListener('lostpointercapture',function(e){if(drag&&drag.lifted)endDrag(e)});
+  function check(){if(locked)return;locked=true;root.classList.add('locked');var n=0;
+    [].forEach.call(root.querySelectorAll('.mz'),function(z){var c=z.querySelector('.mslot .mc');var ok=c&&c.dataset.key===z.dataset.key;z.classList.add(ok?'good':'bad');z.querySelector('.mk').textContent=ok?'✓':'✗';if(ok)n++});
+    SC[rootId]=n;root.querySelector('#'+rootId+'chk').hidden=true;
+    var fb=root.querySelector('#'+rootId+'fb');fb.hidden=false;
+    if(n===cfg.zones.length){fb.className='fb ok';fb.textContent=cfg.okText}
+    else{fb.className='fb no';fb.textContent=cfg.noText;var rv=root.querySelector('#'+rootId+'rv');rv.hidden=false;
+      rv.innerHTML='<b>Η σωστή απάντηση:</b><ul class="revl">'+cfg.zones.map(function(z){var it=cfg.items.filter(function(i){return i.key===z.key})[0];return '<li>'+esc(z.label)+' → <b'+(cfg.grc?' lang="grc"':'')+'>'+esc(it.text)+'</b></li>'}).join('')+'</ul>'}
+    root.querySelector('#'+rootId+'st').textContent='Σωστές απαντήσεις '+n+'/'+cfg.zones.length;
+    var nx=document.createElement('button');nx.className='btn ghost';nx.textContent='Επόμενη δραστηριότητα ›';nx.onclick=function(){go(cur+1)};root.querySelector('.pnl').appendChild(nx);
+  }
+  this.reset=build;build();
+}
+var M1=new Match('m1',{grc:true,
+  zones:[{key:'a',label:'Πολυσύνδετο Σχήμα'},{key:'b',label:'Διαλογική Μορφή'},{key:'c',label:'Β΄ Ενικό Πρόσωπο'},{key:'d',label:'Εικόνα'},{key:'e',label:'Εκφραστικός Τρόπος'}],
+  items:[{key:'c',text:'«ἀπείκασον»'},{key:'b',text:'«ἔφη»'},{key:'a',text:'«καὶ τὰ σκέλη καὶ τοὺς αὐχένας»'},{key:'d',text:'«ἐν καταγείῳ οἰκήσει σπηλαιώδει»'},{key:'e',text:'«ὥσπερ τοῖς θαυματοποιοῖς…»'}],
+  okText:'Σωστά! Αντιστοίχισες κάθε φαινόμενο με το σωστό παράδειγμα.',
+  noText:'Μελέτησε λίγο περισσότερο τα παραδείγματα του χωρίου, εστιάζοντας στο πώς κάθε φράση λειτουργεί ως χαρακτηριστικό δείγμα ενός συγκεκριμένου γλωσσικού φαινομένου.'});
+var M3=new Match('m3',{sans:true,
+  zones:[{key:'a',label:'Πολυσύνδετο Σχήμα',sub:'Παράδειγμα: «ἐν δεσμοῖς καὶ τὰ σκέλη καὶ τοὺς αὐχένας»'},{key:'b',label:'Διαλογική Μορφή',sub:'Παράδειγμα: «ἔφη»'},{key:'c',label:'Β΄ Ενικό Πρόσωπο',sub:'Παράδειγμα: «ἰδὲ»'},{key:'d',label:'Εικόνα',sub:'Παράδειγμα: «ἐν καταγείῳ οἰκήσει σπηλαιώδει»'},{key:'e',label:'Εκφραστικός Τρόπος',sub:'Παράδειγμα: «ὥσπερ τοῖς θαυματοποιοῖς...»'}],
+  items:[{key:'c',text:'κάνει τον αναγνώστη συμμέτοχο της φιλοσοφικής αναζήτησης'},{key:'b',text:'οργανώνει τη σκέψη βήμα-βήμα μέσα από ερωταποκρίσεις'},{key:'a',text:'ενισχύει την αίσθηση εγκλωβισμού και συσσώρευσης'},{key:'d',text:'αποδίδει ορατά τον κόσμο του σπηλαίου και της πλάνης'},{key:'e',text:'προσδίδει εκφραστική δύναμη και φιλοσοφικό βάθος'}],
+  okText:'Σωστά! Προχώρησες από την απλή αναγνώριση στη βαθύτερη κατανόηση του ρόλου που έχουν οι γλωσσικές επιλογές στο φιλοσοφικό μήνυμα του κειμένου.',
+  noText:'Μελέτησε λίγο περισσότερο τον ερμηνευτικό ρόλο των γλωσσικών επιλογών, εστιάζοντας στο πώς συνδέονται με τη δομή, την παραστατικότητα και το φιλοσοφικό νόημα της αλληγορίας.'});
+
+/* ===== activity 2: fill with select ===== */
+var A2OPT=['πολυσύνδετο σχήμα','διαλογική μορφή','β΄ ενικό πρόσωπο','εικόνα','εκφραστικός τρόπος','ασύνδετο σχήμα','γ΄ πληθυντικό πρόσωπο'];
+var A2=[
+ {l:'Α.',a:'Οι προστακτικές «ἀπείκασον», «ἰδὲ» και «Ὅρα» χρησιμοποιούνται σε ',b:' για να εμπλέξουν άμεσα τον συνομιλητή.',ans:'β΄ ενικό πρόσωπο'},
+ {l:'Β.',a:'Οι φράσεις «Ὁρῶ, ἔφη» και «Ἄτοπον, ἔφη» δίνουν στο κείμενο ',b:' και προσδίδουν φυσικότητα στη συζήτηση.',ans:'διαλογική μορφή'},
+ {l:'Γ.',a:'Η επανάληψη του «καὶ» στη φράση «καὶ τὰ σκέλη καὶ τοὺς αὐχένας» αποτελεί ',b:' και ενισχύει την έμφαση.',ans:'πολυσύνδετο σχήμα'},
+ {l:'Δ.',a:'Η φράση «ἐν καταγείῳ οἰκήσει σπηλαιώδει» αποτελεί ',b:' και συμβάλλει στην παραστατική απόδοση του χώρου.',ans:'εικόνα'},
+ {l:'Ε.',a:'Η παρομοίωση «ὥσπερ τοῖς θαυματοποιοῖς…» είναι ',b:' και ενισχύει την εκφραστική δύναμη του λόγου.',ans:'εκφραστικός τρόπος'}
+];
+function buildA2(){
+  var r=document.getElementById('a2');
+  r.innerHTML='<div class="fill" id="a2f">'+A2.map(function(q,i){return '<div class="fitem"><b>'+q.l+'</b> '+esc(q.a)+'<select data-i="'+i+'" aria-label="κενό '+q.l+'"><option value="">…</option>'+A2OPT.map(function(o){return '<option>'+esc(o)+'</option>'}).join('')+'</select>'+esc(q.b)+'<div class="ans">Η σωστή απάντηση: <b>'+esc(q.ans)+'</b></div></div>'}).join('')+'</div>'
+    +'<div class="pnl"><button class="btn" id="a2chk" disabled>Έλεγχος</button><span class="tries" id="a2st"></span></div><div class="fb" id="a2fb" hidden></div>';
+  var f=document.getElementById('a2f'),chk=document.getElementById('a2chk');
+  function upd(){var n=0;[].forEach.call(f.querySelectorAll('select'),function(s){if(s.value)n++});chk.disabled=n<A2.length;document.getElementById('a2st').textContent=n+'/'+A2.length}
+  f.addEventListener('change',upd);upd();
+  chk.onclick=function(){var n=0;f.classList.add('locked');
+    [].forEach.call(f.querySelectorAll('select'),function(s){var ok=s.value===A2[+s.dataset.i].ans;s.closest('.fitem').classList.add(ok?'good':'bad');if(ok)n++});
+    SC.a2=n;chk.hidden=true;var fb=document.getElementById('a2fb');fb.hidden=false;
+    if(n===A2.length){fb.className='fb ok';fb.textContent='Σωστά! Συμπλήρωσες τα κενά αναγνωρίζοντας το κατάλληλο γλωσσικό φαινόμενο και τη λειτουργία του μέσα στο κείμενο.'}
+    else{fb.className='fb no';fb.textContent='Μελέτησε λίγο περισσότερο τα γλωσσικά φαινόμενα του αποσπάσματος, εστιάζοντας στο πώς συνδέεται κάθε κατηγορία με συγκεκριμένα παραδείγματα και λειτουργίες μέσα στο χωρίο.'}
+    document.getElementById('a2st').textContent='Σωστές απαντήσεις '+n+'/'+A2.length;
+    var nx=document.createElement('button');nx.className='btn ghost';nx.textContent='Επόμενη δραστηριότητα ›';nx.onclick=function(){go(cur+1)};r.querySelector('.pnl').appendChild(nx)};
+}
+buildA2();
+
+/* ===== MCQ sets (activities 4, 5) ===== */
+var A4={key:'a4',ok:'Σωστά! Ερμήνευσες σωστά τον ρόλο των επισημασμένων στοιχείων και συνέδεσες τη μορφή με τη λειτουργία.',
+  no:'Μελέτησε λίγο περισσότερο τη λειτουργία των επισημασμένων φράσεων, εστιάζοντας στο πώς μικρά γλωσσικά στοιχεία συμβάλλουν στην παραστατικότητα, την έμφαση και τη συμμετοχή του συνομιλητή.',
+  qs:[
+   {s:'Η χρήση του «Ὅρα τοίνυν» δείχνει κυρίως:',o:['αποστασιοποίηση του αναγνώστη','άμεση καθοδήγηση του συνομιλητή','χιουμοριστική διάθεση','αλλαγή θέματος'],c:1},
+   {s:'Η φράση «καὶ τὰ σκέλη καὶ τοὺς αὐχένας» λειτουργεί κυρίως ως:',o:['απλή απαρίθμηση','έμφαση στον πλήρη περιορισμό','ειρωνικό σχόλιο','ιστορική πληροφορία'],c:1},
+   {s:'Η φράση «ἐν καταγείῳ οἰκήσει σπηλαιώδει» συμβάλλει κυρίως:',o:['στην παραστατική περιγραφή του χώρου','στη δήλωση χρόνου','στη νομική ακρίβεια','στην αφαίρεση της εικόνας'],c:0}
+  ]};
+var A5={key:'a5',ok:'Σωστά! Συνδύασες τα βασικά γλωσσικά φαινόμενα.',
+  no:'Μελέτησε λίγο περισσότερο τη συνολική λειτουργία των γλωσσικών επιλογών, εστιάζοντας στο πώς τα μορφολογικά, συντακτικά και υφολογικά στοιχεία συνεργάζονται στο πλατωνικό κείμενο.',
+  qs:[
+   {s:'Ποιος συνδυασμός κάνει τον αναγνώστη ενεργό συμμέτοχο της φιλοσοφικής συζήτησης;',o:['Πολυσύνδετο σχήμα και εικόνες','Β΄ ενικό πρόσωπο και διαλογική μορφή','Εικόνες και παρομοιώσεις','Συντακτική συσσώρευση και ειρωνεία'],c:1},
+   {s:'Ποιο στοιχείο συνδέεται περισσότερο με τη ζωντανή οπτική αναπαράσταση του κόσμου του σπηλαίου;',o:['Διαλογική μορφή','Πολυσύνδετο σχήμα','Εικόνες','Β΄ ενικό πρόσωπο'],c:2},
+   {s:'Το πολυσύνδετο σχήμα συμβάλλει κυρίως:',o:['στη μείωση της έντασης','στην έμφαση και στη συσσώρευση','στην αφαίρεση της εικόνας','στην αποστασιοποίηση του αναγνώστη'],c:1},
+   {s:'Οι εκφραστικοί τρόποι ενισχύουν κυρίως:',o:['την ουδετερότητα του λόγου','το φιλοσοφικό βάθος και την εκφραστική δύναμη','την απλοποίηση του νοήματος','την κατάργηση του διαλόγου'],c:1}
+  ]};
+var L=['Α','Β','Γ','Δ'];
+function buildMCQ(cfg){
+  var r=document.getElementById(cfg.key);var i=0;SC[cfg.key]=[];
+  function render(){
+    var q=cfg.qs[i];
+    r.innerHTML='<div class="steps">'+cfg.qs.map(function(_,k){return '<i class="'+(SC[cfg.key][k]===1?'ok':SC[cfg.key][k]===0?'no':k===i?'on':'')+'"></i>'}).join('')+'</div>'
+      +'<div class="stem"><b>'+(i+1)+'.</b> '+esc(q.s)+'</div>'
+      +'<div class="opts">'+q.o.map(function(o,k){return '<button type="button" class="opt" data-k="'+k+'"><span class="k">'+L[k]+'</span><span>'+esc(o)+'</span></button>'}).join('')+'</div>'
+      +'<div class="fb" hidden></div><div class="pnl"></div>';
+    var opts=r.querySelector('.opts');
+    opts.addEventListener('click',function(e){var b=e.target.closest('.opt');if(!b||opts.classList.contains('locked'))return;
+      var k=+b.dataset.k,ok=k===q.c;SC[cfg.key][i]=ok?1:0;
+      opts.querySelector('.opt[data-k="'+q.c+'"]').classList.add('good');
+      if(!ok)b.classList.add('bad');
+      [].forEach.call(opts.children,function(o){if(!o.classList.contains('good')&&!o.classList.contains('bad'))o.classList.add('dim')});
+      opts.classList.add('locked');
+      var fb=r.querySelector('.fb');fb.hidden=false;
+      if(ok){fb.className='fb ok';fb.textContent=cfg.ok}
+      else{fb.className='fb no';fb.innerHTML=esc(cfg.no)+'<br><b>Η σωστή απάντηση: '+L[q.c]+'</b>'}
+      r.querySelector('.steps').children[i].className=ok?'ok':'no';
+      var nx=document.createElement('button');nx.className='btn';
+      if(i<cfg.qs.length-1){nx.textContent='Επόμενη ερώτηση ›';nx.onclick=function(){i++;render()}}
+      else{nx.textContent=(cfg.key==='a5'?'Αποτελέσματα ›':'Επόμενη δραστηριότητα ›');nx.className='btn ghost';nx.onclick=function(){go(cur+1)}}
+      r.querySelector('.pnl').appendChild(nx);nx.focus({preventScroll:true});
+    });
+  }
+  render();
+  return {reset:function(){i=0;SC[cfg.key]=[];render()}};
+}
+var Q4=buildMCQ(A4),Q5=buildMCQ(A5);
+
+/* ===== results ===== */
+var BANDS=[
+ [0,25,'0-25%','Μπορείς να βελτιώσεις σημαντικά το αποτέλεσμά σου! Μελέτησε τις σωστές απαντήσεις και τα αντίστοιχα σχόλια.'],
+ [25,50,'25-50%','Μπορείς να βελτιώσεις το αποτέλεσμά σου! Φαίνεται ότι χρειάζεται να εμβαθύνεις ακόμα περισσότερο σε ορισμένα σημεία. Μελέτησε τις σωστές απαντήσεις και τα σχόλια που τις συνοδεύουν, εστιάζοντας ειδικά στα σημεία που δεν κατανοείς πλήρως.'],
+ [50,75,'50-75%','Τα πήγες αρκετά καλά! Μελέτησε τις σωστές απαντήσεις και τα αντίστοιχα σχόλια, με σκοπό να εντοπίσεις τα σημεία που σου διαφεύγουν.'],
+ [75,98,'75-98%','Τα πήγες καλά! Αν νομίζεις ότι κάτι σου έχει διαφύγει, δες τα μηνύματα που έλαβες κατά την υποβολή των απαντήσεών σου. Αν θέλεις, προσπάθησε να εντοπίσεις περισσότερες σωστές απαντήσεις, για να βελτιώσεις το αποτέλεσμά σου.'],
+ [98,101,'98-100%','Όλες οι απαντήσεις σου είναι σωστές! Μπορείς να ανατρέξεις στις απαντήσεις σου και στις ανατροφοδοτήσεις, όποτε το κρίνεις χρήσιμο για σένα, για περαιτέρω εμπέδωση.']
+];
+var RECAP='<ul class="recap">'
+ +'<li><b>Δραστηριότητα 1:</b> Πολυσύνδετο Σχήμα → <i>«καὶ τὰ σκέλη καὶ τοὺς αὐχένας»</i>· Διαλογική Μορφή → <i>«ἔφη»</i>· Β΄ Ενικό Πρόσωπο → <i>«ἀπείκασον»</i>· Εικόνες → <i>«ἐν καταγείῳ οἰκήσει σπηλαιώδει»</i>· Εκφραστικοί Τρόποι → <i>«ὥσπερ τοῖς θαυματοποιοῖς…»</i></li>'
+ +'<li><b>Δραστηριότητα 2:</b> Α. β΄ ενικό πρόσωπο· Β. διαλογική μορφή· Γ. πολυσύνδετο σχήμα· Δ. εικόνα· Ε. εκφραστικός τρόπος</li>'
+ +'<li><b>Δραστηριότητα 3:</b> Πολυσύνδετο Σχήμα → ενισχύει την αίσθηση εγκλωβισμού και συσσώρευσης· Διαλογική Μορφή → οργανώνει τη σκέψη βήμα-βήμα μέσα από ερωταποκρίσεις· Β΄ Ενικό Πρόσωπο → κάνει τον αναγνώστη συμμέτοχο της φιλοσοφικής αναζήτησης· Εικόνα → αποδίδει ορατά τον κόσμο του σπηλαίου και της πλάνης· Εκφραστικός Τρόπος → προσδίδει εκφραστική δύναμη και φιλοσοφικό βάθος</li>'
+ +'<li><b>Δραστηριότητα 4:</b> 1. Β· 2. Β· 3. Α</li>'
+ +'<li><b>Δραστηριότητα 5:</b> 1. Β· 2. Γ· 3. Β· 4. Β</li></ul>';
+function showResults(){
+  var n=total(),pc=Math.round(n/TOTAL*100);
+  ring(document.getElementById('ring'),n,TOTAL);
+  document.getElementById('scoreTxt').textContent=n+'/'+TOTAL;
+  document.getElementById('pctTxt').textContent=pc+'%';
+  document.getElementById('bands').innerHTML=BANDS.map(function(b){var hit=pc>=b[0]&&pc<b[1];return '<div class="band'+(hit?'':' mute')+'"><b>'+b[2]+':</b> '+esc(b[3])+'</div>'}).join('');
+  document.getElementById('recap').innerHTML=RECAP;
+}
+var _go=go;go=function(n){_go(n);if(screens[n].dataset.name==='Αποτελέσματα')showResults()};
+function resetAll(){SC={m1:0,a2:0,m3:0,a4:[],a5:[]};M1.reset();buildA2();M3.reset();Q4.reset();Q5.reset();go(3)}
+document.getElementById('btnReset').onclick=resetAll;
+</script>
+<script>var ASSETS={"k0": "data:image/jpeg;base64,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"};document.querySelectorAll("img[data-key]").forEach(function(i){i.src=ASSETS[i.dataset.key]});</script>
+</body>
+</html>

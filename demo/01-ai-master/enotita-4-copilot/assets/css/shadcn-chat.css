@@ -1,0 +1,255 @@
+/* ============================================================
+   shadcn/ui — Message Scroller και Bubble για τον βοηθό
+   ------------------------------------------------------------
+   Ακολουθεί τη δομή και τις τιμές των επίσημων components:
+   scroller με viewport που κρατά τη θέση του, γραμμές μηνυμάτων
+   με content-visibility, φυσαλίδες rounded-3xl με padding 10/12
+   και κουμπί επιστροφής στο τέλος της συνομιλίας.
+   ============================================================ */
+
+/* ---------- Message Scroller ---------- */
+.lc-scroller {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.lc-log {                       /* viewport */
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  contain: content;
+  /* Το ίδιο fade προς τα κάτω που έχει το component. */
+  mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 24px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 24px), transparent 100%);
+  padding: 0;
+  display: block;
+}
+.lc-log[data-at-end="true"] { mask-image: none; -webkit-mask-image: none; }
+
+.lc-content {                   /* transcript */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100%;
+  height: max-content;
+  padding: 14px 14px 26px;
+}
+
+.lc-item {                      /* γραμμή μηνύματος */
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+/* ---------- Bubble ---------- */
+.lc-msg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                     /* bubble-group gap-2 */
+  width: fit-content;
+  max-width: 85%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 0;
+}
+.lc-msg[data-align="end"] { align-self: flex-end; }
+.lc-msg[data-align="start"] { align-self: flex-start; }
+.lc-msg:has(.lc-bubble-ghost) { max-width: 100%; width: 100%; }
+
+.lc-bubble {
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border: 1px solid transparent;
+  border-radius: 22px;          /* rounded-3xl */
+  padding: 10px 12px;           /* px-3 py-2.5 */
+  font-size: 0.875rem;          /* text-sm */
+  line-height: 1.625;           /* leading-relaxed */
+}
+.lc-bubble p { margin: 0 0 8px; }
+.lc-bubble p:last-child { margin-bottom: 0; }
+
+/* variant=default — το μήνυμα του χρήστη */
+.lc-msg[data-variant="default"] .lc-bubble {
+  background: var(--primary);
+  color: var(--sc-primary-fg);
+}
+.lc-msg[data-variant="default"] .lc-bubble .lc-term { color: var(--sc-primary-fg); }
+
+/* variant=muted — η απάντηση του βοηθού */
+.lc-msg[data-variant="muted"] .lc-bubble {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+/* variant=ghost — πλούσιο περιεχόμενο χωρίς πλαίσιο φυσαλίδας */
+.lc-bubble-ghost {
+  background: transparent;
+  border-color: transparent;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+}
+
+/* ---------- Κουμπί επιστροφής στο τέλος ---------- */
+.lc-scroll-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%) translateY(6px);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 16px;          /* rounded-2xl */
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+}
+.lc-scroll-btn[data-visible="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.lc-scroll-btn:hover { background: var(--bg-soft); }
+.lc-scroll-btn:focus-visible {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--sc-ring);
+}
+
+/* ---------- Κάρτες αποτελεσμάτων μέσα στις απαντήσεις ---------- */
+.lc-hits { gap: 8px; margin: 0; }
+.lc-hit {
+  border-radius: var(--sc-radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 10px 12px;
+}
+.lc-source {
+  border-radius: var(--sc-radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  margin-top: 0;
+}
+.lc-lead { margin: 0 0 2px; font-size: .78rem; color: var(--muted); }
+
+/* ---------- Γραμμή προτεινόμενων ερωτήσεων ---------- */
+.lc-chips { padding: 10px 14px 0; gap: 8px; }
+.lc-chip {
+  height: var(--sc-h-xs);
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: .78rem;
+  font-weight: 500;
+}
+.lc-chip:hover { background: var(--bg-soft); border-color: var(--border); }
+.lc-chip:focus-visible {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--sc-ring);
+}
+
+/* ---------- Πεδίο εισόδου ---------- */
+.lc-form { padding: 12px 14px; gap: 8px; align-items: center; }
+.lc-form input {
+  height: var(--sc-h-sm);
+  padding: 0 12px;
+  border-radius: var(--sc-radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  font-size: .875rem;
+}
+body.dark .lc-form input { background: color-mix(in srgb, var(--surface) 30%, transparent); }
+.lc-form input:focus,
+.lc-form input:focus-visible {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--sc-ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lc-scroll-btn { transition: none; }
+}
+@media print {
+  .lc-scroll-btn { display: none !important; }
+}
+
+/* ---------- Ένδειξη πληκτρολόγησης μέσα σε φυσαλίδα ---------- */
+.lc-typing { padding: 0; }
+.lc-typing .lc-bubble {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 13px 14px;
+}
+
+/* ---------- Το κουμπί αποστολής ακολουθεί το Button ---------- */
+.lc-form button.sc-btn {
+  flex: 0 0 auto;
+  height: var(--sc-h-sm);
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: var(--sc-radius);
+  background: var(--primary);
+  color: var(--sc-primary-fg);
+  font-size: .8rem;
+  font-weight: 500;
+}
+.lc-form button.sc-btn:hover { background: color-mix(in srgb, var(--primary) 85%, var(--ink)); }
+.lc-form button.sc-btn:disabled { opacity: .5; }
+
+/* ---------- Το κουμπί κλεισίματος ως icon button ---------- */
+.lc-head .lc-close.sc-btn {
+  width: var(--sc-h-sm);
+  height: var(--sc-h-sm);
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--sc-radius);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 1rem;
+}
+.lc-head .lc-close.sc-btn:hover { background: var(--sc-accent); }
+
+/* ---------- Το κουμπί μετάβασης ως outline button ---------- */
+.lc-hit .lc-goto.sc-btn,
+.lc-source .lc-goto.sc-btn {
+  height: var(--sc-h-xs);
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--sc-radius-md);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: .76rem;
+  font-weight: 500;
+}
+.lc-hit .lc-goto.sc-btn:hover,
+.lc-source .lc-goto.sc-btn:hover { background: var(--bg-soft); color: var(--ink); }

@@ -1,0 +1,4 @@
+React Bits by David Haz: Particles is compiled as a real React component with ReactDOM and OGL into assets/js/reactbits.js; its CSS is in assets/css/reactbits.css. Adaptations: pause/resume, visibility handling, frame-rate-independent rotation. Source: https://github.com/DavidHDev/react-bits/tree/main/src/content/Backgrounds/Particles .
+SpotlightCard CSS and pointer interaction are adapted to vanilla JavaScript in astra.css and astra.js. Source: https://github.com/DavidHDev/react-bits/tree/main/src/content/Components/SpotlightCard .
+License: MIT + Commons Clause, included in REACT-BITS-LICENSE.md. React, ReactDOM and OGL license texts are in DEPENDENCY-LICENSES.txt. All dependencies are bundled locally; no CDN is used.
+The animated star-knot uses coordinates from the existing course OpenAI mark, matching the user-supplied visual reference.

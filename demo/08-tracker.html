@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Αναβάθμιση Υλικού — Tracker</title>
+<style>
+  :root{
+    --bg:#f4f6fa; --card:#ffffff; --border:#e3e8f0; --text:#1a2332; --muted:#6b7688;
+    --accent:#2563eb; --accent-soft:#dbeafe;
+    --ok:#16a34a; --ok-soft:#dcfce7;
+    --warn:#d97706; --warn-soft:#fef3c7;
+    --bar-track:#e9edf4;
+    --row-done:#f0fdf4;
+    --shadow:0 1px 3px rgba(16,24,40,.06), 0 1px 2px rgba(16,24,40,.04);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:24px 20px 60px}
+
+  header{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;margin-bottom:20px}
+  h1{font-size:22px;margin:0;font-weight:700;letter-spacing:-.3px}
+  h1 span{color:var(--accent)}
+  .subtitle{color:var(--muted);font-size:13px;margin-top:4px}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .stat .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+  .stat .value{font-size:22px;font-weight:700}
+  .stat .value small{font-size:13px;font-weight:500;color:var(--muted)}
+  .stat .mini-bar{height:6px;background:var(--bar-track);border-radius:99px;margin-top:8px;overflow:hidden}
+  .stat .mini-bar i{display:block;height:100%;border-radius:99px;background:var(--accent);transition:width .35s ease}
+  .stat.total .mini-bar i{background:linear-gradient(90deg,#2563eb,#16a34a)}
+
+  /* toolbar */
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+  .search{flex:1;min-width:220px;position:relative}
+  .search input{width:100%;padding:9px 12px 9px 34px;border:1px solid var(--border);border-radius:10px;background:var(--card);font-size:14px;color:var(--text);outline:none}
+  .search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+  .search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--muted)}
+  .filters{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{padding:8px 14px;border:1px solid var(--border);border-radius:99px;background:var(--card);cursor:pointer;font-size:13px;color:var(--muted);transition:.15s}
+  .chip:hover{border-color:var(--accent)}
+  .chip.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+
+  /* table */
+  .table-card{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .table-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:980px}
+  thead th{position:sticky;top:0;background:var(--card);z-index:2;text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);padding:12px 10px;border-bottom:2px solid var(--border);white-space:nowrap}
+  thead th.center{text-align:center}
+  tbody td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr{transition:background .15s}
+  tbody tr:hover{background:#f8fafc}
+  tbody tr.done{background:var(--row-done)}
+  tbody tr.done:hover{background:#e7f8ec}
+
+  .code{font-weight:700;color:var(--muted);font-size:13px;white-space:nowrap}
+  .kbadge{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:12px;padding:3px 8px;border-radius:6px;white-space:nowrap}
+  .title-cell{max-width:380px}
+  .title-cell a{color:var(--text);text-decoration:none;font-weight:600;line-height:1.35;display:inline-flex;align-items:flex-start;gap:6px}
+  .title-cell a:hover{color:var(--accent);text-decoration:underline}
+  .title-cell a svg{flex:none;width:13px;height:13px;stroke:var(--muted);margin-top:3px}
+  .scorm{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
+  .scorm.yes{background:var(--ok-soft);color:var(--ok)}
+  .scorm.no{background:var(--warn-soft);color:var(--warn)}
+
+  td.chk{text-align:center}
+  .chk input{width:19px;height:19px;accent-color:var(--accent);cursor:pointer}
+
+  .rowbar{display:flex;align-items:center;gap:10px;min-width:150px}
+  .bar{flex:1;height:9px;background:var(--bar-track);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:99px;width:0;transition:width .3s ease, background .3s ease;background:var(--accent)}
+  .bar i.full{background:var(--ok)}
+  .pct{font-size:12px;font-weight:700;color:var(--muted);width:34px;text-align:right}
+  .pct.full{color:var(--ok)}
+
+  .empty{padding:40px;text-align:center;color:var(--muted)}
+
+  footer{margin-top:16px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12.5px;flex-wrap:wrap;gap:10px}
+  .reset{background:none;border:1px solid var(--border);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:12.5px}
+  .reset:hover{border-color:#dc2626;color:#dc2626}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Αναβάθμιση Υλικού <span>· Tracker</span></h1>
+      <div class="subtitle">EKEK e-studies — παρακολούθηση προόδου ανά πρόγραμμα</div>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat total">
+      <div class="label">Συνολική πρόοδος</div>
+      <div class="value" id="stat-total">0% <small id="stat-total-detail"></small></div>
+      <div class="mini-bar"><i id="stat-total-bar"></i></div>
+    </div>
+    <div class="stat">
+      <div class="label">Link &amp; SCORM</div>
+      <div class="value" id="stat-c0">0<small>/0</small></div>
+      <div class="mini-bar"><i id="stat-c0-bar"></i></div>
+    </div>
+    <div class="stat">
+      <div class="label">DOCX &amp; PDF</div>
+      <div class="value" id="stat-c1">0<small>/0</small></div>
+      <div class="mini-bar"><i id="stat-c1-bar"></i></div>
+    </div>
+    <div class="stat">
+      <div class="label">Quiz</div>
+      <div class="value" id="stat-c2">0<small>/0</small></div>
+      <div class="mini-bar"><i id="stat-c2-bar"></i></div>
+    </div>
+    <div class="stat">
+      <div class="label">Ολοκληρωμένα</div>
+      <div class="value" id="stat-done">0<small>/0</small></div>
+      <div class="mini-bar"><i id="stat-done-bar" style="background:#16a34a"></i></div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search">
+      <svg fill="none" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Αναζήτηση προγράμματος, κωδικού, Κ...">
+    </div>
+    <div class="filters" id="filters">
+      <button class="chip active" data-f="all">Όλα</button>
+      <button class="chip" data-f="pending">Σε εκκρεμότητα</button>
+      <button class="chip" data-f="progress">Σε εξέλιξη</button>
+      <button class="chip" data-f="done">Ολοκληρωμένα</button>
+      <button class="chip" data-f="scorm">Έχει SCORM</button>
+      <button class="chip" data-f="noscorm">Χωρίς SCORM</button>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Τμήμα</th>
+            <th>Πρόγραμμα</th>
+            <th class="center">SCORM</th>
+            <th class="center">Link &amp; SCORM</th>
+            <th class="center">DOCX &amp; PDF</th>
+            <th class="center">Quiz</th>
+            <th>Πρόοδος</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="empty" style="display:none">Κανένα αποτέλεσμα.</div>
+  </div>
+
+  <footer>
+    <span>Η πρόοδος αποθηκεύεται αυτόματα σε αυτόν τον browser (localStorage).</span>
+    <button class="reset" id="reset">Μηδενισμός προόδου</button>
+  </footer>
+</div>
+
+<script>
+const COURSES = [
+  {id:11, k:"Κ55", t:"ΕΙΔΙΚΗ ΑΓΩΓΗ Κ55 (450 ωρών)", url:"https://estudies.ekek.gr/course/view.php?id=7267", scorm:false},
+  {id:12, k:"Κ54", t:"ΟΡΓΑΝΩΣΗ ΚΑΙ ΔΙΟΙΚΗΣΗ ΤΗΣ ΕΚΠΑΙΔΕΥΣΗΣ Κ54", url:"https://estudies.ekek.gr/course/view.php?id=7268", scorm:false},
+  {id:13, k:"Κ52", t:"ΕΤΗΣΙΑ ΕΠΙΜΟΡΦΩΣΗ ΣΤΗ ΣΧΟΛΙΚΗ ΨΥΧΟΛΟΓΙΑ (450 ΩΡΩΝ) Κ52", url:"https://estudies.ekek.gr/user/index.php?id=7269", scorm:false},
+  {id:18, k:"Κ45", t:"ΑΓΩΓΗ ΥΓΕΙΑΣ Κ45", url:"https://estudies.ekek.gr/course/view.php?id=7192", scorm:false},
+  {id:19, k:"Κ49", t:"ΑΥΤΙΣΜΟΣ Κ49", url:"https://estudies.ekek.gr/course/view.php?id=7270", scorm:false},
+  {id:20, k:"Κ48", t:"PYTHON Κ48", url:"https://estudies.ekek.gr/course/view.php?id=7294", scorm:false},
+  {id:21, k:"Κ44", t:"ΔΙΑΠΟΛΙΤΙΣΜΙΚΗ ΕΚΠΑΙΔΕΥΣΗ Κ44", url:"https://estudies.ekek.gr/course/view.php?id=7194", scorm:false},
+  {id:22, k:"Κ48", t:"ΕΚΠΑΙΔΕΥΣΗ ΕΚΠΑΙΔΕΥΤΩΝ ΕΝΗΛΙΚΩΝ Κ48", url:"https://estudies.ekek.gr/course/view.php?id=7272", scorm:false},
+  {id:23, k:"Κ42", t:"ΝΟΗΜΑΤΙΚΗ ΓΛΩΣΣΑ Κ42", url:"https://estudies.ekek.gr/course/view.php?id=7227", scorm:false},
+  {id:24, k:"Κ41", t:"ΣΕΞΟΥΑΛΙΚΗ ΔΙΑΠΑΙΔΑΓΩΓΗΣΗ Κ41", url:"https://estudies.ekek.gr/course/view.php?id=6889", scorm:false},
+  {id:26, k:"Κ41", t:"ΣΧΟΛΙΚΗ ΝΟΣΗΛΕΥΤΙΚΗ Κ41", url:"https://estudies.ekek.gr/course/view.php?id=7274", scorm:false},
+  {id:28, k:"Κ37", t:"ΕΙΔΙΚΗ ΑΓΩΓΗ & ΕΚΠΑΙΔΕΥΣΗ Κ37", url:"https://estudies.ekek.gr/course/view.php?id=7275", scorm:false},
+  {id:29, k:"Κ35", t:"BIG DATA ANALYTICS Κ35", url:"https://estudies.ekek.gr/course/view.php?id=7198", scorm:false},
+  {id:30, k:"Κ29", t:"BLOCK CHAIN ΣΤΑ ΟΙΚΟΝΟΜΙΚΑ Κ29", url:"https://estudies.ekek.gr/course/view.php?id=7143", scorm:true},
+  {id:32, k:"Κ35", t:"CYBER SECURITY Κ35", url:"https://estudies.ekek.gr/course/view.php?id=7199", scorm:false},
+  {id:33, k:"Κ28", t:"INTERNET OF THINGS Κ28", url:"https://estudies.ekek.gr/course/view.php?id=7145", scorm:true},
+  {id:34, k:"Κ33", t:"MACHINE LEARNING Κ33", url:"https://estudies.ekek.gr/course/view.php?id=7146", scorm:false},
+  {id:40, k:"Κ32", t:"CHATGPT Κ32", url:"https://estudies.ekek.gr/course/view.php?id=7147", scorm:true},
+  {id:41, k:"Κ32", t:"DIGITAL MARKETING Κ32", url:"https://estudies.ekek.gr/course/view.php?id=7148", scorm:true},
+  {id:42, k:"Κ33", t:"ΣΥΜΒΟΥΛΕΥΤΙΚΗ ΚΑΙ ΕΠΑΓΓΕΛΜΑΤΙΚΟΣ ΠΡΟΣΑΝΑΤΟΛΙΣΜΟΣ Κ33", url:"https://estudies.ekek.gr/course/view.php?id=7203", scorm:false},
+  {id:49, k:"Κ29", t:"ΕΞΕΙΔΙΚΕΥΣΗ ΣΤΟΝ ΑΥΤΙΣΜΟ Κ29", url:"https://estudies.ekek.gr/course/view.php?id=7278", scorm:false},
+  {id:50, k:"Κ26", t:"ΔΙΟΙΚΗΣΗ ΕΠΙΧΕΙΡΗΣΕΩΝ (MINI MBA) Κ26", url:"https://estudies.ekek.gr/course/view.php?id=7248", scorm:true},
+  {id:51, k:"Κ25", t:"ΟΡΓΑΝΩΣΗ ΚΑΙ ΔΙΟΙΚΗΣΗ ΜΟΝΑΔΩΝ ΥΓΕΙΑΣ Κ25", url:"https://estudies.ekek.gr/course/view.php?id=7205", scorm:false},
+  {id:53, k:"Κ25", t:"ΔΙΔΑΣΚΑΛΙΑ ΤΗΣ ΕΛΛΗΝΙΚΗΣ ΩΣ 2ΗΣ ΞΕΝΗΣ ΓΛΩΣΣΑΣ Κ25", url:"https://estudies.ekek.gr/course/view.php?id=7279", scorm:false},
+  {id:54, k:"Κ24", t:"ΟΡΓΑΝΩΣΗ ΚΑΙ ΔΙΟΙΚΗΣΗ ΞΕΝΟΔΟΧΕΙΑΚΩΝ ΕΠΙΧΕΙΡΗΣΕΩΝ Κ24", url:"https://estudies.ekek.gr/course/view.php?id=7207", scorm:true},
+  {id:56, k:"Κ26", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΣΤΗΝ ΕΚΠΑΙΔΕΥΣΗ Κ26", url:"https://estudies.ekek.gr/course/view.php?id=7281", scorm:true},
+  {id:57, k:"Κ22", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΣΤΗΝ ΕΠΟΧΗ ΤΟΥ CHAT GPT Κ22", url:"https://estudies.ekek.gr/course/view.php?id=7155", scorm:true},
+  {id:58, k:"Κ25", t:"ΕΠΙΜΟΡΦΩΣΗ ΣΤΗ ΣΕΞΟΥΑΛΙΚΗ ΔΙΑΠΑΙΔΑΓΩΓΗΣΗ (2 ΜΗΝΕΣ) Κ25", url:"https://estudies.ekek.gr/course/view.php?id=7282", scorm:false},
+  {id:60, k:"Κ20", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΓΙΑ ΔΙΚΗΓΟΡΟΥΣ Κ20", url:"https://estudies.ekek.gr/course/view.php?id=7210", scorm:true},
+  {id:63, k:"Κ18", t:"ΕΓΚΛΗΜΑΤΟΛΟΓΙΑ Κ18", url:"https://estudies.ekek.gr/course/view.php?id=7211", scorm:false},
+  {id:64, k:"Κ17", t:"FOOD AND BEVERAGE MANAGEMENT Κ17", url:"https://estudies.ekek.gr/course/view.php?id=7212", scorm:true},
+  {id:65, k:"Κ18", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΓΙΑ ΦΙΛΟΛΟΓΟΥΣ Κ18", url:"https://estudies.ekek.gr/course/view.php?id=7285", scorm:true},
+  {id:66, k:"Κ18", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΓΙΑ ΜΑΘΗΜΑΤΙΚΟΥΣ Κ18", url:"https://estudies.ekek.gr/course/view.php?id=7286", scorm:true},
+  {id:67, k:"Κ17", t:"ΜΟΥΣΕΙΟΠΑΙΔΑΓΩΓΙΚΗ Κ17", url:"https://estudies.ekek.gr/course/view.php?id=7252", scorm:false},
+  {id:68, k:"Κ19", t:"ΣΧΟΛΙΚΗ ΨΥΧΟΛΟΓΙΑ: ΘΕΩΡΗΤΙΚΕΣ ΠΡΟΣΕΓΓΙΣΕΙΣ ΚΑΙ ΕΦΑΡΜΟΓΕΣ (400 ΩΡΩΝ) Κ19", url:"https://estudies.ekek.gr/course/view.php?id=7287", scorm:false},
+  {id:69, k:"Κ15", t:"ΕΦΑΡΜΟΓΕΣ ΤΝ ΣΤΟΝ ΤΟΥΡΙΣΜΟ Κ15", url:"https://estudies.ekek.gr/course/view.php?id=7163", scorm:true},
+  {id:70, k:"Κ13", t:"ΕΦΑΡΜΟΓΕΣ ΤΝ ΣΕ ΟΡΓΑΝΙΣΜΟΥΣ ΚΑΙ ΕΠΙΧΕΙΡΗΣΕΙΣ Κ13", url:"https://estudies.ekek.gr/course/view.php?id=7165", scorm:true},
+  {id:71, k:"Κ16", t:"ΕΦΑΡΜΟΓΕΣ ΤΕΧΝΗΤΗΣ ΝΟΗΜΟΣΥΝΗΣ ΣΤΗΝ ΥΓΕΙΑ Κ16", url:"https://estudies.ekek.gr/course/view.php?id=7223", scorm:true},
+  {id:72, k:"Κ17", t:"ΕΠΙΜΟΡΦΩΣΗ ΣΕ ΘΕΜΑΤΑ ΣΔΕ Κ17", url:"https://estudies.ekek.gr/course/view.php?id=7297", scorm:false},
+  {id:73, k:"Κ17", t:"ΑΡΧΕΣ ΕΚΠΑΙΔΕΥΣΗΣ ΕΝΗΛΙΚΩΝ Κ17", url:"https://estudies.ekek.gr/course/view.php?id=7299", scorm:false},
+  {id:74, k:"K13", t:"ΕΙΣΑΓΩΓΗ ΣΤΟ DEEPSEEK Κ13", url:"https://estudies.ekek.gr/course/view.php?id=7170", scorm:true},
+  {id:76, k:"Κ14", t:"AI ACT ΚΑΙ ΣΥΓΧΡΟΝΗ ΕΥΡΩΠΑΪΚΗ ΝΟΜΟΘΕΣΙΑ - AI ETHICS OFFICER Κ14", url:"https://estudies.ekek.gr/course/view.php?id=7231", scorm:true},
+  {id:77, k:"Κ13", t:"ΠΟΛΥΓΛΩΣΣΙΚΗ ΕΚΠΑΙΔΕΥΣΗ Κ13", url:"https://estudies.ekek.gr/course/view.php?id=7173", scorm:false},
+  {id:78, k:"Κ14", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΣΤΟ DIGITAL MARKETING Κ14", url:"https://estudies.ekek.gr/course/view.php?id=7233", scorm:true},
+  {id:79, k:"Κ15", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ – GENERATIVE AI Κ15", url:"https://estudies.ekek.gr/course/view.php?id=7254", scorm:true},
+  {id:83, k:"Κ10", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΣΤΗΝ ΕΙΔΙΚΗ ΑΓΩΓΗ Κ10", url:"https://estudies.ekek.gr/course/view.php?id=7255", scorm:true},
+  {id:84, k:"Κ08", t:"ΤΟ ΠΛΑΙΣΙΟ ESG ΩΣ ΣΤΡΑΤΗΓΙΚΗ ΒΙΩΣΙΜΟΤΗΤΑΣ ΣΤΙΣ ΣΥΓΧΡΟΝΕΣ ΕΠΙΧΕΙΡΗΣΕΙΣ Κ08", url:"https://estudies.ekek.gr/course/view.php?id=7176", scorm:true},
+  {id:85, k:"Κ08", t:"Η ΕΠΙΣΤΗΜΗ ΤΩΝ ΔΕΔΟΜΕΝΩΝ ΣΤΗΝ ΟΙΚΟΝΟΜΙΚΗ ΑΝΑΛΥΣΗ ΜΕ R Κ08", url:"https://estudies.ekek.gr/course/view.php?id=7177", scorm:true},
+  {id:87, k:"Κ07", t:"ChatGPT for All (Μηνιαίο) Κ07", url:"https://estudies.ekek.gr/course/view.php?id=7260", scorm:true},
+  {id:88, k:"Κ09", t:"ΕΙΔΙΚΟΣ ΣΤΗΝ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ – AI MASTER Κ09", url:"https://estudies.ekek.gr/course/view.php?id=7292", scorm:true},
+  {id:89, k:"Κ05", t:"A.I. For Teachers (Μηνιαίο) Κ05", url:"https://estudies.ekek.gr/course/view.php?id=7183", scorm:true},
+  {id:90, k:"Κ07", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΓΙΑ ΝΗΠΙΑΓΩΓΟΥΣ Κ07", url:"https://estudies.ekek.gr/course/view.php?id=7263", scorm:true},
+  {id:91, k:"Κ07", t:"ΣΧΟΛΙΚΗ ΚΟΙΝΩΝΙΚΗ ΕΡΓΑΣΙΑ Κ07", url:"https://estudies.ekek.gr/course/view.php?id=7293", scorm:false},
+  {id:93, k:"Κ04", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΣΤΟΝ ΔΗΜΟΣΙΟ ΤΟΜΕΑ Κ04", url:"https://estudies.ekek.gr/course/view.php?id=7295", scorm:true},
+  {id:94, k:"Κ01", t:"ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΣΤΗ ΦΥΣΙΚΗ, ΤΗ ΧΗΜΕΙΑ, ΤΗ ΒΙΟΛΟΓΙΑ Κ01", url:"https://estudies.ekek.gr/course/view.php?id=7187", scorm:true},
+  {id:95, k:"Κ01", t:"ΦΙΛΟΛΟΓΙΚΑ ΜΑΘΗΜΑΤΑ ΚΑΙ ΠΟΛΛΑΠΛΟ ΒΙΒΛΙΟ Κ01", url:"https://estudies.ekek.gr/course/view.php?id=7185", scorm:false},
+  {id:96, k:"Κ02", t:"ΕΦΑΡΜΟΓΕΣ ΤΕΧΝΗΤΗΣ ΝΟΗΜΟΣΥΝΗΣ ΣΤΑ ΠΑΝΕΠΙΣΤΗΜΙΑ Κ02", url:"https://estudies.ekek.gr/course/view.php?id=7264", scorm:true},
+  {id:97, k:"Κ03", t:"CLAUDE ΑΙ Κ03", url:"https://estudies.ekek.gr/course/view.php?id=7296", scorm:true},
+  {id:98, k:"Κ02", t:"AI MANAGER: ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ ΣΤΗ ΣΥΓΧΡΟΝΗ ΕΠΙΧΕΙΡΗΣΗ K02", url:"https://estudies.ekek.gr/course/view.php?id=7298", scorm:true}
+];
+
+const CATS = ["c0","c1","c2"]; // Link & SCORM, DOCX & PDF, Quiz
+const STORE_KEY = "anavathmisi-ylikou-tracker-v1";
+
+let state = {};
+try { state = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch(e) { state = {}; }
+
+function save(){ try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e){} }
+function getChecks(id){ return state[id] || {c0:false,c1:false,c2:false}; }
+function countDone(id){ const s = getChecks(id); return CATS.filter(c=>s[c]).length; }
+
+let filter = "all";
+let query = "";
+
+const tbody = document.getElementById("tbody");
+
+function render(){
+  const q = query.trim().toLowerCase();
+  tbody.innerHTML = "";
+  let shown = 0;
+  for (const c of COURSES){
+    const s = getChecks(c.id);
+    const n = countDone(c.id);
+    if (filter==="done" && n!==3) continue;
+    if (filter==="pending" && n!==0) continue;
+    if (filter==="progress" && (n===0 || n===3)) continue;
+    if (filter==="scorm" && !c.scorm) continue;
+    if (filter==="noscorm" && c.scorm) continue;
+    if (q && !(c.t.toLowerCase().includes(q) || c.k.toLowerCase().includes(q) || String(c.id).includes(q))) continue;
+    shown++;
+
+    const tr = document.createElement("tr");
+    if (n===3) tr.classList.add("done");
+    const pct = Math.round(n/3*100);
+    tr.innerHTML = `
+      <td class="code">${c.id}</td>
+      <td><span class="kbadge">${c.k}</span></td>
+      <td class="title-cell"><a href="${c.url}" target="_blank" rel="noopener">${c.t}
+        <svg fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></td>
+      <td class="chk"><span class="scorm ${c.scorm?"yes":"no"}">${c.scorm?"ΝΑΙ":"ΟΧΙ"}</span></td>
+      <td class="chk"><input type="checkbox" data-id="${c.id}" data-cat="c0" ${s.c0?"checked":""}></td>
+      <td class="chk"><input type="checkbox" data-id="${c.id}" data-cat="c1" ${s.c1?"checked":""}></td>
+      <td class="chk"><input type="checkbox" data-id="${c.id}" data-cat="c2" ${s.c2?"checked":""}></td>
+      <td><div class="rowbar">
+        <div class="bar"><i class="${pct===100?"full":""}" style="width:${pct}%"></i></div>
+        <span class="pct ${pct===100?"full":""}">${pct}%</span>
+      </div></td>`;
+    tbody.appendChild(tr);
+  }
+  document.getElementById("empty").style.display = shown ? "none" : "block";
+  renderStats();
+}
+
+function renderStats(){
+  const total = COURSES.length;
+  const per = {c0:0,c1:0,c2:0};
+  let doneAll = 0, checkedTotal = 0;
+  for (const c of COURSES){
+    const s = getChecks(c.id);
+    for (const cat of CATS){ if (s[cat]){ per[cat]++; checkedTotal++; } }
+    if (countDone(c.id)===3) doneAll++;
+  }
+  const totalPct = Math.round(checkedTotal/(total*3)*100);
+  document.getElementById("stat-total").firstChild.textContent = totalPct + "% ";
+  document.getElementById("stat-total-detail").textContent = `(${checkedTotal}/${total*3} εργασίες)`;
+  document.getElementById("stat-total-bar").style.width = totalPct + "%";
+  for (const cat of CATS){
+    const el = document.getElementById("stat-"+cat);
+    el.innerHTML = `${per[cat]}<small>/${total}</small>`;
+    document.getElementById("stat-"+cat+"-bar").style.width = (per[cat]/total*100) + "%";
+  }
+  document.getElementById("stat-done").innerHTML = `${doneAll}<small>/${total}</small>`;
+  document.getElementById("stat-done-bar").style.width = (doneAll/total*100) + "%";
+}
+
+tbody.addEventListener("change", e=>{
+  const cb = e.target;
+  if (cb.tagName!=="INPUT") return;
+  const id = cb.dataset.id, cat = cb.dataset.cat;
+  if (!state[id]) state[id] = {c0:false,c1:false,c2:false};
+  state[id][cat] = cb.checked;
+  save();
+  render();
+});
+
+document.getElementById("search").addEventListener("input", e=>{ query = e.target.value; render(); });
+
+document.getElementById("filters").addEventListener("click", e=>{
+  const btn = e.target.closest(".chip");
+  if (!btn) return;
+  document.querySelectorAll(".chip").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  filter = btn.dataset.f;
+  render();
+});
+
+document.getElementById("reset").addEventListener("click", ()=>{
+  if (confirm("Σίγουρα θέλεις να μηδενίσεις όλη την πρόοδο;")){
+    state = {}; save(); render();
+  }
+});
+
+render();
+</script>
+</body>
+</html>

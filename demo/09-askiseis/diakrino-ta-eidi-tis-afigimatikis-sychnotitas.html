@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Διακρίνω τα είδη της αφηγηματικής συχνότητας</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: linear-gradient(135deg, #7c2d12 0%, #991b1b 50%, #be123c 100%);
+      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: #fef2f2;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      max-width: 95vw;
+      width: 100%;
+      height: 100vh;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #7c2d12 0%, #991b1b 100%);
+      color: white;
+      padding: 20px 30px;
+      text-align: center;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '📖';
+      position: absolute;
+      font-size: 12em;
+      opacity: 0.08;
+      right: -50px;
+      top: -40px;
+    }
+    .header-meta {
+      font-size: 0.85em;
+      opacity: 0.8;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      font-family: 'Source Serif 4', serif;
+    }
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7em;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+      line-height: 1.3;
+    }
+
+    /* SLIDE CONTAINER */
+    .slide-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+      margin-bottom: 72px;
+    }
+
+    .slide {
+      display: none;
+      padding: 35px 45px;
+      animation: fadeIn 0.4s ease;
+    }
+    .slide.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide h2 {
+      font-family: 'Playfair Display', serif;
+      color: #7c2d12;
+      font-size: 1.6em;
+      border-bottom: 3px solid #991b1b;
+      padding-bottom: 10px;
+      margin-bottom: 22px;
+    }
+    .slide h3 {
+      font-family: 'Playfair Display', serif;
+      color: #991b1b;
+      font-size: 1.25em;
+      margin: 22px 0 12px;
+    }
+    .slide p {
+      line-height: 1.85;
+      color: #2a1a1a;
+      margin-bottom: 14px;
+      font-size: 1.05em;
+    }
+
+    /* THEORY TABLE */
+    .theory-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .theory-card {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe4e6 100%);
+      border: 2px solid #fca5a5;
+      border-top: 4px solid #991b1b;
+      border-radius: 10px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .theory-card .card-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #7c2d12;
+      font-size: 1.0em;
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+    .theory-card .card-def {
+      font-size: 0.92em;
+      color: #3d1515;
+      line-height: 1.6;
+    }
+
+    /* LITERARY EXCERPT */
+    .literary-quote {
+      background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+      border-left: 5px solid #7c2d12;
+      padding: 22px 24px;
+      margin: 18px 0;
+      border-radius: 8px;
+      font-style: italic;
+      font-size: 0.97em;
+      line-height: 1.9;
+      color: #2a1a1a;
+      position: relative;
+    }
+    .literary-quote::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: #991b1b;
+      opacity: 0.18;
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      line-height: 1;
+    }
+    .literary-quote .citation {
+      font-style: normal;
+      font-size: 0.88em;
+      color: #7c2d12;
+      margin-top: 12px;
+      display: block;
+    }
+    .literary-quote .footnote {
+      font-style: normal;
+      font-size: 0.82em;
+      color: #6b3a3a;
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* EKFONISI */
+    .ekfonisi {
+      background: #fff7ed;
+      border: 1.5px solid #f97316;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 0.97em;
+      line-height: 1.7;
+      color: #2a1a1a;
+    }
+    .ekfonisi strong { color: #7c2d12; }
+
+    /* ACTIVITY HEADER */
+    .activity-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .activity-badge {
+      font-family: 'Playfair Display', serif;
+      background: #7c2d12;
+      color: white;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.82em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .activity-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05em;
+      font-weight: 700;
+      color: #7c2d12;
+    }
+
+    /* TRUE/FALSE QUESTION */
+    .tf-statement {
+      background: #fff5f5;
+      border: 1.5px solid #fca5a5;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      font-size: 1.0em;
+      line-height: 1.7;
+      color: #2a1a1a;
+    }
+    .tf-statement em {
+      font-style: italic;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .btn-tf {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1em;
+      font-weight: 600;
+      padding: 10px 28px;
+      border: 2px solid #7c2d12;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+      color: #7c2d12;
+    }
+    .btn-tf:hover { background: #ffe4e6; }
+    .btn-tf.selected-true  { background: #7c2d12; color: white; }
+    .btn-tf.selected-false { background: #991b1b; color: white; }
+    .btn-tf:disabled { cursor: not-allowed; opacity: 0.7; }
+
+    .btn-check {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.95em;
+      font-weight: 600;
+      padding: 9px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #7c2d12;
+      color: white;
+      transition: all 0.2s;
+    }
+    .btn-check:hover { background: #991b1b; transform: translateY(-1px); }
+    .btn-reset {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.95em;
+      font-weight: 600;
+      padding: 9px 24px;
+      border: 2px solid #7c2d12;
+      border-radius: 6px;
+      cursor: pointer;
+      background: transparent;
+      color: #7c2d12;
+      transition: all 0.2s;
+    }
+    .btn-reset:hover { background: #ffe4e6; }
+
+    /* FEEDBACK */
+    .feedback-box {
+      display: none;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 12px;
+      font-size: 0.97em;
+      line-height: 1.7;
+    }
+    .feedback-box.show  { display: block; }
+    .feedback-box.success {
+      background: #f0fdf4;
+      border: 1.5px solid #16a34a;
+      color: #14532d;
+    }
+    .feedback-box.error {
+      background: #fef2f2;
+      border: 1.5px solid #dc2626;
+      color: #7f1d1d;
+    }
+    .feedback-icon { font-size: 1.2em; margin-right: 6px; }
+
+    /* NAVIGATION */
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      background: #ffe4e6;
+      border-top: 2px solid #991b1b;
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 95vw;
+      box-sizing: border-box;
+      border-radius: 0 0 20px 20px;
+      z-index: 1000;
+    }
+    .nav-button {
+      font-family: 'Source Serif 4', serif;
+      background: linear-gradient(135deg, #7c2d12 0%, #991b1b 100%);
+      color: white;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 0.97em;
+      font-weight: 600;
+      transition: all 0.25s;
+    }
+    .nav-button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(124,45,18,0.4);
+    }
+    .nav-button:disabled { opacity: 0.45; cursor: not-allowed; }
+    .slide-counter {
+      font-size: 0.97em;
+      color: #7c2d12;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* PROGRESS */
+    .progress-bar-wrap {
+      background: #fecdd3;
+      height: 5px;
+      flex-shrink: 0;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: #7c2d12;
+      transition: width 0.35s ease;
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.78em;
+      letter-spacing: 0.1em;
+      color: #991b1b;
+      border-bottom: 1px solid #fca5a5;
+      margin-bottom: 18px;
+      padding-bottom: 3px;
+      text-transform: uppercase;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .slide { padding: 20px 18px; }
+      .header h1 { font-size: 1.2em; }
+      .theory-grid { grid-template-columns: 1fr; }
+      .navigation { padding: 10px 16px; }
+      .nav-button { padding: 8px 16px; font-size: 0.88em; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">Νέα Ελληνική Γλώσσα &amp; Λογοτεχνία · Ψηφιακό Εκπαιδευτικό Υλικό</div>
+    <h1>Διακρίνω τα είδη της αφηγηματικής συχνότητας</h1>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-fill" style="width:16.6%"></div>
+  </div>
+
+  <!-- SLIDES -->
+  <div class="slide-container">
+
+    <!-- SLIDE 1 — ΘΕΩΡΙΑ -->
+    <div class="slide active" data-slide="1">
+      <div class="section-label">Θεωρία</div>
+      <h2>Αφηγηματική συχνότητα</h2>
+      <p>Η αφηγηματική συχνότητα καθορίζεται από τη σχέση της εμφάνισης ενός γεγονότος στην ιστορία και της έκθεσής του μέσα στην αφήγηση.</p>
+
+      <div class="theory-grid">
+        <div class="theory-card">
+          <div class="card-title">ΜΟΝΑΔΙΚΗ ΑΦΗΓΗΣΗ</div>
+          <div class="card-def">Είναι η αφήγηση αυτού που έγινε μία φορά.</div>
+        </div>
+        <div class="theory-card">
+          <div class="card-title">ΕΠΑΝΑΛΗΠΤΙΚΗ ΑΦΗΓΗΣΗ</div>
+          <div class="card-def">Είναι η επανάληψη Χ φορές αυτού που έγινε μία φορά.</div>
+        </div>
+        <div class="theory-card">
+          <div class="card-title">ΘΑΜΙΣΤΙΚΗ ΑΦΗΓΗΣΗ</div>
+          <div class="card-def">Είναι η αφήγηση μία φορά αυτού που έγινε Χ φορές.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 — ΕΡΩΤΗΣΗ 1 -->
+    <div class="slide" data-slide="2">
+      <div class="activity-header">
+        <span class="activity-badge">Ερώτηση 1</span>
+        <span class="activity-title">Θ. Βαλτινός, Ειδύλλιο</span>
+      </div>
+
+      <div class="ekfonisi">
+        <strong>Εκφώνηση:</strong> Να χαρακτηρίσεις τις παρακάτω διατυπώσεις ως Σωστές ή Λανθασμένες με κριτήριο τα είδη της αφηγηματικής συχνότητας.
+      </div>
+
+      <div class="literary-quote">
+        Δεν ήταν ακριβώς του δρόμου. Από κάπου πρέπει να το είχε σκάσει. Ήταν καθαρή και υγιής. Το τρίχωμά της γυάλιζε-εξαιρετικά νέα δηλαδή. Ενάμισι-δύο χρόνων; Διασχίζοντας τη Βασιλίσσης Σοφίας, από Πλουτάρχου προς Ριζάρη, με πήρε από πίσω. Ήταν χαρούμενη. Με προσπερνούσε φερμάροντας<sup>2</sup>, προχώραγε, ξαναγύριζε κοντά μου. Χαρούμενη. Με ακολούθησε έτσι έως τη Βασιλέως Κωνσταντίνου. Την περάσαμε μαζί. Μπήκαμε στην Αντήνορος. Έφυγε πάλι μπροστά. Πάντα τρέχοντας, πάντα φερμάροντας<sup>2</sup>. Διαδήλωνε με αυτόν τον τρόπο την ευφροσύνη της. Ευφροσύνη που ζούσε, που ξαναγύριζε πίσω και με κοίταζε στα μάτια, που με εμπιστευόταν. Στην Αστυδάμαντος σταμάτησα. Έβγαλα τα κλειδιά μου. Είχε φτάσει η ώρα. Εκείνη έπαψε να τρέχει. Ακίνητη. Ήταν μια πρώτη ραγισματιά αμφιβολίας. Είχα ψηλά ένα μεγάλο μπαλκόνι, αυτό ήταν όλο. Να την κάνω τι; Έβαλα το κλειδί στην πόρτα προσπαθώντας να μην την κοιτάξω. Συμπεριφορά δειλού. Δεν τα κατάφερα. Το μάτι μου την αναζήτησε από μόνο του. Πάντα ασάλευτη, με μιαν αξιοπρέπεια στην ακινησία της με παρακολουθούσε που την έκλεινα έξω.
+        <span class="citation">Θανάσης Βαλτινός, <em>ΕΠΕΙΓΟΥΣΑ ΑΝΑΓΚΗ ΕΛΕΟΥ</em>. Αθήνα, Εστία, 2015, σελ. 55-56.</span>
+        <span class="footnote"><sup>1</sup> Τρυφερή ερωτική σχέση &nbsp;|&nbsp; <sup>2</sup> Φερμάρω: Κοιτάζω κάποιον ή κάτι προσεκτικά ή επίμονα</span>
+      </div>
+
+      <div class="tf-statement">
+        Στο παραπάνω απόσπασμα διακρίνεται <strong>μοναδική αφήγηση</strong>.
+      </div>
+
+      <div class="btn-row" id="tf-btns-1">
+        <button class="btn-tf" id="q1-true"  onclick="selectTF(1,'true')" >✓ Σωστό</button>
+        <button class="btn-tf" id="q1-false" onclick="selectTF(1,'false')">✗ Λάθος</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkTF(1)">Έλεγχος</button>
+        <button class="btn-reset" onclick="resetTF(1)">Επαναφορά</button>
+      </div>
+      <div class="feedback-box" id="fb-1"></div>
+    </div>
+
+    <!-- SLIDE 3 — ΕΡΩΤΗΣΗ 2 -->
+    <div class="slide" data-slide="3">
+      <div class="activity-header">
+        <span class="activity-badge">Ερώτηση 2</span>
+        <span class="activity-title">Α. Σουρούνης, Διακοπή από τις διακοπές</span>
+      </div>
+
+      <div class="ekfonisi">
+        <strong>Εκφώνηση:</strong> Να χαρακτηρίσεις τις παρακάτω διατυπώσεις ως Σωστές ή Λανθασμένες με κριτήριο τα είδη της αφηγηματικής συχνότητας.
+      </div>
+
+      <div class="literary-quote" style="max-height:320px; overflow-y:auto;">
+        Κάποτε τη λέξη «διακοπές» τη χρησιμοποιούσαν για το φως και το νερό που κάθε τόσο σταματούσαν. Ήταν από τα κακά που συνόδευαν εκείνη την εποχή. Σήμερα οι άνθρωποι τη χρησιμοποιούν για την ίδια τους τη ζωή. Είναι από τα καλά που συνοδεύουν αυτή την εποχή. Ή τουλάχιστον θα μπορούσε να είναι. Γιατί, ενώ οι πρώτες ήταν καθημερινές και αναπάντεχες, των ανθρώπων είναι ετήσιες και προγραμματισμένες. Τόσο προγραμματισμένες, ώστε προτού ακόμα τελειώσουν αυτές, αρχίζουν να καταστρώνονται οι άλλες, του επόμενου χρόνου. Συνήθως από ένα εύθυμο επιτελείο. Από τι διακόπτει λοιπόν κανείς για να κάνει διακοπές; Νομίζω από την τύφλα του τη μαύρη. Για να ξαναγυρίσει ύστερα από ένα μήνα πάλι σ' αυτήν.
+        <br><br>
+        Την εποχή που το φως και το νερό έκαναν επίσης διακοπές, μ' έστελνε η μάνα μου μ' ένα βάζο ν' αγοράσω ταχίνι. Ήταν ένας ισόγειος και σκοτεινός χώρος στην οδό Κασσάνδρου με χωμάτινο δάπεδο, όπου, πιασμένο μ' ένα μακρύ δοκάρι, γύριζε γύρω γύρω ένα τυφλωμένο άλογο. Συνέχεια. Κάπου κάπου ο γέρος που ζούσε εκεί μέσα το έβγαζε στην αυλή να πάρει αέρα και ξανά πάλι στο μαγκανοπήγαδο. Στο σπίτι απορούσαν που δεν έβαζα ταχίνι στο στόμα μου.
+        <br><br>
+        Όταν μεγάλωσα, βρέθηκα συχνά σε παρόμοιες δουλειές μ' εκείνη του αλόγου. Κι επειδή εμάς απαγορευόταν να μας τυφλώσουν, έπρεπε να τυφλωθούμε από μόνοι μας, για να μπορούμε να συνεχίσουμε τους ατέλειωτους γύρους μας. Μια μέρα λοιπόν είπα να κάνω όχι διακοπές αλλά διακοπή στη ζωή που ζούσα μέχρι τότε. Γύρισα το διακόπτη κι έφυγα. Μόνος. Όχι για ένα μήνα αλλά για τρία χρόνια. Πρώτη φορά ζούσα κοντά στη φύση. Τι λέω κοντά, μέσα της καλύτερα. Κοιμόμουν και ξυπνούσα ταυτόχρονα με τα πλάσματα εκείνα που δε νοιάζονται για την αποταμίευση παρά μόνο για την καθημερινή τους τροφή. Ήξερα ότι μπορεί να επιβιώσει κανείς με ελάχιστα χρήματα ή και καθόλου, όμως να μπορεί μαζί να είναι και τόσο ευτυχισμένος δεν το ήξερα. Και την αληθινή ευτυχία εκεί την έμαθα. Ήταν σα να φοιτώ σ' ένα σχολείο με χίλιους δασκάλους και με μόνο μαθητή εμένα. Είχα ξετυφλωθεί τελείως και μπορούσα να βλέπω τα πράγματα που με πλησίαζαν και τ' άλλα που με απέφευγαν. Προπαντός αυτά.
+        <br><br>
+        Επέστρεψα κάποτε έχοντας στην τσάντα μου γραμμένες εβδομήντα σελίδες όλες κι όλες. Οι γνωστοί μου, που περίμεναν να γράψω τόμους και τόμους, απογοητεύτηκαν. Με κατηγόρησαν ότι έχασα τρία χρόνια απ' τη ζωή μου παρακολουθώντας τα δέντρα και τη θάλασσα. Η αλήθεια είναι ότι παρακολουθούσα και τις γάτες, αλλά θεώρησα φρόνιμο να μην τους το πω. Στα τρία αυτά χρόνια είχα αλλάξει τόσο πολύ, που και οι ίδιοι χρειάστηκαν τον ίδιο χρόνο για να το διαπιστώσουν. Σήμερα δε χρειάζομαι πια διακοπές. Γιατί να διακόψεις κάτι όταν σου αρέσει τόσο πολύ; Μπορείς να αλλάζεις τόπους, αλλά αν δεν κουβαλάς μαζί σου αυτή τη ζωή που διάλεξες, τότε τι θα κουβαλάς; Στο κάτω κάτω πρέπει να χαρεί κι αυτή μαζί σου, αφού τόσα πολλά σου προσφέρει. Διαφορετικά την κλειδώνεις στο διαμέρισμά σου, γεμίζεις τη βαλίτσα με σώβρακα κι εξαφανίζεσαι για τριάντα μέρες από κοντά της. Κι όταν γυρίσεις, θα τη βρεις μπροστά σου έξαλλη, με σηκωμένη την τρίχα, να σε περιμένει για να σου κάνει το βίο αβίωτο. Και θα 'χει και δίκιο.
+        <span class="citation">Αντώνης Σουρούνης, <em>Μισόν αιώνα άνθρωπος</em>, εκδόσεις Καστανιώτη, 1996.<br>Πηγή: Andro.gr [<a href="https://www.andro.gr/zoi/antonis-sourounis-diakopes/" target="_blank" rel="noopener" style="color:#7c2d12;">https://www.andro.gr/zoi/antonis-sourounis-diakopes/</a>]</span>
+      </div>
+
+      <div class="tf-statement">
+        Στο παραπάνω απόσπασμα διακρίνεται η <strong>θαμιστική αφήγηση</strong>.
+      </div>
+
+      <div class="btn-row" id="tf-btns-2">
+        <button class="btn-tf" id="q2-true"  onclick="selectTF(2,'true')" >✓ Σωστό</button>
+        <button class="btn-tf" id="q2-false" onclick="selectTF(2,'false')">✗ Λάθος</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkTF(2)">Έλεγχος</button>
+        <button class="btn-reset" onclick="resetTF(2)">Επαναφορά</button>
+      </div>
+      <div class="feedback-box" id="fb-2"></div>
+    </div>
+
+    <!-- SLIDE 4 — ΕΡΩΤΗΣΗ 3 -->
+    <div class="slide" data-slide="4">
+      <div class="activity-header">
+        <span class="activity-badge">Ερώτηση 3</span>
+        <span class="activity-title">Α. Παπαδιαμάντης, «Βαρδιάνος στα Σπόρκα»</span>
+      </div>
+
+      <div class="ekfonisi">
+        <strong>Εκφώνηση:</strong> Να χαρακτηρίσεις τις παρακάτω διατυπώσεις ως Σωστές ή Λανθασμένες με κριτήριο τα είδη της αφηγηματικής συχνότητας.
+      </div>
+
+      <p style="font-size:0.92em; color:#6b3a3a; margin-bottom:10px; font-style:italic;">Πρόκειται για το διορισμό της γριάς Σκεύως ως βαρδιάνου στα Σπόρκα, δηλαδή ως φύλακα στα πλοία που βρίσκονται σε καραντίνα, επειδή υπάρχει επιδημία χολέρας. Στη σκηνή αυτή ο υγειονόμος, ο επιστάτης του λοιμοκαθαρτηρίου και ο λιμενάρχης εξαπατούνται από τη μεταμφίεσή της και τη διορίζουν βαρδιάνο.</p>
+
+      <div class="literary-quote" style="max-height:360px; overflow-y:auto;">
+        <strong style="font-style:normal; color:#7c2d12; font-size:0.88em; letter-spacing:0.05em;">ΑΦΗΓΗΤΗΣ</strong><br><br>
+        Την εσπέραν της αυτής ημέρας, ήτις ήτο η 17 Αυγούστου, βραχύσωμον γερόντιον παρουσιάσθη ενώπιον του κυρ-υγειονόμου, του επιστάτου του λοιμοκαθαρτηρίου και του λιμενάρχου, οίτινες είχον συνέλθει εις συμβούλιον εν τω λιμεναρχείω. Εις τον προθάλαμον ευρίσκοντο πέντε ή εξ άλλοι γηραιοί, πρώην ναύται, οίτινες επερίμεναν να μάθωσιν αν έγινε δεκτή η προσφορά των. […] Το γερόντιον είχε ρυτίδας εις το πρόσωπον και ήτο σπανόν. Εφόρει πλατείαν βράκαν, γελέκον και τσάκαν από ξεθωριασμένον βελούδον. Εφαίνετο ως ζων αναχρονισμός μεταξύ των άλλων ναυτικών, οίτινες εφόρουν συνήθως τας καθημερινάς στενά αμπαδίτικα. Εσηκώθη μετά διστακτικού βήματος και επλησίασεν εις την θύραν του εσωτερικού γραφείου. Ο μπαρμπα-Νίκας τον συνώδευεν εγγύς εκ των όπισθεν.
+        <br><br>
+        — Ποιος είναι αυτός πάλι; είπεν ο λιμενάρχης με δύσπιστον βλέμμα. Πρώτην φοράν τον βλέπω! Δεν μου φαίνεται για θαλασσινός.<br>
+        — Α, εσύ είσαι, μπαρμπα-Σταμάτη Γυρατσίνη! Ανέκραξεν ο υγειονόμος, άμα ιδών το γερόντιον.<br>
+        — Εγώ είμαι, κυρ-υγειονόμε, απήντησε μετ' αποφάσεως το γερόντιον.<br>
+        — Δεν μου τον είπες Σταμάτη Γυρατσίνη μπαρμπα-Νίκα, είπεν αποτεινόμενος προς τον υπάλληλόν του ο επιστάτης του λοιμοκαθαρτηρίου. Κάπως αλλοιώς μου τον είπες.<br>
+        — Ναι… ναι, Σταμάτης Γυρατσίνης ήθελα να πω, κύριε επιστάτη, είπε τραυλίζων ο μπαρμπα-Νίκας· δεν θυμούμουν το όνομα καλά.
+        <br><br>
+        Ο επιστάτης επαραξενεύθη.<br>
+        — Τι συγγενής σου είναι αυτός, οπού δεν θυμάσαι το όνομά του; είπε μετά μικρού καγχασμού.
+        <br><br>
+        Ο μπαρμπα-Νίκας ήρχισε να ξύη εν αμηχανία το κρανίον του. Είχε κοιμηθή δύο ώρας μετά το δειλινόν, και όταν εσηκώθη είχε πίει μόνον ένα ρούμι. Ήτο σχετικώς νηφάλιος.
+        <br><br>
+        Αίφνης το βλέμμα του έλαμψεν εκ νοημοσύνης. Έκυψε προς τον επιστάτην και του είπε.<br>
+        — Τον λένε και Καρδαράκη… μα αυτό είναι παρατσούκλι και δεν το δέχεται ο ίδιος… το καθ' αυτό όνομά του είναι Σταμάτης Γυρατσίνης.<br>
+        — Α! έκαμεν ο επιστάτης όστις επείσθη εντελώς.
+        <br><br>
+        Εν τω μεταξύ ο υγειονόμος απηύθυνεν εκ νέου τον λόγον προς τον μικρόσωμον γέροντα.<br>
+        — Και τι γίνεσαι Γυρατσίνη; Γεράσαμε, μπαρμπα-Σταμάτη, γεράσαμε…<br>
+        — Γεράσαμε, κύριε υγειονόμε, ετραύλισε το γερόντιον. […]
+        <br><br>
+        Μόνος ο λιμενάρχης, ο γηραιός πλωτάρχης του Β. Ναυτικού, εφαίνετο έχων υποψίας. Εκύτταζε δυσπίστως το γερόντιον, κι έλεγεν: Αυτός μοιάζει σαν γριά ζαρωμένη. Μετά τινας άλλας διατυπώσεις εδόθη το χαρτί του διορισμού εις τον Σταμάτην Γυρατσίνην, ενεχειρίσθη αυτώ προκαταβολή εκ δύο ταλλήρων, και ο νεωστί διορισθείς βαρδιάνος διετάχθη να είναι εις την θέσιν του εντός της ημέρας της επαύριον. […]
+        <br><br>
+        Η Σκεύω εξηκολούθησε. […]<br>
+        — Το βράδυ-βράδυ πήγα, και ήταν εκεί ο υγειονόμος, κι ο επιστάτης κι ο λιμενάρχης, οι τρεις τους, κλεισμένοι μες στην μέσα κάμαρη… Κι εμάς μας έβαλαν να καρτερούμε στην όξου κάμαρη, για να νυχτώση ακόμα, σαν να τους είχα ορμηνεμένους… Κι άλλοι πέντε' εξ γέροι που καρτερούσαν εκεί, νάρθ' η αράδα τους, να παρουσιαστούν στ' αφεντικά, για να μπουν βαρδιάνοι, μ' επήραν για ξένο, και μ' ερώτησαν κι εγώ τους είπα, πως ήμουν από τα Εικοσιτέσσερα Χωριά. Ύστερα ένας-ένας παρουσιάστηκαν και επήραν το χαρτί τους κι εμβήκαν βαρδιάνοι. Στα υστερινά ήρθεν η αράδα μου να παρουσιαστώ κι εγώ.<br>
+        — Ε! και τότε;<br>
+        — Εγώ εμβήκα μέσα τρέμοντας, και λίγο έλειψε να μου φανή ο ουρανός σφοντύλι… Και πιάστηκα από την πόρτα, για να μην πέσω. Κι' όσο να μβω μέσ' απ' την πόρτα, παρακάλεσα την Παναγιά και μούδωσε θάρρος… Κι' ο υγειονόμος άμα με είδε…;<br>
+        — Α!<br>
+        — … μου λέει, σαν να τον είχα ορμηνεμένον: «Εσύ είσαι ο Σταμάτης ο Γυρατσίνης;… Τι γίνεσαι, Σταμάτη…; Γηράσαμε, Σταμάτη, γηράσαμε…». Κι εγώ τότε, χωρίς να το συλλογισθώ: «Μάλιστα, λέω, εγώ είμαι ο Σταμάτης ο Γυρατσίνης… Τι κάνεις, κυρ-υγειονόμε; είσαι καλά;…» […]
+        <br><br>
+        Ο ιατρός ανεπήδησεν από του στελέχους εφ' ου εκάθητο, διότι σφοδρός γέλως ανετίναξεν όλον το σώμα του, και ησθάνετο την ανάγκην να καγχάση εν ανέσει.<br>
+        — Ω! ντιάλοε! Ω ντιάλοε… τώρα καταλαβαίνω… σ' επήρε για τον πετάμενο… Κι' εσύ σαν σου ήρτε, σα μπούφος, έτοιμο όνομα, το εντέχτης, και επαρατήτηκες από το άλλο;<br>
+        — Ναι. […]<br>
+        — Ω ντιάολο! το στραβούλιακα… Κι εσύ είπες μέσα σου, τι τέλω να γυρεύω άλλο όνομα, αφού μου ντίνει αυτό ο υγειονόμος; Έτσι;<br>
+        — Ναι. […]<br>
+        — Ε! και ύστερα… ντεν ηύρες καμμία ντυσκολία, και οι άλλοι, έκοντας κολαούζο τον υγειονόμο, σ' επαραντέχτηκαν για Σταμάτη Γυρατσίνη και σε ντιώρισαν βαρντιάνο…<br>
+        — Ο επιστάτης κάτι υποπτεύθηκε, απήντησεν η Σκεύω.<br>
+        — Α!<br>
+        — Εγύρισε και είπε του Νίκα: «Μα εσύ αυτόν που τον εσύστησες τον έλεγες Καρδαράκη, τώρα πώς βρίσκεσαι Γυρατσίνης;».<br>
+        — Α, κι ο Νίκας τι του είπε;<br>
+        — Ο Νίκας τα εχρειάστηκε… λίγο έλειψε να τα χάση.<br>
+        — Κι ύστερα πώς μπόρεσε και τα μπάλωσε;<br>
+        — Τον εφώτισε ο Θεός και του είπε, του επιστάτη: «Τον λένε και Καρδαράκη, μα αυτό είναι το παρατσούκλι, και του κακοφαίνεται… το καθ' αυτό όνομά του είναι Γυρατσίνης».
+        <br><br>
+        Ο κ. Βουνδ εκάγχασε θορυβωδέστερον παρά ποτέ.<br>
+        — Μπράφο! Μπράφο! χοχ! πραίχτιγ! Φερμάχτ!<br><br>
+        Ήναψε το τσιμπούκι του, εισέπνευσε πεντάκις ή εξάκις, πλαταγίζων τα χείλη και επανέλαβε.<br>
+        — Κι ο επιστάτης εγελάστη μ' αυτό;<br>
+        — Γελάστηκε.<br>
+        — Ύστερα, σούντωκαν το καρτί σου, κι ήρτες;…<br>
+        — Μου τόδωκαν…; Μονάχα ο λιμενάρχης είχε ακόμα κάποια υποψία, κι' έλεε: «Αυτός φαίνεται σα γριά ζαρωμένη!». […]
+        <span class="citation">Αλέξανδρου Παπαδιαμάντη, <em>Άπαντα</em>, Εταιρεία Ελληνικών Εκδόσεων, Αθήνα, χ.χ., τομ. Β΄, σ. 448-449, 460-462</span>
+      </div>
+
+      <div class="tf-statement">
+        Στο παραπάνω απόσπασμα διακρίνεται η <strong>θαμιστική αφήγηση</strong>.
+      </div>
+
+      <div class="btn-row" id="tf-btns-3">
+        <button class="btn-tf" id="q3-true"  onclick="selectTF(3,'true')" >✓ Σωστό</button>
+        <button class="btn-tf" id="q3-false" onclick="selectTF(3,'false')">✗ Λάθος</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkTF(3)">Έλεγχος</button>
+        <button class="btn-reset" onclick="resetTF(3)">Επαναφορά</button>
+      </div>
+      <div class="feedback-box" id="fb-3"></div>
+    </div>
+
+    <!-- SLIDE 5 — ΕΡΩΤΗΣΗ 4 -->
+    <div class="slide" data-slide="5">
+      <div class="activity-header">
+        <span class="activity-badge">Ερώτηση 4</span>
+        <span class="activity-title">Γ. Βιζυηνός, Το αμάρτημα της μητρός μου</span>
+      </div>
+
+      <div class="ekfonisi">
+        <strong>Εκφώνηση:</strong> Να χαρακτηρίσεις τις παρακάτω διατυπώσεις ως Σωστές ή Λανθασμένες με κριτήριο τα είδη της αφηγηματικής συχνότητας.
+      </div>
+
+      <p style="font-size:0.92em; color:#6b3a3a; margin-bottom:10px; font-style:italic;">Ο Γιωργής αναφέρεται στην αδελφή του την Αννιώ, που ήταν το μοναδικό κορίτσι της οικογένειας και στο οποίο η μητέρα είχε ιδιαίτερη αδυναμία.</p>
+
+      <div class="literary-quote" style="max-height:360px; overflow-y:auto;">
+        <strong style="font-style:normal; color:#7c2d12; font-size:0.88em; letter-spacing:0.05em;">Αφήγηση του Γιωργή:</strong><br><br>
+        Ἄλλην ἀδελφήν δέν εἴχομεν παρά μόνον τήν Ἀννιώ. Ἦτον ἡ χαϊδεμμένη τῆς μικρᾶς ἡμῶν οἰκογενείας καί τήν ἠγαπῶμεν ὅλοι. Ἀλλ' ἀπ' ὅλους περισσότερον τήν ἠγάπα ἡ μήτηρ μας. Εἰς τήν τράπεζαν τήν ἐκάθιζε πάντοτε πλησίον της καί ἀπό ὅ,τι εἴχομεν ἔδιδε τό καλύτερον εἰς ἐκείνην. Καί ἐνῷ ἡμᾶς μᾶς ἐνέδυε χρησιμοποιοῦσα τά φορέματα τοῦ μακαρίτου πατρός μας, διά τήν Ἀννιώ ἠγόραζε συνήθως νέα.
+        <br><br>
+        Ὥς καί εἰς τά γράμματα δέν τήν ἐβίαζεν. Ἄν ἤθελεν, ἐπήγαινεν εἰς τό σχολεῖον, ἄν δέν ἤθελεν, ἔμενεν εἰς τήν οἰκίαν. Πρᾶγμα τό ὁποῖον εἰς ἡμᾶς διά κανένα λόγον δέν θά ἐπετρέπετο. Ἐξαιρέσεις τοιαῦται ἔπρεπε, φυσικῷ τῷ λόγῳ, νά γεννήσουν ζηλοτυπίας βλαβεράς μεταξύ παιδίων, μάλιστα μικρῶν, ὅπως ἤμεθα καί ἐγώ καί οἱ ἄλλοι δύο μου ἀδελφοί, καθ' ἥν ἐποχήν συνέβαινον ταῦτα.
+        <br><br>
+        <strong style="font-style:normal; color:#7c2d12; font-size:0.88em; letter-spacing:0.05em;">Αφήγηση της μητέρας:</strong><br><br>
+        Σάν ἐγεννήθηκε τό παιδί καί βγῆκεν ἀληθινά κορίτσι, τότε πιά ἦρθεν ἡ καρδιά στόν τόπο της. Τό ὠνομάσαμεν Ἀννιώ, τό ἴδιο τό ὄνομα πού εἶχε τό σχωρεμένο, γιά νά μήν ποφαίνεται πώς μᾶς λείπει κανείς ἀπό τό σπίτι. — Ευχαριστῶ σε, Θεέ μου! ἔλεγα νύχτα καί μέρα. Εὐχαριστῶ σε ἡ ἁμαρτωλή, πού ἐσήκωσες τήν ἐντροπή καί ἐξάλειψες τήν ἁμαρτία μου!
+        <br><br>
+        Καί εἴχαμε πιά τήν Ἄννιώ σάν τά μάτια μας. Καί ἐζούλευες ἐσύ, καί ἔγινες τοῦ θανατᾶ ἀπό τή ζούλια σου. Ὁ πατέρας σου σέ ἔλεγε «τό ἀδικημένο του», γιατί σ' ἀπόκοψα<sup>1</sup> πολύ νωρίς, καί μ' ἐμάλωνε καμμιά φορά, γιατί σέ παραμελοῦσα. Κ' ἐμένα ἡ καρδιά μου ἐρράγιζε, σάν σ' ἔβλεπα νά χαλνᾷς. Μά, ἔλα πού δέν ἐμποροῦσα ν' ἀφήσω τήν Ἀννιώ ἀπό τά χέρια μου! Ἐφοβούμην πώς κάθε στιγμή μπορεῖ νά τῆς συμβῇ τίποτε. Καί ὁ πατέρας σου ὁ μακαρίτης, ὅσο καί ἄ μάλωνε κ' ἐκεῖνος, τήν ἤθελε πιά νά μή στάξῃ καί τήν βρέξῃ!
+        <span class="footnote"><sup>1</sup> αποκόβω· απογαλακτίζω βρέφος, παύω να τρέφω βρέφος με το μητρικό γάλα</span>
+      </div>
+
+      <div class="tf-statement">
+        Στο παραπάνω απόσπασμα διακρίνεται η <strong>μοναδική αφήγηση</strong>.
+      </div>
+
+      <div class="btn-row" id="tf-btns-4">
+        <button class="btn-tf" id="q4-true"  onclick="selectTF(4,'true')" >✓ Σωστό</button>
+        <button class="btn-tf" id="q4-false" onclick="selectTF(4,'false')">✗ Λάθος</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkTF(4)">Έλεγχος</button>
+        <button class="btn-reset" onclick="resetTF(4)">Επαναφορά</button>
+      </div>
+      <div class="feedback-box" id="fb-4"></div>
+    </div>
+
+    <!-- SLIDE 6 — ΕΡΩΤΗΣΗ 5 -->
+    <div class="slide" data-slide="6">
+      <div class="activity-header">
+        <span class="activity-badge">Ερώτηση 5</span>
+        <span class="activity-title">Κ. Καρυωτάκης, Τρεις μεγάλες χάρες</span>
+      </div>
+
+      <div class="ekfonisi">
+        <strong>Εκφώνηση:</strong> Να χαρακτηρίσεις τις παρακάτω διατυπώσεις ως Σωστές ή Λανθασμένες με κριτήριο τα είδη της αφηγηματικής συχνότητας.
+      </div>
+
+      <div class="literary-quote" style="max-height:360px; overflow-y:auto;">
+        Εἶναι ἕνας ἀγαθὸς γεροντάκος. Ἔπειτα ἀπὸ τριάντα χρόνων ὑπηρεσία, ἔχει νὰ διατρέξει ὅλους τοὺς βαθμούς. Γραφεὺς στὸ πρωτόκολλο. Πάντα ἔκανε τὴ δουλειά του εὐσυνείδητα, σχεδὸν μὲ κέφι. Σκυμμένος ἀπὸ τὸ πρωὶ ὡς τὸ βράδυ στὸ παρθενικὸ βιβλίο του, περνοῦσε τοὺς ἀριθμοὺς καὶ ἀντέγραφε τὶς περιλήψεις. Κάποτε, μετὰ τὴν καταχώριση ἑνὸς εἰσερχομένου ἢ ἑνὸς ἐξερχομένου, ἐτράβαγε μιὰ γραμμὴ ποὺ ἔβγαινε ἀπὸ τὴν τελευταία στήλη καὶ προχωροῦσε πρὸς τὸ περιθώριο, ἔτσι σὰν ἀπόπειρα φυγῆς. Αὐτὴ ἡ οὐρὰ δὲν εἶχε θέση ἐκεί μέσα, ὅμως τὴν τραβοῦσε βιαστικά, μὲ πεῖσμα, θέλοντας νὰ ἐκφράσει τὸν ἑαυτό του. Ἂν ἔσκυβε κανεὶς πάνω στὴν ἁπλὴ καὶ ἴσια γραμμούλα, θὰ διάβαζε τὴν ἱστορία τοῦ καλοῦ ὑπαλλήλου.
+        <br><br>
+        Νέος ἀκόμη, μπαίνοντας στὴν ὑπηρεσία, ἐχαιρέτησε μὲ συγκαταβατικὸ χαμόγελο τοὺς συναδέλφους του. Ἔτυχε νὰ καθίσει σ᾿ αὐτὴν τὴν καρέκλα. Κ᾿ ἔμεινε ἐκεῖ. Ἦρθαν ἄλλοι ἀργότερα, ἔφυγαν, ἐπέθαναν. Αὐτὸς ἔμεινε ἐκεῖ. Οἱ προϊστάμενοί του τὸν θεωροῦσαν ἀπαραίτητο. Εἶχε ἀποκτήσει μία φοβερή, μοιραία εἰδικότητα.
+        <br><br>
+        Ἐλάχιστα πρακτικὸς ἄνθρωπος. Τίμιος, ἰδεολόγος. Μ᾿ ὅλη τὴ φτωχική του ἐμφάνιση, εἶχε ἀξιώσεις εὐπατρίδου. Ἕνα πρωί, ἐπειδὴ ὁ Διευθυντής του τοῦ μίλησε κάπως φιλικότερα, ἐπῆρε τὸ θάρρος, τοῦ ἀπάντησε στὸν ἑνικό, ἐγέλασε μάλιστα ἀνοιχτόκαρδα καὶ τὸν χτύπησε στὸν ὦμο. Ὁ κύριος Διευθυντὴς τότε, μ᾿ ἕνα παγωμένο βλέμμα, τὸν ἐκάρφωσε πάλι στὴ θέση του. Κ᾿ ἔμεινε ἐκεῖ.
+        <br><br>
+        Τώρα, βγαίνοντας κάθε βράδυ ἀπὸ τὸ γραφεῖο, παίρνοντας τὸν παραλιακὸ δρόμο, βιαστικὸς βιαστικός, γυρίζοντας δαιμονισμένα τὸ μπαστούνι του μὲ τὴν ὡραία, νικέλινη λαβή, γράφει κύκλους μέσα στὸ ἄπειρο. Καὶ μέσα στοὺς κύκλους τὰ σημεῖα τοῦ ἀπείρου. Ὅταν περάσει τὰ τελευταῖα σπίτια, θ᾿ ἀφήσει πάντα νὰ ξεφύγει ψηλὰ μὲ ὁρμὴ τὸ μπαστούνι του, ἔτσι σὰν ἀπόπειρα λυτρωμοῦ.
+        <br><br>
+        Μετὰ τὸν περίπατο τρυπώνει σὲ μία ταβέρνα. Κάθεται μόνος, ἀντίκρυ στὰ μεγάλα, φρεσκοβαμμένα βαρέλια. Ὅλα ἔχουν γραμμένο πάνω ἀπ᾿ τὴν κάνουλα, μὲ παχιά, μαῦρα γράμματα, τ᾿ ὄνομά τους: Πηνειός, Γάγγης, Μισσισσιππῆς, Τάρταρος. Κοιτάζει ἐκστατικὸς μπροστά του. Τὸ τέταρτο ποτηράκι γίνεται ποταμόπλοιο, μὲ τὸ ὁποῖο ταξιδεύει σὲ θαυμάσιους, ἄγνωστους κόσμους. Ἀπὸ τὰ πυκνὰ δέντρα, πίθηκοι σκύβουν καὶ τὸν χαιρετᾶνε. Εἶναι εὐτυχής.
+        <span class="citation">Κ.Γ. Καρυωτάκης, <em>Ποιήματα και πεζά</em>, επιμ. Γ. Π. Σαββίδης, Εστία: Νέα ελληνική βιβλιοθήκη</span>
+      </div>
+
+      <div class="tf-statement">
+        Στο παραπάνω απόσπασμα διακρίνεται η <strong>θαμιστική αφήγηση</strong>.
+      </div>
+
+      <div class="btn-row" id="tf-btns-5">
+        <button class="btn-tf" id="q5-true"  onclick="selectTF(5,'true')" >✓ Σωστό</button>
+        <button class="btn-tf" id="q5-false" onclick="selectTF(5,'false')">✗ Λάθος</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkTF(5)">Έλεγχος</button>
+        <button class="btn-reset" onclick="resetTF(5)">Επαναφορά</button>
+      </div>
+      <div class="feedback-box" id="fb-5"></div>
+    </div>
+
+  </div><!-- /slide-container -->
+
+  <!-- NAVIGATION -->
+  <div class="navigation">
+    <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)" disabled>◀ Προηγούμενο</button>
+    <span class="slide-counter" id="slide-counter">Σελίδα 1 από 6</span>
+    <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Επόμενο ▶</button>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  // ── SLIDE NAVIGATION ─────────────────────────────────────────────
+  var currentSlide = 1;
+  var totalSlides = 6;
+
+  function changeSlide(dir) {
+    var slides = document.querySelectorAll('.slide');
+    slides[currentSlide - 1].classList.remove('active');
+    currentSlide += dir;
+    slides[currentSlide - 1].classList.add('active');
+    // scroll slide container to top
+    document.querySelector('.slide-container').scrollTop = 0;
+    updateNav();
+  }
+
+  function updateNav() {
+    document.getElementById('prevBtn').disabled = (currentSlide === 1);
+    document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
+    document.getElementById('slide-counter').textContent = 'Σελίδα ' + currentSlide + ' από ' + totalSlides;
+    document.getElementById('progress-fill').style.width = ((currentSlide / totalSlides) * 100) + '%';
+  }
+
+  updateNav();
+
+  // ── TRUE / FALSE LOGIC ────────────────────────────────────────────
+  // correct answers: 1=true, 2=true, 3=false, 4=false, 5=true
+  var correctAnswers = { 1: 'true', 2: 'true', 3: 'false', 4: 'false', 5: 'true' };
+
+  var feedbackTexts = {
+    1: {
+      correct: 'ΣΩΣΤΟ. Ο αφηγητής αφηγείται ό,τι έγινε μία φορά.',
+      wrong:   'Η αφήγηση είναι μοναδική — ο αφηγητής αφηγείται ό,τι έγινε μία φορά.'
+    },
+    2: {
+      correct: 'ΣΩΣΤΟ. Ο αφηγητής αφηγείται μία φορά κάτι που έγινε πολλές φορές.',
+      wrong:   'Η αφήγηση είναι θαμιστική — ο αφηγητής αφηγείται μία φορά κάτι που έγινε πολλές φορές.'
+    },
+    3: {
+      correct: 'ΛΑΘΟΣ. Η αφήγηση είναι επαναληπτική, καθώς κάτι που έγινε μία φορά επαναλαμβάνεται περισσότερες φορές.',
+      wrong:   'ΛΑΘΟΣ. Η αφήγηση είναι επαναληπτική, καθώς κάτι που έγινε μία φορά επαναλαμβάνεται περισσότερες φορές.'
+    },
+    4: {
+      correct: 'ΛΑΘΟΣ. Η αφήγηση είναι επαναληπτική, καθώς κάτι που έγινε μία φορά επαναλαμβάνεται περισσότερες φορές.',
+      wrong:   'ΛΑΘΟΣ. Η αφήγηση είναι επαναληπτική, καθώς κάτι που έγινε μία φορά επαναλαμβάνεται περισσότερες φορές.'
+    },
+    5: {
+      correct: 'ΣΩΣΤΟ. Η αφήγηση είναι θαμιστική, καθώς κάτι που έγινε πολλές φορές ο αφηγητής το αφηγείται μία φορά.',
+      wrong:   'Η αφήγηση είναι θαμιστική, καθώς κάτι που έγινε πολλές φορές ο αφηγητής το αφηγείται μία φορά.'
+    }
+  };
+
+  var userAnswers = {};
+
+  function selectTF(qNum, val) {
+    userAnswers[qNum] = val;
+    var trueBtn  = document.getElementById('q' + qNum + '-true');
+    var falseBtn = document.getElementById('q' + qNum + '-false');
+    trueBtn.classList.remove('selected-true', 'selected-false');
+    falseBtn.classList.remove('selected-true', 'selected-false');
+    if (val === 'true')  trueBtn.classList.add('selected-true');
+    if (val === 'false') falseBtn.classList.add('selected-false');
+  }
+
+  function checkTF(qNum) {
+    var fb = document.getElementById('fb-' + qNum);
+    if (!userAnswers[qNum]) {
+      fb.className = 'feedback-box show error';
+      fb.innerHTML = '<span class="feedback-icon">⚠️</span> Επίλεξε «Σωστό» ή «Λάθος» πριν τον έλεγχο.';
+      return;
+    }
+    var isCorrect = (userAnswers[qNum] === correctAnswers[qNum]);
+    if (isCorrect) {
+      fb.className = 'feedback-box show success';
+      fb.innerHTML = '<span class="feedback-icon">✅</span> ' + feedbackTexts[qNum].correct;
+    } else {
+      fb.className = 'feedback-box show error';
+      fb.innerHTML = '<span class="feedback-icon">❌</span> ' + feedbackTexts[qNum].wrong;
+    }
+  }
+
+  function resetTF(qNum) {
+    delete userAnswers[qNum];
+    var trueBtn  = document.getElementById('q' + qNum + '-true');
+    var falseBtn = document.getElementById('q' + qNum + '-false');
+    trueBtn.classList.remove('selected-true', 'selected-false');
+    falseBtn.classList.remove('selected-true', 'selected-false');
+    var fb = document.getElementById('fb-' + qNum);
+    fb.className = 'feedback-box';
+    fb.innerHTML = '';
+  }
+</script>
+</body>
+</html>

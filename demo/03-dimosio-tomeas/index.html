@@ -1,0 +1,65 @@
+<meta charset="utf-8">
+<title>ΤΝ στον Δημόσιο Τομέα</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700;800&family=Literata:opsz,wght@7..72,400&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#EEF1EF;--surface:#FFF;--ink:#121C18;--muted:#5B6B64;--faint:#87958E;
+ --line:#D2DAD5;--line-strong:#B4C0BA;--accent:#1F5E45;
+ --display:"Alegreya Sans","Segoe UI",Arial,sans-serif;--body:"Literata",Georgia,serif;
+ --mono:"Roboto Mono",Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --paper:#0D1411;--surface:#141E1A;--ink:#E4EAE6;--muted:#93A29B;--faint:#71807A;
+ --line:#243129;--line-strong:#33443B;--accent:#54BC8E;}}
+:root[data-theme="dark"]{--paper:#0D1411;--surface:#141E1A;--ink:#E4EAE6;--muted:#93A29B;
+ --faint:#71807A;--line:#243129;--line-strong:#33443B;--accent:#54BC8E;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;
+ line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:clamp(36px,7vw,72px) clamp(20px,5vw,48px) 64px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+ color:var(--accent);margin:0 0 18px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,5.4vw,50px);line-height:1.06;
+ letter-spacing:-.018em;margin:0 0 14px;text-wrap:balance}
+.intro{margin:0 0 34px;color:var(--muted);font-size:15.5px;max-width:58ch}
+ul{list-style:none;padding:0;margin:0;border-top:1px solid var(--line-strong)}
+li{border-bottom:1px solid var(--line)}
+li a{display:flex;gap:16px;align-items:baseline;text-decoration:none;color:var(--ink);
+ padding:16px 8px 16px 0}
+li a:hover,li a:focus-visible{color:var(--accent);background:var(--surface)}
+li a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.n{font-family:var(--mono);font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+.t{flex:1;font-size:16.5px;line-height:1.4}
+</style>
+<div class="wrap">
+  <p class="eyebrow">Σειρά 6 ενοτήτων · SCORM 1.2</p>
+  <h1>Τεχνητή Νοημοσύνη στον Δημόσιο Τομέα</h1>
+  <p class="intro">Επιλέξτε ενότητα. Κάθε ενότητα ανοίγει στη δική της σελίδα και
+     κρατά την πρόοδό σας σε αυτή τη συσκευή.</p>
+  <ul>
+      <li><a href="enotita-1/index.html">
+        <span class="n">01</span>
+        <span class="t">Στρατηγικό και Κανονιστικό Πλαίσιο</span>
+      </a></li>
+      <li><a href="enotita-2/index.html">
+        <span class="n">02</span>
+        <span class="t">Το Κεντρικό Εργαλείο, Microsoft Copilot</span>
+      </a></li>
+      <li><a href="enotita-3/index.html">
+        <span class="n">03</span>
+        <span class="t">Εξειδικευμένα Εργαλεία Generative AI</span>
+      </a></li>
+      <li><a href="enotita-4/index.html">
+        <span class="n">04</span>
+        <span class="t">Προηγμένες Εφαρμογές στην Ελλάδα (Case Studies)</span>
+      </a></li>
+      <li><a href="enotita-5/index.html">
+        <span class="n">05</span>
+        <span class="t">Κανόνες Υπεύθυνης Χρήσης</span>
+      </a></li>
+      <li><a href="enotita-6/index.html">
+        <span class="n">06</span>
+        <span class="t">Επίλογος - Η Ανάγκη της Συνεχούς Εκπαίδευσης (CPD)</span>
+      </a></li>
+  </ul>
+</div>

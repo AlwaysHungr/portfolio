@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Κυριότερες Κατηγορίες Ελατηρίων βάσει του τύπου καταπόνησης που αναλαμβάνουν</title>
+<style>
+/* ===== base ===== */
+*{box-sizing:border-box}
+:root{
+  --ink:#16273A; --muted:#5B6B7B; --paper:#FFFFFF; --bg:#F1F5F9;
+  --brand:#1F5FA8; --brand2:#0E3E7A; --accent:#F0A63A; --ok:#2E8B57; --bad:#C63B3B; --line:#D9E2EC;
+  --radius:16px; --topH:56px;
+}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);
+  font:16px/1.55 "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+.app{height:100dvh;display:flex;flex-direction:column}
+/* ===== header ===== */
+.top{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 10px 14px -10px rgba(0,0,0,.15);z-index:5}
+.top .ttl{font-weight:800;font-size:17px;letter-spacing:.2px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .lbl{font-size:13px;color:var(--muted);white-space:nowrap}
+.prog{height:4px;background:var(--line);flex:0 0 auto}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));transition:width .4s}
+/* ===== screens ===== */
+.screens{flex:1;min-height:0;position:relative}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:auto;padding:18px 22px}
+.screen.on{display:flex;animation:fadein .35s}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wrap{width:100%;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0;gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:0 6px 18px -12px rgba(0,0,0,.18)}
+.card.pad{padding:22px 26px}
+h1{font-size:clamp(24px,3.4vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.3px}
+h2{font-size:clamp(19px,2.2vw,26px);margin:0 0 8px}
+h3{font-size:17px;margin:0 0 6px}
+p{margin:0 0 10px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:none;color:var(--brand);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#E8F0FA;color:var(--brand2);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
+/* ===== buttons ===== */
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:11px 18px;font-weight:800;
+  background:var(--brand);color:#fff;box-shadow:0 8px 18px -10px rgba(31,95,168,.8);transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px);background:var(--brand2)}
+.btn.ghost{background:transparent;color:var(--brand);box-shadow:none;border:2px solid var(--brand)}
+.btn.ghost:hover{background:#E8F0FA}
+.btn.sm{padding:8px 13px;font-size:14px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.btn[hidden]{display:none}
+/* ===== bottom nav ===== */
+.nav{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:var(--paper);border-top:1px solid var(--line)}
+.dots{display:flex;gap:8px;align-items:center}
+.dots button{width:11px;height:11px;border-radius:50%;border:2px solid var(--brand);background:transparent;padding:0}
+.dots button.on{background:var(--brand);transform:scale(1.25)}
+.dots button.done{background:#9DBCE3;border-color:#9DBCE3}
+/* ===== images: alt-tooltip + zoom ===== */
+.zi{position:relative;display:inline-block;max-width:100%;cursor:zoom-in;border-radius:12px;line-height:0}
+.zi img{border-radius:12px;width:100%;height:auto}
+.zi .mag{position:absolute;right:9px;top:9px;width:30px;height:30px;border-radius:50%;background:#0E2233;color:#fff;
+  display:grid;place-items:center;font-size:15px;opacity:.85;pointer-events:none;line-height:1}
+.zi::after{content:attr(data-alt);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%);
+  background:#0E2233;color:#fff;font-size:13px;line-height:1.35;padding:8px 11px;border-radius:9px;max-width:min(320px,78vw);
+  width:max-content;white-space:normal;text-align:center;display:none;z-index:31;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.zi::before{content:"";position:absolute;left:50%;bottom:calc(100% + 3px);transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:#0E2233;display:none;z-index:31;pointer-events:none}
+.zi:hover::after,.zi:focus-visible::after,.zi.on::after,.zi:hover::before,.zi:focus-visible::before,.zi.on::before{display:block;animation:tipin .18s}
+.zi.below::after{bottom:auto;top:calc(100% + 9px)}
+.zi.below::before{bottom:auto;top:calc(100% + 3px);border-top-color:transparent;border-bottom-color:#0E2233}
+.zi.inset::after{bottom:auto;top:14px;left:14px;transform:none;max-width:70%;text-align:left}
+.zi.inset::before{display:none!important}
+.zi:hover,.zi:focus-visible,.zi.on{z-index:30}
+@keyframes tipin{from{opacity:0;transform:translate(-50%,4px)}to{opacity:1}}
+.zi.inset:hover::after{animation:none}
+figure{margin:0}
+figcaption{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:6px}
+/* lightbox */
+.lbx{position:fixed;inset:0;background:rgba(6,16,28,.92);display:none;z-index:90;padding:16px;overflow:auto}
+.lbx.on{display:grid;place-items:center}
+.lbx .box{width:100%;max-width:1200px;min-width:0;text-align:center}
+.lbx img{width:auto;height:auto;max-width:100%;max-height:82vh;margin:0 auto;border-radius:8px;background:#fff}
+.lbx .cap{color:#DCE6F0;font-size:14px;margin-top:10px}
+.lbx .x{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:#0E2233;color:#fff;border:2px solid #fff;
+  font-size:24px;line-height:1;display:grid;place-items:center;z-index:91;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+/* ===== activities ===== */
+.q{display:flex;flex-direction:column;gap:12px}
+.q .stem{font-weight:700;font-size:17px}
+.fb{border-radius:12px;padding:12px 14px;border:2px solid;font-size:15px}
+.fb.ok{border-color:var(--ok);background:#EAF7EF;color:#1B5E3A}
+.fb.no{border-color:var(--bad);background:#FBEDED;color:#8A2626}
+.fb.rev{border-color:var(--accent);background:#FFF6E5;color:#6B4A00}
+.fb[hidden]{display:none}
+.steps{display:flex;gap:6px;flex-wrap:wrap}
+.steps i{width:22px;height:8px;border-radius:4px;background:var(--line)}
+.steps i.on{background:var(--brand)} .steps i.ok{background:var(--ok)} .steps i.no{background:var(--bad)}
+/* results ring */
+.ring{width:150px;height:150px}
+.ring circle{fill:none;stroke-width:12}
+.ring .bg{stroke:var(--line)} .ring .v{stroke:var(--ok);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .8s}
+.ring text{font-weight:900;font-size:26px;fill:var(--ink);text-anchor:middle;dominant-baseline:middle}
+.band{border-left:8px solid var(--accent);border-radius:12px;padding:12px 16px;background:#FFF9EE}
+.band.mute{opacity:.45;border-left-color:var(--line);background:#F7F9FB}
+/* misc */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.two>*{min-width:0;min-height:0}
+.grow{flex:1;min-height:0;overflow:auto}
+.center{text-align:center}
+.src{font-size:12.5px;color:var(--muted)}
+.srclist{columns:2;column-gap:22px;font-size:13px;color:var(--muted)}
+.srclist li{break-inside:avoid;margin-bottom:6px}
+
+/* ===================== concept map / drag & drop ===================== */
+.lvbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.lvtag{font-size:11.5px;font-weight:800;letter-spacing:.1em;color:#fff;background:var(--lv,#1F5FA8);padding:5px 11px;border-radius:999px;white-space:nowrap}
+.lvttl{font-weight:800;font-size:clamp(17px,2.2vw,22px);min-width:0}
+.hintline{font-size:13px;color:var(--muted);margin:0}
+.mapx{display:flex;flex-direction:column;align-items:center;gap:0}
+.rootbox{background:var(--lv,#1F5FA8);color:#fff;border-radius:14px;padding:11px 20px;font-weight:800;text-align:center;max-width:660px;
+  box-shadow:0 10px 20px -14px rgba(0,0,0,.6);font-size:15.5px}
+.stemx{width:2px;height:20px;background:var(--line);flex:0 0 auto}
+.kids{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:16px;position:relative;padding-top:24px}
+.kids>*{min-width:0;min-height:0}
+.kids::before{content:"";position:absolute;top:0;left:16%;right:16%;height:2px;background:var(--line)}
+.kids.one::before{display:none}
+.znode{position:relative;background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--lv,#1F5FA8);
+  border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:9px}
+.znode::before{content:"";position:absolute;top:-24px;left:50%;width:2px;height:24px;background:var(--line)}
+.zk{font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--lv,#1F5FA8)}
+.zd{margin:0;font-size:14px;line-height:1.45}
+.zd b{font-weight:800}
+.znode .fb{font-size:13px;padding:9px 11px;line-height:1.45}
+.zdrop{border:2px dashed #B9C7D6;border-radius:12px;min-height:54px;display:flex;align-items:center;justify-content:safe center;
+  gap:8px;padding:9px 32px 9px 10px;background:#F7FAFD;text-align:center;font-weight:700;font-size:14.5px;cursor:pointer;position:relative;transition:.15s}
+.zdrop.over{border-color:var(--lv,#1F5FA8);background:#EAF2FC;border-style:solid}
+.zdrop.filled{border-style:solid;border-color:var(--lv,#1F5FA8);background:#fff}
+.zdrop.good{border-color:var(--ok);background:#EAF7EF}
+.zdrop.bad{border-color:var(--bad);background:#FBEDED}
+.zdrop.rev{border-color:var(--accent);background:#FFF6E5}
+.zdrop.good::after,.zdrop.bad::after,.zdrop.rev::after{position:absolute;right:6px;top:6px;width:22px;height:22px;border-radius:50%;
+  display:grid;place-items:center;font-size:13px;font-weight:900;background:#fff;z-index:44;line-height:1}
+.zdrop.good::after{content:"✓";color:var(--ok);box-shadow:0 0 0 2px var(--ok)}
+.zdrop.bad::after{content:"✗";color:var(--bad);box-shadow:0 0 0 2px var(--bad)}
+.zdrop.rev::after{content:"✓";color:#8A6100;box-shadow:0 0 0 2px var(--accent)}
+.zph{color:var(--muted);font-weight:600;font-size:13.5px}
+.zdrop.zimg{min-height:110px;padding:7px 32px 7px 7px}
+/* pool */
+.dcpool{display:flex;flex-wrap:wrap;gap:9px;justify-content:safe center;background:#EDF2F8;border:1px solid var(--line);
+  border-radius:14px;padding:11px}
+.dc{border:2px solid var(--line);background:var(--paper);border-radius:11px;padding:9px 13px;font-weight:700;font-size:14px;
+  text-align:center;touch-action:none;transition:transform .15s,border-color .15s,background .15s;position:relative;line-height:1.3;color:var(--ink)}
+.dc:hover{border-color:var(--lv,#1F5FA8);transform:translateY(-1px)}
+.dc.sel{border-color:var(--lv,#1F5FA8);background:#EAF2FC;box-shadow:0 0 0 3px rgba(31,95,168,.18)}
+.dc.used{opacity:.45}
+.dc.lifted{opacity:.3}
+.act.locked .dc{cursor:default;opacity:.5;transform:none}
+.act.locked .zdrop{cursor:default}
+.dc.dci{width:118px;padding:6px}
+.dc.dci .zi{display:block;width:100%;height:84px}
+.dc.dci .zi img{width:100%;height:100%;object-fit:contain;background:#fff;border-radius:8px}
+.dc.dci .mag{display:none}
+.dc .zi,.zdrop .zi{cursor:pointer}
+.zdrop .zi{display:block;width:112px;height:92px}
+.zdrop .zi img{width:100%;height:100%;object-fit:contain;background:#fff;border-radius:8px}
+.zdrop .mag{display:none}
+.zoomb{position:absolute;right:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#0E2233;color:#fff;border:1px solid #fff;
+  font-size:12px;line-height:1;display:grid;place-items:center;z-index:46;padding:0;opacity:.9}
+.zdrop .zoomb{top:auto;bottom:5px;right:5px}
+.dragx{position:fixed;z-index:80;transform:translate(-50%,-50%) rotate(-2deg);pointer-events:none;background:#fff;
+  border:2px solid var(--lv,#1F5FA8);border-radius:11px;padding:9px 13px;font-weight:700;font-size:14px;text-align:center;
+  box-shadow:0 16px 32px rgba(0,0,0,.3)}
+.dragx .zi{display:block;width:100%;height:84px}
+.dragx .zi img{width:100%;height:100%;object-fit:contain}
+.dragx .zoomb,.dragx .mag{display:none}
+.actbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
+.scoreline{font-weight:800;font-size:14.5px}
+.scoreline[hidden]{display:none}
+/* cover coil */
+.coil{width:120px;height:56px;overflow:visible}
+.coil path{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round}
+.coilw{animation:bob 2.6s ease-in-out infinite;transform-origin:50% 50%}
+@keyframes bob{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.74)}}
+.recap{list-style:none;margin:0;padding:0;font-size:13.5px}
+.recap li{display:flex;gap:9px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.recap b{flex:0 0 88px;color:var(--muted);font-weight:800;font-size:12.5px}
+.kwbox{display:flex;flex-direction:column;gap:14px}
+@media (max-width:760px){
+  .screen{padding:12px 12px}
+  .two{grid-template-columns:minmax(0,1fr)}
+  .srclist{columns:1}
+  .top .ttl{font-size:15px}
+  h1{font-size:24px}
+  .kids{padding-top:0;grid-template-columns:minmax(0,1fr)}
+  .kids::before{display:none}
+  .znode::before{display:none}
+  .stemx{display:none}
+  .recap b{flex:0 0 74px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="ttl">Κυριότερες Κατηγορίες Ελατηρίων βάσει του τύπου καταπόνησης που αναλαμβάνουν</div>
+    <div class="lbl" id="lbl">Εξώφυλλο</div>
+  </header>
+  <div class="prog"><i id="prog"></i></div>
+
+  <main class="screens" id="screens">
+
+    <!-- 1. ΕΞΩΦΥΛΛΟ -->
+    <section class="screen on" data-name="Εξώφυλλο">
+      <div class="wrap">
+        <div class="card pad" style="flex:1;display:flex;align-items:center;gap:26px;flex-wrap:wrap">
+          <div style="flex:1 1 340px;min-width:0">
+            <svg class="coil" viewBox="0 0 120 56" aria-hidden="true"><g class="coilw"><path d="M8 28 L20 10 L32 46 L44 10 L56 46 L68 10 L80 46 L92 10 L104 46 L112 28"/></g></svg>
+            <div class="eyebrow">ΕΝΝΟΙΟΛΟΓΙΚΟΣ ΧΑΡΤΗΣ</div>
+            <h1>Κυριότερες Κατηγορίες Ελατηρίων βάσει του τύπου καταπόνησης που αναλαμβάνουν</h1>
+            <p class="chips">
+              <span class="chip">Ελατήρια</span><span class="chip">σχεδίαση ελατηρίων</span><span class="chip">τύποι ελατηρίων</span>
+              <span class="chip">σπειροειδές ελατήριο</span><span class="chip">ελατήριο πολλαπλών ελασμάτων</span><span class="chip">ελικοειδές ελατήριο</span>
+            </p>
+            <p style="margin-top:18px"><button class="btn" onclick="go(1)">Ξεκίνα →</button></p>
+          </div>
+          <figure style="flex:1 1 260px;min-width:0;max-width:340px">
+            <span class="zi" tabindex="0" data-alt="Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171"><img data-key="k0" alt="Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171"><span class="mag">🔍</span></span>
+            <figcaption>Εικόνα 1: Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171. Πηγή: Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού — Στοιχεία μηχανών. Σχέδιο Β΄ &amp; Γ΄ τάξη ΕΠΑ.Λ., Καρβέλης Ι., Μπαλντούκας Α., Ντασκαγιάννη Α., ISBN 978-960-06-2819-7</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ΕΠΙΠΕΔΟ 1 -->
+    <section class="screen" data-name="Επίπεδο 1" style="--lv:#1F5FA8">
+      <div class="wrap">
+        <div class="lvbar"><span class="lvtag">ΕΠΙΠΕΔΟ 1</span><span class="lvttl">Κυριότερες Κατηγορίες</span></div>
+        <div class="card act" data-act="a1" style="display:flex;flex-direction:column;gap:14px">
+          <p class="hintline">Πάτησε μια επιλογή και μετά έναν κενό κόμβο (ή σύρε την επάνω του).</p>
+          <div class="dcpool">
+            <button class="dc" data-a="c1">Ελατήρια Έλξης/Πίεσης (Θλίψης)</button>
+            <button class="dc" data-a="c2">Ελατήρια Κάμψης (Πολλαπλών Ελασμάτων)</button>
+            <button class="dc" data-a="c3">Ελατήρια Στρέψης</button>
+            <button class="dc" data-a="c4">Ελατήρια επαναφοράς</button>
+            <button class="dc" data-a="c5">Δισκοειδή ελατήρια</button>
+          </div>
+          <div class="mapx">
+            <div class="rootbox">Κυριότερες Κατηγορίες Ελατηρίων βάσει του τύπου καταπόνησης που αναλαμβάνουν</div>
+            <div class="stemx"></div>
+            <div class="kids">
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 1</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Φορτία Έλξης ή Πίεσης (Θλίψης)</p>
+                <div class="zdrop" data-ans="c1" tabindex="0"
+                  data-ok="Σωστά! Τα ελατήρια Έλξης/Πίεσης (Θλίψης) έχουν σχεδιαστεί για να απορροφούν ειδικά φορτία έλξης ή θλίψης (πίεσης). Η σωστή κατηγοριοποίηση είναι το πρώτο βήμα για τη σωστή σχεδίαση!"
+                  data-no="Λάθος. Τα Ελατήρια Έλξης/Πίεσης (όπως τα κυλινδρικά ελικοειδή) αναλαμβάνουν φόρτιση ευθείας γραμμής (εφελκυσμό ή θλίψη). Η επιλογή σου («Κάμψης» ή «Στρέψης») αντιστοιχεί σε ελατήρια που δέχονται φόρτιση κάθετη στον άξονα ή ροπή."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 2</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Φορτία Κάμψης/Κρουστικά Φορτία</p>
+                <div class="zdrop" data-ans="c2" tabindex="0"
+                  data-ok="Σωστά! Τα ελατήρια Κάμψης έχουν σχεδιαστεί για να απορροφούν ειδικά φορτία κάμψης. Η σωστή κατηγοριοποίηση είναι το πρώτο βήμα για τη σωστή σχεδίαση!"
+                  data-no="Λάθος. Τα ελατήρια που δέχονται φορτία Κάμψης (όπως οι λάμες) έχουν διαφορετική μορφή από τα ελικοειδή ή τις ράβδους στρέψης. Η βασική τους λειτουργία είναι η παραμόρφωση κάθετα στον άξονα, όχι η επιμήκυνση/συστολή ή η συστροφή."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 3</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Στρεπτικές Κινήσεις/Ροπή</p>
+                <div class="zdrop" data-ans="c3" tabindex="0"
+                  data-ok="Σωστά! Τα ελατήρια Στρέψης έχουν σχεδιαστεί για να απορροφούν ειδικά φορτία στρεπτικής ροπής. Η σωστή κατηγοριοποίηση είναι το πρώτο βήμα για τη σωστή σχεδίαση!"
+                  data-no="Λάθος. Τα Ελατήρια Στρέψης έχουν ως κύριο στόχο να αναλάβουν ροπή (στρέψη), ώστε να επιστρέψουν ένα μηχανικό μέρος στην αρχική του θέση (π.χ., πόρτες, μοχλοί). Η επιλογή σου αντιστοιχεί σε φόρτιση ευθείας γραμμής ή κάμψης, όχι περιστροφής."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+            </div>
+          </div>
+          <div class="actbar">
+            <div class="steps"></div>
+            <button class="btn chk" disabled>Έλεγχος</button>
+            <span class="scoreline" hidden></span>
+            <button class="btn ghost sm nxt" hidden onclick="go(cur+1)">Επόμενο →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ΕΠΙΠΕΔΟ 2 – ΕΛΞΗΣ/ΠΙΕΣΗΣ -->
+    <section class="screen" data-name="Επίπεδο 2 · Έλξης/Πίεσης" style="--lv:#2E8B57">
+      <div class="wrap">
+        <div class="lvbar"><span class="lvtag">ΕΠΙΠΕΔΟ 2</span><span class="lvttl">Ελατήρια Έλξης/Πίεσης (Θλίψης)</span></div>
+        <div class="card act" data-act="a2" style="display:flex;flex-direction:column;gap:14px">
+          <p class="hintline">Πάτησε μια επιλογή και μετά έναν κενό κόμβο (ή σύρε την επάνω του).</p>
+          <div class="dcpool">
+            <button class="dc" data-a="d1">Ελικοειδή Ελατήρια</button>
+            <button class="dc" data-a="d2">Ελαστικά Ελατήρια</button>
+            <button class="dc" data-a="d3">Ελατήρια Πολλαπλών Ελασμάτων</button>
+            <button class="dc" data-a="d4">Ελατήρια Κάμψης με ελαττούμενη διατομή</button>
+            <button class="dc" data-a="d5">Ελικοειδή Ελατήρια (για στρέψη)</button>
+            <button class="dc" data-a="d6">Σπειροειδή Ελατήρια</button>
+            <button class="dc" data-a="d7">Ράβδοι Στρέψης</button>
+            <button class="dc" data-a="d8">Ράβδοι Πίεσης</button>
+            <button class="dc" data-a="d9">Ελατήρια Περιορισμού Φόρτισης</button>
+          </div>
+          <div class="mapx">
+            <div class="rootbox">Ελατήρια Έλξης/Πίεσης (Θλίψης)</div>
+            <div class="stemx"></div>
+            <div class="kids">
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 4</div>
+                <p class="zd"><b>Περιγραφή:</b> Τα πιο συνηθισμένα, φθηνά, με σύρμα κυκλικής ή ορθογωνικής διατομής</p>
+                <div class="zdrop" data-ans="d1" tabindex="0"
+                  data-ok="Σωστά! Τα Ελικοειδή (κυλινδρικά, κωνικά) είναι τα πιο συνηθισμένα και απορροφούν αξονική φόρτιση. Σχεδιάζονται με σύρμα κυκλικής ή ορθογωνικής διατομής."
+                  data-no="Λάθος. Τα ελατήρια που επιλέχθηκαν (π.χ., λάμες ή ράβδοι στρέψης) είναι σχεδιασμένα για Κάμψη ή Στρέψη, όχι για αξονικά φορτία Έλξης/Πίεσης. Δες ξανά τη μορφή που επιτρέπει μεγάλη επιμήκυνση/συστολή."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 5</div>
+                <p class="zd"><b>Περιγραφή:</b> Χρησιμοποιούνται συνήθως για έδραση μηχανών.</p>
+                <div class="zdrop" data-ans="d2" tabindex="0"
+                  data-ok="Σωστά! Τα Ελαστικά ελατήρια (καουτσούκ/συνθετικά) χρησιμοποιούνται κυρίως για απόσβεση κραδασμών και έδραση μηχανών (υπό πίεση)."
+                  data-no="Λάθος. Τα ελατήρια που επιλέχθηκαν (π.χ., λάμες ή ράβδοι στρέψης) είναι σχεδιασμένα για Κάμψη ή Στρέψη, όχι για αξονικά φορτία Έλξης/Πίεσης. Δες ξανά τη μορφή που επιτρέπει μεγάλη επιμήκυνση/συστολή."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 6</div>
+                <p class="zd"><b>Περιγραφή:</b> Χρησιμοποιούνται ευρύτατα. Ανάλογα με την κατασκευή τους μπορεί να είναι κυλινδρικά, κωνικά ή δισκοειδή.</p>
+                <div class="zdrop" data-ans="d1" tabindex="0"
+                  data-ok="Σωστά! Τα Ελικοειδή (κυλινδρικά, κωνικά) είναι τα πιο συνηθισμένα και απορροφούν αξονική φόρτιση. Σχεδιάζονται με σύρμα κυκλικής ή ορθογωνικής διατομής."
+                  data-no="Λάθος. Τα ελατήρια που επιλέχθηκαν (π.χ., λάμες ή ράβδοι στρέψης) είναι σχεδιασμένα για Κάμψη ή Στρέψη, όχι για αξονικά φορτία Έλξης/Πίεσης. Δες ξανά τη μορφή που επιτρέπει μεγάλη επιμήκυνση/συστολή."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+            </div>
+          </div>
+          <div class="actbar">
+            <div class="steps"></div>
+            <button class="btn chk" disabled>Έλεγχος</button>
+            <span class="scoreline" hidden></span>
+            <button class="btn ghost sm nxt" hidden onclick="go(cur+1)">Επόμενο →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ΕΠΙΠΕΔΟ 2 – ΚΑΜΨΗΣ -->
+    <section class="screen" data-name="Επίπεδο 2 · Κάμψης" style="--lv:#2E8B57">
+      <div class="wrap">
+        <div class="lvbar"><span class="lvtag">ΕΠΙΠΕΔΟ 2</span><span class="lvttl">Ελατήρια Κάμψης</span></div>
+        <div class="card act" data-act="a3" style="display:flex;flex-direction:column;gap:14px">
+          <p class="hintline">Πάτησε μια επιλογή και μετά έναν κενό κόμβο (ή σύρε την επάνω του).</p>
+          <div class="dcpool">
+            <button class="dc" data-a="d1">Ελικοειδή Ελατήρια</button>
+            <button class="dc" data-a="d2">Ελαστικά Ελατήρια</button>
+            <button class="dc" data-a="d3">Ελατήρια Πολλαπλών Ελασμάτων</button>
+            <button class="dc" data-a="d4">Ελατήρια Κάμψης με ελαττούμενη διατομή</button>
+            <button class="dc" data-a="d5">Ελικοειδή Ελατήρια (για στρέψη)</button>
+            <button class="dc" data-a="d6">Σπειροειδή Ελατήρια</button>
+            <button class="dc" data-a="d7">Ράβδοι Στρέψης</button>
+            <button class="dc" data-a="d8">Ράβδοι Πίεσης</button>
+            <button class="dc" data-a="d9">Ελατήρια Περιορισμού Φόρτισης</button>
+          </div>
+          <div class="mapx">
+            <div class="rootbox">Ελατήρια Κάμψης</div>
+            <div class="stemx"></div>
+            <div class="kids">
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 7</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Χρησιμοποιούνται για την παραλαβή κρουστικών φορτίων (π.χ., ανάρτηση φορτηγών). Αποτελούνται από χαλύβδινα ελάσματα ορθογωνικής διατομής.</p>
+                <div class="zdrop" data-ans="d3" tabindex="0"
+                  data-ok="Σωστά! Τα ελατήρια πολλαπλών ελασμάτων (λάμες) χρησιμοποιούνται για την παραλαβή κρουστικών φορτίων κάμψης (π.χ., ανάρτηση). Αποτελούνται από χαλύβδινα ελάσματα ορθογωνικής διατομής."
+                  data-no="Λάθος. Αυτή η κατηγορία αφορά ελατήρια που παραμορφώνονται από εγκάρσιες δυνάμεις (κάμψη). Τα ελικοειδή ανήκουν στην Έλξη/Πίεση. Εστίασε στα ελατήρια που μοιάζουν με δοκούς."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 8</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Εξομοίωση ελατηρίου πολλαπλών ελασμάτων με ραβδοειδές ελατήριο κάμψης με ελαττούμενη διατομή (πυραμιδοειδές/κωνικό).</p>
+                <div class="zdrop" data-ans="d4" tabindex="0"
+                  data-ok="Σωστά! Αυτά ανήκουν στα ραβδοειδή ελατήρια κάμψης. Η μορφή τους έχει ως αποτέλεσμα την παραλαβή φόρτισης κυρίως μέσω κάμψης."
+                  data-no="Λάθος. Αυτή η κατηγορία αφορά ελατήρια που παραμορφώνονται από εγκάρσιες δυνάμεις (κάμψη). Τα ελικοειδή ανήκουν στην Έλξη/Πίεση. Εστίασε στα ελατήρια που μοιάζουν με δοκούς."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+            </div>
+          </div>
+          <div class="actbar">
+            <div class="steps"></div>
+            <button class="btn chk" disabled>Έλεγχος</button>
+            <span class="scoreline" hidden></span>
+            <button class="btn ghost sm nxt" hidden onclick="go(cur+1)">Επόμενο →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ΕΠΙΠΕΔΟ 2 – ΣΤΡΕΨΗΣ -->
+    <section class="screen" data-name="Επίπεδο 2 · Στρέψης" style="--lv:#2E8B57">
+      <div class="wrap">
+        <div class="lvbar"><span class="lvtag">ΕΠΙΠΕΔΟ 2</span><span class="lvttl">Ελατήρια Στρέψης</span></div>
+        <div class="card act" data-act="a4" style="display:flex;flex-direction:column;gap:14px">
+          <p class="hintline">Πάτησε μια επιλογή και μετά έναν κενό κόμβο (ή σύρε την επάνω του).</p>
+          <div class="dcpool">
+            <button class="dc" data-a="d1">Ελικοειδή Ελατήρια</button>
+            <button class="dc" data-a="d2">Ελαστικά Ελατήρια</button>
+            <button class="dc" data-a="d3">Ελατήρια Πολλαπλών Ελασμάτων</button>
+            <button class="dc" data-a="d4">Ελατήρια Κάμψης με ελαττούμενη διατομή</button>
+            <button class="dc" data-a="d5">Ελικοειδή Ελατήρια (για στρέψη)</button>
+            <button class="dc" data-a="d6">Σπειροειδή Ελατήρια</button>
+            <button class="dc" data-a="d7">Ράβδοι Στρέψης</button>
+            <button class="dc" data-a="d8">Ράβδοι Πίεσης</button>
+            <button class="dc" data-a="d9">Ελατήρια Περιορισμού Φόρτισης</button>
+          </div>
+          <div class="mapx">
+            <div class="rootbox">Ελατήρια Στρέψης</div>
+            <div class="stemx"></div>
+            <div class="kids">
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 9</div>
+                <p class="zd"><b>Περιγραφή:</b> Χρησιμοποιούνται για μεντεσέδες, μοχλούς κ.λπ.</p>
+                <div class="zdrop" data-ans="d5" tabindex="0"
+                  data-ok="Σωστά! Αυτά είναι ελικοειδή ελατήρια που χρησιμοποιούνται ειδικά για στρεπτικές κινήσεις (π.χ., μεντεσέδες, μοχλοί)."
+                  data-no="Λάθος. Αυτή η κατηγορία αφορά ελατήρια που λειτουργούν με περιστροφή (ροπή). Η επιλογή σου (π.χ., Ελαστικά) ανήκει σε φόρτιση πίεσης (Θλίψης) και όχι στρέψης."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 10</div>
+                <p class="zd"><b>Περιγραφή:</b> Αποτελούνται από μεταλλικούς παράκυκλους.</p>
+                <div class="zdrop" data-ans="d6" tabindex="0"
+                  data-ok="Σωστά! Τα Σπειροειδή ελατήρια (μεταλλικοί παράκυκλοι) χρησιμοποιούνται επίσης για την αποταμίευση ή απόδοση στρεπτικής ενέργειας (π.χ., ρολόγια, παιχνίδια)."
+                  data-no="Λάθος. Αυτή η κατηγορία αφορά ελατήρια που λειτουργούν με περιστροφή (ροπή). Η επιλογή σου (π.χ., Ελαστικά) ανήκει σε φόρτιση πίεσης (Θλίψης) και όχι στρέψης."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 11</div>
+                <p class="zd"><b>Περιγραφή:</b> Ένα από τα κυριότερα είδη ανάλογα με τη μορφή τους.</p>
+                <div class="zdrop" data-ans="d7" tabindex="0"
+                  data-ok="Σωστά! Οι Ράβδοι Στρέψης είναι ο πιο χαρακτηριστικός τύπος για την απορρόφηση και επιστροφή ροπής (στρέψης) μέσω της συστροφής τους."
+                  data-no="Λάθος. Αυτή η κατηγορία αφορά ελατήρια που λειτουργούν με περιστροφή (ροπή). Η επιλογή σου (π.χ., Ελαστικά) ανήκει σε φόρτιση πίεσης (Θλίψης) και όχι στρέψης."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+            </div>
+          </div>
+          <div class="actbar">
+            <div class="steps"></div>
+            <button class="btn chk" disabled>Έλεγχος</button>
+            <span class="scoreline" hidden></span>
+            <button class="btn ghost sm nxt" hidden onclick="go(cur+1)">Επόμενο →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ΕΠΙΠΕΔΟ 3 – ΕΛΙΚΟΕΙΔΗ -->
+    <section class="screen" data-name="Επίπεδο 3 · Ελικοειδή" style="--lv:#C77D0A">
+      <div class="wrap">
+        <div class="lvbar"><span class="lvtag">ΕΠΙΠΕΔΟ 3 · ΟΨΕΙΣ ΣΧΕΔΙΑΣΗΣ &amp; ΣΥΜΒΟΛΙΣΜΟΣ</span><span class="lvttl">Ελικοειδή Ελατήρια (Κυλινδρικά/Κωνικά)</span></div>
+        <div class="card act" data-act="a5" style="display:flex;flex-direction:column;gap:14px">
+          <p class="hintline">Πάτησε μια εικόνα και μετά έναν κενό κόμβο (ή σύρε την επάνω του). Το 🔍 μεγεθύνει την εικόνα.</p>
+          <div class="dcpool">
+            <button class="dc dci" data-a="i1"><span class="zi" data-alt="Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171"><img data-key="k0" class="hs" alt="Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i2"><span class="zi" data-alt="Σχήμα 7.6θ, Κυλινδρικό ελατήριο (συμβολικά), σελ. 171"><img data-key="k1" class="hs" alt="Σχήμα 7.6θ, Κυλινδρικό ελατήριο (συμβολικά), σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i3"><span class="zi" data-alt="Σχήμα 7.6γ, Κυλινδρικό ελικοειδές ελατήριο χρησιμοποιούμενο σε στρεπτικές κινήσεις, σελ. 168"><img data-key="k2" class="hs" alt="Σχήμα 7.6γ, Κυλινδρικό ελικοειδές ελατήριο χρησιμοποιούμενο σε στρεπτικές κινήσεις, σελ. 168"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i4"><span class="zi" data-alt="Σχήμα 7.6ι, Ελατήρια με λάμες (σχηματικά), σελ. 171"><img data-key="k3" class="hs" alt="Σχήμα 7.6ι, Ελατήρια με λάμες (σχηματικά), σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i5"><span class="zi" data-alt="Σχήμα 7.6ι, Ελατήρια με λάμες (συμβολικά), σελ. 171"><img data-key="k4" class="hs" alt="Σχήμα 7.6ι, Ελατήρια με λάμες (συμβολικά), σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i6"><span class="zi" data-alt="Σχήμα 7.6δ, Ελατήρια πολλαπλών ελασμάτων, σελ. 169"><img data-key="k5" class="hs" alt="Σχήμα 7.6δ, Ελατήρια πολλαπλών ελασμάτων, σελ. 169"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i7"><span class="zi" data-alt="Σχήμα 7.6ζ, Σπειροειδές ελατήριο (σχηματικά), σελ. 170"><img data-key="k6" class="hs" alt="Σχήμα 7.6ζ, Σπειροειδές ελατήριο (σχηματικά), σελ. 170"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i8"><span class="zi" data-alt="Σχήμα 7.6ι, Σπειροειδές ελατήριο (συμβολικά), σελ. 172"><img data-key="k7" class="hs" alt="Σχήμα 7.6ι, Σπειροειδές ελατήριο (συμβολικά), σελ. 172"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+          </div>
+          <div class="mapx">
+            <div class="rootbox">Είδος Ε2: Ελικοειδή Ελατήρια</div>
+            <div class="stemx"></div>
+            <div class="kids">
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 12</div>
+                <p class="zd"><b>Περιγραφή:</b> Σχεδίαση που δείχνει τις κύριες διαστάσεις (Da, Dm, Lo, d). Σχεδιάζεται σχεδόν πάντα σε τομή, δείχνοντας την πρώτη και την τελευταία σπείρα.</p>
+                <div class="zdrop zimg" data-ans="i1" tabindex="0"
+                  data-ok="Σωστά! Σύμφωνα με το DIN ISO 2162, τα ελικοειδή ελατήρια σχεδιάζονται σχεδόν πάντα σε τομή (δείχνοντας την πρώτη και την τελευταία σπείρα). Αυτή η όψη επιτρέπει την αναγραφή όλων των κύριων διαστάσεων (Da, Dm, d, Lo) που είναι απαραίτητες για την κατασκευή."
+                  data-no="Λάθος. Εδώ πρέπει να τοποθετήσεις την εικόνα που δείχνει το ελατήριο σε Τομή για να φαίνονται καθαρά οι άκρες των σπειρών. Η τομή είναι το βασικό στοιχείο σχεδίασης κατά DIN ISO 2162 για τα ελικοειδή."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 13</div>
+                <p class="zd"><b>Περιγραφή:</b> Η απλοποιημένη σχεδίαση που χρησιμοποιείται όταν δεν απαιτούνται λεπτομέρειες</p>
+                <div class="zdrop zimg" data-ans="i2" tabindex="0"
+                  data-ok="Σωστά! Αυτή είναι η απλοποιημένη (συμβολική) σχεδίαση του ελικοειδούς ελατηρίου. Χρησιμοποιείται για εξοικονόμηση χώρου σε γενικά σχέδια. Προσοχή: Σε αυτή τη μορφή, όλες οι διαστάσεις πρέπει να δίνονται υποχρεωτικά σε πίνακα."
+                  data-no="Λάθος. Εδώ πρέπει να τοποθετήσεις την εικόνα που δείχνει το ελατήριο σε Τομή για να φαίνονται καθαρά οι άκρες των σπειρών. Η τομή είναι το βασικό στοιχείο σχεδίασης κατά DIN ISO 2162 για τα ελικοειδή."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 14</div>
+                <p class="zd"><b>Περιγραφή:</b> Όψη για ελατήρια που χρησιμοποιούνται σε στρεπτικές κινήσεις (π.χ. μεντεσέδες).</p>
+                <div class="zdrop zimg" data-ans="i3" tabindex="0" data-ok=""
+                  data-no="Λάθος. Εδώ πρέπει να τοποθετήσεις την εικόνα που δείχνει το ελατήριο σε Τομή για να φαίνονται καθαρά οι άκρες των σπειρών. Η τομή είναι το βασικό στοιχείο σχεδίασης κατά DIN ISO 2162 για τα ελικοειδή."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+            </div>
+          </div>
+          <div class="actbar">
+            <div class="steps"></div>
+            <button class="btn chk" disabled>Έλεγχος</button>
+            <span class="scoreline" hidden></span>
+            <button class="btn ghost sm nxt" hidden onclick="go(cur+1)">Επόμενο →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ΕΠΙΠΕΔΟ 3 – ΠΟΛΛΑΠΛΩΝ ΕΛΑΣΜΑΤΩΝ -->
+    <section class="screen" data-name="Επίπεδο 3 · Πολλαπλών ελασμάτων" style="--lv:#C77D0A">
+      <div class="wrap">
+        <div class="lvbar"><span class="lvtag">ΕΠΙΠΕΔΟ 3 · ΟΨΕΙΣ ΣΧΕΔΙΑΣΗΣ &amp; ΣΥΜΒΟΛΙΣΜΟΣ</span><span class="lvttl">Ελατήρια Πολλαπλών Ελασμάτων (Λάμες)</span></div>
+        <div class="card act" data-act="a6" style="display:flex;flex-direction:column;gap:14px">
+          <p class="hintline">Πάτησε μια εικόνα και μετά έναν κενό κόμβο (ή σύρε την επάνω του). Το 🔍 μεγεθύνει την εικόνα.</p>
+          <div class="dcpool">
+            <button class="dc dci" data-a="i1"><span class="zi" data-alt="Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171"><img data-key="k0" class="hs" alt="Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i2"><span class="zi" data-alt="Σχήμα 7.6θ, Κυλινδρικό ελατήριο (συμβολικά), σελ. 171"><img data-key="k1" class="hs" alt="Σχήμα 7.6θ, Κυλινδρικό ελατήριο (συμβολικά), σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i3"><span class="zi" data-alt="Σχήμα 7.6γ, Κυλινδρικό ελικοειδές ελατήριο χρησιμοποιούμενο σε στρεπτικές κινήσεις, σελ. 168"><img data-key="k2" class="hs" alt="Σχήμα 7.6γ, Κυλινδρικό ελικοειδές ελατήριο χρησιμοποιούμενο σε στρεπτικές κινήσεις, σελ. 168"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i4"><span class="zi" data-alt="Σχήμα 7.6ι, Ελατήρια με λάμες (σχηματικά), σελ. 171"><img data-key="k3" class="hs" alt="Σχήμα 7.6ι, Ελατήρια με λάμες (σχηματικά), σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i5"><span class="zi" data-alt="Σχήμα 7.6ι, Ελατήρια με λάμες (συμβολικά), σελ. 171"><img data-key="k4" class="hs" alt="Σχήμα 7.6ι, Ελατήρια με λάμες (συμβολικά), σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i6"><span class="zi" data-alt="Σχήμα 7.6δ, Ελατήρια πολλαπλών ελασμάτων, σελ. 169"><img data-key="k5" class="hs" alt="Σχήμα 7.6δ, Ελατήρια πολλαπλών ελασμάτων, σελ. 169"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i7"><span class="zi" data-alt="Σχήμα 7.6ζ, Σπειροειδές ελατήριο (σχηματικά), σελ. 170"><img data-key="k6" class="hs" alt="Σχήμα 7.6ζ, Σπειροειδές ελατήριο (σχηματικά), σελ. 170"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i8"><span class="zi" data-alt="Σχήμα 7.6ι, Σπειροειδές ελατήριο (συμβολικά), σελ. 172"><img data-key="k7" class="hs" alt="Σχήμα 7.6ι, Σπειροειδές ελατήριο (συμβολικά), σελ. 172"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+          </div>
+          <div class="mapx">
+            <div class="rootbox">Είδος Ε2: Ελατήρια Πολλαπλών Ελασμάτων</div>
+            <div class="stemx"></div>
+            <div class="kids">
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 15</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Πλήρης σχηματική απεικόνιση</p>
+                <div class="zdrop zimg" data-ans="i6" tabindex="0"
+                  data-ok="Σωστά! Αυτή η σχηματική όψη δείχνει καθαρά τα επιμέρους ελάσματα (λάμες). Η σχεδίαση αυτή είναι απαραίτητη για να φαίνονται οι διαστάσεις πλάτους (b) και ύψους (h) της εγκάρσιας τομής, καθώς και το μήκος τους."
+                  data-no="Λάθος. Η σχεδίαση των ελασμάτων δεν γίνεται σε τομή με τον ίδιο τρόπο όπως τα ελικοειδή. Η εικόνα που ψάχνεις δείχνει σχηματικά τη διάταξη των ελασμάτων, που είναι το βασικό δομικό τους στοιχείο."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 16</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Απλοποιημένη σχεδίαση.</p>
+                <div class="zdrop zimg" data-ans="i5" tabindex="0"
+                  data-ok="Σωστά! Αυτή είναι η απλοποιημένη σχεδίαση για τα ελατήρια λάμες. Όπως και στα ελικοειδή, χρησιμοποιείται όταν δεν απαιτούνται λεπτομέρειες, αρκεί οι κύριες διαστάσεις να δίνονται σε πίνακα δίπλα στο υπόμνημα."
+                  data-no="Λάθος. Η σχεδίαση των ελασμάτων δεν γίνεται σε τομή με τον ίδιο τρόπο όπως τα ελικοειδή. Η εικόνα που ψάχνεις δείχνει σχηματικά τη διάταξη των ελασμάτων, που είναι το βασικό δομικό τους στοιχείο."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 17</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Σχηματική όψη με σημεία συγκράτησης των ελασμάτων.</p>
+                <div class="zdrop zimg" data-ans="i4" tabindex="0" data-ok=""
+                  data-no="Λάθος. Η σχεδίαση των ελασμάτων δεν γίνεται σε τομή με τον ίδιο τρόπο όπως τα ελικοειδή. Η εικόνα που ψάχνεις δείχνει σχηματικά τη διάταξη των ελασμάτων, που είναι το βασικό δομικό τους στοιχείο."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+            </div>
+          </div>
+          <div class="actbar">
+            <div class="steps"></div>
+            <button class="btn chk" disabled>Έλεγχος</button>
+            <span class="scoreline" hidden></span>
+            <button class="btn ghost sm nxt" hidden onclick="go(cur+1)">Επόμενο →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ΕΠΙΠΕΔΟ 3 – ΣΠΕΙΡΟΕΙΔΗ -->
+    <section class="screen" data-name="Επίπεδο 3 · Σπειροειδή" style="--lv:#C77D0A">
+      <div class="wrap">
+        <div class="lvbar"><span class="lvtag">ΕΠΙΠΕΔΟ 3 · ΟΨΕΙΣ ΣΧΕΔΙΑΣΗΣ &amp; ΣΥΜΒΟΛΙΣΜΟΣ</span><span class="lvttl">Σπειροειδή Ελατήρια</span></div>
+        <div class="card act" data-act="a7" style="display:flex;flex-direction:column;gap:14px">
+          <p class="hintline">Πάτησε μια εικόνα και μετά έναν κενό κόμβο (ή σύρε την επάνω του). Το 🔍 μεγεθύνει την εικόνα.</p>
+          <div class="dcpool">
+            <button class="dc dci" data-a="i1"><span class="zi" data-alt="Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171"><img data-key="k0" class="hs" alt="Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i2"><span class="zi" data-alt="Σχήμα 7.6θ, Κυλινδρικό ελατήριο (συμβολικά), σελ. 171"><img data-key="k1" class="hs" alt="Σχήμα 7.6θ, Κυλινδρικό ελατήριο (συμβολικά), σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i3"><span class="zi" data-alt="Σχήμα 7.6γ, Κυλινδρικό ελικοειδές ελατήριο χρησιμοποιούμενο σε στρεπτικές κινήσεις, σελ. 168"><img data-key="k2" class="hs" alt="Σχήμα 7.6γ, Κυλινδρικό ελικοειδές ελατήριο χρησιμοποιούμενο σε στρεπτικές κινήσεις, σελ. 168"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i4"><span class="zi" data-alt="Σχήμα 7.6ι, Ελατήρια με λάμες (σχηματικά), σελ. 171"><img data-key="k3" class="hs" alt="Σχήμα 7.6ι, Ελατήρια με λάμες (σχηματικά), σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i5"><span class="zi" data-alt="Σχήμα 7.6ι, Ελατήρια με λάμες (συμβολικά), σελ. 171"><img data-key="k4" class="hs" alt="Σχήμα 7.6ι, Ελατήρια με λάμες (συμβολικά), σελ. 171"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i6"><span class="zi" data-alt="Σχήμα 7.6δ, Ελατήρια πολλαπλών ελασμάτων, σελ. 169"><img data-key="k5" class="hs" alt="Σχήμα 7.6δ, Ελατήρια πολλαπλών ελασμάτων, σελ. 169"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i7"><span class="zi" data-alt="Σχήμα 7.6ζ, Σπειροειδές ελατήριο (σχηματικά), σελ. 170"><img data-key="k6" class="hs" alt="Σχήμα 7.6ζ, Σπειροειδές ελατήριο (σχηματικά), σελ. 170"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+            <button class="dc dci" data-a="i8"><span class="zi" data-alt="Σχήμα 7.6ι, Σπειροειδές ελατήριο (συμβολικά), σελ. 172"><img data-key="k7" class="hs" alt="Σχήμα 7.6ι, Σπειροειδές ελατήριο (συμβολικά), σελ. 172"><span class="mag">🔍</span></span><span class="zoomb">🔍</span></button>
+          </div>
+          <div class="mapx">
+            <div class="rootbox">Είδος Ε2: Σπειροειδή Ελατήρια</div>
+            <div class="stemx"></div>
+            <div class="kids">
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 18</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Σχηματική απεικόνιση.</p>
+                <div class="zdrop zimg" data-ans="i7" tabindex="0"
+                  data-ok="Σωστά! Η σχηματική όψη των σπειροειδών ελατηρίων (μεταλλικοί παράκυκλοι) είναι αυτή που δείχνει τη διάταξη των σπειρών. Εδώ φαίνεται η πλήρης μορφή τους για να καθοριστούν οι διαστάσεις τους."
+                  data-no="Λάθος. Τα σπειροειδή ελατήρια σχεδιάζονται ως κάτοψη (όψη από πάνω). Η επιλογή σου (π.χ. τομή ελικοειδούς) δεν αντιστοιχεί στη μορφή των σπειροειδών."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+              <div class="znode">
+                <div class="zk">ΚΟΜΒΟΣ 19</div>
+                <p class="zd"><b>Περιγραφή/Καταπόνηση:</b> Απλοποιημένος συμβολισμός.</p>
+                <div class="zdrop zimg" data-ans="i8" tabindex="0"
+                  data-ok="Σωστά! Αυτός είναι ο απλοποιημένος συμβολισμός του σπειροειδούς ελατηρίου. Χρησιμοποιείται για εξοικονόμηση χώρου. Να θυμάσαι ότι όλες οι διαστάσεις που δεν εμφανίζονται στο σχέδιο πρέπει να αναφέρονται στον πίνακα."
+                  data-no="Λάθος. Τα σπειροειδή ελατήρια σχεδιάζονται ως κάτοψη (όψη από πάνω). Η επιλογή σου (π.χ. τομή ελικοειδούς) δεν αντιστοιχεί στη μορφή των σπειροειδών."><span class="zph">κενός</span></div>
+                <div class="fb" hidden></div>
+              </div>
+            </div>
+          </div>
+          <div class="actbar">
+            <div class="steps"></div>
+            <button class="btn chk" disabled>Έλεγχος</button>
+            <span class="scoreline" hidden></span>
+            <button class="btn ghost sm nxt" hidden onclick="go(cur+1)">Επόμενο →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. ΑΠΟΤΕΛΕΣΜΑΤΑ -->
+    <section class="screen" data-name="Αποτελέσματα">
+      <div class="wrap">
+        <div class="card pad" style="display:flex;flex-direction:column;gap:16px">
+          <div class="two">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;align-self:start">
+              <svg class="ring" viewBox="0 0 140 140" id="resring">
+                <circle class="bg" cx="70" cy="70" r="60"></circle>
+                <circle class="v" cx="70" cy="70" r="60"></circle>
+                <text x="70" y="70">0/19</text>
+              </svg>
+              <div style="font-weight:800" id="respc">0%</div>
+              <button class="btn ghost sm" id="againb">Επανάληψη</button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px" id="bands">
+              <div class="band mute" data-lo="0" data-hi="25">0-25%: Μπορείς να βελτιώσεις σημαντικά το αποτέλεσμά σου! Μελέτησε τις σωστές απαντήσεις και τα αντίστοιχα σχόλια.</div>
+              <div class="band mute" data-lo="25" data-hi="50">25-50%: Μπορείς να βελτιώσεις το αποτέλεσμά σου! Φαίνεται ότι χρειάζεται να εμβαθύνεις ακόμα περισσότερο σε ορισμένα σημεία. Μελέτησε τις σωστές απαντήσεις και τα σχόλια που τις συνοδεύουν, εστιάζοντας ειδικά στα σημεία που δεν κατανοείς πλήρως.</div>
+              <div class="band mute" data-lo="50" data-hi="75">50-75%: Τα πήγες αρκετά καλά! Μελέτησε τις σωστές απαντήσεις και τα αντίστοιχα σχόλια, με σκοπό να εντοπίσεις τα σημεία που σου διαφεύγουν.</div>
+              <div class="band mute" data-lo="75" data-hi="98">75-98%: Τα πήγες καλά! Αν νομίζεις ότι κάτι σου έχει διαφύγει, δες τα μηνύματα που έλαβες κατά την υποβολή των απαντήσεών σου. Αν θέλεις, προσπάθησε να εντοπίσεις περισσότερες σωστές απαντήσεις, για να βελτιώσεις το αποτέλεσμά σου.</div>
+              <div class="band mute" data-lo="98" data-hi="101">98-100%: Όλες οι απαντήσεις σου είναι σωστές! Μπορείς να ανατρέξεις στις απαντήσεις σου και στις ανατροφοδοτήσεις όποτε το κρίνεις χρήσιμο για σένα, για περαιτέρω εμπέδωση.</div>
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow">ΣΩΣΤΕΣ ΑΠΑΝΤΗΣΕΙΣ</div>
+            <ul class="recap" id="recap"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. ΛΕΞΕΙΣ-ΚΛΕΙΔΙΑ & ΠΗΓΕΣ -->
+    <section class="screen" data-name="Λέξεις-κλειδιά &amp; Πηγές">
+      <div class="wrap">
+        <div class="card pad kwbox">
+          <div>
+            <div class="eyebrow">ΛΕΞΕΙΣ-ΚΛΕΙΔΙΑ</div>
+            <p class="chips">
+              <span class="chip">Ελατήρια</span><span class="chip">σχεδίαση ελατηρίων</span><span class="chip">τύποι ελατηρίων</span>
+              <span class="chip">σπειροειδές ελατήριο</span><span class="chip">ελατήριο πολλαπλών ελασμάτων</span><span class="chip">ελικοειδές ελατήριο</span>
+            </p>
+          </div>
+          <div>
+            <div class="eyebrow">ΠΗΓΕΣ</div>
+            <ul class="srclist">
+              <li>Εικόνα 1: Σχήμα 7.6η, Διαστάσεις ελατηρίου, σελ. 171. Πηγή: Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού — Στοιχεία μηχανών. Σχέδιο Β΄ &amp; Γ΄ τάξη ΕΠΑ.Λ., Καρβέλης Ι., Μπαλντούκας Α., Ντασκαγιάννη Α., ISBN 978-960-06-2819-7</li>
+              <li>Εικόνα 2: Σχήμα 7.6θ, Κυλινδρικό ελατήριο (συμβολικά), σελ. 171. Πηγή: Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού — Στοιχεία μηχανών. Σχέδιο Β΄ &amp; Γ΄ τάξη ΕΠΑ.Λ., Καρβέλης Ι., Μπαλντούκας Α., Ντασκαγιάννη Α., ISBN 978-960-06-2819-7</li>
+              <li>Εικόνα 3: Σχήμα 7.6γ, Κυλινδρικό ελικοειδές ελατήριο χρησιμοποιούμενο σε στρεπτικές κινήσεις, σελ. 168. Πηγή: Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού — Στοιχεία μηχανών. Σχέδιο Β΄ &amp; Γ΄ τάξη ΕΠΑ.Λ., Καρβέλης Ι., Μπαλντούκας Α., Ντασκαγιάννη Α., ISBN 978-960-06-2819-7</li>
+              <li>Εικόνα 4: Σχήμα 7.6ι, Ελατήρια με λάμες (σχηματικά), σελ. 171. Πηγή: Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού — Στοιχεία μηχανών. Σχέδιο Β΄ &amp; Γ΄ τάξη ΕΠΑ.Λ., Καρβέλης Ι., Μπαλντούκας Α., Ντασκαγιάννη Α., ISBN 978-960-06-2819-7</li>
+              <li>Εικόνα 5: Σχήμα 7.6ι, Ελατήρια με λάμες (συμβολικά), σελ. 171. Πηγή: Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού — Στοιχεία μηχανών. Σχέδιο Β΄ &amp; Γ΄ τάξη ΕΠΑ.Λ., Καρβέλης Ι., Μπαλντούκας Α., Ντασκαγιάννη Α., ISBN 978-960-06-2819-7</li>
+              <li>Εικόνα 6: Σχήμα 7.6δ, Ελατήρια πολλαπλών ελασμάτων, σελ. 169. Πηγή: Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού — Στοιχεία μηχανών. Σχέδιο Β΄ &amp; Γ΄ τάξη ΕΠΑ.Λ., Καρβέλης Ι., Μπαλντούκας Α., Ντασκαγιάννη Α., ISBN 978-960-06-2819-7</li>
+              <li>Εικόνα 7: Σχήμα 7.6ζ, Σπειροειδές ελατήριο (σχηματικά) σελ. 170. Πηγή: Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού — Στοιχεία μηχανών. Σχέδιο Β΄ &amp; Γ΄ τάξη ΕΠΑ.Λ., Καρβέλης Ι., Μπαλντούκας Α., Ντασκαγιάννη Α., ISBN 978-960-06-2819-7</li>
+              <li>Εικόνα 8: Σχήμα 7.6ι, Σπειροειδές ελατήριο (συμβολικά), σελ. 172. Πηγή: Υπουργείο Παιδείας, Θρησκευμάτων και Αθλητισμού — Στοιχεία μηχανών. Σχέδιο Β΄ &amp; Γ΄ τάξη ΕΠΑ.Λ., Καρβέλης Ι., Μπαλντούκας Α., Ντασκαγιάννη Α., ISBN 978-960-06-2819-7</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="btn ghost sm" id="prev" onclick="go(cur-1)">‹ Πίσω</button>
+    <div class="dots" id="dots"></div>
+    <button class="btn sm" id="next" onclick="go(cur+1)">Μπροστά ›</button>
+  </nav>
+</div>
+
+<!-- lightbox -->
+<div class="lbx" id="lbx" aria-modal="true" role="dialog">
+  <button class="x" id="lbxX" aria-label="Κλείσιμο">✕</button>
+  <div class="box"><img id="lbxImg" alt=""><div class="cap" id="lbxCap"></div></div>
+</div>
+
+<script>
+/* ===== navigation ===== */
+var screens=[].slice.call(document.querySelectorAll('.screen')),cur=0;
+var dots=document.getElementById('dots');
+screens.forEach(function(s,i){var b=document.createElement('button');b.title=s.dataset.name||('Οθόνη '+(i+1));b.setAttribute('aria-label',b.title);b.onclick=function(){go(i)};dots.appendChild(b)});
+function go(n){
+  if(n<0||n>=screens.length)return;
+  screens[cur].classList.remove('on');cur=n;screens[cur].classList.add('on');screens[cur].scrollTop=0;
+  [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===cur);d.classList.toggle('done',i<cur)});
+  document.getElementById('lbl').textContent=screens[cur].dataset.name||'';
+  document.getElementById('prog').style.width=((cur+1)/screens.length*100)+'%';
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===screens.length-1;
+  document.querySelectorAll('.zi.on').forEach(function(z){z.classList.remove('on')});
+  if(window.onScreen)onScreen(cur);
+}
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('lbx').classList.contains('on')){if(e.key==='Escape')closeLbx();return}
+  var t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
+  if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);
+});
+go(0);
+
+/* ===== images: tooltip side + lightbox ===== */
+function side(z){var r=z.getBoundingClientRect();z.classList.toggle('below',r.top<130&&!z.classList.contains('inset'))}
+var lbx=document.getElementById('lbx'),lbxImg=document.getElementById('lbxImg'),lbxCap=document.getElementById('lbxCap');
+function openLbx(z){var im=z.querySelector('img');lbxImg.src=im.src;lbxImg.alt=im.alt;lbxCap.textContent=z.dataset.alt||im.alt||'';
+  document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});lbx.classList.add('on')}
+function closeLbx(){lbx.classList.remove('on');lbxImg.src=''}
+document.getElementById('lbxX').onclick=closeLbx;
+lbx.addEventListener('click',function(e){if(e.target===lbx||e.target.classList.contains('box'))closeLbx()});
+document.addEventListener('click',function(e){var z=e.target.closest('.zi');if(!z)return;if(e.target.closest('.hs'))return;openLbx(z)});
+document.addEventListener('mouseover',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('focusin',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('zi'))openLbx(e.target)});
+/* touch: first tap shows alt, second opens */
+document.addEventListener('touchstart',function(e){var z=e.target.closest('.zi');if(!z)return;
+  if(z.closest('.dc')||z.closest('.zdrop'))return;
+  if(!z.classList.contains('on')){e.preventDefault();document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});z.classList.add('on');side(z)}},{passive:false});
+
+/* ===== helpers ===== */
+function ring(el,n,total){var c=2*Math.PI*60;var v=el.querySelector('.v');var pc=total?n/total:0;v.style.strokeDasharray=(c*pc)+' '+c;v.style.opacity=pc?1:0;el.querySelector('text').textContent=n+'/'+total}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+</script>
+
+<script>
+/* ===================== concept-map drag & drop ===================== */
+(function(){
+var acts=[].slice.call(document.querySelectorAll('.act'));
+var TOTAL=document.querySelectorAll('.zdrop').length;
+var sel=null, supress=false, supT=null;
+
+function chipIn(act,id){return act.querySelector('.dc[data-a="'+id+'"]')}
+function zonesOf(act){return [].slice.call(act.querySelectorAll('.zdrop'))}
+
+function buildSteps(){
+  acts.forEach(function(a){
+    var s=a.querySelector('.steps'); s.innerHTML='';
+    zonesOf(a).forEach(function(){s.appendChild(document.createElement('i'))});
+  });
+}
+function syncSel(){
+  document.querySelectorAll('.dc.sel').forEach(function(c){c.classList.remove('sel')});
+  if(sel)sel.classList.add('sel');
+}
+function markUsed(act){
+  act.querySelectorAll('.dc').forEach(function(c){c.classList.remove('used')});
+  zonesOf(act).forEach(function(z){
+    if(!z.dataset.got)return;
+    var c=chipIn(act,z.dataset.got); if(c)c.classList.add('used');
+  });
+}
+function fillFrom(z,chip){
+  z.dataset.got=chip.dataset.a;
+  z.innerHTML=chip.innerHTML;
+  z.classList.add('filled');
+}
+function clearZone(z){
+  delete z.dataset.got;
+  z.innerHTML='<span class="zph">κενός</span>';
+  z.classList.remove('filled');
+}
+function upd(act){
+  markUsed(act);
+  var zs=zonesOf(act), all=zs.every(function(z){return !!z.dataset.got});
+  var chk=act.querySelector('.chk');
+  if(chk&&!act.classList.contains('locked'))chk.disabled=!all;
+  var st=act.querySelector('.steps').children;
+  zs.forEach(function(z,i){
+    var e=st[i]; if(!e)return;
+    e.className=''; if(act.classList.contains('locked')){e.className=z.classList.contains('good')?'ok':'no'}
+    else if(z.dataset.got){e.className='on'}
+  });
+}
+function place(z,chip){
+  var act=z.closest('.act'); if(act.classList.contains('locked'))return;
+  fillFrom(z,chip); upd(act);
+}
+function zoneAt(x,y){var el=document.elementFromPoint(x,y);return el?el.closest('.zdrop'):null}
+function hold(){supress=true;clearTimeout(supT);supT=setTimeout(function(){supress=false},400)}
+
+/* --- pointer drag --- */
+document.addEventListener('pointerdown',function(e){
+  var c=e.target.closest('.dc'); if(!c)return;
+  if(e.target.closest('.zoomb'))return;
+  var act=c.closest('.act'); if(!act||act.classList.contains('locked'))return;
+  var sx=e.clientX, sy=e.clientY, moved=false, g=null;
+  try{c.setPointerCapture(e.pointerId)}catch(err){}
+  function mv(ev){
+    if(!moved&&Math.abs(ev.clientX-sx)+Math.abs(ev.clientY-sy)<8)return;
+    if(!moved){
+      moved=true;
+      g=document.createElement('div'); g.className='dragx';
+      g.style.width=c.offsetWidth+'px'; g.innerHTML=c.innerHTML;
+      document.body.appendChild(g); c.classList.add('lifted');
+    }
+    g.style.left=ev.clientX+'px'; g.style.top=ev.clientY+'px';
+    document.querySelectorAll('.zdrop.over').forEach(function(x){x.classList.remove('over')});
+    var z=zoneAt(ev.clientX,ev.clientY);
+    if(z&&z.closest('.act')===act&&!act.classList.contains('locked'))z.classList.add('over');
+  }
+  function up(ev){
+    c.removeEventListener('pointermove',mv); c.removeEventListener('pointerup',up); c.removeEventListener('lostpointercapture',up);
+    if(g){g.remove();g=null}
+    c.classList.remove('lifted');
+    document.querySelectorAll('.zdrop.over').forEach(function(x){x.classList.remove('over')});
+    if(moved){
+      hold();
+      var z=zoneAt(ev.clientX,ev.clientY);
+      if(z&&z.closest('.act')===act)place(z,c);
+      sel=null; syncSel();
+    }
+  }
+  c.addEventListener('pointermove',mv); c.addEventListener('pointerup',up); c.addEventListener('lostpointercapture',up);
+});
+
+/* --- click: select chip / place into zone --- */
+document.addEventListener('click',function(e){
+  var zb=e.target.closest('.zoomb');
+  if(zb){var zi=zb.parentNode.querySelector('.zi');if(zi)openLbx(zi);return}
+  var c=e.target.closest('.dc');
+  if(c){
+    if(supress){supress=false;return}
+    var act=c.closest('.act'); if(!act||act.classList.contains('locked'))return;
+    sel=(sel===c)?null:c; syncSel(); return;
+  }
+  var z=e.target.closest('.zdrop');
+  if(z){
+    if(supress){supress=false;return}
+    var a2=z.closest('.act'); if(!a2||a2.classList.contains('locked'))return;
+    if(sel&&sel.closest('.act')===a2){place(z,sel);sel=null;syncSel()}
+    else if(z.dataset.got){clearZone(z);upd(a2)}
+    return;
+  }
+});
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  var z=e.target.closest&&e.target.closest('.zdrop');
+  if(!z)return;
+  var a2=z.closest('.act'); if(!a2||a2.classList.contains('locked'))return;
+  e.preventDefault();
+  if(sel&&sel.closest('.act')===a2){place(z,sel);sel=null;syncSel()}
+  else if(z.dataset.got){clearZone(z);upd(a2)}
+});
+
+/* --- check --- */
+acts.forEach(function(act){
+  var chk=act.querySelector('.chk');
+  chk.addEventListener('click',function(){
+    if(act.classList.contains('locked'))return;
+    var zs=zonesOf(act), n=0;
+    zs.forEach(function(z){
+      var good=z.dataset.got===z.dataset.ans;
+      var fb=z.parentNode.querySelector('.fb');
+      if(good){
+        n++; z.classList.add('good');
+        if(z.dataset.ok){fb.className='fb ok';fb.textContent=z.dataset.ok;fb.hidden=false}
+      }else{
+        var right=chipIn(act,z.dataset.ans);
+        if(right){z.dataset.got=right.dataset.a;z.innerHTML=right.innerHTML;z.classList.add('filled')}
+        z.classList.add('rev');
+        if(z.dataset.no){fb.className='fb rev';fb.textContent=z.dataset.no;fb.hidden=false}
+      }
+    });
+    act.classList.add('locked');
+    chk.hidden=true;
+    var sl=act.querySelector('.scoreline');
+    sl.textContent='Σωστές απαντήσεις '+n+'/'+zs.length; sl.hidden=false;
+    act.querySelector('.nxt').hidden=false;
+    act.dataset.score=n;
+    sel=null; syncSel(); markUsed(act); upd(act);
+  });
+});
+
+/* --- results --- */
+function total(){var n=0;acts.forEach(function(a){n+=parseInt(a.dataset.score||0,10)});return n}
+function doneAll(){return acts.every(function(a){return a.classList.contains('locked')})}
+var recapEl=document.getElementById('recap');
+function renderRes(){
+  var n=total(), pc=Math.round(n/TOTAL*100);
+  ring(document.getElementById('resring'),n,TOTAL);
+  document.getElementById('respc').textContent=pc+'%';
+  [].forEach.call(document.querySelectorAll('#bands .band'),function(b){
+    var lo=+b.dataset.lo, hi=+b.dataset.hi;
+    b.classList.toggle('mute',!(doneAll()&&pc>=lo&&pc<hi));
+  });
+  recapEl.innerHTML='';
+  acts.forEach(function(a){
+    zonesOf(a).forEach(function(z){
+      var k=z.parentNode.querySelector('.zk').textContent;
+      var right=chipIn(a,z.dataset.ans);
+      var txt=right?(right.classList.contains('dci')?right.querySelector('.zi').dataset.alt:right.textContent.trim()):'';
+      var li=document.createElement('li');
+      var b=document.createElement('b'); b.textContent=k;
+      var s=document.createElement('span'); s.textContent=txt;
+      li.appendChild(b); li.appendChild(s); recapEl.appendChild(li);
+    });
+  });
+}
+window.onScreen=function(i){
+  if(screens[i].dataset.name==='Αποτελέσματα')renderRes();
+};
+document.getElementById('againb').addEventListener('click',function(){
+  acts.forEach(function(a){
+    a.classList.remove('locked');
+    delete a.dataset.score;
+    zonesOf(a).forEach(function(z){
+      z.classList.remove('good','bad','rev','over');
+      clearZone(z);
+      var fb=z.parentNode.querySelector('.fb'); fb.hidden=true; fb.textContent=''; fb.className='fb';
+    });
+    var chk=a.querySelector('.chk'); chk.hidden=false; chk.disabled=true;
+    a.querySelector('.scoreline').hidden=true;
+    a.querySelector('.nxt').hidden=true;
+    upd(a);
+  });
+  sel=null; syncSel(); renderRes(); go(1);
+});
+
+buildSteps();
+acts.forEach(upd);
+})();
+</script>
+<script>var ASSETS={"k0": "data:image/png;base64,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", "k1": "data:image/png;base64,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", "k2": "data:image/png;base64,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", "k3": "data:image/png;base64,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", "k4": "data:image/png;base64,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", "k5": "data:image/png;base64,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", "k6": "data:image/png;base64,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", "k7": "data:image/png;base64,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"};document.querySelectorAll("img[data-key]").forEach(function(i){i.src=ASSETS[i.dataset.key]});</script>
+</body>
+</html>

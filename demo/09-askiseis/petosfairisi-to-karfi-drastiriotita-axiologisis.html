@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Πετοσφαίριση — Το καρφί: Δραστηριότητα Αξιολόγησης</title>
+<style>
+  :root{
+    --bg1:#0b2545; --bg2:#13315c; --accent:#ff8c42; --accent2:#ffb703;
+    --ok:#2a9d8f; --err:#e63946; --card:#ffffff; --ink:#12263f; --muted:#5a6a80;
+    --line:#dfe6f0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:linear-gradient(140deg,var(--bg1) 0%,var(--bg2) 55%,#1d4e89 100%);
+    color:var(--ink);display:flex;align-items:center;justify-content:center;padding:10px;
+  }
+  #app{
+    width:min(980px,100%);height:min(700px,calc(100vh - 20px));
+    background:var(--card);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.35);
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  header{
+    background:linear-gradient(90deg,#0b2545,#1d4e89);color:#fff;
+    padding:10px 18px;display:flex;align-items:center;gap:12px;flex:0 0 auto;
+  }
+  header .ball{font-size:1.35rem}
+  header h1{font-size:.95rem;font-weight:700;letter-spacing:.2px;flex:1;line-height:1.25}
+  header .counter{font-size:.8rem;background:rgba(255,255,255,.15);padding:4px 10px;border-radius:20px;white-space:nowrap}
+  #bar{height:5px;background:#e6ecf5;flex:0 0 auto}
+  #bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width .35s ease}
+  main{flex:1 1 auto;overflow-y:auto;padding:18px 22px;-webkit-overflow-scrolling:touch}
+  footer{
+    flex:0 0 auto;border-top:1px solid var(--line);padding:10px 18px;
+    display:flex;align-items:center;gap:10px;background:#f7f9fc;
+  }
+  footer .spacer{flex:1}
+  button{font-family:inherit;font-size:.88rem;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;font-weight:600;transition:.15s}
+  .btn-main{background:var(--accent);color:#fff}
+  .btn-main:hover{background:#f57c2a}
+  .btn-ghost{background:#e8edf5;color:var(--ink)}
+  .btn-ghost:hover{background:#dbe3ee}
+  button:disabled{opacity:.4;cursor:not-allowed}
+
+  .qnum{display:inline-block;background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;
+        padding:3px 10px;border-radius:20px;margin-bottom:8px;letter-spacing:.5px}
+  .qtext{font-size:1.02rem;font-weight:600;line-height:1.45;margin-bottom:14px}
+  .hint{font-size:.78rem;color:var(--muted);margin-bottom:10px;font-style:italic}
+
+  ul.opts{list-style:none;display:flex;flex-direction:column;gap:8px}
+  ul.opts li{
+    border:2px solid var(--line);border-radius:12px;padding:11px 14px;cursor:pointer;
+    display:flex;align-items:flex-start;gap:10px;font-size:.93rem;line-height:1.4;background:#fff;transition:.15s
+  }
+  ul.opts li:hover{border-color:#b9c8dd;background:#f8fafd}
+  ul.opts li .mark{
+    flex:0 0 22px;height:22px;border:2px solid #b9c8dd;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#8496ad
+  }
+  ul.opts.multi li .mark{border-radius:6px}
+  ul.opts li.sel{border-color:var(--accent);background:#fff6ee}
+  ul.opts li.sel .mark{background:var(--accent);border-color:var(--accent);color:#fff}
+  ul.opts li.good{border-color:var(--ok);background:#eaf7f5}
+  ul.opts li.good .mark{background:var(--ok);border-color:var(--ok);color:#fff}
+  ul.opts li.bad{border-color:var(--err);background:#fdeded}
+  ul.opts li.bad .mark{background:var(--err);border-color:var(--err);color:#fff}
+  .locked ul.opts li{cursor:default}
+
+  .tfwrap{display:flex;gap:12px;flex-wrap:wrap}
+  .tfwrap li{flex:1 1 180px;justify-content:center;font-weight:700;font-size:1rem}
+
+  .fill{font-size:1rem;line-height:2.1}
+  .fill input{
+    font-family:inherit;font-size:.95rem;border:none;border-bottom:2.5px solid var(--accent);
+    background:#fff8f2;padding:4px 8px;min-width:130px;text-align:center;border-radius:6px 6px 0 0;color:var(--ink)
+  }
+  .fill input:focus{outline:none;background:#ffeede}
+  .fill input.good{border-color:var(--ok);background:#eaf7f5}
+  .fill input.bad{border-color:var(--err);background:#fdeded}
+  .sol{font-size:.85rem;color:var(--ok);font-weight:700;margin-top:8px}
+
+  .matchgrid{display:flex;flex-direction:column;gap:8px}
+  .mrow{display:flex;gap:8px;align-items:stretch}
+  .mterm{
+    flex:0 0 38%;background:linear-gradient(135deg,#0b2545,#1d4e89);color:#fff;border-radius:10px;
+    padding:10px 12px;font-size:.85rem;font-weight:600;display:flex;align-items:center;line-height:1.3
+  }
+  .mslot{
+    flex:1;border:2px dashed #b9c8dd;border-radius:10px;padding:10px 12px;font-size:.84rem;
+    display:flex;align-items:center;min-height:52px;color:var(--muted);cursor:pointer;background:#fbfcfe;line-height:1.3
+  }
+  .mslot.filled{border-style:solid;border-color:var(--accent);background:#fff6ee;color:var(--ink);font-weight:500}
+  .mslot.good{border-color:var(--ok);background:#eaf7f5}
+  .mslot.bad{border-color:var(--err);background:#fdeded}
+  .pool{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding:10px;background:#f2f6fb;border-radius:12px}
+  .chip{
+    background:#fff;border:2px solid var(--accent);color:var(--ink);border-radius:20px;
+    padding:8px 14px;font-size:.82rem;cursor:pointer;line-height:1.25;max-width:100%
+  }
+  .chip.active{background:var(--accent);color:#fff}
+  .pool:empty{display:none}
+
+  ol.order{list-style:none;counter-reset:o;display:flex;flex-direction:column;gap:8px}
+  ol.order li{
+    counter-increment:o;display:flex;align-items:center;gap:10px;background:#fff;
+    border:2px solid var(--line);border-radius:12px;padding:9px 12px;font-size:.9rem;line-height:1.35
+  }
+  ol.order li::before{
+    content:counter(o);flex:0 0 26px;height:26px;border-radius:50%;background:var(--bg2);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700
+  }
+  ol.order li span{flex:1}
+  ol.order li .arrows{display:flex;flex-direction:column;gap:2px}
+  ol.order li .arrows button{padding:1px 8px;font-size:.7rem;background:#e8edf5;color:var(--ink);border-radius:6px}
+  ol.order li.good{border-color:var(--ok);background:#eaf7f5}
+  ol.order li.bad{border-color:var(--err);background:#fdeded}
+
+  .fb{margin-top:14px;border-radius:12px;padding:12px 14px;font-size:.9rem;line-height:1.45;display:none}
+  .fb.show{display:block;animation:pop .25s ease}
+  .fb.ok{background:#eaf7f5;border-left:5px solid var(--ok);color:#155e56}
+  .fb.no{background:#fdeded;border-left:5px solid var(--err);color:#8d1c25}
+  .fb b{display:block;margin-bottom:3px;font-size:.95rem}
+  @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* Cover & results */
+  .cover{text-align:center;padding:6px 4px}
+  .cover .icon{font-size:3rem;line-height:1}
+  .cover.intro{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%}
+  .cover.intro .icon{font-size:4.5rem}
+  .cover.intro h2{font-size:1.7rem;margin-top:14px}
+  .cover h2{font-size:1.35rem;color:var(--bg1);margin:8px 0 4px}
+  .cover .sub{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+  .cover p{font-size:.92rem;line-height:1.55;text-align:left;margin-bottom:10px}
+  .box{background:#f2f6fb;border-radius:14px;padding:14px 16px;text-align:left;margin-top:10px}
+  .box h3{font-size:.95rem;color:var(--bg1);margin-bottom:8px}
+  .box ul{margin-left:18px;font-size:.88rem;line-height:1.55}
+  .box ul li{margin-bottom:5px}
+
+  .score{font-size:3rem;font-weight:800;color:var(--accent);line-height:1}
+  .score small{font-size:1.1rem;color:var(--muted);font-weight:600}
+  .ring{width:100%;height:12px;background:#e6ecf5;border-radius:10px;overflow:hidden;margin:14px 0}
+  .ring>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent))}
+  .kw{margin-top:14px;font-size:.78rem;color:var(--muted);text-align:center}
+
+  main::-webkit-scrollbar{width:7px}
+  main::-webkit-scrollbar-thumb{background:#c9d5e5;border-radius:10px}
+
+  @media (max-width:600px){
+    #app{height:calc(100vh - 12px);border-radius:14px}
+    main{padding:14px 14px}
+    .mterm{flex:0 0 42%;font-size:.8rem}
+    header h1{font-size:.82rem}
+    .qtext{font-size:.96rem}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <span class="ball">🏐</span>
+    <h1>Πετοσφαίριση — Το καρφί (επιθετικό χτύπημα)</h1>
+    <span class="counter" id="counter">Εισαγωγή</span>
+  </header>
+  <div id="bar"><i id="barfill"></i></div>
+  <main id="stage"></main>
+  <footer>
+    <button class="btn-ghost" id="prev">‹ Πίσω</button>
+    <div class="spacer"></div>
+    <button class="btn-main" id="check">Έλεγχος</button>
+    <button class="btn-main" id="next">Επόμενη ›</button>
+  </footer>
+</div>
+
+<script>
+/* ====================== ΔΕΔΟΜΕΝΑ ====================== */
+const Q = [
+{ type:'mcq', q:'Ποια από τα παρακάτω ΔΕΝ είναι είδος καρφιού στην πετοσφαίριση;',
+  opts:['Δυνατό καρφί (power spike).','Αγγιχτό (tip/dink).','Καρφί από πίσω γραμμή (back row attack).','Καρφί με κεφαλιά.'],
+  ans:3,
+  ok:'Σωστά! Στην πετοσφαίριση το επιθετικό χτύπημα γίνεται πάντα με το χέρι. Δεν υπάρχει τύπος καρφιού με κεφαλιά.',
+  no:'Το καρφί με κεφαλιά δεν υπάρχει στην πετοσφαίριση. Όλα τα υπόλοιπα (δυνατό καρφί, αγγιχτό, καρφί από πίσω γραμμή) είναι πραγματικοί τύποι επιθετικού χτυπήματος.'},
+
+{ type:'tf', q:'Ένας/Μία παίκτης/τρια από την πίσω γραμμή μπορεί να καρφώσει από οποιοδήποτε σημείο του γηπέδου, χωρίς κανέναν περιορισμό.',
+  ans:1,
+  ok:'Σωστά! Ο/Η παίκτης/τρια από την πίσω γραμμή πρέπει να απογειωθεί πίσω από τη γραμμή επίθεσης (3 μέτρα). Αν απογειωθεί μέσα στη ζώνη επίθεσης και χτυπήσει την μπάλα πάνω από το φιλέ, είναι σφάλμα.',
+  no:'Προσοχή! Ο/Η παίκτης/τρια από την πίσω γραμμή πρέπει να απογειώνεται πίσω από τη γραμμή επίθεσης (3μ.). Η απογείωση μέσα στη ζώνη επίθεσης με χτύπημα πάνω από το φιλέ είναι σφάλμα.'},
+
+{ type:'mcq', q:'Ποια είναι η σωστή σειρά φάσεων κατά την εκτέλεση ενός καρφιού;',
+  opts:['Απογείωση → Τρέξιμο → Χτύπημα → Προσγείωση','Τρέξιμο → Απογείωση → Χτύπημα → Προσγείωση','Τρέξιμο → Χτύπημα → Απογείωση → Προσγείωση','Χτύπημα → Τρέξιμο → Απογείωση → Προσγείωση'],
+  ans:1,
+  ok:'Άριστα! Οι 4 φάσεις του καρφιού είναι πάντα: τρέξιμο προσέγγισης, απογείωση, χτύπημα και ασφαλής προσγείωση. Αυτή η σειρά δεν αλλάζει.',
+  no:'Η σωστή σειρά είναι: Τρέξιμο → Απογείωση → Χτύπημα → Προσγείωση. Πρώτα τρέχεις για να πάρεις ορμή, μετά απογειώνεσαι, χτυπάς στο ψηλότερο σημείο και τέλος προσγειώνεσαι.'},
+
+{ type:'fill', q:'Συμπλήρωσε τα κενά:',
+  seg:['«Κατά την εκτέλεση του καρφιού, το χτύπημα γίνεται στο ',' σημείο της απογείωσης, με το χέρι σε πλήρη ','.»'],
+  blanks:[['υψηλότερο'],['έκταση']],
+  ok:'Σωστά! Το χτύπημα στο υψηλότερο σημείο με πλήρη έκταση του χεριού δίνει μέγιστη δύναμη και καλύτερη γωνία πάνω από την άμυνα.',
+  no:'Το χτύπημα πρέπει να γίνεται στο υψηλότερο σημείο της απογείωσης, με το χέρι σε πλήρη έκταση. Έτσι ξεπερνάς ευκολότερα την άμυνα.'},
+
+{ type:'mcq', q:'Ποιο μέρος της παλάμης χτυπά την μπάλα σε ένα δυνατό καρφί;',
+  opts:['Μόνο οι άκρες των δακτύλων.','Η βάση της παλάμης (πίσω μέρος).','Η κεντρική-άνω περιοχή της παλάμης μαζί με τα δάκτυλα.','Η πλευρά του μικρού δακτύλου.'],
+  ans:2,
+  ok:'Σωστά! Η επαφή με την κεντρική-άνω περιοχή της παλάμης και τα δάχτυλα δίνει ταυτόχρονα δύναμη και έλεγχο κατεύθυνσης στο χτύπημα.',
+  no:'Η σωστή επαφή γίνεται με την κεντρική-άνω περιοχή της παλάμης και τα δάχτυλα. Αυτό επιτρέπει και δύναμη και έλεγχο της κατεύθυνσης.'},
+
+{ type:'match', q:'Αντιστοίχισε κάθε τύπο καρφιού με τη σωστή περιγραφή του:',
+  terms:['Δυνατό καρφί (power spike)','Αγγιχτό (tip/dink)','Κυλιστό (roll shot)','Καρφί από πίσω γραμμή (back row)'],
+  defs:['Χτύπημα με μέγιστη δύναμη, κατά μήκος ή διαγώνια.','Ελαφρύ άγγιγμα με άκρη δακτύλων γύρω από τον τοίχο.','Χτύπημα με κυλιστή κίνηση καρπού για βαθύτερη τοποθέτηση.','Επίθεση από παίκτη/τρια που απογειώνεται πίσω από τη γραμμή των 3μ.'],
+  ok:'Εξαιρετικά! Γνωρίζεις τους τύπους καρφιού. Κάθε τύπος χρησιμοποιείται ανάλογα με την άμυνα του/της αντιπάλου/ης και τη θέση της μπάλας.',
+  no:'Έλεγξε ξανά. Ο τύπος καρφιού αλλάζει ανάλογα με τη δύναμη, την κίνηση του καρπού και τη θέση απογείωσης του/της παίκτη/τριας.'},
+
+{ type:'tf', q:'Ο/Η λίμπερο επιτρέπεται να καρφώσει την μπάλα αν αυτή βρίσκεται πάνω από το φιλέ.',
+  ans:1,
+  ok:'Σωστά! Σύμφωνα με τους κανονισμούς FIVB, ο/η λίμπερο δεν επιτρέπεται να εκτελεί επιθετικό χτύπημα όταν η μπάλα βρίσκεται εντελώς πάνω από το άνω άκρο του φιλέ.',
+  no:'Λάθος! Ο/Η λίμπερο έχει ειδικό ρόλο στην άμυνα και δεν μπορεί να καρφώσει μπάλα που βρίσκεται πάνω από το φιλέ. Αυτό απαγορεύεται ρητά από τους κανονισμούς FIVB.'},
+
+{ type:'mcq', q:'Σε τι απόσταση από το φιλέ βρίσκεται η γραμμή επίθεσης στην πετοσφαίριση;',
+  opts:['2 μέτρα.','2,5 μέτρα.','3 μέτρα.','4 μέτρα.'],
+  ans:2,
+  ok:'Άριστα! Η γραμμή επίθεσης βρίσκεται 3 μέτρα από τον κεντρικό άξονα του φιλέ. Χωρίζει την εμπρός ζώνη από την πίσω ζώνη και καθορίζει ποιοι/ες παίκτες/τριες μπορούν να καρφώσουν ελεύθερα.',
+  no:'Η γραμμή επίθεσης βρίσκεται ακριβώς 3 μέτρα από τον κεντρικό άξονα του φιλέ. Είναι σημαντική γιατί καθορίζει ποιος/α παίκτης/τρια μπορεί να καρφώσει χωρίς περιορισμό.'},
+
+{ type:'fill', q:'Συμπλήρωσε το κενό:',
+  seg:['«Ένα επιθετικό χτύπημα μετράει ως σφάλμα αν ο/η παίκτης/τρια αγγίξει το ',' κατά τη διάρκεια της εκτέλεσης.»'],
+  blanks:[['φιλέ','δίχτυ']],
+  ok:'Σωστά! Οποιαδήποτε επαφή με το φιλέ κατά την εκτέλεση χτυπήματος αποτελεί αυτόματα σφάλμα.',
+  no:'Η σωστή απάντηση είναι φιλέ. Αν ο/η παίκτης/τρια αγγίξει το φιλέ οποιαδήποτε στιγμή κατά την εκτέλεση, το σημείο χάνεται.'},
+
+{ type:'multi', q:'Ποιες από τις παρακάτω καταστάσεις αποτελούν σφάλμα κατά την εκτέλεση καρφιού; (Επίλεξε τις σωστές)',
+  opts:['Επαφή με το φιλέ.','Χτύπημα μπάλας που βρίσκεται ήδη στον αντίπαλο χώρο.','Χτύπημα με ένα χέρι.','Πάτημα ή υπέρβαση της κεντρικής γραμμής κάτω από το φιλέ.','Διπλό χτύπημα από τον/την ίδιο/α παίκτη/τρια.'],
+  ans:[0,1,3,4],
+  ok:'Εξαιρετικά! Εντόπισες σωστά όλα τα σφάλματα. Το χτύπημα με ένα χέρι επιτρέπεται, όλα τα υπόλοιπα είναι σφάλματα.',
+  no:'Σφάλματα κατά το καρφί είναι: επαφή με φιλέ, χτύπημα μπάλας στον αντίπαλο χώρο, υπέρβαση κεντρικής γραμμής και διπλό χτύπημα. Το χτύπημα με ένα χέρι είναι επιτρεπτό.'},
+
+{ type:'order', q:'Τοποθέτησε τις φάσεις εκτέλεσης καρφιού στη σωστή σειρά:',
+  items:['Τρέξιμο προσέγγισης (3–4 βήματα).','Απογείωση με δύο πόδια.','Ανάταση χεριού προς την μπάλα.','Χτύπημα μπάλας στο υψηλότερο σημείο.','Ασφαλής προσγείωση στα δύο πόδια.'],
+  start:[3,1,0,4,2],
+  ok:'Τέλεια! Αυτή η σειρά διασφαλίζει τόσο την αποτελεσματικότητα όσο και την ασφάλεια κατά την εκτέλεση.',
+  no:'Θυμήσου: πρώτα τρέχεις, μετά απογειώνεσαι, σηκώνεις το χέρι, χτυπάς στο ψηλότερο σημείο και προσγειώνεσαι ασφαλώς.'},
+
+{ type:'tf', q:'Ένας/Μία παίκτης/τρια μπορεί να χτυπήσει νόμιμα μία μπάλα που έχει ήδη περάσει στην αντίπαλη πλευρά του γηπέδου.',
+  ans:1,
+  ok:'Σωστά! Ο/Η παίκτης/τρια επιτρέπεται να χτυπήσει μόνο μπάλα που βρίσκεται στον δικό του/της χώρο ή πάνω από το φιλέ. Μόλις η μπάλα περάσει στον αντίπαλο χώρο, δεν επιτρέπεται χτύπημα.',
+  no:'Λάθος! Η μπάλα που έχει περάσει στον αντίπαλο χώρο δεν μπορεί να χτυπηθεί. Αυτό μετράει αυτόματα ως σφάλμα.'},
+
+{ type:'mcq', q:'Ποιος είναι ο κύριος σκοπός του τελευταίου βήματος («βήμα κλοπής») πριν την απογείωση;',
+  opts:['Να επιβραδύνει τον/την παίκτη/τρια για να πάρει σωστή θέση.','Να μετατρέψει την οριζόντια ορμή του τρεξίματος σε κατακόρυφη ώθηση.','Να αποφύγει τη σύγκρουση με άλλους/ες παίκτες/τριες.','Να σταθεροποιήσει τον/την παίκτη/τρια, ώστε να μη χτυπήσει το φιλέ.'],
+  ans:1,
+  ok:'Εξαιρετικά! Το τελευταίο βήμα «σπάει» την οριζόντια κίνηση και τη μετατρέπει σε ανοδική ώθηση, ώστε ο/η παίκτης/τρια να ανέβει όσο πιο ψηλά γίνεται.',
+  no:'Ο βασικός σκοπός είναι η μετατροπή της οριζόντιας ορμής σε κατακόρυφη ώθηση. Αυτό επιτρέπει μεγαλύτερο ύψος απογείωσης για πιο αποτελεσματικό καρφί.'},
+
+{ type:'tf', q:'Ένας/Μία παίκτης/τρια εμπρός γραμμής μπορεί να χτυπήσει την μπάλα κάτω από το ύψος του φιλέ, αρκεί η μπάλα να βρίσκεται στον δικό του/της χώρο.',
+  ans:0,
+  ok:'Σωστά! Αν η μπάλα βρίσκεται ακόμα στον χώρο της ομάδας και κάτω από το φιλέ, ο/η παίκτης/τρια μπορεί να την χτυπήσει, συνήθως με τεχνική αγγιχτού (tip/dink).',
+  no:'Αυτό είναι Σωστό! Ο/Η παίκτης/τρια μπορεί να χτυπήσει μπάλα κάτω από το ύψος του φιλέ, εφόσον η μπάλα βρίσκεται ακόμα στον δικό του/της χώρο. Απαγορεύεται μόνο το χτύπημα στον αντίπαλο χώρο.'},
+
+{ type:'fill', q:'Συμπλήρωσε το κενό:',
+  seg:['«Στην πετοσφαίριση κάθε ομάδα έχει δικαίωμα σε ',' το πολύ αγγίγματα πριν επιστρέψει την μπάλα στην αντίπαλη πλευρά.»'],
+  blanks:[['τρία','3','τρια']],
+  ok:'Σωστά! Κάθε ομάδα έχει έως 3 αγγίγματα, συνήθως: υποδοχή, πάσα στον/στην παίκτη/τρια-στήτη και καρφί. Αυτή είναι η βάση της επιθετικής οργάνωσης στο βόλεϊ.',
+  no:'Η σωστή απάντηση είναι τρία (3). Κάθε ομάδα μπορεί να αγγίξει την μπάλα έως 3 φορές. Το καρφί είναι συνήθως το τρίτο και τελευταίο άγγιγμα.'}
+];
+
+/* ====================== ΚΑΤΑΣΤΑΣΗ ====================== */
+let idx = -1;                       // -1 = εξώφυλλο, Q.length = αποτελέσματα
+const st = Q.map(()=>({answer:null, checked:false, correct:false}));
+
+const stage=document.getElementById('stage'), counter=document.getElementById('counter'),
+      barfill=document.getElementById('barfill'), bPrev=document.getElementById('prev'),
+      bNext=document.getElementById('next'), bCheck=document.getElementById('check');
+
+const norm = s => (s||'').toString().trim().toLowerCase()
+  .replace(/[άΆ]/g,'α').replace(/[έΈ]/g,'ε').replace(/[ήΉ]/g,'η')
+  .replace(/[ίΊϊΐ]/g,'ι').replace(/[όΌ]/g,'ο').replace(/[ύΎϋΰ]/g,'υ')
+  .replace(/[ώΏ]/g,'ω').replace(/ς/g,'σ').replace(/\s+/g,' ');
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ====================== RENDER ====================== */
+function render(){
+  stage.scrollTop=0;
+  if(idx===-1) return renderCover();
+  if(idx===Q.length) return renderResults();
+  renderQuestion();
+}
+
+function chrome(){
+  const total=Q.length;
+  if(idx===-1){counter.textContent='Εισαγωγή';barfill.style.width='0%';}
+  else if(idx===total){counter.textContent='Αποτελέσματα';barfill.style.width='100%';}
+  else {counter.textContent=`Ερώτηση ${idx+1} / ${total}`;barfill.style.width=((idx)/total*100)+'%';}
+  bPrev.style.display = idx>0 && idx<=total ? '' : 'none';
+  const s = idx>=0 && idx<total ? st[idx] : null;
+  bCheck.style.display = s && !s.checked ? '' : 'none';
+  bNext.style.display = idx===total ? 'none' : '';
+  bNext.textContent = idx===-1 ? 'Ξεκίνα ›' : (idx===total-1 ? 'Αποτελέσματα ›' : 'Επόμενη ›');
+  bNext.disabled = !!(s && !s.checked);
+}
+
+function renderCover(){
+  stage.innerHTML = `
+  <div class="cover intro">
+    <div class="icon">🏐</div>
+    <h2>Το καρφί στην πετοσφαίριση</h2>
+    <div class="sub">Δραστηριότητα αξιολόγησης κλειστού τύπου · 15 ερωτήσεις</div>
+  </div>`;
+  chrome();
+}
+
+function renderQuestion(){
+  const q=Q[idx], s=st[idx];
+  let body='';
+  if(q.type==='mcq'||q.type==='multi'){
+    const cls = q.type==='multi' ? 'opts multi' : 'opts';
+    body = `<ul class="${cls}" id="opts">` + q.opts.map((o,i)=>
+      `<li data-i="${i}"><span class="mark">${String.fromCharCode(65+i)}</span><span>${esc(o)}</span></li>`).join('') + `</ul>`;
+  }
+  else if(q.type==='tf'){
+    body = `<ul class="opts tfwrap" id="opts">
+      <li data-i="0"><span class="mark">✓</span><span>Σωστό</span></li>
+      <li data-i="1"><span class="mark">✕</span><span>Λάθος</span></li></ul>`;
+  }
+  else if(q.type==='fill'){
+    let html='<div class="fill">';
+    q.seg.forEach((sg,i)=>{
+      html+=esc(sg);
+      if(i<q.blanks.length) html+=`<input type="text" data-b="${i}" autocomplete="off" spellcheck="false">`;
+    });
+    html+='</div>';
+    body=html;
+  }
+  else if(q.type==='match'){
+    body = `<div class="matchgrid" id="mg">` + q.terms.map((t,i)=>
+      `<div class="mrow"><div class="mterm">${esc(t)}</div>
+       <div class="mslot" data-slot="${i}">Σύρε ή πάτησε μια περιγραφή…</div></div>`).join('') + `</div>
+      <div class="pool" id="pool"></div>`;
+  }
+  else if(q.type==='order'){
+    body = `<ol class="order" id="ord"></ol>`;
+  }
+
+  const hint = {mcq:'Επίλεξε μία απάντηση.',multi:'Μπορείς να επιλέξεις περισσότερες από μία.',
+    tf:'Επίλεξε Σωστό ή Λάθος.',fill:'Γράψε τη λέξη που λείπει.',
+    match:'Πάτησε μια περιγραφή και μετά το κουτί που της αντιστοιχεί (ή σύρε την).',
+    order:'Άλλαξε τη σειρά με τα βελάκια ή σύροντας τα στοιχεία.'}[q.type];
+
+  stage.innerHTML = `<div id="qwrap">
+    <span class="qnum">ΕΡΩΤΗΣΗ ${idx+1}</span>
+    <div class="qtext">${esc(q.q)}</div>
+    <div class="hint">${hint}</div>
+    ${body}
+    <div class="fb" id="fb"></div>
+  </div>`;
+
+  if(q.type==='match') initMatch();
+  if(q.type==='order') initOrder();
+  bindInputs();
+  if(s.answer!==null) restore();
+  if(s.checked) showResult(true);
+  chrome();
+}
+
+/* ---------- επιλογές ---------- */
+function bindInputs(){
+  const q=Q[idx], s=st[idx];
+  const opts=document.getElementById('opts');
+  if(opts){
+    opts.addEventListener('click',e=>{
+      if(s.checked) return;
+      const li=e.target.closest('li'); if(!li) return;
+      const i=+li.dataset.i;
+      if(q.type==='multi'){
+        const cur = Array.isArray(s.answer)?s.answer:[];
+        s.answer = cur.includes(i) ? cur.filter(x=>x!==i) : cur.concat(i);
+      } else s.answer=i;
+      restore();
+    });
+  }
+  if(q.type==='fill'){
+    stage.querySelectorAll('input[data-b]').forEach(inp=>{
+      inp.addEventListener('input',()=>{
+        s.answer = [...stage.querySelectorAll('input[data-b]')].map(x=>x.value);
+      });
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!s.checked) doCheck(); });
+    });
+  }
+}
+
+function restore(){
+  const q=Q[idx], s=st[idx];
+  if(q.type==='mcq'||q.type==='tf'){
+    stage.querySelectorAll('#opts li').forEach(li=>li.classList.toggle('sel',+li.dataset.i===s.answer));
+  } else if(q.type==='multi'){
+    const a=Array.isArray(s.answer)?s.answer:[];
+    stage.querySelectorAll('#opts li').forEach(li=>li.classList.toggle('sel',a.includes(+li.dataset.i)));
+  } else if(q.type==='fill'){
+    const a=s.answer||[];
+    stage.querySelectorAll('input[data-b]').forEach((inp,i)=>inp.value=a[i]||'');
+  }
+}
+
+/* ---------- αντιστοίχιση ---------- */
+let activeChip=null;
+function initMatch(){
+  const q=Q[idx], s=st[idx];
+  if(!s.answer) s.answer=Array(q.terms.length).fill(null);
+  const pool=document.getElementById('pool');
+  const order = q.defs.map((d,i)=>i).sort((a,b)=>((a*7+3)%5)-((b*7+3)%5)); // σταθερή ανάμιξη
+  function paint(){
+    pool.innerHTML='';
+    order.forEach(i=>{
+      if(s.answer.includes(i)) return;
+      const c=document.createElement('div');
+      c.className='chip'; c.textContent=q.defs[i]; c.dataset.d=i; c.draggable=true;
+      pool.appendChild(c);
+    });
+    stage.querySelectorAll('.mslot').forEach(sl=>{
+      const v=s.answer[+sl.dataset.slot];
+      sl.textContent = v===null?'Σύρε ή πάτησε μια περιγραφή…':q.defs[v];
+      sl.classList.toggle('filled',v!==null);
+    });
+    activeChip=null;
+  }
+  paint();
+
+  const root=document.getElementById('qwrap');
+  root.addEventListener('click',e=>{
+    if(st[idx].checked) return;
+    const chip=e.target.closest('.chip');
+    const slot=e.target.closest('.mslot');
+    if(chip){
+      stage.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      if(activeChip===+chip.dataset.d){activeChip=null;} else {activeChip=+chip.dataset.d;chip.classList.add('active');}
+      return;
+    }
+    if(slot){
+      const k=+slot.dataset.slot;
+      if(activeChip!==null){ s.answer[k]=activeChip; paint(); }
+      else if(s.answer[k]!==null){ s.answer[k]=null; paint(); }
+    }
+  });
+  root.addEventListener('dragstart',e=>{
+    const chip=e.target.closest('.chip'); if(!chip) return;
+    e.dataTransfer.setData('text/plain',chip.dataset.d);
+  });
+  root.addEventListener('dragover',e=>{ if(e.target.closest('.mslot')) e.preventDefault(); });
+  root.addEventListener('drop',e=>{
+    const slot=e.target.closest('.mslot'); if(!slot||st[idx].checked) return;
+    e.preventDefault();
+    s.answer[+slot.dataset.slot]=+e.dataTransfer.getData('text/plain');
+    paint();
+  });
+  stage._paintMatch=paint;
+}
+
+/* ---------- σειροθέτηση ---------- */
+function initOrder(){
+  const q=Q[idx], s=st[idx];
+  if(!s.answer) s.answer=q.start.slice();
+  const ol=document.getElementById('ord');
+  function paint(){
+    ol.innerHTML='';
+    s.answer.forEach((v,pos)=>{
+      const li=document.createElement('li');
+      li.draggable=!st[idx].checked; li.dataset.pos=pos;
+      li.innerHTML=`<span>${esc(q.items[v])}</span>
+        <span class="arrows"><button data-up="${pos}">▲</button><button data-dn="${pos}">▼</button></span>`;
+      ol.appendChild(li);
+    });
+  }
+  paint();
+  ol.addEventListener('click',e=>{
+    if(st[idx].checked) return;
+    const b=e.target.closest('button'); if(!b) return;
+    const a=s.answer;
+    if(b.dataset.up!==undefined){const p=+b.dataset.up; if(p>0){[a[p-1],a[p]]=[a[p],a[p-1]];}}
+    else {const p=+b.dataset.dn; if(p<a.length-1){[a[p+1],a[p]]=[a[p],a[p+1]];}}
+    paint();
+  });
+  let from=null;
+  ol.addEventListener('dragstart',e=>{const li=e.target.closest('li');if(!li)return;from=+li.dataset.pos;e.dataTransfer.effectAllowed='move';});
+  ol.addEventListener('dragover',e=>{if(e.target.closest('li'))e.preventDefault();});
+  ol.addEventListener('drop',e=>{
+    const li=e.target.closest('li'); if(!li||from===null||st[idx].checked) return;
+    e.preventDefault();
+    const to=+li.dataset.pos, a=s.answer;
+    a.splice(to,0,a.splice(from,1)[0]); from=null; paint();
+  });
+  stage._paintOrder=paint;
+}
+
+/* ====================== ΕΛΕΓΧΟΣ ====================== */
+function evaluate(){
+  const q=Q[idx], s=st[idx];
+  if(q.type==='mcq'||q.type==='tf') return s.answer===q.ans;
+  if(q.type==='multi'){
+    const a=(s.answer||[]).slice().sort((x,y)=>x-y), b=q.ans.slice().sort((x,y)=>x-y);
+    return a.length===b.length && a.every((v,i)=>v===b[i]);
+  }
+  if(q.type==='fill') return q.blanks.every((acc,i)=>acc.some(w=>norm(w)===norm((s.answer||[])[i])));
+  if(q.type==='match') return (s.answer||[]).every((v,i)=>v===i);
+  if(q.type==='order') return (s.answer||[]).every((v,i)=>v===i);
+  return false;
+}
+
+function hasAnswer(){
+  const q=Q[idx], s=st[idx];
+  if(q.type==='multi') return Array.isArray(s.answer)&&s.answer.length>0;
+  if(q.type==='fill') return (s.answer||[]).length===q.blanks.length && (s.answer||[]).every(v=>(v||'').trim()!=='');
+  if(q.type==='match') return (s.answer||[]).every(v=>v!==null);
+  if(q.type==='order') return true;
+  return s.answer!==null;
+}
+
+function doCheck(){
+  const s=st[idx];
+  if(s.checked) return;
+  if(!hasAnswer()){ flash('Συμπλήρωσε πρώτα την απάντησή σου.'); return; }
+  s.correct=evaluate(); s.checked=true;
+  showResult(false); chrome();
+}
+
+function flash(msg){
+  const fb=document.getElementById('fb');
+  fb.className='fb no show'; fb.innerHTML=`<b>Προσοχή</b>${msg}`;
+  setTimeout(()=>{ if(!st[idx].checked) fb.className='fb'; },2000);
+}
+
+function showResult(){
+  const q=Q[idx], s=st[idx];
+  const wrap=document.getElementById('qwrap'); wrap.classList.add('locked');
+
+  if(q.type==='mcq'||q.type==='tf'){
+    stage.querySelectorAll('#opts li').forEach(li=>{
+      const i=+li.dataset.i; li.classList.remove('sel');
+      if(i===q.ans) li.classList.add('good');
+      else if(i===s.answer) li.classList.add('bad');
+    });
+  }
+  else if(q.type==='multi'){
+    const a=s.answer||[];
+    stage.querySelectorAll('#opts li').forEach(li=>{
+      const i=+li.dataset.i; li.classList.remove('sel');
+      if(q.ans.includes(i)) li.classList.add('good');
+      else if(a.includes(i)) li.classList.add('bad');
+    });
+  }
+  else if(q.type==='fill'){
+    stage.querySelectorAll('input[data-b]').forEach((inp,i)=>{
+      inp.disabled=true;
+      const good=q.blanks[i].some(w=>norm(w)===norm(inp.value));
+      inp.classList.add(good?'good':'bad');
+      if(!good) inp.value=q.blanks[i][0];
+    });
+  }
+  else if(q.type==='match'){
+    if(stage._paintMatch) stage._paintMatch();
+    stage.querySelectorAll('.mslot').forEach(sl=>{
+      const k=+sl.dataset.slot, v=(s.answer||[])[k];
+      sl.classList.add(v===k?'good':'bad');
+      if(v!==k) sl.textContent=q.defs[k];
+    });
+    const p=document.getElementById('pool'); if(p) p.innerHTML='';
+  }
+  else if(q.type==='order'){
+    if(stage._paintOrder) stage._paintOrder();
+    stage.querySelectorAll('#ord li').forEach((li,pos)=>{
+      li.draggable=false;
+      li.classList.add((s.answer||[])[pos]===pos?'good':'bad');
+      li.querySelector('.arrows').remove();
+    });
+    if(!s.correct){
+      const sol=document.createElement('div'); sol.className='sol';
+      sol.textContent='Σωστή σειρά: '+q.items.map((t,i)=>`${i+1}. ${t}`).join(' ');
+      document.getElementById('ord').after(sol);
+    }
+  }
+
+  const fb=document.getElementById('fb');
+  fb.className='fb '+(s.correct?'ok':'no')+' show';
+  fb.innerHTML=`<b>${s.correct?'✔ Σωστή απάντηση':'✖ Λάθος απάντηση'}</b>${esc(s.correct?q.ok:q.no)}`;
+}
+
+/* ====================== ΑΠΟΤΕΛΕΣΜΑΤΑ ====================== */
+function renderResults(){
+  const score=st.filter(s=>s.correct).length, total=Q.length;
+  const pct=Math.round(score/total*100);
+  let icon,title,msg;
+  if(pct>=85){icon='🏆';title='Εξαιρετικά!';msg='Κατέχεις πολύ καλά την τεχνική και τους κανονισμούς του καρφιού. Είσαι έτοιμος/η να τα εφαρμόσεις στο γήπεδο!';}
+  else if(pct>=70){icon='🎯';title='Πολύ καλά!';msg='Έχεις κατακτήσει τα περισσότερα σημεία. Ξαναδές τις ερωτήσεις που δυσκολεύτηκες και θα φτάσεις στο άριστα.';}
+  else if(pct>=50){icon='💪';title='Καλή προσπάθεια!';msg='Έχεις καλή βάση, αλλά χρειάζεται επανάληψη στις φάσεις του καρφιού και στα σφάλματα κατά την επίθεση.';}
+  else {icon='📚';title='Χρειάζεται επανάληψη.';msg='Μελέτησε ξανά τις τέσσερις φάσεις του καρφιού, τους τύπους επιθετικού χτυπήματος και τους βασικούς κανονισμούς, και δοκίμασε ξανά.';}
+
+  stage.innerHTML=`<div class="cover">
+    <div class="icon">${icon}</div>
+    <h2>${title}</h2>
+    <div class="score">${score}<small> / ${total}</small></div>
+    <div class="ring"><i style="width:${pct}%"></i></div>
+    <div class="sub">Ποσοστό επιτυχίας: <b>${pct}%</b></div>
+    <div class="box"><p style="margin:0">${msg}</p></div>
+    <div class="box"><h3>Ανασκόπηση</h3><ul>${
+      st.map((s,i)=>`<li>${s.correct?'✔':'✖'} Ερώτηση ${i+1}</li>`).join('')
+    }</ul></div>
+    <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-main" id="again">↻ Ξεκίνα ξανά</button>
+      <button class="btn-ghost" id="review">Δες τις ερωτήσεις</button>
+    </div>
+    <div class="kw">Λέξεις κλειδιά: πετοσφαίριση, βόλεϊ, καρφί, επίθεση, τεχνική, συνεργασία, μπλοκ, κανονισμοί</div>
+  </div>`;
+  document.getElementById('again').onclick=()=>{
+    st.forEach(s=>{s.answer=null;s.checked=false;s.correct=false;});
+    idx=-1; render();
+  };
+  document.getElementById('review').onclick=()=>{ idx=0; render(); };
+  chrome();
+}
+
+/* ====================== ΠΛΟΗΓΗΣΗ ====================== */
+bNext.onclick=()=>{ if(idx<Q.length){idx++;render();} };
+bPrev.onclick=()=>{ if(idx>-1){idx--;render();} };
+bCheck.onclick=doCheck;
+render();
+</script>
+</body>
+</html>

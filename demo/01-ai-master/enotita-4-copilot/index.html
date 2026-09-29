@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 4: Copilot 365 – Microsoft | Διαδραστικό Μάθημα</title>
+<meta name="description" content="Διαδραστικό μάθημα σε μορφή διαφανειών: γνωριμία με τον Microsoft Copilot — στον browser και μέσα στις εφαρμογές του Microsoft 365 (Word, Excel, PowerPoint), το περιβάλλον, τα prompts και πώς συνεργάζονται μεταξύ τους NotebookLM, Gemini, ChatGPT και Copilot.">
+<link rel="stylesheet" href="assets/css/style.css?v=1">
+<link rel="stylesheet" href="assets/css/v2.css?v=1">
+<!-- AI-UPDATE-2026:START --><link rel="stylesheet" href="assets/css/updates-2026.css?v=enriched"><link rel="stylesheet" href="assets/css/enrichment.css?v=1"><!-- AI-UPDATE-2026:END --><link rel="stylesheet" href="assets/css/local-chatbot.css?v=sc1"><link rel="stylesheet" href="assets/css/space-theme.css?v=sp1"><script>try{if(!localStorage.getItem("claudeCourse_theme"))localStorage.setItem("claudeCourse_theme","dark");}catch(e){}</script><link rel="stylesheet" href="assets/css/astra.css?v=2"><link rel="stylesheet" href="assets/css/reactbits.css?v=2"><link rel="stylesheet" href="assets/css/shadcn-base.css?v=sc1"><link rel="stylesheet" href="assets/css/shadcn-chat.css?v=sc1"></head>
+<body class="sidebar-collapsed" data-astra-course="copilot" data-course="aimaster_en4">
+
+<div class="app">
+
+  <!-- ===================== ΠΛΕΥΡΙΚΟ ΜΕΝΟΥ ===================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Περιεχόμενα μαθήματος">
+    <div class="sidebar-header">
+      <div class="brand">
+        <img class="brand-mark" src="assets/images/copilot-logo.png" alt="" aria-hidden="true" width="38" height="38">
+        <span class="brand-text"><strong>AI MASTER</strong> Ενότητα 4 · Copilot 365 – Microsoft</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <p class="nav-group-label">Περιεχόμενα</p>
+      <ul id="navList" style="list-style:none; margin:0; padding:0;"></ul>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="overall"><span>Πρόοδος</span><span id="overallLabel">0 / 0</span></div>
+      <button type="button" class="btn btn-secondary btn-sm" id="resetProgress" style="width:100%;">Επαναφορά προόδου</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- ===================== ΚΥΡΙΑ ΠΕΡΙΟΧΗ ===================== -->
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="icon-btn" id="sidebarToggle" aria-label="Άνοιγμα/κλείσιμο μενού">☰</button>
+      <span class="topbar-title" id="topbarTitle">Ενότητα 4</span>
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Σκούρο θέμα" aria-pressed="false">🌙</button>
+      <div class="topbar-progress" aria-hidden="true">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressLabel">0%</span>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ============ ΔΙΑΦΑΝΕΙΑ 0 — ΑΡΧΙΚΗ ΟΘΟΝΗ ============ -->
+      <section class="chapter no-autonav" data-title="Αρχική οθόνη ενότητας" data-group="Εισαγωγή">
+        <div class="hero">
+          <span class="hero-badge">Ενότητα 4</span>
+          <h1>Copilot 365 – Microsoft: Ο ψηφιακός βοηθός στη δουλειά σας</h1>
+          <p class="lead">Ένα διαδραστικό μάθημα γνωριμίας με τον Microsoft Copilot: από τον browser και το περιβάλλον του, μέχρι τα σωστά prompts και τη συνεργασία του με το Word, το Excel και το PowerPoint — και στο τέλος, πώς συνεργάζονται μεταξύ τους όλα τα εργαλεία AI που γνωρίσατε.</p>
+          <img class="hero-logo" src="assets/images/copilot-logo.png" alt="" aria-hidden="true">
+          <div class="objectives">
+            <h3>Μαθησιακοί στόχοι</h3>
+            <ul>
+              <li>Να κατανοήσετε τι είναι ο Microsoft Copilot και πού θα τον συναντήσετε (browser και εφαρμογές Microsoft 365).</li>
+              <li>Να γνωρίσετε το περιβάλλον του: σημεία πρόσβασης, κύρια οθόνη, τρόπους απάντησης, είσοδο με λογαριασμό και ρυθμίσεις.</li>
+              <li>Να γράφετε σωστά prompts με σαφήνεια και ακρίβεια, εφαρμόζοντας τις βασικές αρχές.</li>
+              <li>Να δημιουργείτε και να επεξεργάζεστε έγγραφα στο Word με τη βοήθεια του Copilot.</li>
+              <li>Να δημιουργείτε πίνακες, υπολογισμούς και γραφήματα στο Excel βήμα προς βήμα.</li>
+              <li>Να χτίζετε παρουσιάσεις στο PowerPoint: διαφάνειες, σχεδίαση, σημειώσεις ομιλητή και περίληψη.</li>
+              <li>Να κατανοήσετε πώς συνεργάζονται μεταξύ τους το NotebookLM, το Gemini, το ChatGPT και ο Copilot σε μια ενιαία ροή εργασίας.</li>
+            </ul>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1;">
+            <button type="button" class="btn btn-primary" data-nav="1">Έναρξη μαθήματος →</button>
+            <button type="button" class="btn btn-secondary" id="resumeBtn" hidden>Συνέχεια από το τελευταίο σημείο</button>
+          </div>
+        </div>
+      <!-- AI-UPDATE-2026:START --><div class="update-catalog"><details><summary>Εμπλουτισμένο υλικό · 6 αναλυτικές υποενότητες</summary><p>Κάθε υποενότητα περιλαμβάνει εισαγωγή, αναλυτική εξήγηση με παραγράφους, μελέτη περίπτωσης και διαδραστική εφαρμογή. Μπορείτε να προχωράτε σε βήματα ή να επιλέξετε «Συνεχής ανάγνωση».</p><ul><li><a data-update-link href="#copilot-access">Ποιο Copilot χρησιμοποιώ και σε ποια δεδομένα έχει πρόσβαση;</a></li><li><a data-update-link href="#copilot-agents">Researcher, Analyst και Facilitator: διαφορετικοί ρόλοι</a></li><li><a data-update-link href="#copilot-word-review">Word: επεξεργασία με σαφείς αμετάβλητους όρους</a></li><li><a data-update-link href="#copilot-excel-2026">Excel: Copilot, Python και επαλήθευση αποτελεσμάτων</a></li><li><a data-update-link href="#copilot-slides-review">PowerPoint: τεκμηριωμένες και προσβάσιμες διαφάνειες</a></li><li><a data-update-link href="#copilot-capstone">Τελική εφαρμογή: συνεργασία εργαλείων με κοινό έλεγχο</a></li></ul><p>Οι διαθέσιμες λειτουργίες μπορεί να διαφέρουν ανά λογαριασμό, πρόγραμμα και πλατφόρμα.</p></details></div><!-- AI-UPDATE-2026:END --></section>
+
+      <!-- ============ ΚΕΦΑΛΑΙΟ 1 ============ -->
+      <section class="chapter" data-title="Εισαγωγή" data-group="1. Γνωριμία με το Copilot">
+        <span class="chapter-kicker">Κεφάλαιο 1 · Εισαγωγή</span>
+        <h1>Γνωριμία με το Copilot</h1>
+        <p>Φανταστείτε να έχετε έναν ψηφιακό βοηθό, έτοιμο να απαντήσει στις ερωτήσεις σας, να σας προτείνει ιδέες, να οργανώσει τα έγγραφά σας ή ακόμα και να γράψει για εσάς. Αυτός ο ψηφιακός βοηθός είναι ο Microsoft Copilot. Ένα έξυπνο εργαλείο που ενσωματώνεται απευθείας στις εφαρμογές του Microsoft 365, όπως το Word, το Excel, το Outlook και το PowerPoint, και σας προσφέρει βοήθεια σε πραγματικό χρόνο με τη δύναμη της Τεχνητής Νοημοσύνης.</p>
+        <p>Θα δούμε πώς να τον εντοπίζετε στον υπολογιστή σας, πώς να του «μιλάτε» μέσω των prompts και πώς να αξιοποιείτε τις δυνατότητές του για να εξοικονομείτε χρόνο και να εργάζεστε πιο αποτελεσματικά.</p>
+        <figure class="shot">
+          <img src="assets/images/copilot-banner.png" alt="Το λογότυπο του Microsoft Copilot" loading="lazy" style="max-height:34vh;">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Τι είναι ο Copilot" data-group="1. Γνωριμία με το Copilot">
+        <span class="chapter-kicker">Υποενότητα 1.1</span>
+        <h1>Τι είναι ο Copilot και πού θα τον συναντήσετε</h1>
+        <p>Ο Copilot είναι στην απλή του μορφή ένα μοντέλο Τεχνητής Νοημοσύνης της Microsoft, παρόμοιο με αυτά που ήδη έχετε γνωρίσει: το ChatGPT και το Gemini. Όπως και εκείνα, έχει σχεδιαστεί για να καταλαβαίνει φυσική γλώσσα, να απαντά στις ερωτήσεις σας, να σας προτείνει ιδέες και να σας βοηθά σε διάφορες εργασίες.</p>
+        <p>Αυτό σημαίνει πως μπορείτε να του γράψετε κάτι απλό, όπως:</p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Παραδείγματα ερωτήσεων</span>
+          <p class="pb-text">«Τι είναι η τεχνητή νοημοσύνη με απλά λόγια;»<br>«Βρες μου τίτλους για μια εργασία σχετική με το περιβάλλον»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image1.png" alt="Παράδειγμα ερώτησης στον Copilot" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Copilot στον Browser" data-group="1. Γνωριμία με το Copilot">
+        <span class="chapter-kicker">Υποενότητα 1.1.1</span>
+        <h1>Copilot στον Browser</h1>
+        <p>Υπάρχουν δύο βασικά είδη Copilot που θα χρησιμοποιήσετε. Το πρώτο είναι ο Copilot στον browser — ο πιο απλός και άμεσος τρόπος να τον δοκιμάσετε. Δεν χρειάζεται να έχετε εγκατεστημένο κάποιο πρόγραμμα: αρκεί να ανοίξετε τον browser σας (π.χ. Microsoft Edge ή Chrome) και να γράψετε την ερώτησή σας.</p>
+        <p>Είναι ιδανικός για απλές ερωτήσεις και πληροφορίες, βοήθεια στη σύνταξη κειμένων, παραγωγή ιδεών και περιλήψεων.</p>
+        <p>Μόλις μπείτε στη σελίδα <a href="https://copilot.microsoft.com" target="_blank" rel="noopener">https://copilot.microsoft.com</a>, έχετε μπροστά σας έναν έξυπνο βοηθό που περιμένει να του δώσετε οδηγίες.</p>
+        <figure class="shot">
+          <img src="assets/images/image2.png" alt="Ο Copilot στον browser" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Copilot στις εφαρμογές 365" data-group="1. Γνωριμία με το Copilot">
+        <span class="chapter-kicker">Υποενότητα 1.1.2</span>
+        <h1>Microsoft Copilot μέσα στις εφαρμογές του 365</h1>
+        <p>Το Microsoft Copilot είναι ο έξυπνος βοηθός σας μέσα στις εφαρμογές του Microsoft 365, όπως το Word, το Excel, το Outlook και το PowerPoint. Χρησιμοποιεί Τεχνητή Νοημοσύνη για να σας βοηθήσει να γράφετε, να οργανώνετε, να υπολογίζετε και να δημιουργείτε πιο γρήγορα και εύκολα.</p>
+        <p>Μπορείτε να του δώσετε οδηγίες με φυσική γλώσσα — δηλαδή όπως θα τις λέγατε σε έναν συνάδελφο — και εκείνος θα αναλάβει να κάνει τη δουλειά για εσάς. Για παράδειγμα:</p>
+        <ul>
+          <li>Να γράψει ένα προσχέδιο για ένα έγγραφο.</li>
+          <li>Να δημιουργήσει έναν πίνακα στο Excel με βάση δεδομένα.</li>
+          <li>Να σας προτείνει ιδέες για μια παρουσίαση στο PowerPoint.</li>
+          <li>Να προτείνει απαντήσεις ή να συνοψίσει μεγάλα email.</li>
+        </ul>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">🤝</span>
+          <div><p>Το Copilot είναι σαν να έχετε έναν προσωπικό βοηθό που συνεργάζεται μαζί σας κάθε στιγμή που δουλεύετε στον υπολογιστή. Εμφανίζεται ως βοηθός μέσα στην εφαρμογή, με ειδικό εικονίδιο, και λειτουργεί σε συνεργασία με τα περιεχόμενά σας.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Η βασική διαφορά τους" data-group="1. Γνωριμία με το Copilot"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#copilot-access">Ποιο Copilot χρησιμοποιώ και σε ποια δεδομένα έχει πρόσβαση;</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 1.1</span>
+        <h1>Ποια είναι η βασική διαφορά τους</h1>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Copilot στον browser</th><th>Microsoft Copilot στις Εφαρμογές</th></tr></thead>
+            <tbody>
+              <tr><td>Λειτουργεί σαν chatbot</td><td>Συνεργάζεται απευθείας με έγγραφα</td></tr>
+              <tr><td>Ιδανικό για ερωτήσεις και ιδέες</td><td>Ιδανικό για παραγωγή περιεχομένου</td></tr>
+              <tr><td>Δεν επεξεργάζεται Word/Excel αρχεία</td><td>Έχει πρόσβαση σε ό,τι βλέπετε στην εφαρμογή</td></tr>
+              <tr><td>Δεν απαιτείται εγκατάσταση</td><td>Απαιτεί συνδρομή Microsoft 365</td></tr>
+            </tbody>
+          </table>
+        </div>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="copilot-access" data-update-title="Ποιο Copilot χρησιμοποιώ και σε ποια δεδομένα έχει πρόσβαση;" aria-labelledby="copilot-access-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 1.1</p><h2 id="copilot-access-title" tabindex="-1">Ποιο Copilot χρησιμοποιώ και σε ποια δεδομένα έχει πρόσβαση;</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να ελέγχετε περιβάλλον, λογαριασμό και δικαιώματα.</p><div class="learn-workbook" data-workbook="copilot-access"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="copilot-access-tab-0" aria-controls="copilot-access-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="copilot-access-tab-1" aria-controls="copilot-access-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="copilot-access-tab-2" aria-controls="copilot-access-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="copilot-access-tab-3" aria-controls="copilot-access-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="copilot-access-panel-0" role="tabpanel" aria-labelledby="copilot-access-tab-0" tabindex="0"><p>Το όνομα Copilot χρησιμοποιείται σε διαφορετικά προϊόντα και περιβάλλοντα. Οι ενημερώσεις Microsoft 365 Copilot αφορούν αυτό το προϊόν και τις συγκεκριμένες πλατφόρμες που αναφέρονται. Η Microsoft περιγράφει σταδιακή διάθεση λειτουργιών μέσα στους οργανισμούς, επομένως δύο χρήστες μπορεί να βλέπουν διαφορετικές επιλογές.</p><ul><li>Ελέγξτε αν χρησιμοποιείτε προσωπικό ή λογαριασμό εργασίας/εκπαίδευσης.</li><li>Εντοπίστε την εφαρμογή: browser, Word, Excel, PowerPoint ή Microsoft 365 Copilot Chat.</li><li>Ελέγξτε ποιο αρχείο ή ποια πηγή χρησιμοποιείται στη συγκεκριμένη απάντηση.</li><li>Αν λείπει μια λειτουργία, ανατρέξτε στις προϋποθέσεις και στον διαχειριστή, αντί να θεωρήσετε ότι κάνατε λάθος στα βήματα.</li></ul><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Συνάδελφος βλέπει νέα λειτουργία στο Excel, ενώ εσείς όχι. Αποδεικνύει αυτό ότι ο οδηγός είναι λανθασμένος;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Όχι. Μπορεί να διαφέρουν το κανάλι ενημέρωσης, η πλατφόρμα, η άδεια ή η σταδιακή διάθεση. Καταγράφουμε το περιβάλλον πριν αναζητήσουμε λύση.</p></details></div></div><div class="learn-panel" id="copilot-access-panel-1" role="tabpanel" aria-labelledby="copilot-access-tab-1" tabindex="0"><h3>Λογαριασμός, περιβάλλον και πραγματικά διαθέσιμα δεδομένα</h3><p>Η ονομασία Copilot καλύπτει διαφορετικά περιβάλλοντα και λειτουργίες. Ο χρήστης μπορεί να εργάζεται σε συνομιλία, μέσα σε εφαρμογή Microsoft 365 ή με εξειδικευμένο agent. Η εμπειρία επηρεάζεται από άδεια, λογαριασμό, πολιτικές οργανισμού και διαθέσιμα εργαλεία. Για αυτό η πρώτη ερώτηση πριν από μια σημαντική εργασία είναι «σε ποιο περιβάλλον βρίσκομαι και ποιο υλικό έχει πράγματι πρόσβαση ο βοηθός;».</p><p>Η πρόσβαση δεν πρέπει να συνάγεται μόνο από την εμφάνιση μιας απάντησης. Αν ζητήσουμε σύνοψη εγγράφου που δεν έχει επισυναφθεί ή επιλεγεί, ο βοηθός μπορεί να χρειάζεται συγκεκριμένη αναφορά στο αρχείο. Ένα γενικό κείμενο για το θέμα δεν αποδεικνύει ότι διαβάστηκε το δικό μας έγγραφο. Ζητάμε αναγνωρίσιμα στοιχεία πηγής και ελέγχουμε αν η απάντηση αντιστοιχεί στο συγκεκριμένο περιεχόμενο.</p><p>Η οργάνωση της εργασίας περιλαμβάνει και τον διαχωρισμό προσωπικών και οργανωτικών δεδομένων. Δεν μεταφέρουμε υλικό σε άλλο περιβάλλον μόνο για να εμφανιστεί μια επιθυμητή λειτουργία, χωρίς να εξετάσουμε αν αυτό επιτρέπεται. Αν η δυνατότητα δεν είναι διαθέσιμη, επιλέγουμε εγκεκριμένη εναλλακτική. Η αποτελεσματικότητα προκύπτει από τη σωστή αντιστοίχιση εργασίας, πρόσβασης και εργαλείου.</p></div><div class="learn-panel" id="copilot-access-panel-2" role="tabpanel" aria-labelledby="copilot-access-tab-2" tabindex="0"><h3>Παράδειγμα: δύο χρήστες βλέπουν διαφορετικές επιλογές</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Δύο συνάδελφοι προσπαθούν να αναλύσουν έναν πίνακα. Ο ένας εργάζεται μέσα στο Excel του οργανισμού, ενώ ο άλλος σε προσωπική συνομιλία. Η διαφορετική πρόσβαση σε αρχείο και εργαλεία μπορεί να εξηγεί τη διαφορετική συμπεριφορά. Δεν είναι ασφαλές να υποθέσουμε ότι η ίδια ονομασία σημαίνει ίδια δυνατότητα.</p><p>Η ομάδα καταγράφει το περιβάλλον της δοκιμής και χρησιμοποιεί συνθετικό αρχείο για αρχικό έλεγχο. Έτσι μπορεί να εξετάσει τη λειτουργία χωρίς να μεταφέρει πραγματικά οργανωτικά στοιχεία σε μη εγκεκριμένο χώρο.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Πριν αναλύσεις, δήλωσε ποιο επιλεγμένο αρχείο χρησιμοποιείς και ποια φύλλα ή πεδία είναι διαθέσιμα. Αν δεν έχεις πρόσβαση στο αρχείο, ζήτησε το κατάλληλο υλικό αντί να δώσεις γενική ανάλυση σαν να το διάβασες.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="copilot-access-panel-3" role="tabpanel" aria-labelledby="copilot-access-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Μια απάντηση περιγράφει γενικά το θέμα ενός εγγράφου. Τι χρειάζεται για να βεβαιωθούμε ότι χρησιμοποιήθηκε το συγκεκριμένο αρχείο;</p><form class="enrich-choice" data-correct="2" data-answers="[&quot;Το μήκος και το ύφος δεν αποδεικνύουν πρόσβαση στην πηγή.&quot;,&quot;Η γλωσσική επιμέλεια δεν ταυτοποιεί το χρησιμοποιημένο υλικό.&quot;,&quot;Σωστά. Η αντιπαραβολή με την πηγή ελέγχει αν πράγματι αξιοποιήθηκε.&quot;]"><fieldset><legend class="enrich-sr">Μια απάντηση περιγράφει γενικά το θέμα ενός εγγράφου. Τι χρειάζεται για να βεβαιωθούμε ότι χρησιμοποιήθηκε το συγκεκριμένο αρχείο;</legend><label><input type="radio" name="copilot-access-choice" value="0" required><span>Να είναι αρκετά μεγάλη και καλογραμμένη.</span></label><label><input type="radio" name="copilot-access-choice" value="1" required><span>Να περιλαμβάνει πολλά επαγγελματικά επίθετα.</span></label><label><input type="radio" name="copilot-access-choice" value="2" required><span>Να αντιστοιχεί σε αναγνωρίσιμα στοιχεία και αποσπάσματα του αρχείου.</span></label></fieldset><button type="submit" class="enrich-button">Έλεγχος απάντησης</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></form><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Ποια στοιχεία θα κατέγραφες για να μπορεί ένας συνάδελφος να επαναλάβει τη δική σου δοκιμή Copilot;</p><label for="copilot-access-reflection">Η δική σου σύντομη απάντηση</label><textarea id="copilot-access-reflection" data-note="copilot-access" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes" target="_blank" rel="noopener noreferrer">Microsoft Learn · Ενημερώσεις Microsoft 365 Copilot</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <section class="chapter" data-title="Παραδείγματα: Οργάνωση &amp; Ιδέες" data-group="1. Γνωριμία με το Copilot">
+        <span class="chapter-kicker">Υποενότητα 1.2</span>
+        <h1>Πώς σας βοηθά ο Edge: οργάνωση και ιδέες</h1>
+        <p>Χρησιμοποιώντας τον Copilot από τον Microsoft Edge, έχετε έναν βοηθό στη διάθεσή σας όποτε χρειαστείτε γρήγορες απαντήσεις, ιδέες ή βοήθεια για καθημερινές εργασίες. Είναι σαν να ρωτάτε κάποιον «έμπειρο» φίλο που τα ξέρει όλα και σας απαντά μέσα σε δευτερόλεπτα.</p>
+        <p><strong>Για οργανωτικά θέματα:</strong></p>
+        <ul>
+          <li>«Φτιάξε ένα πρόγραμμα μελέτης για 5 μέρες»</li>
+          <li>«Τι να μαγειρέψω με πατάτες, αυγά και τυρί;»</li>
+          <li>«Οργάνωσέ μου μια λίστα για τις αποσκευές διακοπών 5 ημερών»</li>
+          <li>«Φτιάξε ένα ημερήσιο πρόγραμμα για κάποιον που δουλεύει 9-5 και θέλει να γυμνάζεται»</li>
+        </ul>
+        <p><strong>Για δημιουργικότητα και ιδέες:</strong></p>
+        <ul>
+          <li>«Πρότεινέ μου 3 ιδέες για ευχετήριο μήνυμα γενεθλίων»</li>
+          <li>«Δώσε μου 5 έξυπνες λεζάντες για Instagram»</li>
+          <li>«Βρες μου τίτλους για ένα podcast σχετικά με την υγεία»</li>
+          <li>«Δώσε μου ιδέες για χειροποίητα δώρα για φίλους»</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Παραδείγματα: Κείμενα &amp; Σπουδές" data-group="1. Γνωριμία με το Copilot">
+        <span class="chapter-kicker">Υποενότητα 1.2</span>
+        <h1>Πώς σας βοηθά ο Edge: κείμενα και σπουδές</h1>
+        <p><strong>Για τη συγγραφή κειμένων:</strong></p>
+        <ul>
+          <li>«Γράψε ένα επαγγελματικό email παραίτησης»</li>
+          <li>«Φτιάξε μου μια εισαγωγή για εργασία κοινωνιολογίας»</li>
+          <li>«Ξαναγράψε αυτό το κείμενο σε πιο φιλικό ύφος»</li>
+          <li>«Γράψε ένα σύντομο βιογραφικό κείμενο για παρουσίαση σε εκδήλωση»</li>
+        </ul>
+        <p><strong>Για τις σπουδές σας:</strong></p>
+        <ul>
+          <li>«Γράψε μια περίληψη για τον Β΄ Παγκόσμιο Πόλεμο»</li>
+          <li>«Τι είναι η τεχνητή νοημοσύνη με απλά λόγια;»</li>
+          <li>«Πες μου 3 τίτλους για εργασία σχετική με την προστασία του περιβάλλοντος»</li>
+          <li>«Φτιάξε μου ένα σχεδιάγραμμα για έκθεση με θέμα "Το σχολείο του μέλλοντος"»</li>
+        </ul>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">💡</span>
+          <div><p>Αυτά είναι μόνο μερικά παραδείγματα που δείχνουν πώς μπορείτε να αξιοποιήσετε τον Copilot μέσω του Microsoft Edge στην καθημερινότητά σας. Είτε χρειάζεστε βοήθεια για μια εργασία, είτε ιδέες για δημιουργικά projects, είτε απλώς μια γρήγορη απάντηση, ο Copilot είναι εκεί για να σας κάνει τη ζωή πιο εύκολη.</p></div>
+        </div>
+      </section>
+
+      <!-- ============ ΚΕΦΑΛΑΙΟ 2 ============ -->
+      <section class="chapter" data-title="Σημεία πρόσβασης — 1ος τρόπος" data-group="2. Παρουσίαση του περιβάλλοντος">
+        <span class="chapter-kicker">Υποενότητα 2.1</span>
+        <h1>Σημεία πρόσβασης — 1ος τρόπος</h1>
+        <p>Πριν ξεκινήσετε να χρησιμοποιείτε τον Copilot, είναι σημαντικό να γνωρίσετε το περιβάλλον μέσα στο οποίο θα εργάζεστε. Είτε τον χρησιμοποιείτε μέσα από τον Microsoft Edge, είτε μέσα από τις εφαρμογές του Microsoft 365, ο Copilot εμφανίζεται με ένα γνώριμο, εύκολο στη χρήση παράθυρο συνομιλίας.</p>
+        <p>Ο Copilot είναι πάντα «κοντά σας» — αρκεί να ξέρετε πού να τον βρείτε. <strong>Στον Microsoft Edge:</strong> Όταν ανοίγετε τον browser Microsoft Edge, θα δείτε πάνω δεξιά ένα μικρό εικονίδιο με το λογότυπο του Copilot. Πατήστε πάνω του και θα ανοίξει ένα πλαϊνό παράθυρο συνομιλίας, χωρίς να φύγετε από τη σελίδα που βλέπετε.</p>
+        <figure class="shot">
+          <img src="assets/images/image3.png" alt="Το εικονίδιο του Copilot πάνω δεξιά στον Microsoft Edge" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Σημεία πρόσβασης — 2ος &amp; 3ος τρόπος" data-group="2. Παρουσίαση του περιβάλλοντος">
+        <span class="chapter-kicker">Υποενότητα 2.1</span>
+        <h1>Σημεία πρόσβασης — 2ος &amp; 3ος τρόπος</h1>
+        <p><strong>2ος Τρόπος:</strong> Κάνοντας κλικ στο εικονίδιο που εμφανίζεται στο πλαίσιο αναζήτησης, τότε και πάλι ανοίγει η συνομιλία με τον Copilot, αλλά πλέον σε πλήρες παράθυρο.</p>
+        <figure class="shot">
+          <img src="assets/images/image4.png" alt="Το εικονίδιο του Copilot στο πλαίσιο αναζήτησης" loading="lazy">
+        </figure>
+        <p><strong>3ος Τρόπος:</strong> Αν δεν θέλετε να κάνετε χρήση του browser Microsoft Edge, τότε μπορείτε να αντιγράψετε τον ακόλουθο σύνδεσμο και να τον επικολλήσετε στον browser της επιλογής σας: <a href="https://copilot.microsoft.com/" target="_blank" rel="noopener">https://copilot.microsoft.com/</a></p>
+      </section>
+
+      <section class="chapter" data-title="Κύρια οθόνη" data-group="2. Παρουσίαση του περιβάλλοντος">
+        <span class="chapter-kicker">Υποενότητα 2.2</span>
+        <h1>Κύρια οθόνη και στοιχεία πλοήγησης</h1>
+        <p>Μόλις μπείτε στη σελίδα, θα δείτε μπροστά σας την κύρια οθόνη του Copilot. Είναι ένα καθαρό και απλό περιβάλλον, σχεδιασμένο ώστε να μην σας μπερδεύει και να μπορείτε να ξεκινήσετε άμεσα.</p>
+        <figure class="shot">
+          <img src="assets/images/image5.png" alt="Η κύρια οθόνη του Copilot" loading="lazy">
+        </figure>
+        <p>Τα βασικά στοιχεία που θα δείτε είναι:</p>
+        <ul>
+          <li><strong>Πεδίο συνομιλίας (Message Copilot):</strong> Στο κάτω μέρος της οθόνης υπάρχει ένα μεγάλο πλαίσιο όπου μπορείτε να γράψετε την ερώτησή σας ή την εντολή σας — το prompt σας. Εκεί ξεκινά κάθε συνομιλία με τον Copilot.</li>
+          <li><strong>Εικονίδιο μικροφώνου:</strong> Αν ο υπολογιστής σας το υποστηρίζει, μπορείτε να μιλήσετε αντί να πληκτρολογήσετε.</li>
+          <li><strong>Κουμπί αποστολής:</strong> Πατάτε το κουμπί για να στείλετε την ερώτησή σας ή απλώς πατάτε Enter.</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Τρόποι απάντησης" data-group="2. Παρουσίαση του περιβάλλοντος">
+        <span class="chapter-kicker">Υποενότητα 2.2</span>
+        <h1>Επιλογές τρόπου απάντησης</h1>
+        <p>Κάτω από το πεδίο συνομιλίας υπάρχει ένα μενού όπου μπορείτε να επιλέξετε πώς θέλετε να σας απαντήσει ο Copilot, ανάλογα με το τι ζητάτε:</p>
+        <ul>
+          <li><strong>Quick response:</strong> Είναι η προεπιλεγμένη επιλογή. Δίνει άμεσες και σύντομες απαντήσεις (2–3 δευτερόλεπτα). Ιδανικό για καθημερινές ερωτήσεις, γρήγορες απαντήσεις και απλές πληροφορίες.</li>
+          <li><strong>Think Deeper:</strong> Ο Copilot παίρνει λίγο περισσότερο χρόνο (περίπου 30 δευτερόλεπτα) για να σας δώσει πιο αναλυτική και ολοκληρωμένη απάντηση, κατάλληλη για σύνθετα θέματα ή πιο απαιτητικές ερωτήσεις.</li>
+        </ul>
+        <figure class="shot">
+          <img src="assets/images/image6.png" alt="Οι επιλογές τρόπου απάντησης του Copilot" loading="lazy">
+        </figure>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">ℹ️</span>
+          <div><p>Αυτές οι 2 επιλογές σάς παρέχονται στην περίπτωση που είστε χρήστης της δωρεάν έκδοσης.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Deep Research (συνδρομή)" data-group="2. Παρουσίαση του περιβάλλοντος"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#copilot-agents">Researcher, Analyst και Facilitator: διαφορετικοί ρόλοι</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 2.2</span>
+        <h1>Deep Research (με συνδρομή)</h1>
+        <p>Αν έχετε κάνει συνδρομή, σε αυτή την περίπτωση σάς δίνεται μια επιπλέον επιλογή: «Deep Research».</p>
+        <ul>
+          <li><strong>Deep Research:</strong> Αυτή η επιλογή είναι κατάλληλη όταν χρειάζεστε λεπτομερή απάντηση, αναλύσεις ή ακόμα και πηγές και παραπομπές. Ο Copilot σε αυτήν τη λειτουργία χρειάζεται λίγο περισσότερο χρόνο (περίπου 10 λεπτά), αλλά σας προσφέρει αποτέλεσμα που μοιάζει με μικρή ερευνητική εργασία.</li>
+        </ul>
+        <figure class="shot">
+          <img src="assets/images/image7.png" alt="Η επιλογή Deep Research" loading="lazy">
+        </figure>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="copilot-agents" data-update-title="Researcher, Analyst και Facilitator: διαφορετικοί ρόλοι" aria-labelledby="copilot-agents-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 2.2</p><h2 id="copilot-agents-title" tabindex="-1">Researcher, Analyst και Facilitator: διαφορετικοί ρόλοι</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να επιλέγετε ειδικευμένο βοηθό ανάλογα με το ζητούμενο.</p><div class="learn-workbook" data-workbook="copilot-agents"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="copilot-agents-tab-0" aria-controls="copilot-agents-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="copilot-agents-tab-1" aria-controls="copilot-agents-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="copilot-agents-tab-2" aria-controls="copilot-agents-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="copilot-agents-tab-3" aria-controls="copilot-agents-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="copilot-agents-panel-0" role="tabpanel" aria-labelledby="copilot-agents-tab-0" tabindex="0"><p>Η Microsoft παρουσιάζει ειδικευμένους agents μέσα στο οικοσύστημα Microsoft 365. Ο Researcher υποστηρίζει έρευνα και σύνθεση, ο Analyst ανάλυση δεδομένων και ο Facilitator συνεργασία σε συναντήσεις Teams. Η γενική διάθεση μιας δυνατότητας δεν σημαίνει αυτόματα πρόσβαση από κάθε λογαριασμό.</p><div class="update-table" role="region" aria-label="Συγκριτικός πίνακας" tabindex="0"><table><thead><tr><th scope="col">Ανάγκη</th><th scope="col">Ρόλος που εξετάζουμε</th><th scope="col">Ανθρώπινος έλεγχος</th></tr></thead><tbody><tr><th scope="row">Ερευνητικό ενημερωτικό</th><td>Researcher</td><td>Πρωτογενείς πηγές και ισχυρισμοί</td></tr><tr><th scope="row">Αριθμητική ανάλυση</th><td>Analyst</td><td>Δεδομένα, μονάδες και υπολογισμοί</td></tr><tr><th scope="row">Σημειώσεις συνάντησης</th><td>Facilitator</td><td>Αποφάσεις, υπεύθυνοι και προθεσμίες</td></tr></tbody></table></div><p>Στο δικό μας σενάριο, μια ομάδα προετοιμάζει απολογισμό σεμιναρίου. Δεν ζητάμε απλώς «κάνε την αναφορά». Αναθέτουμε συγκεκριμένο παραδοτέο και ζητάμε να φαίνονται τα ανεπίλυτα ζητήματα. Αν η ειδική λειτουργία δεν υπάρχει, η άσκηση εκτελείται με συνθετικά δεδομένα και χειροκίνητο έλεγχο.</p><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Ο agent αποδίδει μια εργασία σε συνάδελφο που δεν την ανέλαβε ρητά στη συνάντηση. Τι διορθώνουμε;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Χαρακτηρίζουμε τον υπεύθυνο ως μη επιβεβαιωμένο και επιστρέφουμε στο πρακτικό ή στην καταγραφή. Η ερμηνεία του AI δεν δημιουργεί από μόνη της συμφωνία.</p></details></div></div><div class="learn-panel" id="copilot-agents-panel-1" role="tabpanel" aria-labelledby="copilot-agents-tab-1" tabindex="0"><h3>Εξειδίκευση του βοηθού και ευθύνη για το αποτέλεσμα</h3><p>Ένας εξειδικευμένος agent οργανώνει μια κατηγορία εργασιών με κατάλληλη πρόσβαση και εργαλεία. Ο Researcher προσανατολίζεται στην έρευνα και στη σύνθεση, ο Analyst στην ανάλυση δεδομένων και ο Facilitator στη συνεργασία. Αυτή η διάκριση βοηθά την ανάθεση, αλλά δεν σημαίνει ότι ο ρόλος εγγυάται ορθότητα. Το παραδοτέο πρέπει να ελεγχθεί με κριτήρια που αντιστοιχούν στο είδος της εργασίας.</p><p>Στην ερευνητική εργασία ελέγχουμε αν οι πηγές στηρίζουν τους ισχυρισμούς και αν παρουσιάζονται περιορισμοί. Στην ανάλυση δεδομένων εξετάζουμε ορισμούς, τύπους και μετασχηματισμούς. Στη σύνοψη συνάντησης ελέγχουμε αν αποδόθηκαν σωστά αποφάσεις, υπεύθυνοι και εκκρεμότητες. Η ίδια γενική ερώτηση «είναι καλή η απάντηση;» αντικαθίσταται από συγκεκριμένους ελέγχους που μπορούν να εφαρμοστούν.</p><p>Όταν συνεργάζονται περισσότεροι βοηθοί ή εργαλεία, χρειάζονται σαφείς μεταβιβάσεις. Το επόμενο στάδιο πρέπει να λαμβάνει τις ίδιες πηγές, μονάδες και παραδοχές που χρησιμοποιήθηκαν στο προηγούμενο. Διαφορετικά μπορεί να παραχθεί συνεπές κείμενο πάνω σε διαφορετικά δεδομένα. Η ομάδα διατηρεί κοινή προδιαγραφή και ελέγχει τα σημεία όπου αλλάζει μορφή ή υπεύθυνος επεξεργασίας.</p></div><div class="learn-panel" id="copilot-agents-panel-2" role="tabpanel" aria-labelledby="copilot-agents-tab-2" tabindex="0"><h3>Παράδειγμα: από τη συνάντηση στην ενημέρωση διοίκησης</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Η συνάντηση καταλήγει σε δύο αποφάσεις και ένα ανοιχτό ερώτημα. Η σύνοψη πρέπει να κρατήσει αυτή τη διάκριση. Στη συνέχεια μια ανάλυση εξετάζει τα σχετικά δεδομένα και μια ερευνητική αναφορά παρουσιάζει εξωτερικές πληροφορίες. Οι εργασίες συνδέονται, αλλά δεν έχουν το ίδιο είδος τεκμηρίου.</p><p>Πριν από την τελική ενημέρωση, η ομάδα ελέγχει ότι το ανοιχτό ερώτημα δεν μετατράπηκε σε ειλημμένη απόφαση και ότι κάθε αριθμός έχει κοινή προέλευση. Η εξειδίκευση επιταχύνει την εργασία όταν οι μεταβιβάσεις παραμένουν διαφανείς.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Δώσε χωριστά αποφάσεις, προτάσεις και εκκρεμότητες. Για τις αποφάσεις κατέγραψε υπεύθυνο και προθεσμία μόνο αν αναφέρονται. Μην μετατρέψεις ένα θέμα προς διερεύνηση σε συμφωνημένη ενέργεια.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="copilot-agents-panel-3" role="tabpanel" aria-labelledby="copilot-agents-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Αντιστοίχισε το παραδοτέο με τον κρίσιμο έλεγχο.</p><form class="enrich-match" data-explanation="Η επιλογή agent και ο έλεγχος του αποτελέσματος είναι συμπληρωματικές αποφάσεις."><div class="enrich-match-row"><label for="copilot-agents-match-0">Ερευνητική σύνθεση</label><select id="copilot-agents-match-0" aria-label="Αντιστοίχιση: Ερευνητική σύνθεση" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="2">Διάκριση απόφασης, πρότασης και εκκρεμότητας</option><option value="1">Ορθότητα τύπων, μονάδων και παραδοχών</option><option value="0">Αντιστοίχιση ισχυρισμών με πηγές</option><option value="3">Συνέπεια μεταξύ παραδοτέων</option></select></div><div class="enrich-match-row"><label for="copilot-agents-match-1">Ανάλυση δεδομένων</label><select id="copilot-agents-match-1" aria-label="Αντιστοίχιση: Ανάλυση δεδομένων" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="2">Διάκριση απόφασης, πρότασης και εκκρεμότητας</option><option value="1">Ορθότητα τύπων, μονάδων και παραδοχών</option><option value="0">Αντιστοίχιση ισχυρισμών με πηγές</option><option value="3">Συνέπεια μεταξύ παραδοτέων</option></select></div><div class="enrich-match-row"><label for="copilot-agents-match-2">Σύνοψη συνάντησης</label><select id="copilot-agents-match-2" aria-label="Αντιστοίχιση: Σύνοψη συνάντησης" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="2">Διάκριση απόφασης, πρότασης και εκκρεμότητας</option><option value="1">Ορθότητα τύπων, μονάδων και παραδοχών</option><option value="0">Αντιστοίχιση ισχυρισμών με πηγές</option><option value="3">Συνέπεια μεταξύ παραδοτέων</option></select></div><div class="enrich-match-row"><label for="copilot-agents-match-3">Συνδυασμένη αναφορά</label><select id="copilot-agents-match-3" aria-label="Αντιστοίχιση: Συνδυασμένη αναφορά" required><option value="">Επίλεξε τη σωστή λειτουργία…</option><option value="2">Διάκριση απόφασης, πρότασης και εκκρεμότητας</option><option value="1">Ορθότητα τύπων, μονάδων και παραδοχών</option><option value="0">Αντιστοίχιση ισχυρισμών με πηγές</option><option value="3">Συνέπεια μεταξύ παραδοτέων</option></select></div><button type="submit" class="enrich-button">Έλεγχος αντιστοίχισης</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></form><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Διάλεξε έναν από τους τρεις ρόλους και γράψε δύο κριτήρια που θα χρησιμοποιούσες πριν αξιοποιήσεις το αποτέλεσμά του.</p><label for="copilot-agents-reflection">Η δική σου σύντομη απάντηση</label><textarea id="copilot-agents-reflection" data-note="copilot-agents" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://adoption.microsoft.com/en-us/ai-agents/agents-in-microsoft-365/" target="_blank" rel="noopener noreferrer">Microsoft Adoption · Agents στο Microsoft 365</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <section class="chapter" data-title="Το πλαϊνό μενού" data-group="2. Παρουσίαση του περιβάλλοντος">
+        <span class="chapter-kicker">Υποενότητα 2.2</span>
+        <h1>Το πλαϊνό μενού</h1>
+        <p>Στην αριστερή πλευρά της οθόνης σας υπάρχει ένα πλαϊνό μενού με διάφορες επιλογές που σας δίνουν πρόσβαση σε επιπλέον λειτουργίες του Copilot. Ας δούμε τι περιλαμβάνει:</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🧭 Discover<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Εδώ θα βρείτε ειδήσεις, προτάσεις και ιδέες που μπορεί να σας εμπνεύσουν. Είναι σαν αρχική σελίδα με έξυπνα θέματα που επιλέγονται για εσάς.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🧪 Labs<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Εδώ δοκιμάζονται πειραματικές δυνατότητες της Τεχνητής Νοημοσύνης. Είναι ένα «εργαστήριο» όπου η Microsoft ελέγχει νέες λειτουργίες που ίσως δείτε στο μέλλον.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">📄 Pages – Δημιουργία σελίδας<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Με το κουμπί Create a page, μπορείτε να ξεκινήσετε να γράφετε ένα μεγαλύτερο κείμενο (όπως μια εργασία, ένα άρθρο ή κώδικα) σε έναν ξεχωριστό χώρο, όπου ο Copilot θα σας προσφέρει βοήθεια, παρατηρήσεις και διορθώσεις καθώς γράφετε.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">💬 Conversations<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Εδώ θα εμφανίζονται όλες οι προηγούμενες συνομιλίες σας με τον Copilot. Μπορείτε να επιστρέψετε σε μια παλιά συζήτηση και να συνεχίσετε από εκεί που σταματήσατε.</p></div>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image8.png" alt="Το πλαϊνό μενού του Copilot" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Είσοδος με λογαριασμό" data-group="2. Παρουσίαση του περιβάλλοντος">
+        <span class="chapter-kicker">Υποενότητα 2.3</span>
+        <h1>Είσοδος με λογαριασμό</h1>
+        <p>Για να χρησιμοποιήσετε πλήρως τον Copilot μέσω browser, χρειάζεται να κάνετε είσοδο (Sign in) με τον λογαριασμό σας.</p>
+        <figure class="shot">
+          <img src="assets/images/image9.png" alt="Το κουμπί Sign in στη σελίδα του Copilot" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Τρόποι εισόδου" data-group="2. Παρουσίαση του περιβάλλοντος">
+        <span class="chapter-kicker">Υποενότητα 2.3</span>
+        <h1>Τρόποι εισόδου</h1>
+        <p>Όταν πατήσετε «Sign in» στη σελίδα του Copilot, θα σας εμφανιστεί μια οθόνη σαν αυτή:</p>
+        <figure class="shot">
+          <img src="assets/images/image10.png" alt="Η οθόνη επιλογής τρόπου εισόδου" loading="lazy">
+        </figure>
+        <p>Έχετε τη δυνατότητα να επιλέξετε τον τρόπο με τον οποίο θέλετε να συνδεθείτε:</p>
+        <ul>
+          <li><strong>Continue with Microsoft:</strong> Εδώ χρησιμοποιείτε έναν λογαριασμό Microsoft (π.χ. Outlook, Hotmail, ή λογαριασμό από τη δουλειά σας).</li>
+          <li><strong>Continue with Apple:</strong> Αν έχετε Apple ID, μπορείτε να μπείτε εύκολα με αυτό, χωρίς να φτιάξετε ξεχωριστό λογαριασμό Microsoft.</li>
+          <li><strong>Continue with Google:</strong> Εάν έχετε Gmail ή Google λογαριασμό, μπορείτε να μπείτε με αυτόν.</li>
+        </ul>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🔑</span>
+          <div><p>Όποιον τρόπο και να επιλέξετε, ο Copilot θα θυμάται τις συνομιλίες σας και θα ενεργοποιήσει όλες τις λειτουργίες που είναι διαθέσιμες για εσάς.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Ρυθμίσεις χρήστη" data-group="2. Παρουσίαση του περιβάλλοντος">
+        <span class="chapter-kicker">Υποενότητα 2.4</span>
+        <h1>Ρυθμίσεις χρήστη</h1>
+        <p>Μόλις συνδεθείτε στον Copilot, μπορείτε να προσαρμόσετε μερικά βασικά στοιχεία του λογαριασμού σας και της εμπειρίας σας. Οι ρυθμίσεις χρήστη σάς επιτρέπουν να έχετε τον Copilot όπως σας βολεύει, να βλέπετε το ιστορικό σας ή να αλλάζετε λογαριασμό.</p>
+        <p><strong>Πού βρίσκονται οι ρυθμίσεις;</strong> Πάνω δεξιά στην οθόνη, δίπλα από το όνομά σας ή το εικονίδιο του προφίλ σας, θα βρείτε το κουμπί Ρυθμίσεις (Settings) — ή πατήστε απλά στο εικονίδιο που δείχνει πως είστε συνδεδεμένοι.</p>
+        <figure class="shot">
+          <img src="assets/images/image11.png" alt="Το κουμπί ρυθμίσεων πάνω δεξιά" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Τι κάνετε από τις ρυθμίσεις" data-group="2. Παρουσίαση του περιβάλλοντος">
+        <span class="chapter-kicker">Υποενότητα 2.4</span>
+        <h1>Τι μπορείτε να κάνετε από εκεί</h1>
+        <p>Όταν κάνετε κλικ πάνω δεξιά στο όνομά σας ή στο εικονίδιο του προφίλ σας, εμφανίζεται ένα μενού όπως φαίνεται στην εικόνα:</p>
+        <figure class="shot">
+          <img src="assets/images/image12.png" alt="Το μενού ρυθμίσεων του Copilot" loading="lazy">
+        </figure>
+        <div class="accordion">
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🎙️ Voice<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Επιλέγετε τη φωνή που θα χρησιμοποιεί ο Copilot όταν σας απαντάει με ήχο. (Η επιλογή «Meadow» είναι ένα παράδειγμα φωνής.)</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🌐 Language<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Η γλώσσα στην οποία εμφανίζεται η διεπαφή και δέχεται τα prompts σας. Συνήθως είναι EN (Αγγλικά). Αν θέλετε, μπορείτε να αλλάξετε γλώσσα, αλλά προς το παρόν πολλές λειτουργίες δουλεύουν καλύτερα στα Αγγλικά.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🎨 Theme<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Μπορείτε να αλλάξετε το χρώμα του περιβάλλοντος:</p><ul><li><strong>Light:</strong> Ανοιχτό φόντο</li><li><strong>Night ή Dark:</strong> Σκούρο φόντο για ξεκούραστα μάτια</li></ul></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">💳 Manage subscription<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Αν χρησιμοποιείτε την επί πληρωμή έκδοση, από εδώ μπορείτε να διαχειριστείτε τη συνδρομή σας (π.χ. ανανέωση, ακύρωση).</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">📣 Give feedback<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Αν κάτι δεν λειτούργησε όπως περιμένατε ή αν έχετε πρόταση βελτίωσης, μπορείτε να στείλετε τα σχόλιά σας στην ομάδα του Copilot.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">ℹ️ About<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Βασικές πληροφορίες για την έκδοση του Copilot που χρησιμοποιείτε.</p></div>
+          </div>
+          <div class="acc-item">
+            <button type="button" class="acc-header" aria-expanded="false">🚪 Sign out<span class="acc-arrow" aria-hidden="true">▸</span></button>
+            <div class="acc-body"><p>Κάντε αποσύνδεση όταν ολοκληρώσετε τη χρήση του Copilot — ειδικά αν είστε σε δημόσιο ή κοινόχρηστο υπολογιστή.</p></div>
+          </div>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">💡</span>
+          <div><p><strong>Tip!</strong> Αν θέλετε, μπορείτε να κατεβάσετε και την εφαρμογή για κινητό πατώντας το «Download Copilot App», ώστε να τον έχετε πάντα μαζί σας.</p></div>
+        </div>
+      </section>
+
+      <!-- ============ ΚΕΦΑΛΑΙΟ 3 ============ -->
+      <section class="chapter" data-title="Ξεκινώντας το Prompt" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Κεφάλαιο 3</span>
+        <h1>Ξεκινώντας το Prompt</h1>
+        <p>Τώρα που γνωρίζετε πού βρίσκεται ο Copilot και πώς λειτουργεί το περιβάλλον του, ήρθε η ώρα να ξεκινήσετε πραγματικά να συνομιλείτε μαζί του — δηλαδή να του δίνετε εντολές ή ερωτήσεις, τα γνωστά prompts.</p>
+        <p>Δεν χρειάζεται να είστε ειδικοί. Το μόνο που χρειάζεται είναι να μάθετε πώς να του μιλάτε καθαρά και σωστά, για να παίρνετε χρήσιμες και ακριβείς απαντήσεις.</p>
+        <p>Για να συνεργαστείτε σωστά με τον Copilot, χρειάζεται να μάθετε πώς να του δίνετε οδηγίες με τον σωστό τρόπο. Ακολουθούν οι βασικές αρχές για να γράφετε καλά prompts.</p>
+      </section>
+
+      <section class="chapter" data-title="Αρχή 1: Σκεφτείτε τι θέλετε" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Υποενότητα 3.1 · Βασικές αρχές</span>
+        <h1>1. Σκεφτείτε πρώτα τι θέλετε</h1>
+        <p>Πριν γράψετε κάτι, κάντε μια απλή ερώτηση στον εαυτό σας: «Τι περιμένω από τον Copilot να κάνει για μένα;» Αυτό μπορεί να είναι: να σας προτείνει ιδέες, να γράψει ένα κείμενο, να κάνει μια περίληψη, να εξηγήσει κάτι ή να σας βοηθήσει να οργανωθείτε.</p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Παράδειγμα</span>
+          <p class="pb-text">«Θέλω να μου προτείνει τρόπους για να συγκεντρωθώ στο διάβασμα»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image13.png" alt="Παράδειγμα prompt για συγκέντρωση στο διάβασμα" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Αρχή 2: Ξεκινήστε απλά" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Υποενότητα 3.1 · Βασικές αρχές</span>
+        <h1>2. Ξεκινήστε με κάτι απλό</h1>
+        <p>Δεν χρειάζεται να γράψετε μεγάλα και πολύπλοκα prompts. Ξεκινήστε με κάτι απλό και δοκιμάστε:</p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Παράδειγμα</span>
+          <p class="pb-text">«Τι είναι η ανακύκλωση;»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image14.png" alt="Παράδειγμα απλού prompt" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Αρχή 3: Δοκιμάστε – Ζητήστε – Διορθώστε" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Υποενότητα 3.1 · Βασικές αρχές</span>
+        <h1>3. Δοκιμάστε – Ζητήστε – Διορθώστε</h1>
+        <p>Ο Copilot δεν παρεξηγείται! Αν δεν σας άρεσε η απάντηση, μπορείτε να του πείτε:</p>
+        <ul>
+          <li>«Ξαναγράψε το πιο απλά»</li>
+          <li>«Δώσε μου άλλη εκδοχή»</li>
+          <li>«Κάν' το πιο σύντομο»</li>
+        </ul>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">🔄</span>
+          <div><p>Η συνεργασία μαζί του είναι διαδραστική. Όσο πιο πολύ του μιλάτε, τόσο καλύτερα μαθαίνει το στυλ σας και τι ζητάτε.</p></div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image15.png" alt="Παράδειγμα διορθωτικού prompt" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Αρχή 4: Δώστε πλαίσιο" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Υποενότητα 3.1 · Βασικές αρχές</span>
+        <h1>4. Δώστε πλαίσιο — εξηγήστε το «για ποιο λόγο»</h1>
+        <p>Αν θέλετε καλύτερη απάντηση, μπορείτε να εξηγήσετε σε ποιο πλαίσιο θα χρησιμοποιήσετε αυτό που ζητάτε. Αυτό βοηθά τον Copilot να προσαρμόσει το ύφος και το περιεχόμενο.</p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Παράδειγμα</span>
+          <p class="pb-text">«Γράψε ένα email για αίτηση πρακτικής άσκησης, το στέλνω σε πανεπιστήμιο»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image16.png" alt="Παράδειγμα prompt με πλαίσιο" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Αρχή 5: Πειραματιστείτε" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Υποενότητα 3.1 · Βασικές αρχές</span>
+        <h1>5. Μη φοβάστε να πειραματιστείτε</h1>
+        <p>Ο Copilot είναι εκεί για να σας βοηθήσει, όχι για να σας εξετάσει! Μπορείτε να του ζητήσετε το ίδιο πράγμα με διαφορετικούς τρόπους, να δοκιμάσετε φράσεις, να παίξετε με το ύφος, ακόμα και να του πείτε «δεν μου άρεσε, προσπάθησε αλλιώς».</p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Παραδείγματα</span>
+          <p class="pb-text">«Πες το με χιουμοριστικό τρόπο»<br>«Κάν' το να μοιάζει με στιχάκι»</p>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🚀</span>
+          <div><p>Όσο πιο πολύ τον χρησιμοποιείτε, τόσο πιο σίγουροι θα νιώθετε και τόσο πιο δημιουργικοί θα γίνεστε.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Σαφήνεια — Παράδειγμα 1" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Υποενότητα 3.1.1 · Σαφήνεια και ακρίβεια</span>
+        <h1>Σαφήνεια και ακρίβεια — Παράδειγμα 1</h1>
+        <p>Όσο πιο καθαρά και συγκεκριμένα του εξηγείτε τι θέλετε, τόσο πιο χρήσιμη θα είναι η απάντηση που θα σας δώσει ο Copilot. Αν γράψετε κάτι γενικό, το αποτέλεσμα θα είναι γενικό. Αν του πείτε ακριβώς τι χρειάζεστε, με ποιο ύφος, για ποιο σκοπό και σε ποια μορφή, τότε θα σας απαντήσει πολύ πιο σωστά.</p>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">📌</span>
+          <div><p><strong>Γενική αρχή:</strong> Μη γράφετε «κάνε κάτι» — γράψτε «κάνε αυτό, με αυτόν τον τρόπο, για αυτόν τον λόγο».</p></div>
+        </div>
+        <div class="compare-grid">
+          <div class="prompt-box prompt-bad">
+            <span class="pb-label">✘ Λάθος prompt</span>
+            <p class="pb-text">«Γράψε μου κάτι για το διάστημα.»</p>
+          </div>
+          <div class="prompt-box prompt-good">
+            <span class="pb-label">✔ Σωστό prompt</span>
+            <p class="pb-text">«Γράψε μια μικρή παράγραφο (5-6 σειρές) για το ηλιακό μας σύστημα, με απλή γλώσσα κατάλληλη για ανθρώπους που έχουν βασικές γνώσεις σχετικά με αυτό το θέμα.»</p>
+          </div>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image17.png" alt="Απάντηση σε γενικό prompt" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image18.png" alt="Απάντηση σε σαφές prompt" loading="lazy"></figure>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Σαφήνεια — Παράδειγμα 2" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Υποενότητα 3.1.1 · Σαφήνεια και ακρίβεια</span>
+        <h1>Παράδειγμα 2: Προσθέστε λεπτομέρειες</h1>
+        <div class="compare-grid">
+          <div class="prompt-box prompt-bad">
+            <span class="pb-label">✘ Λάθος prompt με λίγες πληροφορίες</span>
+            <p class="pb-text">«Γράψε μια εισαγωγή για έκθεση»</p>
+          </div>
+          <div class="prompt-box prompt-good">
+            <span class="pb-label">✔ Σωστό prompt με πιο ακριβείς πληροφορίες</span>
+            <p class="pb-text">«Γράψε μια εισαγωγή για έκθεση με θέμα "Η φιλία στη ζωή των εφήβων", κατάλληλη για μαθητή Γ΄ Γυμνασίου.»</p>
+          </div>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image19.png" alt="Απάντηση σε prompt με λίγες πληροφορίες" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image20.png" alt="Απάντηση σε prompt με ακριβείς πληροφορίες" loading="lazy"></figure>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Σαφήνεια — Παράδειγμα 3" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Υποενότητα 3.1.1 · Σαφήνεια και ακρίβεια</span>
+        <h1>Παράδειγμα 3: Ύφος &amp; μορφή</h1>
+        <div class="compare-grid">
+          <div class="prompt-box prompt-bad">
+            <span class="pb-label">✘ Λάθος prompt</span>
+            <p class="pb-text">«Γράψε ένα ευχαριστήριο μήνυμα»</p>
+          </div>
+          <div class="prompt-box prompt-good">
+            <span class="pb-label">✔ Σωστό prompt</span>
+            <p class="pb-text">«Γράψε ένα σύντομο και φιλικό μήνυμα για να ευχαριστήσω έναν φίλο που με βοήθησε στη μετακόμιση.»</p>
+          </div>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image21.png" alt="Απάντηση σε γενικό ευχαριστήριο prompt" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image22.png" alt="Απάντηση σε συγκεκριμένο ευχαριστήριο prompt" loading="lazy"></figure>
+        </div>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">💡</span>
+          <div><p><strong>Tip!</strong> Αν δείτε ότι η απάντηση δεν είναι αυτό που θέλατε, δοκιμάστε να προσθέσετε μία επιπλέον πρόταση στο prompt σας που να εξηγεί τι περιμένετε. Μερικές φορές, μια λέξη κάνει τη διαφορά.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Συμπέρασμα για τα prompts" data-group="3. Ξεκινώντας το Prompt">
+        <span class="chapter-kicker">Υποενότητα 3.1.1</span>
+        <h1>Συμπέρασμα</h1>
+        <p>Όταν γράφετε ένα prompt με σαφήνεια και ακρίβεια, βοηθάτε τον Copilot να καταλάβει ακριβώς τι χρειάζεστε. Αν του μιλήσετε γενικά, θα σας απαντήσει γενικά. Αν όμως του εξηγήσετε με απλά λόγια τι θέλετε, για ποιον λόγο, με ποιο ύφος και σε ποια μορφή, τότε το αποτέλεσμα θα είναι πολύ πιο κοντά σε αυτό που φαντάζεστε.</p>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🔑</span>
+          <div><p><strong>Βασικό συμπέρασμα:</strong> Γι' αυτό είναι καλό να μη βιάζεστε. Φτιάξτε το prompt σας σιγά-σιγά. Ξεκινήστε με μια βασική ιδέα και στη συνέχεια προσθέστε όσα περισσότερα στοιχεία μπορείτε (π.χ. τόνος, σκοπός, κοινό). Ένα καλό prompt είναι σαν μια σωστή ερώτηση: χρειάζεται λίγη σκέψη, αλλά σας πάει πολύ πιο μακριά.</p></div>
+        </div>
+      </section>
+
+      <!-- ============ ΚΕΦΑΛΑΙΟ 4 — WORD ============ -->
+      <section class="chapter" data-title="Αλληλεπίδραση με τις εφαρμογές 365" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Κεφάλαιο 4</span>
+        <h1>Αλληλεπίδραση με τις εφαρμογές του Microsoft 365</h1>
+        <p>Μέχρι τώρα, γνωρίσατε τον Copilot μέσα από τον browser και μάθατε πώς να του μιλάτε σωστά με καλά διατυπωμένα prompts. Τώρα ήρθε η ώρα να δείτε πώς μπορεί να σας βοηθήσει μέσα σε πραγματικές εφαρμογές, όπως το Word, το Excel, το PowerPoint και το Outlook.</p>
+        <p>Ο Microsoft Copilot ενσωματώνεται κατευθείαν σε αυτές τις εφαρμογές και λειτουργεί σαν βοηθός που «κάθεται δίπλα σας». Μπορεί να δει τι φτιάχνετε, να καταλάβει το περιεχόμενο και να σας βοηθήσει να δημιουργήσετε πιο γρήγορα, πιο εύκολα και πιο έξυπνα.</p>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image23.png" alt="Ο Copilot μέσα στις εφαρμογές του Microsoft 365" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image24.png" alt="Ο Copilot μέσα στις εφαρμογές του Microsoft 365 (συνέχεια)" loading="lazy"></figure>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Word: Ο Copilot στο έγγραφο" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Δημιουργία και επεξεργασία νέου εγγράφου (Word)</h1>
+        <p>Ανοίγοντας το Word, θα παρατηρήσετε στην επάνω δεξιά γωνία της εφαρμογής το κουμπί του Copilot. Κάνοντας κλικ σε αυτό, εμφανίζεται ένα παράθυρο συνομιλίας στα δεξιά της οθόνης σας. Από εκεί μπορείτε να αρχίσετε να του δίνετε οδηγίες, ακριβώς όπως κάνατε και στον browser.</p>
+        <p>Η διαφορά τώρα είναι πως ο Copilot έχει πλήρη εικόνα του εγγράφου σας και μπορεί να παρέμβει, να προσθέσει, να διορθώσει ή να προτείνει με βάση το κείμενο που βλέπει.</p>
+        <figure class="shot">
+          <img src="assets/images/image25.png" alt="Το παράθυρο του Copilot μέσα στο Word" loading="lazy">
+        </figure>
+        <p>Τι μπορεί να κάνει για εσάς:</p>
+        <ul>
+          <li>Να ξεκινήσει ένα έγγραφο από την αρχή, με βάση ένα σύντομο prompt</li>
+          <li>Να διορθώσει ορθογραφικά ή συντακτικά λάθη</li>
+          <li>Να προτείνει αναδιατύπωση ή εναλλακτικές εκφράσεις</li>
+          <li>Να σας βοηθήσει να οργανώσετε καλύτερα τη δομή ενός κειμένου</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Word: Παραδείγματα εντολών" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Παραδείγματα εντολών μέσα στο Word</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Παραδείγματα</span>
+          <p class="pb-text">«Γράψε μια εισαγωγή για εργασία με θέμα την προστασία του περιβάλλοντος.»<br>
+          «Δημιούργησέ μου μια περίληψη σε 3-4 γραμμές του κειμένου.»<br>
+          «Μετέτρεψε το ύφος του κειμένου ώστε να είναι πιο επίσημο»<br>
+          «Δημιούργησε έναν τίτλο και υπότιτλο για αυτό το άρθρο»<br>
+          «Πρόσθεσε μια παράγραφο με επιχειρήματα υπέρ της ανακύκλωσης»</p>
+        </div>
+        <p>Ας δούμε τώρα βήμα προς βήμα πώς θα δημιουργήσουμε μαζί με τον Copilot ένα κείμενο, ακολουθώντας τα παραπάνω prompts.</p>
+      </section>
+
+      <section class="chapter" data-title="Word: Το πλαίσιο του prompt" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Ξεκινώντας ένα νέο έγγραφο</h1>
+        <p>Ανοίγοντας ένα κενό αρχείο Word, εμφανίζεται ένα πλαίσιο μέσα στο οποίο θα γράψετε το prompt — δηλαδή αυτό που θέλετε να δημιουργήσει ο Copilot.</p>
+        <figure class="shot">
+          <img src="assets/images/image26.png" alt="Το πλαίσιο του Copilot σε κενό έγγραφο Word" loading="lazy">
+        </figure>
+        <p>Πατώντας το «Enter» ή το βελάκι, ξεκινάει να δημιουργεί το κείμενο, όπως στην παρακάτω εικόνα.</p>
+        <figure class="shot">
+          <img src="assets/images/image27.png" alt="Ο Copilot δημιουργεί το κείμενο" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Word: Διατήρηση ή αλλαγές" data-group="4. Copilot στις εφαρμογές του Microsoft 365"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#copilot-word-review">Word: επεξεργασία με σαφείς αμετάβλητους όρους</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Διατήρηση, αλλαγές ή νέα δημιουργία</h1>
+        <p>Μόλις ολοκληρώσει αυτό που του ζητήσατε, εμφανίζει το εξής μήνυμα, όπως στην εικόνα:</p>
+        <figure class="shot">
+          <img src="assets/images/image28.png" alt="Το μήνυμα ολοκλήρωσης του Copilot" loading="lazy">
+        </figure>
+        <ul>
+          <li>Αφού διαβάσετε το κείμενο, αν σε ένα γενικό σύνολο σας αρέσει, τότε επιλέγετε το <strong>«Διατήρηση»</strong>.</li>
+          <li>Αν θέλετε να κάνει αλλαγές, τότε στο πλαίσιο που λέει «Τι θέλετε να αλλάξει το Copilot» μπορείτε να του δώσετε την αντίστοιχη εντολή.</li>
+          <li>Επίσης, μπορείτε να διατηρήσετε το κείμενο όπως είναι και στη συνέχεια να κάνετε τις αλλαγές που επιθυμείτε, όπως θα δούμε στη συνέχεια.</li>
+          <li>Αν δεν σας αρέσει το κείμενο, τότε μπορείτε να πατήσετε είτε διαγραφή, είτε <strong>«δημιουργήστε ξανά»</strong> — είναι το εικονίδιο δίπλα στη λέξη «Διατήρηση».</li>
+        </ul>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="copilot-word-review" data-update-title="Word: επεξεργασία με σαφείς αμετάβλητους όρους" aria-labelledby="copilot-word-review-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 4.1 · Word</p><h2 id="copilot-word-review-title" tabindex="-1">Word: επεξεργασία με σαφείς αμετάβλητους όρους</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να βελτιώνετε κείμενο διατηρώντας την ουσία του.</p><div class="learn-workbook" data-workbook="copilot-word-review"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="copilot-word-review-tab-0" aria-controls="copilot-word-review-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="copilot-word-review-tab-1" aria-controls="copilot-word-review-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="copilot-word-review-tab-2" aria-controls="copilot-word-review-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="copilot-word-review-tab-3" aria-controls="copilot-word-review-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="copilot-word-review-panel-0" role="tabpanel" aria-labelledby="copilot-word-review-tab-0" tabindex="0"><p>Η χρήσιμη επεξεργασία εγγράφου ξεκινά από τη διάκριση ανάμεσα σε περιεχόμενο και διατύπωση. Όταν ζητάμε πιο απλό ύφος, δηλώνουμε ποια ονόματα, αριθμοί, όροι και τίτλοι πρέπει να διατηρηθούν. Το παράδειγμα που ακολουθεί είναι διαδικασία ποιοτικού ελέγχου για τις λειτουργίες Word που παρουσιάστηκαν ήδη.</p><div class="update-prompt"><h3>Δοκιμάστε αυτό το prompt</h3><blockquote>Βελτίωσε τη σαφήνεια αυτού του ενημερωτικού για ενήλικους αρχάριους. Διατήρησε όλους τους τίτλους, τις ημερομηνίες, τους αριθμούς και τις παραπομπές. Μην προσθέσεις νέα πραγματικά στοιχεία. Δώσε πρώτα προτεινόμενη αναδιατύπωση και έπειτα σύντομο κατάλογο ουσιαστικών αλλαγών για έλεγχο.</blockquote></div><ol><li>Συγκρίνετε παλιό και νέο κείμενο σε κρίσιμες προτάσεις.</li><li>Ελέγξτε μήπως το «μπορεί» έγινε «εγγυάται» ή το «προτείνεται» έγινε «απαιτείται».</li><li>Ανοίξτε το έγγραφο και εξετάστε τίτλους, λίστες, πίνακες και συνδέσμους.</li><li>Διατηρήστε ελέγξιμη έκδοση πριν κοινοποιήσετε το τελικό αρχείο.</li></ol><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Το AI μετέτρεψε το «η δράση προγραμματίζεται» σε «η δράση θα πραγματοποιηθεί». Είναι μόνο υφολογική αλλαγή;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Όχι. Αυξάνει τη βεβαιότητα του ισχυρισμού. Επαναφέρουμε τη σωστή διατύπωση και ελέγχουμε αν έχουν αλλάξει παρόμοια σημεία.</p></details></div></div><div class="learn-panel" id="copilot-word-review-panel-1" role="tabpanel" aria-labelledby="copilot-word-review-tab-1" tabindex="0"><h3>Επιμέλεια με αμετάβλητα στοιχεία και ορατές παραδοχές</h3><p>Η επεξεργασία κειμένου με AI μπορεί να βελτιώσει τη συνοχή, τη σαφήνεια και την οργάνωση. Χρειάζεται όμως να οριστεί ποια στοιχεία πρέπει να παραμείνουν αμετάβλητα. Ονόματα, ημερομηνίες, αριθμοί, επίσημοι τίτλοι και διατυπώσεις με συγκεκριμένη ισχύ δεν πρέπει να αναθεωρούνται επειδή μια εναλλακτική φράση ακούγεται πιο ομαλή. Η γλωσσική επιμέλεια είναι διαφορετική εργασία από την αλλαγή περιεχομένου.</p><p>Ένα συνηθισμένο πρόβλημα είναι η αύξηση της βεβαιότητας κατά τη σύνοψη. Η φράση «τα στοιχεία υποδηλώνουν» μπορεί να γίνει «τα στοιχεία αποδεικνύουν», ή μια πρόταση για το μέλλον να παρουσιαστεί σαν απόφαση. Αυτές οι αλλαγές δεν είναι απλώς υφολογικές. Επηρεάζουν το νόημα και τις προσδοκίες του αναγνώστη. Για αυτό ζητάμε διατήρηση επιφυλάξεων και χωριστή επισήμανση ουσιαστικών αλλαγών.</p><p>Ο έλεγχος γίνεται με σύγκριση πριν και μετά. Εξετάζουμε το κύριο μήνυμα, τα αριθμητικά στοιχεία, την απόδοση ευθύνης και τις πληροφορίες που παραλείφθηκαν. Δεν χρειάζεται να απορρίψουμε όλες τις αλλαγές επειδή βρέθηκε ένα λάθος. Διορθώνουμε συγκεκριμένα την απόκλιση και επανελέγχουμε το σχετικό σημείο. Η τελική αποδοχή παραμένει απόφαση του συντάκτη.</p></div><div class="learn-panel" id="copilot-word-review-panel-2" role="tabpanel" aria-labelledby="copilot-word-review-tab-2" tabindex="0"><h3>Παράδειγμα: ενημέρωση για ένα εκπαιδευτικό πρόγραμμα</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Το αρχικό κείμενο γράφει «προτείνεται να διερευνηθεί δεύτερος κύκλος». Η αναθεωρημένη εκδοχή γράφει «θα υλοποιηθεί δεύτερος κύκλος». Η φράση μετατρέπει πρόταση σε δέσμευση. Ακόμη και αν το κείμενο είναι πιο σύντομο και επαγγελματικό, η αλλαγή πρέπει να διορθωθεί.</p><p>Η οδηγία επιμέλειας ορίζει ότι οι αποφάσεις, οι προτάσεις και οι εκκρεμότητες διατηρούν τον αρχικό τους χαρακτήρα. Ο συντάκτης ζητά σύντομο κατάλογο ουσιαστικών αλλαγών, ώστε να ελέγξει γρήγορα τα σημεία που επηρεάζουν το νόημα.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Βελτίωσε σαφήνεια και σύνταξη χωρίς να αλλάξεις ονόματα, αριθμούς, ημερομηνίες ή βαθμό βεβαιότητας. Διατήρησε τη διάκριση προτάσεων και αποφάσεων. Επισήμανε χωριστά κάθε αλλαγή που μπορεί να επηρεάζει το νόημα.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="copilot-word-review-panel-3" role="tabpanel" aria-labelledby="copilot-word-review-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Ποια αναδιατύπωση διατηρεί τη σημασία του «προτείνεται να διερευνηθεί»;</p><form class="enrich-choice" data-correct="0" data-answers="[&quot;Σωστά. Διατηρεί τον χαρακτήρα πρότασης χωρίς να προσθέτει απόφαση.&quot;,&quot;Η έγκριση δεν τεκμηριώνεται από την αρχική διατύπωση.&quot;,&quot;Η βεβαιότητα και η δέσμευση είναι ισχυρότερες από το αρχικό νόημα.&quot;]"><fieldset><legend class="enrich-sr">Ποια αναδιατύπωση διατηρεί τη σημασία του «προτείνεται να διερευνηθεί»;</legend><label><input type="radio" name="copilot-word-review-choice" value="0" required><span>«Η διερεύνηση αποτελεί προτεινόμενο επόμενο βήμα».</span></label><label><input type="radio" name="copilot-word-review-choice" value="1" required><span>«Η υλοποίηση έχει εγκριθεί».</span></label><label><input type="radio" name="copilot-word-review-choice" value="2" required><span>«Η δράση θα πραγματοποιηθεί οπωσδήποτε».</span></label></fieldset><button type="submit" class="enrich-button">Έλεγχος απάντησης</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></form><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Γράψε μια οδηγία επιμέλειας για δικό σου έγγραφο, κατονομάζοντας τουλάχιστον τρία στοιχεία που δεν πρέπει να αλλάξουν.</p><label for="copilot-word-review-reflection">Η δική σου σύντομη απάντηση</label><textarea id="copilot-word-review-reflection" data-note="copilot-word-review" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes" target="_blank" rel="noopener noreferrer">Microsoft Learn · Ενημερώσεις Microsoft 365 Copilot</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <section class="chapter" data-title="Word: Αλλαγές στο κείμενο" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Πώς κάνετε αλλαγές στο κείμενο που δημιούργησε</h1>
+        <p>Ο ψηφιακός βοηθός δεν σταματάει μέχρι τη δημιουργία κειμένου. Μπορεί να μας κάνει αλλαγές, διορθώσεις κ.τ.λ.</p>
+        <p>Μπορείτε να επιλέξετε την παράγραφο στην οποία θέλετε να κάνετε αλλαγές και στο τέλος της επιλογής εμφανίζεται ένα εικονίδιο, το οποίο σας δίνει διάφορες επιλογές.</p>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image29.png" alt="Επιλογή παραγράφου για αλλαγές" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image30.png" alt="Οι επιλογές αλλαγών του Copilot" loading="lazy"></figure>
+        </div>
+        <p>Μπορείτε είτε να επιλέξετε κάποιες από αυτές που προτείνει, είτε γράφοντάς του ένα prompt του λέτε «Τι θέλετε να συντάξει το Copilot».</p>
+      </section>
+
+      <section class="chapter" data-title="Word: Πλαϊνό παράθυρο" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Άνοιγμα του Copilot σε πλαϊνό παράθυρο</h1>
+        <p>Στη συνέχεια, ανοίξτε τον Copilot σε πλαϊνό παράθυρο, ώστε να σας δημιουργήσει μια περίληψη. Στην καρτέλα «Κεντρική» στο Word, στο τέλος της καρτέλας, θα δείτε το εικονίδιο του Copilot.</p>
+        <figure class="shot">
+          <img src="assets/images/image32.png" alt="Το πλαϊνό παράθυρο του Copilot" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Word: Δημιουργία περίληψης" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Δημιουργία περίληψης</h1>
+        <p>Ο επόμενος στόχος είναι να δημιουργήσει μια περίληψη του κειμένου που δημιούργησε.</p>
+        <figure class="shot">
+          <img src="assets/images/image33.png" alt="Το prompt για δημιουργία περίληψης" loading="lazy">
+        </figure>
+        <p>Δίνοντάς του το prompt «Δημιούργησέ μου μια περίληψη του κειμένου σε 3-4 γραμμές.», ο Copilot θα δημιουργήσει την περίληψη από το κείμενο που δημιούργησε νωρίτερα. Σε αυτό το σημείο μπορείτε να διαπιστώσετε ότι ο Copilot επικοινωνεί με το Word αρχείο: απλά λέγοντάς του να σας δημιουργήσει μια περίληψη, αμέσως ξεκινάει να εκτελεί το prompt από το αρχείο που βρίσκεται ήδη ανοιχτό στο αριστερό παράθυρο.</p>
+        <figure class="shot">
+          <img src="assets/images/image34.png" alt="Η περίληψη που δημιούργησε ο Copilot" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Word: Εισαγωγή περίληψης" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Εισαγωγή της περίληψης στο κείμενο</h1>
+        <p>Αν θέλετε να χρησιμοποιήσετε την περίληψη στην αρχή του κειμένου σας, τότε μπορείτε να επιλέξετε τη λέξη «Εισαγωγή».</p>
+        <figure class="shot">
+          <img src="assets/images/image35.png" alt="Η επιλογή Εισαγωγή για την περίληψη" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Word: Νέα παράγραφος — 1ος τρόπος" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Προσθήκη παραγράφου — 1ος τρόπος</h1>
+        <p>Ας δούμε και ένα ακόμη prompt. Θέλετε να εισαγάγετε στο κείμενό σας μια ακόμη παράγραφο με επιχειρήματα υπέρ της ανακύκλωσης. Υπάρχουν 2 τρόποι που μπορεί ο Copilot να δημιουργήσει την παράγραφο αλλά και να την εισαγάγει στο Word. Το prompt που θα δημιουργήσει την παράγραφο: <strong>«Πρόσθεσε μια παράγραφο με επιχειρήματα υπέρ της ανακύκλωσης.»</strong></p>
+        <p><strong>1ος Τρόπος:</strong> Διαβάζοντας το κείμενο, εντοπίζετε πως λίγο πριν τον επίλογο θέλετε να προσθέσετε μια επιπλέον παράγραφο στην οποία να γίνεται αναφορά στα «επιχειρήματα υπέρ της ανακύκλωσης». Ακριβώς πριν, μπορείτε να δημιουργήσετε ένα κενό, και αριστερά θα εμφανιστεί ένα κουμπί «Πρόχειρο με Copilot».</p>
+        <p>Πατώντας επάνω σε αυτό, ξεδιπλώνεται και πάλι το μενού με την επιλογή «Τι θέλετε να συντάξει ο Copilot». Εκεί πληκτρολογήστε το ερώτημά σας ή την πρόταση που του λέει τι να κάνει για εσάς.</p>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image36.png" alt="Το κουμπί Πρόχειρο με Copilot" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image37.png" alt="Το μενού σύνταξης του Copilot" loading="lazy"></figure>
+        </div>
+        <p>Αφού δημιουργήσει την παράγραφο που του ζητήθηκε, έπειτα επιλέγοντας τη «Διατήρηση», καταγράφει τη νέα προσθήκη στο σημείο που θέλετε.</p>
+        <figure class="shot">
+          <img src="assets/images/image38.png" alt="Η νέα παράγραφος στο κείμενο" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Word: Νέα παράγραφος — 2ος τρόπος" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.1 · Word</span>
+        <h1>Προσθήκη παραγράφου — 2ος τρόπος</h1>
+        <p><strong>2ος Τρόπος:</strong> Στο πεδίο που έχετε ενεργοποιήσει τον Copilot (πλαϊνό παράθυρο δεξιά), μπορείτε να πείτε στον ψηφιακό βοηθό: «Πρόσθεσε μια παράγραφο με επιχειρήματα υπέρ της ανακύκλωσης.»</p>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image39.png" alt="Το prompt στο πλαϊνό παράθυρο" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image40.png" alt="Η παράγραφος που δημιούργησε ο Copilot" loading="lazy"></figure>
+        </div>
+        <p>Εάν το κείμενο είναι όπως το θέλετε, κάνετε «Εισαγωγή» στο βασικό σας κείμενο.</p>
+        <figure class="shot">
+          <img src="assets/images/image41.png" alt="Εισαγωγή της παραγράφου στο κείμενο" loading="lazy">
+        </figure>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🔑</span>
+          <div><p><strong>Συμπέρασμα:</strong> Ο Copilot μπορεί να γίνει πραγματικός βοηθός σας μέσα στο Word. Σας βοηθάει να ξεκινήσετε από το μηδέν, να βελτιώσετε αυτό που έχετε γράψει και να προσθέσετε περιεχόμενο χωρίς κόπο. Η δύναμή του βρίσκεται στη συνεργασία με το κείμενό σας: εσείς δίνετε την κατεύθυνση και εκείνος αναλαμβάνει τα υπόλοιπα.</p></div>
+        </div>
+      </section>
+
+      <!-- ============ ΚΕΦΑΛΑΙΟ 4 — EXCEL ============ -->
+      <section class="chapter" data-title="Excel: Εισαγωγή" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Δημιουργία και επεξεργασία Excel</h1>
+        <p>Επιλέξτε να δημιουργήσετε ένα νέο «βιβλίο εργασίας».</p>
+        <figure class="shot">
+          <img src="assets/images/image42.png" alt="Δημιουργία νέου βιβλίου εργασίας στο Excel" loading="lazy">
+        </figure>
+        <p>Το Microsoft Copilot μπορεί να σας βοηθήσει να δημιουργήσετε ή να επεξεργαστείτε ένα υπολογιστικό φύλλο Excel, χωρίς να χρειάζεται να γνωρίζετε πολύπλοκες συναρτήσεις ή προχωρημένα εργαλεία. Μπορείτε να του δώσετε οδηγίες όπως:</p>
+        <ul>
+          <li>«Δημιούργησε έναν πίνακα με τις πωλήσεις του μήνα ανά προϊόν»</li>
+          <li>«Φτιάξε ένα γράφημα που να δείχνει τη μεταβολή των εξόδων κάθε εβδομάδα»</li>
+          <li>«Υπολόγισε το σύνολο και τον μέσο όρο στη στήλη Γ»</li>
+        </ul>
+        <p>Το Copilot θα αναλύσει τα δεδομένα σας (αν υπάρχουν ήδη στο φύλλο) ή θα σας ζητήσει να του δώσετε τα απαραίτητα στοιχεία για να τα προσθέσει μόνο του.</p>
+      </section>
+
+      <section class="chapter" data-title="Excel: Εξειδικευμένες εργασίες" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Πιο εξειδικευμένες εργασίες</h1>
+        <p>Μπορεί επίσης να σας βοηθήσει με πιο εξειδικευμένες εργασίες όπως:</p>
+        <ul>
+          <li>Δημιουργία αυτόματων φίλτρων</li>
+          <li>Ταξινόμηση δεδομένων</li>
+          <li>Εύρεση αποκλίσεων ή τάσεων μέσα από τα δεδομένα</li>
+          <li>Εισαγωγή συναρτήσεων όπως =SUM(), =AVERAGE(), =IF() με βάση το τι του ζητάτε</li>
+        </ul>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">📊</span>
+          <div><p>Με τον Copilot, η χρήση του Excel γίνεται πιο εύκολη και γρήγορη — αρκεί να ξέρετε τι θέλετε να πετύχετε και να το εκφράσετε με σαφήνεια. Ας το δούμε με ένα παράδειγμα, βήμα προς βήμα.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Excel: Βήμα 1 — Πίνακας" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Βήμα 1: Δημιουργία πίνακα με πωλήσεις προϊόντων</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Δημιούργησε έναν πίνακα με τα εξής προϊόντα: Ψωμί, Γάλα, Τυρί και Καφές, και πρόσθεσε τις πωλήσεις τους για τις 4 πρώτες εβδομάδες του Ιουλίου.»</p>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image43.png" alt="Ο Copilot δημιουργεί τον πίνακα" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image44.png" alt="Ο πίνακας που δημιούργησε ο Copilot" loading="lazy"></figure>
+        </div>
+        <p>Αυτά τα 2 στιγμιότυπα είναι αυτό που δημιούργησε ο Copilot δίνοντάς του το prompt βήμα προς βήμα. Το ερώτημα ήταν ξεκάθαρο και με ακρίβεια. Έτσι, ο ψηφιακός βοηθός ξεκίνησε να δημιουργεί πρώτα 5 κελιά από το A1 έως το E1 και στη συνέχεια δημιούργησε 4 στήλες, όσες και οι εβδομάδες που του ζητήθηκαν. Έπειτα, καταχώρησε κάποιους τυχαίους αριθμούς, αφού δεν του είχαν δοθεί από το prompt. Τέλος, αφού έφτιαξε τον πίνακα στο περιβάλλον του, έγινε εισαγωγή στο κενό αρχείο του Excel.</p>
+        <figure class="shot">
+          <img src="assets/images/image45.png" alt="Ο πίνακας εισηγμένος στο Excel" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Excel: Βήμα 2 — Σύνολο" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Βήμα 2: Υπολογισμός συνολικών πωλήσεων</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Πρόσθεσε μια στήλη με το σύνολο των πωλήσεων κάθε προϊόντος για τον Ιούλιο.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image46.png" alt="Η στήλη Σύνολο Ιουλίου που δημιούργησε ο Copilot" loading="lazy">
+        </figure>
+        <p>Ο Copilot, ακολουθώντας την οδηγία που έλαβε, δημιούργησε μια στήλη με το όνομα «Σύνολο Ιουλίου» και υπολόγισε το σύνολο για κάθε προϊόν. Αφού δείτε πως το αποτέλεσμα που σας έδωσε είναι σωστό, τότε μπορείτε να το εισαγάγετε στο αρχείο σας.</p>
+        <figure class="shot">
+          <img src="assets/images/image47.png" alt="Η στήλη συνόλου στο αρχείο Excel" loading="lazy">
+        </figure>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">⚠️</span>
+          <div><p><strong>Προσοχή!</strong> Πάντα θα πρέπει να ελέγχετε τα αποτελέσματα που σας δίνει ο Copilot. Το ίδιο ισχύει για όλα τα μοντέλα τεχνητής νοημοσύνης.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Excel: Βήμα 3 — Μέσος όρος" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Βήμα 3: Υπολογισμός μέσου όρου εβδομαδιαίων πωλήσεων</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Πρόσθεσε μια στήλη που να δείχνει τον μέσο όρο πωλήσεων ανά εβδομάδα για κάθε προϊόν.»</p>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image48.png" alt="Η στήλη μέσου όρου που δημιούργησε ο Copilot" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image49.png" alt="Ο μέσος όρος στο αρχείο Excel" loading="lazy"></figure>
+        </div>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">ℹ️</span>
+          <div><p><strong>Σημείωση!</strong> Κατά τη διάρκεια της επεξεργασίας, θα δείτε στη φάση της «Δημιουργίας» ο πίνακας στο αρχείο του Excel να παίρνει ένα χρώμα κόκκινο. Αυτό σημαίνει πως ο Copilot εκείνη τη στιγμή συλλέγει όλα τα στοιχεία του πίνακα, ώστε να μπορέσει να τον διαβάσει και να κάνει τους ανάλογους υπολογισμούς (ακόλουθη εικόνα).</p></div>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image50.png" alt="Ο πίνακας με κόκκινο χρώμα κατά την επεξεργασία" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Excel: Βήμα 4 — Γράφημα" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Βήμα 4: Δημιουργία γραφήματος</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Φτιάξε ένα γράφημα που να δείχνει τις συνολικές πωλήσεις κάθε προϊόντος.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image51.png" alt="Το γράφημα που δημιούργησε ο Copilot" loading="lazy">
+        </figure>
+        <p>Αν το διάγραμμα που δημιούργησε είναι σωστό, μπορείτε να το εισαγάγετε στο Excel πατώντας το κουμπί κάτω από το διάγραμμα που λέει «Προσθήκη σε νέο φύλλο».</p>
+        <figure class="shot">
+          <img src="assets/images/image52.png" alt="Το γράφημα σε νέο φύλλο του Excel" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Excel: Βήμα 5 — Ποσοστά" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Βήμα 5: Ποσοστό συμμετοχής κάθε προϊόντος</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Υπολόγισε το ποσοστό συμμετοχής κάθε προϊόντος στο σύνολο των πωλήσεων του Ιουλίου.»</p>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image53.png" alt="Ο υπολογισμός ποσοστών από τον Copilot" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image54.png" alt="Τα ποσοστά συμμετοχής στο Excel" loading="lazy"></figure>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Excel: Βήμα 6 — Γράφημα πίτας" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Βήμα 6: Δημιουργία γραφήματος πίτας</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Φτιάξε ένα γράφημα πίτας που να δείχνει το ποσοστό συμμετοχής κάθε προϊόντος στις συνολικές πωλήσεις του Ιουλίου.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image55.png" alt="Το γράφημα πίτας που δημιούργησε ο Copilot" loading="lazy">
+        </figure>
+        <p>Ο Copilot μπορεί να δημιουργήσει όποιο γράφημα θέλετε. Το γράφημα πίτας θα δείξει καθαρά πόσο «μερίδιο» έχει κάθε προϊόν στις πωλήσεις. Είναι ιδανικό για οπτική σύγκριση και παρουσιάσεις.</p>
+        <figure class="shot">
+          <img src="assets/images/image56.png" alt="Το γράφημα πίτας στο Excel" loading="lazy">
+        </figure>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">ℹ️</span>
+          <div><p><strong>Σημείωση!</strong> Αν ο Copilot κατά την εκτέλεση ενός prompt δεν μπορέσει να απαντήσει, ενώ γνωρίζετε πως μπορεί να απαντήσει αυτό που τον ρωτήσατε, τότε κλείστε το αρχείο και ανοίξτε το και πάλι. Είναι πιθανόν να έχει κολλήσει.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Excel: Βήμα 7 — Φίλτρα" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Βήμα 7: Προσθήκη φίλτρων στον πίνακα</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Πρόσθεσε φίλτρα στον πίνακα για να μπορώ να ταξινομώ ή να φιλτράρω τα προϊόντα και τις πωλήσεις τους.»</p>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image57.png" alt="Η προσθήκη φίλτρων από τον Copilot" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image58.png" alt="Τα φίλτρα στον πίνακα του Excel" loading="lazy"></figure>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Excel: Βήματα 8 &amp; 9 — Ερωτήσεις" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Βήματα 8 &amp; 9: Ερωτήσεις στα δεδομένα</h1>
+        <p><strong>Βήμα 8: Ποιο προϊόν είχε τη μεγαλύτερη αύξηση πωλήσεων μέσα στον μήνα;</strong></p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Ποιο προϊόν είχε τη μεγαλύτερη αύξηση πωλήσεων μέσα στον μήνα;»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image59.png" alt="Η απάντηση του Copilot για τη μεγαλύτερη αύξηση" loading="lazy">
+        </figure>
+        <p><strong>Βήμα 9: Ποια εβδομάδα είχε τις περισσότερες συνολικές πωλήσεις;</strong></p>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Πρόσθεσε μια γραμμή στο τέλος του πίνακα με το άθροισμα των πωλήσεων για κάθε εβδομάδα και πες μου ποια εβδομάδα είχε τις περισσότερες πωλήσεις.»</p>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image60.png" alt="Η γραμμή αθροίσματος ανά εβδομάδα" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image61.png" alt="Η απάντηση για την εβδομάδα με τις περισσότερες πωλήσεις" loading="lazy"></figure>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Excel: Συμπέρασμα" data-group="4. Copilot στις εφαρμογές του Microsoft 365"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#copilot-excel-2026">Excel: Copilot, Python και επαλήθευση αποτελεσμάτων</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 4.2 · Excel</span>
+        <h1>Συμπέρασμα</h1>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🔑</span>
+          <div><p>Όπως είδατε, με τη βοήθεια του Copilot μπορείτε να δουλεύετε στο Excel με έναν τελείως νέο τρόπο. Δεν χρειάζεται να θυμάστε πολύπλοκες συναρτήσεις ούτε να χάνετε χρόνο ψάχνοντας πώς να φτιάξετε έναν πίνακα ή ένα γράφημα. Αρκεί να του δώσετε ένα καθαρό και σαφές prompt και εκείνος αναλαμβάνει τα υπόλοιπα. Μπορεί να δημιουργήσει πίνακες, να κάνει υπολογισμούς, να βρει τάσεις, να σας βοηθήσει με ταξινομήσεις και φίλτρα, ακόμα και να σας φτιάξει εντυπωσιακά γραφήματα. Με λίγη εξάσκηση, θα δείτε ότι μπορείτε να αξιοποιήσετε το Excel πολύ πιο αποτελεσματικά και να επικεντρωθείτε στην ανάλυση και την απόφαση, αφήνοντας τα τεχνικά στον ψηφιακό σας βοηθό.</p></div>
+        </div>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="copilot-excel-2026" data-update-title="Excel: Copilot, Python και επαλήθευση αποτελεσμάτων" aria-labelledby="copilot-excel-2026-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 4.2 · Excel</p><h2 id="copilot-excel-2026-title" tabindex="-1">Excel: Copilot, Python και επαλήθευση αποτελεσμάτων</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να ελέγχετε το φύλλο εργασίας μετά από αυτοματοποιημένη ανάλυση.</p><div class="learn-workbook" data-workbook="copilot-excel-2026"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="copilot-excel-2026-tab-0" aria-controls="copilot-excel-2026-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="copilot-excel-2026-tab-1" aria-controls="copilot-excel-2026-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="copilot-excel-2026-tab-2" aria-controls="copilot-excel-2026-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="copilot-excel-2026-tab-3" aria-controls="copilot-excel-2026-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="copilot-excel-2026-panel-0" role="tabpanel" aria-labelledby="copilot-excel-2026-tab-0" tabindex="0"><p>Οι σημειώσεις έκδοσης της 25/08/2026 περιγράφουν χρήση Python μέσω του Edit with Copilot στο Excel για ανάλυση, μετασχηματισμό δεδομένων και οπτικοποιήσεις. Η λειτουργία υπόκειται στους διαθέσιμους ελέγχους εκτέλεσης και στη διάθεση του οργανισμού. Δεν απαιτείται για να ολοκληρωθεί η παρακάτω απλή άσκηση.</p><p><a href="assets/downloads/update-training-data.csv" download>Κατεβάστε το συνθετικό CSV</a> και ανοίξτε το στο Excel. Ελέγξτε ότι οι αριθμοί εισάγονται ως αριθμοί και ότι το ελληνικό κείμενο εμφανίζεται σωστά. Κρατήστε αντίγραφο των αρχικών δεδομένων πριν ζητήσετε μετασχηματισμούς.</p><div class="update-prompt"><h3>Δοκιμάστε αυτό το prompt</h3><blockquote>Υπολόγισε ποσοστό ολοκλήρωσης ανά μήνα από τις στήλες Εγγραφές και Ολοκληρώσεις. Διατήρησε τα αρχικά δεδομένα. Δείξε τον τύπο υπολογισμού, πρόσθεσε συνολικό ποσοστό και γράφημα. Μη συμπεράνεις αιτία από απλή συσχέτιση.</blockquote></div><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Τι ελέγχουμε αν ο πίνακας προσθέτει ποσοστά και εμφανίζει σύνολο 215%;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Το άθροισμα μηνιαίων ποσοστών δεν είναι συνολικό ποσοστό ολοκλήρωσης. Υπολογίζουμε 214 / 300 = 71,33%. Ελέγχουμε επίσης ότι οι παρονομαστές και η περίοδος είναι σωστοί.</p></details></div></div><div class="learn-panel" id="copilot-excel-2026-panel-1" role="tabpanel" aria-labelledby="copilot-excel-2026-tab-1" tabindex="0"><h3>Η ανάλυση αρχίζει από τον ορισμό κάθε γραμμής και στήλης</h3><p>Πριν ζητήσουμε τύπους ή γραφήματα, πρέπει να γνωρίζουμε τι αντιπροσωπεύουν τα δεδομένα. Κάθε γραμμή μπορεί να είναι άτομο, συναλλαγή ή μηνιαία ομάδα και κάθε στήλη πρέπει να έχει σαφή μονάδα. Αν η ίδια εγγραφή εμφανίζεται δύο φορές ή αν διαφορετικές γραμμές αφορούν επικαλυπτόμενους πληθυσμούς, ένα άθροισμα μπορεί να διπλομετρά. Η τεχνική ορθότητα του τύπου δεν διορθώνει έναν λανθασμένο ορισμό του πίνακα.</p><p>Οι τύποι πρέπει να συνδέονται με το ερώτημα. Το άθροισμα απαντά πόσα καταγράφηκαν συνολικά, ο μέσος όρος περιγράφει μέση τιμή ανά παρατήρηση και το ποσοστό συνδέει μέρος και σύνολο. Τα τρία μεγέθη έχουν διαφορετικές μονάδες. Αν ονομάσουμε «ποσοστό» έναν απλό μέσο αριθμό, το αποτέλεσμα γίνεται παραπλανητικό ακόμη και όταν ο υπολογισμός εκτελείται χωρίς τεχνικό σφάλμα.</p><p>Οι δυνατότητες Copilot και Python μπορούν να υποστηρίζουν πιο σύνθετη επεξεργασία, όπου διατίθενται. Η επαλήθευση όμως παραμένει αναγκαία: ελέγχουμε την αρχική περιοχή, τυχόν φίλτρα, τη διαχείριση κενών και τη μορφή εξόδου. Κρατάμε απλό χειροκίνητο υπολογισμό για μικρό δείγμα και συγκρίνουμε. Όταν το αποτέλεσμα αλλάζει μετά από φίλτρο, δηλώνουμε ποιος πληθυσμός χρησιμοποιείται ως βάση.</p></div><div class="learn-panel" id="copilot-excel-2026-panel-2" role="tabpanel" aria-labelledby="copilot-excel-2026-tab-2" tabindex="0"><h3>Παράδειγμα: μέσος όρος και συνολικό ποσοστό</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Στο συνθετικό CSV υπάρχουν 214 ολοκληρώσεις σε τρεις μήνες και 300 εγγραφές. Ο μέσος αριθμός ολοκληρώσεων είναι 214/3 = 71,33 ανά μήνα. Το συνολικό ποσοστό είναι 214/300 × 100 = 71,33%. Οι αριθμητικές τιμές συμπίπτουν στο συγκεκριμένο παράδειγμα, αλλά οι μονάδες και η σημασία τους διαφέρουν.</p><p>Η σύμπτωση είναι χρήσιμη για να φανεί γιατί δεν αρκεί να ελέγχουμε μόνο έναν αριθμό. Στην αναφορά προσθέτουμε πάντα τίτλο δείκτη, μονάδα και παρονομαστή. Αν αλλάξουν οι εγγραφές, το ποσοστό μεταβάλλεται ενώ ο μέσος αριθμός ολοκληρώσεων μπορεί να παραμείνει ίδιος.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Υπολόγισε σύνολο, μέσο αριθμό ολοκληρώσεων ανά μήνα και συνολικό ποσοστό. Για κάθε αποτέλεσμα γράψε τον τύπο και τη μονάδα. Έλεγξε το σύνολο με ανεξάρτητο απλό υπολογισμό.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="copilot-excel-2026-panel-3" role="tabpanel" aria-labelledby="copilot-excel-2026-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Άλλαξε τις εγγραφές ή τις ολοκληρώσεις και παρατήρησε πώς μεταβάλλεται το συνολικό ποσοστό σε σχέση με τον απλό μέσο μηνιαίων ποσοστών.</p><div class="enrich-calculator"><p class="enrich-help">Συνθετικά δεδομένα. Κάθε μήνας θεωρείται διαφορετική ομάδα. Οι τιμές παραμένουν μόνο στον browser.</p><div class="enrich-data-grid"><div aria-hidden="true">Μήνας</div><div>Εγγραφές</div><div>Ολοκληρώσεις</div><div>Ιούνιος</div><label><span class="enrich-sr">Εγγραφές Ιούνιος</span><input type="number" min="1" max="1000000" step="1" data-enrolled="0" value="80"></label><label><span class="enrich-sr">Ολοκληρώσεις Ιούνιος</span><input type="number" min="0" max="1000000" step="1" data-completed="0" value="60"></label><div>Ιούλιος</div><label><span class="enrich-sr">Εγγραφές Ιούλιος</span><input type="number" min="1" max="1000000" step="1" data-enrolled="1" value="100"></label><label><span class="enrich-sr">Ολοκληρώσεις Ιούλιος</span><input type="number" min="0" max="1000000" step="1" data-completed="1" value="70"></label><div>Αύγουστος</div><label><span class="enrich-sr">Εγγραφές Αύγουστος</span><input type="number" min="1" max="1000000" step="1" data-enrolled="2" value="120"></label><label><span class="enrich-sr">Ολοκληρώσεις Αύγουστος</span><input type="number" min="0" max="1000000" step="1" data-completed="2" value="84"></label></div><div class="enrich-feedback" role="status" aria-live="polite"></div><div class="enrich-calc-results" aria-label="Αποτελέσματα υπολογισμού"><div><strong data-total-rate></strong><span>Συνολικό ποσοστό</span></div><div><strong data-average-rate></strong><span>Απλός μέσος ποσοστών</span></div></div><p class="enrich-calc-explain"></p><div class="enrich-bars" aria-label="Ποσοστά ανά μήνα"></div><button type="button" class="enrich-reset">Επαναφορά αρχικών δεδομένων</button></div><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Εξήγησε με δικά σου λόγια γιατί δύο αριθμητικά ίσες τιμές μπορεί να περιγράφουν διαφορετικά μεγέθη.</p><label for="copilot-excel-2026-reflection">Η δική σου σύντομη απάντηση</label><textarea id="copilot-excel-2026-reflection" data-note="copilot-excel-2026" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes" target="_blank" rel="noopener noreferrer">Microsoft Learn · Ενημερώσεις Microsoft 365 Copilot</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <!-- ============ ΚΕΦΑΛΑΙΟ 4 — POWERPOINT ============ -->
+      <section class="chapter" data-title="PowerPoint: Εισαγωγή" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Δημιουργία και επεξεργασία PowerPoint</h1>
+        <p>Το Microsoft Copilot μπορεί να γίνει πολύτιμος βοηθός όταν δημιουργείτε παρουσιάσεις. Αντί να ξεκινάτε από το μηδέν, μπορείτε να του δώσετε μια γενική ιδέα και εκείνος να δημιουργήσει τις πρώτες διαφάνειες για εσάς, να προτείνει τίτλους, περιεχόμενο, ακόμα και τη διάταξη κάθε διαφάνειας.</p>
+        <p>Ο Copilot δημιουργεί μια παρουσίαση που περιλαμβάνει:</p>
+        <ul>
+          <li>Τίτλο παρουσίασης</li>
+          <li>Εισαγωγική διαφάνεια</li>
+          <li>Διαφάνειες με βασικά σημεία</li>
+          <li>Συμπερασματική διαφάνεια</li>
+        </ul>
+        <p>Μπορείτε να πατήσετε «Εισαγωγή» για να την προσθέσετε απευθείας στο αρχείο σας ή να επιλέξετε μόνο όσα κομμάτια θέλετε.</p>
+        <figure class="shot">
+          <img src="assets/images/image62.png" alt="Ο Copilot μέσα στο PowerPoint" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Δημιουργία από τίτλο" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Βήμα 1: Δημιουργία παρουσίασης από τίτλο</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Δημιούργησε μια παρουσίαση με τίτλο «Κλιματική Αλλαγή» που να περιλαμβάνει 5 διαφάνειες.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image63.png" alt="Το prompt για δημιουργία παρουσίασης" loading="lazy">
+        </figure>
+        <p>Αφού προσθέσετε το ερώτημά σας, στη συνέχεια ο Copilot θα σας εμφανίσει τον τίτλο της διαφάνειας και τις 5 διαφάνειες που ζητήσατε, με τα σχετικά θέματα που θα περιέχει η κάθε διαφάνεια.</p>
+        <p>Αν θέλετε να περιέχεται στις διαφάνειες συγκεκριμένο υλικό, τότε μπορείτε να το ορίσετε μέσα από το prompt που δώσατε. Όσο πιο περιγραφικό και σαφές είναι το prompt, τόσο πιο ακριβές θα είναι αυτό που θα σας προτείνει. Ωστόσο, και στη συνέχεια μπορείτε να επεξεργαστείτε την κάθε διαφάνεια, ώστε να την προσαρμόσετε στο θέμα που θέλετε να δημιουργήσετε.</p>
+        <figure class="shot">
+          <img src="assets/images/image64.png" alt="Οι προτεινόμενες διαφάνειες του Copilot" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Οι διαφάνειες" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Οι διαφάνειες που δημιούργησε ο Copilot</h1>
+        <p>Παρακάτω παρουσιάζονται οι διαφάνειες όπως τις έχει επιλέξει ο Copilot.</p>
+        <figure class="shot">
+          <img src="assets/images/image65.png" alt="Οι διαφάνειες της παρουσίασης" loading="lazy">
+        </figure>
+        <p>Επιλέγετε το κουμπί «Διατήρηση» και στη συνέχεια κάντε διπλό κλικ στην 1η διαφάνεια.</p>
+        <figure class="shot">
+          <img src="assets/images/image66.png" alt="Η πρώτη διαφάνεια της παρουσίασης" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Προτάσεις σχεδίασης" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Προτάσεις σχεδίασης</h1>
+        <p>Επιλέξτε μια διαφάνεια της οποίας θέλετε να αλλάξετε τον σχεδιασμό. Κάνοντας δεξί κλικ του ποντικιού, εμφανίζεται το παρακάτω μενού.</p>
+        <figure class="shot">
+          <img src="assets/images/image67.png" alt="Το μενού δεξιού κλικ με τις Προτάσεις σχεδίασης" loading="lazy">
+        </figure>
+        <p>Επιλέγοντας «Προτάσεις σχεδίασης», εμφανίζεται δεξιά μια στήλη με διάφορες προτάσεις σχεδίασης. Μπορείτε να αλλάξετε στυλ στην εκάστοτε διαφάνεια, επιλέγοντας κάποια από τις προτάσεις που σας παραθέτει ο Copilot.</p>
+        <figure class="shot">
+          <img src="assets/images/image68.png" alt="Οι προτάσεις σχεδίασης του Copilot" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Αναδιατύπωση τίτλου" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Αναδιατύπωση τίτλου ή υπότιτλου</h1>
+        <p>Επιλέξτε τον τίτλο, τον υπότιτλο ή και κάποιο κείμενο της διαφάνειας. Έπειτα θα εμφανιστεί το κουμπί του Copilot. Κάντε κλικ επάνω και θα σας εμφανίσει το μενού, όπως στην εικόνα.</p>
+        <figure class="shot">
+          <img src="assets/images/image69.png" alt="Το μενού αναδιατύπωσης του Copilot" loading="lazy">
+        </figure>
+        <p>Τώρα μπορείτε να επιλέξετε να κάνει το κείμενο «Επαγγελματικό». Ο Copilot θα αλλάξει το κείμενο. Αν θέλετε να το κρατήσετε, πατήστε «Διατήρηση», διαφορετικά επιλέξτε το διπλανό εικονίδιο για να σας δημιουργήσει άλλο κείμενο — ή, αν θέλετε να κρατήσετε το αρχικό κείμενο, τότε πατήστε το τρίτο κουμπί, που κάνει αναίρεση.</p>
+        <figure class="shot">
+          <img src="assets/images/image70.png" alt="Οι επιλογές διατήρησης και αναίρεσης" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Προσθήκη διαφάνειας" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Βήμα 2: Προσθήκη περιεχομένου σε υπάρχουσα παρουσίαση</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Πρόσθεσε μια διαφάνεια με τίτλο «Ο ρόλος του καθενός μας στην προστασία του κλίματος» και γράψε 3 πρακτικούς τρόπους που μπορεί να βοηθήσει ο καθένας μας.»</p>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image71.png" alt="Το prompt για προσθήκη διαφάνειας" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image72.png" alt="Η νέα διαφάνεια που δημιούργησε ο Copilot" loading="lazy"></figure>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Βελτίωση κειμένου" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Βήμα 3: Αναδιατύπωση ή βελτίωση κειμένου</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Βελτίωσε το κείμενο αυτής της διαφάνειας ώστε να είναι πιο κατανοητό για μαθητές Γυμνασίου.»</p>
+        </div>
+        <p>Πολύ χρήσιμο όταν έχετε γράψει ήδη κάτι και θέλετε να το κάνετε πιο απλό, πιο φιλικό ή πιο επαγγελματικό, ανάλογα με το κοινό σας.</p>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image73.png" alt="Το κείμενο πριν τη βελτίωση" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image74.png" alt="Το βελτιωμένο κείμενο" loading="lazy"></figure>
+        </div>
+        <p>Στο περιβάλλον του PowerPoint μπορείτε να επεξεργαστείτε κάθε στοιχείο, όπως κάνετε και στο απλό PowerPoint. Τώρα, αφού δημιούργησε το κείμενο με πιο κατανοητό τρόπο για παιδιά Γ΄ Γυμνασίου, μπορείτε να κάνετε «Αντιγραφή-Επικόλληση» το κείμενο μέσα στη διαφάνεια.</p>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Λίστα bullets" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Βήμα 4: Δημιουργία λίστας bullets ή πίνακα</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Φτιάξε μια διαφάνεια με 3 πλεονεκτήματα και 3 μειονεκτήματα της ανανεώσιμης ενέργειας.»</p>
+        </div>
+        <div class="shot-row">
+          <figure class="shot"><img src="assets/images/image75.png" alt="Το prompt για λίστα πλεονεκτημάτων και μειονεκτημάτων" loading="lazy"></figure>
+          <figure class="shot"><img src="assets/images/image76.png" alt="Η διαφάνεια με τη λίστα" loading="lazy"></figure>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Σημειώσεις ομιλητή" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Βήμα 5: Δημιουργία πρόχειρης αφήγησης</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Πρόσθεσε σημειώσεις για τον ομιλητή που να εξηγούν τα βασικά σημεία αυτής της διαφάνειας.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image77.png" alt="Το prompt για σημειώσεις ομιλητή" loading="lazy">
+        </figure>
+        <p>Στο κάτω μέρος από την κεντρική διαφάνεια, ο Copilot θα δημιουργήσει σημειώσεις για τον ομιλητή, όπως φαίνεται στην εικόνα παρακάτω.</p>
+        <figure class="shot">
+          <img src="assets/images/image78.png" alt="Οι σημειώσεις ομιλητή κάτω από τη διαφάνεια" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Περίληψη παρουσίασης" data-group="4. Copilot στις εφαρμογές του Microsoft 365">
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Βήμα 6: Περίληψη παρουσίασης</h1>
+        <div class="prompt-box prompt-good">
+          <span class="pb-label">✔ Prompt</span>
+          <p class="pb-text">«Δημιούργησε μια σύντομη περίληψη της παρουσίασης για να την προσθέσω στην τελευταία διαφάνεια ως επίλογο.»</p>
+        </div>
+        <figure class="shot">
+          <img src="assets/images/image79.png" alt="Το prompt για περίληψη της παρουσίασης" loading="lazy">
+        </figure>
+        <p>Ο Copilot διαβάζει όλες τις διαφάνειες και δημιουργεί μια συνοπτική σύνοψη με τα βασικά σημεία. Μπορεί να τη βάλει αυτόματα στην τελευταία διαφάνεια ή να σας την προτείνει σε μορφή bullet ή παραγράφου.</p>
+        <figure class="shot">
+          <img src="assets/images/image80.png" alt="Η περίληψη της παρουσίασης" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="PowerPoint: Συμπέρασμα" data-group="4. Copilot στις εφαρμογές του Microsoft 365"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#copilot-slides-review">PowerPoint: τεκμηριωμένες και προσβάσιμες διαφάνειες</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Υποενότητα 4.3 · PowerPoint</span>
+        <h1>Συμπέρασμα</h1>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🔑</span>
+          <div><p>Όπως είδατε, ο Copilot μπορεί να σας βοηθήσει να δημιουργήσετε μια ολόκληρη παρουσίαση πιο γρήγορα και πιο εύκολα από ποτέ. Δεν χρειάζεται να ξεκινάτε από το μηδέν ή να αγχώνεστε για το περιεχόμενο κάθε διαφάνειας. Αρκεί να του δώσετε έναν τίτλο ή ένα θέμα, και εκείνος μπορεί να χτίσει για εσάς δομή, κείμενο, bullets, ακόμη και σημειώσεις για τον ομιλητή. Επιπλέον, μπορεί να προσθέσει ή να αναδιατυπώσει περιεχόμενο, να προτείνει τίτλους ή να σας δώσει περίληψη για το τέλος. Με λίγα λόγια, είναι σαν να έχετε έναν συνεργάτη δίπλα σας την ώρα που φτιάχνετε την παρουσίασή σας — έναν συνεργάτη που δεν κουράζεται ποτέ και καταλαβαίνει τι θέλετε, αρκεί να του το πείτε με καθαρό και σαφή τρόπο.</p></div>
+        </div>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="copilot-slides-review" data-update-title="PowerPoint: τεκμηριωμένες και προσβάσιμες διαφάνειες" aria-labelledby="copilot-slides-review-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Υποενότητα 4.3 · PowerPoint</p><h2 id="copilot-slides-review-title" tabindex="-1">PowerPoint: τεκμηριωμένες και προσβάσιμες διαφάνειες</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να αξιολογείτε την παρουσίαση ως εκπαιδευτικό παραδοτέο.</p><div class="learn-workbook" data-workbook="copilot-slides-review"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="copilot-slides-review-tab-0" aria-controls="copilot-slides-review-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="copilot-slides-review-tab-1" aria-controls="copilot-slides-review-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="copilot-slides-review-tab-2" aria-controls="copilot-slides-review-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="copilot-slides-review-tab-3" aria-controls="copilot-slides-review-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="copilot-slides-review-panel-0" role="tabpanel" aria-labelledby="copilot-slides-review-tab-0" tabindex="0"><p>Η αυτόματη δημιουργία διαφανειών επιταχύνει το πρώτο προσχέδιο. Ο εκπαιδευτικός έλεγχος εξετάζει αν η ιστορία βγάζει νόημα, αν κάθε διαφάνεια έχει σαφή λειτουργία και αν το κοινό μπορεί να διαβάσει τα στοιχεία. Αυτή η δραστηριότητα επεκτείνει τη χρήση του PowerPoint που έχει ήδη διδαχθεί.</p><div class="update-prompt"><h3>Δοκιμάστε αυτό το prompt</h3><blockquote>Με βάση το εγκεκριμένο ενημερωτικό, ετοίμασε προσχέδιο έξι διαφανειών. Για καθεμία δώσε ένα βασικό μήνυμα, σύντομο κείμενο και προτεινόμενο οπτικό στοιχείο. Βάλε τις πηγές κοντά στους ισχυρισμούς. Μην προσθέσεις αριθμούς που δεν υπάρχουν στο αρχείο. Στις σημειώσεις ομιλητή πρόσθεσε μία ερώτηση προς το κοινό.</blockquote></div><ul><li>Ελέγχουμε μονάδες, άξονες και ποσοστά σε κάθε γράφημα.</li><li>Εξασφαλίζουμε επαρκές μέγεθος γραμμάτων και αντίθεση.</li><li>Προσθέτουμε εναλλακτικό κείμενο και δεν χρησιμοποιούμε μόνο χρώμα για διάκριση.</li><li>Δηλώνουμε ποια εικόνα είναι συνθετική και ελέγχουμε την τελική εξαγωγή.</li></ul><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Μια εντυπωσιακή εικόνα δεν σχετίζεται με το μαθησιακό μήνυμα. Την κρατάμε;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Την αντικαθιστούμε ή την αφαιρούμε. Το οπτικό στοιχείο πρέπει να βοηθά στην κατανόηση, στη σύγκριση ή στην ανάκληση του περιεχομένου.</p></details></div></div><div class="learn-panel" id="copilot-slides-review-panel-1" role="tabpanel" aria-labelledby="copilot-slides-review-tab-1" tabindex="0"><h3>Εκπαιδευτική ροή, αναγνωσιμότητα και τεκμηριωμένο μήνυμα</h3><p>Μια παρουσίαση δεν είναι αναφορά χωρισμένη μηχανικά σε οθόνες. Το περιεχόμενο επιλέγεται με βάση τον χρόνο, το κοινό και τον μαθησιακό στόχο. Κάθε διαφάνεια πρέπει να έχει αναγνωρίσιμη λειτουργία: εισαγωγή, εξήγηση, παράδειγμα, ερώτηση ή συμπέρασμα. Η διαδοχή αυτών των λειτουργιών βοηθά το κοινό να καταλάβει πού βρίσκεται και γιατί παρουσιάζεται η επόμενη πληροφορία.</p><p>Η οπτική μορφή πρέπει να αποδίδει τη σχέση που θέλουμε να εξηγήσουμε. Μια σύγκριση χρειάζεται κοινές διαστάσεις, μια διαδικασία καθαρή σειρά σταδίων και ένα αριθμητικό εύρημα κατάλληλο γράφημα. Δεν μετατρέπουμε κάθε παράγραφο σε εικόνα ούτε κάθε διαφορά σε πολύχρωμο διάγραμμα. Η λειτουργική απλότητα διευκολύνει την κατανόηση όταν κάθε στοιχείο έχει συγκεκριμένο ρόλο.</p><p>Η αναγνωσιμότητα αφορά μέγεθος, αντίθεση, έκταση και οργάνωση. Οι λεπτομέρειες που χρειάζονται για αυτοτελή μελέτη μπορούν να οργανωθούν σε σαφείς υποενότητες ή συμπληρωματικές εξηγήσεις. Οι πηγές παραμένουν διακριτές και προσβάσιμες. Η τελική επιθεώρηση πρέπει να γίνει στη μορφή με την οποία θα χρησιμοποιηθεί το υλικό, ώστε να εντοπιστούν κομμένα κείμενα, ασαφή γραφήματα και στοιχεία που καλύπτουν άλλο περιεχόμενο.</p></div><div class="learn-panel" id="copilot-slides-review-panel-2" role="tabpanel" aria-labelledby="copilot-slides-review-tab-2" tabindex="0"><h3>Παράδειγμα: ένα γράφημα και μια σύντομη δραστηριότητα</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Μια διαφάνεια δείχνει περισσότερες ολοκληρώσεις τον Αύγουστο αλλά ίδιο ποσοστό με τον Ιούλιο. Ο τίτλος δηλώνει αυτή την παρατήρηση χωρίς να μιλά για αποδεδειγμένη επιτυχία της μεθόδου. Πριν δοθεί εξήγηση, ο εκπαιδευτής ζητά από το κοινό να επιλέξει ποιος δείκτης απαντά στην ερώτηση «πόσοι ολοκλήρωσαν;».</p><p>Η απάντηση ακολουθεί μετά την προσπάθεια και εξηγεί τη διάκριση πλήθους και ποσοστού. Η δραστηριότητα δεν προστίθεται για εντυπωσιασμό: συνδέεται με την παρανόηση που μπορεί να προκαλέσει το συγκεκριμένο γράφημα.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Από το εγκεκριμένο κείμενο σχεδίασε σύντομη παρουσίαση με σαφή λειτουργία ανά διαφάνεια. Διατήρησε πηγές και περιορισμούς. Πρόσθεσε ερώτηση εφαρμογής με λύση που εμφανίζεται μετά την προσπάθεια.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="copilot-slides-review-panel-3" role="tabpanel" aria-labelledby="copilot-slides-review-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Ποια οπτική μορφή βοηθά περισσότερο στη σύγκριση δύο εναλλακτικών;</p><form class="enrich-choice" data-correct="1" data-answers="[&quot;Ο αναγνώστης δυσκολεύεται να εντοπίσει σε τι πραγματικά διαφέρουν.&quot;,&quot;Σωστά. Τα κοινά κριτήρια κάνουν τη σύγκριση σαφή και ελέγξιμη.&quot;,&quot;Η εικόνα δεν αποδίδει τη σχέση που χρειάζεται να κατανοηθεί.&quot;]"><fieldset><legend class="enrich-sr">Ποια οπτική μορφή βοηθά περισσότερο στη σύγκριση δύο εναλλακτικών;</legend><label><input type="radio" name="copilot-slides-review-choice" value="0" required><span>Δύο κείμενα με διαφορετικά, μη συγκρίσιμα χαρακτηριστικά.</span></label><label><input type="radio" name="copilot-slides-review-choice" value="1" required><span>Πίνακας με τα ίδια κριτήρια και για τις δύο επιλογές.</span></label><label><input type="radio" name="copilot-slides-review-choice" value="2" required><span>Μια διακοσμητική εικόνα χωρίς εξήγηση της διαφοράς.</span></label></fieldset><button type="submit" class="enrich-button">Έλεγχος απάντησης</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></form><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Πάρε μια πυκνή διαφάνεια του αντικειμένου σου και περιέγραψε πώς θα χώριζες την εξήγηση, το παράδειγμα και την εφαρμογή.</p><label for="copilot-slides-review-reflection">Η δική σου σύντομη απάντηση</label><textarea id="copilot-slides-review-reflection" data-note="copilot-slides-review" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes" target="_blank" rel="noopener noreferrer">Microsoft Learn · Ενημερώσεις Microsoft 365 Copilot</a></li><li><a href="https://developers.openai.com/api/docs/guides/image-generation" target="_blank" rel="noopener noreferrer">OpenAI · Παραγωγή εικόνων</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <!-- ============ ΠΩΣ ΣΥΝΕΡΓΑΖΟΝΤΑΙ ΤΑ ΕΡΓΑΛΕΙΑ ============ -->
+      <section class="chapter" data-title="Πώς συνεργάζονται τα εργαλεία" data-group="Πώς συνεργάζονται τα εργαλεία">
+        <span class="chapter-kicker">Συνέχεια · Συνεργασία εργαλείων</span>
+        <h1>Πώς συνεργάζονται μεταξύ τους το NotebookLM, το Gemini, το ChatGPT και το Copilot</h1>
+        <p>Κάθε εργαλείο έχει διαφορετικό ρόλο και μπορείτε να το χρησιμοποιήσετε σε διαφορετικό στάδιο της εργασίας σας. Όταν τα συνδυάζετε σωστά, μπορείτε να οργανώσετε το υλικό σας, να γράψετε το κείμενό σας και να δημιουργήσετε την τελική μορφή ενός εγγράφου με πολύ λιγότερο χρόνο και κόπο. Ακολουθεί ένα απλό μοντέλο συνεργασίας που μπορείτε να εφαρμόσετε σε οποιαδήποτε εργασία.</p>
+        <figure class="shot">
+          <img src="assets/images/synergasia.png" alt="Η ροή συνεργασίας: NotebookLM συγκεντρώνει πηγές, Gemini οργανώνει εργασίες, ChatGPT γράφει κείμενο, Copilot μορφοποιεί έγγραφο" loading="lazy">
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="1. NotebookLM: Οι πηγές" data-group="Πώς συνεργάζονται τα εργαλεία">
+        <span class="chapter-kicker">Συνεργασία εργαλείων · Στάδιο 1</span>
+        <h1>1. NotebookLM – Συγκεντρώνετε, ανεβάζετε και κατανοείτε τις πηγές σας</h1>
+        <p>Ξεκινάτε πάντα από το υλικό που ήδη έχετε. Μπορείτε να ανεβάσετε PDF, σημειώσεις, άρθρα ή Word έγγραφα. Το NotebookLM σάς δίνει άμεσα μια περίληψη, τα βασικά σημεία και τυχόν έννοιες που πρέπει να προσέξετε. Έτσι αποκτάτε μια ξεκάθαρη εικόνα για το θέμα, χωρίς να ψάχνετε σε κάθε αρχείο ξεχωριστά.</p>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">📓</span>
+          <div><p>Το NotebookLM είναι το «σημειωματάριο» της έρευνας, εφόσον έχετε κάποια αρχεία στην κατοχή σας.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="2. Gemini: Οι μικρο-εργασίες" data-group="Πώς συνεργάζονται τα εργαλεία">
+        <span class="chapter-kicker">Συνεργασία εργαλείων · Στάδιο 2</span>
+        <h1>2. Gemini – Οργανώνετε πρακτικές λεπτομέρειες και μικρο-εργασίες</h1>
+        <p>Αφού συλλέξετε το υλικό, μπορείτε να χρησιμοποιήσετε το Gemini για τα πιο πρακτικά κομμάτια της δουλειάς σας. Μπορείτε να ζητήσετε περίληψη ενός email, να δημιουργήσετε μια λίστα εργασιών, να οργανώσετε υπενθυμίσεις ή να εντοπίσετε γρήγορα πληροφορίες μέσα από το Google Workspace.</p>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">✅</span>
+          <div><p>Το Gemini σάς λύνει τα χέρια σε μικρά καθημερινά βήματα, ώστε να μείνετε συγκεντρωμένοι στην κύρια εργασία.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="3. ChatGPT: Η συγγραφή" data-group="Πώς συνεργάζονται τα εργαλεία">
+        <span class="chapter-kicker">Συνεργασία εργαλείων · Στάδιο 3</span>
+        <h1>3. ChatGPT – Συγγραφή, μετασχηματισμός και βελτίωση του κειμένου</h1>
+        <p>Αφού έχετε τις ιδέες και τις βασικές πληροφορίες, περνάτε στο ChatGPT για να γράψετε το κύριο κείμενο. Μπορείτε να ζητήσετε:</p>
+        <ul>
+          <li>καθαρό και δομημένο κείμενο,</li>
+          <li>περίληψη,</li>
+          <li>επεξεργασία ύφους,</li>
+          <li>bullets, πίνακες ή JSON,</li>
+          <li>μία ενιαία αναφορά με δομή Εισαγωγή – Ευρήματα – Προτάσεις.</li>
+        </ul>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">✍️</span>
+          <div><p>Το ChatGPT αναλαμβάνει το «συγγραφικό» στάδιο και σας βοηθά να μετατρέψετε σκέψεις, σημειώσεις και ιδέες σε καθαρό τελικό κείμενο.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="4. Copilot: Η τελική μορφή" data-group="Πώς συνεργάζονται τα εργαλεία"><!-- AI-UPDATE-2026:START --><div class="update-jump">Αναλυτική συμπλήρωση: <a data-update-link href="#copilot-capstone">Τελική εφαρμογή: συνεργασία εργαλείων με κοινό έλεγχο</a></div><!-- AI-UPDATE-2026:END -->
+        <span class="chapter-kicker">Συνεργασία εργαλείων · Στάδιο 4</span>
+        <h1>4. Copilot – Τελική μορφοποίηση σε Word, Excel ή PowerPoint</h1>
+        <p>Τελειώνετε την εργασία σας στο Copilot, μέσα στο περιβάλλον που ήδη χρησιμοποιείτε. Μπορείτε να ζητήσετε:</p>
+        <ul>
+          <li>μετατροπή του κειμένου σε Word,</li>
+          <li>δημιουργία πινάκων ή γραφημάτων στο Excel,</li>
+          <li>ετοιμασία μιας μικρής παρουσίασης στο PowerPoint,</li>
+          <li>τελική επιμέλεια ή οπτικό ύφος για το έγγραφο.</li>
+        </ul>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">🎯</span>
+          <div><p>Το Copilot φροντίζει για την τελική μορφή, ώστε το αποτέλεσμα να είναι έτοιμο για παρουσίαση ή υποβολή.</p></div>
+        </div>
+      <!-- AI-UPDATE-2026:START --><article class="ai-update enriched-update" id="copilot-capstone" data-update-title="Τελική εφαρμογή: συνεργασία εργαλείων με κοινό έλεγχο" aria-labelledby="copilot-capstone-title"><div class="update-meta"><span class="update-badge">ΑΝΑΛΥΤΙΚΗ ΥΠΟΕΝΟΤΗΤΑ</span><span>Εξήγηση · Παράδειγμα · Εφαρμογή</span></div><p class="update-parent-label">Συμπληρωματική υποενότητα · Συνεργασία εργαλείων · Στάδιο 4</p><h2 id="copilot-capstone-title" tabindex="-1">Τελική εφαρμογή: συνεργασία εργαλείων με κοινό έλεγχο</h2><p class="update-goal"><strong>Μαθησιακός στόχος:</strong> Να σχεδιάζετε ολοκληρωμένη ροή χωρίς περιττές μεταφορές.</p><div class="learn-workbook" data-workbook="copilot-capstone"><div class="learn-tools"><span>4 βήματα μελέτης · προσπάθησε πριν δεις την ανατροφοδότηση</span><button type="button" class="enrich-all" aria-pressed="false">Συνεχής ανάγνωση</button></div><div class="learn-tabbar" role="tablist" aria-label="Βήματα υποενότητας"><button type="button" role="tab" id="copilot-capstone-tab-0" aria-controls="copilot-capstone-panel-0" aria-selected="true" tabindex="0" data-step="0"><span>1</span>Εισαγωγή</button><button type="button" role="tab" id="copilot-capstone-tab-1" aria-controls="copilot-capstone-panel-1" aria-selected="false" tabindex="-1" data-step="1"><span>2</span>Αναλυτική εξήγηση</button><button type="button" role="tab" id="copilot-capstone-tab-2" aria-controls="copilot-capstone-panel-2" aria-selected="false" tabindex="-1" data-step="2"><span>3</span>Μελέτη περίπτωσης</button><button type="button" role="tab" id="copilot-capstone-tab-3" aria-controls="copilot-capstone-panel-3" aria-selected="false" tabindex="-1" data-step="3"><span>4</span>Διαδραστική εφαρμογή</button></div><div class="learn-panel" id="copilot-capstone-panel-0" role="tabpanel" aria-labelledby="copilot-capstone-tab-0" tabindex="0"><p>Οι τέσσερις εφαρμογές έχουν επικαλυπτόμενες δυνατότητες. Η προηγούμενη κατανομή ρόλων είναι ένα παράδειγμα, όχι υποχρεωτική σειρά. Επιλέγουμε τα εργαλεία που υπάρχουν στον οργανισμό και περιορίζουμε τις μεταφορές αρχείων όταν δεν προσθέτουν αξία.</p><figure class="shot update-figure"><img src="assets/images/update-deliverable.svg" alt="Πηγές, ανάλυση, σύνταξη, οπτική μορφή και έλεγχος πριν την κοινοποίηση." loading="lazy"><figcaption>Πρωτότυπο εκπαιδευτικό διάγραμμα · 2026. Η εξήγηση αποδίδεται και στο κείμενο.</figcaption></figure><p>Εργασία εφαρμογής: δημιουργήστε απολογισμό ενός υποθετικού σεμιναρίου από το συνθετικό CSV και δύο μικρά κείμενα που θα γράψετε εσείς. Παραδώστε πίνακα αποτελεσμάτων, ενημερωτικό 300 λέξεων και τρεις διαφάνειες. Καταγράψτε πού βοήθησε το AI και ποιες διορθώσεις κάνατε.</p><div class="update-table" role="region" aria-label="Συγκριτικός πίνακας" tabindex="0"><table><thead><tr><th scope="col">Κριτήριο</th><th scope="col">Τεκμήριο επιτυχίας</th></tr></thead><tbody><tr><th scope="row">Ακρίβεια</th><td>Οι αριθμοί συμφωνούν με το CSV</td></tr><tr><th scope="row">Τεκμηρίωση</th><td>Κάθε πραγματικό στοιχείο συνδέεται με πηγή</td></tr><tr><th scope="row">Διαφάνεια</th><td>Οι παραδοχές και οι συνθετικές εικόνες δηλώνονται</td></tr><tr><th scope="row">Χρηστικότητα</th><td>Τα αρχεία ανοίγουν και διαβάζονται καθαρά</td></tr></tbody></table></div><div class="update-exercise"><h3>Μικρή άσκηση</h3><p>Χρειάζεται υποχρεωτικά να περάσετε το υλικό και από τις τέσσερις εφαρμογές;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Όχι. Μία ή δύο μπορεί να επαρκούν. Επιλέγουμε τη μικρότερη ροή που δίνει ελέγξιμο αποτέλεσμα, με βάση πρόσβαση, ποιότητα και χρόνο διόρθωσης.</p></details></div></div><div class="learn-panel" id="copilot-capstone-panel-1" role="tabpanel" aria-labelledby="copilot-capstone-tab-1" tabindex="0"><h3>Ολοκλήρωση έργου με κοινά δεδομένα και σαφείς μεταβιβάσεις</h3><p>Η συνεργασία εργαλείων έχει νόημα όταν εξυπηρετεί την εργασία και μειώνει ουσιαστικά τον χρόνο ή τα σφάλματα. Δεν χρειάζεται κάθε έργο να περάσει από όλες τις εφαρμογές. Επιλέγουμε το μικρότερο κατάλληλο σύνολο εργαλείων με βάση πρόσβαση σε πηγές, μορφή παραδοτέου και δυνατότητα ελέγχου. Περισσότερα στάδια δημιουργούν και περισσότερα σημεία όπου μπορεί να χαθεί πληροφορία ή να αλλάξει μια παραδοχή.</p><p>Κάθε μεταβίβαση χρειάζεται σύντομο πλαίσιο: ποια πηγή χρησιμοποιήθηκε, ποια έκδοση είναι τελική, τι υπολογίστηκε και τι παραμένει ανοιχτό. Αν μεταφέρουμε μόνο ένα συμπέρασμα χωρίς τα δεδομένα και τους περιορισμούς του, το επόμενο εργαλείο μπορεί να το αναπτύξει με μεγαλύτερη βεβαιότητα από όση δικαιολογείται. Η διατήρηση προέλευσης και ορισμών είναι προϋπόθεση συνέπειας.</p><p>Ο τελικός έλεγχος αφορά το έργο ως σύνολο. Αναφορά, πίνακας και παρουσίαση πρέπει να συμφωνούν στα βασικά στοιχεία και να εξυπηρετούν το ίδιο κοινό. Η ομάδα ελέγχει το άνοιγμα των αρχείων, τις παραπομπές, τους αριθμούς και τα δικαιώματα κοινοποίησης. Η δήλωση ενός βοηθού ότι «ολοκληρώθηκε» δεν αντικαθιστά αυτά τα κριτήρια παραλαβής.</p></div><div class="learn-panel" id="copilot-capstone-panel-2" role="tabpanel" aria-labelledby="copilot-capstone-tab-2" tabindex="0"><h3>Παράδειγμα: ενημερωτικό εκπαιδευτικού οργανισμού</h3><p class="enrich-case-label">Υποθετικό εκπαιδευτικό σενάριο</p><p>Η ομάδα έχει δύο εγκεκριμένες πηγές και το συνθετικό CSV. Χρειάζεται αναφορά μίας σελίδας, πίνακα με τύπους και σύντομη παρουσίαση. Πρώτα συμφωνεί σε ορισμούς και ερώτημα, έπειτα οργανώνει τα τεκμήρια και παράγει τα παραδοτέα. Οι προτάσεις δράσης δηλώνονται χωριστά από τα ευρήματα.</p><p>Πριν από την παράδοση, ένα μέλος ελέγχει τις πηγές, ένα τους υπολογισμούς και ένα τη συνοχή μεταξύ αρχείων. Αν η αναφορά περιέχει αιτιώδη εξήγηση που δεν προκύπτει από τα δεδομένα, η διατύπωση διορθώνεται σε παρατήρηση ή υπόθεση. Το τελικό αποτέλεσμα είναι κοινό, ελέγξιμο έργο.</p><div class="enrich-prompt"><h4>Ενδεικτική οδηγία</h4><blockquote>Οργάνωσε τη ροή με πηγές, ανάλυση και τελικά αρχεία. Για κάθε μεταβίβαση διατήρησε ορισμούς, μονάδες και εκκρεμότητες. Στο τέλος έλεγξε ότι αναφορά, πίνακας και παρουσίαση συμφωνούν στα βασικά ευρήματα.</blockquote><button type="button" class="enrich-copy">Αντιγραφή οδηγίας</button></div></div><div class="learn-panel" id="copilot-capstone-panel-3" role="tabpanel" aria-labelledby="copilot-capstone-tab-3" tabindex="0"><h3>Εργαστήριο εφαρμογής</h3><p class="enrich-question">Οργάνωσε τη συνολική ροή του έργου.</p><div class="enrich-order" data-explanation="Η αλλαγή εργαλείου ή μορφής δεν πρέπει να αλλάζει ανεξέλεγκτα τα δεδομένα και το νόημα."><p class="enrich-help">Μετακίνησε τα βήματα με τα κουμπιά ↑ και ↓. Το πρώτο βήμα πρέπει να βρίσκεται επάνω.</p><ol><li data-order="0"><span>Συμφωνώ σε ερώτημα, πηγές και ορισμούς</span><div><button type="button" data-move="-1" aria-label="Πάνω: Συμφωνώ σε ερώτημα, πηγές και ορισμούς">↑</button><button type="button" data-move="1" aria-label="Κάτω: Συμφωνώ σε ερώτημα, πηγές και ορισμούς">↓</button></div></li><li data-order="3"><span>Ελέγχω τη συνέπεια και παραλαμβάνω τα αρχεία</span><div><button type="button" data-move="-1" aria-label="Πάνω: Ελέγχω τη συνέπεια και παραλαμβάνω τα αρχεία">↑</button><button type="button" data-move="1" aria-label="Κάτω: Ελέγχω τη συνέπεια και παραλαμβάνω τα αρχεία">↓</button></div></li><li data-order="2"><span>Μετατρέπω την ανάλυση στις απαιτούμενες μορφές</span><div><button type="button" data-move="-1" aria-label="Πάνω: Μετατρέπω την ανάλυση στις απαιτούμενες μορφές">↑</button><button type="button" data-move="1" aria-label="Κάτω: Μετατρέπω την ανάλυση στις απαιτούμενες μορφές">↓</button></div></li><li data-order="1"><span>Ελέγχω δεδομένα και παράγω τεκμηριωμένη ανάλυση</span><div><button type="button" data-move="-1" aria-label="Πάνω: Ελέγχω δεδομένα και παράγω τεκμηριωμένη ανάλυση">↑</button><button type="button" data-move="1" aria-label="Κάτω: Ελέγχω δεδομένα και παράγω τεκμηριωμένη ανάλυση">↓</button></div></li></ol><button type="button" class="enrich-button enrich-check-order">Έλεγχος σειράς</button><div class="enrich-feedback" role="status" aria-live="polite"></div><button type="button" class="enrich-reset">Νέα προσπάθεια</button></div><div class="enrich-reflection"><h4>Μεταφορά στη δική σου πράξη</h4><p>Σχεδίασε μια δική σου ροή με έως τρία εργαλεία και γράψε τι θα παραδίνει κάθε στάδιο στο επόμενο.</p><label for="copilot-capstone-reflection">Η δική σου σύντομη απάντηση</label><textarea id="copilot-capstone-reflection" data-note="copilot-capstone" rows="5" maxlength="4000" placeholder="Γράψε την εφαρμογή ή την αιτιολόγησή σου…"></textarea><div class="enrich-note-tools"><span class="enrich-note-status" role="status">Οι σημειώσεις παραμένουν σε αυτόν τον browser.</span><button type="button" class="enrich-export">Λήψη σημείωσης</button></div><details><summary>Κριτήρια αυτοαξιολόγησης</summary><p>Έλεγξε αν η απάντησή σου συνδέεται με τη συγκεκριμένη έννοια, περιλαμβάνει ένα εφαρμόσιμο παράδειγμα και εξηγεί πώς θα ελέγξεις το αποτέλεσμα. Σύγκρινέ την με την αναλυτική εξήγηση και συζήτησε τυχόν αμφιβολία με τον εκπαιδευτή.</p></details></div></div><div class="learn-pager"><button type="button" data-learn-prev>← Προηγούμενο βήμα</button><span class="learn-position" role="status"></span><button type="button" data-learn-next>Αναλυτική εξήγηση →</button></div></div><footer class="update-sources"><strong>Πηγές και περαιτέρω μελέτη</strong><ul><li><a href="https://openai.com/chatgpt-work/" target="_blank" rel="noopener noreferrer">OpenAI · ChatGPT Work</a></li><li><a href="https://blog.google/innovation-and-ai/products/notebooklm/better-research-notebooklm/" target="_blank" rel="noopener noreferrer">Google · Νέες δυνατότητες έρευνας στο NotebookLM</a></li><li><a href="https://adoption.microsoft.com/en-us/ai-agents/agents-in-microsoft-365/" target="_blank" rel="noopener noreferrer">Microsoft Adoption · Agents στο Microsoft 365</a></li></ul><p>Τα σενάρια και οι δραστηριότητες είναι πρωτότυπες εκπαιδευτικές εφαρμογές. Οι αυτόματοι έλεγχοι είναι διαμορφωτικοί και δεν αποτελούν πιστοποίηση.</p></footer></article><!-- AI-UPDATE-2026:END --></section>
+
+      <!-- ============ ΑΝΑΚΕΦΑΛΑΙΩΣΗ ============ -->
+      <section class="chapter" data-title="Ανακεφαλαίωση: ο Copilot και το περιβάλλον του" data-group="Ανακεφαλαίωση &amp; Πηγές">
+        <span class="chapter-kicker">Ανακεφαλαίωση</span>
+        <h1>Ανακεφαλαίωση Ενότητας 4</h1>
+        <p>Ας συνοψίσουμε τα βασικά σημεία της ενότητας:</p>
+        <ol class="recap-list">
+          <li>Ο <strong>Microsoft Copilot</strong> είναι μοντέλο Τεχνητής Νοημοσύνης της Microsoft, παρόμοιο με το ChatGPT και το Gemini: καταλαβαίνει φυσική γλώσσα, απαντά σε ερωτήσεις, προτείνει ιδέες και βοηθά σε εργασίες.</li>
+          <li>Υπάρχουν <strong>δύο βασικά είδη</strong>: ο Copilot στον browser (chatbot, χωρίς εγκατάσταση, στο copilot.microsoft.com) και ο Microsoft Copilot στις εφαρμογές του 365 (συνεργάζεται απευθείας με τα έγγραφα, απαιτεί συνδρομή Microsoft 365).</li>
+          <li>Το <strong>περιβάλλον</strong>: σημεία πρόσβασης από τον Edge, πεδίο συνομιλίας, τρόποι απάντησης (Quick response, Think Deeper και — με συνδρομή — Deep Research), πλαϊνό μενού (Discover, Labs, Pages, Conversations), είσοδος με λογαριασμό Microsoft/Apple/Google και ρυθμίσεις χρήστη.</li>
+          <li>Τα <strong>καλά prompts</strong>: σκεφτείτε πρώτα τι θέλετε, ξεκινήστε απλά, δοκιμάστε–ζητήστε–διορθώστε, δώστε πλαίσιο και πειραματιστείτε. Σαφήνεια και ακρίβεια: «κάνε αυτό, με αυτόν τον τρόπο, για αυτόν τον λόγο».</li>
+        </ol>
+      </section>
+
+      <section class="chapter" data-title="Ανακεφαλαίωση: Word, Excel και PowerPoint" data-group="Ανακεφαλαίωση &amp; Πηγές">
+        <span class="chapter-kicker">Ανακεφαλαίωση</span>
+        <h1>Ανακεφαλαίωση: Word, Excel και PowerPoint</h1>
+        <ol class="recap-list" start="5">
+          <li>Στο <strong>Word</strong>, ο Copilot ξεκινά έγγραφα από το μηδέν, διορθώνει, αναδιατυπώνει, δημιουργεί περιλήψεις και προσθέτει παραγράφους — με «Διατήρηση», «δημιουργήστε ξανά» ή νέες οδηγίες.</li>
+          <li>Στο <strong>Excel</strong>, δημιουργεί πίνακες, υπολογίζει σύνολα και μέσους όρους, φτιάχνει γραφήματα (στήλες, πίτα), προσθέτει φίλτρα και απαντά σε ερωτήσεις πάνω στα δεδομένα — πάντα ελέγχετε τα αποτελέσματα.</li>
+          <li>Στο <strong>PowerPoint</strong>, χτίζει παρουσιάσεις από έναν τίτλο, προτείνει σχεδίαση, αναδιατυπώνει κείμενα, προσθέτει διαφάνειες, σημειώσεις ομιλητή και περίληψη-επίλογο.</li>
+          <li>Τα τέσσερα εργαλεία <strong>συνεργάζονται</strong> σε μια ενιαία ροή: NotebookLM (συγκέντρωση και κατανόηση πηγών) → Gemini (οργάνωση μικρο-εργασιών) → ChatGPT (συγγραφή κειμένου) → Copilot (τελική μορφοποίηση σε Word, Excel, PowerPoint).</li>
+        </ol>
+        <div class="callout callout-tip">
+          <span class="co-icon" aria-hidden="true">🚀</span>
+          <div><p><strong>Συγχαρητήρια!</strong> Ολοκληρώσατε την Ενότητα 4 και μαζί της τη γνωριμία με τα εργαλεία του προγράμματος. Μπορείτε να επιστρέψετε σε οποιαδήποτε διαφάνεια από το πλευρικό μενού για επανάληψη — η πρόοδός σας αποθηκεύεται αυτόματα.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-title="Πηγές &amp; σύνδεσμοι" data-group="Ανακεφαλαίωση &amp; Πηγές">
+        <span class="chapter-kicker">Πηγές</span>
+        <h1>Πηγές &amp; σύνδεσμοι</h1>
+        <p>Οι σύνδεσμοι που αναφέρονται στο εκπαιδευτικό υλικό της ενότητας:</p>
+        <ul class="checklist">
+          <li><strong>Ο Copilot στον browser:</strong> <a href="https://copilot.microsoft.com/" target="_blank" rel="noopener">https://copilot.microsoft.com/</a></li>
+        </ul>
+        <div class="brandcard"><img src="assets/images/copilot-banner.png" alt="Λογότυπο Microsoft Copilot" style="max-height:110px;"></div>
+      <!-- AI-UPDATE-2026:START --><div class="update-bibliography"><h2>Πηγές των συμπληρωματικών υποενοτήτων</h2><p>Επίσημη τεκμηρίωση και επιλεγμένες επιστημονικές αναφορές. Τα επαγγελματικά παραδείγματα είναι υποθετικά και τα δεδομένα των ασκήσεων συνθετικά.</p><ul><li><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes" target="_blank" rel="noopener noreferrer">Microsoft Learn · Ενημερώσεις Microsoft 365 Copilot</a></li><li><a href="https://adoption.microsoft.com/en-us/ai-agents/agents-in-microsoft-365/" target="_blank" rel="noopener noreferrer">Microsoft Adoption · Agents στο Microsoft 365</a></li><li><a href="https://developers.openai.com/api/docs/guides/image-generation" target="_blank" rel="noopener noreferrer">OpenAI · Παραγωγή εικόνων</a></li><li><a href="https://openai.com/chatgpt-work/" target="_blank" rel="noopener noreferrer">OpenAI · ChatGPT Work</a></li><li><a href="https://blog.google/innovation-and-ai/products/notebooklm/better-research-notebooklm/" target="_blank" rel="noopener noreferrer">Google · Νέες δυνατότητες έρευνας στο NotebookLM</a></li></ul></div><!-- AI-UPDATE-2026:END --></section>
+            <section class="chapter" id="ctheory-intro" data-title="Τι θα μάθετε για την AI μέσα στον οργανισμό" data-group="Θεωρητικό υπόβαθρο: AI μέσα στον οργανισμό">
+        <span class="chapter-kicker">Θεωρία · 1</span>
+        <h1>Τι θα μάθετε για την AI μέσα στον οργανισμό</h1>
+        <p>Ο Copilot διαφέρει από έναν δημόσιο βοηθό συνομιλίας σε ένα σημείο που καθορίζει τα πάντα: δουλεύει <strong>μέσα στα δεδομένα του οργανισμού σας</strong>. Η παρούσα θεματική εξηγεί τι σημαίνει αυτό τεχνικά και ποιες ευθύνες συνεπάγεται.</p>
+        <div class="objectives">
+          <h3>Μαθησιακοί στόχοι της θεματικής</h3>
+          <ul>
+            <li>Να διακρίνετε πού βρίσκονται τα δεδομένα σας και ποιος έχει πρόσβαση σε αυτά.</li>
+            <li>Να περιγράφετε πώς εντοπίζεται το σχετικό αρχείο μέσα σε χιλιάδες έγγραφα.</li>
+            <li>Να εξηγείτε γιατί δύο συνάδελφοι μπορούν να πάρουν διαφορετική απάντηση στην ίδια ερώτηση.</li>
+            <li>Να αναγνωρίζετε τους κινδύνους υπερέκθεσης πληροφορίας και πώς περιορίζονται.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="chapter" id="ctheory-boundary" data-title="Πού ζουν τα δεδομένα σας" data-group="Θεωρητικό υπόβαθρο: AI μέσα στον οργανισμό">
+        <span class="chapter-kicker">Θεωρία · 2</span>
+        <h1>Πού ζουν τα δεδομένα σας</h1>
+        <p>Η βασική διάκριση που πρέπει να κρατήσετε είναι ανάμεσα στον <strong>δημόσιο</strong> και στον <strong>επιχειρησιακό</strong> βοηθό. Το ίδιο εμπορικό όνομα μπορεί να καλύπτει και τα δύο, με πολύ διαφορετικούς όρους.</p>
+        <div class="update-table"><table>
+          <thead><tr><th scope="col">Ερώτημα</th><th scope="col">Δημόσιος βοηθός</th><th scope="col">Επιχειρησιακή έκδοση</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Πού πηγαίνει το κείμενό μου;</th><td>Σε υποδομή του παρόχου, με τους γενικούς όρους χρήσης.</td><td>Εντός των ορίων που ορίζει η σύμβαση του οργανισμού.</td></tr>
+            <tr><th scope="row">Χρησιμοποιείται για εκπαίδευση;</th><td>Εξαρτάται από τις ρυθμίσεις του λογαριασμού.</td><td>Συνήθως όχι· ορίζεται ρητά στη σύμβαση.</td></tr>
+            <tr><th scope="row">Ποια αρχεία βλέπει;</th><td>Μόνο όσα ανεβάζετε εσείς στη συνομιλία.</td><td>Όσα έχετε ήδη δικαίωμα να δείτε στον οργανισμό.</td></tr>
+            <tr><th scope="row">Ποιος ελέγχει την πρόσβαση;</th><td>Εσείς, ανά συνομιλία.</td><td>Ο διαχειριστής, μέσα από τις πολιτικές του οργανισμού.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">🔐</span>
+          <div><p>Πριν από κάθε επαγγελματική χρήση, βεβαιωθείτε ποια έκδοση χρησιμοποιείτε. Ένα εργασιακό έγγραφο σε δημόσιο βοηθό μπορεί να συνιστά παράβαση της πολιτικής του φορέα σας, ανεξάρτητα από το πόσο χρήσιμη ήταν η απάντηση.</p></div>
+        </div>
+      </section>
+      <section class="chapter" id="ctheory-index" data-title="Ο σημασιολογικός δείκτης" data-group="Θεωρητικό υπόβαθρο: AI μέσα στον οργανισμό">
+        <span class="chapter-kicker">Θεωρία · 3</span>
+        <h1>Ο σημασιολογικός δείκτης</h1>
+        <p>Πώς βρίσκει ο Copilot το σχετικό αρχείο ανάμεσα σε χιλιάδες έγγραφα, μηνύματα και παρουσιάσεις; Δεν διαβάζει τα πάντα σε κάθε ερώτηση. Στηρίζεται σε έναν <strong>δείκτη</strong> που έχει προετοιμαστεί εκ των προτέρων.</p>
+        <div class="update-table"><table>
+          <thead><tr><th scope="col">Βήμα</th><th scope="col">Τι συμβαίνει</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">1. Ευρετηρίαση</th><td>Το περιεχόμενο του οργανισμού τεμαχίζεται και μετατρέπεται σε διανύσματα που αποτυπώνουν το νόημα.</td></tr>
+            <tr><th scope="row">2. Ερώτηση</th><td>Η δική σας διατύπωση μετατρέπεται επίσης σε διάνυσμα.</td></tr>
+            <tr><th scope="row">3. Φιλτράρισμα δικαιωμάτων</th><td>Από τα υποψήφια αποσπάσματα κρατούνται μόνο όσα έχετε δικαίωμα να δείτε.</td></tr>
+            <tr><th scope="row">4. Σύνθεση</th><td>Τα επιτρεπόμενα αποσπάσματα δίνονται στο μοντέλο, το οποίο συντάσσει την απάντηση με αναφορές στα αρχεία.</td></tr>
+          </tbody>
+        </table></div>
+        <p class="slide-theory">Το τρίτο βήμα είναι το πιο σημαντικό από πλευράς ασφάλειας: το φιλτράρισμα γίνεται <em>πριν</em> φτάσει οτιδήποτε στο μοντέλο. Ο Copilot δεν «ξέρει» και μετά αποφασίζει να μη σας πει· απλώς δεν του δίνεται το περιεχόμενο στο οποίο δεν έχετε πρόσβαση.</p>
+      </section>
+      <section class="chapter" id="ctheory-permissions" data-title="Γιατί δύο χρήστες παίρνουν άλλη απάντηση" data-group="Θεωρητικό υπόβαθρο: AI μέσα στον οργανισμό">
+        <span class="chapter-kicker">Θεωρία · 4</span>
+        <h1>Γιατί δύο χρήστες παίρνουν άλλη απάντηση</h1>
+        <p>Επειδή η ανάκτηση περιορίζεται από τα δικαιώματα του καθενός, η ίδια ερώτηση δίνει διαφορετικό αποτέλεσμα σε διαφορετικούς ανθρώπους. Δεν πρόκειται για σφάλμα: είναι ο μηχανισμός ασφάλειας σε λειτουργία.</p>
+        <div class="update-table"><table>
+          <thead><tr><th scope="col">Κατάσταση</th><th scope="col">Τι σημαίνει</th><th scope="col">Τι κάνετε</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Ελλιπής απάντηση</th><td>Δεν έχετε πρόσβαση σε κάποια σχετικά αρχεία.</td><td>Ζητάτε πρόσβαση από τον κάτοχο ή αναφέρετε ρητά το κενό.</td></tr>
+            <tr><th scope="row">Απροσδόκητα πλούσια απάντηση</th><td>Έχετε πρόσβαση σε περισσότερα από όσα νομίζατε.</td><td>Το αναφέρετε: ίσως πρόκειται για λάθος ρύθμιση δικαιωμάτων.</td></tr>
+            <tr><th scope="row">Παλαιά στοιχεία</th><td>Ο δείκτης δεν έχει ενημερωθεί ή το αρχείο είναι ξεπερασμένο.</td><td>Επιβεβαιώνετε στο ίδιο το αρχείο και ελέγχετε ημερομηνία.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout callout-warn">
+          <span class="co-icon" aria-hidden="true">⚠️</span>
+          <div><p><strong>Υπερέκθεση πληροφορίας:</strong> ο μεγαλύτερος πρακτικός κίνδυνος σε έναν οργανισμό δεν είναι ότι ο βοηθός θα «σπάσει» τα δικαιώματα, αλλά ότι θα φέρει στην επιφάνεια αρχεία με υπερβολικά ανοιχτά δικαιώματα, τα οποία ως τότε ήταν απλώς δυσεύρετα. Η εισαγωγή ενός τέτοιου εργαλείου είναι καλή αφορμή για έλεγχο των δικαιωμάτων πρόσβασης.</p></div>
+        </div>
+      </section>
+      <section class="chapter" id="ctheory-check" data-title="Ελέγξτε την κατανόησή σας στη θεωρία" data-group="Θεωρητικό υπόβαθρο: AI μέσα στον οργανισμό">
+        <span class="chapter-kicker">Αυτοαξιολόγηση</span>
+        <h1>Ελέγξτε την κατανόησή σας στη θεωρία</h1>
+        <p>Απαντήστε νοερά και μετά ανοίξτε κάθε απάντηση. Οι ερωτήσεις είναι διαμορφωτικές και δεν επηρεάζουν τη βαθμολογία της τελικής αξιολόγησης.</p>
+        <div class="update-exercise"><h3>Ερώτηση 1</h3><p>Συνάδελφός σας παίρνει πληρέστερη απάντηση από εσάς στην ίδια ερώτηση. Τι συμβαίνει;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Έχει πρόσβαση σε αρχεία στα οποία εσείς δεν έχετε. Η ανάκτηση φιλτράρεται με βάση τα δικαιώματα του κάθε χρήστη πριν φτάσει οτιδήποτε στο μοντέλο. Αν χρειάζεστε τα στοιχεία, ζητάτε πρόσβαση με τον συνηθισμένο τρόπο του οργανισμού.</p></details></div>
+        <div class="update-exercise"><h3>Ερώτηση 2</h3><p>Ο βοηθός αναφέρει αριθμό από εσωτερική παρουσίαση. Τον χρησιμοποιείτε απευθείας σε αναφορά;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Όχι πριν ανοίξετε το αρχείο και επιβεβαιώσετε τον αριθμό, την ημερομηνία και το τι ακριβώς μετρά. Ο δείκτης μπορεί να περιέχει παλαιότερες εκδόσεις, προσχέδια ή στοιχεία που αργότερα αναθεωρήθηκαν.</p></details></div>
+        <div class="update-exercise"><h3>Ερώτηση 3</h3><p>Γιατί δεν επικολλάτε εργασιακό έγγραφο σε δημόσιο βοηθό συνομιλίας;</p><details><summary>Δείτε ενδεικτική απάντηση και εξήγηση</summary><p>Επειδή το περιεχόμενο εξέρχεται από τα όρια του οργανισμού και υπάγεται στους γενικούς όρους του παρόχου, όχι στη σύμβαση του φορέα σας. Ανάλογα με το περιεχόμενο, αυτό μπορεί να συνιστά παράβαση της πολιτικής ασφάλειας ή και της νομοθεσίας για τα προσωπικά δεδομένα.</p></details></div>
+      </section>
+      <section class="chapter" id="ctheory-sources" data-title="Θεωρία: πηγές και περαιτέρω μελέτη" data-group="Θεωρητικό υπόβαθρο: AI μέσα στον οργανισμό">
+        <span class="chapter-kicker">Πηγές</span>
+        <h1>Θεωρία: πηγές και περαιτέρω μελέτη</h1>
+        <div class="update-sources"><ul>
+          <li><a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview" target="_blank" rel="noopener noreferrer">Microsoft Learn · επισκόπηση του Microsoft 365 Copilot</a></li>
+          <li><a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener noreferrer">Lewis κ.ά. · η εργασία που εισήγαγε την παραγωγή με ανάκτηση (RAG)</a></li>
+          <li><a href="https://www.dpa.gr/" target="_blank" rel="noopener noreferrer">Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα</a></li>
+        </ul></div>
+        <div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">📌</span>
+          <div><p>Οι πίνακες και τα σενάρια είναι <strong>διδακτικές κατασκευές</strong> του μαθήματος. Οι ακριβείς όροι κάθε συνδρομής ορίζονται από τη σύμβαση του οργανισμού σας.</p></div>
+        </div>
+      </section>
+<section class="chapter" id="local-assistant" data-title="Ο βοηθός του μαθήματος" data-group="Εργαλεία μαθήματος"><span class="chapter-kicker">Εργαλείο μαθήματος</span><h1>Ο βοηθός του μαθήματος</h1><p>Κάτω δεξιά σε κάθε οθόνη θα βρείτε το κουμπί <strong>«Βοηθός μαθήματος»</strong>. Είναι ένας μικρός συνομιλητής που γνωρίζει το περιεχόμενο αυτής της ενότητας και σας βοηθά να βρείτε γρήγορα ό,τι ψάχνετε, χωρίς να ξεφυλλίζετε διαφάνειες.</p><div class="callout callout-note lc-callout">
+          <span class="co-icon lc-callout-icon" aria-hidden="true">💬</span>
+          <div><p><strong>Δοκιμάστε τον τώρα.</strong> Ρωτήστε τον με δικά σας λόγια, όπως θα ρωτούσατε έναν συνάδελφο. Θα σας απαντήσει και θα σας πάει με ένα κλικ στο σημείο όπου βρίσκεται η απάντηση.</p><button type="button" class="lc-open-inline" data-open-assistant>Άνοιγμα του βοηθού</button></div>
+        </div><h2>Τι μπορείτε να τον ρωτήσετε</h2><ul class="checklist">
+          <li><strong>Ορισμούς:</strong> «τι είναι ο σημασιολογικός δείκτης;»</li>
+          <li><strong>Διαδικασίες:</strong> «πώς χρησιμοποιώ τον Copilot στο Excel;»</li>
+          <li><strong>Παραδείγματα:</strong> «δείξε μου ένα παράδειγμα στο Word»</li>
+          <li><strong>Προσανατολισμό:</strong> «περιεχόμενα» ή «πού βρίσκομαι;»</li>
+          <li><strong>Συνέχεια:</strong> «πες μου περισσότερα», για να συνεχίσει από εκεί που σταμάτησε</li>
+        </ul><div class="callout callout-info">
+          <span class="co-icon" aria-hidden="true">🔒</span>
+          <div><p>Ο βοηθός δουλεύει μέσα στον δικό σας υπολογιστή, πάνω στο υλικό του μαθήματος. Δεν στέλνει πουθενά τις ερωτήσεις σας, δεν τις αποθηκεύει και λειτουργεί ακόμη κι όταν δεν έχετε σύνδεση στο διαδίκτυο.</p></div>
+        </div><p class="slide-theory">Υπάρχει και μια διδακτική πλευρά. Ο βοηθός <strong>εντοπίζει</strong> κείμενο που υπάρχει ήδη, αντί να <strong>παράγει</strong> καινούργιο. Γι’ αυτό δεν μπορεί να σας πει κάτι που δεν γράφεται πουθενά στο μάθημα, αλλά ούτε και να επινοήσει. Η ίδια διάκριση, ανάμεσα στην ανάκτηση και στην παραγωγή, βρίσκεται πίσω από κάθε σύστημα τεχνητής νοημοσύνης που στηρίζεται σε πηγές.</p></section>
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/app.js?v=1"></script>
+<script src="assets/js/v2.js?v=1"></script>
+<!-- AI-UPDATE-2026:START --><script src="assets/js/updates-2026.js?v=enriched"></script><script src="assets/js/enrichment.js?v=1"></script><!-- AI-UPDATE-2026:END --><script src="scorm-driver.js"></script>
+<script src="assets/js/local-chatbot.js?v=sc1"></script><script src="assets/js/space-theme.js?v=sp1"></script><script src="assets/js/astra-knot.js?v=2"></script><script src="assets/js/astra.js?v=2"></script><script src="assets/js/reactbits.js?v=2"></script></body>
+</html>

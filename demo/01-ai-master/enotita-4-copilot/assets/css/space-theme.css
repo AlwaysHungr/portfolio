@@ -1,0 +1,174 @@
+/* ============================================================
+   Διαστημικό θέμα
+   ------------------------------------------------------------
+   Ενεργό στο σκούρο θέμα (body.dark), που είναι πλέον η
+   προεπιλογή. Το φωτεινό θέμα παραμένει διαθέσιμο από τον
+   διακόπτη και δεν εμφανίζει αστέρια.
+   ============================================================ */
+
+body.dark {
+  --bg: #05070f;
+  --bg-soft: #0a0e1c;
+  --surface: #0d1220;
+  --border: #232a41;
+  --border-soft: #1a2033;
+  --ink: #eef1fb;
+  --ink-2: #d3d8ec;
+  --text: #b3bad4;
+  --muted: #7f88a8;
+  --primary-tint: #12233a;
+  --info-bg: #171a33;
+  --success-bg: #10251d;
+  --danger-bg: #2b1a1c;
+  --shadow: 0 2px 10px rgba(0, 0, 0, .45), 0 12px 38px rgba(0, 0, 0, .38);
+  --shadow-sm: 0 1px 5px rgba(0, 0, 0, .4);
+}
+
+/* ---------- Έναστρο φόντο ---------- */
+/* Τρία επίπεδα αστεριών με διαφορετικό μέγεθος και ταχύτητα,
+   φτιαγμένα με βαθμιδώσεις: καμία εικόνα και μηδενικό κόστος δικτύου. */
+.space-sky {
+  position: fixed;
+  inset: -60px;
+  z-index: -2;
+  pointer-events: none;
+  display: none;
+  background-color: #05070f;
+}
+body.dark .space-sky { display: block; }
+
+.space-sky::before,
+.space-sky::after,
+.space-sky > .space-layer {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+}
+
+/* Μικρά, πυκνά αστέρια */
+.space-sky::before {
+  background-image:
+    radial-gradient(1px 1px at 59.7% 29.9%, rgba(255,255,255,0.75), transparent 100%),
+    radial-gradient(1px 1px at 67.2% 52.9%, rgba(255,255,255,0.93), transparent 100%),
+    radial-gradient(1px 1px at 7.5% 99.7%, rgba(196,216,255,0.57), transparent 100%),
+    radial-gradient(1px 1px at 99.3% 5.9%, rgba(255,224,190,0.66), transparent 100%),
+    radial-gradient(1px 1px at 7.2% 67.4%, rgba(255,255,255,0.96), transparent 100%),
+    radial-gradient(1px 1px at 74.1% 6.4%, rgba(255,255,255,0.79), transparent 100%),
+    radial-gradient(1px 1px at 20.4% 89.2%, rgba(255,255,255,0.49), transparent 100%),
+    radial-gradient(1px 1px at 14.6% 2.7%, rgba(255,255,255,0.84), transparent 100%),
+    radial-gradient(1px 1px at 86.3% 81.8%, rgba(255,255,255,0.91), transparent 100%),
+    radial-gradient(1px 1px at 3.6% 33.9%, rgba(255,255,255,0.53), transparent 100%),
+    radial-gradient(1px 1px at 38.3% 29.9%, rgba(196,216,255,0.88), transparent 100%),
+    radial-gradient(1px 1px at 87.4% 55.8%, rgba(255,255,255,0.56), transparent 100%),
+    radial-gradient(1px 1px at 57.4% 41.5%, rgba(255,255,255,0.61), transparent 100%),
+    radial-gradient(1px 1px at 60.1% 35.3%, rgba(255,255,255,0.84), transparent 100%),
+    radial-gradient(1px 1px at 39.9% 57.4%, rgba(255,224,190,0.58), transparent 100%),
+    radial-gradient(1px 1px at 59.1% 52.5%, rgba(196,216,255,0.70), transparent 100%),
+    radial-gradient(1px 1px at 45.2% 8.0%, rgba(196,216,255,0.87), transparent 100%),
+    radial-gradient(1px 1px at 12.1% 85.0%, rgba(255,255,255,0.78), transparent 100%),
+    radial-gradient(1px 1px at 93.2% 24.9%, rgba(255,255,255,0.71), transparent 100%),
+    radial-gradient(1px 1px at 63.2% 68.0%, rgba(196,216,255,0.58), transparent 100%),
+    radial-gradient(1px 1px at 61.7% 0.0%, rgba(255,255,255,0.61), transparent 100%),
+    radial-gradient(1px 1px at 76.6% 43.2%, rgba(255,255,255,0.65), transparent 100%),
+    radial-gradient(1px 1px at 25.4% 29.2%, rgba(196,216,255,0.91), transparent 100%),
+    radial-gradient(1px 1px at 59.5% 5.9%, rgba(255,255,255,0.93), transparent 100%),
+    radial-gradient(1px 1px at 44.8% 17.4%, rgba(196,216,255,0.91), transparent 100%),
+    radial-gradient(1px 1px at 22.1% 45.5%, rgba(255,255,255,0.88), transparent 100%),
+    radial-gradient(1px 1px at 0.1% 42.1%, rgba(255,255,255,0.51), transparent 100%),
+    radial-gradient(1px 1px at 27.8% 57.6%, rgba(255,255,255,0.78), transparent 100%),
+    radial-gradient(1px 1px at 72.1% 97.4%, rgba(196,216,255,0.59), transparent 100%),
+    radial-gradient(1px 1px at 49.5% 39.4%, rgba(255,255,255,0.88), transparent 100%),
+    radial-gradient(1px 1px at 94.4% 77.9%, rgba(255,255,255,0.73), transparent 100%),
+    radial-gradient(1px 1px at 39.0% 58.4%, rgba(255,255,255,0.94), transparent 100%),
+    radial-gradient(1px 1px at 33.8% 74.4%, rgba(255,255,255,0.94), transparent 100%),
+    radial-gradient(1px 1px at 18.0% 24.6%, rgba(255,224,190,0.64), transparent 100%),
+    radial-gradient(1px 1px at 13.6% 66.2%, rgba(196,216,255,0.90), transparent 100%),
+    radial-gradient(1px 1px at 55.2% 28.5%, rgba(255,255,255,0.55), transparent 100%),
+    radial-gradient(1px 1px at 64.3% 91.7%, rgba(196,216,255,0.95), transparent 100%),
+    radial-gradient(1px 1px at 68.1% 11.9%, rgba(196,216,255,0.90), transparent 100%),
+    radial-gradient(1px 1px at 31.2% 69.3%, rgba(255,255,255,0.51), transparent 100%),
+    radial-gradient(1px 1px at 35.5% 27.6%, rgba(255,255,255,0.79), transparent 100%),
+    radial-gradient(1px 1px at 55.6% 93.2%, rgba(255,255,255,0.70), transparent 100%),
+    radial-gradient(1px 1px at 7.4% 58.5%, rgba(196,216,255,0.81), transparent 100%),
+    radial-gradient(1px 1px at 60.8% 76.7%, rgba(255,224,190,0.77), transparent 100%),
+    radial-gradient(1px 1px at 89.6% 47.6%, rgba(255,255,255,0.69), transparent 100%),
+    radial-gradient(1px 1px at 75.6% 15.7%, rgba(196,216,255,0.94), transparent 100%),
+    radial-gradient(1px 1px at 9.7% 21.9%, rgba(255,255,255,0.49), transparent 100%);
+  background-size: 300px 300px;
+  animation: space-drift-a 260s linear infinite;
+}
+
+/* Μεσαία και φωτεινότερα αστέρια */
+.space-sky::after {
+  background-image:
+    radial-gradient(1.7px 1.7px at 87.3% 19.3%, rgba(196,216,255,0.93), transparent 100%),
+    radial-gradient(1.7px 1.7px at 72.2% 63.4%, rgba(255,255,255,0.60), transparent 100%),
+    radial-gradient(1.7px 1.7px at 96.4% 13.1%, rgba(255,255,255,0.84), transparent 100%),
+    radial-gradient(1.7px 1.7px at 84.9% 88.1%, rgba(196,216,255,0.76), transparent 100%),
+    radial-gradient(1.7px 1.7px at 18.4% 73.1%, rgba(255,255,255,0.95), transparent 100%),
+    radial-gradient(1.7px 1.7px at 30.8% 65.5%, rgba(196,216,255,0.90), transparent 100%),
+    radial-gradient(1.7px 1.7px at 47.3% 59.5%, rgba(255,224,190,0.75), transparent 100%),
+    radial-gradient(1.7px 1.7px at 100.0% 80.7%, rgba(255,255,255,0.55), transparent 100%),
+    radial-gradient(1.7px 1.7px at 69.5% 84.6%, rgba(255,255,255,0.78), transparent 100%),
+    radial-gradient(1.7px 1.7px at 97.9% 96.1%, rgba(255,255,255,0.68), transparent 100%),
+    radial-gradient(1.7px 1.7px at 37.4% 85.8%, rgba(255,255,255,0.68), transparent 100%),
+    radial-gradient(1.7px 1.7px at 24.9% 77.3%, rgba(255,255,255,0.67), transparent 100%),
+    radial-gradient(1.7px 1.7px at 37.9% 22.5%, rgba(255,255,255,0.83), transparent 100%),
+    radial-gradient(1.7px 1.7px at 87.7% 98.9%, rgba(196,216,255,0.99), transparent 100%),
+    radial-gradient(1.7px 1.7px at 70.5% 14.7%, rgba(255,224,190,0.78), transparent 100%),
+    radial-gradient(1.7px 1.7px at 38.2% 32.7%, rgba(255,255,255,0.84), transparent 100%),
+    radial-gradient(1.7px 1.7px at 27.3% 7.7%, rgba(255,224,190,0.84), transparent 100%),
+    radial-gradient(1.7px 1.7px at 3.1% 44.8%, rgba(196,216,255,0.81), transparent 100%),
+    radial-gradient(1.7px 1.7px at 6.6% 2.5%, rgba(255,224,190,0.87), transparent 100%),
+    radial-gradient(1.7px 1.7px at 20.7% 45.1%, rgba(255,255,255,0.60), transparent 100%),
+    radial-gradient(1.7px 1.7px at 67.5% 98.1%, rgba(255,255,255,0.82), transparent 100%),
+    radial-gradient(1.7px 1.7px at 47.7% 60.4%, rgba(255,224,190,0.77), transparent 100%);
+  background-size: 520px 520px;
+  animation: space-drift-b 420s linear infinite, space-twinkle 7s ease-in-out infinite;
+}
+
+/* Απαλή λάμψη νεφελώματος, ώστε το φόντο να μην είναι επίπεδο μαύρο */
+.space-sky > .space-layer {
+  background-image:
+    radial-gradient(760px 520px at 12% 8%, rgba(38, 74, 138, .30), transparent 70%),
+    radial-gradient(680px 480px at 88% 22%, rgba(96, 52, 132, .24), transparent 72%),
+    radial-gradient(900px 620px at 60% 96%, rgba(16, 88, 96, .22), transparent 72%);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@keyframes space-drift-a { from { transform: translate3d(0,0,0); } to { transform: translate3d(-320px, -160px, 0); } }
+@keyframes space-drift-b { from { transform: translate3d(0,0,0); } to { transform: translate3d(280px, -200px, 0); } }
+@keyframes space-twinkle { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .space-sky::before, .space-sky::after { animation: none; }
+}
+
+/* Οι επιφάνειες γίνονται ελαφρώς διάφανες ώστε να διακρίνεται ο ουρανός. */
+body.dark .sidebar,
+body.dark .topbar { background: rgba(9, 13, 24, .82); backdrop-filter: blur(9px); }
+body.dark .card,
+body.dark .callout,
+body.dark .video-block,
+body.dark .ai-update,
+body.dark .update-table,
+body.dark .lc-panel { background-color: rgba(13, 18, 32, .86); }
+body.dark figure.shot img { background: #0d1220; }
+
+/* ---------- Ετικέτα υποενότητας στο μενού ---------- */
+.nav-sub-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+  font-weight: 600;
+  padding: 10px 10px 4px 18px;
+  margin: 0;
+  border-inline-start: 2px solid var(--primary);
+  opacity: .9;
+}
+
+@media print {
+  .space-sky { display: none !important; }
+}

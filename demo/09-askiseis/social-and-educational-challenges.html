@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Social and Educational Challenges</title>
+<style>
+:root{
+  --ink:#14202b;
+  --ink-2:#3c5063;
+  --paper:#eef1ee;
+  --card:#ffffff;
+  --line:#d5dcd8;
+  --teal:#17726b;
+  --teal-soft:#e2f0ed;
+  --amber:#c8871a;
+  --amber-soft:#faeed6;
+  --coral:#bd4f4b;
+  --coral-soft:#f8e4e2;
+  --indigo:#3f4b8f;
+  --indigo-soft:#e6e8f6;
+  --shadow:0 1px 2px rgba(20,32,43,.06), 0 8px 24px -12px rgba(20,32,43,.28);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--paper);
+  background-image:
+    radial-gradient(circle at 12% -10%, rgba(23,114,107,.10), transparent 45%),
+    radial-gradient(circle at 92% 8%, rgba(63,75,143,.09), transparent 42%),
+    linear-gradient(rgba(20,32,43,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,32,43,.028) 1px, transparent 1px);
+  background-size:auto,auto,28px 28px,28px 28px;
+  -webkit-text-size-adjust:100%;
+  line-height:1.6;
+}
+.app{max-width:1080px;margin:0 auto;padding:0 18px 132px}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:40;background:rgba(238,241,238,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);margin:0 -18px 22px;padding:10px 18px 8px}
+.topbar-in{max-width:1044px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-size:16px;letter-spacing:.01em;font-weight:600}
+.brand small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+.pbar{flex:1;min-width:140px;height:5px;border-radius:99px;background:#dde3df;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--indigo));transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.pcount{font-size:12px;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* ---------- screens ---------- */
+.screen{display:none;animation:rise .45s cubic-bezier(.2,.8,.2,1)}
+.screen.on{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);margin:0 0 8px}
+h1{font-family:var(--serif);font-size:clamp(30px,5.4vw,50px);line-height:1.08;margin:0 0 12px;letter-spacing:-.015em}
+h2{font-family:var(--serif);font-size:clamp(23px,3.6vw,33px);line-height:1.15;margin:0 0 6px;letter-spacing:-.01em}
+h3{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin:26px 0 12px;font-weight:700}
+p{margin:0 0 14px}
+.lead{font-family:var(--serif);font-size:clamp(17px,2.2vw,20px);line-height:1.62;color:#22323f}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow)}
+.card + .card{margin-top:14px}
+.grid{display:grid;gap:14px}
+@media(min-width:720px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+
+/* cover */
+.cover{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(26px,5vw,54px);
+  box-shadow:var(--shadow);position:relative;overflow:hidden;margin-top:8px}
+.cover:before{content:"";position:absolute;inset:auto -80px -120px auto;width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,rgba(23,114,107,.16),rgba(63,75,143,.05) 60%,transparent 70%)}
+.cover-code{display:inline-block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:var(--ink-2);border:1px solid var(--line);border-radius:99px;padding:5px 12px;margin-bottom:20px}
+.cover h1{max-width:16ch}
+.cover .sub{font-family:var(--serif);font-size:clamp(18px,2.6vw,23px);color:var(--teal);margin:0 0 26px}
+.rule{width:64px;height:4px;border-radius:99px;background:var(--amber);margin:0 0 24px}
+
+/* buttons */
+.btn{appearance:none;border:1px solid transparent;border-radius:12px;padding:12px 22px;font:inherit;font-weight:700;
+  cursor:pointer;background:var(--ink);color:#fff;transition:transform .15s ease,box-shadow .2s ease,background .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -10px rgba(20,32,43,.6)}
+.btn:active{transform:none}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{background:#fff}
+.btn.teal{background:var(--teal)}
+.btn[disabled]{opacity:.42;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+
+/* focus chips */
+.focus{display:grid;gap:12px}
+@media(min-width:720px){.focus{grid-template-columns:repeat(4,1fr)}}
+.fx{position:relative;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:16px 16px 14px;cursor:pointer;font:inherit;transition:.2s;overflow:hidden}
+.fx:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#bfcbc4}
+.fx .n{font-family:var(--serif);font-size:26px;color:var(--line);line-height:1;display:block;margin-bottom:8px;transition:.2s}
+.fx .t{font-weight:700;font-size:15.5px;display:block}
+.fx .mk{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);
+  display:grid;place-items:center;font-size:12px;color:transparent;transition:.2s}
+.fx.on{border-color:var(--teal);background:var(--teal-soft)}
+.fx.on .n{color:var(--teal)}
+.fx.on .mk{background:var(--teal);border-color:var(--teal);color:#fff}
+.counter{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ink-2);
+  background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px}
+.counter b{color:var(--teal);font-variant-numeric:tabular-nums}
+
+/* link cards */
+.link{display:flex;gap:14px;align-items:flex-start;text-decoration:none;color:inherit;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:16px 18px;transition:.2s;box-shadow:var(--shadow)}
+.link:hover{transform:translateY(-2px);border-color:var(--indigo)}
+.link .ic{flex:none;width:38px;height:38px;border-radius:11px;background:var(--indigo-soft);color:var(--indigo);
+  display:grid;place-items:center;font-size:18px}
+.link .tt{font-weight:700;margin:0 0 3px;line-height:1.3}
+.link .uu{font-size:12.5px;color:var(--ink-2);word-break:break-all;line-height:1.45}
+.note{font-size:13px;color:var(--ink-2);background:#fff;border-left:3px solid var(--amber);border-radius:0 10px 10px 0;
+  padding:11px 14px;margin-top:14px}
+
+/* embedded video */
+.video{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow)}
+.vframe{position:relative;width:100%;padding-top:56.25%;border-radius:11px;overflow:hidden;background:#0d1319}
+.vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vcap{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;padding:12px 8px 4px}
+.vcap b{font-size:15px}
+.vcap a{margin-left:auto;font-size:13px;font-weight:700;color:var(--indigo);text-decoration:none}
+.vcap a:hover{text-decoration:underline}
+
+/* think prompts */
+.think{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+.think .q{display:flex;gap:10px;align-items:baseline;font-weight:700;margin-bottom:10px}
+.think .q i{font-style:normal;font-family:var(--serif);color:var(--amber);font-size:20px}
+textarea{width:100%;font:inherit;font-size:15px;line-height:1.6;color:var(--ink);background:#fbfcfb;
+  border:1px solid var(--line);border-radius:10px;padding:12px 14px;resize:vertical;min-height:78px;outline:none;transition:.2s}
+textarea:focus{border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px var(--teal-soft)}
+label.fl{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 7px}
+
+/* flip cards */
+.flips{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.flip{perspective:1100px;height:132px;cursor:pointer;background:none;border:0;padding:0;font:inherit}
+.flip .in{display:block;position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .fc{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;box-shadow:var(--shadow);transition:opacity .2s .18s}
+.flip .front{background:var(--card)}
+.flip .fc{flex-direction:column;gap:8px}
+.flip .front b{display:block;font-family:var(--serif);font-size:20px;line-height:1.2}
+.flip .front em{display:block;font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.flip.on .front{opacity:0}
+.flip .back{background:var(--teal);color:#fff;transform:rotateY(180deg);border-color:var(--teal);font-size:14.5px;line-height:1.5}
+
+/* word bank */
+.wb{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.wb + .wb{margin-top:10px}
+.wb button.h{width:100%;display:flex;align-items:center;gap:12px;background:none;border:0;font:inherit;cursor:pointer;
+  padding:14px 18px;text-align:left}
+.wb button.h b{font-size:16px;font-family:var(--serif)}
+.wb button.h .ar{margin-left:auto;color:var(--ink-2);transition:transform .25s}
+.wb.on button.h .ar{transform:rotate(90deg)}
+.wb .body{display:none;padding:0 18px 16px}
+.wb.on .body{display:block}
+.chip{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:5px 12px;
+  font-size:13.5px;margin:0 6px 6px 0}
+.chip.k{background:var(--amber-soft);border-color:#e8d3a8;font-weight:700}
+
+/* options */
+.opt{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;transition:.2s}
+.opt:hover{border-color:#b9c6bf;transform:translateY(-2px)}
+.opt.on{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft),var(--shadow)}
+.opt .tag{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;
+  padding:4px 10px;border-radius:99px;margin-bottom:12px;align-self:flex-start}
+.opt[data-opt="1"] .tag{background:var(--teal-soft);color:var(--teal)}
+.opt[data-opt="2"] .tag{background:var(--indigo-soft);color:var(--indigo)}
+.opt[data-opt="3"] .tag{background:var(--coral-soft);color:var(--coral)}
+.opt h4{font-family:var(--serif);font-size:21px;margin:0 0 10px}
+.opt p{font-size:14.5px}
+.opt ul{margin:6px 0 0;padding-left:20px;font-size:14px;color:#2c3d4c}
+.opt li{margin-bottom:5px}
+.opt .pick{margin-top:auto;padding-top:16px}
+
+/* writing */
+.studio{display:grid;gap:16px}
+@media(min-width:860px){.studio{grid-template-columns:1.35fr .9fr;align-items:start}}
+.wcount{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--ink-2);margin-top:10px;flex-wrap:wrap}
+.wcount .num{font-size:22px;font-family:var(--serif);color:var(--ink);font-variant-numeric:tabular-nums}
+.wcount .ok{color:var(--teal)}
+.gauge{height:6px;border-radius:99px;background:#e4e9e6;flex:1;min-width:110px;overflow:hidden;position:relative}
+.gauge i{display:block;height:100%;background:var(--amber);width:0;transition:width .3s}
+.gauge.ok i{background:var(--teal)}
+.gauge:after{content:"";position:absolute;top:0;bottom:0;left:50%;width:33.3%;background:rgba(23,114,107,.13)}
+
+.meter{display:grid;gap:9px;margin-top:6px}
+.mrow{display:flex;align-items:center;gap:10px;font-size:13px}
+.mrow .lb{flex:1;font-weight:600;color:var(--ink-2)}
+.mrow .bar{width:74px;height:8px;border-radius:99px;background:#e4e9e6;overflow:hidden;flex:none}
+.mrow .bar i{display:block;height:100%;width:0;background:var(--teal);transition:width .35s}
+.mrow .pt{font-variant-numeric:tabular-nums;font-weight:800;color:var(--line);width:30px;text-align:right;flex:none}
+.mrow.hit .lb{color:var(--ink)}
+.mrow.hit .bar i{width:100%}
+.mrow.hit .pt{color:var(--teal)}
+
+.chk{list-style:none;margin:0;padding:0}
+.chk li{margin-bottom:9px}
+.chk label{display:flex;gap:11px;align-items:flex-start;cursor:pointer;font-size:14.2px;line-height:1.5}
+.chk input{appearance:none;flex:none;width:20px;height:20px;border:1.5px solid var(--line);border-radius:6px;margin:1px 0 0;
+  cursor:pointer;display:grid;place-items:center;transition:.15s;background:#fff}
+.chk input:checked{background:var(--teal);border-color:var(--teal)}
+.chk input:checked:after{content:"✓";color:#fff;font-size:12px;font-weight:900}
+.chk input:checked + span{color:var(--ink-2);text-decoration:line-through;text-decoration-color:rgba(23,114,107,.5)}
+
+/* modal */
+.mask{position:fixed;inset:0;background:rgba(15,24,32,.62);backdrop-filter:blur(3px);z-index:80;display:none;
+  align-items:center;justify-content:center;padding:20px}
+.mask.on{display:flex}
+.modal{background:var(--card);border-radius:18px;max-width:560px;width:100%;max-height:86vh;overflow:auto;padding:26px 26px 22px;
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.5);animation:rise .3s}
+.modal h3{margin-top:0}
+
+/* notes recall */
+.notes-card{padding:14px 18px}
+.notes-h{width:100%;display:flex;align-items:center;gap:10px;background:none;border:0;font:inherit;cursor:pointer;padding:0;text-align:left}
+.notes-h .ar{margin-left:auto;color:var(--ink-2);transition:transform .25s}
+.notes-card.on .notes-h .ar{transform:rotate(90deg)}
+.notes-body{display:none;margin-top:12px}
+.notes-card.on .notes-body{display:block}
+.nblock{border-left:3px solid var(--amber);background:#fbfcfb;border-radius:0 10px 10px 0;padding:10px 13px;margin-bottom:9px}
+.nblock .nl{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-2);margin-bottom:5px}
+.nblock .nt{font-family:var(--serif);font-size:15px;line-height:1.6;white-space:pre-wrap}
+.nempty{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.nempty a{color:var(--teal);font-weight:700;cursor:pointer;text-decoration:underline}
+
+/* results */
+.mytext-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.mytext-meta{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.mytext{font-family:var(--serif);font-size:16.5px;line-height:1.7;white-space:pre-wrap;background:#fbfcfb;
+  border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:18px 20px}
+.mytext mark{background:var(--amber-soft);border-radius:4px;padding:1px 2px;box-shadow:inset 0 -2px 0 rgba(200,135,26,.45)}
+
+.ring-wrap{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.ring{width:150px;height:150px;flex:none}
+.ring circle{fill:none;stroke-width:13;stroke-linecap:round}
+.ring .bg{stroke:#e2e8e4}
+.ring .fg{stroke:var(--teal);transition:stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1)}
+.ring text{font-family:var(--serif);font-size:34px;fill:var(--ink);font-weight:600}
+.fb{border-radius:14px;padding:15px 17px;font-size:14.5px;line-height:1.55;border:1px solid var(--line);background:#fff;
+  display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.fb .dot{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:900;color:#fff;margin-top:1px}
+.fb.yes{background:var(--teal-soft);border-color:#bcdcd6}
+.fb.yes .dot{background:var(--teal)}
+.fb.no{background:var(--amber-soft);border-color:#eddcb8}
+.fb.no .dot{background:var(--amber)}
+.band{border-radius:16px;padding:20px 22px;font-family:var(--serif);font-size:17.5px;line-height:1.55;margin:18px 0}
+.band.b1{background:var(--coral-soft);border:1px solid #eec8c5}
+.band.b2{background:var(--amber-soft);border:1px solid #eddcb8}
+.band.b3{background:var(--teal-soft);border:1px solid #bcdcd6}
+.sample{background:#fbfcfb;border:1px dashed var(--line);border-radius:14px;padding:20px 22px;font-family:var(--serif);
+  font-size:16px;line-height:1.68;white-space:pre-line}
+.sample h4{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0 0 12px}
+
+/* figures (lightbox-ready) */
+.figure{margin:18px 0}
+.figure img{width:100%;border-radius:14px;border:1px solid var(--line);cursor:zoom-in;display:block}
+.figure figcaption{font-size:12.5px;color:var(--ink-2);margin-top:8px}
+#lb{position:fixed;inset:0;background:rgba(10,16,21,.92);z-index:95;display:none;align-items:center;justify-content:center;padding:32px}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:88vh;border-radius:8px}
+#lbx{position:absolute;top:18px;right:20px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.08);color:#fff;font-size:22px;cursor:pointer;line-height:1}
+#tip{position:fixed;z-index:99;pointer-events:none;background:rgba(20,32,43,.95);color:#fff;font-size:12.5px;
+  padding:7px 11px;border-radius:8px;max-width:290px;opacity:0;transition:opacity .15s;line-height:1.45}
+#tip.on{opacity:1}
+
+/* nav */
+.navbar{position:fixed;left:0;right:0;bottom:0;z-index:45;background:rgba(238,241,238,.94);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);padding:9px 14px calc(9px + env(safe-area-inset-bottom))}
+.navbar-in{max-width:1044px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.dots{flex:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.dots::-webkit-scrollbar{display:none}
+.dot-b{flex:none;border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font:inherit;font-size:12px;
+  font-weight:600;color:var(--ink-2);cursor:pointer;white-space:nowrap;transition:.18s}
+.dot-b:hover{border-color:var(--teal);color:var(--teal)}
+.dot-b.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dot-b.done{border-color:var(--teal);color:var(--teal)}
+.arrow{flex:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;
+  font-size:18px;color:var(--ink);transition:.18s}
+.arrow:hover:not([disabled]){background:var(--ink);color:#fff;border-color:var(--ink)}
+.arrow[disabled]{opacity:.35;cursor:not-allowed}
+.hint{font-size:12.5px;color:var(--ink-2);margin-top:8px}
+.kw{display:flex;flex-wrap:wrap;gap:9px}
+.kw span{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 15px;font-family:var(--serif);font-size:16.5px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">Social and Educational Challenges<small>School in the Time of COVID-19</small></div>
+    <div class="pbar"><i id="pfill"></i></div>
+    <div class="pcount"><span id="pnow">1</span>/<span id="ptot">10</span></div>
+  </div>
+</div>
+
+<div class="app">
+<main id="deck">
+
+<!-- 1. COVER -->
+<section class="screen on" data-label="Εξώφυλλο">
+  <div class="cover">
+    <h1>Social and Educational Challenges</h1>
+    <div class="rule"></div>
+    <p class="sub">School in the Time of COVID-19</p>
+    <p class="lead" style="max-width:56ch">Explore the topic of social and educational challenges during the pandemic.</p>
+    <div class="btn-row"><button class="btn teal" data-go="1">Ξεκίνα &nbsp;→</button></div>
+  </div>
+</section>
+
+<!-- 2. INTRODUCTION -->
+<section class="screen" data-label="Introduction">
+  <p class="eyebrow">Introduction</p>
+  <h2>School in the Time of COVID-19</h2>
+  <div class="card" style="margin-top:16px">
+    <p class="lead" style="margin-bottom:0">Explore the topic of social and educational challenges during the pandemic. Watch the video and visit the suggested links carefully. Focus on the main problems students faced (learning loss, feeling lonely, stress and unequal access to technology). Note down facts that you could use as evidence. Think about possible solutions before you start writing.</p>
+  </div>
+
+  <h3>Focus on the main problems students faced</h3>
+  <div class="focus" id="focus">
+    <button class="fx" data-fx><span class="n">01</span><span class="t">learning loss</span><span class="mk">✓</span></button>
+    <button class="fx" data-fx><span class="n">02</span><span class="t">feeling lonely</span><span class="mk">✓</span></button>
+    <button class="fx" data-fx><span class="n">03</span><span class="t">stress</span><span class="mk">✓</span></button>
+    <button class="fx" data-fx><span class="n">04</span><span class="t">unequal access to technology</span><span class="mk">✓</span></button>
+  </div>
+  <p style="margin-top:14px"><span class="counter">Εστίασες σε <b><span id="fxn">0</span>/4</b> προβλήματα</span></p>
+
+  <h3>Note down facts</h3>
+  <div class="card">
+    <label class="fl" for="notes">Note down facts that you could use as evidence</label>
+    <textarea id="notes" rows="5" placeholder="…"></textarea>
+    <p class="hint">Οι σημειώσεις σου μένουν διαθέσιμες όσο είσαι σε αυτή τη σελίδα.</p>
+  </div>
+</section>
+
+<!-- 3. VIDEO -->
+<section class="screen" data-label="Video">
+  <h2>The Impact of the Pandemic on Students</h2>
+  <p class="lead">Watch the video about how the pandemic affected students’ lives and education:</p>
+
+  <div class="video">
+    <div class="vframe">
+      <iframe src="https://www.youtube-nocookie.com/embed/t0VfskoIgU0?rel=0"
+              title="How the pandemic affected teen mental health"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="vcap">
+      <b>How the pandemic affected teen mental health</b>
+      <a href="https://www.youtube.com/watch?v=t0VfskoIgU0" target="_blank" rel="noopener">Άνοιγμα στο YouTube ↗</a>
+    </div>
+  </div>
+
+  <h3>Think about</h3>
+  <div class="grid g3">
+    <div class="think">
+      <div class="q"><i>a</i><span>what problems students faced</span></div>
+      <textarea id="t1" rows="4" placeholder="…"></textarea>
+    </div>
+    <div class="think">
+      <div class="q"><i>b</i><span>how these problems affected their daily life</span></div>
+      <textarea id="t2" rows="4" placeholder="…"></textarea>
+    </div>
+    <div class="think">
+      <div class="q"><i>c</i><span>what solutions could help</span></div>
+      <textarea id="t3" rows="4" placeholder="…"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- 4. SOURCES -->
+<section class="screen" data-label="Sources">
+  <h2>Explore: Education and the Pandemic</h2>
+  <p class="lead">Before you write, visit relevant online sources, such as UNESCO reports on the impact of the pandemic on education, so that you can support your ideas with real facts and data.</p>
+
+  <h3>Useful Sources</h3>
+  <div class="grid g2">
+    <a class="link" href="https://unescochair-ghe.org/resources/covid-19-and-schools/" target="_blank" rel="noopener">
+      <span class="ic">↗</span>
+      <span><span class="tt">COVID-19 and schools</span>
+      <span class="uu">https://unescochair-ghe.org/resources/covid-19-and-schools/</span></span>
+    </a>
+    <a class="link" href="https://www.unesco.org/en/covid-19/education-response/initiatives?hub=800" target="_blank" rel="noopener">
+      <span class="ic">↗</span>
+      <span><span class="tt">UNESCO — Education response initiatives</span>
+      <span class="uu">https://www.unesco.org/en/covid-19/education-response/initiatives?hub=800</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- 5. VOCABULARY -->
+<section class="screen" data-label="Vocabulary">
+  <p class="eyebrow">Useful Vocabulary</p>
+  <h2>Γύρισε την κάρτα για τον ορισμό</h2>
+  <p class="hint" style="margin-bottom:16px">Κάνε κλικ σε κάθε κάρτα. <span class="counter" style="margin-left:6px">Είδες <b><span id="flipn">0</span>/9</b></span></p>
+  <div class="flips" id="flips">
+    <button class="flip"><span class="in">
+      <span class="fc front"><b>pandemic</b><em>κλικ</em></span>
+      <span class="fc back">a global disease that affects many people</span></span></button>
+    <button class="flip"><span class="in">
+      <span class="fc front"><b>online learning</b><em>κλικ</em></span>
+      <span class="fc back">learning through the internet</span></span></button>
+    <button class="flip"><span class="in">
+      <span class="fc front"><b>isolation</b><em>κλικ</em></span>
+      <span class="fc back">being alone or separated from others</span></span></button>
+    <button class="flip"><span class="in">
+      <span class="fc front"><b>stress</b><em>κλικ</em></span>
+      <span class="fc back">feeling worried or under pressure</span></span></button>
+    <button class="flip"><span class="in">
+      <span class="fc front"><b>access</b><em>κλικ</em></span>
+      <span class="fc back">the ability to use something</span></span></button>
+    <button class="flip"><span class="in">
+      <span class="fc front"><b>support</b><em>κλικ</em></span>
+      <span class="fc back">help or assistance</span></span></button>
+    <button class="flip"><span class="in">
+      <span class="fc front"><b>challenge</b><em>κλικ</em></span>
+      <span class="fc back">a difficult situation</span></span></button>
+    <button class="flip"><span class="in">
+      <span class="fc front"><b>solution</b><em>κλικ</em></span>
+      <span class="fc back">a way to solve a problem</span></span></button>
+    <button class="flip"><span class="in">
+      <span class="fc front"><b>inequality</b><em>κλικ</em></span>
+      <span class="fc back">unfair difference in opportunities between people</span></span></button>
+  </div>
+</section>
+
+<!-- 6. WORD BANK -->
+<section class="screen" data-label="Word bank">
+  <p class="eyebrow">Λέξεις-κλειδιά</p>
+  <h2>Θεματικό λεξιλόγιο</h2>
+  <p class="lead" style="max-width:66ch">Έχουν επιλεγεί ορισμένες λέξεις-κλειδιά (καθώς και ενδεικτικές εναλλακτικές τους), οι οποίες υποστηρίζουν την ανάπτυξη του θέματος, τη χρήση κατάλληλου θεματικού λεξιλογίου και την αξιοποίηση βασικών εννοιών που σχετίζονται με τις επιπτώσεις της πανδημίας στην εκπαίδευση.</p>
+
+  <div id="bank"></div>
+
+  <h3>Συνδετικές λέξεις και φράσεις</h3>
+  <div id="bank2"></div>
+</section>
+
+<!-- 7. CHOOSE TASK -->
+<section class="screen" data-label="Your task">
+  <h2>COVID-19 and Education: Your Voice Matters</h2>
+  <p class="lead">Choose ONE of the following writing tasks. Use information and evidence from the video and the online resources you explored. Before submitting your work, complete the self-check to make sure you have included all the required elements.</p>
+
+  <div class="grid g3" style="margin-top:18px" id="opts">
+    <div class="opt" data-opt="1">
+      <span class="tag">Option 1</span>
+      <h4>Report</h4>
+      <p>Write a report describing the effects of the pandemic on education and suggesting practical solutions. Use evidence from the video and the online resources you read to support your ideas. Write 100–150 words. Use formal, objective language, in the third person where possible. Your text should include:</p>
+      <ul>
+        <li>a short introduction to the topic</li>
+        <li>a main body describing 2–3 problems, supported by evidence from the sources</li>
+        <li>at least one practical solution for each problem</li>
+        <li>a clear conclusion</li>
+        <li>appropriate linking words (firstly, furthermore, however, in conclusion, etc.)</li>
+      </ul>
+      <div class="pick"><button class="btn ghost" data-pick="1">Διάλεξε αυτή</button></div>
+    </div>
+
+    <div class="opt" data-opt="2">
+      <span class="tag">Option 2</span>
+      <h4>Formal Letter</h4>
+      <p>Write a formal letter of complaint to the Ministry of Education. Describe the problems students faced during the pandemic and suggest practical solutions to improve education in similar situations in the future. Write 100–150 words. Use formal language, and avoid contractions (like don’t or can’t) and informal expressions. Sign your letter as <em>George Papadakis</em>. Your letter should include:</p>
+      <ul>
+        <li>an appropriate opening (e.g. Dear Sir/Madam)</li>
+        <li>the reason for writing the letter</li>
+        <li>description of 1–2 specific problems, with an example or evidence from the sources</li>
+        <li>a polite, clearly stated request or proposal for change</li>
+        <li>an appropriate closing (e.g. Yours faithfully)</li>
+      </ul>
+      <div class="pick"><button class="btn ghost" data-pick="2">Διάλεξε αυτή</button></div>
+    </div>
+
+    <div class="opt" data-opt="3">
+      <span class="tag">Option 3</span>
+      <h4>Social Media Post</h4>
+      <p>Write a short, engaging social media post about an important challenge students faced during the pandemic. Encourage people to think about the issue and support positive change. Write 100–150 words. Use a direct, engaging but respectful tone. Your post should include:</p>
+      <ul>
+        <li>a short, engaging opening line that grabs attention</li>
+        <li>description of 1–2 specific problems, with an example or evidence from the sources</li>
+        <li>a call to action or a suggestion addressed to readers</li>
+        <li>1–2 relevant hashtags (e.g. #StudentWellbeing #EducationMatters)</li>
+      </ul>
+      <div class="pick"><button class="btn ghost" data-pick="3">Διάλεξε αυτή</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. WRITE -->
+<section class="screen" data-label="Write">
+  <p class="eyebrow" id="wtag">Your writing</p>
+  <h2 id="wtitle">Write your text</h2>
+
+  <div class="studio">
+    <div>
+      <div class="card">
+        <label class="fl" for="essay">Το κείμενό σου — 100–150 words</label>
+        <textarea id="essay" rows="15" placeholder="Start writing here…"></textarea>
+        <div class="wcount">
+          <span class="num" id="wnum">0</span><span>words</span>
+          <span class="gauge" id="wgauge"><i></i></span>
+          <span id="wmsg">Στόχος: 100–150</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="submit">Έλεγχος &amp; υποβολή</button>
+          <button class="btn ghost" data-go="6">Αλλαγή δραστηριότητας</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card notes-card on" id="notesCard">
+        <button class="notes-h" id="notesToggle">
+          <span class="fl" style="margin:0">Οι σημειώσεις σου</span>
+          <span class="ar">›</span>
+        </button>
+        <div class="notes-body" id="notesBody"></div>
+      </div>
+
+      <div class="card">
+        <label class="fl">Κάλυψη θεματικών ομάδων</label>
+        <div class="meter" id="meter"></div>
+        <p class="hint">Οι ομάδες ανάβουν καθώς εμφανίζονται στο κείμενό σου λέξεις-κλειδιά ή οι εναλλακτικές τους (χωρίς διάκριση πεζών/κεφαλαίων).</p>
+      </div>
+
+      <div class="card">
+        <label class="fl">Self-check</label>
+        <ul class="chk" id="selfcheck">
+          <li><label><input type="checkbox"><span>Did I choose one task and follow its specific format?</span></label></li>
+          <li><label><input type="checkbox"><span>Did I use at least one fact or idea from the video or the UNESCO sources?</span></label></li>
+          <li><label><input type="checkbox"><span>Are my ideas clear and is at least one solution included?</span></label></li>
+          <li><label><input type="checkbox"><span>Did I use appropriate vocabulary and tone for my text type?</span></label></li>
+          <li><label><input type="checkbox"><span>Did I check my grammar and word count?</span></label></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <label class="fl">Requirements της επιλογής σου</label>
+        <ul id="reqs" style="margin:0;padding-left:20px;font-size:14px;color:#2c3d4c"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. RESULTS -->
+<section class="screen" data-label="Feedback">
+  <p class="eyebrow">Ανατροφοδότηση</p>
+  <h2>Το αποτέλεσμά σου</h2>
+
+  <div class="card" style="margin-top:16px">
+    <div class="ring-wrap">
+      <svg class="ring" viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="50"></circle>
+        <circle class="fg" id="ringfg" cx="60" cy="60" r="50" transform="rotate(-90 60 60)"
+                stroke-dasharray="314.16" stroke-dashoffset="314.16"></circle>
+        <text id="ringtx" x="60" y="72" text-anchor="middle">0%</text>
+      </svg>
+      <div style="flex:1;min-width:240px">
+        <p style="margin:0 0 6px;font-weight:800;font-size:15px">Σύνολο: <span id="scr">0</span> / 100 μονάδες</p>
+        <p class="hint" style="margin:0">Η παρακάτω βαθμολόγηση αφορά αποκλειστικά την αυτοματοποιημένη αξιολόγηση της θεματικής κάλυψης μέσω λέξεων-κλειδιών και δεν αποτελεί πλήρη αξιολόγηση της ποιότητας του γραπτού λόγου, η οποία προϋποθέτει την παιδαγωγική κρίση του/της εκπαιδευτικού.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="mytext-head">
+      <span class="fl" style="margin:0">Το κείμενό σου</span>
+      <span class="mytext-meta"><span id="myopt">—</span> · <span id="mywords">0</span> words</span>
+    </div>
+    <div class="mytext" id="mytext"></div>
+  </div>
+
+  <div class="band" id="band"></div>
+
+  <h3>Ανατροφοδότηση ανά ομάδα λέξεων-κλειδιών</h3>
+  <div id="fbs"></div>
+
+  <div class="card" style="margin-top:18px">
+    <p style="margin:0;font-family:var(--serif);font-size:17px;line-height:1.6">COVID-19 created difficulties for students and education systems around the world. Solutions like online learning aimed to help students continue their education.</p>
+  </div>
+
+  <h3>Sample Solution Text</h3>
+  <div class="sample" id="sample"></div>
+  <div class="btn-row">
+    <button class="btn ghost" id="others">Δες και τα άλλα δείγματα</button>
+    <button class="btn ghost" data-go="7">Ξαναγράψε το κείμενό σου</button>
+  </div>
+  <div id="othersBox" style="display:none;margin-top:14px"></div>
+</section>
+
+<!-- 10. KEYWORDS -->
+<section class="screen" data-label="Λέξεις κλειδιά">
+  <p class="eyebrow">Κλείσιμο</p>
+  <h2>Λέξεις κλειδιά</h2>
+  <h3>English</h3>
+  <div class="kw">
+    <span>Pandemic</span><span>Education</span><span>Covid 19</span><span>Report</span><span>Letter</span><span>Post</span>
+  </div>
+  <h3>Ελληνικά</h3>
+  <div class="kw">
+    <span>Πανδημία</span><span>Εκπαίδευση</span><span>COVID-19</span><span>Έκθεση αναφοράς</span><span>Επιστολή</span><span>Ανάρτηση</span>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- pre-submit modal -->
+<div class="mask" id="mask">
+  <div class="modal">
+    <h3 style="margin-bottom:14px">Before submitting, check that your text has:</h3>
+    <ul class="chk" id="preflight">
+      <li><label><input type="checkbox"><span>chosen one writing task and followed its format,</span></label></li>
+      <li><label><input type="checkbox"><span>an introduction or opening appropriate for the text type,</span></label></li>
+      <li><label><input type="checkbox"><span>clear paragraphs and organised ideas,</span></label></li>
+      <li><label><input type="checkbox"><span>at least three words from the vocabulary list,</span></label></li>
+      <li><label><input type="checkbox"><span>at least one fact or idea from the video or UNESCO sources,</span></label></li>
+      <li><label><input type="checkbox"><span>a description of one or more challenges students faced during the pandemic,</span></label></li>
+      <li><label><input type="checkbox"><span>at least one practical solution,</span></label></li>
+      <li><label><input type="checkbox"><span>an appropriate conclusion, closing or call to action depending on the text type.</span></label></li>
+    </ul>
+    <div class="btn-row">
+      <button class="btn teal" id="confirm">Υποβολή</button>
+      <button class="btn ghost" id="cancel">Πίσω στο κείμενο</button>
+    </div>
+  </div>
+</div>
+
+<div id="lb"><button id="lbx" aria-label="Κλείσιμο">✕</button><img alt=""></div>
+<div id="tip"></div>
+
+<nav class="navbar">
+  <div class="navbar-in">
+    <button class="arrow" id="prev" aria-label="Προηγούμενο">‹</button>
+    <div class="dots" id="dots"></div>
+    <button class="arrow" id="next" aria-label="Επόμενο">›</button>
+  </div>
+</nav>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,c){return (c||document).querySelector(s)};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+/* ---------- navigation ---------- */
+var screens=$$('.screen'), cur=0, seen={0:1};
+var dots=$('#dots');
+screens.forEach(function(s,i){
+  var b=document.createElement('button');
+  b.className='dot-b'; b.textContent=(i+1)+'. '+s.dataset.label;
+  b.onclick=function(){go(i)}; dots.appendChild(b);
+});
+$('#ptot').textContent=screens.length;
+function go(i){
+  if(i<0||i>=screens.length) return;
+  screens[cur].classList.remove('on'); cur=i; seen[i]=1;
+  screens[cur].classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+  paint();
+}
+function paint(){
+  if(cur===7 && typeof syncNotes==='function') syncNotes();
+  $$('.dot-b',dots).forEach(function(b,i){
+    b.classList.toggle('on',i===cur);
+    b.classList.toggle('done',!!seen[i]&&i!==cur);
+  });
+  $('#pfill').style.width=((cur+1)/screens.length*100)+'%';
+  $('#pnow').textContent=cur+1;
+  $('#prev').disabled=cur===0; $('#next').disabled=cur===screens.length-1;
+  var on=$$('.dot-b',dots)[cur]; if(on&&on.scrollIntoView) on.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+}
+$('#prev').onclick=function(){go(cur-1)};
+$('#next').onclick=function(){go(cur+1)};
+$$('[data-go]').forEach(function(b){b.onclick=function(){go(+b.dataset.go)}});
+document.addEventListener('keydown',function(e){
+  if(/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  if(e.key==='ArrowRight') go(cur+1);
+  if(e.key==='ArrowLeft') go(cur-1);
+});
+paint();
+
+/* ---------- focus chips ---------- */
+$$('[data-fx]').forEach(function(b){
+  b.onclick=function(){
+    b.classList.toggle('on');
+    $('#fxn').textContent=$$('#focus .fx.on').length;
+  };
+});
+
+/* ---------- flip cards ---------- */
+var flipped={};
+$$('#flips .flip').forEach(function(f,i){
+  f.onclick=function(){
+    f.classList.toggle('on');
+    if(f.classList.contains('on')) flipped[i]=1;
+    $('#flipn').textContent=Object.keys(flipped).length;
+  };
+});
+
+/* ---------- word bank ---------- */
+var topic=[
+ ['Pandemic',['COVID-19','global health crisis','health emergency']],
+ ['Online learning',['distance learning','remote learning','digital education']],
+ ['Learning loss',['educational gaps','difficulties in learning','missed learning opportunities']],
+ ['Isolation',['social isolation','loneliness','separation from others']],
+ ['Stress / mental health',['anxiety','pressure','emotional difficulties','wellbeing']],
+ ['Access to technology',['digital access','internet access','technological resources']],
+ ['Inequality',['unequal opportunities','educational inequality','digital divide']],
+ ['Support',['assistance','help','additional resources']],
+ ['Challenge',['problem','difficulty','obstacle']],
+ ['Solution',['response','improvement','practical measure']]
+];
+var linkers=[
+ ['Firstly',['first of all','to begin with']],
+ ['Furthermore',['moreover','additionally','in addition']],
+ ['For example',['for instance','such as']],
+ ['However',['nevertheless','although','on the other hand']],
+ ['Therefore',['thus','as a result']],
+ ['In conclusion',['to conclude','to sum up']]
+];
+function bank(list,host){
+  list.forEach(function(row){
+    var d=document.createElement('div'); d.className='wb';
+    d.innerHTML='<button class="h"><b>'+row[0]+'</b><span class="ar">›</span></button>'+
+      '<div class="body"><span class="chip k">'+row[0]+'</span>'+
+      row[1].map(function(a){return '<span class="chip">'+a+'</span>'}).join('')+
+      '<p class="hint" style="margin:8px 0 0">εναλλακτικές</p></div>';
+    $('.h',d).onclick=function(){d.classList.toggle('on')};
+    host.appendChild(d);
+  });
+}
+bank(topic,$('#bank')); bank(linkers,$('#bank2'));
+
+/* ---------- keyword groups & scoring ---------- */
+var GROUPS=[
+{
+  id:1,pts:25,label:'Pandemic & education context',
+  terms:['pandemic','covid-19','covid 19','covid19','global health crisis','health emergency','education','online learning','distance learning','remote learning','digital education'],
+  yes:'Good! You clearly introduced the topic of the pandemic and its impact on education.',
+  no:'Try to mention the pandemic and explain how it affected education or students’ learning.'
+},
+{
+  id:2,pts:25,label:'Challenges faced by students',
+  terms:['learning loss','educational gaps','difficulties in learning','missed learning opportunities','isolation','social isolation','loneliness','separation from others','stress','mental health','anxiety','pressure','emotional difficulties','wellbeing','inequality','unequal opportunities','educational inequality','digital divide','access to technology','digital access','internet access','technological resources'],
+  yes:'Well done! You described important challenges students experienced during the pandemic.',
+  no:'Remember to include at least one specific difficulty students faced, such as learning problems, isolation, stress or unequal access to technology.'
+},
+{
+  id:3,pts:20,label:'Evidence & examples',
+  terms:['fact','facts','evidence','source','sources','unesco','research','data','information','example','examples'],
+  yes:'Great! You supported your ideas with information or examples from the sources.',
+  no:'Try to include a fact, example or idea from the video or the UNESCO sources to support your points.'
+},
+{
+  id:4,pts:20,label:'Solutions & support',
+  terms:['solution','solutions','support','improvement','resources','digital access','assistance','help','additional resources','response','practical measure'],
+  yes:'Great! You suggested ways to improve education and support students in similar situations.',
+  no:'Add at least one practical solution or suggestion to address the problems you described.'
+},
+{
+  id:5,pts:10,label:'Linking words & organisation',
+  terms:['firstly','first of all','to begin with','furthermore','moreover','additionally','in addition','for example','for instance','such as','however','nevertheless','although','on the other hand','therefore','thus','as a result','in conclusion','to conclude','to sum up'],
+  yes:'Well done! You used linking words to organise your ideas clearly.',
+  no:'Try to use linking words to connect your ideas and improve the organisation of your text.'
+}
+];
+
+function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function hasTerm(text,term){
+  return new RegExp('(^|[^a-z0-9])'+esc(term)+'([^a-z0-9]|$)','i').test(text);
+}
+function analyse(text){
+  var t=' '+(text||'').toLowerCase().replace(/\s+/g,' ')+' ';
+  // η φράση «for example» μετράει στους συνδέσμους (ομάδα 5), όχι ως «example» της ομάδας 3
+  var t3=t.replace(/for example/g,' ');
+  return GROUPS.map(function(g){
+    var src=(g.id===3)?t3:t;
+    var hit=g.terms.some(function(w){return hasTerm(src,w)});
+    return {g:g,hit:hit};
+  });
+}
+
+function escHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function highlight(text){
+  var all=[]; GROUPS.forEach(function(g){ all=all.concat(g.terms) });
+  all.sort(function(a,b){return b.length-a.length});
+  var out=escHtml(text||'');
+  var re=new RegExp('(^|[^a-z0-9])('+all.map(esc).join('|')+')(?![a-z0-9])','gi');
+  return out.replace(re,function(m,p1,p2){return p1+'<mark>'+p2+'</mark>'});
+}
+
+/* meter */
+var meter=$('#meter');
+GROUPS.forEach(function(g){
+  var r=document.createElement('div'); r.className='mrow'; r.dataset.g=g.id;
+  r.innerHTML='<span class="lb">'+g.label+'</span><span class="bar"><i></i></span><span class="pt">'+g.pts+'</span>';
+  meter.appendChild(r);
+});
+
+/* ---------- option picking ---------- */
+var OPT={
+1:{name:'Report',tag:'Option 1 · Report',title:'Report',
+   reqs:['a short introduction to the topic','a main body describing 2–3 problems, supported by evidence from the sources','at least one practical solution for each problem','a clear conclusion','appropriate linking words (firstly, furthermore, however, in conclusion, etc.)'],
+   sample:'The Impact of COVID-19 on Education\n\nThe COVID-19 pandemic created serious challenges for more than 1.5 billion students around the world. During school closures, many students had to continue their studies through online learning. However, not all students had equal access to computers, internet connections or digital resources. This situation increased educational inequality and caused learning loss for many learners.\n\nFurthermore, the pandemic affected students’ mental health. Many young people experienced stress, loneliness and difficulties because they were separated from their classmates and teachers. Schools can support students by providing additional learning programmes, better technological resources and mental health support.\n\nIn conclusion, the pandemic changed education in many ways. Although online learning helped students continue their studies, future plans should focus on creating more equal and supportive learning environments.'},
+2:{name:'Formal Letter',tag:'Option 2 · Formal Letter',title:'Formal Letter',
+   reqs:['an appropriate opening (e.g. Dear Sir/Madam)','the reason for writing the letter','description of 1–2 specific problems, with an example or evidence from the sources','a polite, clearly stated request or proposal for change','an appropriate closing (e.g. Yours faithfully)'],
+   sample:'Dear Sir/Madam,\n\nI am writing to express my concerns about the educational difficulties students faced during the COVID-19 pandemic. School closures created many problems, especially for students who did not have reliable access to technology or a stable internet connection. As a result, some learners struggled to follow online lessons and experienced learning loss.\n\nFurthermore, many students felt isolated and stressed because they could not communicate with their classmates and teachers in person. I believe that schools should be better prepared for similar situations in the future by providing digital resources and psychological support.\n\nI kindly request that more action is taken to ensure equal educational opportunities for all students.\n\nYours faithfully,\nGeorge Papadakis'},
+3:{name:'Social Media Post',tag:'Option 3 · Social Media Post',title:'Social Media Post',
+   reqs:['a short, engaging opening line that grabs attention','description of 1–2 specific problems, with an example or evidence from the sources','a call to action or a suggestion addressed to readers','1–2 relevant hashtags (e.g. #StudentWellbeing #EducationMatters)'],
+   sample:'Education Matters: Supporting Students After COVID-19\n\nDid you know that many students are still affected by the challenges of the COVID-19 pandemic? During school closures, thousands of learners experienced problems such as online learning difficulties, stress and social isolation.\n\nEducation is not only about lessons and exams. Students also need support, communication and equal opportunities to succeed. We should make sure that every learner has access to technology, helpful resources and mental health support.\n\nSchools, teachers and communities can work together to create a better future for education. Let’s listen to students’ experiences and support positive changes in learning.\n\n#StudentWellbeing #EducationMatters'}
+};
+var chosen=null;
+$$('[data-pick]').forEach(function(b){
+  b.onclick=function(){
+    chosen=b.dataset.pick;
+    $$('#opts .opt').forEach(function(o){o.classList.toggle('on',o.dataset.opt===chosen)});
+    $$('[data-pick]').forEach(function(x){
+      var on=x.dataset.pick===chosen;
+      x.textContent=on?'✓ Επιλεγμένη':'Διάλεξε αυτή';
+      x.className=on?'btn teal':'btn ghost';
+    });
+    var o=OPT[chosen];
+    $('#wtag').textContent=o.tag;
+    $('#wtitle').textContent='Write your '+o.title.toLowerCase();
+    $('#reqs').innerHTML=o.reqs.map(function(r){return '<li style="margin-bottom:5px">'+r+'</li>'}).join('');
+    go(7);
+  };
+});
+
+/* ---------- word count + live meter ---------- */
+var essay=$('#essay');
+function words(t){var m=(t||'').trim().match(/[A-Za-zΆ-ώά-ώ0-9’'#-]+/g);return m?m.length:0}
+function refresh(){
+  var n=words(essay.value);
+  $('#wnum').textContent=n;
+  var g=$('#wgauge'), ok=n>=100&&n<=150;
+  $('.num',$('.wcount')).classList.toggle('ok',ok);
+  g.classList.toggle('ok',ok);
+  $('i',g).style.width=Math.min(100,n/200*100)+'%';
+  $('#wmsg').textContent = n===0?'Στόχος: 100–150' : ok?'Είσαι μέσα στον στόχο ✓' : (n<100?('Λείπουν ακόμη '+(100-n)+' λέξεις'):('Είσαι '+(n-150)+' λέξεις πάνω από τον στόχο'));
+  var res=analyse(essay.value);
+  res.forEach(function(r){
+    var row=$('.mrow[data-g="'+r.g.id+'"]');
+    row.classList.toggle('hit',r.hit);
+  });
+}
+essay.addEventListener('input',refresh); refresh();
+
+/* ---------- σημειώσεις μαθητή στην οθόνη γραφής ---------- */
+var NOTE_SRC=[
+  {id:'notes',label:'Facts you noted'},
+  {id:'t1',label:'what problems students faced'},
+  {id:'t2',label:'how these problems affected their daily life'},
+  {id:'t3',label:'what solutions could help'}
+];
+$('#notesToggle').onclick=function(){ $('#notesCard').classList.toggle('on') };
+function syncNotes(){
+  var host=$('#notesBody'), html='';
+  NOTE_SRC.forEach(function(n){
+    var el=$('#'+n.id); if(!el) return;
+    var v=(el.value||'').trim(); if(!v) return;
+    html+='<div class="nblock"><span class="nl">'+n.label+'</span><span class="nt">'+escHtml(v)+'</span></div>';
+  });
+  if(!html){
+    html='<p class="nempty">Δεν έχεις κρατήσει σημειώσεις ακόμη. Γύρνα στο <a data-jump="1">Introduction</a> ή στο <a data-jump="2">βίντεο</a> και σημείωσε facts και ιδέες — θα εμφανιστούν εδώ.</p>';
+  }
+  host.innerHTML=html;
+  $$('[data-jump]',host).forEach(function(a){ a.onclick=function(){ go(+a.dataset.jump) } });
+}
+NOTE_SRC.forEach(function(n){
+  var el=$('#'+n.id); if(el) el.addEventListener('input',syncNotes);
+});
+syncNotes();
+
+/* ---------- submit ---------- */
+$('#submit').onclick=function(){
+  if(words(essay.value)===0){ essay.focus(); return; }
+  $('#mask').classList.add('on');
+};
+$('#cancel').onclick=function(){$('#mask').classList.remove('on')};
+$('#mask').onclick=function(e){if(e.target===$('#mask')) $('#mask').classList.remove('on')};
+$('#confirm').onclick=function(){
+  $('#mask').classList.remove('on');
+  score();
+  go(8);
+};
+
+function score(){
+  var res=analyse(essay.value);
+  var total=0;
+  res.forEach(function(r){ if(r.hit) total+=r.g.pts; });
+  $('#scr').textContent=total;
+  var C=2*Math.PI*50;
+  var fg=$('#ringfg');
+  fg.setAttribute('stroke-dasharray',C.toFixed(2));
+  fg.setAttribute('stroke-dashoffset',C.toFixed(2));
+  $('#ringtx').textContent='0%';
+  setTimeout(function(){
+    fg.setAttribute('stroke-dashoffset',(C*(1-total/100)).toFixed(2));
+    var i=0,step=setInterval(function(){ i+=2; if(i>=total){i=total;clearInterval(step)} $('#ringtx').textContent=i+'%'; },20);
+  },120);
+  fg.style.stroke = total<=30?'#bd4f4b':(total<=87?'#c8871a':'#17726b');
+
+  var band=$('#band');
+  if(total<=30){band.className='band b1';band.textContent='You made a good start, but your text needs more development. Try to describe more clearly how the pandemic affected students and education. Include relevant vocabulary, examples and possible solutions.'}
+  else if(total<=87){band.className='band b2';band.textContent='Nice work! Your text communicates your ideas clearly. You can improve it by adding more evidence from the sources, using more topic-related vocabulary and developing your solutions in greater detail.'}
+  else{band.className='band b3';band.textContent='Great work! You completed the activity. We hope it helped you reflect on the educational and social impact of the COVID-19 pandemic.'}
+
+  $('#fbs').innerHTML=res.map(function(r){
+    return '<div class="fb '+(r.hit?'yes':'no')+'"><span class="dot">'+(r.hit?'✓':'!')+'</span><span><b>'+r.g.label+' — '+r.g.pts+' μονάδες</b><br>'+(r.hit?r.g.yes:r.g.no)+'</span></div>';
+  }).join('');
+
+  var o=OPT[chosen||'1'];
+  $('#myopt').textContent=o.tag;
+  $('#mywords').textContent=words(essay.value);
+  $('#mytext').innerHTML=highlight(essay.value);
+  $('#sample').innerHTML='<h4>'+o.tag+'</h4>'+o.sample;
+  $('#othersBox').style.display='none';
+  $('#others').textContent='Δες και τα άλλα δείγματα';
+}
+$('#others').onclick=function(){
+  var box=$('#othersBox');
+  if(box.style.display==='block'){box.style.display='none';$('#others').textContent='Δες και τα άλλα δείγματα';return}
+  box.innerHTML=Object.keys(OPT).filter(function(k){return k!==(chosen||'1')}).map(function(k){
+    return '<div class="sample" style="margin-bottom:12px"><h4>'+OPT[k].tag+'</h4>'+OPT[k].sample+'</div>';
+  }).join('');
+  box.style.display='block';
+  $('#others').textContent='Απόκρυψη';
+};
+
+/* ---------- lightbox + alt tooltip (για κάθε εικόνα .figure img ή img[data-zoom]) ---------- */
+var lb=$('#lb'), lbimg=$('#lb img'), tip=$('#tip');
+function bindImages(){
+  $$('.figure img, img[data-zoom]').forEach(function(im){
+    if(im.dataset.bound) return; im.dataset.bound='1';
+    im.addEventListener('click',function(){
+      lbimg.src=im.src; lbimg.alt=im.alt||''; lb.classList.add('on');
+    });
+    im.addEventListener('mouseenter',function(){ if(im.alt){tip.textContent=im.alt;tip.classList.add('on')} });
+    im.addEventListener('mousemove',function(e){ placeTip(e); });
+    im.addEventListener('mouseleave',function(){ tip.classList.remove('on') });
+  });
+}
+function placeTip(e){
+  var x=e.clientX+14,y=e.clientY+18, r=tip.getBoundingClientRect();
+  if(x+r.width>window.innerWidth-10) x=window.innerWidth-r.width-10;
+  if(y+r.height>window.innerHeight-10) y=e.clientY-r.height-12;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function closeLb(){lb.classList.remove('on');lbimg.src=''}
+$('#lbx').onclick=closeLb;
+lb.addEventListener('click',function(e){if(e.target===lb) closeLb()});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){ closeLb(); $('#mask').classList.remove('on'); }
+});
+bindImages();
+
+})();
+</script>
+</body>
+</html>

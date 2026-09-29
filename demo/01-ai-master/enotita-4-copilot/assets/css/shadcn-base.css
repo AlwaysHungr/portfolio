@@ -1,0 +1,179 @@
+/* ============================================================
+   shadcn/ui — base style
+   ------------------------------------------------------------
+   Απόδοση των components Button, Button Group και Select του
+   shadcn/ui (base) σε καθαρό CSS, χωρίς React και χωρίς Tailwind.
+   Οι τιμές (ύψη, ακτίνες, μεγέθη, δακτύλιος εστίασης) είναι ίδιες
+   με εκείνες των επίσημων components· τα χρώματα αντλούνται από
+   τις μεταβλητές του μαθήματος, ώστε να ακολουθούν το θέμα.
+   ============================================================ */
+
+:root {
+  --sc-radius: 10px;            /* rounded-lg  · --radius 0.625rem */
+  --sc-radius-md: 8px;          /* rounded-md */
+  --sc-radius-sm: 6px;
+  --sc-h: 36px;                 /* size lg */
+  --sc-h-sm: 32px;              /* size default */
+  --sc-h-xs: 28px;              /* size sm */
+  --sc-ring: color-mix(in srgb, var(--primary) 50%, transparent);
+  --sc-accent: var(--primary-tint);
+  --sc-muted: var(--bg-soft);
+  /* Κείμενο πάνω σε primary. Στο σκούρο θέμα το primary είναι ανοιχτό,
+     οπότε το κείμενο γίνεται σκούρο, όπως ορίζει και το ίδιο το θέμα. */
+  --sc-primary-fg: #fff;
+}
+body.dark {
+  --sc-primary-fg: var(--bg);
+}
+
+/* ------------------------------------------------------------
+   Button
+   ------------------------------------------------------------ */
+.btn,
+.sc-btn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: var(--sc-h);
+  padding: 0 14px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  border-radius: var(--sc-radius);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.btn:focus-visible,
+.sc-btn:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--sc-ring);
+}
+.btn:active:not([aria-haspopup]),
+.sc-btn:active:not([aria-haspopup]) { transform: translateY(1px); }
+.btn:disabled,
+.sc-btn:disabled { pointer-events: none; opacity: .5; }
+.btn svg, .sc-btn svg { pointer-events: none; flex-shrink: 0; width: 16px; height: 16px; }
+
+/* Μεγέθη */
+.btn-sm, .sc-btn-sm { height: var(--sc-h-sm); padding: 0 10px; font-size: .8rem; }
+.btn-xs, .sc-btn-xs { height: var(--sc-h-xs); padding: 0 8px; font-size: .78rem; border-radius: var(--sc-radius-md); }
+.sc-btn-icon { width: var(--sc-h-sm); height: var(--sc-h-sm); padding: 0; }
+
+/* Παραλλαγές */
+.btn-primary { box-shadow: none; }
+.sc-btn-default {
+  background: var(--primary);
+  color: var(--sc-primary-fg);
+  box-shadow: none;
+}
+.sc-btn-default:hover { background: color-mix(in srgb, var(--primary) 85%, var(--ink)); }
+.sc-btn-secondary {
+  background: var(--sc-muted);
+  color: var(--ink);
+  border-color: transparent;
+}
+.sc-btn-secondary:hover { background: color-mix(in srgb, var(--sc-muted) 80%, var(--ink) 6%); }
+/* Το ανασήκωμα στο hover δεν ανήκει στο Button του shadcn. */
+.btn:hover { transform: none; }
+.sc-btn-outline {
+  border-color: var(--border);
+  background: var(--surface);
+  color: var(--ink);
+}
+.sc-btn-outline:hover { background: var(--sc-muted); color: var(--ink); }
+.sc-btn-ghost { background: transparent; color: var(--ink); }
+.sc-btn-ghost:hover { background: var(--sc-accent); }
+.sc-btn-destructive { background: var(--danger); color: #fff; }
+.sc-btn-destructive:hover { background: color-mix(in srgb, var(--danger) 80%, transparent); }
+
+body.dark .sc-btn-outline { background: color-mix(in srgb, var(--surface) 55%, transparent); }
+body.dark .sc-btn-outline:hover { background: color-mix(in srgb, var(--surface) 80%, transparent); }
+
+/* ------------------------------------------------------------
+   Button Group
+   ------------------------------------------------------------ */
+.sc-btn-group {
+  display: flex;
+  width: fit-content;
+  align-items: stretch;
+}
+.sc-btn-group > * { border-radius: 0; }
+.sc-btn-group > *:first-child {
+  border-start-start-radius: var(--sc-radius);
+  border-end-start-radius: var(--sc-radius);
+}
+.sc-btn-group > *:last-child {
+  border-start-end-radius: var(--sc-radius);
+  border-end-end-radius: var(--sc-radius);
+}
+.sc-btn-group > * + * { border-inline-start-width: 0; }
+.sc-btn-group > *:focus-visible { position: relative; z-index: 10; }
+.sc-btn-group-wrap { flex-wrap: wrap; width: auto; gap: 8px; }
+.sc-btn-group-wrap > * { border-radius: var(--sc-radius); border-inline-start-width: 1px; }
+
+/* ------------------------------------------------------------
+   Select
+   ------------------------------------------------------------ */
+.enrich-match select,
+select.sc-select {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  height: var(--sc-h-sm);
+  padding: 0 32px 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--sc-radius);
+  background-color: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  cursor: pointer;
+  outline: none;
+  text-overflow: ellipsis;
+  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  /* Το βελάκι του trigger, σε SVG μέσα στο ίδιο το φύλλο στυλ. */
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238E8EA0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 16px;
+}
+.enrich-match select:focus-visible,
+select.sc-select:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--sc-ring);
+}
+.enrich-match select:disabled,
+select.sc-select:disabled { cursor: not-allowed; opacity: .5; }
+.enrich-match select:invalid,
+select.sc-select:invalid { color: var(--muted); }
+
+body.dark .enrich-match select,
+body.dark select.sc-select {
+  background-color: color-mix(in srgb, var(--surface) 30%, transparent);
+}
+body.dark .enrich-match select:hover,
+body.dark select.sc-select:hover {
+  background-color: color-mix(in srgb, var(--surface) 55%, transparent);
+}
+/* Η λίστα επιλογών σχεδιάζεται από το λειτουργικό· ορίζουμε μόνο χρώματα. */
+.enrich-match select option,
+select.sc-select option { background: var(--surface); color: var(--ink); }
+
+.enrich-match-row { display: grid; gap: 6px; margin: 0 0 12px; }
+.enrich-match-row label { font-size: .82rem; font-weight: 600; color: var(--ink-2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .sc-btn, select.sc-select, .enrich-match select { transition: none; }
+  .btn:active, .sc-btn:active { transform: none; }
+}

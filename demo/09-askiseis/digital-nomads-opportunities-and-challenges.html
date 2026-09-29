@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital nomads: opportunities and challenges</title>
+<style>
+:root{
+  --ink:#0E2233; --ink2:#3B5468; --paper:#FFFFFF; --bg:#EEF3F6;
+  --sea:#0F6E8C; --sea2:#0B5570; --sand:#F2A93B; --sand2:#DE9505;
+  --leaf:#3F8F4A; --coral:#D2503C; --line:#D7E1E8; --soft:#F6FAFC;
+  --topH:64px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  line-height:1.55;
+  -webkit-text-size-adjust:100%;
+}
+
+/* ---------- header ---------- */
+.top{
+  position:sticky; top:0; z-index:60;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 10px 14px -12px rgba(14,34,51,.35);
+}
+.top .in{
+  max-width:1080px; margin:0 auto; padding:10px 18px;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+.brand{display:flex; align-items:center; gap:11px; min-width:0}
+.brand .glyph{
+  width:38px;height:38px;flex:0 0 38px;border-radius:12px;
+  background:linear-gradient(135deg,var(--sea),var(--sea2));
+  display:grid;place-items:center;color:#fff;
+}
+.brand h1{
+  margin:0; font-size:17px; line-height:1.25; font-weight:700; letter-spacing:.1px;
+  min-width:0;
+}
+.brand h1 i{display:block;font-style:normal;font-size:12px;font-weight:600;color:var(--sea);letter-spacing:.8px}
+.prog{flex:1 1 180px; min-width:140px; display:flex; align-items:center; gap:10px}
+.bar{flex:1; height:7px; border-radius:99px; background:#E3EBF1; overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sea),var(--sand));transition:width .35s ease}
+.pcount{font-size:12px;font-weight:700;color:var(--ink2);white-space:nowrap}
+
+/* ---------- stepper strip ---------- */
+.strip{
+  position:sticky; z-index:55;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 10px 14px -10px rgba(14,34,51,.25);
+}
+.strip .in{
+  max-width:1080px;margin:0 auto;padding:8px 12px;
+  display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;
+}
+.dot{
+  border:1px solid var(--line); background:var(--soft); color:var(--ink2);
+  border-radius:99px; padding:7px 13px; font-size:13px; font-weight:600;
+  cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:7px;
+  font-family:inherit;
+}
+.dot b{
+  width:20px;height:20px;border-radius:50%;background:#DCE6EC;color:var(--ink2);
+  display:grid;place-items:center;font-size:11px;font-weight:800;
+}
+.dot:hover{border-color:var(--sea);color:var(--sea)}
+.dot.on{background:var(--sea);border-color:var(--sea);color:#fff}
+.dot.on b{background:rgba(255,255,255,.25);color:#fff}
+.dot.done b{background:var(--leaf);color:#fff}
+.dot.on.done b{background:rgba(255,255,255,.3)}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:22px 18px 70px}
+.screen{display:none;animation:fade .32s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.panel{
+  background:var(--paper); border:1px solid var(--line); border-radius:18px;
+  padding:22px; margin:0 0 18px;
+  box-shadow:0 14px 30px -26px rgba(14,34,51,.5);
+}
+.panel.tint{background:linear-gradient(180deg,#F7FBFD,#FFFFFF)}
+h2.sec{
+  margin:0 0 4px; font-size:23px; line-height:1.25;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+h2.sec svg{flex:0 0 auto}
+.lead{margin:0 0 18px;color:var(--ink2);font-size:14.5px}
+h3.sub{margin:22px 0 10px;font-size:16px;color:var(--sea2);display:flex;align-items:center;gap:8px}
+h3.sub:first-child{margin-top:0}
+
+.en{
+  font-size:15.5px;
+}
+.en b{color:var(--ink)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;justify-content:center;
+  border:0;border-radius:12px;padding:12px 20px;cursor:pointer;
+  font-family:inherit;font-size:15px;font-weight:700;
+  background:var(--sea);color:#fff;text-decoration:none;
+  transition:transform .12s ease, box-shadow .2s ease, background .2s ease;
+  box-shadow:0 10px 18px -12px rgba(15,110,140,.9);
+}
+.btn:hover{background:var(--sea2);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn[hidden]{display:none}
+.btn.ghost{background:#fff;color:var(--sea);border:1.5px solid var(--sea);box-shadow:none}
+.btn.ghost:hover{background:var(--soft)}
+.btn.gold{background:linear-gradient(135deg,var(--sand),var(--sand2));box-shadow:0 12px 22px -12px rgba(222,149,5,.95)}
+.btn.gold:hover{background:linear-gradient(135deg,var(--sand2),#C58200)}
+.btn.big{padding:15px 26px;font-size:16.5px}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* ---------- article embed ---------- */
+.srcline{
+  display:flex;gap:10px;align-items:flex-start;
+  background:var(--soft);border:1px solid var(--line);border-left:5px solid var(--sand);
+  border-radius:12px;padding:12px 14px;font-size:13.5px;color:var(--ink2);margin:16px 0 0;
+}
+.srcline svg{flex:0 0 auto;margin-top:2px}
+.frame{
+  margin-top:16px;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  background:#F3F7F9;position:relative;
+}
+.frame .ph{
+  display:grid;place-items:center;gap:14px;text-align:center;
+  padding:44px 22px;min-height:280px;
+}
+.frame .ph p{margin:0;color:var(--ink2);font-size:14px;max-width:520px}
+.frame iframe{display:block;width:100%;height:600px;border:0;background:#fff}
+.frame iframe[hidden]{display:none}
+.ph[hidden]{display:none}
+.hint{
+  display:flex;gap:9px;align-items:flex-start;
+  font-size:13px;color:var(--ink2);margin:12px 2px 0;
+}
+.hint svg{flex:0 0 auto;margin-top:1px}
+
+/* ---------- checklist ---------- */
+.checks{display:grid;gap:11px;margin:0;padding:0;list-style:none}
+.chk{
+  display:flex;gap:13px;align-items:flex-start;
+  background:var(--soft);border:1.5px solid var(--line);border-radius:14px;
+  padding:13px 15px;cursor:pointer;text-align:left;width:100%;
+  font-family:inherit;font-size:15px;color:var(--ink);line-height:1.5;
+  transition:border-color .18s ease, background .18s ease, transform .12s ease;
+}
+.chk:hover{border-color:var(--sea);transform:translateX(2px)}
+.chk .box{
+  flex:0 0 24px;width:24px;height:24px;border-radius:8px;
+  border:2px solid #B9CCD8;background:#fff;
+  display:grid;place-items:center;margin-top:1px;transition:all .18s ease;
+}
+.chk .box svg{opacity:0;transform:scale(.5);transition:all .2s ease}
+.chk.on{background:#EFF8F0;border-color:var(--leaf)}
+.chk.on .box{background:var(--leaf);border-color:var(--leaf)}
+.chk.on .box svg{opacity:1;transform:none}
+.chk .num{
+  flex:0 0 auto;font-weight:800;color:var(--sea);font-size:13px;
+  background:#E4F0F5;border-radius:7px;padding:2px 8px;margin-top:2px;
+}
+.chk.on .num{background:#DCEFDE;color:var(--leaf)}
+
+.tally{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#fff;border:1px solid var(--line);border-radius:99px;
+  padding:8px 16px;font-size:14px;font-weight:700;color:var(--ink2);margin-top:16px;
+}
+.tally .ringmini{
+  width:26px;height:26px;flex:0 0 26px;
+}
+
+/* ---------- specs ---------- */
+.specs{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.spec{
+  display:flex;align-items:center;gap:9px;
+  background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:10px 14px;font-size:13.5px;font-weight:600;color:var(--ink2);
+}
+.spec b{color:var(--ink);font-size:15px}
+.spec .ic{
+  width:28px;height:28px;flex:0 0 28px;border-radius:9px;
+  background:#E4F0F5;display:grid;place-items:center;color:var(--sea);
+}
+
+/* ---------- vocabulary ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}
+.chip{
+  border:1.5px solid var(--line);background:#fff;color:var(--ink);
+  border-radius:99px;padding:9px 15px;font-size:14.5px;font-weight:600;
+  cursor:pointer;font-family:inherit;text-align:left;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .16s ease;
+}
+.chip:hover{border-color:var(--sand2);transform:translateY(-2px)}
+.chip .mk{
+  width:18px;height:18px;flex:0 0 18px;border-radius:50%;
+  border:2px solid #C6D5DE;display:grid;place-items:center;
+  font-size:11px;line-height:1;color:#fff;background:#fff;transition:all .16s ease;
+}
+.chip.on{background:#FFF6E6;border-color:var(--sand2);color:#7A5200}
+.chip.on .mk{background:var(--sand2);border-color:var(--sand2)}
+.chip.used{background:#EFF8F0;border-color:var(--leaf);color:#215C29}
+.chip.used .mk{background:var(--leaf);border-color:var(--leaf)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:13px;height:13px;border-radius:50%;display:inline-block}
+
+/* ---------- writer ---------- */
+.writer{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.writer>*{min-width:0}
+.ta{
+  width:100%;min-height:300px;resize:vertical;
+  border:1.5px solid var(--line);border-radius:14px;padding:16px;
+  font-family:inherit;font-size:15.5px;line-height:1.65;color:var(--ink);
+  background:var(--soft);
+}
+.ta:focus{outline:none;border-color:var(--sea);background:#fff}
+.meter{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+}
+.meter .n{font-size:26px;font-weight:800;line-height:1;color:var(--sea)}
+.meter .n small{font-size:13px;font-weight:700;color:var(--ink2);margin-left:4px}
+.track{
+  flex:1 1 200px;min-width:150px;height:12px;border-radius:99px;background:#E7EEF3;
+  position:relative;overflow:hidden;
+}
+.track i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--coral);transition:width .25s ease,background .25s ease}
+.track u{position:absolute;top:0;bottom:0;width:2px;background:#B9CCD8}
+.state{
+  font-size:13.5px;font-weight:700;padding:6px 13px;border-radius:99px;
+  background:#FBE9E6;color:#8E2C1D;
+}
+.state.ok{background:#E6F4E8;color:#215C29}
+.state.over{background:#FFF1DC;color:#7A5200}
+.vtrack{
+  display:flex;align-items:center;gap:11px;flex-wrap:wrap;
+  font-size:13.5px;color:var(--ink2);font-weight:600;
+}
+.vtrack b{color:var(--leaf);font-size:16px}
+.cta{
+  background:linear-gradient(135deg,#0F6E8C,#0B5570);color:#fff;
+  border-radius:18px;padding:24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;
+}
+.cta .t{flex:1 1 260px;min-width:0}
+.cta h3{margin:0 0 6px;font-size:19px}
+.cta p{margin:0;font-size:14px;color:#CFE6EE}
+.cta .btn{background:#fff;color:var(--sea2)}
+.cta .btn:hover{background:#EAF5F8}
+
+/* ---------- rubric ---------- */
+.rub{display:grid;gap:14px}
+.crit{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+.crit>h4{
+  margin:0;padding:13px 16px;background:var(--soft);font-size:15.5px;
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;
+}
+.crit>h4 span{
+  margin-left:auto;font-size:12.5px;font-weight:700;color:var(--ink2);
+  background:#fff;border:1px solid var(--line);border-radius:99px;padding:3px 11px;
+}
+.crit.picked>h4 span{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.lv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.lvl{
+  border-right:1px solid var(--line);padding:13px 14px;cursor:pointer;
+  background:#fff;text-align:left;font-family:inherit;
+  font-size:13.2px;line-height:1.5;color:var(--ink2);
+  transition:background .16s ease;
+}
+.lvl:last-child{border-right:0}
+.lvl:hover{background:var(--soft)}
+.lvl b{display:block;font-size:13px;color:var(--ink);margin-bottom:6px}
+.lvl b i{
+  font-style:normal;display:inline-block;min-width:20px;text-align:center;
+  background:#E4F0F5;color:var(--sea);border-radius:6px;padding:1px 6px;margin-right:6px;font-size:12px;
+}
+.lvl.sel{background:#EFF8F0;box-shadow:inset 0 0 0 2px var(--leaf)}
+.lvl.sel b i{background:var(--leaf);color:#fff}
+.total{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-top:16px;
+}
+.total .ring{width:74px;height:74px;flex:0 0 74px}
+.total .tx{flex:1 1 200px;min-width:0}
+.total .tx b{display:block;font-size:16px}
+.total .tx span{font-size:13.5px;color:var(--ink2)}
+
+/* ---------- keywords / footer ---------- */
+.kw{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.kw span{
+  background:#E4F0F5;color:var(--sea2);border-radius:99px;
+  padding:6px 13px;font-size:13px;font-weight:600;
+}
+.foot{
+  text-align:center;color:var(--ink2);font-size:12.5px;padding:6px 4px 0;
+}
+
+/* ---------- nav ---------- */
+.nav{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:6px}
+.nav .btn{min-width:132px}
+
+@media (max-width:860px){
+  .lv{grid-template-columns:minmax(0,1fr)}
+  .lvl{border-right:0;border-bottom:1px solid var(--line)}
+  .lvl:last-child{border-bottom:0}
+  .frame iframe{height:460px}
+}
+@media (max-width:620px){
+  .wrap{padding:16px 12px 60px}
+  .panel{padding:17px;border-radius:15px}
+  h2.sec{font-size:20px}
+  .brand h1{font-size:15px}
+  .nav .btn{min-width:0;flex:1 1 auto;padding:12px 10px;font-size:14px}
+  .dot span:not(.mk){display:none}
+  .dot{padding:7px 10px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="in">
+    <div class="brand">
+      <div class="glyph">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg>
+      </div>
+      <h1><i>READING &amp; WRITING</i>Digital nomads: opportunities and challenges</h1>
+    </div>
+    <div class="prog">
+      <div class="bar"><i id="pbar"></i></div>
+      <div class="pcount"><span id="pnow">1</span>/5</div>
+    </div>
+  </div>
+</header>
+
+<nav class="strip" id="strip">
+  <div class="in" id="dots"></div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ 1. ARTICLE ============ -->
+  <section class="screen on" data-s="0">
+    <div class="panel tint">
+      <h2 class="sec">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F6E8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-1.5z"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+        Digital Nomads
+      </h2>
+      <p class="lead">Read the article to find out more about the benefits and the challenges of being a digital nomad.</p>
+
+      <div class="btnrow">
+        <button class="btn" id="loadArt" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Φόρτωσε το άρθρο εδώ
+        </button>
+        <a class="btn ghost" id="openArt" href="https://digitalnomad.gg/news/digital-nomads-exploring-opportunities-and-overcoming-challenges-in-2023" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+          Άνοιγμα σε νέα καρτέλα
+        </a>
+      </div>
+
+      <div class="frame">
+        <div class="ph" id="artPh">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#9FB6C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8h20M6 12h7M6 15.5h10"/></svg>
+          <p>Το άρθρο <b>“Digital Nomads”</b> φορτώνεται από τον ιστότοπο Digital Nomad GG. Πάτησε «Φόρτωσε το άρθρο εδώ» για να το διαβάσεις χωρίς να φύγεις από τη σελίδα.</p>
+        </div>
+        <iframe id="artFrame" hidden title="Digital Nomads — Digital Nomad GG" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+      </div>
+
+      <p class="hint">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B5468" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+        Αν το άρθρο δεν εμφανιστεί μέσα στο πλαίσιο (ορισμένοι ιστότοποι δεν επιτρέπουν την ενσωμάτωση), άνοιξέ το σε νέα καρτέλα με το διπλανό κουμπί.
+      </p>
+
+      <div class="srcline">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#DE9505" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5v8l-9 5-9-5V8z"/><path d="M12 12v8M12 12l9-4M12 12L3 8"/></svg>
+        <span>Digital Nomad GG (2024). <i>Digital Nomads: Exploring Opportunities and Overcoming Challenges in 2023.</i> Τα πνευματικά δικαιώματα του υλικού ανήκουν στην ιστοσελίδα “Digital Nomad GG”.</span>
+      </div>
+    </div>
+
+    <div class="nav">
+      <span></span>
+      <button class="btn nx" type="button" data-go="1">Η αποστολή σου
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ 2. TASK ============ -->
+  <section class="screen" data-s="1">
+    <div class="panel">
+      <h2 class="sec">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F6E8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6v3H9z"/><path d="M15 5h3v15H6V5h3"/><path d="M9 12l2 2 4-4"/></svg>
+        Your task
+      </h2>
+      <p class="lead en">Then, come back here and <b>write an article of at least 200 words</b>, expressing your opinion on the topic at hand. Use the text as inspiration but don’t forget to express your own opinion.</p>
+
+      <h3 class="sub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5570" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        Your text should include:
+      </h3>
+      <ul class="checks" id="checks">
+        <li><button class="chk" type="button">
+          <span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <span class="num">1</span>
+          <span class="en">an appropriate and <b>catchy title</b> (since it’s an article!)</span>
+        </button></li>
+        <li><button class="chk" type="button">
+          <span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <span class="num">2</span>
+          <span class="en">an <b>introduction</b> of one or two sentences with general ideas on the topic,</span>
+        </button></li>
+        <li><button class="chk" type="button">
+          <span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <span class="num">3</span>
+          <span class="en">two paragraphs with the <b>advantages</b> and <b>disadvantages</b> of working remotely and being a digital nomad (supported with convincing examples!),</span>
+        </button></li>
+        <li><button class="chk" type="button">
+          <span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <span class="num">4</span>
+          <span class="en">a <b>conclusion</b> of one or two sentences that sums up your arguments and restates your opinion on the topic.</span>
+        </button></li>
+      </ul>
+
+      <div class="tally">
+        <svg class="ringmini" viewBox="0 0 36 36">
+          <circle cx="18" cy="18" r="15" fill="none" stroke="#E3EBF1" stroke-width="5"/>
+          <circle id="cRing" cx="18" cy="18" r="15" fill="none" stroke="#3F8F4A" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 94.2" transform="rotate(-90 18 18)" opacity="0"/>
+        </svg>
+        <span><span id="cNum">0</span>/4 σημεία της δομής σημειωμένα</span>
+      </div>
+
+      <h3 class="sub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5570" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+        Style
+      </h3>
+      <p class="en" style="margin:0">Remember to keep the style <b>formal</b> since you’re writing an article! You can do that by using formal vocabulary and by avoiding short forms and informal phrases!</p>
+
+      <div class="specs">
+        <div class="spec"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"/></svg></span>Ελάχιστο <b>200</b> λέξεις</div>
+        <div class="spec"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span>Μέγιστο <b>300</b> λέξεις</div>
+        <div class="spec"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></span>Επεξεργαστής κειμένου HTML</div>
+        <div class="spec"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Χωρίς συνημμένα αρχεία</div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn ghost" type="button" data-go="0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Το άρθρο
+      </button>
+      <button class="btn nx" type="button" data-go="2">Λεξιλόγιο
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ 3. VOCABULARY ============ -->
+  <section class="screen" data-s="2">
+    <div class="panel tint">
+      <h2 class="sec">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F6E8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H19v3H6.5"/></svg>
+        Useful vocabulary
+      </h2>
+      <p class="lead">Here is some useful vocabulary for you to use. Πάτησε τους όρους που σκοπεύεις να αξιοποιήσεις στο κείμενό σου.</p>
+
+      <ul class="chips" id="vocab"></ul>
+
+      <div class="legend">
+        <span><i style="background:#DE9505"></i> επιλεγμένος για χρήση</span>
+        <span><i style="background:#3F8F4A"></i> εντοπίστηκε στο κείμενό σου</span>
+      </div>
+
+      <div class="tally">
+        <svg class="ringmini" viewBox="0 0 36 36">
+          <circle cx="18" cy="18" r="15" fill="none" stroke="#E3EBF1" stroke-width="5"/>
+          <circle id="vRing" cx="18" cy="18" r="15" fill="none" stroke="#DE9505" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 94.2" transform="rotate(-90 18 18)" opacity="0"/>
+        </svg>
+        <span><span id="vNum">0</span>/15 όροι επιλεγμένοι</span>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn ghost" type="button" data-go="1">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Η αποστολή σου
+      </button>
+      <button class="btn nx" type="button" data-go="3">Γράψε το άρθρο
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ 4. WRITE ============ -->
+  <section class="screen" data-s="3">
+    <div class="panel">
+      <h2 class="sec">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F6E8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10-10-4-4L4 16z"/><path d="M14 6l4 4"/></svg>
+        Write your article
+      </h2>
+      <p class="lead">Γράψε εδώ το προσχέδιό σου και παρακολούθησε τις λέξεις σου. Όταν είσαι έτοιμος/έτοιμη, αντίγραψέ το και υπόβαλέ το στη δραστηριότητα.</p>
+
+      <div class="writer">
+        <textarea class="ta" id="draft" placeholder="Your title…&#10;&#10;Introduction…&#10;&#10;Advantages…&#10;&#10;Disadvantages…&#10;&#10;Conclusion…" spellcheck="true"></textarea>
+
+        <div class="meter">
+          <div class="n"><span id="wc">0</span><small>λέξεις</small></div>
+          <div class="track" id="track">
+            <i id="tfill"></i>
+            <u style="left:66.6%"></u>
+          </div>
+          <div class="state" id="wstate">Χρειάζονται τουλάχιστον 200 λέξεις</div>
+        </div>
+
+        <div class="vtrack">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3F8F4A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
+          Λεξιλόγιο του πίνακα που εντοπίστηκε στο κείμενό σου: <b><span id="vUsed">0</span>/15</b>
+        </div>
+
+        <div class="btnrow">
+          <button class="btn ghost" id="copyBtn" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+            Αντιγραφή κειμένου
+          </button>
+          <button class="btn ghost" id="clearBtn" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg>
+            Καθαρισμός
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="t">
+        <h3>Υπόβαλε το άρθρο σου</h3>
+        <p>Άνοιξε τη δραστηριότητα και γράψε το κείμενό σου στον επεξεργαστή κειμένου. Ελάχιστο 200 – μέγιστο 300 λέξεις, χωρίς συνημμένα αρχεία.</p>
+      </div>
+      <a class="btn big" href="https://mlm-support.iep.edu.gr/demolms/mod/assign/view.php?id=105561&amp;forceview=1" target="_blank" rel="noopener">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+        Μετάβαση στη δραστηριότητα
+      </a>
+    </div>
+
+    <div class="nav">
+      <button class="btn ghost" type="button" data-go="2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Λεξιλόγιο
+      </button>
+      <button class="btn nx" type="button" data-go="4">Αξιολόγηση
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ 5. RUBRIC ============ -->
+  <section class="screen" data-s="4">
+    <div class="panel">
+      <h2 class="sec">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F6E8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6.1L12 16.8 6.6 19.7l1.2-6.1L3.3 9.4l6.1-.8z"/></svg>
+        Πώς θα αξιολογηθεί το κείμενό σου
+      </h2>
+      <p class="lead">Δραστηριότητα ανοιχτού τύπου: λαμβάνεις ανατροφοδότηση από τον/την εκπαιδευτικό. Διάβασε τη ρουμπρίκα και δοκίμασε να αξιολογήσεις μόνος/μόνη σου το προσχέδιό σου.</p>
+
+      <div class="rub" id="rub"></div>
+
+      <div class="total">
+        <svg class="ring" viewBox="0 0 36 36">
+          <circle cx="18" cy="18" r="15.5" fill="none" stroke="#E3EBF1" stroke-width="4.5"/>
+          <circle id="tRing" cx="18" cy="18" r="15.5" fill="none" stroke="#0F6E8C" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0 97.4" transform="rotate(-90 18 18)" opacity="0"/>
+          <text id="tTxt" x="18" y="19.4" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0E2233" font-family="Segoe UI, system-ui, Arial, sans-serif">0/12</text>
+        </svg>
+        <div class="tx">
+          <b id="tLead">Επίλεξε ένα επίπεδο σε κάθε κριτήριο</b>
+          <span id="tSub">Η αυτοαξιολόγηση σε βοηθά να δεις τι μπορείς να βελτιώσεις πριν υποβάλεις το κείμενό σου.</span>
+        </div>
+        <button class="btn ghost" id="rubReset" type="button">Καθαρισμός</button>
+      </div>
+
+      <h3 class="sub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5570" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10H7z"/><path d="M4 4h3M17 4h3M4 20h3M17 20h3"/></svg>
+        Λέξεις κλειδιά
+      </h3>
+      <div class="kw">
+        <span>τηλεργασία</span><span>ψηφιακοί νομάδες</span><span>έκθεση</span>
+        <span>remote work</span><span>digital nomads</span><span>essay</span>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn ghost" type="button" data-go="3">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Γράψε το άρθρο
+      </button>
+      <a class="btn gold" href="https://mlm-support.iep.edu.gr/demolms/mod/assign/view.php?id=105561&amp;forceview=1" target="_blank" rel="noopener">
+        Μετάβαση στη δραστηριότητα
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+      </a>
+    </div>
+
+    <p class="foot">Digital Nomad GG (2024). <i>Digital Nomads: Exploring Opportunities and Overcoming Challenges in 2023.</i></p>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- js: navigation ---------- */
+  var screens = [].slice.call(document.querySelectorAll(".screen"));
+  var LABELS = ["Το άρθρο","Η αποστολή","Λεξιλόγιο","Γράψε","Αξιολόγηση"];
+  var dots = document.getElementById("dots");
+  var seen = [true,false,false,false,false];
+  var cur = 0;
+
+  LABELS.forEach(function(l,i){
+    var b = document.createElement("button");
+    b.className = "dot" + (i===0 ? " on" : "");
+    b.type = "button";
+    b.innerHTML = '<b class="mk">'+(i+1)+'</b><span>'+l+'</span>';
+    b.addEventListener("click", function(){ go(i); });
+    dots.appendChild(b);
+  });
+
+  function go(i){
+    if(i<0 || i>=screens.length) return;
+    cur = i; seen[i] = true;
+    screens.forEach(function(s,k){ s.classList.toggle("on", k===i); });
+    [].slice.call(dots.children).forEach(function(d,k){
+      d.classList.toggle("on", k===i);
+      d.classList.toggle("done", seen[k] && k!==i);
+    });
+    document.getElementById("pbar").style.width = ((i+1)/screens.length*100)+"%";
+    document.getElementById("pnow").textContent = i+1;
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  [].slice.call(document.querySelectorAll("[data-go]")).forEach(function(b){
+    b.addEventListener("click", function(){ go(parseInt(b.getAttribute("data-go"),10)); });
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if(e.key === "ArrowRight") go(cur+1);
+    if(e.key === "ArrowLeft") go(cur-1);
+  });
+  go(0);
+
+  /* ---------- js: sticky offset ---------- */
+  function fitTop(){
+    var h = document.querySelector(".top").offsetHeight;
+    document.getElementById("strip").style.top = h + "px";
+  }
+  fitTop();
+  window.addEventListener("resize", fitTop);
+  window.addEventListener("load", fitTop);
+
+  /* ---------- js: article embed ---------- */
+  var ART = "https://digitalnomad.gg/news/digital-nomads-exploring-opportunities-and-overcoming-challenges-in-2023";
+  var lb = document.getElementById("loadArt"),
+      fr = document.getElementById("artFrame"),
+      ph = document.getElementById("artPh");
+  lb.addEventListener("click", function(){
+    fr.src = ART;
+    fr.hidden = false;
+    ph.hidden = true;
+    lb.hidden = true;
+  });
+
+  /* ---------- js: structure checklist ---------- */
+  var C = 2*Math.PI*15;
+  function setRing(el, frac){
+    el.setAttribute("stroke-dasharray", (frac*C).toFixed(2) + " " + C.toFixed(2));
+    el.style.opacity = frac ? 1 : 0;
+  }
+  var chks = [].slice.call(document.querySelectorAll("#checks .chk"));
+  chks.forEach(function(b){
+    b.addEventListener("click", function(){
+      b.classList.toggle("on");
+      var n = document.querySelectorAll("#checks .chk.on").length;
+      document.getElementById("cNum").textContent = n;
+      setRing(document.getElementById("cRing"), n/4);
+    });
+  });
+
+  /* ---------- js: vocabulary ---------- */
+  var TERMS = ["remote work","location independence","flexible work arrangements",
+    "work–life balance","broaden horizons","cultural diversity","financial stability",
+    "unreliable internet connectivity","blurred boundaries","lack of long-term security",
+    "professional networking opportunities","cost of living",
+    "adapt to changing environments","maintain productivity","feelings of isolation"];
+
+  function norm(s){
+    return (" " + s.toLowerCase()
+      .replace(/[\u2010-\u2015]/g,"-")
+      .replace(/[^a-z0-9]+/g," ")
+      .trim() + " ");
+  }
+  var vlist = document.getElementById("vocab");
+  var chipEls = [];
+  TERMS.forEach(function(t,i){
+    var li = document.createElement("li");
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.setAttribute("data-i", i);
+    b.innerHTML = '<span class="mk">✓</span>' + t;
+    b.addEventListener("click", function(){
+      b.classList.toggle("on");
+      var n = document.querySelectorAll("#vocab .chip.on").length;
+      document.getElementById("vNum").textContent = n;
+      setRing(document.getElementById("vRing"), n/TERMS.length);
+    });
+    li.appendChild(b);
+    vlist.appendChild(li);
+    chipEls.push(b);
+  });
+
+  /* ---------- js: writer ---------- */
+  var ta = document.getElementById("draft"),
+      wc = document.getElementById("wc"),
+      tf = document.getElementById("tfill"),
+      st = document.getElementById("wstate"),
+      vu = document.getElementById("vUsed");
+
+  function update(){
+    var raw = ta.value.trim();
+    var n = raw ? raw.split(/\s+/).length : 0;
+    wc.textContent = n;
+
+    var pct = Math.min(n/300, 1) * 100;
+    tf.style.width = pct + "%";
+    if(n === 0){
+      tf.style.background = "#C7D5DE";
+      st.className = "state";
+      st.textContent = "Χρειάζονται τουλάχιστον 200 λέξεις";
+    } else if(n < 200){
+      tf.style.background = "#D2503C";
+      st.className = "state";
+      st.textContent = "Ακόμη " + (200-n) + " λέξεις για το ελάχιστο";
+    } else if(n <= 300){
+      tf.style.background = "#3F8F4A";
+      st.className = "state ok";
+      st.textContent = "Εντός ορίων (200–300 λέξεις)";
+    } else {
+      tf.style.background = "#DE9505";
+      st.className = "state over";
+      st.textContent = (n-300) + " λέξεις πάνω από το μέγιστο";
+    }
+
+    var hay = norm(ta.value);
+    var used = 0;
+    chipEls.forEach(function(b,i){
+      var hit = hay.indexOf(norm(TERMS[i]).slice(1,-1)) > -1;
+      b.classList.toggle("used", hit);
+      if(hit) used++;
+    });
+    vu.textContent = used;
+  }
+  ta.addEventListener("input", update);
+  update();
+
+  document.getElementById("copyBtn").addEventListener("click", function(){
+    var b = this;
+    var done = function(){
+      var old = b.innerHTML;
+      b.innerHTML = "Αντιγράφηκε!";
+      setTimeout(function(){ b.innerHTML = old; }, 1600);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(ta.value).then(done, function(){ ta.select(); document.execCommand("copy"); done(); });
+    } else {
+      ta.select(); document.execCommand("copy"); done();
+    }
+  });
+  document.getElementById("clearBtn").addEventListener("click", function(){
+    ta.value = ""; update(); ta.focus({preventScroll:true});
+  });
+
+  /* ---------- js: rubric ---------- */
+  var RUB = [
+    { name:"Content &amp; Task Achievement", lv:[
+      "Fully addresses the task with well-developed, relevant ideas and a clear purpose.",
+      "Addresses the task with relevant ideas, though some points could be developed further.",
+      "Partially addresses the task; ideas are repetitive, underdeveloped, or occasionally irrelevant.",
+      "Does not adequately address the task or provides very limited relevant content."]},
+    { name:"Organisation &amp; Cohesion", lv:[
+      "Information is logically organised into clear paragraphs with effective sequencing and a wide range of cohesive devices used naturally.",
+      "Generally well organised with appropriate paragraphing and linking devices.",
+      "Organisation is inconsistent; linking devices are limited or sometimes inaccurate.",
+      "Lacks clear organisation; ideas are disconnected and difficult to follow."]},
+    { name:"Language Use", lv:[
+      "Demonstrates a wide range of sophisticated vocabulary and complex grammatical structures with a high degree of accuracy. Errors are rare and do not affect understanding.",
+      "Uses a good range of vocabulary and grammatical structures with occasional errors that do not interfere with meaning.",
+      "Uses adequate but repetitive vocabulary and attempts some complex structures, though frequent errors reduce clarity.",
+      "Limited vocabulary and frequent grammatical errors significantly affect clarity and communication."]},
+    { name:"Style &amp; Register", lv:[
+      "Consistently maintains an engaging, appropriate style and register for an article, effectively addressing the intended audience.",
+      "Style and register are generally appropriate, with only minor inconsistencies.",
+      "Style or register is occasionally inappropriate or inconsistent for the genre",
+      "Style and register are inappropriate for the task and audience."]}
+  ];
+  var HEAD = ["Excellent (3)","Good (2)","Developing (1)","Limited (0)"];
+  var SCORE = [3,2,1,0];
+  var picks = [null,null,null,null];
+  var rubBox = document.getElementById("rub");
+
+  RUB.forEach(function(c, ci){
+    var d = document.createElement("div");
+    d.className = "crit";
+    var html = '<h4>' + c.name + '<span data-badge>—</span></h4><div class="lv">';
+    c.lv.forEach(function(txt, li){
+      html += '<button class="lvl" type="button" data-c="'+ci+'" data-l="'+li+'"><b><i>'+SCORE[li]+'</i>'+HEAD[li]+'</b>'+txt+'</button>';
+    });
+    html += '</div>';
+    d.innerHTML = html;
+    rubBox.appendChild(d);
+  });
+
+  var CT = 2*Math.PI*15.5;
+  function rubUpdate(){
+    var done = 0, sum = 0;
+    picks.forEach(function(p){ if(p !== null){ done++; sum += SCORE[p]; } });
+    var ring = document.getElementById("tRing");
+    ring.setAttribute("stroke-dasharray", (sum/12*CT).toFixed(2) + " " + CT.toFixed(2));
+    ring.style.opacity = sum ? 1 : 0;
+    document.getElementById("tTxt").textContent = sum + "/12";
+    var lead = document.getElementById("tLead");
+    if(done < 4){
+      lead.textContent = "Επίλεξε ένα επίπεδο σε κάθε κριτήριο (" + done + "/4)";
+    } else {
+      lead.textContent = "Η αυτοαξιολόγησή σου: " + sum + " στα 12";
+    }
+  }
+  rubBox.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest(".lvl") : null;
+    if(!b) return;
+    var ci = +b.getAttribute("data-c"), li = +b.getAttribute("data-l");
+    var crit = b.closest(".crit");
+    [].slice.call(crit.querySelectorAll(".lvl")).forEach(function(x){ x.classList.remove("sel"); });
+    if(picks[ci] === li){
+      picks[ci] = null;
+      crit.classList.remove("picked");
+      crit.querySelector("[data-badge]").textContent = "—";
+    } else {
+      picks[ci] = li;
+      b.classList.add("sel");
+      crit.classList.add("picked");
+      crit.querySelector("[data-badge]").textContent = SCORE[li] + "/3";
+    }
+    rubUpdate();
+  });
+  document.getElementById("rubReset").addEventListener("click", function(){
+    picks = [null,null,null,null];
+    [].slice.call(rubBox.querySelectorAll(".lvl")).forEach(function(x){ x.classList.remove("sel"); });
+    [].slice.call(rubBox.querySelectorAll(".crit")).forEach(function(x){
+      x.classList.remove("picked");
+      x.querySelector("[data-badge]").textContent = "—";
+    });
+    rubUpdate();
+  });
+  rubUpdate();
+
+})();
+</script>
+</body>
+</html>

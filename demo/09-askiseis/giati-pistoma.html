@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Γιατί «Πίστομα»;</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:     #1a1208;
+      --paper:   #f5f0e8;
+      --aged:    #e8e0cc;
+      --accent:  #8b1a1a;
+      --accent2: #2c4a6e;
+      --gold:    #c9a227;
+      --muted:   #6b5e4e;
+      --success: #2d6a4f;
+      --error:   #8b1a1a;
+      --shadow:  rgba(26,18,8,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--ink);
+      background-color: #2a2118;
+      background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(139,26,26,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(44,74,110,0.15) 0%, transparent 50%);
+      min-height: 100vh;
+      padding: 2rem 1rem 3rem;
+    }
+
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--paper);
+      border-top: 6px solid var(--accent);
+      padding: 2.2rem 3rem 1.8rem;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .header-meta {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    .header-sub {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* DIVIDER */
+    .divider-ornament {
+      background: var(--aged);
+      text-align: center;
+      padding: 0.55rem 0;
+      letter-spacing: 0.4em;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-left: 2px solid var(--ink);
+      border-right: 2px solid var(--ink);
+    }
+
+    /* SECTION */
+    .section {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-top: none;
+      padding: 2.2rem 3rem;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--aged);
+    }
+
+    /* EKFONISI */
+    .ekfonisi {
+      background: #ede8db;
+      border: 1px solid #d0c8b0;
+      border-radius: 3px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.6rem;
+      font-size: 0.97rem;
+      color: var(--ink);
+    }
+
+    /* ACTIVITY HEADER */
+    .activity-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.9rem;
+      margin-bottom: 1.4rem;
+      flex-wrap: wrap;
+    }
+
+    .activity-badge {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .activity-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* QUIZ */
+    .question-block {
+      margin-bottom: 2rem;
+      padding-bottom: 1.6rem;
+      border-bottom: 1px solid var(--aged);
+    }
+
+    .question-block:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .question-text {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .question-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+
+    /* MCQ options */
+    .options-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.85rem;
+      border: 1.5px solid #ccc5b0;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.97rem;
+      color: var(--ink);
+      background: #faf7f2;
+      transition: border-color 0.15s, background 0.15s;
+      line-height: 1.45;
+    }
+
+    .option-label:hover {
+      border-color: var(--accent2);
+      background: #eef2f7;
+    }
+
+    .option-label input[type="radio"],
+    .option-label input[type="checkbox"] {
+      accent-color: var(--accent2);
+      width: 1.1em;
+      height: 1.1em;
+      flex-shrink: 0;
+    }
+
+    /* True/False */
+    .tf-btn-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .tf-btn {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.97rem;
+      padding: 0.55rem 1.6rem;
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      background: #faf7f2;
+      color: var(--ink);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-weight: 600;
+    }
+
+    .tf-btn:hover:not(:disabled) {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .tf-btn.selected {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    /* States after submit */
+    .option-label.correct-answer {
+      border-color: var(--success);
+      background: #d8f0e4;
+    }
+
+    .option-label.wrong-answer {
+      border-color: var(--error);
+      background: #f5dada;
+    }
+
+    .option-label.correct-answer::after {
+      content: ' ✓';
+      font-weight: 700;
+      color: var(--success);
+      margin-left: auto;
+    }
+
+    .option-label.wrong-answer::after {
+      content: ' ✗';
+      font-weight: 700;
+      color: var(--error);
+      margin-left: auto;
+    }
+
+    .tf-btn.correct-answer {
+      background: #d8f0e4;
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    .tf-btn.wrong-answer {
+      background: #f5dada;
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    /* Feedback box */
+    .feedback-box {
+      display: none;
+      padding: 0.65rem 1rem;
+      border-radius: 3px;
+      font-size: 0.93rem;
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+
+    .feedback-box.correct {
+      background: #d8f0e4;
+      border-left: 4px solid var(--success);
+      color: #1a4a30;
+    }
+
+    .feedback-box.incorrect {
+      background: #f5dada;
+      border-left: 4px solid var(--error);
+      color: #5a1010;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-top: 1.8rem;
+    }
+
+    .btn-primary {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.97rem;
+      font-weight: 600;
+      background: var(--ink);
+      color: white;
+      border: none;
+      padding: 0.65rem 1.7rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      letter-spacing: 0.03em;
+    }
+
+    .btn-primary:hover:not(:disabled) { opacity: 0.82; }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .btn-secondary {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.97rem;
+      font-weight: 600;
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+      padding: 0.65rem 1.7rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-secondary:hover { background: var(--ink); color: var(--paper); }
+
+    /* Total score */
+    .score-panel {
+      display: none;
+      margin-top: 1.6rem;
+      padding: 1.2rem 1.4rem;
+      border: 2px solid var(--gold);
+      border-radius: 3px;
+      background: #fdf7e8;
+    }
+
+    .score-panel .score-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .score-panel .score-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin-bottom: 0.6rem;
+    }
+
+    .score-panel .score-feedback {
+      font-size: 0.96rem;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 0.75rem 0.5rem 2.5rem; }
+      .header, .section { padding: 1.3rem 1.1rem; }
+      .header h1 { font-size: 1.45rem; }
+      .tf-btn-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">Νεοελληνική Λογοτεχνία · Ψηφιακό Εκπαιδευτικό Υλικό</div>
+    <h1>Γιατί «Πίστομα»;</h1>
+    <div class="header-sub">Κ. Θεοτόκης — Διήγημα</div>
+  </div>
+
+  <div class="divider-ornament">✦ &nbsp; &nbsp; ✦ &nbsp; &nbsp; ✦</div>
+
+  <!-- QUIZ SECTION -->
+  <div class="section">
+
+    <div class="activity-header">
+      <span class="activity-badge">Δραστηριότητα</span>
+      <span class="activity-title">Ερωτήσεις κατανόησης — Πολλαπλής επιλογής &amp; Σωστού/Λάθους</span>
+    </div>
+
+    <div class="ekfonisi">
+      <strong>Εκφώνηση:</strong> Αφού μελετήσεις το διήγημα <em>Πίστομα</em> του Κ. Θεοτόκη, διάβασε προσεκτικά τις παρακάτω ερωτήσεις/φράσεις και επίλεξε τη σωστή απάντηση.
+    </div>
+
+    <!-- Ερώτηση 1 -->
+    <div class="question-block" id="q1-block">
+      <div class="question-text"><span class="question-num">1.</span> Ποιος είναι ο τόπος στον οποίο διαδραματίζεται το διήγημα;</div>
+      <ul class="options-list" id="q1-options">
+        <li><label class="option-label"><input type="radio" name="q1" value="a"> η πόλη</label></li>
+        <li><label class="option-label"><input type="radio" name="q1" value="b"> το χωριό</label></li>
+        <li><label class="option-label"><input type="radio" name="q1" value="c"> η πλατεία του χωριού</label></li>
+        <li><label class="option-label"><input type="radio" name="q1" value="d"> το λιμάνι της πόλης</label></li>
+      </ul>
+      <div class="feedback-box" id="q1-feedback"></div>
+    </div>
+
+    <!-- Ερώτηση 2 -->
+    <div class="question-block" id="q2-block">
+      <div class="question-text"><span class="question-num">2.</span> Ποιος είναι ο χρόνος του διηγήματος, ως προς τον τρόπο παρουσίασης των γεγονότων;</div>
+      <ul class="options-list" id="q2-options">
+        <li><label class="option-label"><input type="radio" name="q2" value="a"> Τα γεγονότα παρουσιάζονται με ευθύγραμμη αφήγηση.</label></li>
+        <li><label class="option-label"><input type="radio" name="q2" value="b"> Τα γεγονότα παρουσιάζονται με αναφορές στο μέλλον.</label></li>
+        <li><label class="option-label"><input type="radio" name="q2" value="c"> Τα γεγονότα παρουσιάζονται με ευθύγραμμη αφήγηση και σύντομες αναδρομές στο παρελθόν.</label></li>
+      </ul>
+      <div class="feedback-box" id="q2-feedback"></div>
+    </div>
+
+    <!-- Ερώτηση 3 -->
+    <div class="question-block" id="q3-block">
+      <div class="question-text"><span class="question-num">3.</span> Ο κεντρικός ήρωας του διηγήματος είναι:</div>
+      <ul class="options-list" id="q3-options">
+        <li><label class="option-label"><input type="radio" name="q3" value="a"> Ο Αντώνης Κουκουλιώτης</label></li>
+        <li><label class="option-label"><input type="radio" name="q3" value="b"> Η σύζυγος του Αντώνη Κουκουλιώτη</label></li>
+        <li><label class="option-label"><input type="radio" name="q3" value="c"> Το βρέφος</label></li>
+      </ul>
+      <div class="feedback-box" id="q3-feedback"></div>
+    </div>
+
+    <!-- Ερώτηση 4 — Σωστό/Λάθος -->
+    <div class="question-block" id="q4-block">
+      <div class="question-text"><span class="question-num">4.</span> Κεντρικό θέμα του διηγήματος είναι το θέμα της τιμής.</div>
+      <div class="tf-btn-row">
+        <button class="tf-btn" id="q4-true" onclick="selectTF(4, true, this)">Σωστό</button>
+        <button class="tf-btn" id="q4-false" onclick="selectTF(4, false, this)">Λάθος</button>
+      </div>
+      <div class="feedback-box" id="q4-feedback"></div>
+    </div>
+
+    <!-- Ερώτηση 5 — Σωστό/Λάθος -->
+    <div class="question-block" id="q5-block">
+      <div class="question-text"><span class="question-num">5.</span> Στο διήγημα κυριαρχούν ρομαντικά και συμβολικά στοιχεία.</div>
+      <div class="tf-btn-row">
+        <button class="tf-btn" id="q5-true" onclick="selectTF(5, true, this)">Σωστό</button>
+        <button class="tf-btn" id="q5-false" onclick="selectTF(5, false, this)">Λάθος</button>
+      </div>
+      <div class="feedback-box" id="q5-feedback"></div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="btn-row">
+      <button class="btn-primary" id="submit-btn" onclick="submitQuiz()">Υποβολή απαντήσεων</button>
+      <button class="btn-secondary" id="reset-btn" onclick="resetQuiz()">Επαναφορά</button>
+    </div>
+
+    <!-- Score panel -->
+    <div class="score-panel" id="score-panel">
+      <div class="score-title">Αποτέλεσμα</div>
+      <div class="score-number" id="score-number"></div>
+      <div class="score-feedback" id="score-feedback"></div>
+    </div>
+
+  </div>
+  <!-- /section -->
+
+</div>
+<!-- /page-wrap -->
+
+<script>
+  // TF selection state
+  var tfAnswers = { 4: null, 5: null };
+
+  function selectTF(qNum, value, btn) {
+    if (document.getElementById('submit-btn').disabled) return;
+    tfAnswers[qNum] = value;
+    var trueBtn  = document.getElementById('q' + qNum + '-true');
+    var falseBtn = document.getElementById('q' + qNum + '-false');
+    trueBtn.classList.remove('selected');
+    falseBtn.classList.remove('selected');
+    btn.classList.add('selected');
+  }
+
+  // Quiz data
+  var questions = [
+    {
+      id: 1,
+      type: 'mcq',
+      correct: 'b',
+      feedbackCorrect: 'Πολύ σωστά! Ο χώρος του διηγήματος είναι η κερκυραϊκή ύπαιθρος.',
+      feedbackWrong: 'Μελέτησε ξανά το κείμενο για να εντοπίσεις τις πληροφορίες σχετικά με τον τόπο, στον οποίο διαδραματίζεται το κείμενο.'
+    },
+    {
+      id: 2,
+      type: 'mcq',
+      correct: 'c',
+      feedbackCorrect: 'Πολύ σωστά! Η αφήγηση είναι ευθύγραμμη αλλά υπάρχουν και σύντομες αναδρομές στο παρελθόν.',
+      feedbackWrong: 'Μελέτησε ξανά το κείμενο για να εντοπίσεις τους χρονικούς δείκτες.'
+    },
+    {
+      id: 3,
+      type: 'mcq',
+      correct: 'a',
+      feedbackCorrect: 'Πολύ σωστά! Ο Αντώνης Κουκουλιώτης είναι το κεντρικό πρόσωπο του διηγήματος.',
+      feedbackWrong: 'Μελέτησε ξανά το κείμενο για να καταλάβεις σε ποιο πρόσωπο εστιάζει ο συγγραφέας.'
+    },
+    {
+      id: 4,
+      type: 'tf',
+      correct: true,
+      feedbackCorrect: 'Πολύ σωστά! Η αποκατάσταση της τιμής είναι το κεντρικό θέμα του διηγήματος.',
+      feedbackWrong: 'Μελέτησε ξανά το κείμενο, εστιάζοντας στις πράξεις του Αντώνη Κουκουλιώτη.'
+    },
+    {
+      id: 5,
+      type: 'tf',
+      correct: false,
+      feedbackCorrect: 'Πολύ σωστά! Στο διήγημα κυριαρχούν ρεαλιστικά και νατουραλιστικά στοιχεία.',
+      feedbackWrong: 'Μελέτησε ξανά το κείμενο, εστιάζοντας στον χαρακτήρα και στις πράξεις των προσώπων.'
+    }
+  ];
+
+  function submitQuiz() {
+    var score = 0;
+    var total = questions.length;
+
+    questions.forEach(function(q) {
+      var isCorrect = false;
+      var userAnswer = null;
+
+      if (q.type === 'mcq') {
+        var radios = document.getElementsByName('q' + q.id);
+        for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked) {
+            userAnswer = radios[i].value;
+            break;
+          }
+        }
+        // Disable radios
+        for (var i = 0; i < radios.length; i++) {
+          radios[i].disabled = true;
+        }
+        isCorrect = (userAnswer === q.correct);
+
+        // Style option labels
+        var optionLabels = document.querySelectorAll('#q' + q.id + '-options .option-label');
+        var valueMap = ['a', 'b', 'c', 'd'];
+        optionLabels.forEach(function(label, idx) {
+          var val = valueMap[idx];
+          if (val === q.correct) {
+            label.classList.add('correct-answer');
+          } else if (val === userAnswer && userAnswer !== q.correct) {
+            label.classList.add('wrong-answer');
+          }
+        });
+
+      } else if (q.type === 'tf') {
+        userAnswer = tfAnswers[q.id];
+        isCorrect = (userAnswer === q.correct);
+
+        var trueBtn  = document.getElementById('q' + q.id + '-true');
+        var falseBtn = document.getElementById('q' + q.id + '-false');
+        trueBtn.disabled  = true;
+        falseBtn.disabled = true;
+
+        // Highlight correct button
+        var correctBtn  = q.correct ? trueBtn  : falseBtn;
+        var incorrectBtn = q.correct ? falseBtn : trueBtn;
+        correctBtn.classList.add('correct-answer');
+        correctBtn.classList.remove('selected');
+        if (!isCorrect && userAnswer !== null) {
+          incorrectBtn.classList.add('wrong-answer');
+          incorrectBtn.classList.remove('selected');
+        }
+      }
+
+      if (isCorrect) score++;
+
+      // Show feedback
+      var fb = document.getElementById('q' + q.id + '-feedback');
+      fb.style.display = 'block';
+      if (userAnswer === null) {
+        fb.className = 'feedback-box incorrect';
+        fb.textContent = q.feedbackWrong;
+      } else if (isCorrect) {
+        fb.className = 'feedback-box correct';
+        fb.textContent = q.feedbackCorrect;
+      } else {
+        fb.className = 'feedback-box incorrect';
+        fb.textContent = q.feedbackWrong;
+      }
+    });
+
+    // Disable submit
+    document.getElementById('submit-btn').disabled = true;
+
+    // Show score
+    var pct = (score / total) * 100;
+    var panel = document.getElementById('score-panel');
+    panel.style.display = 'block';
+    document.getElementById('score-number').textContent = score + ' / ' + total + ' ερωτήσεις σωστά (' + Math.round(pct) + '%)';
+
+    var feedbackText = '';
+    if (pct <= 25) {
+      feedbackText = 'Μπορείς να βελτιώσεις σημαντικά το αποτέλεσμά σου! Μελέτησε τις σωστές απαντήσεις και τα σχόλια που τις συνοδεύουν.';
+    } else if (pct <= 50) {
+      feedbackText = 'Μπορείς να βελτιώσεις το αποτέλεσμά σου! Φαίνεται ότι χρειάζεται να εμβαθύνεις ακόμα περισσότερο σε ορισμένα σημεία. Μελέτησε τις σωστές απαντήσεις και τα σχόλια που τις συνοδεύουν, εστιάζοντας ειδικά στα σημεία που δεν κατανοείς πλήρως.';
+    } else if (pct <= 75) {
+      feedbackText = 'Τα πήγες αρκετά καλά! Μελέτησε τις σωστές απαντήσεις και τα σχόλια που τις συνοδεύουν, ώστε να εντοπίσεις τα σημεία που σου διαφεύγουν και να βελτιωθείς ακόμη περισσότερο.';
+    } else if (pct < 98) {
+      feedbackText = 'Τα πήγες καλά! Αν νομίζεις ότι κάτι σου έχει διαφύγει, δες τα μηνύματα που έλαβες κατά την υποβολή των απαντήσεών σου. Αν θέλεις, προσπάθησε να εντοπίσεις περισσότερες σωστές απαντήσεις για να βελτιώσεις το αποτέλεσμα σου.';
+    } else {
+      feedbackText = 'Όλες οι απαντήσεις σου είναι σωστές! Μπορείς να ανατρέξεις στις απαντήσεις σου και στις ανατροφοδοτήσεις όποτε το κρίνεις χρήσιμο για σένα, για περαιτέρω εμπέδωση.';
+    }
+    document.getElementById('score-feedback').textContent = feedbackText;
+
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetQuiz() {
+    // Reset MCQ
+    [1, 2, 3].forEach(function(qNum) {
+      var radios = document.getElementsByName('q' + qNum);
+      for (var i = 0; i < radios.length; i++) {
+        radios[i].checked   = false;
+        radios[i].disabled  = false;
+      }
+      var labels = document.querySelectorAll('#q' + qNum + '-options .option-label');
+      labels.forEach(function(l) {
+        l.classList.remove('correct-answer', 'wrong-answer');
+      });
+      var fb = document.getElementById('q' + qNum + '-feedback');
+      fb.style.display = 'none';
+      fb.className = 'feedback-box';
+      fb.textContent = '';
+    });
+
+    // Reset TF
+    [4, 5].forEach(function(qNum) {
+      tfAnswers[qNum] = null;
+      var trueBtn  = document.getElementById('q' + qNum + '-true');
+      var falseBtn = document.getElementById('q' + qNum + '-false');
+      trueBtn.disabled  = false;
+      falseBtn.disabled = false;
+      trueBtn.className  = 'tf-btn';
+      falseBtn.className = 'tf-btn';
+      var fb = document.getElementById('q' + qNum + '-feedback');
+      fb.style.display = 'none';
+      fb.className = 'feedback-box';
+      fb.textContent = '';
+    });
+
+    // Reset score panel
+    var panel = document.getElementById('score-panel');
+    panel.style.display = 'none';
+    document.getElementById('score-number').textContent  = '';
+    document.getElementById('score-feedback').textContent = '';
+
+    // Re-enable submit
+    document.getElementById('submit-btn').disabled = false;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

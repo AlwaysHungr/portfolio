@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ένα ταξίδι, μια εμπειρία</title>
+<style>
+/* ===== base ===== */
+*{box-sizing:border-box}
+:root{
+  --ink:#16273A; --muted:#5B6B7B; --paper:#FFFFFF; --bg:#F1F5F9;
+  --brand:#1F5FA8; --brand2:#0E3E7A; --accent:#F0A63A; --ok:#2E8B57; --bad:#C63B3B; --line:#D9E2EC;
+  --rose:#C1476B; --sand:#FFF6E8; --sky:#E8F0FA;
+  --radius:16px; --topH:56px;
+}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);
+  font:16px/1.55 "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+.app{height:100dvh;display:flex;flex-direction:column}
+/* ===== header ===== */
+.top{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 10px 14px -10px rgba(0,0,0,.15);z-index:5}
+.top .ttl{font-weight:800;font-size:17px;letter-spacing:.2px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .lbl{font-size:13px;color:var(--muted);white-space:nowrap}
+.prog{height:4px;background:var(--line);flex:0 0 auto}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));transition:width .4s}
+/* ===== screens ===== */
+.screens{flex:1;min-height:0;position:relative}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:auto;padding:18px 22px}
+.screen.on{display:flex;animation:fadein .35s}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wrap{width:100%;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0;gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:0 6px 18px -12px rgba(0,0,0,.18)}
+.card.pad{padding:22px 26px}
+h1{font-size:clamp(24px,3.4vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.3px}
+h2{font-size:clamp(19px,2.2vw,26px);margin:0 0 8px}
+h3{font-size:17px;margin:0 0 6px}
+p{margin:0 0 10px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--brand);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--sky);color:var(--brand2);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
+.chip.fr{background:#FBE9EF;color:#8E2745}
+/* ===== buttons ===== */
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:11px 18px;font-weight:800;
+  background:var(--brand);color:#fff;box-shadow:0 8px 18px -10px rgba(31,95,168,.8);transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px);background:var(--brand2)}
+.btn.ghost{background:transparent;color:var(--brand);box-shadow:none;border:2px solid var(--brand)}
+.btn.ghost:hover{background:var(--sky)}
+.btn.sm{padding:8px 13px;font-size:14px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.btn[hidden]{display:none}
+/* ===== bottom nav ===== */
+.nav{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:var(--paper);border-top:1px solid var(--line)}
+.dots{display:flex;gap:8px;align-items:center}
+.dots button{width:11px;height:11px;border-radius:50%;border:2px solid var(--brand);background:transparent;padding:0}
+.dots button.on{background:var(--brand);transform:scale(1.25)}
+.dots button.done{background:#9DBCE3;border-color:#9DBCE3}
+/* ===== images: alt-tooltip + zoom ===== */
+.zi{position:relative;display:inline-block;max-width:100%;cursor:zoom-in;border-radius:12px;line-height:0}
+.zi img{border-radius:12px;width:100%;height:auto}
+.zi .mag{position:absolute;right:9px;top:9px;width:30px;height:30px;border-radius:50%;background:#0E2233;color:#fff;
+  display:grid;place-items:center;font-size:15px;opacity:.85;pointer-events:none;line-height:1}
+.zi::after{content:attr(data-alt);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%);
+  background:#0E2233;color:#fff;font-size:13px;line-height:1.35;padding:8px 11px;border-radius:9px;max-width:min(320px,78vw);
+  width:max-content;white-space:normal;text-align:center;display:none;z-index:31;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.zi::before{content:"";position:absolute;left:50%;bottom:calc(100% + 3px);transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:#0E2233;display:none;z-index:31;pointer-events:none}
+.zi:hover::after,.zi:focus-visible::after,.zi.on::after,.zi:hover::before,.zi:focus-visible::before,.zi.on::before{display:block;animation:tipin .18s}
+.zi.below::after{bottom:auto;top:calc(100% + 9px)}
+.zi.below::before{bottom:auto;top:calc(100% + 3px);border-top-color:transparent;border-bottom-color:#0E2233}
+.zi.inset::after{bottom:auto;top:14px;left:14px;transform:none;max-width:70%;text-align:left}
+.zi.inset::before{display:none!important}
+.zi:hover,.zi:focus-visible,.zi.on{z-index:30}
+@keyframes tipin{from{opacity:0;transform:translate(-50%,4px)}to{opacity:1}}
+.zi.inset:hover::after{animation:none}
+figure{margin:0}
+figcaption{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:6px}
+/* lightbox */
+.lbx{position:fixed;inset:0;background:rgba(6,16,28,.92);display:none;z-index:90;padding:16px;overflow:auto}
+.lbx.on{display:grid;place-items:center}
+.lbx .box{width:100%;max-width:1200px;min-width:0;text-align:center}
+.lbx img{width:auto;height:auto;max-width:100%;max-height:82vh;margin:0 auto;border-radius:8px}
+.lbx .cap{color:#DCE6F0;font-size:14px;margin-top:10px}
+.lbx .x{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:#0E2233;color:#fff;border:2px solid #fff;
+  font-size:24px;line-height:1;display:grid;place-items:center;z-index:91;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+/* ===== generic ===== */
+.fb{border-radius:12px;padding:12px 14px;border:2px solid;font-size:15px}
+.fb.ok{border-color:var(--ok);background:#EAF7EF;color:#1B5E3A}
+.fb.rev{border-color:var(--accent);background:#FFF6E5;color:#6B4A00}
+.fb[hidden]{display:none}
+.ring{width:150px;height:150px}
+.ring circle{fill:none;stroke-width:12}
+.ring .bg{stroke:var(--line)} .ring .v{stroke:var(--ok);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .8s}
+.ring text{font-weight:900;font-size:26px;fill:var(--ink);text-anchor:middle;dominant-baseline:middle}
+.flip{display:grid;cursor:pointer;border:0;padding:0;background:none;text-align:left;width:100%}
+.flip[hidden]{display:none}
+.flip .f,.flip .b{grid-area:1/1;border-radius:14px;padding:16px;transition:opacity .35s,transform .35s;display:block}
+.flip .f{background:var(--brand);color:#fff;font-weight:800;display:flex;flex-direction:column;justify-content:center;gap:6px;min-height:132px}
+.flip .b{background:var(--paper);border:2px solid var(--brand);opacity:0;visibility:hidden;transform:scale(.96)}
+.flip.on .f{opacity:0;visibility:hidden;transform:scale(.96)} .flip.on .b{opacity:1;visibility:visible;transform:none}
+.flip .plus{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:19px;font-weight:400;line-height:1}
+.flip .plus[hidden]{display:none}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.two[hidden]{display:none}
+.two>*{min-width:0;min-height:0}
+.grow{flex:1;min-height:0;overflow:auto}
+.center{text-align:center}
+.src{font-size:12.5px;color:var(--muted)}
+.srclist{font-size:13px;color:var(--muted);margin:0;padding-left:18px}
+.srclist li{break-inside:avoid;margin-bottom:9px}
+.srclist a{color:var(--brand);word-break:break-all}
+
+/* ===== cover ===== */
+.cvr{flex:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:26px;align-items:center}
+.cvr[hidden]{display:none}
+.cvr>*{min-width:0;min-height:0}
+.cvart{width:100%;max-width:430px;justify-self:center}
+.cvart svg{width:100%;height:auto;display:block;filter:drop-shadow(0 16px 26px rgba(14,62,122,.22))}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.cvart svg{animation:floaty 5.5s ease-in-out infinite}
+.cvsub{color:var(--muted);font-size:14px;margin:14px 0 0}
+
+/* ===== step overview ===== */
+.stepgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stepgrid[hidden]{display:none}
+.stepgrid>*{min-width:0}
+.stepcard{border:1px solid var(--line);border-left:6px solid var(--brand);border-radius:14px;padding:13px 15px;background:var(--paper);
+  display:flex;flex-direction:column;gap:6px;text-align:left;width:100%;transition:transform .15s,box-shadow .15s}
+.stepcard:hover{transform:translateY(-2px);box-shadow:0 12px 22px -16px rgba(0,0,0,.5)}
+.stepcard b{font-size:15px;color:var(--brand2)}
+.stepcard span{font-size:13.5px;color:var(--muted);line-height:1.4}
+.stepcard .num{width:30px;height:30px;border-radius:50%;background:var(--sky);color:var(--brand2);display:grid;place-items:center;font-weight:900;font-size:14px}
+.stepcard:nth-child(2){border-left-color:var(--accent)}
+.stepcard:nth-child(2) .num{background:var(--sand);color:#8A5B00}
+.stepcard:nth-child(3){border-left-color:var(--ok)}
+.stepcard:nth-child(3) .num{background:#E6F4EC;color:#1B5E3A}
+.stepcard:nth-child(4){border-left-color:var(--rose)}
+.stepcard:nth-child(4) .num{background:#FBE9EF;color:#8E2745}
+
+/* ===== observations ===== */
+.obs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
+.obs[hidden]{display:none}
+.obs li{background:var(--sky);border-radius:12px;padding:11px 14px;font-weight:700;color:var(--brand2);font-size:14.5px}
+
+/* ===== postcard model text ===== */
+.pcard{position:relative;background:#FFFDF7;border:1px solid #E8DCC3;border-radius:14px;padding:20px 22px;
+  box-shadow:0 10px 24px -18px rgba(0,0,0,.6)}
+.pcard::before{content:"";position:absolute;inset:0;border-radius:14px;pointer-events:none;
+  border:5px solid transparent;
+  background:repeating-linear-gradient(45deg,#1F5FA8 0 12px,#fff 12px 24px,#C1476B 24px 36px,#fff 36px 48px) border-box;
+  -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:.55}
+.pcard p{font-size:16.5px;line-height:1.75;margin:0 0 12px}
+.pcard p:last-child{margin-bottom:0}
+.pcard b{color:var(--brand2);background:#EAF2FC;border-radius:5px;box-shadow:0 0 0 3px #EAF2FC}
+.stampbox{position:absolute;top:14px;right:16px;width:44px;height:52px;border-radius:4px;background:#FBE9EF;
+  border:2px dashed #C1476B;display:grid;place-items:center;color:#C1476B;opacity:.9}
+.stampbox[hidden]{display:none}
+.stampbox svg{width:24px;height:24px;display:block}
+
+/* ===== figure reference (image not supplied) ===== */
+.figref{display:block;background:#F7FAFD;border:1px dashed var(--line);border-left:4px solid #C7D7E6;border-radius:12px;padding:10px 14px;font-size:13px;color:var(--muted)}
+.figref[hidden]{display:none}
+.figref b{color:var(--ink);font-weight:800}
+.figref a{color:var(--brand);word-break:break-all}
+
+/* ===== fields ===== */
+.fields{display:grid;gap:10px}
+.fields[hidden]{display:none}
+.fld{display:block}
+.fld>span{display:block;font-weight:700;font-size:14px;margin-bottom:3px}
+.fld input,.fld textarea{width:100%;font:inherit;color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:9px 12px;transition:border-color .15s}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--brand);background:#FBFDFF}
+.fld input.done,.fld textarea.done{border-color:var(--ok);background:#F6FCF8}
+.fld textarea{resize:vertical;min-height:150px;line-height:1.7}
+.inl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:8px 12px}
+.inl[hidden]{display:none}
+.inl:focus-within{border-color:var(--brand)}
+.inl.done{border-color:var(--ok);background:#F6FCF8}
+.inl>i{font-style:normal;font-weight:800;color:var(--brand2);min-width:0}
+.inl>em{font-style:normal;color:var(--muted);font-size:13px}
+.inl input{flex:1 1 140px;min-width:0;font:inherit;color:var(--ink);border:0;border-bottom:2px dotted var(--line);background:transparent;padding:3px 2px}
+.inl input:focus{outline:none;border-bottom-color:var(--brand)}
+.note{font-size:13px;color:var(--muted);font-style:italic}
+.cnt{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.cnt[hidden]{display:none}
+.cnt b{background:var(--sky);color:var(--brand2);border-radius:999px;padding:3px 11px;font-size:13px}
+.cnt b.ok{background:#E6F4EC;color:#1B5E3A}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bar[hidden]{display:none}
+.revbox{border-radius:12px;padding:14px 16px;border:2px solid var(--accent);background:#FFFBF2;font-size:14.5px}
+.revbox[hidden]{display:none}
+.revbox h3{color:#8A5B00;margin-bottom:8px}
+.revbox ul{margin:0 0 6px;padding-left:20px}
+.revbox li{margin-bottom:4px}
+.revbox .col{font-weight:800;color:var(--brand2)}
+
+/* ===== lexique ===== */
+.lexbar{display:flex;flex-wrap:wrap;gap:8px;min-width:0;max-width:100%}
+.lexbar[hidden]{display:none}
+.lexbar button{border:2px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:700;color:var(--muted)}
+.lexbar button.on{border-color:var(--brand);background:var(--sky);color:var(--brand2)}
+.lexgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:10px;align-content:start}
+.lexgrid[hidden]{display:none}
+.lterm{display:grid;gap:3px;text-align:left;width:100%;border:2px solid var(--line);border-radius:12px;padding:10px 13px;background:var(--paper);transition:.15s}
+.lterm:hover{border-color:var(--rose);background:#FFF9FB}
+.lterm .fr{font-weight:800;color:#8E2745;font-size:15px}
+.lterm .el{font-size:13.5px;color:var(--muted);min-height:19px}
+.lterm .el.hid{color:transparent;background:linear-gradient(90deg,#EEF3F8,#E4EBF3);border-radius:6px}
+.lterm.open{border-color:var(--ok);background:#F7FCF9}
+
+/* ===== social post ===== */
+.post{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 14px 30px -22px rgba(0,0,0,.6)}
+.post[hidden]{display:none}
+.posthd{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line);background:#FAFCFE}
+.posthd .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--rose));display:grid;place-items:center;color:#fff;font-size:16px}
+.posthd .ttl2{font-weight:800;font-size:14.5px}
+.postbody{padding:14px 16px;font-size:15.5px;line-height:1.7;white-space:pre-wrap}
+.postbody .ph2{color:#9AA9B8}
+.posttags{padding:0 16px 14px;font-weight:800;color:var(--brand)}
+.resgrid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:stretch}
+.resgrid[hidden]{display:none}
+.resgrid>*{min-width:0;min-height:0}
+.rwrap{display:grid;place-items:center;gap:6px;align-self:start}
+.rwrap>span{font-size:13px;color:var(--muted);text-align:center}
+
+@media (max-width:900px){
+  .stepgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .obs{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .screen{padding:12px 12px}
+  .stampbox{display:none}
+  .lexbar{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}
+  .lexbar button{flex:0 0 auto;white-space:nowrap}
+  .two{grid-template-columns:minmax(0,1fr)}
+  .cvr{grid-template-columns:minmax(0,1fr);align-content:start}
+  .cvart{max-width:320px}
+  .resgrid{grid-template-columns:minmax(0,1fr)}
+  .top .ttl{font-size:15px}
+  h1{font-size:24px}
+  .pcard{padding:16px 15px}
+  .pcard p{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="ttl">Ένα ταξίδι, μια εμπειρία</div>
+    <div class="lbl" id="lbl">Εξώφυλλο</div>
+  </header>
+  <div class="prog"><i id="prog"></i></div>
+
+  <main class="screens" id="screens">
+
+    <!-- 1 ΕΞΩΦΥΛΛΟ -->
+    <section class="screen on" data-name="Εξώφυλλο">
+      <div class="wrap">
+        <div class="card pad cvr">
+          <div>
+            <h1>Ένα ταξίδι, μια εμπειρία</h1>
+            <p class="chips">
+              <span class="chip">διακοπές</span><span class="chip">αξιοθέατα</span>
+              <span class="chip">δραστηριότητες</span><span class="chip">ταξίδι</span>
+              <span class="chip fr">VACANCES</span><span class="chip fr">SITES TOURISTIQUES</span>
+              <span class="chip fr">ACTIVITES</span><span class="chip fr">VOYAGE</span>
+            </p>
+            <p style="margin-top:20px"><button class="btn" onclick="go(1)">Ξεκίνα →</button></p>
+          </div>
+          <div class="cvart">
+            <svg viewBox="0 0 430 300" role="img" aria-label="Ταχυδρομική κάρτα με τον πύργο του Άιφελ">
+              <defs>
+                <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#DCEBFB"/><stop offset="1" stop-color="#FDEBD6"/>
+                </linearGradient>
+              </defs>
+              <rect x="34" y="40" width="366" height="228" rx="14" fill="#EDE3D2" transform="rotate(-5 217 154)"/>
+              <rect x="26" y="30" width="378" height="238" rx="14" fill="#FFFDF7" stroke="#E2D6BE" stroke-width="2"/>
+              <rect x="38" y="42" width="354" height="214" rx="9" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-dasharray="14 9" opacity=".45"/>
+              <rect x="52" y="56" width="176" height="186" rx="7" fill="url(#sk)"/>
+              <circle cx="196" cy="88" r="16" fill="#F0A63A" opacity=".75"/>
+              <g fill="#1F5FA8" opacity=".92">
+                <rect x="138" y="72" width="4" height="18"/>
+                <path d="M133 90h14l7 40h-28z"/>
+                <rect x="124" y="128" width="32" height="5"/>
+                <path d="M127 135h26l9 42h-44z"/>
+                <rect x="112" y="175" width="56" height="5"/>
+                <path d="M117 181c-2 20-11 36-21 48h17c9-14 15-27 19-42z"/>
+                <path d="M163 181c2 20 11 36 21 48h-17c-9-14-15-27-19-42z"/>
+                <rect x="94" y="228" width="92" height="6" rx="2"/>
+              </g>
+              <path d="M126 205q14-9 28 0" fill="none" stroke="#1F5FA8" stroke-width="3" opacity=".9"/>
+              <g stroke="#8FA6BC" stroke-width="3" stroke-linecap="round" opacity=".55">
+                <path d="M252 150h122"/><path d="M252 172h122"/><path d="M252 194h96"/><path d="M252 216h110"/>
+              </g>
+              <rect x="316" y="62" width="58" height="66" rx="4" fill="#FBE9EF" stroke="#C1476B" stroke-width="2.5" stroke-dasharray="6 4"/>
+              <path d="M345 84c-6-9-19-3-14 7 3 6 11 12 14 15 3-3 11-9 14-15 5-10-8-16-14-7z" fill="#C1476B" opacity=".8"/>
+              <g stroke="#C1476B" stroke-width="2.5" opacity=".55" fill="none">
+                <path d="M254 76c14 0 14 12 28 12s14-12 28-12"/><path d="M254 96c14 0 14 12 28 12s14-12 28-12"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 ΟΔΗΓΟΣ -->
+    <section class="screen" data-name="Ο οδηγός">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="eyebrow">ΟΔΗΓΟΣ</div>
+          <h2>Οδηγός υλοποίησης δραστηριότητας κειμένων και δραστηριοτήτων στα Γαλλικά.</h2>
+          <p>Προκειμένου να κατανοήσεις τη σημασία και να κάνεις εξάσκηση και πρακτική σε απλά κείμενα, όπως να συντάξεις κείμενο σε ένα μέσο κοινωνικής δικτύωσης που αφορά αξιοθέατα και δραστηριότητες κατά τη διάρκεια ενός ταξιδιού αναψυχής που έκανες.</p>
+          <h3 style="margin-top:18px">Πώς να γράψεις το κείμενό σου – Βήμα βήμα</h3>
+          <div class="stepgrid" style="margin-top:10px">
+            <button class="stepcard" onclick="go(2)"><span class="num">1</span><b>Βήμα 1ο</b><span>Διάβασε το υπόδειγμα προσεκτικά και παρατήρησε</span></button>
+            <button class="stepcard" onclick="go(4)"><span class="num">2</span><b>Βήμα 2ο</b><span>Συμπλήρωσε τις βασικές πληροφορίες που εσύ επιθυμείς</span></button>
+            <button class="stepcard" onclick="go(5)"><span class="num">3</span><b>Βήμα 3ο</b><span>Φτιάξε απλές προτάσεις</span></button>
+            <button class="stepcard" onclick="go(6)"><span class="num">4</span><b>Βήμα 4ο</b><span>Ένωσε τις προτάσεις σου σε ένα μικρό κείμενο 3–5 προτάσεων.</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 ΒΗΜΑ 1 -->
+    <section class="screen" data-name="Βήμα 1ο — Το υπόδειγμα">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="eyebrow">ΒΗΜΑ 1Ο</div>
+          <h2>Διάβασε το υπόδειγμα προσεκτικά και παρατήρησε:</h2>
+          <ul class="obs">
+            <li>Είναι σύντομο.</li>
+            <li>Έχει απλές προτάσεις.</li>
+            <li>Αναφέρεται σε ένα ταξίδι που έγινε.</li>
+          </ul>
+          <div class="pcard" lang="fr" style="margin-top:14px">
+            <span class="stampbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c-1-1-9-6.5-9-12A5 5 0 0 1 12 6a5 5 0 0 1 9 3c0 5.5-8 11-9 12z" fill="#C1476B" opacity=".8"/></svg></span>
+            <p><b>Je suis allé(e)</b> un voyage, en France au printemps.<br>
+               <b>J’ai visité Paris</b> et <b>j’ai vu</b> la tour Eiffel et le musée du Louvre.<br>
+               <b>Je me suis promené(e)</b> au bord de la Seine et <b>j’ ai pris</b> beaucoup de photos sur le bateau-mouche, qui <b>était</b> magnifique !</p>
+            <p><b>J’ ai</b> aussi <b>goûté</b> la cuisine française et des desserts.<br>
+               <b>J’ ai fait</b> des balades dans la ville et <b>j’ai visité</b> les petits cafés de Montmartre, au pied du Sacré-Cœur.<br>
+               <b>J’ ai passé</b> un très bon moment et ce voyage <b>était</b> une expérience inoubliable.</p>
+          </div>
+          <div class="figref" style="margin-top:12px">
+            <span><b>Figure 1</b> (Η εικόνα δείχνει μια παλιά γαλλική ταχυδρομική κάρτα. Η εικόνα δίνει την αίσθηση ενός ρομαντικού ταξιδιού και θυμίζει αναμνήσεις από διακοπές στη Γαλλία.)<br>
+            <a href="https://www.shutterstock.com/el/image-photo/antique-french-postcard-greeting-text-paris-189458990?trackingId=81039b76-a26a-48ee-aa4e-90d13dc146f9&amp;listId=searchResults" target="_blank" rel="noopener">shutterstock.com</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 S.O.S -->
+    <section class="screen" data-name="Σημείωση S.O.S">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="eyebrow">ΣΗΜΕΙΩΣΗ S.O.S</div>
+          <h2>Προσοχή στους χρόνους</h2>
+          <div class="two" style="margin-top:12px">
+            <button class="flip" id="f1" onclick="flipOn(this)">
+              <span class="f"><span class="plus">+</span>Passé Composé (Αόριστος)</span>
+              <span class="b"><b style="color:var(--brand2)">Passé Composé (Αόριστος)</b><br>χρησιμοποιούμε: Για να περιγράψουμε τις πράξεις και τα γεγονότα που έγιναν. Είναι οι στιγμιαίες ενέργειες που έχουν αρχή και τέλος.</span>
+            </button>
+            <button class="flip" id="f2" onclick="flipOn(this)">
+              <span class="f"><span class="plus">+</span>Imparfait (Παρατατικός)</span>
+              <span class="b"><b style="color:var(--brand2)">Imparfait (Παρατατικός)</b><br>χρησιμοποιούμε: Για να κάνουμε περιγραφή, να δώσουμε πληροφορίες για το «φόντο» της ιστορίας ή να εκφράσουμε μια κατάσταση που διήρκεσε στο παρελθόν.</span>
+            </button>
+          </div>
+          <p class="cnt" style="margin-top:14px">Άνοιξες <b id="fcnt">0/2</b></p>
+          <div class="figref">
+            <span><b>Figure 2</b> (Η εικόνα δείχνει ένα κολλάζ φωτογραφιών Polaroid, διάφορα μέρη του Παρισιού.)<br>
+            <a href="https://www.shutterstock.com/el/image-photo/collage-france-paris-selective-focus-754965319" target="_blank" rel="noopener">shutterstock.com</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 ΒΗΜΑ 2 -->
+    <section class="screen" data-name="Βήμα 2ο — Σκέψου και σημείωσε">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="eyebrow">ΒΗΜΑ 2Ο</div>
+          <h2>Συμπλήρωσε τις βασικές πληροφορίες που εσύ επιθυμείς:</h2>
+          <div class="two" style="margin-top:12px">
+            <div>
+              <h3>Σκέψου και σημείωσε:</h3>
+              <div class="fields">
+                <label class="fld"><span>Προορισμός:</span><input type="text" data-g="s2" id="i21"></label>
+                <label class="fld"><span>Πότε πήγες:</span><input type="text" data-g="s2" id="i22"></label>
+                <label class="fld"><span>Αξιοθέατα:</span><input type="text" data-g="s2" id="i23"></label>
+                <label class="fld"><span>Δραστηριότητες:</span><input type="text" data-g="s2" id="i24"></label>
+              </div>
+            </div>
+            <div lang="fr">
+              <h3>Réfléchis et note :</h3>
+              <div class="fields">
+                <label class="fld"><span>Destination :</span><input type="text" data-g="s2" id="i25"></label>
+                <label class="fld"><span>Quand :</span><input type="text" data-g="s2" id="i26"></label>
+                <label class="fld"><span>Sites touristiques :</span><input type="text" data-g="s2" id="i27"></label>
+                <label class="fld"><span>Activités :</span><input type="text" data-g="s2" id="i28"></label>
+              </div>
+            </div>
+          </div>
+          <p class="note" style="margin-top:12px">(Μπορείς να το συμπληρώσεις με τον προορισμό της αρεσκείας σου.)</p>
+          <div class="bar">
+            <button class="btn ghost sm" id="rb2" onclick="toggleRev('rv2',this)">Απαντήσεις καθοδήγησης</button>
+            <span class="cnt">Συμπλήρωσες <b id="c2">0/8</b></span>
+          </div>
+          <div class="revbox" id="rv2" hidden style="margin-top:12px">
+            <h3>Απαντήσεις καθοδήγησης — Βήμα 2ο</h3>
+            <p class="note" style="margin:0 0 8px">(Απαντήσεις βάσει του υποδείγματος)</p>
+            <div class="two">
+              <p style="margin:0"><span class="col">Προορισμός</span>: Γαλλία – Παρίσι<br>
+                 <span class="col">Πότε πήγες</span>: την άνοιξη<br>
+                 <span class="col">Αξιοθέατα:</span> Πύργος του Άιφελ, Μουσείο του Λούβρου, Μονμάρτρη, Σακρ-Κερ.<br>
+                 <span class="col">Δραστηριότητες</span>: βόλτα στον Σηκουάνα, φωτογραφίες, καφέ</p>
+              <p style="margin:0" lang="fr"><span class="col">Destination</span> : France – Paris<br>
+                 <span class="col">Quand</span> : au printemps<br>
+                 <span class="col">Sites touristiques</span> : tour Eiffel, musée du Louvre, Montmartre, Sacré-Cœur.<br>
+                 <span class="col">Activités</span> : promenade le long de la Seine, photos, cafés</p>
+            </div>
+          </div>
+          <div class="figref" style="margin-top:12px">
+            <span><b>Figure 3</b> (Η εικόνα δείχνει διάφορα μέρη του κόσμου για να πάρεις ιδέες.)<br>
+            <a href="https://www.shutterstock.com/el/image-photo/vintage-travel-background-retro-photos-european-1431888869?trackingId=c636b32b-a7e4-4ff7-9103-9c363b34f0f6&amp;listId=searchResults" target="_blank" rel="noopener">shutterstock.com</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 ΒΗΜΑ 3 -->
+    <section class="screen" data-name="Βήμα 3ο — Φτιάξε απλές προτάσεις">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="eyebrow">ΒΗΜΑ 3Ο</div>
+          <h2>Φτιάξε απλές προτάσεις</h2>
+          <p>Μετάτρεψε τις πληροφορίες σου σε προτάσεις:<br><span lang="fr">Transforme les informations en phrases :</span></p>
+          <div class="fields" lang="fr">
+            <div class="inl"><i>Je suis allé(e) à</i><input type="text" data-g="s3" id="i31"></div>
+            <div class="inl"><i>J’ai visité</i><input type="text" data-g="s3" id="i32"></div>
+            <div class="inl"><i>J’ai fait / Je me suis promené(e) / J’ai goûté</i><input type="text" data-g="s3" id="i33"></div>
+            <div class="inl"><i>J’ai passé</i><input type="text" data-g="s3" id="i34"></div>
+          </div>
+          <p class="note" style="margin-top:12px">(Μπορείς να το συμπληρώσεις με τον προορισμό της αρεσκείας σου.)</p>
+          <div class="bar">
+            <button class="btn ghost sm" id="rb3" onclick="toggleRev('rv3',this)">Απαντήσεις καθοδήγησης</button>
+            <span class="cnt">Συμπλήρωσες <b id="c3">0/4</b></span>
+          </div>
+          <div class="revbox" id="rv3" hidden style="margin-top:12px">
+            <h3>Απαντήσεις καθοδήγησης — Βήμα 3ο</h3>
+            <p class="note" style="margin:0 0 8px">(Απαντήσεις βάσει του υποδείγματος)</p>
+            <div class="two">
+              <ul>
+                <li>Πήγα στη Γαλλία, στο Παρίσι, την άνοιξη.</li>
+                <li>Επισκέφθηκα τον πύργο του Άιφελ, το μουσείο του Λούβρου και τα μικρά καφέ της Μονμάρτρης στους πρόποδες της Σακρ-Κερ.</li>
+                <li>Έκανα / Περπάτησα / Δοκίμασα: Έκανα βόλτες στην πόλη, περπάτησα στις όχθες του Σηκουάνα και δοκίμασα τη γαλλική κουζίνα και επιδόρπια.</li>
+                <li>Πέρασα μια πολύ ωραία στιγμή και αυτό το ταξίδι ήταν μια αξέχαστη εμπειρία.</li>
+              </ul>
+              <ul lang="fr">
+                <li>Je suis allé(e) à Paris, en France au printemps.</li>
+                <li>J’ai visité la tour Eiffel, le musée du Louvre et les petits cafés de Montmartre.</li>
+                <li>J’ ai fait / Je me suis promené(e) / J’ ai goûté: J’ ai fait des balades, je me suis promené(e) au bord de la Seine et j' ai goûté la cuisine française.</li>
+                <li>J' ai passé un très bon moment et ce voyage était une expérience inoubliable.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="figref" style="margin-top:12px">
+            <span><b>Figure 4</b> (Βόλτα με le bateau-mouche, στον βραδινό Σηκουάνα)<br>
+            <a href="https://www.shutterstock.com/el/video/clip-1020493093-paris-france---april-2018--bateau?trackingId=895259d3-187f-4bf7-b481-3e3e7574bfaa&amp;listId=searchResults" target="_blank" rel="noopener">shutterstock.com</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 ΒΗΜΑ 4 -->
+    <section class="screen" data-name="Βήμα 4ο — Ένωσε τις προτάσεις">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="eyebrow">ΒΗΜΑ 4Ο</div>
+          <h2>Ένωσε τις προτάσεις σου σε ένα μικρό κείμενο 3–5 προτάσεων.</h2>
+          <p>Έλεγξε αν έχεις γράψει όσα ζητούνται.</p>
+          <label class="fld"><span class="src">Βήμα 4ο</span><textarea id="ta4" data-g="s4"></textarea></label>
+          <p class="cnt" style="margin-top:10px">Λέξεις <b id="w4">0</b> · Προτάσεις <b id="p4">0</b></p>
+          <div class="fb ok" id="ok4" hidden>Και έτοιμο το κείμενο προς δημοσίευση! #voyage #France</div>
+          <div class="figref" style="margin-top:12px">
+            <span><b>Figure 4</b> ( Η εικόνα δείχνει 2 φίλες να βγάζουν selfie  μπροστά από την εκκλησία της Sacré-Cœur.)<br>
+            <a href="https://www.shutterstock.com/el/image-photo/two-girl-friends-take-selfie-against-1497621149?trackingId=2620934f-fff3-45e9-b955-6b1420acdc72&amp;listId=searchResults" target="_blank" rel="noopener">shutterstock.com</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 LEXIQUE -->
+    <section class="screen" data-name="Lexique">
+      <div class="wrap">
+        <div class="card pad" style="display:flex;flex-direction:column;flex:1;min-height:0;gap:12px">
+          <div>
+            <div class="eyebrow">LEXIQUE</div>
+            <h2 lang="fr">Lexique</h2>
+          </div>
+          <div class="lexbar" id="lexbar"></div>
+          <div class="grow"><div class="lexgrid" id="lexgrid"></div></div>
+          <div class="bar">
+            <button class="btn ghost sm" id="lexall" onclick="lexAll()">Αποκάλυψη όλων</button>
+            <span class="cnt">Αποκάλυψες <b id="lexcnt">0/38</b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 ACTIVITE 1 -->
+    <section class="screen" data-name="Activité 1">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="eyebrow">ACTIVITÉ 1</div>
+          <h2 lang="fr">Activité 1</h2>
+          <p><b>Βάσει των όσων μελέτησες και πριν φτιάξεις το δικό σου post, συμπλήρωσε τα κενά με τον τόπο που επιθυμείς να επισκεφτείς!</b></p>
+          <div class="fields">
+            <h3>Titre / Τίτλος :</h3>
+            <div class="inl"><i lang="fr">Mon voyage à</i><input type="text" data-g="a1" id="a11"></div>
+            <h3 style="margin-top:8px">Introduction / Εισαγωγή :</h3>
+            <div class="inl"><i lang="fr">Salut tout le monde ! Je veux partager mon voyage à</i><input type="text" data-g="a1" id="a12"><i>.</i></div>
+            <div class="inl"><i lang="fr">C’était (adjectif)</i><input type="text" data-g="a1" id="a13"><i>.</i></div>
+            <h3 style="margin-top:8px">Développement / Ανάπτυξη :</h3>
+            <div class="inl"><i lang="fr">D’ abord, j ’ai visité</i><input type="text" data-g="a1" id="a14"><em lang="fr">(lieu)</em><i>.</i></div>
+            <div class="inl"><i lang="fr">C’ était  (adjectif)</i><input type="text" data-g="a1" id="a15"><i>.</i></div>
+            <div class="inl"><i lang="fr">Ensuite, j’ ai</i><input type="text" data-g="a1" id="a16"><em lang="fr">(activité)</em><i>.</i></div>
+            <div class="inl"><i lang="fr">J’ ai aussi</i><input type="text" data-g="a1" id="a17"><em lang="fr">(activité)</em><i>.</i></div>
+            <div class="inl"><i lang="fr">Par exemple,</i><input type="text" data-g="a1" id="a18"><em lang="fr">(activité ou détail amusant/intéressant)</em><i>.</i></div>
+            <h3 style="margin-top:8px">Conclusion / Συμπέρασμα :</h3>
+            <div class="inl"><i lang="fr">Enfin, j’ai adoré mon voyage parce que</i><input type="text" data-g="a1" id="a19"><em lang="fr">(raison)</em><i>.</i></div>
+          </div>
+          <div class="bar" style="margin-top:12px">
+            <button class="btn ghost sm" id="rba" onclick="toggleRev('rva',this)">Απαντήσεις καθοδήγησης</button>
+            <span class="cnt">Συμπλήρωσες <b id="ca">0/9</b></span>
+          </div>
+          <div class="revbox" id="rva" hidden style="margin-top:12px" lang="fr">
+            <h3>Απαντήσεις καθοδήγησης — Activité 1</h3>
+            <p style="margin:0"><span class="col">Titre / Τίτλος :</span><br>Mon voyage à Barcelone</p>
+            <p style="margin:8px 0 0"><span class="col">Introduction / Εισαγωγή :</span><br>Salut tout le monde ! Je veux partager mon voyage à Barcelone.<br>C’ était magnifique et très amusant !</p>
+            <p style="margin:8px 0 0"><span class="col">Développement / Ανάπτυξη :</span><br>D’ abord, j’ ai visité la Sagrada Família.<br>C’ était impressionnante et très colorée.<br>Ensuite, j’ ai fait une promenade sur la plage de Barceloneta.<br>J’ ai aussi goûté la cuisine locale dans un petit restaurant typique.<br>Par exemple, j’ ai pris beaucoup de photos avec mes amis et nous avons rigolé beaucoup !</p>
+            <p style="margin:8px 0 0"><span class="col">Conclusion / Συμπέρασμα :</span><br>Enfin, j’ ai adoré mon voyage parce que c’ était amusant et relaxant.</p>
+          </div>
+          <div class="figref" style="margin-top:12px">
+            <span><b>Figure 5</b> (Η εικόνα δείχνει έναν χαρούμενο ταξιδιώτη να βγάζει selfie μπροστά από τη Sagrada Familia.)<br>
+            <a href="https://www.shutterstock.com/el/image-photo/barcelona-spain-14-february-2022-happy-2245554107?trackingId=daca1ce9-155f-466f-8985-9f1c66ba7611&amp;listId=searchResults" target="_blank" rel="noopener">shutterstock.com</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 ΤΟ POST ΣΟΥ -->
+    <section class="screen" data-name="Το post σου">
+      <div class="wrap">
+        <div class="card pad grow">
+          <div class="eyebrow">ΟΛΟΚΛΗΡΩΣΗ</div>
+          <div class="resgrid" style="margin-top:6px">
+            <div class="rwrap">
+              <svg class="ring" id="ringEl" viewBox="0 0 150 150" role="img" aria-label="Ολοκληρωμένα βήματα">
+                <circle class="bg" cx="75" cy="75" r="60"></circle>
+                <circle class="v" cx="75" cy="75" r="60"></circle>
+                <text x="75" y="75">0/4</text>
+              </svg>
+              <span>Ολοκληρωμένα βήματα</span>
+              <button class="btn ghost sm" onclick="resetAll()" style="margin-top:6px">Επανάληψη</button>
+            </div>
+            <div class="post">
+              <div class="posthd"><span class="av">✈</span><span class="ttl2" id="ptitle" lang="fr">Mon voyage à …</span></div>
+              <div class="postbody" id="pbody" lang="fr"></div>
+              <div class="posttags">#voyage #France</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 ΛΕΞΕΙΣ-ΚΛΕΙΔΙΑ & ΠΗΓΕΣ -->
+    <section class="screen" data-name="Λέξεις-κλειδιά &amp; Πηγές">
+      <div class="wrap">
+        <div class="card pad" style="display:flex;flex-direction:column;flex:1;min-height:0;gap:12px">
+          <div>
+            <h2>Λέξεις-κλειδιά</h2>
+            <p class="chips">
+              <span class="chip">διακοπές</span><span class="chip">αξιοθέατα</span>
+              <span class="chip">δραστηριότητες</span><span class="chip">ταξίδι</span>
+              <span class="chip fr">VACANCES</span><span class="chip fr">SITES TOURISTIQUES</span>
+              <span class="chip fr">ACTIVITES</span><span class="chip fr">VOYAGE</span>
+            </p>
+          </div>
+          <div>
+            <h2>Πηγές</h2>
+          </div>
+          <div class="grow">
+            <ul class="srclist">
+              <li><b>Figure 1</b> (Η εικόνα δείχνει μια παλιά γαλλική ταχυδρομική κάρτα. Η εικόνα δίνει την αίσθηση ενός ρομαντικού ταξιδιού και θυμίζει αναμνήσεις από διακοπές στη Γαλλία.)<br>
+                <a href="https://www.shutterstock.com/el/image-photo/antique-french-postcard-greeting-text-paris-189458990?trackingId=81039b76-a26a-48ee-aa4e-90d13dc146f9&amp;listId=searchResults" target="_blank" rel="noopener">https://www.shutterstock.com/el/image-photo/antique-french-postcard-greeting-text-paris-189458990</a></li>
+              <li><b>Figure 2</b> (Η εικόνα δείχνει ένα κολλάζ φωτογραφιών Polaroid, διάφορα μέρη του Παρισιού.)<br>
+                <a href="https://www.shutterstock.com/el/image-photo/collage-france-paris-selective-focus-754965319" target="_blank" rel="noopener">https://www.shutterstock.com/el/image-photo/collage-france-paris-selective-focus-754965319</a></li>
+              <li><b>Figure 3</b> (Η εικόνα δείχνει διάφορα μέρη του κόσμου για να πάρεις ιδέες.)<br>
+                <a href="https://www.shutterstock.com/el/image-photo/vintage-travel-background-retro-photos-european-1431888869?trackingId=c636b32b-a7e4-4ff7-9103-9c363b34f0f6&amp;listId=searchResults" target="_blank" rel="noopener">https://www.shutterstock.com/el/image-photo/vintage-travel-background-retro-photos-european-1431888869</a></li>
+              <li><b>Figure 4</b> (Βόλτα με le bateau-mouche, στον βραδινό Σηκουάνα)<br>
+                <a href="https://www.shutterstock.com/el/video/clip-1020493093-paris-france---april-2018--bateau?trackingId=895259d3-187f-4bf7-b481-3e3e7574bfaa&amp;listId=searchResults" target="_blank" rel="noopener">https://www.shutterstock.com/el/video/clip-1020493093-paris-france---april-2018--bateau</a></li>
+              <li><b>Figure 4</b> ( Η εικόνα δείχνει 2 φίλες να βγάζουν selfie  μπροστά από την εκκλησία της Sacré-Cœur.)<br>
+                <a href="https://www.shutterstock.com/el/image-photo/two-girl-friends-take-selfie-against-1497621149?trackingId=2620934f-fff3-45e9-b955-6b1420acdc72&amp;listId=searchResults" target="_blank" rel="noopener">https://www.shutterstock.com/el/image-photo/two-girl-friends-take-selfie-against-1497621149</a></li>
+              <li><b>Figure 5</b> (Η εικόνα δείχνει έναν χαρούμενο ταξιδιώτη να βγάζει selfie μπροστά από τη Sagrada Familia.)<br>
+                <a href="https://www.shutterstock.com/el/image-photo/barcelona-spain-14-february-2022-happy-2245554107?trackingId=daca1ce9-155f-466f-8985-9f1c66ba7611&amp;listId=searchResults" target="_blank" rel="noopener">https://www.shutterstock.com/el/image-photo/barcelona-spain-14-february-2022-happy-2245554107</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="btn ghost sm" id="prev" onclick="go(cur-1)">‹ Πίσω</button>
+    <div class="dots" id="dots"></div>
+    <button class="btn sm" id="next" onclick="go(cur+1)">Μπροστά ›</button>
+  </nav>
+</div>
+
+<!-- lightbox -->
+<div class="lbx" id="lbx" aria-modal="true" role="dialog">
+  <button class="x" id="lbxX" aria-label="Κλείσιμο">✕</button>
+  <div class="box"><img id="lbxImg" alt=""><div class="cap" id="lbxCap"></div></div>
+</div>
+
+<script>
+/* ===== navigation ===== */
+var screens=[].slice.call(document.querySelectorAll('.screen')),cur=0;
+var dots=document.getElementById('dots');
+screens.forEach(function(s,i){var b=document.createElement('button');b.title=s.dataset.name||('Οθόνη '+(i+1));b.setAttribute('aria-label',b.title);b.onclick=function(){go(i)};dots.appendChild(b)});
+function go(n){
+  if(n<0||n>=screens.length)return;
+  screens[cur].classList.remove('on');cur=n;screens[cur].classList.add('on');screens[cur].scrollTop=0;
+  [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===cur);d.classList.toggle('done',i<cur)});
+  document.getElementById('lbl').textContent=screens[cur].dataset.name||'';
+  document.getElementById('prog').style.width=((cur+1)/screens.length*100)+'%';
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===screens.length-1;
+  document.querySelectorAll('.zi.on').forEach(function(z){z.classList.remove('on')});
+  if(window.onScreen)onScreen(cur);
+}
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('lbx').classList.contains('on')){if(e.key==='Escape')closeLbx();return}
+  var t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
+  if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);
+});
+go(0);
+
+/* ===== images: tooltip side + lightbox ===== */
+function side(z){var r=z.getBoundingClientRect();z.classList.toggle('below',r.top<130&&!z.classList.contains('inset'))}
+var lbx=document.getElementById('lbx'),lbxImg=document.getElementById('lbxImg'),lbxCap=document.getElementById('lbxCap');
+function openLbx(z){var im=z.querySelector('img');lbxImg.src=im.src;lbxImg.alt=im.alt;lbxCap.textContent=z.dataset.alt||im.alt||'';
+  document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});lbx.classList.add('on')}
+function closeLbx(){lbx.classList.remove('on');lbxImg.src=''}
+document.getElementById('lbxX').onclick=closeLbx;
+lbx.addEventListener('click',function(e){if(e.target===lbx||e.target.classList.contains('box'))closeLbx()});
+document.addEventListener('click',function(e){var z=e.target.closest('.zi');if(!z)return;if(e.target.closest('.hs'))return;openLbx(z)});
+document.addEventListener('mouseover',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('focusin',function(e){var z=e.target.closest('.zi');if(z)side(z)});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('zi'))openLbx(e.target)});
+document.addEventListener('touchstart',function(e){var z=e.target.closest('.zi');if(!z)return;
+  if(!z.classList.contains('on')){e.preventDefault();document.querySelectorAll('.zi.on').forEach(function(x){x.classList.remove('on')});z.classList.add('on');side(z)}},{passive:false});
+
+/* ===== helpers ===== */
+function ring(el,n,total){var c=2*Math.PI*60;var v=el.querySelector('.v');var pc=total?n/total:0;v.style.strokeDasharray=(c*pc)+' '+c;v.style.opacity=pc?1:0;el.querySelector('text').textContent=n+'/'+total}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ===== S.O.S. reveal cards ===== */
+function flipOn(b){b.classList.add('on');fcount()}
+function fcount(){var n=document.querySelectorAll('.flip.on').length;document.getElementById('fcnt').textContent=n+'/2'}
+
+/* ===== guidance answers toggle ===== */
+function toggleRev(id,btn){var e=document.getElementById(id);e.hidden=!e.hidden;btn.textContent=e.hidden?'Απαντήσεις καθοδήγησης':'Κλείσιμο'}
+
+/* ===== inputs / progress ===== */
+var G={s2:8,s3:4,a1:9};
+function filled(g){var n=0;document.querySelectorAll('[data-g="'+g+'"]').forEach(function(i){if(i.value.trim())n++});return n}
+function upd(){
+  document.querySelectorAll('input[data-g],textarea[data-g]').forEach(function(i){i.classList.toggle('done',!!i.value.trim());
+    var w=i.closest('.inl');if(w)w.classList.toggle('done',!!i.value.trim())});
+  document.getElementById('c2').textContent=filled('s2')+'/8';
+  document.getElementById('c3').textContent=filled('s3')+'/4';
+  document.getElementById('ca').textContent=filled('a1')+'/9';
+  var t=document.getElementById('ta4').value.trim();
+  var wds=t?t.split(/\s+/).length:0;
+  var sen=t?t.split(/[.!?…]+/).filter(function(s){return s.trim().length>0}).length:0;
+  var w4=document.getElementById('w4'),p4=document.getElementById('p4');
+  w4.textContent=wds;p4.textContent=sen;
+  p4.classList.toggle('ok',sen>=3&&sen<=5);
+  document.getElementById('ok4').hidden=!(sen>=3&&sen<=5);
+  var done=0;
+  if(filled('s2')===8)done++;
+  if(filled('s3')===4)done++;
+  if(sen>=3&&sen<=5)done++;
+  if(filled('a1')===9)done++;
+  ring(document.getElementById('ringEl'),done,4);
+  buildPost();
+}
+function v(id){return (document.getElementById(id).value||'').trim()}
+function ph(id,txt){var x=v(id);return x?esc(x):'<span class="ph2">'+txt+'</span>'}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function buildPost(){
+  document.getElementById('ptitle').innerHTML='Mon voyage à '+ph('a11','…');
+  var h='';
+  h+='Salut tout le monde ! Je veux partager mon voyage à '+ph('a12','…')+'.\n';
+  h+='C’était (adjectif) '+ph('a13','…')+'.\n\n';
+  h+='D’ abord, j ’ai visité '+ph('a14','…')+'.\n';
+  h+='C’ était  (adjectif) '+ph('a15','…')+'.\n';
+  h+='Ensuite, j’ ai '+ph('a16','…')+'.\n';
+  h+='J’ ai aussi '+ph('a17','…')+'.\n';
+  h+='Par exemple, '+ph('a18','…')+'.\n\n';
+  h+='Enfin, j’ai adoré mon voyage parce que '+ph('a19','…')+'.';
+  document.getElementById('pbody').innerHTML=h;
+}
+document.addEventListener('input',function(e){if(e.target.dataset&&e.target.dataset.g)upd()});
+
+/* ===== Lexique ===== */
+var LEX=[
+ {t:'1. Lieux / Τοποθεσίες',w:[['la plage','η παραλία'],['l’ île','το νησί'],['le musée','το μουσείο'],['le parc','το πάρκο'],['la montagne','το βουνό'],['le centre-ville','το κέντρο της πόλης'],['le château','το κάστρο'],['le marché','η αγορά'],['le lac','η λίμνη'],['le restaurant','το εστιατόριο'],['le café','το καφέ']]},
+ {t:'2. Activités / Δραστηριότητες',w:[['visiter des monuments','επισκέπτομαι μνημεία'],['se promener dans la ville','περπατώ στην πόλη'],['nager à la plage','κολυμπάω στην παραλία'],['faire du shopping','κάνω ψώνια'],['prendre des photos','βγάζω φωτογραφίες'],['faire de la randonnée','κάνω πεζοπορία'],['goûter la cuisine locale','δοκιμάζω την τοπική κουζίνα'],['assister à un spectacle','παρακολουθώ ένα θέαμα'],['se détendre','χαλαρώνω']]},
+ {t:'3. Adjectifs / Επίθετα',w:[['magnifique','υπέροχο'],['intéressant','ενδιαφέρον'],['amusant','διασκεδαστικό'],['impressionnant','εντυπωσιακό'],['relaxant','χαλαρωτικό'],['animé','ζωντανό'],['typique','χαρακτηριστικό'],['magnifique vue','εκπληκτική θέα']]},
+ {t:'4. Connecteurs / Συνδετικές λέξεις',w:[['et','και'],['mais','αλλά'],['aussi','επίσης'],['d’ abord','αρχικά'],['ensuite','στη συνέχεια'],['enfin','τέλος'],['donc','οπότε'],['par exemple','για παράδειγμα'],['surtout','κυρίως'],['parce que','επειδή']]}
+];
+var LEXTOT=LEX.reduce(function(a,g){return a+g.w.length},0);
+var lexOpen={},lexCat=0;
+var lexbar=document.getElementById('lexbar'),lexgrid=document.getElementById('lexgrid');
+LEX.forEach(function(g,i){var b=document.createElement('button');b.textContent=g.t;b.onclick=function(){lexCat=i;drawLex()};lexbar.appendChild(b)});
+function drawLex(){
+  [].forEach.call(lexbar.children,function(b,i){b.classList.toggle('on',i===lexCat)});
+  lexgrid.innerHTML='';
+  LEX[lexCat].w.forEach(function(p,j){
+    var k=lexCat+'_'+j;
+    var b=document.createElement('button');b.className='lterm'+(lexOpen[k]?' open':'');
+    b.innerHTML='<span class="fr" lang="fr"></span><span class="el'+(lexOpen[k]?'':' hid')+'"></span>';
+    b.querySelector('.fr').textContent=p[0];
+    b.querySelector('.el').textContent='= '+p[1];
+    b.onclick=function(){lexOpen[k]=true;drawLex();lexCount()};
+    lexgrid.appendChild(b);
+  });
+}
+function lexCount(){var n=Object.keys(lexOpen).length;document.getElementById('lexcnt').textContent=n+'/'+LEXTOT}
+function lexAll(){LEX.forEach(function(g,i){g.w.forEach(function(p,j){lexOpen[i+'_'+j]=true})});drawLex();lexCount()}
+document.getElementById('lexcnt').textContent='0/'+LEXTOT;
+drawLex();
+
+/* ===== reset ===== */
+function resetAll(){
+  document.querySelectorAll('input[data-g],textarea[data-g]').forEach(function(i){i.value='';i.classList.remove('done')});
+  document.querySelectorAll('.inl.done').forEach(function(i){i.classList.remove('done')});
+  ['rv2','rv3','rva'].forEach(function(id){document.getElementById(id).hidden=true});
+  ['rb2','rb3','rba'].forEach(function(id){document.getElementById(id).textContent='Απαντήσεις καθοδήγησης'});
+  document.querySelectorAll('.flip.on').forEach(function(f){f.classList.remove('on')});
+  fcount();
+  lexOpen={};lexCat=0;drawLex();lexCount();
+  upd();
+  go(0);
+}
+upd();
+</script>
+<script>var ASSETS={};document.querySelectorAll("img[data-key]").forEach(function(i){i.src=ASSETS[i.dataset.key]});</script>
+</body>
+</html>
